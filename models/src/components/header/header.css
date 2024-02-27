@@ -1,0 +1,18 @@
+header {
+	position: fixed;
+	background-color: #1b2a57;
+	width: 100vw;
+	height: 2rem;
+	padding: 1rem;
+
+	display: flex;
+	gap: 1rem;
+}
+
+header img {
+	height: 100%;
+}
+
+header ~ main {
+	margin-top: 4rem;
+}
