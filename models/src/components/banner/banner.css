@@ -1,0 +1,12 @@
+.banner{
+    display: flex;
+    justify-content: space-around;
+	width: 100vw;
+    background-color: #1B2A57;
+    font-size: 2rem;
+    color: white;
+}
+
+.banner > p{
+    margin-top: 0rem;
+}

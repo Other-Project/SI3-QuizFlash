@@ -1,10 +1,9 @@
 header {
 	position: fixed;
-	background-color: #1b2a57;
+	background-color: #1B2A57;
 	width: 100vw;
 	height: 2rem;
 	padding: 1rem;
-
 	display: flex;
 	gap: 1rem;
 }
