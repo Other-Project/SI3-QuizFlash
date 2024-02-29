@@ -1,0 +1,10 @@
+.patient-box img {
+    height: 50%;
+    width: 50%;
+}
+
+.patient-box {
+    width: 150px;
+    height: 150px;
+    border: 2px solid blue;
+}
