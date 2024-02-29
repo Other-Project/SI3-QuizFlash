@@ -1,0 +1,12 @@
+.data-section{
+    padding-top: 1vh;
+    margin-right: 4vw;
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid rgb(0, 45, 129);;
+    height: 100%;
+}
+
+.patient-nav a{
+    border-bottom: 1px white;
+}

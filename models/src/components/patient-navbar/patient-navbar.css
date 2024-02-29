@@ -1,0 +1,22 @@
+.patient-nav{
+    gap: 0;
+}
+
+.patient-nav a{
+    display: inline-block;
+	padding: 0.5em 0.7em 0.5em 0.7em;
+	border : 1px solid rgb(0, 45, 129);
+    font-size: 0.9rem;
+    color:black;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.patient-nav a:first-child{
+    border-left: 1px solid rgb(0, 45, 129);
+}
+
+.patient-nav a:hover{
+    background-color: rgb(232, 232, 232);
+}
+
