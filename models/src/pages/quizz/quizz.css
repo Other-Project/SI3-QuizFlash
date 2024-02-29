@@ -1,11 +1,11 @@
-section{
+.quizz-section{
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-size: 5rem;
 }
 
-main{
+.quizz-main{
     display: flex;
     flex-direction: column;
     padding: 1rem 0 1rem 0;
