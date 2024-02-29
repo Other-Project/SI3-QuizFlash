@@ -1,7 +1,7 @@
 header {
 	position: fixed;
 	background-color: #1B2A57;
-	width: 100vw;
+	width: calc(100vw - 2rem);
 	height: 2rem;
 	padding: 1rem;
 	display: flex;
