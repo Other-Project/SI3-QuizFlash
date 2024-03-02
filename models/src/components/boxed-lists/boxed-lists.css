@@ -10,3 +10,13 @@
 .patient-nav a{
     border-bottom: 1px white;
 }
+
+.data-section li{
+    margin-top: 4vh;
+    font-size: 0.9rem;
+}
+
+.data-section p{
+    margin-bottom: 4vh;
+    font-weight: bold;
+}

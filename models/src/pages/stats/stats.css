@@ -1,5 +1,24 @@
 .patient-data{
+    font-size: 0.9rem;
     margin-top: 2vh;
     margin-left: 4vw;
     height: 100%;
+}
+
+.patient-data img{
+    width: 60%;
+}
+
+.stats-section article{
+    margin-left: 3vw;
+}
+
+.centered-article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.centered-article p{
+    font-weight: bold;
 }

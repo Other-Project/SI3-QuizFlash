@@ -13,7 +13,7 @@
 }
 
 .patient-info {
-    margin-top: 4vh;
+    margin-top: 2vh;
     display: grid;
     align-items: normal;
     grid-template: 1fr 1fr / 1fr 1fr;
