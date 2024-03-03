@@ -1,0 +1,21 @@
+#pause-button, #stop-button {
+    display: none;
+}
+
+div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div span, #timer-bar {
+    font-size: 16px;
+}
+
+#timer-bar, #lecture-button {
+    align-items: flex-start;
+}
+
+#volume {
+    display: none;
+}
