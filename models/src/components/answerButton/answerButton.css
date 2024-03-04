@@ -1,4 +1,4 @@
-button {
+#answer-button {
     border : 2px solid #00090f;
     background-color: #F2E86D;
     width: 98%;
@@ -7,10 +7,10 @@ button {
     font-size: 3rem;
 }
 
-button:hover {
+#answer-button:hover {
     background-color: #e5db6b;
 }
 
-button > p{
+#answer-button > p{
     margin: auto;
 }
