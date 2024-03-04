@@ -1,3 +1,27 @@
 .info-button{
     margin-top: 5vh;
 }
+
+label,input{
+    display: block;
+}
+
+.pathologies h1{
+    font-size: 1.5rem;
+    margin-bottom: 5vh;
+}
+
+.pathologies input{
+    margin-top: 2vh;
+}
+
+input[type="range"] {
+    width:50vh;
+}
+
+datalist{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 6vh;
+}

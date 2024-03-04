@@ -18,32 +18,32 @@
         <section class="patient-data">
             <matrio path="components/patient-navbar/patient-navbar"></matrio>
             <matrio path="components/boxed-lists/boxed-lists">
-                <article>
-                    <p>Pathologies</p>
-                    <ul>
-                        <li>Pathologie 1</li>
-                        <li>Pathologie 2</li>
-                        <li>Pathologie 3</li>
-                        <button class="info-button">Ajouter</button>
-                    </ul>
+                <article class="pathologies">
+                    <h2>Pathologies</h2>
+                    <label for="dementia">Niveau de démence</li>
+                    <input class="patho-input" type="range" min="0" max="2" id="dementia" list="dementia-list">
+                    <datalist id="dementia-list">
+                        <option value="0" label="Léger"></option>
+                        <option value="1" label="Intermédiaire"></option>
+                        <option value="2" label="Elevé"></option>
+                    </datalist>
+                    <label for="deafness">Niveau de surdité</li>
+                    <input class="patho-input" type="range" min="0" max="2" id="deafness" list="deafness-list">
+                    <datalist id="deafness-list">
+                        <option value="0" label="Léger"></option>
+                        <option value="1" label="Intermédiaire"></option>
+                        <option value="2" label="Elevé"></option>
+                    </datalist>
+                    <label for="low-vision">Taille de la police</li>
+                    <input class="patho-input" type="range" min="0" max="100" id="low-vision">
+                    <datalist id="low-vision">
+                        <option value="0" label="0%"></option>
+                        <option value="100" label="100%"></option>
+                    </datalist>
                 </article>
                 <article>
-                    <p>Centre d'intérêts</p>
-                    <ul>
-                        <li>Centre d'intérêts 1</li>
-                        <li>Centre d'intérêts 2</li>
-                        <li>Centre d'intérêts 3</li>
-                        <button class="info-button">Ajouter</button>
-                    </ul>
-                </article>
-                <article>
-                    <p>Paramétrage</p>
-                    <ul>
-                        <li>Paramètre 1</li>
-                        <li>Paramètre 2</li>
-                        <li>Paramètre 3</li>
-                        <button class="info-button">Ajouter</button>
-                    </ul>
+                    <h2>Centre d'intérêts</h2>
+                    <input type="text">
                 </article>
             </matrio>
         </section>

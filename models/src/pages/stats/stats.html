@@ -16,18 +16,22 @@
             <h3> Age </h3>
 		</matrio>
 		<section class="patient-data">
-			<matrio path="components/patient-navbar/patient-navbar"></matrio>
-        	<matrio path="components/boxed-content/boxed-content">
+			<matrio path="components/patient-navbar/patient-navbar" />
+        	<matrio path="components/boxed-lists/boxed-lists">
 				<article>
-					<p>Taux de réussite : 70%</p>
-					<p>Progression sur les derniers tests : 10%</p>
+					<p>Pourcentage de succès par quizz : 70%</p>
+					<p>Pourcentage de succès par question : 10%</p>
+					<p>Proportion de réponses assistées : 15%</p>
 				</article>
-				<article class="centered-article">
-					<p>Taux de réussite au cours du temps</p>
+				<article class="graph-rates">
+					<p>Taux de réussite par tentatives (quizz ou question)</p>
+					<div class="stats-input">
+						<input type="select">
+						<input type="select">
+					</div>
 					<img src="assets/stats.png">
 				</article>
 			</matrio>
 		</section>
-		<main></main>
 	</body>
 </html>

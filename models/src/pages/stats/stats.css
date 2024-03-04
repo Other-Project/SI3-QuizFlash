@@ -6,19 +6,26 @@
 }
 
 .patient-data img{
-    width: 60%;
+    width: 600px;
 }
 
-.stats-section article{
-    margin-left: 3vw;
+.patient-data p{
+    font-size: 1.2rem;
+    font-weight:normal;
 }
 
-.centered-article{
+.graph-rates p{
+    text-align: center;
+}
+
+.stats-input input{
+    display: inline-block;
+    margin-bottom: 1vh;
+}
+
+.stats-input{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    gap: 1vw;
 }
 
-.centered-article p{
-    font-weight: bold;
-}
