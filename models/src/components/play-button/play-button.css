@@ -2,13 +2,13 @@
     display: none;
 }
 
-div {
+#lecture-button, #timer-bar, #volume {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-div span, #timer-bar {
+#elapsed, #volume-value, #timer-bar {
     font-size: 16px;
 }
 
