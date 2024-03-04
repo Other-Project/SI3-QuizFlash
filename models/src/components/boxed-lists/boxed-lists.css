@@ -1,10 +1,16 @@
 .data-section{
     padding-top: 1vh;
     margin-right: 4vw;
-    display: flex;
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    justify-items: center;
     justify-content: space-around;
     border: 1px solid rgb(0, 45, 129);;
     height: 100%;
+}
+
+.data-section>article:last-child{
+    grid-column: 1/3;
 }
 
 .patient-nav a{

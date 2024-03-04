@@ -13,6 +13,7 @@
 }
 
 .patient-info {
+    margin-left: 3vw;
     margin-top: 2vh;
     display: grid;
     align-items: normal;
@@ -20,7 +21,6 @@
 }
 
 .patient-info * {
-    margin-left: 3vw;
     margin-top: 0;
 }
 
