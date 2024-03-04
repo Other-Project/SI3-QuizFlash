@@ -19,3 +19,7 @@
 #volume {
     display: none;
 }
+
+#play-button:hover {
+    fill: #5e3eb5;;
+}
