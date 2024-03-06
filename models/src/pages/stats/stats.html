@@ -19,16 +19,26 @@
 			<matrio path="components/patient-navbar/patient-navbar" />
         	<matrio path="components/boxed-lists/boxed-lists">
 				<article>
-					<p>Pourcentage de succès par quizz : 70%</p>
+					<h2>Choix des statistiques</h2>
+					<select name="quizz-select" id="quizz-select">
+						<option value="all">Tous les quizz</option>
+						<option value="quizzid1">Quizz 1</option>
+						<option value="quizzid2">Quizz 2</option>
+						<option value="quizzid3">Quizz 3</option>
+						<option value="quizzid4">Quizz 4</option>
+						<option value="quizzid5">Quizz 5</option>
+					</select>
+					<select name="type-select" id="type-select">
+						<option value="all">Type de question</option>
+						<option value="hearing">Auditive</option>
+					</select>
+					<p>Taux de réussite : 70%</p>
 					<p>Pourcentage de succès par question : 10%</p>
 					<p>Proportion de réponses assistées : 15%</p>
+					<p>Temps passé sur le quizz : 20 minutes</p>
 				</article>
 				<article class="graph-rates">
-					<p>Taux de réussite par tentatives (quizz ou question)</p>
-					<div class="stats-input">
-						<input type="select">
-						<input type="select">
-					</div>
+					<h2>Graphique des statistiques</h2>
 					<img src="assets/stats.png">
 				</article>
 			</matrio>

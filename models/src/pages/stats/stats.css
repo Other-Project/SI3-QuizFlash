@@ -6,26 +6,20 @@
 }
 
 .patient-data img{
-    width: 600px;
+    width: 850px;
 }
 
 .patient-data p{
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight:normal;
 }
 
-.graph-rates p{
-    text-align: center;
-}
-
-.stats-input input{
-    display: inline-block;
-    margin-bottom: 1vh;
-}
-
-.stats-input{
+.graph-rates{
     display: flex;
-    justify-content: center;
-    gap: 1vw;
+    align-items: center;
+    flex-direction: column;
 }
 
+#type-select{
+    margin-bottom: 10vh;
+}
