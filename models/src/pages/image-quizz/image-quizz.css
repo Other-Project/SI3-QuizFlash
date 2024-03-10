@@ -11,3 +11,8 @@
     padding: 1rem 0 1rem 0;
     height: 100%;
 }
+
+img {
+    display: inline-block;
+    max-width: 50%;
+}

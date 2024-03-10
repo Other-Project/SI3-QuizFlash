@@ -1,9 +1,10 @@
 .quizz-section{
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    font-size: 5rem;
+    text-align: center;
+    font-size: 4rem;
 }
+
 
 .quizz-main{
     display: flex;
