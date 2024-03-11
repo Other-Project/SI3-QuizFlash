@@ -8,8 +8,8 @@
 
 #sound-click {
   font-size: 35px;
-}
 
-#sound-click:hover {
-  color: #5e3eb5;
+  &:hover {
+    color: #5e3eb5;
+  }
 }
