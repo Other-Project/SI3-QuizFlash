@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="209.11406"
+   height="39.871517"
+   viewBox="0 0 55.328096 10.549339"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="quizflash.svg">
+  <defs
+     id="defs2">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 8.4666667 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="67.733335 : 8.4666667 : 1"
+       inkscape:persp3d-origin="33.866667 : 5.6444445 : 1"
+       id="perspective1368" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="78.754507"
+     inkscape:cy="19.580691"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-3.2112161,-282.8961)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Berlin Sans FB';-inkscape-font-specification:'Berlin Sans FB, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="16.169806"
+       y="291.21451"
+       id="text1414"><tspan
+         sodipodi:role="line"
+         id="tspan1412"
+         x="16.169806"
+         y="291.21451"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:'Berlin Sans FB';-inkscape-font-specification:'Berlin Sans FB, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;stroke-width:0.26458332">QuizFlash</tspan></text>
+    <path
+       sodipodi:type="spiral"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.26458332;stroke-opacity:1"
+       id="path1424"
+       sodipodi:cx="8.4858074"
+       sodipodi:cy="288.64786"
+       sodipodi:expansion="1"
+       sodipodi:revolution="3"
+       sodipodi:radius="5.7466831"
+       sodipodi:argument="-20.013933"
+       sodipodi:t0="0"
+       d="m 8.4858074,288.64786 c 0.1139042,-0.26466 0.4129516,0.023 0.439881,0.18931 0.072977,0.4508 -0.4310148,0.72864 -0.8185133,0.69045 -0.6931438,-0.0683 -1.0678363,-0.81331 -0.9410106,-1.44771 0.1861218,-0.931 1.1997674,-1.41423 2.0769075,-1.19158 1.16909,0.29676 1.763512,1.58756 1.44214,2.70611 -0.404413,1.40757 -1.9759561,2.11426 -3.3353015,1.6927 -1.6463494,-0.51056 -2.4658471,-2.36468 -1.9432699,-3.9645 0.6158391,-1.88532 2.7536263,-2.81796 4.5936964,-2.19383 2.124433,0.72058 3.170426,3.1427 2.444399,5.22289 -0.824958,2.36365 -3.5318777,3.52314 -5.8520902,2.69497 -2.6029276,-0.92909 -3.8760282,-3.92113 -2.9455291,-6.48129 1.0330303,-2.84227 4.3104237,-4.22905 7.1104843,-3.19609" />
+  </g>
+</svg>
