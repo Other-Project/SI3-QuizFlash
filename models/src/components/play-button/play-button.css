@@ -1,25 +1,15 @@
-#pause-button, #stop-button {
+#pause-button, #stop-button, #play-button, #timer-bar, #volume {
     display: none;
-}
-
-#lecture-button, #timer-bar, #volume {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
 }
 
 #elapsed, #volume-value, #timer-bar {
     font-size: 16px;
 }
 
-#timer-bar, #lecture-button {
-    align-items: flex-start;
+#sound-click {
+    font-size: 35px;
 }
 
-#volume {
-    display: none;
-}
-
-#play-button:hover {
-    fill: #5e3eb5;;
+#sound-click:hover {
+    color: #5e3eb5;
 }
