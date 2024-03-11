@@ -49,3 +49,6 @@ Thumbs.db
 # E2E folder
 /playwright-report
 /test-results
+
+# Lock file
+/package-lock.json
