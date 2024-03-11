@@ -1,0 +1,15 @@
+#pause-button, #stop-button, #play-button, #timer-bar, #volume {
+  display: none;
+}
+
+#elapsed, #volume-value, #timer-bar {
+  font-size: 16px;
+}
+
+#sound-click {
+  font-size: 35px;
+}
+
+#sound-click:hover {
+  color: #5e3eb5;
+}
