@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {AdminRoutingModule} from "./admin-routing.module";
 import {AdminNavbarComponent} from "./admin-navbar/admin-navbar.component";
 import {AdminComponent} from "./admin.component";
@@ -11,10 +11,11 @@ import {HeaderComponent} from "../layout/header/header.component";
     AdminComponent,
     HeaderComponent
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        NgOptimizedImage
+    ]
 })
 export class AdminModule {
 }
