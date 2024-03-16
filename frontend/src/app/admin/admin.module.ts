@@ -10,6 +10,9 @@ import {LayoutModule} from "../layout/layout.module";
     AdminNavbarComponent,
     AdminComponent
   ],
+  exports: [
+    AdminNavbarComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,

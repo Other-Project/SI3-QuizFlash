@@ -5,6 +5,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NgOptimizedImage} from "@angular/common";
 import {AdminModule} from "./admin/admin.module";
+import {QuizModule} from "./quiz/quiz.module";
+import {QuizComponent} from "./quiz/quiz.component";
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import {AdminModule} from "./admin/admin.module";
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
-    AdminModule
+    AdminModule,
+    QuizModule
   ],
   providers: [],
   bootstrap: [AppComponent]
