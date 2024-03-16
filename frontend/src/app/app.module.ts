@@ -7,6 +7,7 @@ import {NgOptimizedImage} from "@angular/common";
 import {AdminModule} from "./admin/admin.module";
 import {QuizModule} from "./quiz/quiz.module";
 import {QuizComponent} from "./quiz/quiz.component";
+import {PatientModule} from "./patient/patient.module";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,8 @@ import {QuizComponent} from "./quiz/quiz.component";
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
+    AdminModule,
+    PatientModule,
     AdminModule,
     QuizModule
   ],

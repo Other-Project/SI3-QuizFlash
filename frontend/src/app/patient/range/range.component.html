@@ -1,0 +1,9 @@
+<label for="{{ subject }}">{{ title }}</label>
+
+<input class="range-input" type="range" min="{{ min }}" max="{{ max }}" id="{{ subject }}" [attr.list]="subject+'-list'" />
+<datalist id="{{ subject }}-list">
+    @for (tag of tags;track tags; let i = $index){
+      <option value="{{ tag }}" label="{{ tag }}"></option>
+    }
+</datalist>
+

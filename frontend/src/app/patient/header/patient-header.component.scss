@@ -1,0 +1,35 @@
+@import "../../../styles";
+
+.patient-header {
+  display: flex;
+  align-items: center;
+  height: 9rem;
+  border-bottom: 1px solid $blue;
+  min-height: 100px;
+
+  img{
+    height: 80%;
+    margin-left: 3vw;
+  }
+}
+
+.patient-info {
+  margin-left: 3vw;
+  margin-top: 2vh;
+  display: grid;
+  align-items: normal;
+  grid-template: 1fr 1fr / 1fr 1fr;
+
+  *{
+    margin-top: 0;
+  }
+
+  h1{
+    font-size: 1.5rem;
+  }
+
+  h3{
+    margin-top: 0.2rem;
+    font-size: 1rem;
+  }
+}

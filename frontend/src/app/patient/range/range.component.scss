@@ -1,0 +1,13 @@
+.range-input{
+  width: 100%;
+  + datalist{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 6vh;
+  }
+}
+
+#font-size-list{
+  margin-bottom: 0;
+}
