@@ -1,0 +1,16 @@
+header {
+  position: fixed;
+  background-color: #1B2A57;
+  width: calc(100vw - 2rem);
+  height: 2rem;
+  padding: 1rem;
+  gap: 1rem;
+
+  display: grid;
+  grid-template: 1fr / 170px 1fr 210px;
+
+  img {
+    width: auto;
+    height: 100%;
+  }
+}

@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { PatientHeaderComponent } from "./patient/header/patient-header.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AdminComponent} from "./admin/admin.component";
 import {PatientPageComponent} from "./patient/page/patient-page.component";
 
 const routes: Routes = [
-  { path: 'patient', component: PatientPageComponent}
+  {path: '', pathMatch: "full", redirectTo: 'admin'},
+  {path: 'admin', component: AdminComponent},
+  {path: 'patient', component: PatientPageComponent}
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

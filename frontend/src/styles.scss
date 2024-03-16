@@ -1,2 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
 $blue : rgb(0, 45, 129);
+$blackBlue : #00090f;
+$yellow1 : #F2E86D;
+$yellow2 : #e5db6b;
+
+
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  color: #00090f;
+}
+
+main {
+  margin: 4rem auto 0;
+  padding: .5rem;
+}
+
+a {
+  text-decoration: none;
+  color: #00090f;
+}
