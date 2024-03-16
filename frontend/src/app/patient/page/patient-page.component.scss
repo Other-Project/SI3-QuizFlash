@@ -1,0 +1,32 @@
+.diseases{
+  width: 30vw;
+
+  h1{
+    font-size: 1.5rem;
+    margin-bottom: 5vh;
+  }
+  input{
+    margin-top: 2vh;
+  }
+}
+
+.data-section{
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.patient-nav a{
+  border-bottom: 1px white;
+}
+
+.data-section li{
+  margin-top: 4vh;
+  font-size: 0.9rem;
+}
+
+.data-section p{
+  margin-bottom: 4vh;
+  font-weight: bold;
+}
