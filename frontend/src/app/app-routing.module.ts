@@ -9,7 +9,6 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'patient', component: PatientComponent},
   {path: 'admin', component: AdminComponent},
-  {path:'', pathMatch:"full", redirectTo:'quiz'},
   {path:'quiz', component: QuizComponent}
 ];
 

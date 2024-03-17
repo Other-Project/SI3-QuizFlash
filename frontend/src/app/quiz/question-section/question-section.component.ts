@@ -14,5 +14,6 @@ export class QuestionSectionComponent implements OnInit{
 
   protected readonly length = length;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

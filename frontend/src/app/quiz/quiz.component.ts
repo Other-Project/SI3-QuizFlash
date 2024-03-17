@@ -1,11 +1,22 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
-  //styleUrls: ['./admin.component.scss']
+  styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent {
-  constructor() {
+export class QuizComponent  implements OnInit{
+  private router: Router;
+
+  constructor(defaultRouter: Router){
+    this.router = defaultRouter;
+    this.router.navigate([this.router.url +"/question"])
+  }
+
+  ngOnInit(): void {
+    console.log(this.router.url)
+    //this.router.navigate([this.router.url +"/question"])
   }
 }
