@@ -16,7 +16,7 @@ import {PatientModule} from "./patient/patient.module";
     AppRoutingModule,
     NgOptimizedImage,
     AdminModule,
-    PatientModule
+    PatientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
