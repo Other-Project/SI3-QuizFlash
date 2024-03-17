@@ -8,13 +8,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent  implements OnInit{
-  private router: Router;
 
-  constructor(defaultRouter: Router){
-    this.router = defaultRouter;
-    this.router.navigate(["/quiz/question"])
+  constructor(private router: Router){
   }
 
   ngOnInit(): void {
+    this.router.navigate(["/quiz/question"])
   }
 }

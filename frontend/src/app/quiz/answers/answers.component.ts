@@ -16,7 +16,7 @@ export class AnswersComponent implements OnInit{
 
   ngOnInit(): void {
     this.answers = this.falseAnswer;
-    if(this.answers.indexOf(this.trueAnswer) == -1)this.answers.push(this.trueAnswer);
+    if(this.answers.indexOf(this.trueAnswer) == -1) this.answers.push(this.trueAnswer);
   }
 
   @Output() returnedAnswer = new EventEmitter<string>();

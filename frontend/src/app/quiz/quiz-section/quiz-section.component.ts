@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {GameService} from "../../../service/game-service.service";
 import {Question} from "../../../models/question.models";
+import {errors} from "@playwright/test";
 
 
 @Component({
@@ -22,19 +23,16 @@ export class QuizSectionComponent  implements OnInit{
   }
 
   checkAnswer(answer:String): void{
-    if(this.question?.trueAnswer == answer){
-      this.router.navigate(["/quiz/intermediate", true]).then(r => console.log("ok"))
-    }
-    else{
-      this.router.navigate(["/quiz/intermediate", false]).then(r => console.log("ok"))
-    }
-    this.continueQuiz();
+    if(this.question?.trueAnswer == answer)
+      this.router.navigate(["/quiz/intermediate", true]).then(r => this.continueQuiz())
+    else
+      this.router.navigate(["/quiz/intermediate", false]).then(r => this.continueQuiz())
   }
 
   continueQuiz(){
       this.gameService.nextQuestion();
       if(this.question == undefined){
-        this.router.navigate(["/quiz/finish"]).then(r => console.log("ok"))
+        this.router.navigate(["/quiz/finish"]).then(r => console.log())
       }
     }
 }
