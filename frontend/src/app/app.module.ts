@@ -6,7 +6,6 @@ import {AppComponent} from './app.component';
 import {NgOptimizedImage} from "@angular/common";
 import {AdminModule} from "./admin/admin.module";
 import {QuizModule} from "./quiz/quiz.module";
-import {PatientModule} from "./patient/patient.module";
 
 @NgModule({
   declarations: [
@@ -17,9 +16,7 @@ import {PatientModule} from "./patient/patient.module";
     AppRoutingModule,
     NgOptimizedImage,
     AdminModule,
-    PatientModule,
-    AdminModule,
-    QuizModule,
+    QuizModule
   ],
   providers: [],
   bootstrap: [AppComponent]

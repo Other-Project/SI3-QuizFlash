@@ -4,6 +4,7 @@ import {AdminRoutingModule} from "./admin-routing.module";
 import {AdminNavbarComponent} from "./admin-navbar/admin-navbar.component";
 import {AdminComponent} from "./admin.component";
 import {LayoutModule} from "../layout/layout.module";
+import {PatientModule} from "./pages/patient/patient.module";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {LayoutModule} from "../layout/layout.module";
     CommonModule,
     AdminRoutingModule,
     LayoutModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    PatientModule
   ]
 })
 export class AdminModule {
