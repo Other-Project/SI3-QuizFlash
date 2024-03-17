@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {GameService} from "../../../service/game-service.service";
 import {Question} from "../../../models/question.models";
-import {errors} from "@playwright/test";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 @Component({
@@ -24,15 +24,25 @@ export class QuizSectionComponent  implements OnInit{
 
   checkAnswer(answer:String): void{
     if(this.question?.trueAnswer == answer)
-      this.router.navigate(["/quiz/intermediate", true]).then(r => this.continueQuiz())
+      this.router.navigate(["/quiz/intermediate", true]).then(
+        r => {
+          if(r)this.continueQuiz();
+          else console.log(error("Quiz intermediate launch error"))
+        })
     else
-      this.router.navigate(["/quiz/intermediate", false]).then(r => this.continueQuiz())
+      this.router.navigate(["/quiz/intermediate", false]).then(
+        r => {
+          if(r)this.continueQuiz();
+          else console.log(error("Quiz intermediate launch error"))
+        })
   }
 
   continueQuiz(){
       this.gameService.nextQuestion();
-      if(this.question == undefined){
-        this.router.navigate(["/quiz/finish"]).then(r => console.log())
-      }
+      if(this.question == undefined)
+        this.router.navigate(["/quiz/finish"]).then(
+          r => {
+            if(!r)console.log(error("Quiz finish launch error"))
+          })
     }
 }

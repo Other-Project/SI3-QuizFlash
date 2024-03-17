@@ -1,9 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
-import {
-  parseAndValidateInputAndOutputOptions
-} from "@angular/compiler-cli/src/ngtsc/annotations/directive/src/input_output_parse_options";
 
 @Component({
   selector: 'intermediate-page',

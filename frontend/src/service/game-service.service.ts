@@ -1,10 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Quiz} from "../models/quiz.models";
 import {QUIZ1} from "../mocks/quiz1.mock";
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {Question} from "../models/question.models";
-import {QuizListService} from "./quiz-list-service.service";
 import {QuestionType} from "../models/question-type.models";
 import {QuizService} from "./quiz-service.service";
 

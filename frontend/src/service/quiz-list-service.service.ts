@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Quiz} from "../models/quiz.models";
 import {QUIZLIST} from "../mocks/quiz-list.mock";
-import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 
 @Injectable({providedIn:'root'})
