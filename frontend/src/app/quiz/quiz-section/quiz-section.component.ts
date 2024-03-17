@@ -27,13 +27,13 @@ export class QuizSectionComponent  implements OnInit{
       this.router.navigate(["/quiz/intermediate", true]).then(
         r => {
           if(r)this.continueQuiz();
-          else console.log(error("Quiz intermediate launch error"))
+          else console.log("Quiz intermediate launch error")
         })
     else
       this.router.navigate(["/quiz/intermediate", false]).then(
         r => {
           if(r)this.continueQuiz();
-          else console.log(error("Quiz intermediate launch error"))
+          else console.log("Quiz intermediate launch error")
         })
   }
 
@@ -42,7 +42,7 @@ export class QuizSectionComponent  implements OnInit{
       if(this.question == undefined) //Open the finish page at the end of the quiz
         this.router.navigate(["/quiz/finish"]).then(
           r => {
-            if(!r)console.log(error("Quiz finish launch error"))
+            if(!r)console.log("Quiz finish launch error")
           })
     }
 }
