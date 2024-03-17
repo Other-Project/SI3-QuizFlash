@@ -23,7 +23,7 @@ export class QuizSectionComponent  implements OnInit{
   }
 
   checkAnswer(answer:String): void{
-    if(this.question?.trueAnswer == answer)
+    if(this.question?.trueAnswer == answer) //Open the intermediate page with good text depends on answer (if it is good or not)
       this.router.navigate(["/quiz/intermediate", true]).then(
         r => {
           if(r)this.continueQuiz();
@@ -39,7 +39,7 @@ export class QuizSectionComponent  implements OnInit{
 
   continueQuiz(){
       this.gameService.nextQuestion();
-      if(this.question == undefined)
+      if(this.question == undefined) //Open the finish page at the end of the quiz
         this.router.navigate(["/quiz/finish"]).then(
           r => {
             if(!r)console.log(error("Quiz finish launch error"))
