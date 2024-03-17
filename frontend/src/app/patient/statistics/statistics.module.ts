@@ -13,7 +13,7 @@ import {StatisticsDataComponent} from "../statistics-data/statistics-data.compon
     StatisticsDataComponent
   ],
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
   ]
 })
 
