@@ -3,8 +3,6 @@ import {PatientComponent} from "./patient.component";
 import {PatientHeaderComponent} from "./header/patient-header.component";
 import {BoxedContainerComponent} from "./boxed-container/boxed-container.component";
 import {NgOptimizedImage} from "@angular/common";
-import {LayoutModule} from "../layout/layout.module";
-import {AdminModule} from "../admin/admin.module";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {InformationComponent} from "./information/information.component";
 import {PatientRoutingModule} from "./patient-routing.module";
@@ -23,9 +21,7 @@ import {PatientNavbarComponent} from "./navbar/patient-navbar.component";
     PatientNavbarComponent
   ],
   imports: [
-    AdminModule,
     NgOptimizedImage,
-    LayoutModule,
     PatientRoutingModule,
     StatisticsModule,
     InformationModule
