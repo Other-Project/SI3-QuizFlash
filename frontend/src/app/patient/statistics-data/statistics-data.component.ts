@@ -1,4 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
+import {Observable} from "rxjs";
+import {QuizListService} from "../../../service/quiz-list-service.service";
+import {Quiz} from "../../../models/quiz.models";
 
 @Component({
   selector: 'stats-data',
@@ -6,26 +9,26 @@ import {Component} from "@angular/core";
   styleUrls: ['statistics-data.component.scss']
 })
 
-export class StatisticsDataComponent{
-  quizzes: Quiz[] = [
-    new Quiz("quiz1","Quizz 1"),
-    new Quiz("quiz2","Quizz 2"),
-    new Quiz("quiz3","Quizz 3"),
-    new Quiz("quiz4","Quizz 4")
-  ];
+export class StatisticsDataComponent implements OnInit{
   questionTypes: string[] = ["Questions textuelles","Questions auditives","Questions visuelles"];
   successRate: number = 70;
   questionSuccessRate: number = 10;
   assistedQuestionRate: number = 15;
   spentTime: number = 20;
-}
+  quizList$: Observable<Quiz[]> | undefined;
+  quizSelected: boolean = false;
 
-class Quiz{
-  id: string = "";
-  name: string = "";
+  constructor(private quizListService: QuizListService) {
+  }
 
-  constructor(id: string, name: string) {
-    this.id=id;
-    this.name=name;
+  ngOnInit(): void {
+    this.quizList$ = this.quizListService.quizz$;
+    console.log(this.quizList$);
+  }
+
+  quizChoice($event: any):void {
+    const quizId = $event.target.value;
+    this.quizSelected = quizId!="all";
   }
 }
+

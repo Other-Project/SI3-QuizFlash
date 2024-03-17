@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {StatisticsGraphComponent} from "../statistics-graph/statistics-graph.component";
-import {NgOptimizedImage} from "@angular/common";
+import {AsyncPipe, NgIf, NgOptimizedImage} from "@angular/common";
 import {StatisticsDataComponent} from "../statistics-data/statistics-data.component";
 
 @NgModule({
@@ -14,6 +14,8 @@ import {StatisticsDataComponent} from "../statistics-data/statistics-data.compon
   ],
   imports: [
     NgOptimizedImage,
+    AsyncPipe,
+    NgIf,
   ]
 })
 

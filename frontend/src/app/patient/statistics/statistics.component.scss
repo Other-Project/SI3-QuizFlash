@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 
   li{
     margin-top: 4vh;
@@ -12,5 +13,11 @@
   p{
     margin-bottom: 4vh;
     font-weight: bold;
+  }
+}
+
+@media (max-width: 768px) {
+  :host {
+    flex-direction: column;
   }
 }

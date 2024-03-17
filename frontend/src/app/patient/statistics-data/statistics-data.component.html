@@ -1,19 +1,19 @@
-<article>
-  <h2>Choix des statistiques</h2>
-  <select name="quizz-select" id="quizz-select">
+<div class="selects">
+<h2>Choix des statistiques</h2>
+  <select  (change)="quizChoice($event)"  name="quizz-select" id="quizz-select">
     <option value="all">Tous les quizz</option>
-    @for (quiz of quizzes;track quiz){
-      <option value="{{ quiz.id }}">{{ quiz.name }}</option>
+    @for (quiz of quizList$ | async; track quiz){
+      <option value="{{ quiz.id }}">Quiz {{ quiz.id }}</option>
     }
   </select>
-  <select name="type-select" id="type-select">
+  <select *ngIf="quizSelected" name="type-select" id="type-select">
     <option value="all">Tous les types de questions</option>
     @for (questionType of questionTypes;track questionType){
       <option value="{{ questionType }}">{{ questionType }}</option>
     }
   </select>
-  <p>Taux de réussite : {{ successRate }}%</p>
-  <p>Pourcentage de succès par question : {{ questionSuccessRate }}%</p>
-  <p>Proportion de réponses assistées : {{ assistedQuestionRate }}%</p>
-  <p>Temps passé sur le quizz : {{ spentTime }} minutes</p>
-</article>
+</div>
+<p>Taux de réussite : {{ successRate }}%</p>
+<p *ngIf="quizSelected">Pourcentage de succès par question : {{ questionSuccessRate }}%</p>
+<p>Proportion de réponses assistées : {{ assistedQuestionRate }}%</p>
+<p *ngIf="quizSelected">Temps passé sur le quizz : {{ spentTime }} minutes</p>

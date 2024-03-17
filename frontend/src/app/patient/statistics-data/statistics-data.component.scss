@@ -1,4 +1,13 @@
+.selects{
+  margin-bottom: 10vh;
+  order: -1;
+}
+
 #type-select{
   margin-left: 1vh;
-  margin-bottom: 10vh;
+}
+
+:host{
+  display: flex;
+  flex-direction: column;
 }
