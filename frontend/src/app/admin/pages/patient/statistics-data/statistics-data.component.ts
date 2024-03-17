@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
-import {QuizListService} from "../../../service/quiz-list-service.service";
-import {Quiz} from "../../../models/quiz.models";
+import {QuizListService} from "../../../../../service/quiz-list-service.service";
+import {Quiz} from "../../../../../models/quiz.models";
 
 @Component({
   selector: 'stats-data',
