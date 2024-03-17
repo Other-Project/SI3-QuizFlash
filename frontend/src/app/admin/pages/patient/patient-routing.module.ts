@@ -3,18 +3,26 @@ import {RouterModule, Routes} from '@angular/router';
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {InformationComponent} from "./information/information.component";
 import {PatientComponent} from "./patient.component";
+import {AdminComponent} from "../../admin.component";
 
 const routes: Routes = [
-  {path: 'stats', component: StatisticsComponent},
-  {path: 'infos', component: InformationComponent}
+  {path: 'infos', component: InformationComponent},
+  {path: 'stats', component: StatisticsComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild([{
-    path: 'patient',
-    component: PatientComponent,
-    children: routes
-  }])],
+  imports: [RouterModule.forChild([
+    {
+      path: 'admin',
+      component: AdminComponent,
+      children: [
+        {
+          path: 'patient',
+          component: PatientComponent,
+          children: routes
+        }]
+    }
+  ])],
   exports: [RouterModule]
 })
 export class PatientRoutingModule {
