@@ -12,7 +12,6 @@ import {QuizRoutingModule} from "./quiz-routing.module";
 import {IntermediatePageComponent} from "./intermediate-page/intermediate-page.component";
 import {FinishPageComponent} from "./finish/finish-page.component";
 
-
 @NgModule({
   declarations: [
     QuizComponent,

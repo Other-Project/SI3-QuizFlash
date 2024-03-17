@@ -8,12 +8,12 @@ import {QuizListService} from "./quiz-list-service.service";
 
 @Injectable({providedIn:'root'})
 export class QuizService{
-  public quizList:Quiz[] = [];
+  private quizList:Quiz[] = [];
   public quiz$:BehaviorSubject<Quiz>=new BehaviorSubject<Quiz>(QUIZ1);
-
+  private quiz:Quiz = QUIZ1;
   constructor(public quizService:QuizListService) {
     this.quizService.quizz$.subscribe((quizz: Quiz[])=>{
-      console.log(quizz); this.quizList = quizz;
+      this.quizList = quizz;
     })
   }
 
@@ -21,6 +21,8 @@ export class QuizService{
     for (let i = 0; i < this.quizList.length; i++) {
       // @ts-ignore
       if(this.quizList.at(i).id == id){
+        //@ts-ignore
+        this.quiz = this.quizList.at(i);
         //@ts-ignore
         this.quiz$.next(this.quizList.at(i));
       }

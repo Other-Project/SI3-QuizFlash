@@ -2,6 +2,7 @@ import {Quiz} from "../models/quiz.models";
 import {Question} from "../models/question.models";
 import {QuestionType} from "../models/question-type.models";
 
+
 const QUESTION1 : Question = {
   text: "Avec lequel de ces objets fait-on la cuisine ?",
   type: QuestionType.TextOnly,

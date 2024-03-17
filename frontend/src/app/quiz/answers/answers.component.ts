@@ -21,7 +21,7 @@ export class AnswersComponent implements OnInit{
 
   @Output() returnedAnswer = new EventEmitter<string>();
   returnAnswer(value: string){
-    this.returnedAnswer.emit(value);
+    this.returnedAnswer.emit(value); //To return value to the quiz-section.component
   }
 
 }

@@ -6,14 +6,11 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./question-section.component.scss']
 })
 export class QuestionSectionComponent implements OnInit{
-  @Input() question:string = "";
-  @Input() image:string = "";
-  @Input() sound:string = "";
+  @Input() question:string = ""; //To have the text of the question in parameter
+  @Input() image:string = ""; //To have the image url of the question in parameter
+  @Input() sound:string = ""; //To have the sound url of the question in parameter
 
   constructor() {}
 
-  protected readonly length = length;
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 }

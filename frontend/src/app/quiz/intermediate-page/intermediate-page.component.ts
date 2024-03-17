@@ -16,8 +16,7 @@ export class IntermediatePageComponent implements OnInit{
   constructor(private location: Location,private route:ActivatedRoute) {
   }
   ngOnInit(): void {
-    this.route.params.subscribe((param)=>{
-      console.log(param["check"].type)
+    this.route.params.subscribe((param)=>{ //Parameter is pass in the url
       if(param["check"] == "true") this.text = "Bravo, bien joué \n Vous avez répondu correctement à la question !"
       else this.text = "Nous retenterons cette question une prochaine fois."
     })
@@ -25,6 +24,6 @@ export class IntermediatePageComponent implements OnInit{
   }
 
   back(): void{
-    this.location.back();
+    this.location.back(); //To go at the previous page (question page)
   }
 }

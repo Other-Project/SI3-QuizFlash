@@ -25,7 +25,7 @@ export class GameService{
 
   constructor(public quizService:QuizService) {
     this.quizService.quiz$.subscribe((quiz: Quiz)=>{
-      console.log(quiz); this.quiz = quiz;this.theme$.next(this.quiz.theme)
+      this.quiz = quiz;this.theme$.next(this.quiz.theme)
     })
   }
 

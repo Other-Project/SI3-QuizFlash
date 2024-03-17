@@ -7,10 +7,12 @@ import {BehaviorSubject} from "rxjs";
 @Injectable({providedIn:'root'})
 export class QuizListService {
   public quizz$: BehaviorSubject<Quiz[]> = new BehaviorSubject<Quiz[]>(QUIZLIST);
-  constructor() { }
+  public quizz : Quiz[] = [];
+  constructor() {}
 
-  addQuizz(){}
+  addQuizz(quiz : Quiz){
+    this.quizz.push(quiz);
+    this.quizz$.next(this.quizz)
+  }
   deleteQuizz(id:string):void {}
-  getQuiz(id:string):void{}
-  modifyQuizz(id:string): void {}
 }

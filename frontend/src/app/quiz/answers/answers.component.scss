@@ -2,7 +2,6 @@
 
 section {
   height: 100%;
-  margin-top: 1rem;
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
   justify-items: center;
@@ -17,7 +16,7 @@ section {
     border-radius: 10px;
     font-size: 3rem;
     margin: auto;
-    padding: 1rem;
+    padding: 0.5%;
     text-align: center;
 
     &:hover {

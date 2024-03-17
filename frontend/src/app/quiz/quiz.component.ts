@@ -12,11 +12,9 @@ export class QuizComponent  implements OnInit{
 
   constructor(defaultRouter: Router){
     this.router = defaultRouter;
-    this.router.navigate([this.router.url +"/question"])
+    this.router.navigate(["/quiz/question"])
   }
 
   ngOnInit(): void {
-    console.log(this.router.url)
-    //this.router.navigate([this.router.url +"/question"])
   }
 }

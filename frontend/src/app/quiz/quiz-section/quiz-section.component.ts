@@ -13,7 +13,7 @@ export class QuizSectionComponent  implements OnInit{
   protected question:Question | undefined;
   constructor(private router:Router, public gameService:GameService) {
     this.gameService.question$.subscribe((question:Question)=>{
-      console.log("question", question);this.question = question
+      this.question = question
     })
   }
 
@@ -33,7 +33,6 @@ export class QuizSectionComponent  implements OnInit{
 
   continueQuiz(){
       this.gameService.nextQuestion();
-      console.log("question2",this.question)
       if(this.question == undefined){
         this.router.navigate(["/quiz/finish"]).then(r => console.log("ok"))
       }

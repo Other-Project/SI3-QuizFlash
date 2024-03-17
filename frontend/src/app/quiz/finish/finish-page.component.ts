@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Location} from "@angular/common";
 
 @Component({
   selector: 'intermediate-page',
@@ -8,7 +7,7 @@ import {Location} from "@angular/common";
 })
 export class FinishPageComponent implements OnInit{
 
-  constructor(private location: Location) {
+  constructor() {
   }
   ngOnInit(): void {
   }
