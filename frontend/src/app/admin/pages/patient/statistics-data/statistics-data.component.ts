@@ -1,5 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {Observable} from "rxjs";
 import {QuizListService} from "../../../../../service/quiz-list-service.service";
 import {Quiz} from "../../../../../models/quiz.models";
 
@@ -15,15 +14,16 @@ export class StatisticsDataComponent implements OnInit{
   questionSuccessRate: number = 10;
   assistedQuestionRate: number = 15;
   spentTime: number = 20;
-  quizList$: Observable<Quiz[]> | undefined;
+  quizList?: Quiz[];
   quizSelected: boolean = false;
 
   constructor(private quizListService: QuizListService) {
   }
 
   ngOnInit(): void {
-    this.quizList$ = this.quizListService.quizz$;
-    console.log(this.quizList$);
+    this.quizListService.quizz$.subscribe((quizzes: Quiz[])=>{
+      this.quizList = quizzes;
+    });
   }
 
   quizChoice($event: any):void {

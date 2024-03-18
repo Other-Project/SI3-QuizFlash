@@ -2,8 +2,8 @@
 <h2>Choix des statistiques</h2>
   <select  (change)="quizChoice($event)"  name="quizz-select" id="quizz-select">
     <option value="all">Tous les quizz</option>
-    @for (quiz of quizList$ | async; track quiz){
-      <option value="{{ quiz.id }}">Quiz {{ quiz.id }}</option>
+    @for (quiz of quizList; track quiz){
+      <option value="{{ quiz.id }}">Quiz {{ quiz.title }}</option>
     }
   </select>
   <select *ngIf="quizSelected" name="type-select" id="type-select">
