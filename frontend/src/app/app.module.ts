@@ -6,17 +6,21 @@ import {AppComponent} from './app.component';
 import {NgOptimizedImage} from "@angular/common";
 import {AdminModule} from "./admin/admin.module";
 import {QuizModule} from "./quiz/quiz.module";
+import {ProfilesComponent} from "./profiles/profiles.component";
+import {LayoutModule} from "./layout/layout.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfilesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
     AdminModule,
-    QuizModule
+    QuizModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
