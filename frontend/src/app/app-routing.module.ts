@@ -10,7 +10,7 @@ import {PatientComponent} from "./admin/pages/patient/patient.component";
 import {AdminQuizzComponent} from "./admin/pages/quizz/admin-quizz.component";
 
 const routes: Routes = [
-  {path: '', pathMatch: "full", redirectTo: 'admin'},
+  {path: '', pathMatch: "prefix", redirectTo: 'admin'},
   {
     path: 'admin', component: AdminComponent, children: [
       {path: 'patients', component: AdminPatientsComponent},
@@ -19,13 +19,12 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'quiz', component: QuizComponent, pathMatch: "full", children: [
+    path: 'quiz', component: QuizComponent, pathMatch: "prefix", children: [
       {path: '', pathMatch: 'full', redirectTo: 'question'},
       {path: 'question', component: QuizSectionComponent},
       {path: 'intermediate/:check', component: IntermediatePageComponent},
       {path: 'finish', component: FinishPageComponent}]
   }
-
 ];
 
 @NgModule({
