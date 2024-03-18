@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Router} from "@angular/router";
-
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
@@ -9,10 +7,9 @@ import {Router} from "@angular/router";
 })
 export class QuizComponent  implements OnInit{
 
-  constructor(private router: Router){
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.router.navigate(["/quiz/question"])
   }
 }
