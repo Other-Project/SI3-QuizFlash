@@ -8,7 +8,6 @@ import {QuestionSectionComponent} from "./question-section/question-section.comp
 import {AnswersComponent} from "./answers/answers.component";
 import {RouterOutlet} from "@angular/router";
 import {QuizSectionComponent} from "./quiz-section/quiz-section.component";
-//import {QuizRoutingModule} from "./quiz-routing.module";
 import {IntermediatePageComponent} from "./intermediate-page/intermediate-page.component";
 import {FinishPageComponent} from "./finish/finish-page.component";
 
