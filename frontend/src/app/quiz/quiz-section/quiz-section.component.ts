@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {GameService} from "../../../service/game-service.service";
 import {Question} from "../../../models/question.models";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 @Component({
