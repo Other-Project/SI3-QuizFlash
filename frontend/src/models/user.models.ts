@@ -8,6 +8,7 @@ export interface User {
   firstname: string;
   age: number;
   hobbies: string[];
+  pictureUrl?: string;
 
   // Global settings
   dementiaLevel: Dementia;

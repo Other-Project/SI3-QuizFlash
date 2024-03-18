@@ -3,6 +3,7 @@ import {Dementia} from "../models/dementia.models";
 
 export const USER_BERNARD: User = {
   id: "98f9f0da-f011-431a-9361-482ab17f8561",
+  pictureUrl: "/assets/users/bernard.jpg",
   firstname: "Bernard",
   lastname: "Martin",
   age: 85,
