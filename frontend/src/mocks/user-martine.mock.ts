@@ -8,7 +8,7 @@ export const USER_MARTINE: User = {
   lastname: "Dupont",
   age: 70,
   dementiaLevel: Dementia.Intermediate,
-  fontSize: 1.5,
+  fontSize: 2,
   hobbies: ["culture", "famille", "theatre"],
 
   automatedSkip: false,
