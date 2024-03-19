@@ -12,7 +12,7 @@ import {InformationComponent} from "./admin/pages/patient/information/informatio
 import {StatisticsComponent} from "./admin/pages/patient/statistics/statistics.component";
 
 const routes: Routes = [
-  {path: '', pathMatch: "prefix", redirectTo: 'admin'},
+  {path: '', pathMatch: "full", redirectTo: 'admin'},
   {
     path: 'admin', component: AdminComponent, children: [
       {path: 'patients', component: AdminPatientsComponent},
@@ -27,7 +27,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'quiz', component: QuizComponent, pathMatch: "prefix", children: [
+    path: 'quiz', component: QuizComponent, children: [
       {path: '', pathMatch: 'full', redirectTo: 'question'},
       {path: 'question', component: QuizSectionComponent},
       {path: 'intermediate/:check', component: IntermediatePageComponent},
