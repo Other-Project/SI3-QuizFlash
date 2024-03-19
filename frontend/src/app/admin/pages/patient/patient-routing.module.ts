@@ -17,7 +17,7 @@ const routes: Routes = [
       component: AdminComponent,
       children: [
         {
-          path: 'patient',
+          path: 'patient/:user_id',
           component: PatientComponent,
           children: routes
         }]

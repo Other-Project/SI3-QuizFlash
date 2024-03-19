@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {GameService} from "../../../service/game-service.service";
 import {Question} from "../../../models/question.models";
+import {UserService} from "../../../service/user.service";
+import {User} from "../../../models/user.models";
 
 
 @Component({
@@ -9,16 +11,19 @@ import {Question} from "../../../models/question.models";
   templateUrl: './quiz-section.component.html',
   styleUrls: ['./quiz-section.component.scss']
 })
-export class QuizSectionComponent  implements OnInit{
+export class QuizSectionComponent implements OnInit {
   protected question:Question | undefined;
-  constructor(private router:Router, public gameService:GameService) {
+  protected user?: User;
+
+  constructor(private router: Router, public gameService: GameService, private userService: UserService) {
     this.gameService.question$.subscribe((question:Question)=>{
       this.question = question
-    })
+    });
   }
 
   ngOnInit(): void {
     this.gameService.getQuestion()
+    this.user = this.userService.getCurrentUser();
   }
 
   checkAnswer(answer:String): void{

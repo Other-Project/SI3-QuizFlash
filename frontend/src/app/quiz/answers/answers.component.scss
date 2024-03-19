@@ -1,4 +1,4 @@
-@import "../../../styles";
+@import "/styles";
 
 section {
   height: 100%;
@@ -6,7 +6,7 @@ section {
   grid-template: 1fr 1fr / 1fr 1fr;
   justify-items: center;
   padding-top: 1rem;
-
+  font-size: $defaultFontSize;
 
   .answer-button {
     border: 2px solid $blackBlue;
@@ -14,7 +14,6 @@ section {
     width: 98%;
     height: 90%;
     border-radius: 10px;
-    font-size: 3rem;
     margin: auto;
     padding: 0.5%;
     text-align: center;
