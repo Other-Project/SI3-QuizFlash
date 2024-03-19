@@ -8,13 +8,21 @@ import {FinishPageComponent} from "./quiz/finish/finish-page.component";
 import {AdminPatientsComponent} from "./admin/pages/patients/admin-patients.component";
 import {PatientComponent} from "./admin/pages/patient/patient.component";
 import {AdminQuizzComponent} from "./admin/pages/quizz/admin-quizz.component";
+import {InformationComponent} from "./admin/pages/patient/information/information.component";
+import {StatisticsComponent} from "./admin/pages/patient/statistics/statistics.component";
 
 const routes: Routes = [
   {path: '', pathMatch: "prefix", redirectTo: 'admin'},
   {
     path: 'admin', component: AdminComponent, children: [
       {path: 'patients', component: AdminPatientsComponent},
-      {path: 'patient', component: PatientComponent},
+      {
+        path: 'patient', component: PatientComponent, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'infos'},
+          {path: 'infos', component: InformationComponent},
+          {path: 'stats', component: StatisticsComponent}
+        ]
+      },
       {path: 'quizz', component: AdminQuizzComponent}
     ]
   },
