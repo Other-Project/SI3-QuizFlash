@@ -1,5 +1,5 @@
 <app-button id="{{quiz.id}}" routerLink="{{quiz.id}}">
-  <app-image [src]="'/assets/Chambre.jpg'" [alt]="quiz.title" [width]="200" [height]="150"/>
+  <app-image [src]="quiz.thumbnailUrl" [alt]="quiz.title" [width]="200" [height]="150"/>
   <p class="quiz-card-title">{{ quiz.title }}</p>
   <p class="quiz-card-theme">{{ quiz.theme }}</p>
 </app-button>

@@ -35,5 +35,6 @@ export const QUIZ1: Quiz = {
   id: "1",
   title: "Les pièce de la maison",
   theme: "La maison",
+  thumbnailUrl: "assets/Chambre.jpg",
   questions: [QUESTION1, QUESTION2, QUESTION3]
 }
