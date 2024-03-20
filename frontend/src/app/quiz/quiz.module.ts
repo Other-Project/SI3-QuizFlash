@@ -6,10 +6,12 @@ import {LayoutModule} from "../layout/layout.module";
 import {QuizHeaderComponent} from "./quiz-header/quiz-header.component";
 import {QuestionSectionComponent} from "./question-section/question-section.component";
 import {AnswersComponent} from "./answers/answers.component";
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 import {QuizSectionComponent} from "./quiz-section/quiz-section.component";
 import {IntermediatePageComponent} from "./intermediate-page/intermediate-page.component";
 import {FinishPageComponent} from "./finish/finish-page.component";
+import {QuizSelectionComponent} from "./quiz-selection/quiz-selection.component";
+import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/quiz-selection-card.component";
 
 @NgModule({
   declarations: [
@@ -20,14 +22,17 @@ import {FinishPageComponent} from "./finish/finish-page.component";
     AnswersComponent,
     QuizSectionComponent,
     IntermediatePageComponent,
-    FinishPageComponent
+    FinishPageComponent,
+    QuizSelectionComponent,
+    QuizSelectionCardComponent
   ],
-  imports: [
-    CommonModule,
-    NgOptimizedImage,
-    LayoutModule,
-    RouterOutlet,
-  ]
+    imports: [
+        CommonModule,
+        NgOptimizedImage,
+        LayoutModule,
+        RouterOutlet,
+        RouterLink,
+    ]
 })
 export class QuizModule {
 }
