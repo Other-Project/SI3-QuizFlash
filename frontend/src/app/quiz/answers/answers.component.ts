@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Answer} from "../../../models/answer.models";
 
 @Component({
   selector: 'answers-section',
@@ -7,20 +8,19 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class AnswersComponent implements OnInit{
 
-  @Input() falseAnswer: string[] = [];
-  @Input() trueAnswer: string = "";
-  protected answers: string[] = [];
+  @Input() answers: Answer[] = [];
+
+  //protected answers: string[] = [];
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.answers = this.falseAnswer;
-    if(this.answers.indexOf(this.trueAnswer) == -1) this.answers.push(this.trueAnswer);
   }
 
-  @Output() returnedAnswer = new EventEmitter<string>();
-  returnAnswer(value: string){
+  @Output() returnedAnswer = new EventEmitter<Answer>();
+
+  returnAnswer(value: Answer) {
     this.returnedAnswer.emit(value); //To return value to the quiz-section.component
   }
 }
