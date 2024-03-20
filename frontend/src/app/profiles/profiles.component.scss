@@ -1,4 +1,11 @@
 main h1, h2 {
+  display: block;
   text-align: center;
   color: #1b2a56;
 }
+
+.profiles {
+  display: flex;
+  justify-content: space-around;
+}
+

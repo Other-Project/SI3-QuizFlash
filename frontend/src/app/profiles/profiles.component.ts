@@ -9,10 +9,11 @@ import {UserService} from "../../service/user.service";
   styleUrls: ['./profiles.component.scss']
 })
 export class ProfilesComponent {
-  users: User[] | undefined;
+  public users?: User[];
   constructor(public userService: UserService) {
     this.userService.users$.subscribe((users: User[]) => {
       this.users = users;
+      console.log(users);
     });
   }
 }

@@ -1,0 +1,16 @@
+.profile_picture {
+  width: 100px;
+  height: 100px;
+  min-width: 50%;
+  min-height: 50%;
+  border-radius: 5%; /* Can be adjusted */
+  object-fit: cover;
+}
+
+p {
+  color: #1b2a56;
+}
+
+button {
+  border: none;
+}

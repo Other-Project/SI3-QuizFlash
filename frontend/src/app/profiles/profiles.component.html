@@ -2,15 +2,11 @@
 <main>
   <h1>Bienvenue dans Quiz Flash !</h1>
   <h2>Séléctionnez un profil :</h2>
-
-  <img ngSrc="/assets/bernard.jpg"
-       alt="Bernard" width="150" height="150"/>
-  <img ngSrc="/assets/francescu.jpg"
-       alt="Francescu" width="150" height="150"/>
-  <img ngSrc="/assets/martine.jpg"
-       alt="Martine" width="150" height="150"/>
-  <div *ngFor="let user of users">
-    <app-profiles-button [user]="user">
-    </app-profiles-button>
+  <div class="profiles">
+    <div *ngFor="let user of users">
+      <app-profiles-button
+        [user]="user">
+      </app-profiles-button>
+    </div>
   </div>
 </main>
