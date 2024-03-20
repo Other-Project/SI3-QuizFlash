@@ -1,11 +1,8 @@
-@import "/styles";
-
 section{
   display: flex;
   justify-content: space-around;
   text-align: center;
   width: 100%;
-  font-size: $defaultFontSize;
 
   img{
     max-width: 40%;

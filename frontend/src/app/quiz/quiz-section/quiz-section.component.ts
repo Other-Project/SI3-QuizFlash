@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {GameService} from "../../../service/game-service.service";
 import {Question} from "../../../models/question.models";
-import {UserService} from "../../../service/user.service";
-import {User} from "../../../models/user.models";
 
 
 @Component({
@@ -13,9 +11,8 @@ import {User} from "../../../models/user.models";
 })
 export class QuizSectionComponent implements OnInit {
   protected question:Question | undefined;
-  protected user?: User;
 
-  constructor(private router: Router, public gameService: GameService, private userService: UserService) {
+  constructor(private router: Router, public gameService: GameService) {
     this.gameService.question$.subscribe((question:Question)=>{
       this.question = question
     });
@@ -23,7 +20,6 @@ export class QuizSectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameService.getQuestion()
-    this.user = this.userService.getCurrentUser();
   }
 
   checkAnswer(answer:String): void{

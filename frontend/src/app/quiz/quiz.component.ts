@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {UserService} from "../../service/user.service";
+import {User} from "../../models/user.models";
 
 @Component({
   selector: 'app-quiz',
@@ -6,10 +8,12 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent  implements OnInit{
+  public user?: User;
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.user = this.userService.getCurrentUser();
   }
 }

@@ -1,8 +1,8 @@
 <div>
-  <question-section [fontSize]="user!.fontSize.toString()+'em'" image="{{question?.imageUrl}}"
+  <question-section image="{{question?.imageUrl}}"
                     sound="{{question?.soundUrl}}" question="{{question?.text}}"/>
   @if (question != undefined) {
-    <answers-section [fontSize]="user!.fontSize.toString()+'em'" [falseAnswer]="question.falseAnswers"
+    <answers-section [falseAnswer]="question.falseAnswers"
                      [trueAnswer]="question.trueAnswer" (returnedAnswer)='checkAnswer($event)'></answers-section>
   }
 </div>

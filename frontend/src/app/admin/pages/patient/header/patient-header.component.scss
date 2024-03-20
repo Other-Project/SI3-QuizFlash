@@ -7,9 +7,26 @@
   border-bottom: 1px solid $blue;
   min-height: 100px;
 
-  img{
-    height: 80%;
+  .patient-picture {
+    width: 115px;
+    height: 115px;
     margin-left: 3vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: auto;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+      flex-shrink: 1;
+    }
   }
 }
 

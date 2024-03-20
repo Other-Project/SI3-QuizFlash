@@ -1,5 +1,7 @@
 <div class="patient-header">
-  <img ngSrc="{{ user?.pictureUrl }}" alt="Profile picture" width="115" height="115">
+  <div class="patient-picture">
+    <img ngSrc="{{ user?.pictureUrl }}" alt="Profile picture" width="115" height="115">
+  </div>
   <div class="patient-info">
     <h1>{{ user?.lastname }}</h1>
     <h1>{{ user?.firstname }}</h1>

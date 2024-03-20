@@ -11,7 +11,7 @@ import {User} from "../../../../../models/user.models";
 export class PatientSettingsComponent{
   settings: {[key: string]: any} = {"deafness":"1","dementia":"1"};
   @ViewChild(OptionsComponent) optionsComponent: OptionsComponent | undefined;
-  @Input() user!: User | undefined;
+  @Input() user?: User;
 
   choiceChange(eventData: { id: string, value: any }) {
     this.settings[eventData.id] = eventData.value;

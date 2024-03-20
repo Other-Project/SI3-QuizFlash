@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from "@angular/core";
 })
 
 export class InterestsComponent implements OnInit{
-  @Input() userHobbies!: string[] | undefined;
+  @Input() userHobbies?: string[];
   ngOnInit(): void {
   }
 }

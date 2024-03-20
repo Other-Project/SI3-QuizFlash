@@ -17,7 +17,7 @@ const routes: Routes = [
     path: 'admin', component: AdminComponent, children: [
       {path: 'patients', component: AdminPatientsComponent},
       {
-        path: 'patient', component: PatientComponent, children: [
+        path: 'patient/:user_id', component: PatientComponent, children: [
           {path: '', pathMatch: 'full', redirectTo: 'infos'},
           {path: 'infos', component: InformationComponent},
           {path: 'stats', component: StatisticsComponent}

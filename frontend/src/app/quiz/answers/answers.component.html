@@ -1,4 +1,4 @@
 <section>
-  <button [ngStyle]="{'font-size': fontSize}" class="answer-button" *ngFor="let answer of answers"
+  <button class="answer-button" *ngFor="let answer of answers"
           textContent="{{answer}}" (click)="returnAnswer(answer)"></button>
 </section>
