@@ -33,6 +33,6 @@ const QUESTION3 : Question = {
 export const QUIZ2 : Quiz = {
   id:"2",
   title:"Les pièce de la maison 2",
-  theme:"La maison 2",
+  theme:"La maison",
   questions: [QUESTION1,QUESTION2,QUESTION3]
 }
