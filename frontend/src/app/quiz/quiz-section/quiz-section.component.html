@@ -1,4 +1,4 @@
 <div>
-<question-section image="{{question?.imageUrl}}" sound="{{question?.soundUrl}}" question = "{{question?.text}}"/>
-@if (question!= undefined){ <answers-section [falseAnswer]="question.falseAnswers" [trueAnswer]="question.trueAnswer" (returnedAnswer)='checkAnswer($event)'></answers-section> }
+  <question-section image="{{question?.imageUrl}}" sound="{{question?.soundUrl}}" question="{{question?.text}}"/>
+  <answers-section [falseAnswer]="question.falseAnswers" [trueAnswer]="question.trueAnswer" (returnedAnswer)='checkAnswer($event)' *ngIf="question" />
 </div>

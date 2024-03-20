@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from "../../../../../models/user.models";
 
 @Component({
   selector: 'patient-header',
@@ -6,10 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./patient-header.component.scss']
 })
 export class PatientHeaderComponent implements OnInit{
-  public name: string = "Lubrat";
-  public firstName: string = "Jean-Luc";
-  public age: number = 52;
-  public imageUrl: string = "../../assets/profile.png"
+  @Input() user?: User;
 
   constructor() {}
 

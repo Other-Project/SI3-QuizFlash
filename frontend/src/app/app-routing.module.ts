@@ -8,25 +8,33 @@ import {FinishPageComponent} from "./quiz/finish/finish-page.component";
 import {AdminPatientsComponent} from "./admin/pages/patients/admin-patients.component";
 import {PatientComponent} from "./admin/pages/patient/patient.component";
 import {AdminQuizzComponent} from "./admin/pages/quizz/admin-quizz.component";
+import {InformationComponent} from "./admin/pages/patient/information/information.component";
+import {StatisticsComponent} from "./admin/pages/patient/statistics/statistics.component";
 import {ProfilesComponent} from "./profiles/profiles.component";
+
 
 const routes: Routes = [
   {path: '', pathMatch: "full", component:ProfilesComponent},
   {
     path: 'admin', component: AdminComponent, children: [
       {path: 'patients', component: AdminPatientsComponent},
-      {path: 'patient', component: PatientComponent},
+      {
+        path: 'patient/:user_id', component: PatientComponent, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'infos'},
+          {path: 'infos', component: InformationComponent},
+          {path: 'stats', component: StatisticsComponent}
+        ]
+      },
       {path: 'quizz', component: AdminQuizzComponent}
     ]
   },
   {
-    path: 'quiz', component: QuizComponent, pathMatch: "full", children: [
+    path: 'quiz', component: QuizComponent, children: [
       {path: '', pathMatch: 'full', redirectTo: 'question'},
       {path: 'question', component: QuizSectionComponent},
       {path: 'intermediate/:check', component: IntermediatePageComponent},
       {path: 'finish', component: FinishPageComponent}]
   }
-
 ];
 
 @NgModule({

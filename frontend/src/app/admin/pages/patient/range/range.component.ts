@@ -15,6 +15,7 @@ export class RangeComponent implements OnInit{
   @Input() min: number = 0;
   @Input() max: number = 0;
   @Input() defaultValue: number = 1;
+  @Input() step: number = 1;
 
   constructor() {
   }

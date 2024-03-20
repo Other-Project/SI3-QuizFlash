@@ -1,4 +1,4 @@
-@import "../../../styles";
+@import "/styles";
 
 section {
   height: 100%;
@@ -7,17 +7,16 @@ section {
   justify-items: center;
   padding-top: 1rem;
 
-
   .answer-button {
     border: 2px solid $blackBlue;
     background-color: $yellow1;
     width: 98%;
     height: 90%;
     border-radius: 10px;
-    font-size: 3rem;
     margin: auto;
     padding: 0.5%;
     text-align: center;
+    font-size: 0.90em;
 
     &:hover {
       background-color: $yellow2;

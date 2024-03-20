@@ -9,12 +9,13 @@ import {Question} from "../../../models/question.models";
   templateUrl: './quiz-section.component.html',
   styleUrls: ['./quiz-section.component.scss']
 })
-export class QuizSectionComponent  implements OnInit{
+export class QuizSectionComponent implements OnInit {
   protected question:Question | undefined;
-  constructor(private router:Router, public gameService:GameService) {
+
+  constructor(private router: Router, public gameService: GameService) {
     this.gameService.question$.subscribe((question:Question)=>{
       this.question = question
-    })
+    });
   }
 
   ngOnInit(): void {
