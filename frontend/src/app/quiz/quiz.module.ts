@@ -10,6 +10,7 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 import {QuizSectionComponent} from "./quiz-section/quiz-section.component";
 import {IntermediatePageComponent} from "./intermediate-page/intermediate-page.component";
 import {FinishPageComponent} from "./finish/finish-page.component";
+import {QuestionResultComponent} from "./question-result/question-result.component";
 import {QuizSelectionComponent} from "./quiz-selection/quiz-selection.component";
 import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/quiz-selection-card.component";
 
@@ -22,6 +23,7 @@ import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/q
     AnswersComponent,
     QuizSectionComponent,
     IntermediatePageComponent,
+    QuestionResultComponent,
     FinishPageComponent,
     QuizSelectionComponent,
     QuizSelectionCardComponent
