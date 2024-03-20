@@ -16,8 +16,11 @@ export class QuizSectionComponent {
   protected trueAnswer: string | undefined;
 
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) {
-    this.gameService.question$.subscribe((question) => {
+    this.gameService.question$.subscribe((question:Question)=>{
       this.question = question
+      for (let i = 0; i < question.answers.length; i++) {
+        if (question.answers.at(i)!.trueAnswer) this.trueAnswer = question.answers.at(i)!.answerText;
+      }
     });
   }
 
@@ -35,4 +38,3 @@ export class QuizSectionComponent {
         })
   }
 }
-

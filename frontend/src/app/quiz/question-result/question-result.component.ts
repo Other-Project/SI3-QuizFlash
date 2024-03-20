@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Location} from "@angular/common";
 import {Answer} from "../../../models/answer.models";
 
 @Component({
@@ -10,7 +9,7 @@ import {Answer} from "../../../models/answer.models";
 export class QuestionResultComponent implements OnInit {
   @Input() goodAnswer: string | undefined;
 
-  constructor(private location: Location) {
+  constructor() {
   }
 
   ngOnInit(): void {
