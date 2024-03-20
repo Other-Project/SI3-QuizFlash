@@ -1,6 +1,10 @@
-<app-header>
-  <quiz-header></quiz-header>
-</app-header>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<div class="quiz">
+  <div [ngStyle]="{'font-size': user!.fontSize.toString()+'em'}" class="quiz-content">
+    <app-header>
+      <quiz-header></quiz-header>
+    </app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

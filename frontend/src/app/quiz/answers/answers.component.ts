@@ -23,5 +23,4 @@ export class AnswersComponent implements OnInit{
   returnAnswer(value: string){
     this.returnedAnswer.emit(value); //To return value to the quiz-section.component
   }
-
 }

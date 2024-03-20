@@ -1,0 +1,5 @@
+<range (change)="changeFontSize($event)" [defaultValue]="user!.fontSize" [min]="1" [max]="2" [step]="0.05"
+       [subject]="'font-size'" [title]="'Taille de la police'" [tags]="['100%','200%']"/>
+<div class="font-preview">
+  <p [ngStyle]="{'font-size': fontSize}">Je suis un texte.</p>
+</div>

@@ -1,4 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {UserService} from "../../../../service/user.service";
+import {User} from "../../../../models/user.models";
 
 @Component({
   selector: 'patient',
@@ -6,5 +9,16 @@ import {Component} from '@angular/core';
   styleUrls: ['./patient.component.scss']
 })
 
-export class PatientComponent{
+export class PatientComponent implements OnInit {
+  public user?: User;
+
+  constructor(private route: ActivatedRoute, private userService: UserService) {
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      let user_id: string = params['user_id'];
+      this.user = this.userService.getUserById(user_id);
+    });
+  }
 }
