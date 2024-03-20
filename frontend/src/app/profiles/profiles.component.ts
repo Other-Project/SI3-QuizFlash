@@ -1,4 +1,6 @@
 import {Component} from "@angular/core";
+import {User} from "../../models/user.models";
+import {UserService} from "../../service/user.service";
 
 
 @Component({
@@ -7,6 +9,10 @@ import {Component} from "@angular/core";
   styleUrls: ['./profiles.component.scss']
 })
 export class ProfilesComponent {
-  constructor() {
+  users: User[] | undefined;
+  constructor(public userService: UserService) {
+    this.userService.users$.subscribe((users: User[]) => {
+      this.users = users;
+    });
   }
 }

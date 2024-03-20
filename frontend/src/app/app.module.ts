@@ -8,11 +8,13 @@ import {AdminModule} from "./admin/admin.module";
 import {QuizModule} from "./quiz/quiz.module";
 import {ProfilesComponent} from "./profiles/profiles.component";
 import {LayoutModule} from "./layout/layout.module";
+import {ProfileButtonComponent} from "./profiles/profile-button/profile-button.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfilesComponent
+    ProfilesComponent,
+    ProfileButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +22,7 @@ import {LayoutModule} from "./layout/layout.module";
     NgOptimizedImage,
     AdminModule,
     QuizModule,
-    LayoutModule
+    LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
