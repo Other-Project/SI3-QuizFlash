@@ -29,15 +29,15 @@ const routes: Routes = [
   },
   {
     path: 'quiz', component: QuizComponent, children: [
-      {path: '', pathMatch: 'full', component: QuizSelectionComponent},
-      {
-        path: ':quiz_id', children: [
-          {path: '', pathMatch: 'full', redirectTo: 'question'},
-          {path: 'question', component: QuizSectionComponent},
-          {path: 'intermediate/:check', component: IntermediatePageComponent},
-          {path: 'finish', component: FinishPageComponent}
-        ]
-      }
+      {path: '', pathMatch: 'full', component: QuizSelectionComponent}
+    ]
+  },
+  {
+    path: 'quiz/:quiz_id', component: QuizComponent, children: [
+      {path: '', pathMatch: 'full', redirectTo: 'question'},
+      {path: 'question', component: QuizSectionComponent},
+      {path: 'intermediate/:check', component: IntermediatePageComponent},
+      {path: 'finish', component: FinishPageComponent}
     ]
   }
 ];
