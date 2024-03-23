@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from "@angular/core";
+import {Component, EventEmitter, Input, Output, ViewChild} from "@angular/core";
 import {OptionsComponent} from "../options/options.component";
 import {User} from "../../../../../models/user.models";
 
@@ -9,12 +9,13 @@ import {User} from "../../../../../models/user.models";
 })
 
 export class PatientSettingsComponent{
-  settings: {[key: string]: any} = {"deafness":"1","dementia":"1"};
-  @ViewChild(OptionsComponent) optionsComponent: OptionsComponent | undefined;
+  @ViewChild(OptionsComponent) optionsComponent?: OptionsComponent;
+  @Output() dementiaLevelUpdate: EventEmitter<any> = new EventEmitter
   @Input() user?: User;
 
-  choiceChange(eventData: { id: string, value: any }) {
-    this.settings[eventData.id] = eventData.value;
-    this.optionsComponent?.changeOptions(this.settings);
+  dementiaLevelChange(newDementiaLevel: number) {
+    //TODO LANCER UN UPDATE SERVEUR
+    this.optionsComponent?.changeDementiaLevel(newDementiaLevel);
+    this.dementiaLevelUpdate.emit(newDementiaLevel);
   }
 }

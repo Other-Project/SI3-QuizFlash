@@ -26,8 +26,6 @@ export class RangeComponent implements OnInit{
   }
 
   choiceChange(event: any): void{
-    const id = event.target.id;
-    const value = event.target.value;
-    this.changeEvent.emit({ id, value });
+    this.changeEvent.emit(event.target.value);
   }
 }

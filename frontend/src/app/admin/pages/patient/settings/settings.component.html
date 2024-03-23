@@ -1,10 +1,9 @@
 <h1>Paramétrage</h1>
 <section class="settings">
   <article class="diseases">
-    <range [defaultValue]="user!.dementiaLevel" (changeEvent)="choiceChange($event)" [subject]="'dementia'"
+    <range [defaultValue]="user!.dementiaLevel" (changeEvent)="dementiaLevelChange($event)" [subject]="'dementia'"
            [title]="'Niveau de démence'" [tags]="['Léger','Intermédiaire','Elevé']"/>
-    <range (changeEvent)="choiceChange($event)" [subject]="'deafness'" [title]="'Niveau de surdité'" [tags]="['Léger','Intermédiaire','Elevé']" />
     <font-size-selector [user]="user"/>
   </article>
-  <options />
+  <options [user]="user"/>
 </section>

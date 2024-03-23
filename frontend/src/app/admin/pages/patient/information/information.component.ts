@@ -22,4 +22,8 @@ export class InformationComponent{
       this.user = this.userService.getUserById(user_id);
     });
   }
+
+  newDementiaLevel(dementiaLevel: number) {
+    this.userService.updateDementiaLevel(this.user!.id, dementiaLevel);
+  }
 }

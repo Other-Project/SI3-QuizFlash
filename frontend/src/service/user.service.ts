@@ -3,6 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {USERS} from "../mocks/users.mock";
 import {USER_BERNARD} from "../mocks/user-bernard.mock";
+import {USER_MARTINE} from "../mocks/user-martine.mock";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -26,8 +27,12 @@ export class UserService {
     // TODO update in the server
   }
 
+  updateDementiaLevel(userId: string, newDementiaLevel: number): void {
+    // TODO update in the server
+  }
+
   public getUserById(id: string): User {
-    return USER_BERNARD;
+    return USER_MARTINE;
   }
 
   getCurrentUser(): User {

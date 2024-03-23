@@ -1,4 +1,5 @@
-import {Component, ElementRef, ViewChild} from "@angular/core";
+import {Component, ElementRef, Input, ViewChild} from "@angular/core";
+import {User} from "../../../../../models/user.models";
 
 @Component({
   selector: 'options',
@@ -7,24 +8,36 @@ import {Component, ElementRef, ViewChild} from "@angular/core";
 })
 
 export class OptionsComponent{
-  @ViewChild('autoscroll') autoScrollCheckBox: ElementRef | undefined;
-  @ViewChild('incorrect') incorrectMessageCheckBox: ElementRef | undefined;
-  @ViewChild('fifty') fiftyFiftyCheckBox: ElementRef | undefined;
-  @ViewChild('auditive') auditiveCheckBox: ElementRef | undefined;
-  @ViewChild('audiolaunch') audioLaunchCheckBox: ElementRef | undefined;
+  @ViewChild('automatedSkip') autoScrollCheckBox?: ElementRef;
+  @ViewChild('showIncorrect') incorrectMessageCheckBox?: ElementRef;
+  @ViewChild('answerHint') fiftyFiftyCheckBox?: ElementRef;
+  @ViewChild('auditive') auditiveCheckBox?: ElementRef;
+  @ViewChild('audioLaunch') audioLaunchCheckBox?: ElementRef;
 
-  changeOptions(settings: {[key: string]: any}) : void{
-      let dementia: string = settings["dementia"]
-      let deafness: string = settings["deafness"]
-      if(this.auditiveCheckBox)
-        this.auditiveCheckBox.nativeElement.checked = (dementia == "0" || dementia == "1") && deafness != "2";
-      if(this.fiftyFiftyCheckBox)
-        this.fiftyFiftyCheckBox.nativeElement.checked = (dementia == "0");
-      if(this.incorrectMessageCheckBox)
-        this.incorrectMessageCheckBox.nativeElement.checked = (dementia == "0");
-      if(this.autoScrollCheckBox)
-        this.autoScrollCheckBox.nativeElement.checked = (dementia=="2");
-      if(this.audioLaunchCheckBox)
-        this.audioLaunchCheckBox.nativeElement.checked = (dementia=="0" || dementia=="1") && (deafness!="2");
+  @Input() user?: User;
+
+  changeDementiaLevel(newLevel: number): void {
+    const intermediateOrHigh: boolean = (newLevel == 0 || newLevel == 1);
+    const low: boolean = (newLevel == 0);
+
+    if (this.fiftyFiftyCheckBox)
+      this.fiftyFiftyCheckBox.nativeElement.checked = low;
+    if (this.incorrectMessageCheckBox)
+      this.incorrectMessageCheckBox.nativeElement.checked = low;
+    if (this.autoScrollCheckBox)
+      this.autoScrollCheckBox.nativeElement.checked = (newLevel == 2);
+    if (this.auditiveCheckBox)
+      this.auditiveCheckBox.nativeElement.checked = intermediateOrHigh;
+    if (this.audioLaunchCheckBox) {
+      this.audioLaunchCheckBox!.nativeElement.checked = intermediateOrHigh;
+      this.audioLaunchCheckBox!.nativeElement.disabled = !intermediateOrHigh;
+    }
+  }
+
+  audioChange($event: any) {
+    if (this.audioLaunchCheckBox) {
+      this.audioLaunchCheckBox.nativeElement.checked = false;
+      this.audioLaunchCheckBox.nativeElement.disabled = !$event.currentTarget.checked;
+    }
   }
 }
