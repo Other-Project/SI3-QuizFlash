@@ -1,34 +1,45 @@
 import {Injectable} from "@angular/core";
 import {Quiz} from "../models/quiz.models";
-import {QUIZ1} from "../mocks/quiz1.mock";
 import {BehaviorSubject} from "rxjs";
 import {Question} from "../models/question.models";
-import {QuestionType} from "../models/question-type.models";
 import {QuizService} from "./quiz-service.service";
 
 
-@Injectable({providedIn:'root'})
-export class GameService{
-  public question$:BehaviorSubject<Question> = new BehaviorSubject<Question>({
-    falseAnswers: [],
-    imageUrl: "",
-    soundUrl: "",
-    text: "",
-    trueAnswer: "",
-    type: QuestionType.TextOnly
-  });
-  private quiz:Quiz=QUIZ1;
-  public compt$:BehaviorSubject<number> = new BehaviorSubject<number>(1);
-  public theme$:BehaviorSubject<string> = new BehaviorSubject<string>("");
+@Injectable({providedIn: 'root'})
+export class GameService {
+  private quiz?: Quiz;
 
-  constructor(public quizService:QuizService) {
-    this.quizService.quiz$.subscribe((quiz: Quiz)=>{
-      this.quiz = quiz;this.theme$.next(this.quiz.theme)
+  private question?: Question;
+  private counter?: number;
+  public question$: BehaviorSubject<Question | undefined> = new BehaviorSubject<Question | undefined>(this.question);
+  public compt$: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(this.counter);
+
+  constructor(public quizService: QuizService) {
+    this.quizService.quiz$.subscribe((quiz) => {
+      this.quiz = quiz;
+      this.counter = quiz ? 1 : undefined;
+      this.getQuestion();
     })
   }
 
-  getQuestion(): void {this.question$.next(this.quiz.questions[this.compt$.value-1])}
-  nextQuestion(): void {this.compt$.next(this.compt$.value + 1);this.getQuestion()}
-  previousQuestion(): void{this.compt$.next(this.compt$.value - 1);this.getQuestion()}
+  private getQuestion(): void {
+    if (this.counter && this.quiz && this.counter > this.quiz.questions.length)
+      this.quizService.endQuiz();
+    else {
+      this.question = this.counter ? this.quiz?.questions[this.counter - 1] : undefined
+      this.compt$.next(this.counter);
+      this.question$.next(this.question);
+    }
+  }
+
+  nextQuestion(): void {
+    if (this.counter) this.counter++;
+    this.getQuestion()
+  }
+
+  previousQuestion(): void {
+    if (this.counter) this.counter--;
+    this.getQuestion()
+  }
 
 }

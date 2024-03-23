@@ -9,6 +9,7 @@ import {StatisticsModule} from "./statistics/statistics.module";
 import {InformationModule} from "./information/information.module";
 import {PatientNavbarComponent} from "./navbar/patient-navbar.component";
 import {RouterLink, RouterOutlet} from "@angular/router";
+import {LayoutModule} from "../../../layout/layout.module";
 
 
 @NgModule({
@@ -20,13 +21,14 @@ import {RouterLink, RouterOutlet} from "@angular/router";
     InformationComponent,
     PatientNavbarComponent
   ],
-  imports: [
-    NgOptimizedImage,
-    StatisticsModule,
-    InformationModule,
-    RouterOutlet,
-    RouterLink
-  ]
+    imports: [
+        NgOptimizedImage,
+        StatisticsModule,
+        InformationModule,
+        RouterOutlet,
+        RouterLink,
+        LayoutModule
+    ]
 })
 
 export class PatientModule {

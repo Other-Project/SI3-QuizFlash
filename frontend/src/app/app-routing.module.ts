@@ -10,6 +10,7 @@ import {PatientComponent} from "./admin/pages/patient/patient.component";
 import {AdminQuizzComponent} from "./admin/pages/quizz/admin-quizz.component";
 import {InformationComponent} from "./admin/pages/patient/information/information.component";
 import {StatisticsComponent} from "./admin/pages/patient/statistics/statistics.component";
+import {QuizSelectionComponent} from "./quiz/quiz-selection/quiz-selection.component";
 
 const routes: Routes = [
   {path: '', pathMatch: "full", redirectTo: 'admin'},
@@ -28,10 +29,16 @@ const routes: Routes = [
   },
   {
     path: 'quiz', component: QuizComponent, children: [
+      {path: '', pathMatch: 'full', component: QuizSelectionComponent}
+    ]
+  },
+  {
+    path: 'quiz/:quiz_id', component: QuizComponent, children: [
       {path: '', pathMatch: 'full', redirectTo: 'question'},
       {path: 'question', component: QuizSectionComponent},
       {path: 'intermediate/:check', component: IntermediatePageComponent},
-      {path: 'finish', component: FinishPageComponent}]
+      {path: 'finish', component: FinishPageComponent}
+    ]
   }
 ];
 

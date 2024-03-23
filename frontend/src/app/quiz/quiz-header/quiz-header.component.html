@@ -1,2 +1,2 @@
-<p>{{theme}}</p>
-<p>{{pageNumber}}</p>
+<p>{{ quiz?.title }}</p>
+<p>{{ questionCount }} <span *ngIf="quiz?.questions">/ {{ quiz!.questions.length }}</span></p>

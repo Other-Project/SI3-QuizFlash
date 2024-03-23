@@ -8,49 +8,33 @@
   min-height: 100px;
 
   .patient-picture {
-    width: 115px;
-    height: 115px;
     margin-left: 3vw;
+    border-radius: 50%;
+    overflow: hidden;
+  }
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .patient-info {
+    margin-left: 3vw;
+    margin-top: 2vh;
+    display: grid;
+    align-items: normal;
+    grid-template: auto auto / auto auto;
 
-    img {
-      width: auto;
-      height: auto;
-      min-width: 100%;
-      min-height: 100%;
-
-      border-radius: 50%;
-
-      object-fit: cover;
-      flex-shrink: 1;
+    * {
+      margin-top: 0;
     }
-  }
-}
 
-.patient-info {
-  margin-left: 3vw;
-  margin-top: 2vh;
-  display: grid;
-  align-items: normal;
-  grid-template: auto auto / auto auto;
+    :nth-child(2) {
+      margin-left: 1rem;
+    }
 
-  *{
-    margin-top: 0;
-  }
+    h1 {
+      font-size: 1.5rem;
+    }
 
-  :nth-child(2) {
-    margin-left: 1rem;
-  }
-
-  h1{
-    font-size: 1.5rem;
-  }
-
-  h3{
-    margin-top: 0.2rem;
-    font-size: 1rem;
+    h3 {
+      margin-top: 0.2rem;
+      font-size: 1rem;
+    }
   }
 }
