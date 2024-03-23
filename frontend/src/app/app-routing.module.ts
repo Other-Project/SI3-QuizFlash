@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminComponent} from "./admin/admin.component";
 import {QuizComponent} from "./quiz/quiz.component";
-import {IntermediatePageComponent} from "./quiz/intermediate-page/intermediate-page.component";
 import {QuizSectionComponent} from "./quiz/quiz-section/quiz-section.component";
 import {FinishPageComponent} from "./quiz/finish/finish-page.component";
 import {AdminPatientsComponent} from "./admin/pages/patients/admin-patients.component";
@@ -36,7 +35,6 @@ const routes: Routes = [
     path: 'quiz/:quiz_id', component: QuizComponent, children: [
       {path: '', pathMatch: 'full', redirectTo: 'question'},
       {path: 'question', component: QuizSectionComponent},
-      {path: 'intermediate/:check', component: IntermediatePageComponent},
       {path: 'finish', component: FinishPageComponent}
     ]
   }

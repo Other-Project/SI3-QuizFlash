@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {GameService} from "../../../service/game-service.service";
 import {Question} from "../../../models/question.models";
-import {Answer} from "../../../models/answer.models";
 
 
 @Component({
@@ -11,20 +10,21 @@ import {Answer} from "../../../models/answer.models";
   styleUrls: ['./quiz-section.component.scss']
 })
 export class QuizSectionComponent {
-  protected question?:Question;
+  protected question?: Question
   protected questionResult: boolean = false;
   protected trueAnswer: string | undefined;
 
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService) {
-    this.gameService.question$.subscribe((question:Question)=>{
-      this.question = question
-      for (let i = 0; i < question.answers.length; i++) {
-        if (question.answers.at(i)!.trueAnswer) this.trueAnswer = question.answers.at(i)!.answerText;
-      }
+    this.gameService.question$.subscribe((question) => {
+      this.question = question;
+      if (question)
+        for (let i = 0; i < question.answers.length; i++) {
+          if (question.answers.at(i)!.trueAnswer) this.trueAnswer = question.answers.at(i)!.answerText;
+        }
     });
   }
 
-  checkAnswer(answer: String): void {
+  checkAnswer(): void {
     this.questionResult = true;
   }
 
