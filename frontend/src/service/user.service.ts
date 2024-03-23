@@ -8,6 +8,8 @@ import {USER_BERNARD} from "../mocks/user-bernard.mock";
 export class UserService {
   public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(USERS);
   public users: User[] = [];
+  public user$: BehaviorSubject<User> = new BehaviorSubject<User>(USER_BERNARD);
+  public user?: User;
 
   constructor() {
   }
