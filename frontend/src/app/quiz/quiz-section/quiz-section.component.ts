@@ -4,6 +4,7 @@ import {GameService} from "../../../service/game-service.service";
 import {Question} from "../../../models/question.models";
 import {UserService} from "../../../service/user.service";
 import {User} from "../../../models/user.models";
+import {QuestionType} from "../../../models/question-type.models";
 
 
 @Component({
@@ -40,6 +41,9 @@ export class QuizSectionComponent {
 
   continueQuiz(){
     this.gameService.nextQuestion();
+    if (!this.user.soundQuestion) {
+      while (this.question?.type == QuestionType.Sound) this.gameService.nextQuestion();
+    }
     this.questionResult = false;
     if (!this.question) //Open the finish page at the end of the quiz
       this.router.navigate(["../finish"], {relativeTo: this.route}).then(
