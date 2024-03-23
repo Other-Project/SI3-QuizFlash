@@ -31,6 +31,9 @@ export class UserService {
     // TODO update in the server
   }
 
+  updatePatientInfo(userId: string, newFirstName: string, newLastName: string, newAge: number) {
+    // TODO update in the server
+  }
   public getUserById(id: string): User {
     return USER_MARTINE;
   }

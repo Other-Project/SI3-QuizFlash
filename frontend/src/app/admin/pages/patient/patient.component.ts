@@ -21,4 +21,9 @@ export class PatientComponent implements OnInit {
       this.user = this.userService.getUserById(user_id);
     });
   }
+
+  updatePatientInfo(newData: { firstName: string, lastName: string, age: number }) {
+    this.userService.updatePatientInfo(this.user!.id, newData.firstName, newData.lastName, newData.age);
+    console.log(newData);
+  }
 }
