@@ -7,5 +7,6 @@ export interface Quiz{
   id:string;
   title:string;
   theme: string;
+  thumbnailUrl: string;
   questions: Question[];
 }
