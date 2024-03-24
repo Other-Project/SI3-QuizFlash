@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {GameService} from "../../../service/game-service.service";
 import {Question} from "../../../models/question.models";
@@ -17,7 +17,7 @@ export class QuizSectionComponent {
   protected question?: Question
   protected questionResult: boolean = false;
   protected trueAnswer?: string;
-  protected user!: User;
+  protected user?: User;
 
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, public userService: UserService) {
     this.gameService.question$.subscribe((question) => {
@@ -31,7 +31,7 @@ export class QuizSectionComponent {
   }
 
   checkAnswer(answer: Answer): void {
-    if (this.user.automatedSkip) {
+    if (this.user!.automatedSkip) {
       this.continueQuiz();
     } else {
       this.questionResult = true;
@@ -40,7 +40,7 @@ export class QuizSectionComponent {
 
   continueQuiz() {
     this.gameService.nextQuestion();
-    if (!this.user.soundQuestion) {
+    if (!this.user!.soundQuestion) {
       while (this.question?.type == QuestionType.Sound) this.gameService.nextQuestion();
     }
     this.questionResult = false;
