@@ -6,8 +6,8 @@ import {USER_BERNARD} from "../mocks/user-bernard.mock";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
-  public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(USERS);
-  public users: User[] = [];
+  public users: User[] = USERS;
+  public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.users);
 
   constructor() {
   }
@@ -26,8 +26,16 @@ export class UserService {
     // TODO update in the server
   }
 
-  public getUserById(id: string): User {
-    return USER_BERNARD;
+  updateDementiaLevel(userId: string, newDementiaLevel: number): void {
+    // TODO update in the server
+  }
+
+  updatePatientInfo(userId: string, newFirstName: string, newLastName: string, newAge: number) {
+    // TODO update in the server
+  }
+
+  public getUserById(id: string): User | undefined {
+    return this.users.find(user => user.id == id);
   }
 
   getCurrentUser(): User {

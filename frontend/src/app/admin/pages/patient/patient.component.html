@@ -1,4 +1,4 @@
-<patient-header [user]="user"/>
+<patient-header (patientInfoChange)="updatePatientInfo($event)" [user]="user"/>
 <section class="patient-data">
   <patient-navbar/>
   <boxed-container>
