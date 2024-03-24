@@ -17,8 +17,8 @@ export class OptionsComponent{
   @Input() user?: User;
 
   changeDementiaLevel(newLevel: number): void {
-    const lowOrIntermediate: boolean = (newLevel == 0 || newLevel == 1);
-    const low: boolean = (newLevel == 0);
+    const lowOrIntermediate: boolean = newLevel == 0 || newLevel == 1;
+    const low: boolean = newLevel == 0;
 
     if (this.fiftyFiftyCheckBox)
       this.fiftyFiftyCheckBox.nativeElement.checked = low;
