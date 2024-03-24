@@ -15,7 +15,6 @@ export class ProfileButtonComponent {
 
   notifyUserService() {
     this.userService.setLoggedUser(this.user);
-    console.log("Done.");
     this.redirectToUserProfile();
   }
 
