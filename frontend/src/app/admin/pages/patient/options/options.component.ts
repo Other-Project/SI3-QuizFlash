@@ -29,7 +29,7 @@ export class OptionsComponent{
     if (this.auditiveCheckBox)
       this.auditiveCheckBox.nativeElement.checked = lowOrIntermediate;
     if (this.audioLaunchCheckBox) {
-      this.audioLaunchCheckBox.nativeElement.checked = lowOrIntermediate;
+      this.audioLaunchCheckBox.nativeElement.checked = (newLevel == 1);
       this.audioLaunchCheckBox.nativeElement.disabled = !lowOrIntermediate;
     }
   }

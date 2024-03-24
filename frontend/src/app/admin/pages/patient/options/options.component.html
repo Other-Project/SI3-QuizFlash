@@ -20,6 +20,7 @@
   <label for="auditive-question">Question auditive</label>
 </div>
 <div class="checkbox-wrapper-14">
-  <input #audioLaunch [checked]="user?.autoStartAudio" id="audio-launch" type="checkbox" class="switch">
+  <input #audioLaunch [checked]="user?.autoStartAudio" [disabled]="!user?.soundQuestion" id="audio-launch"
+         type="checkbox" class="switch">
   <label for="audio-launch">Lancement automatique audio</label>
 </div>
