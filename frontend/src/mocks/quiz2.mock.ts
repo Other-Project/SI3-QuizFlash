@@ -11,7 +11,7 @@ const QUESTION1: Question = {
       trueAnswer: false
     },
     {
-      answerText: "Ordinateur",
+      answerText: "Pelle",
       trueAnswer: false
     },
     {
