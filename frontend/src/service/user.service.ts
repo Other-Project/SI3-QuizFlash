@@ -41,8 +41,7 @@ export class UserService {
     return this.users.find(user => user.id == id);
   }
 
-  getCurrentUser(): User {
-    // TODO return the current user
-    return USER_BERNARD;
+  public setLoggedUser(user: User): void {
+    this.user$.next(this.user = user);
   }
 }

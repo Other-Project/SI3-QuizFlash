@@ -11,9 +11,11 @@ import {InformationComponent} from "./admin/pages/patient/information/informatio
 import {StatisticsComponent} from "./admin/pages/patient/statistics/statistics.component";
 import {QuizSelectionComponent} from "./quiz/quiz-selection/quiz-selection.component";
 import {SoundSettingsComponent} from "./quiz/sound-settings/sound-settings.component";
+import {ProfilesComponent} from "./profiles/profiles.component";
+
 
 const routes: Routes = [
-  {path: '', pathMatch: "full", redirectTo: 'admin'},
+  {path: '', pathMatch: "full", component:ProfilesComponent},
   {
     path: 'admin', component: AdminComponent, children: [
       {path: 'patients', component: AdminPatientsComponent},

@@ -1,0 +1,26 @@
+@import "/colors";
+
+h1 {
+  display: block;
+  text-align: center;
+  color: $darkBlue;
+  margin-top: 175px;
+}
+
+h2 {
+  display: block;
+  text-align: center;
+  color: $darkBlue;
+}
+
+.profiles {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.admin-button {
+  justify-content: end;
+  align-items: start;
+}
+

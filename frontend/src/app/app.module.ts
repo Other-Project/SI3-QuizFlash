@@ -5,17 +5,25 @@ import {AppComponent} from './app.component';
 import {NgOptimizedImage} from "@angular/common";
 import {AdminModule} from "./admin/admin.module";
 import {QuizModule} from "./quiz/quiz.module";
+import {ProfilesComponent} from "./profiles/profiles.component";
+import {LayoutModule} from "./layout/layout.module";
+import {ProfileButtonComponent} from "./profiles/profile-button/profile-button.component";
+import {AdminButtonComponent} from "./profiles/admin-button/admin-button.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfilesComponent,
+    ProfileButtonComponent,
+    AdminButtonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
     AdminModule,
-    QuizModule
+    QuizModule,
+    LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
