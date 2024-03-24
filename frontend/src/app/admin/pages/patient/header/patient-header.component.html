@@ -1,6 +1,6 @@
 <div class="patient-header">
   <div class="patient-picture">
-    <img ngSrc="{{ user?.pictureUrl }}" alt="Profile picture" width="115" height="115">
+    <app-image [src]="user?.pictureUrl" [alt]="'Profile picture'" [width]="115" [height]="115" />
   </div>
   <div class="patient-info">
     <h1>{{ user?.lastname }}</h1>

@@ -1,0 +1,9 @@
+p {
+  text-align: left;
+  margin: .5em;
+  font-size: 1.1em;
+
+  &.quiz-card-title {
+    font-weight: bold;
+  }
+}

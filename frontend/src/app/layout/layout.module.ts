@@ -1,16 +1,24 @@
 import {NgModule} from '@angular/core';
 import {HeaderComponent} from "./header/header.component";
-import {NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
+import {ButtonComponent} from "./button/button.component";
+import {ImageComponent} from "./image/image.component";
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    ButtonComponent,
+    ImageComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    ButtonComponent,
+    ImageComponent
   ],
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgStyle,
+    NgIf
   ]
 })
 export class LayoutModule {
