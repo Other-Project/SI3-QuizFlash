@@ -4,10 +4,6 @@
   <h1>Bienvenue dans Quiz Flash !</h1>
   <h2>Séléctionnez un profil :</h2>
   <div class="profiles">
-    <div *ngFor="let user of users">
-      <app-profiles-button
-        [user]="user">
-      </app-profiles-button>
-    </div>
+    <app-profiles-button *ngFor="let user of users" [user]="user"/>
   </div>
 </main>

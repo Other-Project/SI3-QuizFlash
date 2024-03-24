@@ -13,7 +13,6 @@ export class ProfilesComponent {
   constructor(public userService: UserService) {
     this.userService.users$.subscribe((users: User[]) => {
       this.users = users;
-      console.log(users);
     });
   }
 }
