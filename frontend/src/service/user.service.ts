@@ -9,8 +9,8 @@ import {USER_MARTINE} from "../mocks/user-martine.mock";
 export class UserService {
   public users: User[] = USERS;
   public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.users);
-  public user$: BehaviorSubject<User> = new BehaviorSubject<User>(USER_MARTINE);
   public user?: User;
+  public user$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(USER_MARTINE);
 
   constructor() {
   }

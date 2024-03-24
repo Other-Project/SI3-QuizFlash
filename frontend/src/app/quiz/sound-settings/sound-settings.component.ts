@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {QuizService} from "../../../service/quiz-service.service";
 import {QuestionType} from "../../../models/question-type.models";
@@ -20,7 +20,7 @@ export class SoundSettingsComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, quizService: QuizService, userService: UserService) {
     userService.user$.subscribe(user => {
-      if (!user.soundQuestion) {
+      if (!user?.soundQuestion) {
         this.next();
         return;
       }
@@ -40,27 +40,23 @@ export class SoundSettingsComponent implements OnInit {
   }
 
   play() {
-    if (this.audio) {
-      if (this.audio.readyState >= 2) {
-        this.audio.play().then();
-      }
-    }
+    if (!this.audio || this.audio.readyState < 2) return;
+    this.audio.play().then();
     this.soundPlayed = true;
   }
 
   pause() {
-    if (this.audio) {
-      this.audio.pause()
-    }
-    this.soundPlayed = false
+    if (!this.audio) return;
+    this.audio.pause();
+    this.soundPlayed = false;
   }
 
   gainChange(event: any) {
     this.gainValue = event.target.value;
-    this.gainNode.gain.value = this.gainValue
+    this.gainNode.gain.value = this.gainValue;
   }
 
   next() {
-    this.router.navigate(["../question"], {relativeTo: this.route}).then()
+    this.router.navigate(["../question"], {relativeTo: this.route}).then();
   }
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Answer} from "../../../models/answer.models";
 
 @Component({
@@ -7,17 +7,19 @@ import {Answer} from "../../../models/answer.models";
   styleUrls: ['./question-result.component.scss']
 })
 export class QuestionResultComponent implements OnInit {
-  @Input() goodAnswer: string | undefined;
+  @Input() goodAnswer?: string;
   @Output() continue = new EventEmitter<Answer>();
+  private timeOutId?: number;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    setTimeout(() => this.nextQuestion(), 60000)
+    this.timeOutId = setTimeout(() => this.nextQuestion(), 60000);
   }
 
   nextQuestion() {
-    this.continue.emit()
+    this.continue.emit();
+    clearTimeout(this.timeOutId);
   }
 }
