@@ -18,14 +18,14 @@
     margin-top: 2vh;
     display: grid;
     align-items: normal;
-    grid-template: 1fr 1fr / 1fr 1fr;
+    grid-template: auto auto / auto auto;
 
     * {
       margin-top: 0;
     }
 
-    h1 {
-      font-size: 1.5rem;
+    :nth-child(2) {
+      margin-left: 1rem;
     }
 
     h3 {

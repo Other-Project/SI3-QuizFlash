@@ -1,2 +1,2 @@
-<patient-settings [user]="user"/>
+<patient-settings (dementiaLevelUpdate)="newDementiaLevel($event)" [user]="user"/>
 <interests [userHobbies]="user?.hobbies"/>
