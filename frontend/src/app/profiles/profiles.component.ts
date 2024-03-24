@@ -10,8 +10,8 @@ import {UserService} from "../../service/user.service";
 })
 export class ProfilesComponent {
   public users?: User[];
-  constructor(public userService: UserService) {
-    this.userService.users$.subscribe((users: User[]) => {
+  constructor(public userService1: UserService) {
+    this.userService1.users$.subscribe((users: User[]) => {
       this.users = users;
     });
   }

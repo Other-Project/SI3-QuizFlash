@@ -1,5 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {User} from "../../../models/user.models";
+import {UserService} from "../../../service/user.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -9,6 +11,16 @@ import {User} from "../../../models/user.models";
 })
 export class ProfileButtonComponent {
   @Input() public user!: User; // To get access to the user the profile gets
-  constructor() {
+  constructor(public userService: UserService, private router: Router) {}
+
+  notifyUserService() {
+    this.userService.setLoggedUser(this.user);
+    console.log("Done.");
+    this.redirectToUserProfile();
   }
+
+  redirectToUserProfile() {
+    this.router.navigate(["./quiz"]);
+  }
+
 }

@@ -1,15 +1,24 @@
-.profile_picture {
-  width: 100px;
-  height: 100px;
-  min-width: 50%;
-  min-height: 50%;
-  border-radius: 5%; /* Can be adjusted */
-  object-fit: cover;
+.image-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    flex-shrink: 1;
+  }
 }
 
 p {
-  color: #1b2a56;
   font-size: 17px;
+  color: #1b2a56;
 }
 
 button {
