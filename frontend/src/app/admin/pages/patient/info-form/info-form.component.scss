@@ -1,0 +1,52 @@
+form {
+  width: 20vw;
+  margin-left: 3vw;
+  display: grid;
+  grid-template: auto auto / auto auto;
+
+  input {
+    display: block;
+  }
+
+  :nth-child(2) {
+    margin-left: 1rem;
+  }
+
+  .ng-invalid:not(form) {
+    border: 1px solid red
+  }
+
+  input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  label {
+    width: 10vw;
+    font-size: 1em;
+  }
+}
+
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3vw;
+
+  button {
+    width: 5em;
+    height: 5vh;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+}
+
+:host {
+  display: flex;
+}
+

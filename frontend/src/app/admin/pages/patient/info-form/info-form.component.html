@@ -1,0 +1,14 @@
+<form id="patient-form" (ngSubmit)="onSubmit()" [formGroup]="patientForm">
+  <label> Nom :
+    <input type="text" formControlName="lastName">
+  </label>
+  <label> Prénom :
+    <input type="text" formControlName="firstName">
+  </label>
+  <label> Age :
+    <input type="number" min="0" max="120" formControlName="age">
+  </label>
+</form>
+<div class="submit-button">
+  <button type="submit" form="patient-form">Valider</button>
+</div>

@@ -17,9 +17,13 @@ export class InformationComponent{
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.parent!.params.subscribe(params => {
       let user_id: string = params['user_id'];
       this.user = this.userService.getUserById(user_id);
     });
+  }
+
+  newDementiaLevel(dementiaLevel: number) {
+    this.userService.updateDementiaLevel(this.user!.id, dementiaLevel);
   }
 }
