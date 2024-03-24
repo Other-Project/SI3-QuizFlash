@@ -63,7 +63,7 @@ const QUESTION1 : Question = {
 }
 
 const QUESTION2 : Question = {
-  text: "Dans quelle pièce de la maison est garer la voiture ?",
+  text: "Dans quelle pièce de la maison peut-on garer la voiture ?",
   type: QuestionType.TextOnly,
   answers: [ANSWER5, ANSWER6, ANSWER7, ANSWER8],
   imageUrl: "",
