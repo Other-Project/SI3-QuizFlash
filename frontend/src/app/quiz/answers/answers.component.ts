@@ -10,8 +10,6 @@ export class AnswersComponent implements OnInit {
 
   @Input() answers: Answer[] = [];
 
-  //protected answers: string[] = [];
-
   constructor() {
   }
 

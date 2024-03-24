@@ -1,63 +1,28 @@
 import {Quiz} from "../models/quiz.models";
 import {Question} from "../models/question.models";
 import {QuestionType} from "../models/question-type.models";
-import {Answer} from "../models/answer.models";
-
-
-const ANSWER1: Answer = {
-  answerText: "Râteau",
-  trueAnswer: false
-}
-
-const ANSWER2: Answer = {
-  answerText: "Ordinateur",
-  trueAnswer: false
-}
-
-const ANSWER3: Answer = {
-  answerText: "Télécommande",
-  trueAnswer: false
-}
-
-const ANSWER4: Answer = {
-  answerText: "Casserole",
-  trueAnswer: true
-}
-
-const ANSWER5: Answer = {
-  answerText: "Salle de bain",
-  trueAnswer: false
-}
-
-const ANSWER6: Answer = {
-  answerText: "Cuisine",
-  trueAnswer: false
-}
-
-const ANSWER7: Answer = {
-  answerText: "Chambre",
-  trueAnswer: false
-}
-
-const ANSWER8: Answer = {
-  answerText: "Garage",
-  trueAnswer: true
-}
-
-const ANSWER9: Answer = {
-  answerText: "Chambre",
-  trueAnswer: true
-}
-
-const ANSWER10: Answer = {
-  answerText: "Garage",
-  trueAnswer: false
-}
 
 const QUESTION1: Question = {
   text: "Avec lequel de ces objets fait-on la cuisine ?",
   type: QuestionType.TextOnly,
-  answers: [ANSWER1, ANSWER2, ANSWER3, ANSWER4],
+  answers: [
+    {
+      answerText: "Râteau",
+      trueAnswer: false
+    },
+    {
+      answerText: "Ordinateur",
+      trueAnswer: false
+    },
+    {
+      answerText: "Télécommande",
+      trueAnswer: false
+    },
+    {
+      answerText: "Casserole",
+      trueAnswer: true
+    }
+  ],
   imageUrl: "",
   soundUrl: ""
 }
@@ -65,7 +30,24 @@ const QUESTION1: Question = {
 const QUESTION2: Question = {
   text: "Dans quelle pièce de la maison peut-on garer la voiture ?",
   type: QuestionType.TextOnly,
-  answers: [ANSWER5, ANSWER6, ANSWER7, ANSWER8],
+  answers: [
+    {
+      answerText: "Salle de bain",
+      trueAnswer: false
+    },
+    {
+      answerText: "Cuisine",
+      trueAnswer: false
+    },
+    {
+      answerText: "Chambre",
+      trueAnswer: false
+    },
+    {
+      answerText: "Garage",
+      trueAnswer: true
+    }
+  ],
   imageUrl: "",
   soundUrl: ""
 }
@@ -73,7 +55,24 @@ const QUESTION2: Question = {
 const QUESTION3: Question = {
   text: "Quelle est cette pièce de la maison ?",
   type: QuestionType.Image,
-  answers: [ANSWER5, ANSWER6, ANSWER9, ANSWER10],
+  answers: [
+    {
+      answerText: "Salle de bain",
+      trueAnswer: false
+    },
+    {
+      answerText: "Cuisine",
+      trueAnswer: false
+    },
+    {
+      answerText: "Chambre",
+      trueAnswer: true
+    },
+    {
+      answerText: "Garage",
+      trueAnswer: false
+    }
+  ],
   imageUrl: "Chambre.jpg",
   soundUrl: ""
 }

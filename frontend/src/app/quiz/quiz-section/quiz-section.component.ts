@@ -5,6 +5,7 @@ import {Question} from "../../../models/question.models";
 import {UserService} from "../../../service/user.service";
 import {User} from "../../../models/user.models";
 import {QuestionType} from "../../../models/question-type.models";
+import {Answer} from "../../../models/answer.models";
 
 
 @Component({
@@ -15,23 +16,21 @@ import {QuestionType} from "../../../models/question-type.models";
 export class QuizSectionComponent {
   protected question?: Question
   protected questionResult: boolean = false;
-  protected trueAnswer: string | undefined;
+  protected trueAnswer?: string;
   protected user!: User;
 
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, public userService: UserService) {
     this.gameService.question$.subscribe((question) => {
       this.question = question;
       if (question)
-        for (let i = 0; i < question.answers.length; i++) {
-          if (question.answers.at(i)!.trueAnswer) this.trueAnswer = question.answers.at(i)!.answerText;
-        }
+        this.trueAnswer = question.answers.find(answer => answer.trueAnswer)?.answerText;
     });
     this.userService.user$.subscribe((user) => {
       this.user = user;
     })
   }
 
-  checkAnswer(): void {
+  checkAnswer(answer: Answer): void {
     if (this.user.automatedSkip) {
       this.continueQuiz();
     } else {
