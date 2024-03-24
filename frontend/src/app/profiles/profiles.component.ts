@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {User} from "../../models/user.models";
 import {UserService} from "../../service/user.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -10,9 +11,15 @@ import {UserService} from "../../service/user.service";
 })
 export class ProfilesComponent {
   public users?: User[];
-  constructor(public userService1: UserService) {
-    this.userService1.users$.subscribe((users: User[]) => {
+
+  constructor(public userService: UserService, private router: Router) {
+    this.userService.users$.subscribe((users: User[]) => {
       this.users = users;
     });
+  }
+
+  loginAs(user: User) {
+    this.userService.setLoggedUser(user);
+    this.router.navigate(["./quiz"]).then();
   }
 }

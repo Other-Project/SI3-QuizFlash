@@ -1,0 +1,3 @@
+<div class="profiles">
+  <app-profiles-button *ngFor="let user of users" [user]="user" (click)="userSelected.emit(user)"/>
+</div>
