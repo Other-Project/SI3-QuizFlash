@@ -14,7 +14,6 @@ export class PatientSettingsComponent{
   @Input() user?: User;
 
   dementiaLevelChange(newDementiaLevel: number) {
-    //TODO LANCER UN UPDATE SERVEUR
     this.optionsComponent?.changeDementiaLevel(newDementiaLevel);
     this.dementiaLevelUpdate.emit(newDementiaLevel);
   }

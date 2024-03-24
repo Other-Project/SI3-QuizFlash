@@ -1,7 +1,7 @@
 <h1>Paramétrage</h1>
 <section class="settings">
   <article class="diseases">
-    <range [defaultValue]="user!.dementiaLevel" (changeEvent)="dementiaLevelChange($event)" [subject]="'dementia'"
+    <range [defaultValue]="user?.dementiaLevel ?? 0" (changeEvent)="dementiaLevelChange($event)" [subject]="'dementia'"
            [title]="'Niveau de démence'" [tags]="['Léger','Intermédiaire','Elevé']"/>
     <font-size-selector [user]="user"/>
   </article>

@@ -17,7 +17,7 @@ export class OptionsComponent{
   @Input() user?: User;
 
   changeDementiaLevel(newLevel: number): void {
-    const intermediateOrHigh: boolean = (newLevel == 0 || newLevel == 1);
+    const lowOrIntermediate: boolean = (newLevel == 0 || newLevel == 1);
     const low: boolean = (newLevel == 0);
 
     if (this.fiftyFiftyCheckBox)
@@ -27,17 +27,16 @@ export class OptionsComponent{
     if (this.autoScrollCheckBox)
       this.autoScrollCheckBox.nativeElement.checked = (newLevel == 2);
     if (this.auditiveCheckBox)
-      this.auditiveCheckBox.nativeElement.checked = intermediateOrHigh;
+      this.auditiveCheckBox.nativeElement.checked = lowOrIntermediate;
     if (this.audioLaunchCheckBox) {
-      this.audioLaunchCheckBox!.nativeElement.checked = intermediateOrHigh;
-      this.audioLaunchCheckBox!.nativeElement.disabled = !intermediateOrHigh;
+      this.audioLaunchCheckBox.nativeElement.checked = lowOrIntermediate;
+      this.audioLaunchCheckBox.nativeElement.disabled = !lowOrIntermediate;
     }
   }
 
-  audioChange($event: any) {
-    if (this.audioLaunchCheckBox) {
-      this.audioLaunchCheckBox.nativeElement.checked = false;
-      this.audioLaunchCheckBox.nativeElement.disabled = !$event.currentTarget.checked;
-    }
+  audioChange(audioEnabled: boolean) {
+    if (!this.audioLaunchCheckBox) return;
+    this.audioLaunchCheckBox.nativeElement.checked = audioEnabled;
+    this.audioLaunchCheckBox.nativeElement.disabled = !audioEnabled;
   }
 }

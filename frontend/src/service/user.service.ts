@@ -3,12 +3,11 @@ import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {USERS} from "../mocks/users.mock";
 import {USER_BERNARD} from "../mocks/user-bernard.mock";
-import {USER_MARTINE} from "../mocks/user-martine.mock";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
-  public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(USERS);
-  public users: User[] = [];
+  public users: User[] = USERS;
+  public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.users);
 
   constructor() {
   }
@@ -34,8 +33,9 @@ export class UserService {
   updatePatientInfo(userId: string, newFirstName: string, newLastName: string, newAge: number) {
     // TODO update in the server
   }
-  public getUserById(id: string): User {
-    return USER_MARTINE;
+
+  public getUserById(id: string): User | undefined {
+    return this.users.find(user => user.id == id);
   }
 
   getCurrentUser(): User {

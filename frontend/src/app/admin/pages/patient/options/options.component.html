@@ -14,7 +14,8 @@
 
 <h2>Auditif</h2>
 <div class="checkbox-wrapper-14">
-  <input #auditive [checked]="user?.soundQuestion" (change)="audioChange($event)" id="auditive-question" type="checkbox"
+  <input #auditive [checked]="user?.soundQuestion" (change)="audioChange($any($event.currentTarget).checked)"
+         id="auditive-question" type="checkbox"
          class="switch">
   <label for="auditive-question">Question auditive</label>
 </div>
