@@ -1,4 +1,11 @@
-main h1, h2 {
+h1 {
+  display: block;
+  text-align: center;
+  color: #1b2a56;
+  margin-top: 175px;
+}
+
+h2 {
   display: block;
   text-align: center;
   color: #1b2a56;
@@ -9,7 +16,8 @@ main h1, h2 {
   justify-content: center;
 }
 
-main {
-  margin-top: 175px;
+.admin-button {
+  justify-content: end;
+  align-items: start;
 }
 

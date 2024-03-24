@@ -8,12 +8,14 @@ import {QuizModule} from "./quiz/quiz.module";
 import {ProfilesComponent} from "./profiles/profiles.component";
 import {LayoutModule} from "./layout/layout.module";
 import {ProfileButtonComponent} from "./profiles/profile-button/profile-button.component";
+import {AdminButtonComponent} from "./profiles/admin-button/admin-button.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfilesComponent,
-    ProfileButtonComponent
+    ProfileButtonComponent,
+    AdminButtonComponent
   ],
   imports: [
     BrowserModule,
