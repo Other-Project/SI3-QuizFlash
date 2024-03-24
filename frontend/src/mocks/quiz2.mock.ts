@@ -5,8 +5,24 @@ import {QuestionType} from "../models/question-type.models";
 const QUESTION1: Question = {
   text: "Quel objet trouve-t-on dans la chambre ?",
   type: QuestionType.TextOnly,
-  falseAnswers: ["Pelle", "Casserole", "Assiette"],
-  trueAnswer: "Lit",
+  answers: [
+    {
+      answerText: "Râteau",
+      trueAnswer: false
+    },
+    {
+      answerText: "Ordinateur",
+      trueAnswer: false
+    },
+    {
+      answerText: "Télécommande",
+      trueAnswer: false
+    },
+    {
+      answerText: "Casserole",
+      trueAnswer: true
+    }
+  ],
   imageUrl: "",
   soundUrl: ""
 }
@@ -14,8 +30,24 @@ const QUESTION1: Question = {
 const QUESTION2: Question = {
   text: "Dans quelle pièce de la maison peut-on garer la voiture ?",
   type: QuestionType.TextOnly,
-  falseAnswers: ["Salle de bain", "Cuisine", "Chambre"],
-  trueAnswer: "Garage",
+  answers: [
+    {
+      answerText: "Salle de bain",
+      trueAnswer: false
+    },
+    {
+      answerText: "Cuisine",
+      trueAnswer: false
+    },
+    {
+      answerText: "Chambre",
+      trueAnswer: false
+    },
+    {
+      answerText: "Garage",
+      trueAnswer: true
+    }
+  ],
   imageUrl: "",
   soundUrl: ""
 }
@@ -23,8 +55,24 @@ const QUESTION2: Question = {
 const QUESTION3: Question = {
   text: "Quelle est cette pièce de la maison ?",
   type: QuestionType.Sound,
-  falseAnswers: ["Salle de bain", "Cuisine", "Garage"],
-  trueAnswer: "Chambre",
+  answers: [
+    {
+      answerText: "Salle de bain",
+      trueAnswer: false
+    },
+    {
+      answerText: "Cuisine",
+      trueAnswer: false
+    },
+    {
+      answerText: "Chambre",
+      trueAnswer: true
+    },
+    {
+      answerText: "Garage",
+      trueAnswer: false
+    }
+  ],
   imageUrl: "",
   soundUrl: "test.mp3"
 }

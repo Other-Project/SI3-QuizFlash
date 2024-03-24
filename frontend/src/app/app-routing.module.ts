@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminComponent} from "./admin/admin.component";
 import {QuizComponent} from "./quiz/quiz.component";
-import {IntermediatePageComponent} from "./quiz/intermediate-page/intermediate-page.component";
 import {QuizSectionComponent} from "./quiz/quiz-section/quiz-section.component";
 import {FinishPageComponent} from "./quiz/finish/finish-page.component";
 import {AdminPatientsComponent} from "./admin/pages/patients/admin-patients.component";
@@ -11,6 +10,7 @@ import {AdminQuizzComponent} from "./admin/pages/quizz/admin-quizz.component";
 import {InformationComponent} from "./admin/pages/patient/information/information.component";
 import {StatisticsComponent} from "./admin/pages/patient/statistics/statistics.component";
 import {QuizSelectionComponent} from "./quiz/quiz-selection/quiz-selection.component";
+import {SoundSettingsComponent} from "./quiz/sound-settings/sound-settings.component";
 import {ProfilesComponent} from "./profiles/profiles.component";
 
 
@@ -36,9 +36,9 @@ const routes: Routes = [
   },
   {
     path: 'quiz/:quiz_id', component: QuizComponent, children: [
-      {path: '', pathMatch: 'full', redirectTo: 'question'},
+      {path: '', pathMatch: 'full', redirectTo: 'sound-settings'},
+      {path: 'sound-settings', component: SoundSettingsComponent},
       {path: 'question', component: QuizSectionComponent},
-      {path: 'intermediate/:check', component: IntermediatePageComponent},
       {path: 'finish', component: FinishPageComponent}
     ]
   }

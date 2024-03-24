@@ -8,7 +8,6 @@ import {QuizService} from "./quiz-service.service";
 @Injectable({providedIn: 'root'})
 export class GameService {
   private quiz?: Quiz;
-
   private question?: Question;
   private counter?: number;
   public question$: BehaviorSubject<Question | undefined> = new BehaviorSubject<Question | undefined>(this.question);
@@ -41,5 +40,4 @@ export class GameService {
     if (this.counter) this.counter--;
     this.getQuestion()
   }
-
 }

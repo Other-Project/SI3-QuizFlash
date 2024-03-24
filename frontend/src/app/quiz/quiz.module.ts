@@ -8,10 +8,13 @@ import {QuestionSectionComponent} from "./question-section/question-section.comp
 import {AnswersComponent} from "./answers/answers.component";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {QuizSectionComponent} from "./quiz-section/quiz-section.component";
-import {IntermediatePageComponent} from "./intermediate-page/intermediate-page.component";
 import {FinishPageComponent} from "./finish/finish-page.component";
+import {QuestionResultComponent} from "./question-result/question-result.component";
 import {QuizSelectionComponent} from "./quiz-selection/quiz-selection.component";
 import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/quiz-selection-card.component";
+import {SoundSettingsComponent} from "./sound-settings/sound-settings.component";
+import {SettingsModule} from "../admin/pages/patient/settings/settings.module";
+
 
 @NgModule({
   declarations: [
@@ -21,18 +24,20 @@ import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/q
     QuestionSectionComponent,
     AnswersComponent,
     QuizSectionComponent,
-    IntermediatePageComponent,
+    QuestionResultComponent,
     FinishPageComponent,
     QuizSelectionComponent,
-    QuizSelectionCardComponent
+    QuizSelectionCardComponent,
+    SoundSettingsComponent
   ],
-    imports: [
-        CommonModule,
-        NgOptimizedImage,
-        LayoutModule,
-        RouterOutlet,
-        RouterLink,
-    ]
+  imports: [
+    CommonModule,
+    NgOptimizedImage,
+    LayoutModule,
+    RouterOutlet,
+    RouterLink,
+    SettingsModule,
+  ]
 })
 export class QuizModule {
 }
