@@ -21,5 +21,4 @@ export class ProfileButtonComponent {
   redirectToUserProfile() {
     this.router.navigate(["./quiz"]);
   }
-
 }

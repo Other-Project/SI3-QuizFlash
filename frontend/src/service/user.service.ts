@@ -9,7 +9,6 @@ import {USER_MARTINE} from "../mocks/user-martine.mock";
 export class UserService {
   public users: User[] = USERS;
   public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.users);
-  private loggedUser!: User; // Defined by the profile-selection page
   public user?: User = USER_MARTINE;
   public user$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(this.user);
 
@@ -42,12 +41,7 @@ export class UserService {
     return this.users.find(user => user.id == id);
   }
 
-  getCurrentUser(): User {
-    // TODO return the current user
-    return USER_BERNARD;
-  }
-
   public setLoggedUser(user: User): void {
-    this.loggedUser = user;
+    this.user$.next(this.user = user);
   }
 }
