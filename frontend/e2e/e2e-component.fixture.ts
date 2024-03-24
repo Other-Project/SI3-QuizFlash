@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import {Page} from '@playwright/test';
 
 export class E2EComponentFixture {
   protected page: Page;
