@@ -6,15 +6,28 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding-top: 10vh;
+  margin-top: 1%;
   text-align: center;
   height: 100%;
 
   #trueAnswer {
-    background: #c8e86d;
-    width: 98%;
-    height: 90%;
+    background: $yellow1;
     border-radius: 10px;
+    padding: 1%;
+    min-width: 10%;
     border: 2px solid $blackBlue;
+  }
+
+  #nextQuestion {
+    background: $yellow1;
+    border-radius: 10px;
+    margin-top: 1%;
+    padding: 1%;
+    border: 2px solid $blackBlue;
+    text-decoration: underline;
+  }
+
+  #nextQuestion:hover {
+    background-color: $yellow2;
   }
 }

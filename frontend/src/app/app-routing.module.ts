@@ -10,6 +10,7 @@ import {AdminQuizzComponent} from "./admin/pages/quizz/admin-quizz.component";
 import {InformationComponent} from "./admin/pages/patient/information/information.component";
 import {StatisticsComponent} from "./admin/pages/patient/statistics/statistics.component";
 import {QuizSelectionComponent} from "./quiz/quiz-selection/quiz-selection.component";
+import {SoundSettingsComponent} from "./quiz/sound-settings/sound-settings.component";
 
 const routes: Routes = [
   {path: '', pathMatch: "full", redirectTo: 'admin'},
@@ -33,7 +34,8 @@ const routes: Routes = [
   },
   {
     path: 'quiz/:quiz_id', component: QuizComponent, children: [
-      {path: '', pathMatch: 'full', redirectTo: 'question'},
+      {path: '', pathMatch: 'full', redirectTo: 'sound-settings'},
+      {path: 'sound-settings', component: SoundSettingsComponent},
       {path: 'question', component: QuizSectionComponent},
       {path: 'finish', component: FinishPageComponent}
     ]

@@ -3,12 +3,13 @@ import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {USERS} from "../mocks/users.mock";
 import {USER_BERNARD} from "../mocks/user-bernard.mock";
+import {USER_MARTINE} from "../mocks/user-martine.mock";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
   public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(USERS);
   public users: User[] = [];
-  public user$: BehaviorSubject<User> = new BehaviorSubject<User>(USER_BERNARD);
+  public user$: BehaviorSubject<User> = new BehaviorSubject<User>(USER_MARTINE);
   public user?: User;
 
   constructor() {

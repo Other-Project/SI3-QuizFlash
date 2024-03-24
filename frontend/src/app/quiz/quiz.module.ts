@@ -12,6 +12,9 @@ import {FinishPageComponent} from "./finish/finish-page.component";
 import {QuestionResultComponent} from "./question-result/question-result.component";
 import {QuizSelectionComponent} from "./quiz-selection/quiz-selection.component";
 import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/quiz-selection-card.component";
+import {SoundSettingsComponent} from "./sound-settings/sound-settings.component";
+import {SettingsModule} from "../admin/pages/patient/settings/settings.module";
+
 
 @NgModule({
   declarations: [
@@ -24,15 +27,17 @@ import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/q
     QuestionResultComponent,
     FinishPageComponent,
     QuizSelectionComponent,
-    QuizSelectionCardComponent
+    QuizSelectionCardComponent,
+    SoundSettingsComponent
   ],
-    imports: [
-        CommonModule,
-        NgOptimizedImage,
-        LayoutModule,
-        RouterOutlet,
-        RouterLink,
-    ]
+  imports: [
+    CommonModule,
+    NgOptimizedImage,
+    LayoutModule,
+    RouterOutlet,
+    RouterLink,
+    SettingsModule,
+  ]
 })
 export class QuizModule {
 }
