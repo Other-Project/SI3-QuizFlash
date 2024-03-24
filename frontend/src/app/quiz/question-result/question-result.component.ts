@@ -9,6 +9,7 @@ import {Answer} from "../../../models/answer.models";
 export class QuestionResultComponent implements OnInit {
   @Input() goodAnswer: string | undefined;
   @Output() continue = new EventEmitter<Answer>();
+
   constructor() {
   }
 

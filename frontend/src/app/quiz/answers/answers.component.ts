@@ -6,7 +6,7 @@ import {Answer} from "../../../models/answer.models";
   templateUrl: './answers.component.html',
   styleUrls: ['./answers.component.scss']
 })
-export class AnswersComponent implements OnInit{
+export class AnswersComponent implements OnInit {
 
   @Input() answers: Answer[] = [];
 

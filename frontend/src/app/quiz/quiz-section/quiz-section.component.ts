@@ -39,7 +39,7 @@ export class QuizSectionComponent {
     }
   }
 
-  continueQuiz(){
+  continueQuiz() {
     this.gameService.nextQuestion();
     if (!this.user.soundQuestion) {
       while (this.question?.type == QuestionType.Sound) this.gameService.nextQuestion();

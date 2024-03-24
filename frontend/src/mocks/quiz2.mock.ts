@@ -53,35 +53,35 @@ const ANSWER10: Answer = {
   trueAnswer: false
 }
 
-const QUESTION1 : Question = {
+const QUESTION1: Question = {
   text: "Quel objet trouve-t-on dans la chambre ?",
   type: QuestionType.TextOnly,
   answers: [ANSWER1, ANSWER2, ANSWER3, ANSWER4],
   imageUrl: "",
-  soundUrl:""
+  soundUrl: ""
 }
 
-const QUESTION2 : Question = {
+const QUESTION2: Question = {
   text: "Dans quelle pièce de la maison peut-on garer la voiture ?",
   type: QuestionType.TextOnly,
   answers: [ANSWER5, ANSWER6, ANSWER7, ANSWER8],
   imageUrl: "",
-  soundUrl:""
+  soundUrl: ""
 }
 
-const QUESTION3 : Question = {
+const QUESTION3: Question = {
   text: "Quelle est cette pièce de la maison ?",
   type: QuestionType.Sound,
   answers: [ANSWER5, ANSWER6, ANSWER9, ANSWER10],
   imageUrl: "",
-  soundUrl:"test.mp3"
+  soundUrl: "test.mp3"
 }
 
 
-export const QUIZ2 : Quiz = {
-  id:"2",
-  title:"Les pièce de la maison 2",
-  theme:"La maison 2",
+export const QUIZ2: Quiz = {
+  id: "2",
+  title: "Les pièce de la maison 2",
+  theme: "La maison 2",
   thumbnailUrl: "assets/Chambre.jpg",
-  questions: [QUESTION1,QUESTION2,QUESTION3]
+  questions: [QUESTION1, QUESTION2, QUESTION3]
 }
