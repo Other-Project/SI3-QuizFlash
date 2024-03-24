@@ -11,15 +11,15 @@ const QUESTION1: Question = {
       trueAnswer: false
     },
     {
-      answerText: "Ordinateur",
-      trueAnswer: false
-    },
-    {
-      answerText: "Télécommande",
+      answerText: "Pelle",
       trueAnswer: false
     },
     {
       answerText: "Casserole",
+      trueAnswer: false
+    },
+    {
+      answerText: "Lit",
       trueAnswer: true
     }
   ],
