@@ -74,7 +74,7 @@ const QUESTION3: Question = {
     }
   ],
   imageUrl: "",
-  soundUrl: "test.mp3"
+  soundUrl: "assets/The Rolling Stones - Paint It, Black.mp3"
 }
 
 
