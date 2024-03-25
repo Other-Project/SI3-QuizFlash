@@ -2,8 +2,6 @@
 <main>
   <app-admin-button class="admin-button"></app-admin-button>
   <h1>Bienvenue dans Quiz Flash !</h1>
-  <h2>Séléctionnez un profil :</h2>
-  <div class="profiles">
-    <app-profiles-button *ngFor="let user of users" [user]="user"/>
-  </div>
+  <h2>Sélectionnez un profil :</h2>
+  <app-profile-list [users]="users" (userSelected)="loginAs($event)"/>
 </main>
