@@ -1,10 +1,6 @@
-import {Component} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {GameService} from "../../../service/game-service.service";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Question} from "../../../models/question.models";
-import {UserService} from "../../../service/user.service";
 import {User} from "../../../models/user.models";
-import {QuestionType} from "../../../models/question-type.models";
 import {Answer} from "../../../models/answer.models";
 
 
@@ -13,21 +9,21 @@ import {Answer} from "../../../models/answer.models";
   templateUrl: './quiz-section.component.html',
   styleUrls: ['./quiz-section.component.scss']
 })
-export class QuizSectionComponent {
-  protected question?: Question
+export class QuizSectionComponent implements OnInit {
+  @Input() question?: Question;
+  //protected quiz?: Quiz;
   protected questionResult: boolean = false;
-  protected trueAnswer?: string;
-  protected user?: User;
+  @Input() user?: User;
+  protected trueAnswer?: Answer;
+  @Input() finish: boolean = false;
+  @Output() nextQuestion = new EventEmitter<Answer>();
 
-  constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, public userService: UserService) {
-    this.gameService.question$.subscribe((question) => {
-      this.question = question;
-      if (question)
-        this.trueAnswer = question.answers.find(answer => answer.trueAnswer)?.answerText;
-    });
-    this.userService.user$.subscribe((user) => {
-      this.user = user;
-    })
+  constructor() {
+  }
+
+  ngOnInit(): void {
+    console.log(this.user);
+    this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
   }
 
   checkAnswer(answer: Answer): void {
@@ -36,18 +32,10 @@ export class QuizSectionComponent {
     } else {
       this.questionResult = true;
     }
+    this.nextQuestion.emit(answer);
   }
 
   continueQuiz() {
-    this.gameService.nextQuestion();
-    if (!this.user!.soundQuestion) {
-      while (this.question?.type == QuestionType.Sound) this.gameService.nextQuestion();
-    }
     this.questionResult = false;
-    if (!this.question) //Open the finish page at the end of the quiz
-      this.router.navigate(["../finish"], {relativeTo: this.route}).then(
-        r => {
-          if (!r) console.log("Quiz finish launch error")
-        })
   }
 }

@@ -1,8 +1,4 @@
-import {Component} from '@angular/core';
-import {GameService} from "../../../service/game-service.service";
-import {ActivatedRoute} from "@angular/router";
-import {QuizService} from "../../../service/quiz-service.service";
-import {Quiz} from "../../../models/quiz.models";
+import {Component, Input} from "@angular/core";
 
 @Component({
   selector: 'quiz-header',
@@ -11,19 +7,11 @@ import {Quiz} from "../../../models/quiz.models";
 })
 export class QuizHeaderComponent {
 
-  public quiz?: Quiz;
-  public questionCount?: number;
+  @Input() counter?: number;
+  @Input() quizTheme?: string;
+  @Input() activated?: boolean;
+  @Input() numberOfQuestion?: number;
 
-  constructor(private route: ActivatedRoute, public quizService: QuizService, public gameService: GameService) {
-    quizService.quiz$.subscribe(quiz => {
-      this.quiz = quiz;
-    });
-    gameService.compt$.subscribe(count => {
-      this.questionCount = count;
-    });
-
-    this.route.params.subscribe(params => {
-      quizService.setQuiz(params["quiz_id"]);
-    });
+  constructor() {
   }
 }
