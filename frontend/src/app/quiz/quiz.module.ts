@@ -14,6 +14,7 @@ import {QuizSelectionComponent} from "./quiz-selection/quiz-selection.component"
 import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/quiz-selection-card.component";
 import {SoundSettingsComponent} from "./sound-settings/sound-settings.component";
 import {SettingsModule} from "../admin/pages/patient/settings/settings.module";
+import {PlayButtonComponent} from "../layout/play-button/play-button.component";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {SettingsModule} from "../admin/pages/patient/settings/settings.module";
     RouterOutlet,
     RouterLink,
     SettingsModule,
+    PlayButtonComponent,
   ]
 })
 export class QuizModule {

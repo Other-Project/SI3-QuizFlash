@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {isEmpty} from "rxjs";
 
 @Component({
-  selector: 'app-play-button',
+  selector: 'app-quiz-play-button',
   templateUrl: './play-button.component.html',
   styleUrls: ['./play-button.component.scss']
 })

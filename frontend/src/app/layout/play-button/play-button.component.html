@@ -1,0 +1,7 @@
+
+<div class="buttons">
+  <audio #sound src="{{src}}"></audio>
+  <img alt="Play Button" ngSrc="assets/playButton.svg" width="128" height="128" *ngIf="!soundPlayed" (click)="play()"/>
+  <img alt="Pause Button" ngSrc="assets/pauseButton.svg" width="128" height="128" *ngIf="soundPlayed"
+       (click)="pause()"/>
+</div>
