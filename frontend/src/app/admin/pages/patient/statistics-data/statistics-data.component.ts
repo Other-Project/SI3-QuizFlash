@@ -21,7 +21,7 @@ export class StatisticsDataComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.quizListService.quizz$.subscribe((quizzes: Quiz[])=>{
+    this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
     });
   }

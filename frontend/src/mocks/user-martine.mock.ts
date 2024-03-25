@@ -14,6 +14,7 @@ export const USER_MARTINE: User = {
   automatedSkip: false,
   showIncorrectResponse: false,
   answerHint: false,
+  numberOfQuestion: 3,
 
   soundQuestion: true,
   autoStartAudio: true

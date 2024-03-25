@@ -1,10 +1,13 @@
 <div class="quiz">
   <div [ngStyle]="{'font-size': user!.fontSize.toString()+'em'}" class="quiz-content">
     <app-header>
-      <quiz-header></quiz-header>
+      <quiz-header [counter]="counter+1" [quizTheme]="quiz?.theme" [activated]="headerActivated"
+                   [numberOfQuestion]="user?.numberOfQuestion"></quiz-header>
     </app-header>
     <main>
-      <router-outlet></router-outlet>
+      <sound-settings *ngIf="soundSetting" (settingFinish)="soundSetting=false"/>
+      <app-quiz-section [question]="currentQuestion" [user]="user" [finish]="counter==user?.numberOfQuestion"
+                        (nextQuestion)='nextQuestion($event)' *ngIf="!soundSetting"/>
     </main>
   </div>
 </div>

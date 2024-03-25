@@ -16,6 +16,7 @@ export interface User {
   automatedSkip: boolean;
   showIncorrectResponse: boolean;
   answerHint: boolean;
+  numberOfQuestion: number;
 
   // Sound settings
   soundQuestion: boolean;

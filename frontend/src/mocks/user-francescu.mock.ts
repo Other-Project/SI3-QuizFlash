@@ -14,6 +14,7 @@ export const USER_FRANCESCU: User = {
   automatedSkip: false,
   showIncorrectResponse: true,
   answerHint: true,
+  numberOfQuestion: 3,
 
   soundQuestion: false,
   autoStartAudio: false
