@@ -43,8 +43,8 @@ export class QuizComponent  implements OnInit{
   }
 
   nextQuestion(answerReturned: Answer) {
-    if (this.counter)
-      this.counter++;
+    console.log(this.counter, this.user?.numberOfQuestion);
+    this.counter++;
     this.update();
   }
 }

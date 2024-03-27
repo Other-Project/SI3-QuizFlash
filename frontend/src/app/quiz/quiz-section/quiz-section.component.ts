@@ -27,6 +27,7 @@ export class QuizSectionComponent implements OnInit {
   }
 
   checkAnswer(answer: Answer): void {
+    this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
     if (this.user!.automatedSkip) {
       this.continueQuiz();
     } else {
