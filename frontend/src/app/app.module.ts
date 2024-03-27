@@ -23,7 +23,7 @@ import {ProfileListComponent} from "./profiles/profile-list/profile-list.compone
     AdminModule,
     QuizModule,
     LayoutModule,
-    ProfileListComponent,
+    ProfileListComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
