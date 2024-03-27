@@ -1,0 +1,13 @@
+<div class="hobbies-select">
+  <h1>Centres d'intérêt</h1>
+  <ng-multiselect-dropdown
+    [placeholder]="'Sélectionner des centres d\'intérêt'"
+    [settings]="dropdownSettings"
+    [data]="data!"
+    [(ngModel)]="selectedItems"
+    (onSelect)="addHobby($event)"
+    (onSelectAll)="setHobbies($event)"
+    (onDeSelect)="removeHobby($event)"
+    (onDeSelectAll)="setHobbies($event)"
+  />
+</div>

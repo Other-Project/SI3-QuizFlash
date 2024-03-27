@@ -1,0 +1,43 @@
+@import "colors";
+
+$blue: rgb(32, 91, 203);
+
+$base-color: $blue;
+$disable-background-color: #eceeef;
+.multiselect-dropdown {
+  .dropdown-btn {
+    padding: 0 !important;
+    padding-bottom: 6px !important;
+
+    .selected-item {
+      border: 1px solid $base-color !important;
+      background: $base-color !important;
+    }
+  }
+
+  .disabled {
+    & > span {
+      background-color: $disable-background-color;
+    }
+  }
+
+  .dropdown-btn {
+    padding: 0;
+
+    & > span {
+      display: block !important;
+      margin: 6px 0 0 6px !important
+    }
+  }
+
+  .multiselect-item-checkbox input[type=checkbox] {
+    &:checked + div:before {
+      background: $base-color !important;
+    }
+
+    + div:before {
+      color: $base-color !important;
+      border: 2px solid $base-color !important;
+    }
+  }
+}
