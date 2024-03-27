@@ -33,6 +33,14 @@ export class InformationComponent implements OnInit {
   }
 
   updateHobbies(newHobbies: string[]) {
-    this.userService.updatePatientHobbies(this.user!.id, newHobbies);
+    if (this.user) this.userService.updateUserHobbies(this.user.id, newHobbies);
+  }
+
+  addHobby(hobby: string) {
+    if (this.user) this.userService.addUserHobby(this.user.id, hobby);
+  }
+
+  removeHobby(hobby: string) {
+    if (this.user) this.userService.removeUserHobby(this.user.id, hobby);
   }
 }

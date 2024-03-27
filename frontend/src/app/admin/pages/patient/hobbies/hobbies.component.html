@@ -3,7 +3,7 @@
   <ng-multiselect-dropdown
     [placeholder]="'Sélectionner des centres d\'intérêt'"
     [settings]="dropdownSettings"
-    [data]="data!"
+    [data]="data ?? []"
     [(ngModel)]="selectedItems"
     (onSelect)="addHobby($event)"
     (onSelectAll)="setHobbies($event)"
