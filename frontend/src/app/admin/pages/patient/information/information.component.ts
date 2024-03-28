@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
-import {User} from "../../../../../models/user.models";
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../../../service/user.service";
+import {Patient} from "../../../../../models/patient.models";
 
 
 @Component({
@@ -11,7 +11,7 @@ import {UserService} from "../../../../../service/user.service";
 })
 
 export class InformationComponent{
-  public user?: User;
+  public user?: Patient;
 
   constructor(private route: ActivatedRoute, private userService: UserService) {
   }
@@ -19,7 +19,7 @@ export class InformationComponent{
   ngOnInit() {
     this.route.parent!.params.subscribe(params => {
       let user_id: string = params['user_id'];
-      this.user = this.userService.getUserById(user_id);
+      this.user = this.userService.getUserById(user_id) as Patient;
     });
   }
 

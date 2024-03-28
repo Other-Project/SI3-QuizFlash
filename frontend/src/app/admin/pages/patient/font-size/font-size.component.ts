@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {User} from "../../../../../models/user.models";
 import {UserService} from "../../../../../service/user.service";
+import {Patient} from "../../../../../models/patient.models";
 
 @Component({
   selector: 'font-size-selector',
@@ -9,7 +9,7 @@ import {UserService} from "../../../../../service/user.service";
 })
 
 export class FontSizeComponent implements OnInit {
-  @Input() user?: User;
+  @Input() user?: Patient;
   fontSize: string = "";
 
   constructor(private userService: UserService) {

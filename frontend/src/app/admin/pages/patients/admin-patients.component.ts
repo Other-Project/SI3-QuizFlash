@@ -3,6 +3,7 @@ import {UserService} from "../../../../service/user.service";
 import {User} from "../../../../models/user.models";
 import {ProfileListComponent} from "../../../profiles/profile-list/profile-list.component";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AccessRestriction} from "../../../../models/access-restriction.models";
 
 @Component({
   selector: "app-admin-patients",
@@ -16,7 +17,7 @@ export class AdminPatientsComponent {
   public users?: User[];
 
   constructor(userService: UserService, private router: Router, private route: ActivatedRoute) {
-    userService.users$.subscribe(users => this.users = users);
+    userService.users$.subscribe(users => this.users = users.filter(user => user.access <= AccessRestriction.User));
   }
 
   openUser(user: User) {

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {QuizService} from "../../../service/quiz-service.service";
 import {QuestionType} from "../../../models/question-type.models";
 import {UserService} from "../../../service/user.service";
+import {Patient} from "../../../models/patient.models";
 
 @Component({
   selector: 'sound-settings',
@@ -20,7 +21,7 @@ export class SoundSettingsComponent implements AfterViewInit {
 
   constructor(private router: Router, private route: ActivatedRoute, quizService: QuizService, userService: UserService) {
     userService.user$.subscribe(user => {
-      if (!user?.soundQuestion) {
+      if (!(user as Patient)?.soundQuestion) {
         this.next();
         return;
       }

@@ -3,9 +3,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {GameService} from "../../../service/game-service.service";
 import {Question} from "../../../models/question.models";
 import {UserService} from "../../../service/user.service";
-import {User} from "../../../models/user.models";
 import {QuestionType} from "../../../models/question-type.models";
 import {Answer} from "../../../models/answer.models";
+import {Patient} from "../../../models/patient.models";
 
 
 @Component({
@@ -17,7 +17,7 @@ export class QuizSectionComponent {
   protected question?: Question
   protected questionResult: boolean = false;
   protected trueAnswer?: string;
-  protected user?: User;
+  protected user?: Patient;
 
   constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, public userService: UserService) {
     this.gameService.question$.subscribe((question) => {
@@ -26,7 +26,7 @@ export class QuizSectionComponent {
         this.trueAnswer = question.answers.find(answer => answer.trueAnswer)?.answerText;
     });
     this.userService.user$.subscribe((user) => {
-      this.user = user;
+      this.user = user as Patient;
     })
   }
 

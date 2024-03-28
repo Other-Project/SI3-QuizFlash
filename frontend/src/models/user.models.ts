@@ -1,23 +1,12 @@
-import {Dementia} from "./dementia.models";
+import {AccessRestriction} from "./access-restriction.models";
 
 export interface User {
   id: string;
+  access: AccessRestriction;
 
   // Info
   lastname: string;
   firstname: string;
   age: number;
-  hobbies: string[];
   pictureUrl?: string;
-
-  // Global settings
-  dementiaLevel: Dementia;
-  fontSize: number;
-  automatedSkip: boolean;
-  showIncorrectResponse: boolean;
-  answerHint: boolean;
-
-  // Sound settings
-  soundQuestion: boolean;
-  autoStartAudio: boolean;
 }
