@@ -3,9 +3,16 @@
 
 button {
   border-radius: .5rem;
-  padding: 0;
+  padding: .25em;
   overflow: hidden;
   cursor: pointer;
+  display: block;
+  width: inherit;
+  height: inherit;
+
+  &.no-padding {
+    padding: 0;
+  }
 
   @each $colorId, $background in $colors {
     &.button-#{$colorId} {

@@ -7,6 +7,7 @@ import {Component, Input} from "@angular/core";
 })
 export class ButtonComponent {
   @Input() color: string = "white";
+  @Input() padding: boolean = true;
 
   constructor() {
   }
