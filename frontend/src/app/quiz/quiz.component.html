@@ -1,14 +1,15 @@
 <div class="quiz">
   <div [ngStyle]="{'font-size': user!.fontSize.toString()+'em'}" class="quiz-content">
     <app-header [homePage]="'/quiz'" [interactive]="quiz == undefined">
-      <quiz-header [counter]="counter+1" [quizTheme]="quiz?.theme" [activated]="headerActivated"
-                   [numberOfQuestion]="user?.numberOfQuestion"></quiz-header>
+      <quiz-header [counter]="getCounter()" [quizTheme]="quiz?.theme"
+                   [numberOfQuestion]="user?.numberOfQuestion" *ngIf="headerActivated"></quiz-header>
     </app-header>
     <main>
       <app-quiz-selection (returnValue)="setQuiz($event)" *ngIf="selection"/>
       <sound-settings *ngIf="soundSetting && !selection" (settingFinish)="soundSetting=false"/>
-      <app-quiz-section [question]="currentQuestion" [user]="user" [finish]="counter==user?.numberOfQuestion"
-                        (nextQuestion)='nextQuestion($event)' *ngIf="!soundSetting && !selection"/>
+      <app-quiz-section [question]="currentQuestion" [user]="user" [finish]="isFinish()"
+                        (nextQuestion)='nextQuestion($event)' (returnSelectionPage)="returnSelectionPage()"
+                        *ngIf="!soundSetting && !selection"/>
     </main>
   </div>
 </div>

@@ -4,5 +4,5 @@
   <answers-section [answers]="question.answers" (returnedAnswer)='checkAnswer($event)'
                    *ngIf="question && !questionResult"/>
   <app-question-result [goodAnswer]="trueAnswer" (continue)='continueQuiz()' *ngIf="questionResult"/>
-  <finish-page *ngIf="finish"/>
+  <finish-page (returnSelectionPage)="selectionPage()" *ngIf="finish"/>
 </div>

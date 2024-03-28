@@ -16,8 +16,8 @@ import {QuestionType} from "../../models/question-type.models";
 export class QuizComponent  implements OnInit{
   public user?: User;
   public quiz?: Quiz;
-  protected counter: number = 0;
-  protected headerActivated: boolean = true;
+  protected counter: number = 1;
+  protected headerActivated: boolean = false;
   protected currentQuestion?: Question;
   protected soundSetting: boolean = false;
   protected selection = true;
@@ -40,11 +40,10 @@ export class QuizComponent  implements OnInit{
   }
 
   update() {
-    this.currentQuestion = this.quiz!.questions.at(this.counter);
+    this.currentQuestion = this.quiz!.questions.at(this.counter - 1);
   }
 
   nextQuestion(answerReturned: Answer) {
-    console.log(this.counter, this.user?.numberOfQuestion);
     this.counter++;
     this.update();
   }
@@ -54,5 +53,21 @@ export class QuizComponent  implements OnInit{
     if (quiz.questions.some(question => question.type == QuestionType.Sound) && this.user?.soundQuestion) this.soundSetting = true;
     this.update();
     this.selection = false;
+    this.headerActivated = true;
+  }
+
+  returnSelectionPage() {
+    this.counter = 1;
+    this.selection = true;
+    this.headerActivated = false;
+  }
+
+  isFinish() {
+    return this.counter - 1 == this.user?.numberOfQuestion;
+  }
+
+  getCounter() {
+    if (this.isFinish()) return this.counter - 1;
+    return this.counter;
   }
 }
