@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {inject, NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {AdminComponent} from "./admin/admin.component";
 import {QuizComponent} from "./quiz/quiz.component";
@@ -12,12 +12,15 @@ import {StatisticsComponent} from "./admin/pages/patient/statistics/statistics.c
 import {QuizSelectionComponent} from "./quiz/quiz-selection/quiz-selection.component";
 import {SoundSettingsComponent} from "./quiz/sound-settings/sound-settings.component";
 import {ProfilesComponent} from "./profiles/profiles.component";
+import {AccessChecker} from "../service/access-checker.service";
+import {AccessRestriction} from "../models/access-restriction.models";
 
+export const checkAccess = (restriction: AccessRestriction) => inject(AccessChecker).canActivate(restriction);
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: ProfilesComponent},
   {
-    path: "admin", component: AdminComponent, children: [
+    path: "admin", component: AdminComponent, canActivate: [() => checkAccess(AccessRestriction.Admin)], children: [
       {path: "", pathMatch: "full", redirectTo: "patients"},
       {path: "patients", component: AdminPatientsComponent},
       {
@@ -31,12 +34,12 @@ const routes: Routes = [
     ]
   },
   {
-    path: "quiz", component: QuizComponent, children: [
+    path: "quiz", component: QuizComponent, canActivate: [() => checkAccess(AccessRestriction.User)], children: [
       {path: "", pathMatch: "full", component: QuizSelectionComponent}
     ]
   },
   {
-    path: "quiz/:quiz_id", component: QuizComponent, children: [
+    path: "quiz/:quiz_id", component: QuizComponent, canActivate: [() => checkAccess(AccessRestriction.User)], children: [
       {path: "", pathMatch: "full", redirectTo: "sound-settings"},
       {path: "sound-settings", component: SoundSettingsComponent},
       {path: "question", component: QuizSectionComponent},
