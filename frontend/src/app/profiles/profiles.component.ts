@@ -15,13 +15,21 @@ export class ProfilesComponent {
   public users?: User[];
 
   constructor(public userService: UserService, private router: Router) {
-    this.userService.users$.subscribe((users: User[]) => {
+    this.userService.users$.subscribe((users) => {
       this.users = users.filter(user => user.access <= AccessRestriction.User);
+    });
+
+    this.userService.user$.subscribe(user => {
+      if (user) this.navigateToHomePage(user);
     });
   }
 
   loginAs(user: User) {
     this.userService.setLoggedUser(user);
+    this.navigateToHomePage(user);
+  }
+
+  navigateToHomePage(user: User) {
     this.router.navigate([user.access == AccessRestriction.Admin ? "./admin" : "./quiz"]).then();
   }
 
