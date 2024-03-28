@@ -1,5 +1,9 @@
 <header>
-  <img alt="QuizFlash" ngSrc="/assets/quizflash.svg" width="170" height="32" id="banner" priority/>
+  <img alt="QuizFlash" ngSrc="/assets/quizflash.svg" width="170" height="32" id="banner" [routerLink]="interactive ? homePage : null" priority/>
 
   <ng-content></ng-content>
+
+  <app-button *ngIf="interactive && loggedIn" [color]="'blue'" (click)="logout()" id="logout">
+    <fa-icon [icon]="faSignOut" size="2x" id="logout-icon"/>
+  </app-button>
 </header>
