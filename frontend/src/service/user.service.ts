@@ -2,13 +2,12 @@ import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {USERS} from "../mocks/users.mock";
-import {USER_MARTINE} from "../mocks/user-martine.mock";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
   public users: User[] = USERS;
   public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.users);
-  public user?: User = USER_MARTINE;
+  public user?: User;
   public user$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(this.user);
 
   constructor() {
