@@ -5,9 +5,10 @@
                    [numberOfQuestion]="user?.numberOfQuestion"></quiz-header>
     </app-header>
     <main>
-      <sound-settings *ngIf="soundSetting" (settingFinish)="soundSetting=false"/>
+      <app-quiz-selection (returnValue)="setQuiz($event)" *ngIf="selection"/>
+      <sound-settings *ngIf="soundSetting && !selection" (settingFinish)="soundSetting=false"/>
       <app-quiz-section [question]="currentQuestion" [user]="user" [finish]="counter==user?.numberOfQuestion"
-                        (nextQuestion)='nextQuestion($event)' *ngIf="!soundSetting"/>
+                        (nextQuestion)='nextQuestion($event)' *ngIf="!soundSetting && !selection"/>
     </main>
   </div>
 </div>
