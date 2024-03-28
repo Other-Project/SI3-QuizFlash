@@ -20,6 +20,7 @@ export class QuizComponent  implements OnInit{
   protected headerActivated: boolean = true;
   protected currentQuestion?: Question;
   protected soundSetting: boolean = false;
+  protected selection = true;
 
   constructor(private route: ActivatedRoute, private userService: UserService, private quizService: QuizListService) {
     this.route.parent!.params.subscribe(params => {
@@ -27,11 +28,11 @@ export class QuizComponent  implements OnInit{
     });
     this.userService.user$.subscribe(user => {
       this.user = user;
-      this.quizService.quiz$.subscribe(quiz => {
-        this.quiz = quiz;
-        if (quiz.questions.some(question => question.type == QuestionType.Sound) && this.user?.soundQuestion) this.soundSetting = true;
-        this.update();
-      });
+      //this.quizService.quiz$.subscribe(quiz => {
+      //  this.quiz = quiz;
+      //  if (quiz.questions.some(question => question.type == QuestionType.Sound) && this.user?.soundQuestion) this.soundSetting = true;
+      //  this.update();
+      //});
     });
   }
 
@@ -46,5 +47,12 @@ export class QuizComponent  implements OnInit{
     console.log(this.counter, this.user?.numberOfQuestion);
     this.counter++;
     this.update();
+  }
+
+  setQuiz(quiz: Quiz) {
+    this.quiz = quiz;
+    if (quiz.questions.some(question => question.type == QuestionType.Sound) && this.user?.soundQuestion) this.soundSetting = true;
+    this.update();
+    this.selection = false;
   }
 }

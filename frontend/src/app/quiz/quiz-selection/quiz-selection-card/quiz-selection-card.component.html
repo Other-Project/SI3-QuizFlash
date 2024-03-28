@@ -1,4 +1,4 @@
-<app-button id="{{quiz.id}}" routerLink="{{quiz.id}}" [color]="'white'" [padding]="false">
+<app-button id="{{quiz.id}}" (click)="select()" [color]="'white'" [padding]="false">
   <app-image [src]="quiz.thumbnailUrl" [alt]="quiz.title" [width]="200" [height]="150"/>
   <p class="quiz-card-title">{{ quiz.title }}</p>
   <p class="quiz-card-theme">{{ quiz.theme }}</p>

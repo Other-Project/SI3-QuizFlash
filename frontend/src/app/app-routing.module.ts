@@ -32,13 +32,8 @@ const routes: Routes = [
   },
   {
     path: "quiz", component: QuizComponent, children: [
-      {path: "", pathMatch: "full", redirectTo: "quiz-selection"},
-      {path: "quiz-selection", pathMatch: "full", component: QuizSelectionComponent},
-    ]
-  },
-  {
-    path: "quiz/:quiz_id", component: QuizComponent, children: [
-      {path: "", pathMatch: "full", redirectTo: "sound-settings"},
+      {path: "quiz-section", component: QuizSectionComponent},
+      {path: "quiz-selection", component: QuizSelectionComponent},
       {path: "sound-settings", component: SoundSettingsComponent},
       {path: "question", component: QuizSectionComponent},
       {path: "finish", component: FinishPageComponent}
