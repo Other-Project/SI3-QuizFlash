@@ -24,4 +24,6 @@ export class ProfilesComponent {
     this.userService.setLoggedUser(user);
     this.router.navigate([user.access == AccessRestriction.Admin ? "./admin" : "./quiz"]).then();
   }
+
+  protected readonly USER_ANNE = USER_ANNE;
 }
