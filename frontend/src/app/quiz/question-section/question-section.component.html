@@ -1,5 +1,5 @@
 <section>
   <img *ngIf="image" ngSrc="{{image}}" alt="image" width="500" height="500">
-  <app-play-button *ngIf="sound" src="{{sound}}"/>
+  <app-play-button *ngIf="sound" src="{{sound}}" [accessibility]="true"/>
   <p>{{ question }}</p>
 </section>

@@ -18,6 +18,7 @@ export class PlayButtonComponent {
     if (this.gainNode)
       this.gainNode.gain.value = this.gainValue;
   }
+  @Input() public accessibility: boolean = false;
 
   @ViewChild("sound") audio?: ElementRef;
   private audioContext?: AudioContext;
@@ -25,6 +26,7 @@ export class PlayButtonComponent {
   private gainNode?: GainNode;
   private gainValue: number = 2;
   protected soundPlayed: boolean = false;
+
   constructor() {
   }
 
