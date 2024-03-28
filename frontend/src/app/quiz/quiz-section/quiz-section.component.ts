@@ -17,6 +17,8 @@ export class QuizSectionComponent implements OnInit {
   protected trueAnswer?: Answer;
   @Input() finish: boolean = false;
   @Output() nextQuestion = new EventEmitter<Answer>();
+  protected answerChoose?: Answer;
+  @Output() returnSelectionPage: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
   }
@@ -33,10 +35,15 @@ export class QuizSectionComponent implements OnInit {
     } else {
       this.questionResult = true;
     }
-    this.nextQuestion.emit(answer);
+    this.answerChoose = answer;
   }
 
   continueQuiz() {
     this.questionResult = false;
+    this.nextQuestion.emit(this.answerChoose);
+  }
+
+  selectionPage() {
+    this.returnSelectionPage.emit();
   }
 }

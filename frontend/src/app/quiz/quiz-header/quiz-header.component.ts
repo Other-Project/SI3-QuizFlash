@@ -9,8 +9,8 @@ export class QuizHeaderComponent {
 
   @Input() counter?: number;
   @Input() quizTheme?: string;
-  @Input() activated?: boolean;
   @Input() numberOfQuestion?: number;
+
 
   constructor() {
   }

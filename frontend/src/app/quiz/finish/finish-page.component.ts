@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 
 @Component({
   selector: "finish-page",
@@ -7,8 +7,14 @@ import {Component, OnInit} from "@angular/core";
 })
 export class FinishPageComponent implements OnInit{
 
+  @Output() returnSelectionPage: EventEmitter<any> = new EventEmitter<any>();
+
   constructor() {
   }
   ngOnInit(): void {
+  }
+
+  return() {
+    this.returnSelectionPage.emit();
   }
 }
