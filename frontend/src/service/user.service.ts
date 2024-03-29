@@ -63,7 +63,7 @@ export class UserService {
     return this.users.find(user => user.id == id);
   }
 
-  public setLoggedUser(user: User): void {
+  public setLoggedUser(user?: User): void {
     this.user$.next(this.user = user);
   }
 }
