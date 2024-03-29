@@ -30,8 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/hobbies.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -94,8 +93,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/hobbies.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           }

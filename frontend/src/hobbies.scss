@@ -1,8 +1,5 @@
-@import "colors";
+$form_color: rgb(32, 91, 203);
 
-$blue: rgb(32, 91, 203);
-
-$base-color: $blue;
 $disable-background-color: #eceeef;
 .multiselect-dropdown {
   .dropdown-btn {
@@ -10,8 +7,8 @@ $disable-background-color: #eceeef;
     padding-bottom: 6px !important;
 
     .selected-item {
-      border: 1px solid $base-color !important;
-      background: $base-color !important;
+      border: 1px solid $form_color !important;
+      background: $form_color !important;
     }
   }
 
@@ -32,12 +29,12 @@ $disable-background-color: #eceeef;
 
   .multiselect-item-checkbox input[type=checkbox] {
     &:checked + div:before {
-      background: $base-color !important;
+      background: $form_color !important;
     }
 
     + div:before {
-      color: $base-color !important;
-      border: 2px solid $base-color !important;
+      color: $form_color !important;
+      border: 2px solid $form_color !important;
     }
   }
 }
