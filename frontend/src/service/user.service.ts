@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {USERS} from "../mocks/users.mock";
-import {USER_BERNARD} from "../mocks/user-bernard.mock";
 import {USER_MARTINE} from "../mocks/user-martine.mock";
 
 @Injectable({providedIn: 'root'})
@@ -41,7 +40,7 @@ export class UserService {
     return this.users.find(user => user.id == id);
   }
 
-  public setLoggedUser(user: User): void {
+  public setLoggedUser(user?: User): void {
     this.user$.next(this.user = user);
   }
 }
