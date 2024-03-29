@@ -1,6 +1,15 @@
-$blue : rgb(0, 45, 129);
+$blue: #002d81;
 $darkBlue : #1b2a56;
 $blackBlue : #00090f;
 $yellow1 : #F2E86D;
 $yellow2 : #e5db6b;
 $grey1 : #646464;
+$white: #f1f1f1;
+$red: #d12020;
+
+$colors: (
+  "white": $white,
+  "red": $red,
+  "blue": $blue,
+  "dark-blue": $darkBlue
+);

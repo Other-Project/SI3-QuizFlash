@@ -1,6 +1,6 @@
 <div class="quiz">
   <div [ngStyle]="{'font-size': user!.fontSize.toString()+'em'}" class="quiz-content">
-    <app-header>
+    <app-header [homePage]="'/quiz'" [interactive]="quiz == undefined">
       <quiz-header></quiz-header>
     </app-header>
     <main>
