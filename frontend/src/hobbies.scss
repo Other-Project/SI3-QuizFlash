@@ -1,6 +1,5 @@
-$form_color: rgb(32, 91, 203);
+@import "colors";
 
-$disable-background-color: #eceeef;
 .multiselect-dropdown {
   .dropdown-btn {
     padding: 0 !important;
@@ -12,17 +11,9 @@ $disable-background-color: #eceeef;
     }
   }
 
-  .disabled {
-    & > span {
-      background-color: $disable-background-color;
-    }
-  }
-
   .dropdown-btn {
-    padding: 0;
-
-    & > span {
-      display: block !important;
+    & > span:not(:last-child) {
+      display: flex !important;
       margin: 6px 0 0 6px !important
     }
   }
