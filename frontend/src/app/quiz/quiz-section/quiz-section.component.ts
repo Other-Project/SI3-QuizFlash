@@ -11,30 +11,27 @@ import {Answer} from "../../../models/answer.models";
 })
 export class QuizSectionComponent implements OnInit {
   @Input() question?: Question;
-  //protected quiz?: Quiz;
-  protected questionResult: boolean = false;
   @Input() user?: User;
-  protected trueAnswer?: Answer;
   @Input() finish: boolean = false;
-  @Output() nextQuestion = new EventEmitter<Answer>();
+
+  protected trueAnswer?: Answer;
   protected answerChoose?: Answer;
-  @Output() returnSelectionPage: EventEmitter<any> = new EventEmitter<any>();
+  protected questionResult: boolean = false;
+
+  @Output() nextQuestion: EventEmitter<Answer> = new EventEmitter<Answer>();
+  @Output() returnSelectionPage: EventEmitter<undefined> = new EventEmitter<undefined>();
 
   constructor() {
   }
 
   ngOnInit(): void {
-    console.log(this.user);
     this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
   }
 
   checkAnswer(answer: Answer): void {
     this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
-    if (this.user!.automatedSkip) {
-      this.continueQuiz();
-    } else {
-      this.questionResult = true;
-    }
+    if (this.user!.automatedSkip) this.continueQuiz();
+    else this.questionResult = true;
     this.answerChoose = answer;
   }
 

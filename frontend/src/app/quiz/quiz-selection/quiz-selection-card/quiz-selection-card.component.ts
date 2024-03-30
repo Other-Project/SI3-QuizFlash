@@ -15,7 +15,7 @@ export class QuizSelectionCardComponent {
   constructor() {
   }
 
-  select() {
+  selectQuiz() {
     this.quizReturn.emit(this.quiz);
   }
 }

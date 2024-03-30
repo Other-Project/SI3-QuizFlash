@@ -1,2 +1,2 @@
 <p>{{ quizTheme }}</p>
-<p>{{ counter }} <span>/ {{ numberOfQuestion }}</span></p>
+<p>{{ counter }} <span *ngIf="numberOfQuestion">/ {{ numberOfQuestion }}</span></p>

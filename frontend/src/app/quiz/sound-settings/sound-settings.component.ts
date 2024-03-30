@@ -43,8 +43,8 @@ export class SoundSettingsComponent implements AfterViewInit {
     this.gainNode.gain.value = this.gainValue;
   }
 
-  @Output() settingFinish: EventEmitter<any> = new EventEmitter<any>();
+  @Output() soundSettingsFinish: EventEmitter<any> = new EventEmitter<any>();
   next() {
-    this.settingFinish.emit();
+    this.soundSettingsFinish.emit();
   }
 }

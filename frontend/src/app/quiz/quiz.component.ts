@@ -1,8 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "../../service/user.service";
 import {User} from "../../models/user.models";
-import {QuizListService} from "../../service/quiz-list-service.service";
-import {ActivatedRoute} from "@angular/router";
 import {Quiz} from "../../models/quiz.models";
 import {Question} from "../../models/question.models";
 import {Answer} from "../../models/answer.models";
@@ -22,17 +20,9 @@ export class QuizComponent  implements OnInit{
   protected soundSetting: boolean = false;
   protected selection = true;
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private quizService: QuizListService) {
-    this.route.parent!.params.subscribe(params => {
-      this.quizService.selectQuiz(params["quiz_id"]);
-    });
+  constructor(private userService: UserService) {
     this.userService.user$.subscribe(user => {
       this.user = user;
-      //this.quizService.quiz$.subscribe(quiz => {
-      //  this.quiz = quiz;
-      //  if (quiz.questions.some(question => question.type == QuestionType.Sound) && this.user?.soundQuestion) this.soundSetting = true;
-      //  this.update();
-      //});
     });
   }
 
@@ -51,6 +41,10 @@ export class QuizComponent  implements OnInit{
   setQuiz(quiz: Quiz) {
     this.quiz = quiz;
     if (quiz.questions.some(question => question.type == QuestionType.Sound) && this.user?.soundQuestion) this.soundSetting = true;
+    else if (!this.user?.soundQuestion) {
+      quiz.questions = quiz.questions.filter(question => question.type != QuestionType.Sound);
+      console.log(quiz.questions.at(2));
+    }
     this.update();
     this.selection = false;
     this.headerActivated = true;
@@ -63,7 +57,7 @@ export class QuizComponent  implements OnInit{
   }
 
   isFinish() {
-    return this.counter - 1 == this.user?.numberOfQuestion;
+    return this.quiz?.questions.at(this.counter - 1) == undefined || this.counter - 1 == this.user?.numberOfQuestion;
   }
 
   getCounter() {

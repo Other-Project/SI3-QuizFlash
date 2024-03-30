@@ -6,7 +6,7 @@
     </app-header>
     <main>
       <app-quiz-selection (returnValue)="setQuiz($event)" *ngIf="selection"/>
-      <sound-settings *ngIf="soundSetting && !selection" (settingFinish)="soundSetting=false"/>
+      <sound-settings *ngIf="soundSetting && !selection" (soundSettingsFinish)="soundSetting=false"/>
       <app-quiz-section [question]="currentQuestion" [user]="user" [finish]="isFinish()"
                         (nextQuestion)='nextQuestion($event)' (returnSelectionPage)="returnSelectionPage()"
                         *ngIf="!soundSetting && !selection"/>

@@ -14,7 +14,7 @@ export class FinishPageComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  return() {
+  returnToQuizSelection() {
     this.returnSelectionPage.emit();
   }
 }
