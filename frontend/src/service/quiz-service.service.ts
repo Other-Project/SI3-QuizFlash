@@ -3,16 +3,14 @@ import {Quiz} from "../models/quiz.models";
 import {QUIZLIST} from "../mocks/quiz-list.mock";
 import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
-import {QuestionType} from "../models/question-type.models";
 import {UserService} from "./user.service";
-import {QUIZ1} from "../mocks/quiz1.mock";
 
 @Injectable({providedIn:'root'})
-export class QuizListService {
+export class QuizService {
   public quizzes: Quiz[] = QUIZLIST;
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject<Quiz[]>(this.quizzes);
-  public quiz: Quiz = QUIZ1;
-  public quiz$: BehaviorSubject<Quiz> = new BehaviorSubject<Quiz>(this.quiz);
+  public quiz?: Quiz;
+  public quiz$: BehaviorSubject<Quiz | undefined> = new BehaviorSubject<Quiz | undefined>(this.quiz);
   private user?: User;
 
   constructor(private userService: UserService) {
@@ -24,7 +22,6 @@ export class QuizListService {
   selectQuiz(id: string) {
     let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
     if (!returnedQuiz) return;
-    if (!this.user!.soundQuestion) returnedQuiz.questions.filter((question) => question.type != QuestionType.Sound);
     this.quiz = returnedQuiz;
     this.quiz$.next(this.quiz);
   }

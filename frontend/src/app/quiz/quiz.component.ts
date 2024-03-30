@@ -15,7 +15,6 @@ export class QuizComponent  implements OnInit{
   public user?: User;
   public quiz?: Quiz;
   protected counter: number = 1;
-  protected headerActivated: boolean = false;
   protected currentQuestion?: Question;
   protected soundSetting: boolean = false;
   protected selection = true;
@@ -47,13 +46,11 @@ export class QuizComponent  implements OnInit{
     }
     this.update();
     this.selection = false;
-    this.headerActivated = true;
   }
 
   returnSelectionPage() {
     this.counter = 1;
     this.selection = true;
-    this.headerActivated = false;
   }
 
   isFinish() {

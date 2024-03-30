@@ -15,7 +15,7 @@ export class QuizSectionComponent implements OnInit {
   @Input() finish: boolean = false;
 
   protected trueAnswer?: Answer;
-  protected answerChoose?: Answer;
+  protected chosenAnswer?: Answer;
   protected questionResult: boolean = false;
 
   @Output() nextQuestion: EventEmitter<Answer> = new EventEmitter<Answer>();
@@ -32,12 +32,12 @@ export class QuizSectionComponent implements OnInit {
     this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
     if (this.user!.automatedSkip) this.continueQuiz();
     else this.questionResult = true;
-    this.answerChoose = answer;
+    this.chosenAnswer = answer;
   }
 
   continueQuiz() {
     this.questionResult = false;
-    this.nextQuestion.emit(this.answerChoose);
+    this.nextQuestion.emit(this.chosenAnswer);
   }
 
   selectionPage() {
