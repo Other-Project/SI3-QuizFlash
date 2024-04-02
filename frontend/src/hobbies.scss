@@ -1,0 +1,37 @@
+@import "colors";
+
+.multiselect-dropdown {
+  .dropdown-btn {
+    padding: 3px !important;
+    padding-right: 40px !important;
+    position: relative;
+
+    .selected-item {
+      border: 1px solid $form_color !important;
+      background: $form_color !important;
+    }
+
+    & > span {
+      &:not(:last-child) {
+        display: flex !important;
+        margin: 3px !important;
+      }
+
+      &:last-child {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  .multiselect-item-checkbox input[type=checkbox] {
+    &:checked + div:before {
+      background: $form_color !important;
+    }
+
+    + div:before {
+      color: $form_color !important;
+      border: 2px solid $form_color !important;
+    }
+  }
+}

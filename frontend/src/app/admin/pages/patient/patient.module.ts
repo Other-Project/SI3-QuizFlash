@@ -10,6 +10,7 @@ import {PatientNavbarComponent} from "./navbar/patient-navbar.component";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {LayoutModule} from "../../../layout/layout.module";
 import {PatientHeaderModule} from "./header/patient-header.module";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 
 @NgModule({
@@ -20,15 +21,16 @@ import {PatientHeaderModule} from "./header/patient-header.module";
     InformationComponent,
     PatientNavbarComponent
   ],
-    imports: [
-      PatientHeaderModule,
-        NgOptimizedImage,
-        StatisticsModule,
-        InformationModule,
-        RouterOutlet,
-        RouterLink,
-        LayoutModule
-    ]
+  imports: [
+    PatientHeaderModule,
+    NgOptimizedImage,
+    StatisticsModule,
+    InformationModule,
+    RouterOutlet,
+    RouterLink,
+    LayoutModule,
+    NgMultiSelectDropDownModule,
+  ]
 })
 
 export class PatientModule {

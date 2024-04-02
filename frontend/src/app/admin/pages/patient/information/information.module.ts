@@ -1,21 +1,25 @@
 import {NgModule} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
-import {InterestsComponent} from "../interests/interests.component";
+import {HobbiesComponent} from "../hobbies/hobbies.component";
 import {PatientSettingsComponent} from "../settings/settings.component";
 import {SettingsModule} from "../settings/settings.module";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
-    InterestsComponent,
-    PatientSettingsComponent
+    PatientSettingsComponent,
+    HobbiesComponent
   ],
   exports: [
-    InterestsComponent,
-    PatientSettingsComponent
+    PatientSettingsComponent,
+    HobbiesComponent
   ],
   imports: [
     NgOptimizedImage,
-    SettingsModule
+    SettingsModule,
+    NgMultiSelectDropDownModule,
+    FormsModule,
   ]
 })
 

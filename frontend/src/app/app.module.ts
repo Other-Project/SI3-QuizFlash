@@ -9,6 +9,7 @@ import {ProfilesComponent} from "./profiles/profiles.component";
 import {LayoutModule} from "./layout/layout.module";
 import {AdminButtonComponent} from "./profiles/admin-button/admin-button.component";
 import {ProfileListComponent} from "./profiles/profile-list/profile-list.component";
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {ProfileListComponent} from "./profiles/profile-list/profile-list.compone
     AdminModule,
     QuizModule,
     LayoutModule,
-    ProfileListComponent
+    ProfileListComponent,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
