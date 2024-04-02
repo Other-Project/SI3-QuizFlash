@@ -3,8 +3,9 @@ import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {USERS} from "../mocks/users.mock";
 import {HOBBIES} from "../mocks/hobbies.mock";
+import {Patient} from "../models/patient.models";
 
-@Injectable({providedIn: 'root'})
+@Injectable({providedIn: "root"})
 export class UserService {
   public users: User[] = USERS;
   public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.users);
@@ -39,18 +40,18 @@ export class UserService {
   }
 
   updateUserHobbies(patientId: string, newHobbies: string[]) {
-    let patient: User | undefined = this.getUserById(patientId);
+    let patient = this.getUserById(patientId) as Patient;
     if (patient)
       patient.hobbies = newHobbies;
   }
 
   addUserHobby(patientId: string, newHobby: string) {
-    let patient: User | undefined = this.getUserById(patientId);
+    let patient = this.getUserById(patientId) as Patient;
     patient?.hobbies.push(newHobby);
   }
 
   removeUserHobby(patientId: string, hobby: string) {
-    let patient: User | undefined = this.getUserById(patientId);
+    let patient = this.getUserById(patientId) as Patient;
     if (patient) {
       let itemIndex: number = patient.hobbies.indexOf(hobby);
       if (itemIndex > -1) {
