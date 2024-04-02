@@ -21,7 +21,11 @@ export class QuizService {
 
   selectQuiz(id: string) {
     let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
-    if (!returnedQuiz) return;
+    if (!returnedQuiz) {
+      this.quiz = undefined;
+      this.quiz$.next(this.quiz);
+      console.error();
+    }
     this.quiz = returnedQuiz;
     this.quiz$.next(this.quiz);
   }

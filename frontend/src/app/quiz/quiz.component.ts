@@ -42,7 +42,6 @@ export class QuizComponent  implements OnInit{
     if (quiz.questions.some(question => question.type == QuestionType.Sound) && this.user?.soundQuestion) this.soundSetting = true;
     else if (!this.user?.soundQuestion) {
       quiz.questions = quiz.questions.filter(question => question.type != QuestionType.Sound);
-      console.log(quiz.questions.at(2));
     }
     this.update();
     this.selection = false;
