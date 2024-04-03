@@ -11,7 +11,7 @@ import {QuestionType} from "../../models/question-type.models";
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent implements OnInit{
+export class QuizComponent implements OnInit {
   public user?: Patient;
   public quiz?: Quiz;
   protected counter: number = 1;
