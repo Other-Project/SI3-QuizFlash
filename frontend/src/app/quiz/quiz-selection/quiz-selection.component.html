@@ -1,3 +1,3 @@
 <section>
-  <app-quiz-selection-card *ngFor="let quiz of quizzes" [quiz]="quiz" />
+  <app-quiz-selection-card *ngFor="let quiz of quizzes" [quiz]="quiz" (quizReturn)="returnQuiz($event)"/>
 </section>

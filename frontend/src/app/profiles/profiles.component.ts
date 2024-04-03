@@ -20,6 +20,6 @@ export class ProfilesComponent {
 
   loginAs(user: User) {
     this.userService.setLoggedUser(user);
-    this.router.navigate(["./quiz"]).then();
+    this.router.navigate(["./quiz/"]).then();
   }
 }

@@ -1,6 +1,8 @@
 <div>
-  <question-section image="{{question?.imageUrl}}" sound="{{question?.soundUrl}}" question="{{question?.text}}"/>
+  <question-section image="{{question?.imageUrl}}" sound="{{question?.soundUrl}}" question="{{question?.text}}"
+                    *ngIf="!questionResult"/>
   <answers-section [answers]="question.answers" (returnedAnswer)='checkAnswer($event)'
                    *ngIf="question && !questionResult"/>
   <app-question-result [goodAnswer]="trueAnswer" (continue)='continueQuiz()' *ngIf="questionResult"/>
+  <finish-page (returnSelectionPage)="selectionPage()" *ngIf="finish"/>
 </div>
