@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Question} from "../../../models/question.models";
-import {User} from "../../../models/user.models";
+import {Patient} from "../../../models/patient.models";
 import {Answer} from "../../../models/answer.models";
 
 
@@ -11,7 +11,7 @@ import {Answer} from "../../../models/answer.models";
 })
 export class QuizSectionComponent implements OnInit {
   @Input() question?: Question;
-  @Input() user?: User;
+  @Input() user?: Patient;
   @Input() finish: boolean = false;
 
   protected trueAnswer?: Answer;

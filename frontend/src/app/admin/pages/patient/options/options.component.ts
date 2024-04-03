@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, ViewChild} from "@angular/core";
-import {User} from "../../../../../models/user.models";
+import {Patient} from "../../../../../models/patient.models";
 
 @Component({
   selector: 'options',
@@ -14,7 +14,7 @@ export class OptionsComponent{
   @ViewChild('auditive') auditiveCheckBox?: ElementRef;
   @ViewChild('audioLaunch') audioLaunchCheckBox?: ElementRef;
 
-  @Input() user?: User;
+  @Input() user?: Patient;
 
   changeDementiaLevel(newLevel: number): void {
     const lowOrIntermediate: boolean = newLevel == 0 || newLevel == 1;

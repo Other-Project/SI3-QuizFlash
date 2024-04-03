@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "../../service/user.service";
-import {User} from "../../models/user.models";
+import {Patient} from "../../models/patient.models";
 import {Quiz} from "../../models/quiz.models";
 import {Question} from "../../models/question.models";
 import {Answer} from "../../models/answer.models";
@@ -11,8 +11,8 @@ import {QuestionType} from "../../models/question-type.models";
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent  implements OnInit{
-  public user?: User;
+export class QuizComponent implements OnInit {
+  public user?: Patient;
   public quiz?: Quiz;
   protected counter: number = 1;
   protected currentQuestion?: Question;
@@ -21,7 +21,7 @@ export class QuizComponent  implements OnInit{
 
   constructor(private userService: UserService) {
     this.userService.user$.subscribe(user => {
-      this.user = user;
+      this.user = user as Patient;
     });
   }
 
