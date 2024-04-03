@@ -53,7 +53,7 @@ export class QuizComponent  implements OnInit{
   }
 
   isFinish() {
-    return this.quiz?.questions.at(this.counter - 1) == undefined || this.counter - 1 == this.user?.numberOfQuestion;
+    return this.quiz?.questions.length! < this.counter || this.counter - 1 >= this.user?.numberOfQuestion!;
   }
 
   getCounter() {
