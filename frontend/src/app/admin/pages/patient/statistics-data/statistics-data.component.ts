@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {QuizListService} from "../../../../../service/quiz-list-service.service";
+import {QuizService} from "../../../../../service/quiz-service.service";
 import {Quiz} from "../../../../../models/quiz.models";
 
 @Component({
@@ -17,11 +17,11 @@ export class StatisticsDataComponent implements OnInit{
   quizList?: Quiz[];
   quizSelected: boolean = false;
 
-  constructor(private quizListService: QuizListService) {
+  constructor(private quizListService: QuizService) {
   }
 
   ngOnInit(): void {
-    this.quizListService.quizz$.subscribe((quizzes: Quiz[])=>{
+    this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
     });
   }

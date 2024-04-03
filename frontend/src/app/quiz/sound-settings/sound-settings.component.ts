@@ -1,9 +1,5 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {QuizService} from "../../../service/quiz-service.service";
-import {QuestionType} from "../../../models/question-type.models";
-import {UserService} from "../../../service/user.service";
-import {Patient} from "../../../models/patient.models";
+import {AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild} from "@angular/core";
+
 
 @Component({
   selector: 'sound-settings',
@@ -19,16 +15,7 @@ export class SoundSettingsComponent implements AfterViewInit {
   private gainValue: number = 2;
   protected soundPlayed: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, quizService: QuizService, userService: UserService) {
-    userService.user$.subscribe(user => {
-      if (!(user as Patient)?.soundQuestion) {
-        this.next();
-        return;
-      }
-      quizService.quiz$.subscribe(quiz => {
-        if (!quiz?.questions.some(question => question.type == QuestionType.Sound)) this.next();
-      });
-    });
+  constructor() {
   }
 
   ngAfterViewInit(): void {
@@ -56,7 +43,8 @@ export class SoundSettingsComponent implements AfterViewInit {
     this.gainNode.gain.value = this.gainValue;
   }
 
+  @Output() soundSettingsFinish: EventEmitter<any> = new EventEmitter<any>();
   next() {
-    this.router.navigate(["../question"], {relativeTo: this.route}).then();
+    this.soundSettingsFinish.emit();
   }
 }

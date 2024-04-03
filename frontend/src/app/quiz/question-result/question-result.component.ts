@@ -7,7 +7,7 @@ import {Answer} from "../../../models/answer.models";
   styleUrls: ['./question-result.component.scss']
 })
 export class QuestionResultComponent implements OnInit {
-  @Input() goodAnswer?: string;
+  @Input() goodAnswer?: Answer;
   @Output() continue = new EventEmitter<Answer>();
   private timeOutId?: number;
 

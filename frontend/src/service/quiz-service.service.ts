@@ -1,29 +1,36 @@
 import {Injectable} from "@angular/core";
 import {Quiz} from "../models/quiz.models";
+import {QUIZLIST} from "../mocks/quiz-list.mock";
 import {BehaviorSubject} from "rxjs";
-import {QuizListService} from "./quiz-list-service.service";
+import {User} from "../models/user.models";
+import {UserService} from "./user.service";
 
-@Injectable({providedIn: 'root'})
+@Injectable({providedIn:'root'})
 export class QuizService {
-  private quizList: Quiz[] = [];
-  private quiz?: Quiz;
+  public quizzes: Quiz[] = QUIZLIST;
+  public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject<Quiz[]>(this.quizzes);
+  public quiz?: Quiz;
   public quiz$: BehaviorSubject<Quiz | undefined> = new BehaviorSubject<Quiz | undefined>(this.quiz);
+  private user?: User;
 
-  constructor(public quizService: QuizListService) {
-    this.quizService.quizz$.subscribe((quizz: Quiz[]) => {
-      this.quizList = quizz;
-    })
+  constructor(private userService: UserService) {
+    this.userService.user$.subscribe((user?: User) => {
+      this.user = user;
+    });
   }
 
-  public setQuiz(id: string) {
-    for (let quiz of this.quizList) {
-      if (quiz.id == id) {
-        this.quiz$.next(this.quiz = quiz);
-      }
-    }
+  selectQuiz(id: string) {
+    let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
+    if (!returnedQuiz) console.error("No quiz found with ID " + id);
+    this.quiz = returnedQuiz;
+    this.quiz$.next(this.quiz);
   }
 
-  endQuiz() {
-    this.quiz$.next(this.quiz = undefined);
+  addQuizzes(quiz: Quiz) {
+    this.quizzes.push(quiz);
+    this.quizzes$.next(this.quizzes);
+  }
+
+  deleteQuizzes(id: string): void {
   }
 }

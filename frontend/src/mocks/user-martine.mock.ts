@@ -17,6 +17,7 @@ export const USER_MARTINE: Patient = {
   automatedSkip: false,
   showIncorrectResponse: false,
   answerHint: false,
+  numberOfQuestion: 3,
 
   soundQuestion: true,
   autoStartAudio: true

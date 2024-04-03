@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Quiz} from "../../../../models/quiz.models";
 
 
@@ -10,7 +10,12 @@ import {Quiz} from "../../../../models/quiz.models";
 export class QuizSelectionCardComponent {
   @Input()
   public quiz!: Quiz;
+  @Output() quizReturn: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
   constructor() {
+  }
+
+  selectQuiz() {
+    this.quizReturn.emit(this.quiz);
   }
 }

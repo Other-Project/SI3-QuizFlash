@@ -1,11 +1,7 @@
-import {Component} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {GameService} from "../../../service/game-service.service";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Question} from "../../../models/question.models";
-import {UserService} from "../../../service/user.service";
-import {QuestionType} from "../../../models/question-type.models";
-import {Answer} from "../../../models/answer.models";
 import {Patient} from "../../../models/patient.models";
+import {Answer} from "../../../models/answer.models";
 
 
 @Component({
@@ -13,41 +9,38 @@ import {Patient} from "../../../models/patient.models";
   templateUrl: './quiz-section.component.html',
   styleUrls: ['./quiz-section.component.scss']
 })
-export class QuizSectionComponent {
-  protected question?: Question
-  protected questionResult: boolean = false;
-  protected trueAnswer?: string;
-  protected user?: Patient;
+export class QuizSectionComponent implements OnInit {
+  @Input() question?: Question;
+  @Input() user?: Patient;
+  @Input() finish: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, public gameService: GameService, public userService: UserService) {
-    this.gameService.question$.subscribe((question) => {
-      this.question = question;
-      if (question)
-        this.trueAnswer = question.answers.find(answer => answer.trueAnswer)?.answerText;
-    });
-    this.userService.user$.subscribe((user) => {
-      this.user = user as Patient;
-    })
+  protected trueAnswer?: Answer;
+  protected chosenAnswer?: Answer;
+  protected questionResult: boolean = false;
+
+  @Output() nextQuestion: EventEmitter<Answer> = new EventEmitter<Answer>();
+  @Output() returnSelectionPage: EventEmitter<undefined> = new EventEmitter<undefined>();
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+    this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
   }
 
   checkAnswer(answer: Answer): void {
-    if (this.user!.automatedSkip) {
-      this.continueQuiz();
-    } else {
-      this.questionResult = true;
-    }
+    this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
+    if (this.user!.automatedSkip) this.continueQuiz();
+    else this.questionResult = true;
+    this.chosenAnswer = answer;
   }
 
   continueQuiz() {
-    this.gameService.nextQuestion();
-    if (!this.user!.soundQuestion) {
-      while (this.question?.type == QuestionType.Sound) this.gameService.nextQuestion();
-    }
     this.questionResult = false;
-    if (!this.question) //Open the finish page at the end of the quiz
-      this.router.navigate(["../finish"], {relativeTo: this.route}).then(
-        r => {
-          if (!r) console.log("Quiz finish launch error")
-        })
+    this.nextQuestion.emit(this.chosenAnswer);
+  }
+
+  selectionPage() {
+    this.returnSelectionPage.emit();
   }
 }
