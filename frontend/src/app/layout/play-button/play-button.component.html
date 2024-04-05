@@ -7,9 +7,13 @@
          (click)="pause()"/>
   </div>
   <div *ngIf="accessibility && !soundPlayed" class="accessibility_div" (click)="play()">
-    <p class="accessibility_text">Cliquez sur moi pour lancer le son</p>
+    <app-button [color]="'dark-blue'">
+      <span class="accessibility_text">Cliquez sur moi pour lancer le son</span>
+    </app-button>
   </div>
   <div *ngIf="accessibility && soundPlayed" class="accessibility_div" (click)="pause()">
-    <p class="accessibility_text">Cliquez pour faire Pause</p>
+    <app-button [color]="'dark-blue'">
+      <span class="accessibility_text">Cliquez pour faire Pause</span>
+    </app-button>
   </div>
 </div>

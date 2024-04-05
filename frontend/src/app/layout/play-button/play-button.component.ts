@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, ViewChild} from "@angular/core";
 import {NgIf, NgOptimizedImage} from "@angular/common";
+import {LayoutModule} from "../layout.module";
 
 @Component({
   selector: 'app-play-button',
@@ -7,7 +8,8 @@ import {NgIf, NgOptimizedImage} from "@angular/common";
   styleUrls: ['./play-button.component.scss'],
   imports: [
     NgIf,
-    NgOptimizedImage
+    NgOptimizedImage,
+    LayoutModule
   ],
   standalone: true
 })
