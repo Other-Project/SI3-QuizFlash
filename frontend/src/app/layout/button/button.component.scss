@@ -29,6 +29,10 @@ button {
         border-color: $background;
         box-shadow: 0 0 2px color.scale($background, $lightness: -50%);
       }
+
+      @if (lightness($background) < 40) {
+        color: $white;
+      }
     }
   }
 }
