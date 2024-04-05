@@ -1,18 +1,9 @@
 
 <div class="buttons">
   <audio #sound src="{{src}}"></audio>
-  <div *ngIf="!accessibility" class="images_play_button" >
-    <img alt="Play Button" ngSrc="assets/playButton.svg" width="128" height="128" *ngIf="!soundPlayed" (click)="play()"/>
-    <img alt="Pause Button" ngSrc="assets/pauseButton.svg" width="128" height="128" *ngIf="soundPlayed" (click)="pause()"/>
-  </div>
-  <div *ngIf="accessibility && !soundPlayed" class="accessibility_div" (click)="play()">
-    <app-button [color]="'dark-blue'">
-      <span class="accessibility_text">Cliquez sur moi pour lancer le son</span>
-    </app-button>
-  </div>
-  <div *ngIf="accessibility && soundPlayed" class="accessibility_div" (click)="pause()">
-    <app-button [color]="'dark-blue'">
-      <span class="accessibility_text">Cliquez pour faire Pause</span>
+  <div class="play-button-div">
+    <app-button [color]="'dark-blue'" (click)="playPause()">
+      <span class="accessibility_text">{{soundPlayed ? "Cliquez sur moi pour arrêter le son" : "Cliquez sur moi pour lancer le son"}}</span>
     </app-button>
   </div>
 </div>

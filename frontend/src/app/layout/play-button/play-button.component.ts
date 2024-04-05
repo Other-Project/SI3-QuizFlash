@@ -20,7 +20,6 @@ export class PlayButtonComponent {
     if (this.gainNode)
       this.gainNode.gain.value = this.gainValue;
   }
-  @Input() public accessibility: boolean = false;
 
   @ViewChild("sound") audio?: ElementRef;
   private audioContext?: AudioContext;
@@ -33,7 +32,7 @@ export class PlayButtonComponent {
   }
 
   init(): void {
-    if (this.audio && !this.audioContext) {
+    if (!this.audioContext && this.audio) {
       this.audioContext = new AudioContext();
       this.gainNode = this.audioContext.createGain();
       this.soundNode = this.audioContext.createMediaElementSource(this.audio.nativeElement);
@@ -41,17 +40,15 @@ export class PlayButtonComponent {
       this.soundNode.connect(this.gainNode).connect(this.audioContext.destination);
     }
   }
-
-  play() {
-    this.init();
+  playPause() {
+    if (!this.audioContext) this.init();
     if (!this.audio || this.audio.nativeElement.readyState < 2) return;
-    this.audio.nativeElement.play().then();
-    this.soundPlayed = true;
-  }
-
-  pause() {
-    if (!this.audio) return;
-    this.audio.nativeElement.pause();
-    this.soundPlayed = false;
+    if (!this.soundPlayed) {
+      this.audio.nativeElement.play().then();
+      this.soundPlayed = true;
+    } else {
+      this.audio.nativeElement.pause();
+      this.soundPlayed = false;
+    }
   }
 }
