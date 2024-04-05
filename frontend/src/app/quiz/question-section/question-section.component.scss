@@ -1,12 +1,21 @@
 section{
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  grid-template-rows: 1fr;
+  /* justify-content: space-around; */
   text-align: center;
   align-items: center;
 
   img{
-    max-width: 40%;
     width: auto;
     height: auto;
+    max-width: 60%;
+    margin: auto;
+
+  }
+
+  app-play-button {
+    margin: auto;
   }
 }
