@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, ViewChild} from "@angular/core";
+import {Component, ElementRef, Input, ViewChild} from "@angular/core";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {LayoutModule} from "../layout.module";
 
