@@ -50,6 +50,8 @@ export class QuizComponent implements OnInit {
   returnSelectionPage() {
     this.counter = 1;
     this.selection = true;
+    this.quiz = undefined;
+    this.currentQuestion = undefined;
   }
 
   isFinish() {
