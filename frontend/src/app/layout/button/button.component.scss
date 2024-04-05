@@ -24,7 +24,7 @@ button {
       background-color: $background;
       border: 1px solid color.scale($background, $lightness: -5%);
 
-      &:hover {
+      &:hover:not(:disabled) {
         background-color: color.scale($background, $lightness: +5%);
         border-color: $background;
         box-shadow: 0 0 2px color.scale($background, $lightness: -50%);
