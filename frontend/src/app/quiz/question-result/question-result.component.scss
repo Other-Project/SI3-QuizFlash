@@ -6,11 +6,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1%;
+  gap: .25em;
+  margin-top: .5em;
   text-align: center;
   height: 100%;
 
   p {
     margin: 0;
+  }
+
+  #nextQuestion {
+    margin-top: 1em;
   }
 }
