@@ -1,4 +1,3 @@
 <section class="answer-section">
-  <button class="answer-button" *ngFor="let answer of answers" textContent="{{answer.answerText}}"
-          (click)="returnAnswer(answer)"></button>
+  <app-button class="answer-button" *ngFor="let answer of answers" (click)="returnAnswer(answer)" [color]="'yellow'"><span>{{ answer.answerText }}</span></app-button>
 </section>
