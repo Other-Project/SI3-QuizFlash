@@ -1,6 +1,14 @@
 @import "/colors";
 
-p {
-  font-size: 1.5em;
-  color: $darkBlue;
+app-button {
+
+  app-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  p {
+    font-size: 1.5em;
+    color: $darkBlue;
+  }
 }
