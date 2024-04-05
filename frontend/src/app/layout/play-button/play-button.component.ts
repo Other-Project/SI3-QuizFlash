@@ -20,7 +20,6 @@ export class PlayButtonComponent {
     if (this.gainNode)
       this.gainNode.gain.value = this.gainValue;
   }
-
   @ViewChild("sound") audio?: ElementRef;
   private audioContext?: AudioContext;
   private soundNode?: MediaElementAudioSourceNode;
@@ -43,7 +42,7 @@ export class PlayButtonComponent {
     if (!this.audioContext) this.init();
     if (!this.audio || this.audio.nativeElement.readyState < 2) return;
     if (!this.soundPlayed) this.audio.nativeElement.play().then();
-    else this.audio.nativeElement.pause(); // .then(); ?
+    else this.audio.nativeElement.pause().then();
     this.soundPlayed = !this.soundPlayed;
   }
 }

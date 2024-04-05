@@ -1,9 +1,6 @@
 
-
 <audio #sound src="{{src}}"></audio>
-<div class="play-button-div">
-  <app-button [color]="'dark-blue'" (click)="playPause()">
-      <span class="accessibility_text">{{soundPlayed ? "Cliquez sur moi pour arrêter le son" : "Cliquez sur moi pour lancer le son"}}</span>
-  </app-button>
-</div>
+<app-button [color]="'dark-blue'" (click)="playPause()">
+  <span class="accessibility_text">{{soundPlayed ? "Cliquez sur moi pour arrêter le son" : "Cliquez sur moi pour lancer le son"}}</span>
+</app-button>
 
