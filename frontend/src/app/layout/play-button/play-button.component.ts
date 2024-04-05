@@ -32,23 +32,18 @@ export class PlayButtonComponent {
   }
 
   init(): void {
-    if (!this.audioContext && this.audio) {
-      this.audioContext = new AudioContext();
-      this.gainNode = this.audioContext.createGain();
-      this.soundNode = this.audioContext.createMediaElementSource(this.audio.nativeElement);
-      this.gainNode.gain.value = this.gainValue;
-      this.soundNode.connect(this.gainNode).connect(this.audioContext.destination);
-    }
+    if (this.audioContext || !this.audio) return;
+    this.audioContext = new AudioContext();
+    this.gainNode = this.audioContext.createGain();
+    this.soundNode = this.audioContext.createMediaElementSource(this.audio.nativeElement);
+    this.gainNode.gain.value = this.gainValue;
+    this.soundNode.connect(this.gainNode).connect(this.audioContext.destination);
   }
   playPause() {
     if (!this.audioContext) this.init();
     if (!this.audio || this.audio.nativeElement.readyState < 2) return;
-    if (!this.soundPlayed) {
-      this.audio.nativeElement.play().then();
-      this.soundPlayed = true;
-    } else {
-      this.audio.nativeElement.pause();
-      this.soundPlayed = false;
-    }
+    if (!this.soundPlayed) this.audio.nativeElement.play().then();
+    else this.audio.nativeElement.pause(); // .then(); ?
+    this.soundPlayed = !this.soundPlayed;
   }
 }
