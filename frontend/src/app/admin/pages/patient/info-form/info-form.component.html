@@ -1,4 +1,4 @@
-<form id="patient-form" (ngSubmit)="onSubmit()" [formGroup]="patientForm">
+<form id="patient-form" (ngSubmit)="save()" [formGroup]="patientForm">
   <label> Nom :
     <input type="text" formControlName="lastName">
   </label>
@@ -10,5 +10,5 @@
   </label>
 </form>
 <div class="submit-button">
-  <button type="submit" form="patient-form">Valider</button>
+  <app-button (click)="save()" [color]="'blue'">Valider</app-button>
 </div>
