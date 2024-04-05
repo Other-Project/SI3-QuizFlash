@@ -1,8 +1,11 @@
-import {User} from "../models/user.models";
 import {Dementia} from "../models/dementia.models";
+import {AccessRestriction} from "../models/access-restriction.models";
+import {Patient} from "../models/patient.models";
 
-export const USER_FRANCESCU: User = {
+export const USER_FRANCESCU: Patient = {
   id: "e1840a2b-9e61-4c2f-a002-d683b806ce3a",
+  access: AccessRestriction.User,
+
   pictureUrl: "assets/users/francescu.jpg",
   firstname: "Francescu",
   lastname: "Luciani",
@@ -14,6 +17,7 @@ export const USER_FRANCESCU: User = {
   automatedSkip: false,
   showIncorrectResponse: true,
   answerHint: true,
+  numberOfQuestion: 3,
 
   soundQuestion: false,
   autoStartAudio: false

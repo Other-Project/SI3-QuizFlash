@@ -1,6 +1,6 @@
 <app-header></app-header>
 <main>
-  <app-admin-button class="admin-button"></app-admin-button>
+  <app-admin-button class="admin-button" (connectAsAdmin)="loginAs(USER_ANNE)"></app-admin-button>
   <h1>Bienvenue dans Quiz Flash !</h1>
   <h2>Sélectionnez un profil :</h2>
   <app-profile-list [users]="users" (userSelected)="loginAs($event)"/>
