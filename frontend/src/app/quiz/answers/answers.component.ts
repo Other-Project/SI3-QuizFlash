@@ -9,30 +9,28 @@ import {Answer} from "../../../models/answer.models";
 export class AnswersComponent implements OnInit {
 
   @Input() answers: Answer[] = [];
-  protected timeOutId: number | undefined;
-  @Output() dontPlay: EventEmitter<undefined> = new EventEmitter();
-  protected start: Date | undefined;
-  protected end: Date | undefined;
-  protected duration: number = 0;
+  private timeOutId?: number;
+  @Output() inactive: EventEmitter<undefined> = new EventEmitter();
+  private start?: Date;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.timeOutId = setTimeout(() => this.stopQuiz(), 900000);
+    this.timeOutId = setTimeout(() => this.stopQuiz(), 900000); //15 minutes
     this.start = new Date();
   }
 
   @Output() returnedAnswer = new EventEmitter<Answer>();
 
   returnAnswer(value: Answer) {
-    this.end = new Date();
-    this.duration = (this.end.getTime() - this.start!.getTime()) / 1000;
-    //console.log(this.duration)
+    clearTimeout(this.timeOutId);
+    let end = new Date();
+    let duration = (end.getTime() - this.start!.getTime()) / 1000;
     this.returnedAnswer.emit(value); //To return value to the quiz-section.component
   }
 
   stopQuiz() {
-    this.dontPlay.emit();
+    this.inactive.emit();
   }
 }

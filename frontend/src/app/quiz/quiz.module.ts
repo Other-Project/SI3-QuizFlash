@@ -14,7 +14,6 @@ import {QuizSelectionComponent} from "./quiz-selection/quiz-selection.component"
 import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/quiz-selection-card.component";
 import {SoundSettingsComponent} from "./sound-settings/sound-settings.component";
 import {SettingsModule} from "../admin/pages/patient/settings/settings.module";
-import {DontPlayingPageComponent} from "./dont-playing/dont-playing-page.component";
 
 
 @NgModule({
@@ -23,7 +22,6 @@ import {DontPlayingPageComponent} from "./dont-playing/dont-playing-page.compone
     QuizPlayButtonComponent,
     QuizHeaderComponent,
     QuestionSectionComponent,
-    DontPlayingPageComponent,
     AnswersComponent,
     QuizSectionComponent,
     QuestionResultComponent,
