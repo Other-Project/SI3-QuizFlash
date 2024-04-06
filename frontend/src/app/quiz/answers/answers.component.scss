@@ -8,7 +8,7 @@ section {
   justify-items: center;
   padding-top: 1rem;
 
-  .answer-button {
+  #not-hide {
     border: 2px solid $blackBlue;
     background-color: $yellow1;
     width: 98%;
@@ -22,5 +22,9 @@ section {
     &:hover {
       background-color: $yellow2;
     }
+  }
+
+  #hide {
+    visibility: hidden;
   }
 }

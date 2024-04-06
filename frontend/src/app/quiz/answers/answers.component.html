@@ -1,4 +1,5 @@
 <section class="answer-section">
   <button class="answer-button" *ngFor="let answer of answers" textContent="{{answer.answerText}}"
+          id="{{ answer.hide ? 'hide' : 'not-hide'}}"
           (click)="returnAnswer(answer)"></button>
 </section>
