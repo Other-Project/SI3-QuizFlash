@@ -4,11 +4,11 @@ section {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template: 1fr 1fr / 1fr 1fr;
+  grid-template-columns: repeat(1, 1fr 1fr);
   justify-items: center;
   padding-top: 1rem;
 
-  #not-hide {
+  button {
     border: 2px solid $blackBlue;
     background-color: $yellow1;
     width: 98%;
@@ -22,9 +22,9 @@ section {
     &:hover {
       background-color: $yellow2;
     }
-  }
 
-  #hide {
-    visibility: hidden;
+    &#hide {
+      visibility: hidden;
+    }
   }
 }

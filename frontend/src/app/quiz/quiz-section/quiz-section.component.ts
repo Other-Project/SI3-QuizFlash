@@ -14,7 +14,6 @@ export class QuizSectionComponent implements OnInit {
     if (question) {
       this.question = question;
       this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
-      this.answers = question.answers.copyWithin(0, 0);
     }
   }
 
@@ -30,7 +29,6 @@ export class QuizSectionComponent implements OnInit {
     }
   };
 
-  protected answers: Answer[] = [];
   protected finishOrInactive: boolean = false;
   protected trueAnswer?: Answer;
   protected chosenAnswer?: Answer;
@@ -43,6 +41,7 @@ export class QuizSectionComponent implements OnInit {
 
   @Output() nextQuestion: EventEmitter<Answer> = new EventEmitter<Answer>();
   @Output() returnSelectionPage: EventEmitter<undefined> = new EventEmitter<undefined>();
+  @Output() replayAtTheEnd: EventEmitter<undefined> = new EventEmitter<undefined>();
 
   constructor() {
     if (this.finish) {
@@ -60,7 +59,7 @@ export class QuizSectionComponent implements OnInit {
     console.log(answer, this.trueAnswer);
     if (!this.user!.showIncorrectResponse && answer != this.trueAnswer && this.question) {
       console.log(answer, this.trueAnswer);
-      let question = this.answers.find(a => answer == a);
+      let question = this.question.answers.find(a => answer == a);
       question!.hide = true;
       console.log(this.question);
       return;
@@ -69,13 +68,13 @@ export class QuizSectionComponent implements OnInit {
     if (!this.user!.automatedSkip) {
       if (this.chosenAnswer != this.trueAnswer) {
         this.correct = false;
-        console.log("problème");
-        //TODO remttre la question dans une liste pour la fin
+        this.replayAtTheEnd.emit();
       }
     }
   }
 
   continueQuiz() {
+    this.question!.answers.forEach(answer => answer.hide = false);
     this.questionResult = false;
     this.nextQuestion.emit(this.chosenAnswer);
     this.correct = true;

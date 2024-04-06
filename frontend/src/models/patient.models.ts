@@ -11,6 +11,7 @@ export interface Patient extends User {
   showIncorrectResponse: boolean;
   answerHint: boolean;
   numberOfQuestion: number;
+  replayAtEnd: boolean;
 
   // Sound settings
   soundQuestion: boolean;

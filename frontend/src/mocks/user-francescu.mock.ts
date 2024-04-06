@@ -13,6 +13,8 @@ export const USER_FRANCESCU: Patient = {
   dementiaLevel: Dementia.Mild,
   fontSize: 1,
   hobbies: ["peche", "television"],
+  replayAtEnd: true,
+
 
   automatedSkip: false,
   showIncorrectResponse: true,
