@@ -1,19 +1,17 @@
 <div class="selects">
 <h2>Choix des statistiques</h2>
-  <select  (change)="quizChoice($event)"  name="quizz-select" id="quizz-select">
+  <select #quizSelect (change)="quizChoice(quizSelect.value,questionType.value)" name="quizz-select">
     <option value="all">Tous les quizz</option>
     @for (quiz of quizList; track quiz){
-      <option value="{{ quiz.id }}">Quiz {{ quiz.title }}</option>
+      <option value="{{ quiz.id }}">{{ quiz.title }}</option>
     }
   </select>
-  <select *ngIf="quizSelected" name="type-select" id="type-select">
+  <select #questionType (change)="quizChoice(quizSelect.value,questionType.value)" name="type-select" id="type-select">
     <option value="all">Tous les types de questions</option>
-    @for (questionType of questionTypes;track questionType){
-      <option value="{{ questionType }}">{{ questionType }}</option>
-    }
+    <option *ngFor="let questionType of questionTypes; let i = index" [value]="i">{{ questionType }}</option>
   </select>
 </div>
 <p>Taux de réussite : {{ successRate }}%</p>
-<p *ngIf="quizSelected">Pourcentage de succès par question : {{ questionSuccessRate }}%</p>
-<p>Proportion de réponses assistées : {{ assistedQuestionRate }}%</p>
+<p *ngIf="answerHint">Proportion de réponses assistées : {{ answerHintRate }}%</p>
 <p *ngIf="quizSelected">Temps passé sur le quizz : {{ spentTime }} minutes</p>
+<p *ngIf="quizSelected">Temps moyen par question : {{ averageTimeSpent }} minutes</p>

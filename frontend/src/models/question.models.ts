@@ -6,6 +6,7 @@ import {Answer} from "./answer.models";
 
 //TODO add tags (how to implement that), reflect if it's better here or in quiz model
 export interface Question {
+  id: string;
   text: string;
   answers: Answer[];
   type:QuestionType;

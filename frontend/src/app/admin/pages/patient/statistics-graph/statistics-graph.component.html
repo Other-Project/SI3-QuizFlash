@@ -1,2 +1,10 @@
 <h2>{{ title }}</h2>
-<img ngSrc="{{ src }}" alt="Statistics graph"  width="850" height="250">
+<label> Type de graphe :
+  <select #graphSelect (change)="selectedGraphType(graphSelect.value)" name="graph-select">
+    <option value="time">Temps</option>
+    <option value="try">Essais</option>
+  </select>
+</label>
+<div class="stats-container">
+  <canvas id="stat-chart">{{ chart }}</canvas>
+</div>

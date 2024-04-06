@@ -3,6 +3,7 @@ import {Question} from "../models/question.models";
 import {QuestionType} from "../models/question-type.models";
 
 const QUESTION1: Question = {
+  id: "1",
   text: "Quel objet trouve-t-on dans la chambre ?",
   type: QuestionType.TextOnly,
   answers: [
@@ -28,6 +29,7 @@ const QUESTION1: Question = {
 }
 
 const QUESTION2: Question = {
+  id: "2",
   text: "Dans quelle pièce de la maison peut-on garer la voiture ?",
   type: QuestionType.TextOnly,
   answers: [
@@ -53,6 +55,7 @@ const QUESTION2: Question = {
 }
 
 const QUESTION3: Question = {
+  id: "3",
   text: "Quelle est cette pièce de la maison ?",
   type: QuestionType.Sound,
   answers: [
