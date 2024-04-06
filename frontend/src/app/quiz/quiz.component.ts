@@ -75,7 +75,9 @@ export class QuizComponent implements OnInit {
   }
 
   replayAtEnd() {
-    this.playAtEnd.push(this.currentQuestion!);
-    this.numberOfQuestions = this.numberOfQuestions + 1;
+    if (!this.playAtEnd.find(question => question == this.currentQuestion)) {
+      this.playAtEnd.push(this.currentQuestion!);
+      this.numberOfQuestions = this.numberOfQuestions + 1;
+    }
   }
 }
