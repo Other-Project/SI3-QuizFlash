@@ -1,8 +1,9 @@
 <div>
-  <question-section image="{{question?.imageUrl}}" sound="{{question?.soundUrl}}" question="{{question?.text}}"
-                    *ngIf="!questionResult && !finish"/>
-  <answers-section [answers]="question.answers" (returnedAnswer)='checkAnswer($event)'
-                   *ngIf="question && !questionResult"/>
+  <div *ngIf="question && !questionResult && !finish && !dontPlay">
+    <question-section image="{{question?.imageUrl}}" sound="{{question?.soundUrl}}" question="{{question?.text}}"/>
+    <answers-section [answers]="question.answers" (returnedAnswer)='checkAnswer($event)' (dontPlay)='stopQuiz()'/>
+  </div>
   <app-question-result [goodAnswer]="trueAnswer" (continue)='continueQuiz()' *ngIf="questionResult"/>
   <finish-page (returnSelectionPage)="selectionPage()" *ngIf="finish"/>
+  <dont-playing-page (returnSelectionPage)="selectionPage()" *ngIf="dontPlay"/>
 </div>
