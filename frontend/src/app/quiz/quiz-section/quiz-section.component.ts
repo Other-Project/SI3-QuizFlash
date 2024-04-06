@@ -14,6 +14,7 @@ export class QuizSectionComponent implements OnInit {
     if (question) {
       this.question = question;
       this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
+      this.answers = question.answers.copyWithin(0, 0);
     }
   }
 
@@ -29,6 +30,7 @@ export class QuizSectionComponent implements OnInit {
     }
   };
 
+  protected answers: Answer[] = [];
   protected finishOrInactive: boolean = false;
   protected trueAnswer?: Answer;
   protected chosenAnswer?: Answer;
@@ -58,11 +60,10 @@ export class QuizSectionComponent implements OnInit {
     console.log(answer, this.trueAnswer);
     if (!this.user!.showIncorrectResponse && answer != this.trueAnswer && this.question) {
       console.log(answer, this.trueAnswer);
-      this.question.answers = this.question?.answers.filter(a => a != answer);
+      this.answers = this.answers.filter(a => a != answer);
       console.log(this.question);
       return;
     }
-    this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
     this.questionResult = true;
     if (!this.user!.automatedSkip) {
       if (this.chosenAnswer != this.trueAnswer) {
