@@ -1,5 +1,5 @@
 <div>
-  <question-section image="{{question?.imageUrl}}" sound="{{question?.soundUrl}}" question="{{question?.text}}"
+  <question-section image="{{question.imageUrl}}" sound="{{question.soundUrl}}" question="{{question.text}}"
                     *ngIf="question && !questionResult"/>
   <answers-section [answers]="question.answers" (returnedAnswer)='checkAnswer($event)'
                    *ngIf="question && !questionResult"/>
