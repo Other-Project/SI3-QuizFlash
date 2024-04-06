@@ -8,7 +8,11 @@ import {Answer} from "../../../models/answer.models";
 })
 export class AnswersComponent implements OnInit {
 
-  @Input() answers: Answer[] = [];
+  @Input() set values(answers: Answer[]) {
+    this.answers = answers;
+  }
+
+  protected answers: Answer[] = [];
   private timeOutId?: number;
   private start?: Date;
   @Output() inactive: EventEmitter<undefined> = new EventEmitter();

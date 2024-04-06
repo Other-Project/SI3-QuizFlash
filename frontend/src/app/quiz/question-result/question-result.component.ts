@@ -8,8 +8,18 @@ import {Answer} from "../../../models/answer.models";
 })
 export class QuestionResultComponent implements OnInit {
   @Input() goodAnswer?: Answer;
+
+  @Input() set correct(value: boolean) {
+    console.log(value);
+    if (value) {
+      this.text = "Bravo, tu as raison, la bonne réponse était :";
+    } else {
+      this.text = "Nous réessaierons cette question plus tard, la bonne réponse était :";
+    }
+  }
   @Output() continue = new EventEmitter<Answer>();
   private timeOutId?: number;
+  protected text?: String;
 
   constructor() {
   }
