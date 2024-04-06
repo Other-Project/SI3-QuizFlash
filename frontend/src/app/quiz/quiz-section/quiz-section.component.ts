@@ -62,7 +62,7 @@ export class QuizSectionComponent implements OnInit {
       return;
     }
     this.questionResult = true;
-    if (!this.user!.automatedSkip) {
+    if (!this.user!.removeAnswers) {
       if (this.chosenAnswer != this.trueAnswer) {
         this.correct = false;
         this.replayAtTheEnd.emit();

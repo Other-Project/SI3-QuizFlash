@@ -16,7 +16,7 @@ export const USER_FRANCESCU: Patient = {
   replayAtEnd: true,
 
 
-  automatedSkip: false,
+  removeAnswers: false,
   showIncorrectResponse: true,
   answerHint: true,
   numberOfQuestion: 3,

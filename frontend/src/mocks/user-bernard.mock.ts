@@ -14,7 +14,7 @@ export const USER_BERNARD: Patient = {
   fontSize: 1.25,
   hobbies: ["peinture", "lecture"],
 
-  automatedSkip: true,
+  removeAnswers: true,
   showIncorrectResponse: false,
   answerHint: false,
   numberOfQuestion: 3,

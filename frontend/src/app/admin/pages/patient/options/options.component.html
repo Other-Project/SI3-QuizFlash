@@ -1,7 +1,11 @@
 <h2>Général</h2>
 <div class="checkbox-wrapper-14">
-  <input #automatedSkip [checked]="user?.automatedSkip" id="automated-skip" type="checkbox" class="switch">
-  <label for="automated-skip">Défilement automatique</label>
+  <input #removeFalseAnswer [checked]="user?.removeAnswers" id="remove-false-answer" type="checkbox" class="switch">
+  <label for="remove-false-answer">Retirer les mauvaises réponses</label>
+</div>
+<div class="checkbox-wrapper-14">
+  <input #replayQuestion [checked]="user?.replayAtEnd" id="replay-question" type="checkbox" class="switch">
+  <label for="replay-question">Rejouer les question</label>
 </div>
 <div class="checkbox-wrapper-14">
   <input #showIncorrect [checked]="user?.showIncorrectResponse" id="show-incorrect" type="checkbox" class="switch">
