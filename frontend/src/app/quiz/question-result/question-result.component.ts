@@ -10,7 +10,6 @@ export class QuestionResultComponent implements OnInit {
   @Input() goodAnswer?: Answer;
 
   @Input() set correct(value: boolean) {
-    console.log(value);
     if (value) {
       this.text = "Bravo, tu as raison, la bonne réponse était :";
     } else {

@@ -32,7 +32,6 @@ export class QuizComponent implements OnInit {
   }
 
   update() {
-    console.log(this.playAtEnd);
     if (this.counter - 1 >= this.quiz!.questions.length) {
       this.currentQuestion = this.playAtEnd.at(this.counter - 1 - this.quiz!.questions.length);
     } else this.currentQuestion = this.quiz!.questions.at(this.counter - 1);

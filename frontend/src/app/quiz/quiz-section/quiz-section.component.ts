@@ -56,12 +56,9 @@ export class QuizSectionComponent implements OnInit {
 
   checkAnswer(answer: Answer): void {
     this.chosenAnswer = answer;
-    console.log(answer, this.trueAnswer);
     if (!this.user!.showIncorrectResponse && answer != this.trueAnswer && this.question) {
-      console.log(answer, this.trueAnswer);
       let question = this.question.answers.find(a => answer == a);
       question!.hide = true;
-      console.log(this.question);
       return;
     }
     this.questionResult = true;
