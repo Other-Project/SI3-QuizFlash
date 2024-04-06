@@ -10,8 +10,8 @@ export class AnswersComponent implements OnInit {
 
   @Input() answers: Answer[] = [];
   private timeOutId?: number;
-  @Output() inactive: EventEmitter<undefined> = new EventEmitter();
   private start?: Date;
+  @Output() inactive: EventEmitter<undefined> = new EventEmitter();
 
   constructor() {
   }
