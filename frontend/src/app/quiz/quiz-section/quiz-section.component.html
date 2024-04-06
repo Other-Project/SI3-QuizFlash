@@ -6,7 +6,7 @@
   <app-question-result [goodAnswer]="trueAnswer" (continue)='continueQuiz()' *ngIf="questionResult"/>
   <finish-page [title]="'Bravo !'" [text]="'Vous avez terminé'" [textButton]="'Revenir au menu'"
                (returnSelectionPage)="selectionPage()" *ngIf="finish"/>
-  <finish-page [title]="'Quiz Terminé'"
+  <finish-page [title]="'Quiz terminé'"
                [text]="'Le quiz a été clos automatiquement en raison d\'une longue période d\'inactivité.'"
                [textButton]="'Revenir au menu'"
                (returnSelectionPage)="selectionPage()" *ngIf="inactive"/>
