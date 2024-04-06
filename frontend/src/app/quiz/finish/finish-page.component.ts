@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 
 @Component({
   selector: "finish-page",
@@ -6,6 +6,9 @@ import {Component, EventEmitter, OnInit, Output} from "@angular/core";
   styleUrls: ['./finish-page.component.scss']
 })
 export class FinishPageComponent implements OnInit{
+  @Input() title?: String;
+  @Input() text?: String;
+  @Input() textButton?: String;
 
   @Output() returnSelectionPage: EventEmitter<any> = new EventEmitter<any>();
 
