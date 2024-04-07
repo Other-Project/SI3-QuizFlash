@@ -33,7 +33,7 @@ export class QuizSectionComponent implements OnInit {
   protected trueAnswer?: Answer;
   protected chosenAnswer?: Answer;
   protected questionResult: boolean = false;
-  protected correct: boolean = true;
+  protected correct: boolean[] = [true, true];
 
   protected finishPageTitle?: String;
   protected finishPageText?: String;
@@ -53,6 +53,10 @@ export class QuizSectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.user) {
+      this.correct[1] = this.user.showIncorrectResponse;
+      console.log(this.user.showIncorrectResponse);
+    }
   }
 
   checkAnswer(answer: Answer): void {
@@ -66,7 +70,7 @@ export class QuizSectionComponent implements OnInit {
     if (this.user!.replayAtEnd && this.chosenAnswer != this.trueAnswer) {
         this.replayAtTheEnd.emit();
     }
-    if (this.user!.showIncorrectResponse && this.chosenAnswer != this.trueAnswer) this.correct = false;
+    if (this.chosenAnswer != this.trueAnswer) this.correct[0] = false;
     this.fiftyFiftyUsable.emit(false);
   }
 
@@ -74,7 +78,7 @@ export class QuizSectionComponent implements OnInit {
     this.question!.answers.forEach(answer => answer.hide = false);
     this.questionResult = false;
     this.nextQuestion.emit(this.chosenAnswer);
-    this.correct = true;
+    this.correct[0] = true;
     this.fiftyFiftyUsable.emit(true);
   }
 

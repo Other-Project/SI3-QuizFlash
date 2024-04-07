@@ -9,11 +9,14 @@ import {Answer} from "../../../models/answer.models";
 export class QuestionResultComponent implements OnInit {
   @Input() goodAnswer?: Answer;
 
-  @Input() set correct(value: boolean) {
-    if (value) {
+  @Input() set correct(values: boolean[]) {
+    console.log(values);
+    if (values.at(0)) {
       this.text = "Bravo, tu as raison, la bonne réponse était :";
-    } else {
+    } else if (values.at(1)) {
       this.text = "Nous réessaierons cette question plus tard, la bonne réponse était :";
+    } else {
+      this.text = "La bonne réponse était :";
     }
   }
   @Output() continue = new EventEmitter<Answer>();
