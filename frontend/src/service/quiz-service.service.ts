@@ -25,12 +25,11 @@ export class QuizService {
     let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
     if (!returnedQuiz) console.error("No quiz found with ID " + id);
     let copy = structuredClone(returnedQuiz);
-    if (copy && user.soundQuestion) {
+    if (copy && !user.soundQuestion) {
       copy.questions = copy.questions.filter(question => question.type != QuestionType.Sound);
     }
     if (copy) {
       copy.questions = copy.questions.slice(0, user.numberOfQuestion);
-      copy.questions.forEach(question => question.answers.forEach(answer => answer.hide = false));
     }
     this.quiz = copy;
     this.quiz$.next(this.quiz);

@@ -75,6 +75,7 @@ export class QuizComponent implements OnInit {
   replayAtEnd() {
     if (this.questions.filter(question => question == this.currentQuestion).length <= 1) {
       this.questions.push(this.currentQuestion!);
+      this.questions.at(-1)!.answers.forEach(answer => answer.hide = false);
     }
   }
 
