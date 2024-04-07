@@ -45,7 +45,8 @@ export class QuizComponent implements OnInit {
     this.currentQuestion = this.questions.at(this.counter - 1);
   }
 
-  nextQuestion(answerReturned: Answer) {
+  nextQuestion() {
+    this.fiftyFiftyActivated = true;
     this.counter++;
     this.update();
   }
@@ -70,6 +71,14 @@ export class QuizComponent implements OnInit {
   getCounter() {
     if (this.isFinish()) return this.counter - 1;
     return this.counter;
+  }
+
+  checkAnswer(answer: Answer) {
+    let trueAnswer = this.currentQuestion!.answers.find(answer => answer.trueAnswer);
+    if (this.user!.replayAtEnd && answer != trueAnswer) {
+      this.replayAtEnd();
+    }
+    this.fiftyFiftyActivated = false;
   }
 
   replayAtEnd() {

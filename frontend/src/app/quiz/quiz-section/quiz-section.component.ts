@@ -21,49 +21,35 @@ export class QuizSectionComponent implements OnInit {
   @Input() finish: boolean = false;
   protected inactive: boolean = false;
   protected trueAnswer?: Answer;
-  protected chosenAnswer?: Answer;
   protected questionResult: boolean = false;
-  protected correct: boolean[] = [true, true];
-
-  protected finishPageTitle?: String;
-  protected finishPageText?: String;
-  protected finishPageTextButton?: String;
+  protected correct: boolean = true;
 
   @Output() nextQuestion: EventEmitter<Answer> = new EventEmitter<Answer>();
   @Output() returnSelectionPage: EventEmitter<undefined> = new EventEmitter<undefined>();
-  @Output() replayAtTheEnd: EventEmitter<undefined> = new EventEmitter<undefined>();
-  @Output() fiftyFiftyUsable: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() chosenAnswer: EventEmitter<Answer> = new EventEmitter<Answer>();
 
   constructor() {
   }
 
   ngOnInit(): void {
-    if (this.user) {
-      this.correct[1] = this.user.showIncorrectResponse;
-    }
   }
 
   checkAnswer(answer: Answer): void {
-    this.chosenAnswer = answer;
     if (this.user!.removeAnswers && !answer.trueAnswer && this.question) {
       let question = this.question.answers.find(a => answer == a);
       question!.hide = true;
       return;
     }
     this.questionResult = true;
-    if (this.user!.replayAtEnd && this.chosenAnswer != this.trueAnswer) {
-        this.replayAtTheEnd.emit();
-    }
-    if (this.chosenAnswer != this.trueAnswer) this.correct[0] = false;
-    this.fiftyFiftyUsable.emit(false);
+    if (answer != this.trueAnswer) this.correct = false;
+    this.chosenAnswer.emit(answer);
   }
 
   continueQuiz() {
     this.question!.answers.forEach(answer => answer.hide = false);
     this.questionResult = false;
-    this.nextQuestion.emit(this.chosenAnswer);
-    this.correct[0] = true;
-    this.fiftyFiftyUsable.emit(true);
+    this.nextQuestion.emit();
+    this.correct = true;
   }
 
   selectionPage() {

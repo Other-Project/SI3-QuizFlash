@@ -15,10 +15,9 @@ export const USER_MARTINE: Patient = {
   hobbies: ["culture", "famille", "theatre"],
 
   removeAnswers: false,
-  showIncorrectResponse: false,
   answerHint: false,
   numberOfQuestion: 3,
-  replayAtEnd: true,
+  replayAtEnd: false,
 
   soundQuestion: true,
   autoStartAudio: true

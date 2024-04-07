@@ -17,7 +17,6 @@ export const USER_FRANCESCU: Patient = {
 
 
   removeAnswers: false,
-  showIncorrectResponse: true,
   answerHint: true,
   numberOfQuestion: 3,
 

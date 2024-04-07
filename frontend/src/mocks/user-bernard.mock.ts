@@ -15,7 +15,6 @@ export const USER_BERNARD: Patient = {
   hobbies: ["peinture", "lecture"],
 
   removeAnswers: true,
-  showIncorrectResponse: false,
   answerHint: false,
   numberOfQuestion: 3,
   replayAtEnd: false,
