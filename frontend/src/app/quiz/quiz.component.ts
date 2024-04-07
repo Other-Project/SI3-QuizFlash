@@ -64,6 +64,7 @@ export class QuizComponent implements OnInit {
   isFinish() { //TODO see if put a condition based on user attribute append to validate or not to replay at end the false questions
     if (this.quiz?.questions.length! + this.playAtEnd.length < this.counter || this.counter - 1 >= this.user?.numberOfQuestion! + this.playAtEnd.length) {
       this.playAtEnd = [];
+      this.quiz = undefined;
       return true;
     }
     return false;
