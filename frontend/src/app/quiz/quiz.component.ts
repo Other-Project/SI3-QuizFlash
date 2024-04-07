@@ -5,6 +5,7 @@ import {Quiz} from "../../models/quiz.models";
 import {Question} from "../../models/question.models";
 import {Answer} from "../../models/answer.models";
 import {QuestionType} from "../../models/question-type.models";
+import {QuizService} from "../../service/quiz-service.service";
 
 @Component({
   selector: 'app-quiz',
@@ -13,16 +14,18 @@ import {QuestionType} from "../../models/question-type.models";
 })
 export class QuizComponent implements OnInit {
   public user?: Patient;
+  public quizzes?: Quiz[];
   public quiz?: Quiz;
   protected counter: number = 1;
   protected currentQuestion?: Question;
   protected soundSetting: boolean = false;
   protected selection = true;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, public quizListService: QuizService) {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
     });
+    quizListService.quizzes$.subscribe(quizzes => this.quizzes = quizzes);
   }
 
   ngOnInit(): void {

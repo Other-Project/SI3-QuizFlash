@@ -30,13 +30,16 @@ import {SettingsModule} from "../admin/pages/patient/settings/settings.module";
     QuizSelectionCardComponent,
     SoundSettingsComponent
   ],
+  exports: [
+    QuizSelectionComponent
+  ],
   imports: [
     CommonModule,
     NgOptimizedImage,
     LayoutModule,
     RouterOutlet,
     RouterLink,
-    SettingsModule,
+    SettingsModule
   ]
 })
 export class QuizModule {
