@@ -43,7 +43,7 @@ export class StatisticsService {
     if (patientStats.length == 0)
       return -1;
 
-    return this.getRateByFilter(patientStats, patientId, question => true, question => question.success)
+    return this.getRateByFilter(patientStats, patientId, () => true, question => question.success)
   }
 
   getQuizStatSuccessRate(quizStat: QuizStats) {

@@ -22,6 +22,7 @@ export class StatisticsGraphComponent implements OnInit {
   private selectedQuestionType?: string;
   private eventSubscription?: Subscription;
   public chart: any;
+  selectedValue: string = "tries";
 
   constructor(private statsService: StatisticsService) {
   }
@@ -86,6 +87,7 @@ export class StatisticsGraphComponent implements OnInit {
   }
 
   quizSelection(quizSelectionData: { quizId: string, questionType: string }) {
+    this.selectedValue = "tries";
     this.selectedQuizId = quizSelectionData.quizId;
     this.selectedQuestionType = quizSelectionData.questionType;
     if (quizSelectionData.quizId == "all")
