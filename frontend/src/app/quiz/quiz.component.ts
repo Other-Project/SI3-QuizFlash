@@ -31,6 +31,7 @@ export class QuizComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentQuestion?.answers.forEach(answer => answer.hide = false);
   }
 
   update() {

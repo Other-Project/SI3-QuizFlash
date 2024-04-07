@@ -9,22 +9,18 @@ const QUESTION1: Question = {
     {
       answerText: "Râteau",
       trueAnswer: false,
-      hide: false
     },
     {
       answerText: "Ordinateur",
       trueAnswer: false,
-      hide: false
     },
     {
       answerText: "Télécommande",
       trueAnswer: false,
-      hide: false
     },
     {
       answerText: "Casserole",
       trueAnswer: true,
-      hide: false
     }
   ],
   imageUrl: "",
@@ -38,22 +34,18 @@ const QUESTION2: Question = {
     {
       answerText: "Salle de bain",
       trueAnswer: false,
-      hide: false
     },
     {
       answerText: "Cuisine",
       trueAnswer: false,
-      hide: false
     },
     {
       answerText: "Chambre",
       trueAnswer: false,
-      hide: false
     },
     {
       answerText: "Garage",
       trueAnswer: true,
-      hide: false
     }
   ],
   imageUrl: "",
@@ -67,22 +59,18 @@ const QUESTION3: Question = {
     {
       answerText: "Salle de bain",
       trueAnswer: false,
-      hide: false
     },
     {
       answerText: "Cuisine",
       trueAnswer: false,
-      hide: false
     },
     {
       answerText: "Chambre",
       trueAnswer: true,
-      hide: false
     },
     {
       answerText: "Garage",
       trueAnswer: false,
-      hide: false
     }
   ],
   imageUrl: "Chambre.jpg",
