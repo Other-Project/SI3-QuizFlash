@@ -45,11 +45,6 @@ export class QuizSectionComponent implements OnInit {
   @Output() fiftyFiftyUsable: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {
-    if (this.finish) {
-      this.finishPageTitle = "Bravo !";
-      this.finishPageText = "Vous avez terminé";
-      this.finishPageTextButton = "Revenir au menu";
-    }
   }
 
   ngOnInit(): void {

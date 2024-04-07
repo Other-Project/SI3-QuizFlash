@@ -26,7 +26,7 @@ export class QuizComponent implements OnInit {
   constructor(private userService: UserService) {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
-      this.numberOfQuestions = this.user.numberOfQuestion;
+      if (this.user) this.numberOfQuestions = this.user.numberOfQuestion;
     });
   }
 
