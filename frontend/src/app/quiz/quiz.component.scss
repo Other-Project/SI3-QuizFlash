@@ -15,3 +15,8 @@ main {
 .quiz-content {
   display: flex;
 }
+
+app-button {
+  border: solid $yellow 3px;
+  border-radius: .5rem;
+}

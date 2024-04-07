@@ -1,4 +1,3 @@
 <p>{{ quizTheme }}</p>
-<app-button [color]="'dark-blue'" [padding]="false" *ngIf="hintActivated" (click)="fiftyFifty()"><span>50/50</span>
-</app-button>
+<ng-content/>
 <p>{{ counter }} <span *ngIf="numberOfQuestion">/ {{ numberOfQuestion }}</span></p>
