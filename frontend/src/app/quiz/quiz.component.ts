@@ -5,6 +5,7 @@ import {Quiz} from "../../models/quiz.models";
 import {Question} from "../../models/question.models";
 import {Answer} from "../../models/answer.models";
 import {QuestionType} from "../../models/question-type.models";
+import {QuizService} from "../../service/quiz-service.service";
 
 @Component({
   selector: 'app-quiz',
@@ -22,9 +23,18 @@ export class QuizComponent implements OnInit {
   protected fiftyFiftyNotUse: boolean = true;
   protected fiftyFiftyActivated: boolean = true;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private quizService: QuizService) {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
+    });
+    this.quizService.quiz$.subscribe(quiz => {
+      this.quiz = quiz;
+      if (quiz) {
+        this.questions = quiz.questions;
+        if (this.user?.soundQuestion && this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
+        this.update();
+        this.selection = false;
+      }
     });
   }
 
@@ -41,15 +51,7 @@ export class QuizComponent implements OnInit {
   }
 
   setQuiz(quiz: Quiz) {
-    this.quiz = quiz;
-    this.questions = this.quiz?.questions!.slice(0, this.user!.numberOfQuestion);
-    this.questions.forEach(question => question.answers.forEach(answer => answer.hide = false));
-    if (this.user?.soundQuestion && this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
-    else if (!this.user?.soundQuestion) {
-      this.questions = this.questions.filter(question => question.type != QuestionType.Sound);
-    }
-    this.update();
-    this.selection = false;
+    this.quizService.selectQuiz(quiz.id, this.user!);
   }
 
   returnSelectionPage() {
