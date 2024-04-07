@@ -20,16 +20,8 @@ export class QuizSectionComponent implements OnInit {
   protected question?: Question;
   @Input() user?: Patient;
 
-  @Input() set finish(value: boolean) {
-    this.finishOrInactive = value;
-    if (value) {
-      this.finishPageTitle = "Bravo !";
-      this.finishPageText = "Vous avez terminé";
-      this.finishPageTextButton = "Revenir au menu";
-    }
-  };
-
-  protected finishOrInactive: boolean = false;
+  @Input() finish: boolean = false;
+  protected inactive: boolean = false;
   protected trueAnswer?: Answer;
   protected chosenAnswer?: Answer;
   protected questionResult: boolean = false;
@@ -78,12 +70,5 @@ export class QuizSectionComponent implements OnInit {
 
   selectionPage() {
     this.returnSelectionPage.emit();
-  }
-
-  stopQuiz() {
-    this.finishPageTitle = "Quiz terminé";
-    this.finishPageText = "Le quiz a été clos automatiquement en raison d'une longue période d'inactivité.";
-    this.finishPageTextButton = "Revenir au menu";
-    this.finishOrInactive = true;
   }
 }
