@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
 import Chart from 'chart.js/auto';
 import {StatisticsService} from "../../../../../service/statistics.service";
 import {Observable, Subscription} from "rxjs";
@@ -24,7 +24,7 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   public chart: any;
   selectedValue: string = "tries";
 
-  constructor(private statsService: StatisticsService) {
+  constructor(private statsService: StatisticsService, private cd: ChangeDetectorRef) {
   }
 
 
@@ -62,6 +62,7 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
     this.createChart(data);
     if (data[0].length == 0)
       this.displayChart(false);
+    this.cd.detectChanges();
   }
 
   selectedGraphType(selectedMode: string) {
@@ -95,7 +96,6 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   }
 
   displayChart(bool: boolean) {
-    console.log(this.statsContainer);
     if (this.statsContainer) this.statsContainer.nativeElement.style.display = (bool) ? "block" : "none";
   }
 
