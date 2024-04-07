@@ -11,7 +11,11 @@
     <option *ngFor="let questionType of questionTypes; let i = index" [value]="i">{{ questionType }}</option>
   </select>
 </div>
-<p>Taux de réussite : {{ successRate }}%</p>
-<p *ngIf="answerHint">Proportion de réponses assistées : {{ answerHintRate }}%</p>
-<p *ngIf="quizSelected">Temps passé sur le quizz : {{ spentTime }} minutes</p>
-<p *ngIf="quizSelected">Temps moyen par question : {{ averageTimeSpent }} minutes</p>
+@if (successRate >= 0) {
+  <p>Taux de réussite : {{ successRate }}%</p>
+  <p *ngIf="answerHint && answerHintRate>=0">Proportion de réponses assistées : {{ answerHintRate }}%</p>
+  <p *ngIf="quizSelected && spentTime>=0">Temps passé sur le quizz : {{ spentTime }} minutes</p>
+  <p *ngIf="quizSelected && averageTimeSpent>=0">Temps moyen par question : {{ averageTimeSpent }} minutes</p>
+} @else {
+  <h3>Aucune donnée n'est disponible</h3>
+}

@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
 import Chart from 'chart.js/auto';
 import {StatisticsService} from "../../../../../service/statistics.service";
 import {Observable, Subscription} from "rxjs";
+import {GraphType} from "../../../../../models/graph-type.model";
 
 
 @Component({
@@ -15,6 +16,10 @@ export class StatisticsGraphComponent implements OnInit {
   @Input() title: string = "";
   @Input() patientId?: string;
 
+  @ViewChild("statsContainer") statsContainer?: ElementRef;
+
+  protected selectedQuizId?: string;
+  private selectedQuestionType?: string;
   private eventSubscription?: Subscription;
   public chart: any;
 
@@ -35,21 +40,56 @@ export class StatisticsGraphComponent implements OnInit {
       },
       options: {
         responsive: true,
-        aspectRatio: 2.5
+        aspectRatio: 2.5,
+        scales: {
+          y: {
+            suggestedMin: 0,
+            suggestedMax: 100
+          }
+        }
       }
     });
   }
 
   ngOnInit(): void {
     this.eventSubscription = this.quizSelectionEvent?.subscribe((quizId) => this.quizSelection(quizId));
-    this.createChart(this.statsService.getAllQuizzesGraphData(this.patientId!, undefined));
+    this.createChart(this.statsService.getAllQuizzesGraphData(this.patientId!, "all"));
   }
 
   selectedGraphType(selectedMode: string) {
-    console.log(selectedMode);
+    if (this.selectedQuizId && this.selectedQuestionType) {
+      if (selectedMode == "tries") {
+        this.chart.options.scales.y.suggestedMax = 100;
+        this.chart.data.datasets[0].label = "Taux de réussite";
+        this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TRIES));
+      } else {
+        this.chart.options.scales.y.suggestedMax = 15;
+        this.chart.data.datasets[0].label = "Temps moyen par question";
+        this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TIME));
+      }
+    }
+  }
+
+  updateChart(graphData: [string[], number[]]) {
+    if (graphData[0].length == 0) {
+      this.displayChart(false);
+      return;
+    }
+    this.displayChart(true);
+    this.chart.data.labels = graphData[0];
+    this.chart.data.datasets[0].data = graphData[1];
+    this.chart.update();
+  }
+
+  displayChart(bool: boolean) {
+    if (this.statsContainer) this.statsContainer.nativeElement.style.display = (bool) ? "block" : "none";
   }
 
   quizSelection(quizSelectionData: { quizId: string, questionType: string }) {
-    console.log("RECU", quizSelectionData);
+    this.selectedQuizId = quizSelectionData.quizId;
+    this.selectedQuestionType = quizSelectionData.questionType;
+    if (quizSelectionData.quizId == "all")
+      this.updateChart(this.statsService.getAllQuizzesGraphData(this.patientId!, this.selectedQuestionType));
+    this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TRIES));
   }
 }

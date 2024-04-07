@@ -1,10 +1,12 @@
 <h2>{{ title }}</h2>
+@if (selectedQuizId && !(selectedQuizId == 'all')) {
 <label> Type de graphe :
   <select #graphSelect (change)="selectedGraphType(graphSelect.value)" name="graph-select">
+    <option value="tries">Essais</option>
     <option value="time">Temps</option>
-    <option value="try">Essais</option>
   </select>
 </label>
-<div class="stats-container">
+}
+<div #statsContainer class="stats-container">
   <canvas id="stat-chart">{{ chart }}</canvas>
 </div>

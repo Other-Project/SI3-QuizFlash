@@ -40,17 +40,18 @@ export class StatisticsDataComponent implements OnInit{
   }
 
   quizChoice(quizId: string, questionType: string): void {
+    this.quizSelected = quizId != "all";
+    this.quizSelection?.emit({quizId, questionType});
+
     if (quizId == "all") {
       this.resetAllQuizzesData(questionType);
       return;
     }
 
-    this.quizSelection?.emit({quizId, questionType});
     this.successRate = this.statisticsService.getQuizSuccessRate(this.patientId!, quizId, questionType);
     const timeData = this.statisticsService.getTimeDataForQuiz(this.patientId!, quizId, questionType);
     this.spentTime = timeData[0];
     this.averageTimeSpent = timeData[1];
-    this.quizSelected = quizId!="all";
   }
 }
 
