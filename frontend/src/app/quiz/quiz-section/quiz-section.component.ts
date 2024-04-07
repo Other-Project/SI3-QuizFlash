@@ -11,8 +11,8 @@ import {Answer} from "../../../models/answer.models";
 })
 export class QuizSectionComponent implements OnInit {
   @Input() set values(question: Question | undefined) {
+    this.question = question;
     if (question) {
-      this.question = question;
       this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
     }
   }
@@ -47,7 +47,7 @@ export class QuizSectionComponent implements OnInit {
 
   checkAnswer(answer: Answer): void {
     this.chosenAnswer = answer;
-    if (this.user!.removeAnswers && answer != this.trueAnswer && this.question) {
+    if (this.user!.removeAnswers && !answer.trueAnswer && this.question) {
       let question = this.question.answers.find(a => answer == a);
       question!.hide = true;
       return;

@@ -8,19 +8,19 @@ const QUESTION1: Question = {
   answers: [
     {
       answerText: "Râteau",
-      trueAnswer: false,
+      trueAnswer: false
     },
     {
       answerText: "Pelle",
-      trueAnswer: false,
+      trueAnswer: false
     },
     {
       answerText: "Casserole",
-      trueAnswer: false,
+      trueAnswer: false
     },
     {
       answerText: "Lit",
-      trueAnswer: true,
+      trueAnswer: true
     }
   ],
   imageUrl: "",
@@ -33,19 +33,19 @@ const QUESTION2: Question = {
   answers: [
     {
       answerText: "Salle de bain",
-      trueAnswer: false,
+      trueAnswer: false
     },
     {
       answerText: "Cuisine",
-      trueAnswer: false,
+      trueAnswer: false
     },
     {
       answerText: "Chambre",
-      trueAnswer: false,
+      trueAnswer: false
     },
     {
       answerText: "Garage",
-      trueAnswer: true,
+      trueAnswer: true
     }
   ],
   imageUrl: "",
@@ -58,19 +58,19 @@ const QUESTION3: Question = {
   answers: [
     {
       answerText: "Salle de bain",
-      trueAnswer: false,
+      trueAnswer: false
     },
     {
       answerText: "Cuisine",
-      trueAnswer: false,
+      trueAnswer: false
     },
     {
       answerText: "Chambre",
-      trueAnswer: true,
+      trueAnswer: true
     },
     {
       answerText: "Garage",
-      trueAnswer: false,
+      trueAnswer: false
     }
   ],
   imageUrl: "",

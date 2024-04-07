@@ -1,4 +1,5 @@
 <section class="answer-section">
   <app-button class="answer-button{{ answer.hide ? '-hide' : ''}}" *ngFor="let answer of answers"
-              (click)="returnAnswer(answer)" [color]="'yellow'"><span>{{ answer.answerText }}</span></app-button>
+              (click)="returnAnswer(answer)" [color]="'yellow'">{{ answer.answerText }}
+  </app-button>
 </section>

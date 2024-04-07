@@ -55,7 +55,6 @@ export class QuizComponent implements OnInit {
     }
     this.update();
     this.selection = false;
-    this.currentQuestion?.answers.forEach(answer => answer.hide = false);
   }
 
   returnSelectionPage() {
@@ -85,7 +84,7 @@ export class QuizComponent implements OnInit {
   }
 
   fiftyFifty() {
-    if (this.fiftyFiftyNotUse && this.fiftyFiftyActivated) {
+    if (this.fiftyFiftyActivated && this.fiftyFiftyNotUse) {
       this.fiftyFiftyNotUse = false;
       let falseAnswers = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
       falseAnswers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(falseAnswers.length / 2)).forEach(answer => answer.hide = true);
