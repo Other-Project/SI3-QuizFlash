@@ -5,6 +5,8 @@ import {USERS} from "../mocks/users.mock";
 import {HOBBIES} from "../mocks/hobbies.mock";
 import {Patient} from "../models/patient.models";
 
+const USER_KEY = "user";
+
 @Injectable({providedIn: "root"})
 export class UserService {
   public users: User[] = USERS;
@@ -15,6 +17,8 @@ export class UserService {
   public hobbies$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(this.hobbies);
 
   constructor() {
+    let json = sessionStorage.getItem(USER_KEY);
+    if (json) this.setLoggedUser(JSON.parse(json));
   }
 
   addUser(user: User) {
@@ -65,6 +69,8 @@ export class UserService {
   }
 
   public setLoggedUser(user?: User): void {
+    if (user) sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    else sessionStorage.removeItem(USER_KEY);
     this.user$.next(this.user = user);
   }
 }

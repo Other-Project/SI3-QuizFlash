@@ -18,6 +18,7 @@ export class QuizSectionComponent implements OnInit {
   protected trueAnswer?: Answer;
   protected chosenAnswer?: Answer;
   protected questionResult: boolean = false;
+  protected inactive: boolean = false;
 
   @Output() nextQuestion: EventEmitter<Answer> = new EventEmitter<Answer>();
   @Output() returnSelectionPage: EventEmitter<undefined> = new EventEmitter<undefined>();
@@ -43,5 +44,9 @@ export class QuizSectionComponent implements OnInit {
 
   selectionPage() {
     this.returnSelectionPage.emit();
+  }
+
+  stopQuiz() {
+    this.inactive = true;
   }
 }

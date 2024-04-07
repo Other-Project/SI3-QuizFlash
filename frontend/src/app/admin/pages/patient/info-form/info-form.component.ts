@@ -30,9 +30,7 @@ export class InfoFormComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    if (this.patientForm.valid) {
-      this.patientInfoChange.emit(this.patientForm.value);
-    }
+  save() {
+    if (this.patientForm.valid) this.patientInfoChange.emit(this.patientForm.value);
   }
 }

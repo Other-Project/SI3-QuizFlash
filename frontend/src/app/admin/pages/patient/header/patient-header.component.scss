@@ -11,11 +11,15 @@
     margin-left: 3vw;
     border-radius: 50%;
     overflow: hidden;
+
+    app-image {
+      width: 115px;
+      height: 115px;
+    }
   }
 
   .patient-info {
-    margin-left: 3vw;
-    margin-top: 2vh;
+    margin: 1em;
     display: grid;
     align-items: normal;
     grid-template: auto auto / auto auto;
