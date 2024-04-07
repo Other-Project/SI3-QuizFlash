@@ -9,5 +9,5 @@
   <finish-page [title]="finish ? 'Bravo !' : 'Quiz terminé'"
                [text]="finish ? 'Vous avez terminé' : 'Le quiz a été clos automatiquement en raison d\'une longue période d\'inactivité.'"
                [textButton]="'Revenir au menu'"
-               (returnSelectionPage)="selectionPage()" *ngIf="inactive"/>
+               (returnSelectionPage)="selectionPage()" *ngIf="inactive || finish"/>
 </div>
