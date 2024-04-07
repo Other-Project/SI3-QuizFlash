@@ -18,26 +18,23 @@ export class QuizComponent implements OnInit {
   protected currentQuestion?: Question;
   protected soundSetting: boolean = false;
   protected selection = true;
-  protected playAtEnd: Question[] = [];
-  protected numberOfQuestions: number = 0;
-  protected notUsed: boolean = true;
+  protected questions: Question[] = [];
+  protected numberOfQuestionsPlayed: number = 0;
+  protected fiftyFiftyNotUse: boolean = true;
   protected fiftyFiftyActivated: boolean = true;
 
   constructor(private userService: UserService) {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
-      if (this.user) this.numberOfQuestions = this.user.numberOfQuestion;
+      if (this.user) this.numberOfQuestionsPlayed = this.user.numberOfQuestion;
     });
   }
 
   ngOnInit(): void {
-    this.currentQuestion?.answers.forEach(answer => answer.hide = false);
   }
 
   update() {
-    if (this.counter - 1 >= this.quiz!.questions.length) {
-      this.currentQuestion = this.playAtEnd.at(this.counter - 1 - this.quiz!.questions.length);
-    } else this.currentQuestion = this.quiz!.questions.at(this.counter - 1);
+    this.currentQuestion = this.questions.at(this.counter - 1);
   }
 
   nextQuestion(answerReturned: Answer) {
@@ -47,12 +44,14 @@ export class QuizComponent implements OnInit {
 
   setQuiz(quiz: Quiz) {
     this.quiz = quiz;
-    if (this.user?.soundQuestion && quiz.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
+    this.questions = this.quiz?.questions!;
+    this.questions.forEach(question => question.answers.forEach(answer => answer.hide = false));
+    if (this.user?.soundQuestion && this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
     else if (!this.user?.soundQuestion) {
-      quiz.questions = quiz.questions.filter(question => question.type != QuestionType.Sound);
+      this.questions = this.questions.filter(question => question.type != QuestionType.Sound);
     }
-    if (this.quiz.questions.length < this.numberOfQuestions) {
-      this.numberOfQuestions = this.quiz.questions.length;
+    if (this.questions.length < this.numberOfQuestionsPlayed) {
+      this.numberOfQuestionsPlayed = this.questions.length;
     }
     this.update();
     this.selection = false;
@@ -60,17 +59,17 @@ export class QuizComponent implements OnInit {
   }
 
   returnSelectionPage() {
-    this.notUsed = true;
-    this.numberOfQuestions = this.user!.numberOfQuestion;
+    this.fiftyFiftyNotUse = true;
+    this.numberOfQuestionsPlayed = this.user!.numberOfQuestion;
     this.counter = 1;
     this.selection = true;
     this.quiz = undefined;
     this.currentQuestion = undefined;
-    this.playAtEnd = [];
+    this.questions = [];
   }
 
   isFinish() { //TODO see if put a condition based on user attribute append to validate or not to replay at end the false questions
-    return this.quiz?.questions.length! + this.playAtEnd.length < this.counter || this.counter - 1 >= this.user?.numberOfQuestion! + this.playAtEnd.length;
+    return this.questions.length < this.counter || this.counter - 1 >= this.questions.length;
   }
 
   getCounter() {
@@ -79,15 +78,15 @@ export class QuizComponent implements OnInit {
   }
 
   replayAtEnd() {
-    if (!this.playAtEnd.find(question => question == this.currentQuestion)) {
-      this.playAtEnd.push(this.currentQuestion!);
-      this.numberOfQuestions = this.numberOfQuestions + 1;
+    if (this.questions.filter(question => question == this.currentQuestion).length <= 1) {
+      this.questions.push(this.currentQuestion!);
+      this.numberOfQuestionsPlayed = this.numberOfQuestionsPlayed + 1;
     }
   }
 
   fiftyFifty() {
-    if (this.notUsed && this.fiftyFiftyActivated) {
-      this.notUsed = false;
+    if (this.fiftyFiftyNotUse && this.fiftyFiftyActivated) {
+      this.fiftyFiftyNotUse = false;
       let falseAnswers = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
       falseAnswers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(falseAnswers.length / 2)).forEach(answer => answer.hide = true);
       }

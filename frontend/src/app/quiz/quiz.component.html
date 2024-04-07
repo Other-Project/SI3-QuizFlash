@@ -2,9 +2,8 @@
   <div [ngStyle]="{'font-size': user!.fontSize.toString()+'em'}" class="quiz-content">
     <app-header [homePage]="'/quiz'" [interactive]="quiz == undefined">
       <quiz-header [counter]="getCounter()" [quizTheme]="quiz?.theme"
-                   [numberOfQuestion]="numberOfQuestions" *ngIf="!selection && !isFinish()">
-        <app-button [color]="'dark-blue'" [padding]="false" (click)="fiftyFifty()" *ngIf="user!.answerHint">
-          <span>50/50</span></app-button>
+                   [numberOfQuestion]="numberOfQuestionsPlayed" *ngIf="!selection && !isFinish()">
+        <app-button [color]="'blue'" (click)="fiftyFifty()" *ngIf="user!.answerHint">50/50</app-button>
       </quiz-header>
     </app-header>
     <main>
