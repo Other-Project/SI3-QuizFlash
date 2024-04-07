@@ -42,7 +42,7 @@ export class QuizComponent implements OnInit {
 
   setQuiz(quiz: Quiz) {
     this.quiz = quiz;
-    this.questions = this.quiz?.questions!.splice(this.user!.numberOfQuestion, 0);
+    this.questions = this.quiz?.questions!.slice(0, this.user!.numberOfQuestion);
     this.questions.forEach(question => question.answers.forEach(answer => answer.hide = false));
     if (this.user?.soundQuestion && this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
     else if (!this.user?.soundQuestion) {
