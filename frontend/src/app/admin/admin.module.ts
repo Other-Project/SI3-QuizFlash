@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {NgModule} from "@angular/core";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {AdminNavbarComponent} from "./admin-navbar/admin-navbar.component";
 import {AdminComponent} from "./admin.component";
 import {LayoutModule} from "../layout/layout.module";
 import {PatientModule} from "./pages/patient/patient.module";
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import {RouterOutlet} from "@angular/router";
     LayoutModule,
     NgOptimizedImage,
     PatientModule,
-    RouterOutlet
+    RouterOutlet,
+    RouterLink
   ]
 })
 export class AdminModule {

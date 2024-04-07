@@ -5,7 +5,7 @@ import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {UserService} from "./user.service";
 
-@Injectable({providedIn:'root'})
+@Injectable({providedIn: "root"})
 export class QuizService {
   public quizzes: Quiz[] = QUIZLIST;
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject<Quiz[]>(this.quizzes);
@@ -19,11 +19,14 @@ export class QuizService {
     });
   }
 
-  selectQuiz(id: string) {
+  getQuiz(id: string) {
     let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
     if (!returnedQuiz) console.error("No quiz found with ID " + id);
-    this.quiz = returnedQuiz;
-    this.quiz$.next(this.quiz);
+    return returnedQuiz;
+  }
+
+  selectQuiz(id: string) {
+    this.quiz$.next(this.quiz = this.getQuiz(id));
   }
 
   addQuizzes(quiz: Quiz) {
