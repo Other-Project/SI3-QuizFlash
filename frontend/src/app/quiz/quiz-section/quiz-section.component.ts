@@ -12,9 +12,7 @@ import {Answer} from "../../../models/answer.models";
 export class QuizSectionComponent implements OnInit {
   @Input() set values(question: Question | undefined) {
     this.question = question;
-    if (question) {
-      this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
-    }
+    if (question) this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
   }
 
   protected question?: Question;
