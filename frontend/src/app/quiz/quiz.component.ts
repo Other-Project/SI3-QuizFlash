@@ -20,6 +20,8 @@ export class QuizComponent implements OnInit {
   protected selection = true;
   protected playAtEnd: Question[] = [];
   protected numberOfQuestions: number = 0;
+  protected notUsed: boolean = true;
+  protected fiftyFiftyActivated: boolean = true;
 
   constructor(private userService: UserService) {
     this.userService.user$.subscribe(user => {
@@ -53,9 +55,11 @@ export class QuizComponent implements OnInit {
     }
     this.update();
     this.selection = false;
+    this.currentQuestion?.answers.forEach(answer => answer.hide = false);
   }
 
   returnSelectionPage() {
+    this.notUsed = true;
     this.numberOfQuestions = this.user!.numberOfQuestion;
     this.counter = 1;
     this.selection = true;
@@ -81,6 +85,16 @@ export class QuizComponent implements OnInit {
     if (!this.playAtEnd.find(question => question == this.currentQuestion)) {
       this.playAtEnd.push(this.currentQuestion!);
       this.numberOfQuestions = this.numberOfQuestions + 1;
+    }
+  }
+
+  fiftyFifty() {
+    this.notUsed = false;
+    let falseAnswer = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
+    for (let i = 0; i < this.currentQuestion!.answers.length / 2; i++) {
+      let random = Math.floor(Math.random() * falseAnswer.length);
+      this.currentQuestion!.answers.find(answer => answer == falseAnswer.at(random))!.hide = true;
+      falseAnswer.splice(random, 1);
     }
   }
 }

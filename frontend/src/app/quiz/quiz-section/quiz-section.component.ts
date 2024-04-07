@@ -42,6 +42,7 @@ export class QuizSectionComponent implements OnInit {
   @Output() nextQuestion: EventEmitter<Answer> = new EventEmitter<Answer>();
   @Output() returnSelectionPage: EventEmitter<undefined> = new EventEmitter<undefined>();
   @Output() replayAtTheEnd: EventEmitter<undefined> = new EventEmitter<undefined>();
+  @Output() fiftyFiftyUsable: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {
     if (this.finish) {
@@ -66,6 +67,7 @@ export class QuizSectionComponent implements OnInit {
         this.replayAtTheEnd.emit();
     }
     if (this.user!.showIncorrectResponse && this.chosenAnswer != this.trueAnswer) this.correct = false;
+    this.fiftyFiftyUsable.emit(false);
   }
 
   continueQuiz() {
@@ -73,6 +75,7 @@ export class QuizSectionComponent implements OnInit {
     this.questionResult = false;
     this.nextQuestion.emit(this.chosenAnswer);
     this.correct = true;
+    this.fiftyFiftyUsable.emit(true);
   }
 
   selectionPage() {

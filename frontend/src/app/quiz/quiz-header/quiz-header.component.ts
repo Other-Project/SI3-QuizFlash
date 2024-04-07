@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 
 @Component({
   selector: 'quiz-header',
@@ -7,10 +7,18 @@ import {Component, Input} from "@angular/core";
 })
 
 export class QuizHeaderComponent {
+  @Input() hintActivated: boolean = false;
   @Input() counter?: number;
   @Input() quizTheme?: string;
   @Input() numberOfQuestion?: number;
+  @Input() fiftyFiftyUsable: boolean = true;
+
+  @Output() hintAnswer: EventEmitter<undefined> = new EventEmitter<undefined>();
 
   constructor() {
+  }
+
+  fiftyFifty() {
+    if (this.fiftyFiftyUsable) this.hintAnswer.emit();
   }
 }
