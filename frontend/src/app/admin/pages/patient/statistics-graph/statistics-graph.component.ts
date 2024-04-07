@@ -88,6 +88,7 @@ export class StatisticsGraphComponent implements OnInit {
 
   quizSelection(quizSelectionData: { quizId: string, questionType: string }) {
     this.selectedValue = "tries";
+    this.chart.data.datasets[0].label = "Taux de réussite";
     this.selectedQuizId = quizSelectionData.quizId;
     this.selectedQuestionType = quizSelectionData.questionType;
     if (quizSelectionData.quizId == "all")
