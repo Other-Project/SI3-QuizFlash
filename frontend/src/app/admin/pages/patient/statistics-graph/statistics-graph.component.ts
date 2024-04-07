@@ -67,8 +67,7 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   selectedGraphType(selectedMode: string) {
     if (this.selectedQuizId && this.selectedQuestionType) {
       if (selectedMode == "tries") {
-        this.chart.options.scales.y.suggestedMax = 100;
-        this.chart.data.datasets[0].label = "Taux de réussite";
+        this.setTryGraphOptions();
         this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TRIES));
       } else {
         this.chart.options.scales.y.suggestedMax = 15;
@@ -89,14 +88,19 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
     this.chart.update();
   }
 
+  setTryGraphOptions() {
+    this.selectedValue = "tries";
+    this.chart.data.datasets[0].label = "Taux de réussite";
+    this.chart.options.scales.y.suggestedMax = 100;
+  }
+
   displayChart(bool: boolean) {
     console.log(this.statsContainer);
     if (this.statsContainer) this.statsContainer.nativeElement.style.display = (bool) ? "block" : "none";
   }
 
   quizSelection(quizSelectionData: { quizId: string, questionType: string }) {
-    this.selectedValue = "tries";
-    this.chart.data.datasets[0].label = "Taux de réussite";
+    this.setTryGraphOptions();
     this.selectedQuizId = quizSelectionData.quizId;
     this.selectedQuestionType = quizSelectionData.questionType;
     if (quizSelectionData.quizId == "all")

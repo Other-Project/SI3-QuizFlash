@@ -18,7 +18,7 @@ export class StatisticsService {
     const patientStats = stats.filter(stat => stat.userId == patientId);
 
     if (patientStats.length == 0)
-      return 0;
+      return -1;
 
     const result = stats.reduce((accumulator, current) => {
       let questions = current.questionsStats.filter(questionFilter);
@@ -97,8 +97,7 @@ export class StatisticsService {
       questionIds.push(questionId);
       averageTimes.push(averageTime);
     }
-    console.log(questionTimeMap);
-    console.log(questionIds, averageTimes);
+
     return [questionIds, averageTimes];
   }
 
