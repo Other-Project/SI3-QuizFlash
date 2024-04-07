@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
 import Chart from 'chart.js/auto';
 import {StatisticsService} from "../../../../../service/statistics.service";
 import {Observable, Subscription} from "rxjs";
@@ -11,7 +11,7 @@ import {GraphType} from "../../../../../models/graph-type.model";
   styleUrls: ['statistics-graph.component.scss']
 })
 
-export class StatisticsGraphComponent implements OnInit {
+export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   @Input() quizSelectionEvent?: Observable<{ quizId: string, questionType: string }>;
   @Input() title: string = "";
   @Input() patientId?: string;
@@ -26,6 +26,7 @@ export class StatisticsGraphComponent implements OnInit {
 
   constructor(private statsService: StatisticsService) {
   }
+
 
   createChart(graphData: [string[], number[]]) {
     this.chart = new Chart("stat-chart", {
@@ -54,7 +55,13 @@ export class StatisticsGraphComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventSubscription = this.quizSelectionEvent?.subscribe((quizId) => this.quizSelection(quizId));
-    this.createChart(this.statsService.getAllQuizzesGraphData(this.patientId!, "all"));
+  }
+
+  ngAfterViewInit(): void {
+    let data = this.statsService.getAllQuizzesGraphData(this.patientId!, "all");
+    this.createChart(data);
+    if (data[0].length == 0)
+      this.displayChart(false);
   }
 
   selectedGraphType(selectedMode: string) {
@@ -83,6 +90,7 @@ export class StatisticsGraphComponent implements OnInit {
   }
 
   displayChart(bool: boolean) {
+    console.log(this.statsContainer);
     if (this.statsContainer) this.statsContainer.nativeElement.style.display = (bool) ? "block" : "none";
   }
 
