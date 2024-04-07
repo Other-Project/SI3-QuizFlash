@@ -87,12 +87,8 @@ export class QuizComponent implements OnInit {
   fiftyFifty() {
     if (this.notUsed && this.fiftyFiftyActivated) {
       this.notUsed = false;
-      let falseAnswer = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
-      for (let i = 0; i < this.currentQuestion!.answers.length / 2; i++) {
-        let random = Math.floor(Math.random() * falseAnswer.length);
-        this.currentQuestion!.answers.find(answer => answer == falseAnswer.at(random))!.hide = true;
-        falseAnswer.splice(random, 1);
+      let falseAnswers = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
+      falseAnswers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(falseAnswers.length / 2)).forEach(answer => answer.hide = true);
       }
-    }
   }
 }
