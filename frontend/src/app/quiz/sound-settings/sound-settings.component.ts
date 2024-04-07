@@ -18,9 +18,7 @@ export class SoundSettingsComponent {
   }
 
   @Output() soundSettingsFinish: EventEmitter<any> = new EventEmitter<any>();
-  @Output() gainForPlayButton: EventEmitter<number> = new EventEmitter<number>();
   next() {
-    this.soundSettingsFinish.emit();
-    this.gainForPlayButton.emit(this.gainValue);
+    this.soundSettingsFinish.emit(this.gainValue);
   }
 }
