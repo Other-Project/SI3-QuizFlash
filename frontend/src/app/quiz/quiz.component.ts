@@ -19,14 +19,12 @@ export class QuizComponent implements OnInit {
   protected soundSetting: boolean = false;
   protected selection = true;
   protected questions: Question[] = [];
-  protected numberOfQuestionsPlayed: number = 0;
   protected fiftyFiftyNotUse: boolean = true;
   protected fiftyFiftyActivated: boolean = true;
 
   constructor(private userService: UserService) {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
-      if (this.user) this.numberOfQuestionsPlayed = this.user.numberOfQuestion;
     });
   }
 
@@ -44,14 +42,11 @@ export class QuizComponent implements OnInit {
 
   setQuiz(quiz: Quiz) {
     this.quiz = quiz;
-    this.questions = this.quiz?.questions!;
+    this.questions = this.quiz?.questions!.splice(this.user!.numberOfQuestion, 0);
     this.questions.forEach(question => question.answers.forEach(answer => answer.hide = false));
     if (this.user?.soundQuestion && this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
     else if (!this.user?.soundQuestion) {
       this.questions = this.questions.filter(question => question.type != QuestionType.Sound);
-    }
-    if (this.questions.length < this.numberOfQuestionsPlayed) {
-      this.numberOfQuestionsPlayed = this.questions.length;
     }
     this.update();
     this.selection = false;
@@ -59,7 +54,6 @@ export class QuizComponent implements OnInit {
 
   returnSelectionPage() {
     this.fiftyFiftyNotUse = true;
-    this.numberOfQuestionsPlayed = this.user!.numberOfQuestion;
     this.counter = 1;
     this.selection = true;
     this.quiz = undefined;
@@ -79,7 +73,6 @@ export class QuizComponent implements OnInit {
   replayAtEnd() {
     if (this.questions.filter(question => question == this.currentQuestion).length <= 1) {
       this.questions.push(this.currentQuestion!);
-      this.numberOfQuestionsPlayed = this.numberOfQuestionsPlayed + 1;
     }
   }
 
