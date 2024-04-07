@@ -1,6 +1,6 @@
 <div>
-  <h1>Bravo !</h1>
-  <p>Vous avez terminé</p>
-  <app-button [color]="'yellow'" (click)="returnToQuizSelection()">Revenir au menu</app-button>
+  <h1 *ngIf="title">{{ title }}</h1>
+  <p *ngIf="text">{{ text }}</p>
+  <app-button [color]="'yellow'" (click)="returnToQuizSelection()">{{ textButton }}</app-button>
 </div>
 

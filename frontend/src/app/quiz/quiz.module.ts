@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {NgModule} from "@angular/core";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {QuizPlayButtonComponent} from "./play-button/play-button.component";
 import {QuizComponent} from "./quiz.component";
 import {LayoutModule} from "../layout/layout.module";
