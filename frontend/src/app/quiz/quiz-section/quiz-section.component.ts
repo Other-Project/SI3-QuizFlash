@@ -13,6 +13,7 @@ export class QuizSectionComponent implements OnInit {
   @Input() question?: Question;
   @Input() user?: Patient;
   @Input() finish: boolean = false;
+  @Input() gainToTransfer!: number;
 
   protected trueAnswer?: Answer;
   protected chosenAnswer?: Answer;

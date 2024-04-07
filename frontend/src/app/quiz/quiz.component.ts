@@ -18,6 +18,7 @@ export class QuizComponent implements OnInit {
   protected currentQuestion?: Question;
   protected soundSetting: boolean = false;
   protected selection = true;
+  protected gainForPlayButton!: number;
 
   constructor(private userService: UserService) {
     this.userService.user$.subscribe(user => {
@@ -59,5 +60,9 @@ export class QuizComponent implements OnInit {
   getCounter() {
     if (this.isFinish()) return this.counter - 1;
     return this.counter;
+  }
+
+  getGainToTransfer(event: number) {
+    this.gainForPlayButton = event;
   }
 }
