@@ -55,7 +55,6 @@ export class QuizSectionComponent implements OnInit {
   ngOnInit(): void {
     if (this.user) {
       this.correct[1] = this.user.showIncorrectResponse;
-      console.log(this.user.showIncorrectResponse);
     }
   }
 
