@@ -65,7 +65,7 @@ export class QuizComponent implements OnInit {
   }
 
   getGainToTransfer(event: number) {
-    this.soundSetting=false
+    this.soundSetting = false
     this.audioGain = event;
   }
 }
