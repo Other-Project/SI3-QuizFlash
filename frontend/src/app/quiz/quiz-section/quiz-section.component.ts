@@ -19,6 +19,8 @@ export class QuizSectionComponent implements OnInit {
   @Input() user?: Patient;
 
   @Input() finish: boolean = false;
+  @Input() audioGain!: number;
+
   protected inactive: boolean = false;
   protected trueAnswer?: Answer;
   protected questionResult: boolean = false;

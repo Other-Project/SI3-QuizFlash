@@ -19,6 +19,7 @@ export class QuizComponent implements OnInit {
   protected currentQuestion?: Question;
   protected soundSetting: boolean = false;
   protected selection = true;
+  protected audioGain!: number;
   protected questions: Question[] = [];
   protected fiftyFiftyNotUse: boolean = true;
   protected fiftyFiftyActivated: boolean = true;
@@ -93,6 +94,11 @@ export class QuizComponent implements OnInit {
       this.fiftyFiftyNotUse = false;
       let falseAnswers = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
       falseAnswers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(falseAnswers.length / 2)).forEach(answer => answer.hide = true);
-      }
+    }
+  }
+
+  getGainToTransfer(event: number) {
+    this.soundSetting = false;
+    this.audioGain = event;
   }
 }

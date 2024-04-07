@@ -10,6 +10,7 @@ export class QuestionSectionComponent implements OnInit {
   @Input() image: string = ""; //To have the image url of the question in parameter
   @Input() sound: string = ""; //To have the sound url of the question in parameter
   @Input() fontSize!: string;
+  @Input() volume!:number;
 
   constructor() {
   }
