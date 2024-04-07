@@ -1,6 +1,6 @@
 <div>
   <h1 *ngIf="title">{{ title }}</h1>
   <p *ngIf="text">{{ text }}</p>
-  <a (click)="returnToQuizSelection()" *ngIf="textButton">{{ textButton }}</a>
+  <app-button [color]="'yellow'" (click)="returnToQuizSelection()" *ngIf="textButton">{{ textButton }}</app-button>
 </div>
 

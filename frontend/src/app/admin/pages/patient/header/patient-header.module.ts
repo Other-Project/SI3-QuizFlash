@@ -5,6 +5,7 @@ import {LayoutModule} from "../../../../layout/layout.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
 import {InfoFormComponent} from "../info-form/info-form.component";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {InfoFormComponent} from "../info-form/info-form.component";
     FormsModule,
     NgStyle,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FaIconComponent
   ]
 })
 
