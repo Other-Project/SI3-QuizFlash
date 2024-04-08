@@ -20,13 +20,7 @@ const routes: Routes = [
       {path: "", pathMatch: "full", redirectTo: "patients"},
       {path: "patients", component: AdminPatientsComponent},
       {path: "patient", component: PatientComponent},
-      {
-        path: "patient/:user_id", component: PatientComponent, children: [
-          {path: "", pathMatch: "full", redirectTo: "infos"},
-          {path: "infos", component: InformationComponent},
-          {path: "stats", component: StatisticsComponent}
-        ]
-      },
+      {path: "patient/:user_id", component: PatientComponent},
       {path: "quizz", component: AdminQuizzComponent}
     ]
   },

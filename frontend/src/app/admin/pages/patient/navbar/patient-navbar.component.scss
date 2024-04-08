@@ -3,7 +3,7 @@
 .patient-nav{
   gap: 0;
 
-  a{
+  button {
     display: inline-block;
     padding: 0.5em 0.7em 0.5em 0.7em;
     border : 1px solid $blue;
@@ -13,11 +13,11 @@
     border-bottom: 0;
   }
 
-  a:first-child{
+  button:first-child {
     border-left: 1px solid $blue;
   }
 
-  a:hover{
+  button:hover {
     background-color: rgb(232, 232, 232);
   }
 }

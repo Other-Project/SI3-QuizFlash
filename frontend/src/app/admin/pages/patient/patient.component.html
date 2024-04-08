@@ -1,7 +1,8 @@
 <patient-header (patientInfoChange)="updatePatientInfo($event)" [user]="user"/>
 <section class="patient-data">
-  <patient-navbar/>
-  <boxed-container>
-    <router-outlet/>
-  </boxed-container>
+  <patient-navbar (tabToSwitch)="tab=$event"/>
+  <section id="boxed-container" [ngSwitch]="tab">
+    <information *ngSwitchCase="TabNavigation.INFORMATION" [user]="user"/>
+    <statistics *ngSwitchCase="TabNavigation.STATISTICS" [user]="user"/>
+  </section>
 </section>

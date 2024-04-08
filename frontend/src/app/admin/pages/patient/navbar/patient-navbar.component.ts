@@ -1,4 +1,5 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
+import {TabNavigation} from "../patient.component";
 
 @Component({
   selector: 'patient-navbar',
@@ -7,5 +8,11 @@ import {Component} from "@angular/core";
 })
 
 export class PatientNavbarComponent{
+  @Output() tabToSwitch: EventEmitter<TabNavigation> = new EventEmitter<TabNavigation>();
 
+  switchTab(tab: TabNavigation) {
+    this.tabToSwitch.emit(tab);
+  }
+
+  protected readonly TabNavigation = TabNavigation;
 }
