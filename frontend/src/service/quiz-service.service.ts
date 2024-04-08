@@ -31,9 +31,7 @@ export class QuizService {
       if (copy && !user.soundQuestion) {
         copy.questions = copy.questions.filter(question => question.type != QuestionType.Sound);
       }
-      if (copy) {
-        copy.questions = copy.questions.slice(0, user.numberOfQuestion);
-      }
+      if (copy) copy.questions = copy.questions.sort(() => 0.5 - Math.random()).slice(0, user.numberOfQuestion);
     }
     this.quiz = copy;
     this.quiz$.next(this.quiz);
