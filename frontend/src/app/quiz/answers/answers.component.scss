@@ -4,7 +4,7 @@ section {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template: 1fr 1fr / 1fr 1fr;
+  grid-template-columns: repeat(1, 1fr 1fr);
   gap: 25px;
   justify-items: center;
   margin-top: 1rem;
@@ -16,5 +16,9 @@ section {
     span {
       font-size: 0.90em;
     }
+  }
+
+  .answer-button-hide {
+    visibility: hidden;
   }
 }
