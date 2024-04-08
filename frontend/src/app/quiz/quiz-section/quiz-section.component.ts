@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Question} from "../../../models/question.models";
 import {Patient} from "../../../models/patient.models";
 import {Answer} from "../../../models/answer.models";
@@ -9,7 +9,7 @@ import {Answer} from "../../../models/answer.models";
   templateUrl: './quiz-section.component.html',
   styleUrls: ['./quiz-section.component.scss']
 })
-export class QuizSectionComponent implements OnInit {
+export class QuizSectionComponent {
   @Input() set values(question: Question | undefined) {
     this.question = question;
     if (question) this.trueAnswer = this.question?.answers.find(answer => answer.trueAnswer);
@@ -33,13 +33,9 @@ export class QuizSectionComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
-  }
-
   checkAnswer(answer: Answer): void {
     if (this.user!.removeAnswers && !answer.trueAnswer && this.question) {
-      let question = this.question.answers.find(a => answer == a);
-      question!.hide = true;
+      this.question.answers.find(a => answer == a)!.hide = true;
       return;
     }
     this.questionResult = true;
