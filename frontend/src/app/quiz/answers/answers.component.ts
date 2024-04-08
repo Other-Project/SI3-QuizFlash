@@ -18,7 +18,7 @@ export class AnswersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.automatedSkip) this.timeOutId = setTimeout(() => this.stopQuiz(), 900); //15 minutes
+    if (this.automatedSkip) this.timeOutId = setTimeout(() => this.stopQuiz(), 900000); //15 minutes
     this.start = new Date();
   }
 
