@@ -14,14 +14,12 @@ export class StatisticsService {
   constructor() {
   }
 
-  private getRateByFilter(stats: QuizStats[], patientId: string, questionFilter: Predicate<QuestionStats>, successFilter: Predicate<QuestionStats> = question => question.success): number {
-    const patientStats = stats.filter(stat => stat.userId == patientId);
-
-    if (patientStats.length == 0)
+  private getRateByFilter(stats: QuizStats[], questionType: string, successFilter: Predicate<QuestionStats> = question => question.success): number {
+    if (this.quizStatistics.length == 0)
       return -1;
 
     const result = stats.reduce((accumulator, current) => {
-      let questions = current.questionsStats.filter(questionFilter);
+      let questions = current.questionsStats.filter(question => (questionType == "all") || question.questionType == parseInt(questionType));
       accumulator.questionCount += questions.length;
       accumulator.filterCount += questions.filter(successFilter).length;
       return accumulator;
@@ -34,21 +32,26 @@ export class StatisticsService {
   }
 
   getAllQuizzesAnswerHintRate(patientId: string, questionType: string): number {
-    return this.getRateByFilter(this.quizStatistics, patientId, question => questionType == "all" || question.questionType == parseInt(questionType), question => question.assistedAnswer);
+    const patientStats = this.getPatientQuizWithType(patientId, questionType);
+    return this.getRateByFilter(patientStats, questionType, question => question.answerHint);
   }
 
   getAllQuizzesSuccessRate(patientId: string, questionType: string): number {
-    const patientStats = this.quizStatistics.filter(stat => stat.userId == patientId && stat.questionsStats.some(question => (questionType == "all") || question.questionType == parseInt(questionType)));
+    const patientStats = this.getPatientQuizWithType(patientId, questionType);
 
     if (patientStats.length == 0)
       return -1;
 
-    return this.getRateByFilter(patientStats, patientId, question => (questionType == "all") || question.questionType == parseInt(questionType));
+    return this.getRateByFilter(patientStats, questionType);
+  }
+
+  getPatientQuizWithType(patientId: string, questionType: string): QuizStats[] {
+    return this.quizStatistics.filter(stat => stat.userId == patientId && stat.questionsStats.some(question => (questionType == "all") || question.questionType == parseInt(questionType)));
   }
 
   getAllQuizzesGraphData(patientId: string, questionType: string): [string[], number[]] {
-    const patientStats = this.quizStatistics.filter(stat => stat.userId == patientId && stat.questionsStats.some(question => (questionType == "all") || question.questionType == parseInt(questionType)));
-    return [patientStats.map((stat) => stat.quizId), patientStats.map((stat) => this.getRateByFilter([stat], patientId, question => questionType == "all" || question.questionType == parseInt(questionType)))]
+    const patientStats = this.getPatientQuizWithType(patientId, questionType);
+    return [patientStats.map((stat) => stat.quizId), patientStats.map((stat) => this.getRateByFilter([stat], questionType))]
   }
 
   getQuizGraphData(patientId: string, quizId: string, questionType: string, graphType: GraphType): [string[], number[]] {
@@ -59,13 +62,13 @@ export class StatisticsService {
 
   getQuizTriesGraphData(patientId: string, quizId: string, questionType: string): [string[], number[]] {
     const patientStats = this.quizStatistics.filter(stat => stat.userId == patientId && quizId == stat.quizId && stat.questionsStats.some(question => (questionType == "all") || question.questionType == parseInt(questionType)));
-    return [patientStats.map((stat) => stat.quizId), patientStats.map((stat) => this.getRateByFilter([stat], patientId, question => questionType == "all" || question.questionType == parseInt(questionType)))]
+    return [patientStats.map((stat) => stat.quizId), patientStats.map((stat) => this.getRateByFilter([stat], questionType))]
   }
 
   getTimeQuizGraphData(patientId: string, quizId: string, questionType: string): [string[], number[]] {
     const questionTimeMap: { [questionId: string]: { questionCount: number, totalSpentTime: number } } = {};
 
-    const patientStats = this.quizStatistics.filter(stat => stat.userId == patientId && (quizId == "all" || stat.quizId == quizId));
+    const patientStats = this.getPatientQuizWithType(patientId, quizId);
 
     for (let stat of patientStats) {
       for (let question of stat.questionsStats) {
@@ -95,7 +98,7 @@ export class StatisticsService {
   getQuizSuccessRate(patientId: string, quizId: string, questionType: string) {
     const patientStats = this.quizStatistics.filter(stat => stat.userId == patientId && stat.quizId == quizId);
 
-    return this.getRateByFilter(patientStats, patientId, question => (questionType == "all") || question.questionType == parseInt(questionType));
+    return this.getRateByFilter(patientStats, questionType);
   }
 
   private roundUp(value: number) {
