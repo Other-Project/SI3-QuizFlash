@@ -57,6 +57,7 @@ export class QuizComponent implements OnInit {
   }
 
   returnSelectionPage() {
+    this.quizService.unsetQuiz();
     this.fiftyFiftyNotUse = true;
     this.counter = 1;
     this.selection = true;

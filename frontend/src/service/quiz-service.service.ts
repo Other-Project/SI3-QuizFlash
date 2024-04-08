@@ -42,4 +42,9 @@ export class QuizService {
 
   deleteQuizzes(id: string): void {
   }
+
+  unsetQuiz(): void {
+    this.quiz = undefined;
+    this.quiz$.next(this.quiz);
+  }
 }
