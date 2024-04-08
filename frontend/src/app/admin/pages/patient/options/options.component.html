@@ -8,6 +8,10 @@
   <label for="replay-question">Rejouer les question</label>
 </div>
 <div class="checkbox-wrapper-14">
+  <input #automatedSkip [checked]="user?.automatedSkip" id="automated-skip" type="checkbox" class="switch">
+  <label for="automated-skip">Défilement automatique</label>
+</div>
+<div class="checkbox-wrapper-14">
   <input #answerHint [checked]="user?.answerHint" id="answer-hint" type="checkbox" class="switch">
   <label for="answer-hint">Aide à la réponse (50/50)</label>
 </div>

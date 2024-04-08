@@ -1,7 +1,7 @@
 <div>
   <div *ngIf="question && !questionResult  && !finish && !inactive">
     <question-section image="{{question.imageUrl}}" sound="{{question.soundUrl}}" question="{{question.text}}" [volume]="audioGain"/>
-    <answers-section [answers]="question.answers" (returnedAnswer)='checkAnswer($event)'
+    <answers-section [answers]="question.answers" [automatedSkip]="user!.automatedSkip" (returnedAnswer)='checkAnswer($event)'
                      (inactive)='this.inactive = true'/>
   </div>
   <app-question-result [goodAnswer]="trueAnswer" [correct]="correct" (continue)='continueQuiz()'

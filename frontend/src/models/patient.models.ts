@@ -8,6 +8,7 @@ export interface Patient extends User {
   dementiaLevel: Dementia;
   fontSize: number;
   removeAnswers: boolean;
+  automatedSkip: boolean;
   answerHint: boolean;
   numberOfQuestion: number;
   replayAtEnd: boolean;

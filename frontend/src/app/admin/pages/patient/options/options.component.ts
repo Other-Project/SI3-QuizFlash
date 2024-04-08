@@ -10,6 +10,7 @@ import {Patient} from "../../../../../models/patient.models";
 export class OptionsComponent{
   @ViewChild("removeFalseAnswer") removeFalseAnswerCheckBox?: ElementRef;
   @ViewChild("replayQuestion") replayCheckBox?: ElementRef;
+  @ViewChild("automatedSkip") automatedSkip?: ElementRef;
   @ViewChild('answerHint') fiftyFiftyCheckBox?: ElementRef;
   @ViewChild('auditive') auditiveCheckBox?: ElementRef;
   @ViewChild('audioLaunch') audioLaunchCheckBox?: ElementRef;
@@ -22,6 +23,8 @@ export class OptionsComponent{
 
     if (this.fiftyFiftyCheckBox)
       this.fiftyFiftyCheckBox.nativeElement.checked = low;
+    if (this.automatedSkip)
+      this.automatedSkip.nativeElement.checked = true;
     if (this.replayCheckBox)
       this.replayCheckBox.nativeElement.checked = low;
     if (this.removeFalseAnswerCheckBox)

@@ -9,6 +9,7 @@ import {Answer} from "../../../models/answer.models";
 export class AnswersComponent implements OnInit {
 
   @Input() answers: Answer[] = [];
+  @Input() automatedSkip: boolean = false;
   private timeOutId?: number;
   private start?: Date;
   @Output() inactive: EventEmitter<undefined> = new EventEmitter();
@@ -17,7 +18,7 @@ export class AnswersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.timeOutId = setTimeout(() => this.stopQuiz(), 900000); //15 minutes
+    if (this.automatedSkip) this.timeOutId = setTimeout(() => this.stopQuiz(), 900); //15 minutes
     this.start = new Date();
   }
 

@@ -18,6 +18,7 @@ export const USER_BERNARD: Patient = {
   answerHint: false,
   numberOfQuestion: 3,
   replayAtEnd: false,
+  automatedSkip: true,
 
   soundQuestion: false,
   autoStartAudio: false
