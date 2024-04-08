@@ -21,8 +21,7 @@ export class QuizComponent implements OnInit {
   protected selection = true;
   protected audioGain!: number;
   protected questions: Question[] = [];
-  protected fiftyFiftyNotUse: boolean = true;
-  protected fiftyFiftyActivated: boolean = true;
+  protected fiftyFiftyEnabled: boolean = true;
 
   constructor(private userService: UserService, private quizService: QuizService) {
     this.userService.user$.subscribe(user => {
@@ -47,7 +46,7 @@ export class QuizComponent implements OnInit {
   }
 
   nextQuestion() {
-    this.fiftyFiftyActivated = true;
+    this.fiftyFiftyEnabled = true;
     this.counter++;
     this.update();
   }
@@ -58,7 +57,7 @@ export class QuizComponent implements OnInit {
 
   returnSelectionPage() {
     this.quizService.selectQuiz("", this.user!);
-    this.fiftyFiftyNotUse = true;
+    this.fiftyFiftyEnabled = true;
     this.counter = 1;
     this.selection = true;
     this.quiz = undefined;
@@ -77,7 +76,7 @@ export class QuizComponent implements OnInit {
 
   checkAnswer(answer: Answer) {
     if (this.user!.replayAtEnd && !answer.trueAnswer) this.replayAtEnd();
-    this.fiftyFiftyActivated = false;
+    this.fiftyFiftyEnabled = false;
   }
 
   replayAtEnd() {
@@ -88,11 +87,10 @@ export class QuizComponent implements OnInit {
   }
 
   fiftyFifty() {
-    if (this.fiftyFiftyActivated && this.fiftyFiftyNotUse) {
-      this.fiftyFiftyNotUse = false;
-      let falseAnswers = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
-      falseAnswers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(falseAnswers.length / 2)).forEach(answer => answer.hide = true);
-    }
+    if (!this.fiftyFiftyEnabled) return;
+    this.fiftyFiftyEnabled = false;
+    let falseAnswers = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
+    falseAnswers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(falseAnswers.length / 2)).forEach(answer => answer.hide = true);
   }
 
   getGainToTransfer(event: number) {
