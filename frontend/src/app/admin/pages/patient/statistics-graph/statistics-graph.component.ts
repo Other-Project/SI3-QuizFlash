@@ -80,6 +80,7 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   }
 
   updateChart(graphData: [string[], number[]]) {
+    console.log(graphData);
     if (graphData[0].length == 0) {
       this.displayChart(false);
       return;
@@ -97,15 +98,16 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   }
 
   displayChart(bool: boolean) {
-    if (this.statsContainer) this.statsContainer.nativeElement.style.display = (bool) ? "block" : "none";
+    if (this.statsContainer) this.statsContainer.nativeElement.style.visibility = (bool) ? "visible" : "hidden";
   }
 
   quizSelection(quizSelectionData: { quizId: string, questionType: string }) {
+    console.log(quizSelectionData);
     this.setTryGraphOptions();
     this.selectedQuizId = quizSelectionData.quizId;
     this.selectedQuestionType = quizSelectionData.questionType;
     if (quizSelectionData.quizId == "all")
       this.updateChart(this.statsService.getAllQuizzesGraphData(this.patientId!, this.selectedQuestionType));
-    this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TRIES));
+    else this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TRIES));
   }
 }
