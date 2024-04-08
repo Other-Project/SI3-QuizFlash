@@ -1,5 +1,7 @@
-<form>
-  <input placeholder="Titre" [value]="quiz?.title"/>
-  <input placeholder="Theme" [value]="quiz?.theme"/>
-  <input placeholder="Image" [value]="quiz?.thumbnailUrl"/>
+<form [formGroup]="quizForm">
+  <input placeholder="Titre" formControlName="title"/>
+  <input placeholder="Theme" formControlName="theme"/>
+  <input placeholder="Image" formControlName="thumbnailUrl"/>
+
+  <a (click)="save()">Sauvegarder</a>
 </form>

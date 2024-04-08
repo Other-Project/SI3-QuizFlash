@@ -1,23 +1,47 @@
 import {Component} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Quiz} from "../../../../../models/quiz.models";
 import {QuizService} from "../../../../../service/quiz-service.service";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: "app-admin-quiz",
   templateUrl: "./admin-quiz.component.html",
   styleUrl: "./admin-quiz.component.scss",
+  imports: [
+    ReactiveFormsModule
+  ],
   standalone: true
 })
 export class AdminQuizComponent {
   public quiz?: Quiz;
 
-  constructor(public quizService: QuizService, public route: ActivatedRoute) {
-    this.quizService.quiz$.subscribe(quiz => this.quiz = quiz);
+  quizForm: FormGroup = new FormGroup({
+    title: new FormControl("", [Validators.required]),
+    theme: new FormControl("", [Validators.required]),
+    thumbnailUrl: new FormControl("")
+  });
+
+  constructor(public quizService: QuizService, private route: ActivatedRoute, private router: Router) {
+    this.quizService.quiz$.subscribe(quiz => {
+      this.quiz = quiz;
+      this.quizForm.setValue({
+        title: this.quiz?.title ?? "",
+        theme: this.quiz?.theme ?? "",
+        thumbnailUrl: this.quiz?.thumbnailUrl ?? ""
+      });
+    });
     this.route.params.subscribe(params => {
       let id = params["quiz_id"];
       this.quizService.selectQuiz(id);
-      if (id && !this.quiz) throw new Error("No quiz was found with this id");
     });
+  }
+
+  save() {
+    if (this.quizForm.valid) {
+      if (this.quiz) return this.quizService.updateQuiz(this.quiz.id, this.quizForm.value);
+      let id = this.quizService.addQuiz(this.quizForm.value);
+      this.router.navigate([id], {relativeTo: this.route}).then();
+    }
   }
 }
