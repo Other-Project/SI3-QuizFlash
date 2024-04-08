@@ -14,10 +14,11 @@ export const USER_BERNARD: Patient = {
   fontSize: 1.25,
   hobbies: ["peinture", "lecture"],
 
-  automatedSkip: true,
-  showIncorrectResponse: false,
+  removeAnswers: true,
   answerHint: false,
   numberOfQuestion: 3,
+  replayAtEnd: false,
+  automatedSkip: true,
 
   soundQuestion: false,
   autoStartAudio: false

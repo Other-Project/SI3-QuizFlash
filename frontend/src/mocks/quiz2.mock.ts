@@ -53,28 +53,28 @@ const QUESTION2: Question = {
 }
 
 const QUESTION3: Question = {
-  text: "Quelle est cette pièce de la maison ?",
+  text: "Quelle est cette chanson ?",
   type: QuestionType.Sound,
   answers: [
     {
-      answerText: "Salle de bain",
+      answerText: "La bohème",
       trueAnswer: false
     },
     {
-      answerText: "Cuisine",
+      answerText: "Non, je ne regrette rien",
       trueAnswer: false
     },
     {
-      answerText: "Chambre",
+      answerText: "La vie en rose",
       trueAnswer: true
     },
     {
-      answerText: "Garage",
+      answerText: "Allumer le feu",
       trueAnswer: false
     }
   ],
   imageUrl: "",
-  soundUrl: "test.mp3"
+  soundUrl: "assets/Edith Piaf - La vie en rose.mp3"
 }
 
 

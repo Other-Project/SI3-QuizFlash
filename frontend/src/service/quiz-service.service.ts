@@ -4,6 +4,8 @@ import {QUIZLIST} from "../mocks/quiz-list.mock";
 import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {UserService} from "./user.service";
+import {QuestionType} from "../models/question-type.models";
+import {Patient} from "../models/patient.models";
 
 @Injectable({providedIn: "root"})
 export class QuizService {
@@ -19,14 +21,19 @@ export class QuizService {
     });
   }
 
-  getQuiz(id: string) {
-    let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
-    if (!returnedQuiz) console.error("No quiz found with ID " + id);
-    return returnedQuiz;
-  }
-
-  selectQuiz(id: string) {
-    this.quiz$.next(this.quiz = this.getQuiz(id));
+  selectQuiz(id: string, user: Patient) {
+    let copy = undefined;
+    if (id) {
+      let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
+      if (!returnedQuiz) console.error("No quiz found with ID " + id);
+      copy = structuredClone(returnedQuiz);
+      if (copy && !user.soundQuestion) {
+        copy.questions = copy.questions.filter(question => question.type != QuestionType.Sound);
+      }
+      if (copy) copy.questions = copy.questions.sort(() => 0.5 - Math.random()).slice(0, user.numberOfQuestion);
+    }
+    this.quiz = copy;
+    this.quiz$.next(this.quiz);
   }
 
   addQuizzes(quiz: Quiz) {

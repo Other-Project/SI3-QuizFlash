@@ -1,6 +1,5 @@
 import {NgModule} from "@angular/core";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
-import {QuizPlayButtonComponent} from "./play-button/play-button.component";
 import {QuizComponent} from "./quiz.component";
 import {LayoutModule} from "../layout/layout.module";
 import {QuizHeaderComponent} from "./quiz-header/quiz-header.component";
@@ -14,12 +13,12 @@ import {QuizSelectionComponent} from "./quiz-selection/quiz-selection.component"
 import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/quiz-selection-card.component";
 import {SoundSettingsComponent} from "./sound-settings/sound-settings.component";
 import {SettingsModule} from "../admin/pages/patient/settings/settings.module";
+import {PlayButtonComponent} from "../layout/play-button/play-button.component";
 
 
 @NgModule({
   declarations: [
     QuizComponent,
-    QuizPlayButtonComponent,
     QuizHeaderComponent,
     QuestionSectionComponent,
     AnswersComponent,
@@ -39,7 +38,8 @@ import {SettingsModule} from "../admin/pages/patient/settings/settings.module";
     LayoutModule,
     RouterOutlet,
     RouterLink,
-    SettingsModule
+    SettingsModule,
+    PlayButtonComponent
   ]
 })
 export class QuizModule {

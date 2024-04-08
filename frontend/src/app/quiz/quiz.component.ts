@@ -20,49 +20,83 @@ export class QuizComponent implements OnInit {
   protected currentQuestion?: Question;
   protected soundSetting: boolean = false;
   protected selection = true;
+  protected audioGain!: number;
+  protected questions: Question[] = [];
+  protected fiftyFiftyEnabled: boolean = true;
 
-  constructor(private userService: UserService, public quizListService: QuizService) {
+  constructor(private userService: UserService, private quizService: QuizService) {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
     });
-    quizListService.quizzes$.subscribe(quizzes => this.quizzes = quizzes);
+    quizService.quizzes$.subscribe(quizzes => this.quizzes = quizzes);
+    this.quizService.quiz$.subscribe(quiz => {
+      this.quiz = quiz;
+      if (quiz) {
+        this.questions = quiz.questions;
+        if (this.user?.soundQuestion && this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
+        this.update();
+        this.selection = false;
+      }
+    });
   }
 
   ngOnInit(): void {
   }
 
   update() {
-    this.currentQuestion = this.quiz!.questions.at(this.counter - 1);
+    this.currentQuestion = this.questions.at(this.counter - 1);
   }
 
-  nextQuestion(answerReturned: Answer) {
+  nextQuestion() {
+    this.fiftyFiftyEnabled = true;
     this.counter++;
     this.update();
   }
 
   setQuiz(quiz: Quiz) {
-    this.quiz = quiz;
-    if (this.user?.soundQuestion && quiz.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
-    else if (!this.user?.soundQuestion) {
-      quiz.questions = quiz.questions.filter(question => question.type != QuestionType.Sound);
-    }
-    this.update();
-    this.selection = false;
+    this.quizService.selectQuiz(quiz.id, this.user!);
   }
 
   returnSelectionPage() {
+    this.quizService.selectQuiz("", this.user!);
+    this.fiftyFiftyEnabled = true;
     this.counter = 1;
     this.selection = true;
     this.quiz = undefined;
     this.currentQuestion = undefined;
+    this.questions = [];
   }
 
   isFinish() {
-    return this.quiz?.questions.length! < this.counter || this.counter - 1 >= this.user?.numberOfQuestion!;
+    return this.counter > this.questions.length;
   }
 
   getCounter() {
     if (this.isFinish()) return this.counter - 1;
     return this.counter;
+  }
+
+  checkAnswer(answer: Answer) {
+    if (this.user!.replayAtEnd && !answer.trueAnswer) this.replayAtEnd();
+    this.fiftyFiftyEnabled = false;
+  }
+
+  replayAtEnd() {
+    if (this.questions.filter(question => question == this.currentQuestion).length <= 1) {
+      this.questions.push(this.currentQuestion!);
+      this.questions.at(-1)!.answers.forEach(answer => answer.hide = false);
+    }
+  }
+
+  fiftyFifty() {
+    if (!this.fiftyFiftyEnabled) return;
+    this.fiftyFiftyEnabled = false;
+    let falseAnswers = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
+    falseAnswers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(falseAnswers.length / 2)).forEach(answer => answer.hide = true);
+  }
+
+  getGainToTransfer(event: number) {
+    this.soundSetting = false;
+    this.audioGain = event;
   }
 }
