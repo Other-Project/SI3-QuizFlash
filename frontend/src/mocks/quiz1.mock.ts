@@ -76,7 +76,7 @@ const QUESTION3: Question = {
       trueAnswer: false
     }
   ],
-  imageUrl: "Chambre.jpg",
+  imageUrl: "assets/Chambre.jpg",
   soundUrl: ""
 }
 
