@@ -68,19 +68,20 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
 
   selectedGraphType(selectedMode: string) {
     if (this.selectedQuizId && this.selectedQuestionType) {
+      let graphType;
       if (selectedMode == "tries") {
         this.setTryGraphOptions();
-        this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TRIES));
+        graphType = GraphType.TRIES;
       } else {
+        graphType = GraphType.TIME;
         this.chart.options.scales.y.suggestedMax = 15;
         this.chart.data.datasets[0].label = "Temps moyen par question";
-        this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TIME));
       }
+      this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, graphType));
     }
   }
 
   updateChart(graphData: [string[], number[]]) {
-    console.log(graphData);
     if (graphData[0].length == 0) {
       this.displayChart(false);
       return;
@@ -102,7 +103,6 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   }
 
   quizSelection(quizSelectionData: { quizId: string, questionType: string }) {
-    console.log(quizSelectionData);
     this.setTryGraphOptions();
     this.selectedQuizId = quizSelectionData.quizId;
     this.selectedQuestionType = quizSelectionData.questionType;
