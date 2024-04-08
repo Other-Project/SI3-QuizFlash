@@ -57,7 +57,7 @@ export class QuizComponent implements OnInit {
   }
 
   returnSelectionPage() {
-    this.quizService.unsetQuiz();
+    this.quizService.selectQuiz("", this.user!);
     this.fiftyFiftyNotUse = true;
     this.counter = 1;
     this.selection = true;
@@ -76,8 +76,7 @@ export class QuizComponent implements OnInit {
   }
 
   checkAnswer(answer: Answer) {
-    let trueAnswer = this.currentQuestion!.answers.find(answer => answer.trueAnswer);
-    if (this.user!.replayAtEnd && answer != trueAnswer) this.replayAtEnd();
+    if (this.user!.replayAtEnd && !answer.trueAnswer) this.replayAtEnd();
     this.fiftyFiftyActivated = false;
   }
 

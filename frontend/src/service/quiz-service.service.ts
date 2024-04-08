@@ -22,14 +22,18 @@ export class QuizService {
   }
 
   selectQuiz(id: string, user: Patient) {
-    let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
-    if (!returnedQuiz) console.error("No quiz found with ID " + id);
-    let copy = structuredClone(returnedQuiz);
-    if (copy && !user.soundQuestion) {
-      copy.questions = copy.questions.filter(question => question.type != QuestionType.Sound);
-    }
-    if (copy) {
-      copy.questions = copy.questions.slice(0, user.numberOfQuestion);
+    let copy = undefined;
+    console.log(id);
+    if (id != "") {
+      let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
+      if (!returnedQuiz) console.error("No quiz found with ID " + id);
+      copy = structuredClone(returnedQuiz);
+      if (copy && !user.soundQuestion) {
+        copy.questions = copy.questions.filter(question => question.type != QuestionType.Sound);
+      }
+      if (copy) {
+        copy.questions = copy.questions.slice(0, user.numberOfQuestion);
+      }
     }
     this.quiz = copy;
     this.quiz$.next(this.quiz);
@@ -41,10 +45,5 @@ export class QuizService {
   }
 
   deleteQuizzes(id: string): void {
-  }
-
-  unsetQuiz(): void {
-    this.quiz = undefined;
-    this.quiz$.next(this.quiz);
   }
 }
