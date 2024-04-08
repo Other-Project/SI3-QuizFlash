@@ -21,16 +21,17 @@ export class QuizService {
     });
   }
 
-  selectQuiz(id: string, user: Patient) {
+  selectQuiz(id: string, user?: Patient) {
     let copy = undefined;
     if (id) {
       let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
       if (!returnedQuiz) console.error("No quiz found with ID " + id);
-      copy = structuredClone(returnedQuiz);
-      if (copy && !user.soundQuestion) {
-        copy.questions = copy.questions.filter(question => question.type != QuestionType.Sound);
-      }
-      if (copy) copy.questions = copy.questions.sort(() => 0.5 - Math.random()).slice(0, user.numberOfQuestion);
+
+      if (user && (copy = structuredClone(returnedQuiz))) {
+        if (!user.soundQuestion)
+          copy.questions = copy.questions.filter(question => question.type != QuestionType.Sound);
+        copy.questions = copy.questions.sort(() => 0.5 - Math.random()).slice(0, user.numberOfQuestion);
+      } else copy = returnedQuiz;
     }
     this.quiz = copy;
     this.quiz$.next(this.quiz);

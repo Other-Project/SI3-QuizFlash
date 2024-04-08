@@ -13,9 +13,10 @@ export class AdminQuizComponent {
   public quiz?: Quiz;
 
   constructor(public quizService: QuizService, public route: ActivatedRoute) {
+    this.quizService.quiz$.subscribe(quiz => this.quiz = quiz);
     this.route.params.subscribe(params => {
       let id = params["quiz_id"];
-      this.quiz = this.quizService.getQuiz(id);
+      this.quizService.selectQuiz(id);
       if (id && !this.quiz) throw new Error("No quiz was found with this id");
     });
   }
