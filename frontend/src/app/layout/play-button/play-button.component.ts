@@ -43,7 +43,7 @@ export class PlayButtonComponent {
     console.log(this.audio?.nativeElement);
     if (!this.audio || this.audio.nativeElement.readyState < 2) return;
     if (!this.soundPlayed) this.audio.nativeElement.play().then();
-    else this.audio.nativeElement.pause();
+    else this.audio.nativeElement.pause()?.then();
     this.soundPlayed = !this.soundPlayed;
   }
 }
