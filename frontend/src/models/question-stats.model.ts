@@ -6,5 +6,5 @@ export interface QuestionStats {
   questionType: QuestionType;
   success: boolean;
   timeSpent: number;
-  assistedAnswer: boolean;
+  answerHint: boolean;
 }
