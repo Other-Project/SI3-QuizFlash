@@ -50,6 +50,7 @@ export class QuizComponent implements OnInit {
     this.fiftyFiftyActivated = true;
     this.counter++;
     this.update();
+    this.fiftyFiftyNotUse = true;
   }
 
   setQuiz(quiz: Quiz) {
