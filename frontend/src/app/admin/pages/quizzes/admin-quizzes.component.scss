@@ -1,7 +1,16 @@
+@import "/colors";
+
 section {
   margin-bottom: 1em;
 
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 1em;
+
+
+  #search-bar {
+    border: none;
+    border-bottom: 1px solid $blackBlue;
+    outline: none;
+  }
 }
