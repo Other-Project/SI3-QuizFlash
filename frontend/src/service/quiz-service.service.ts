@@ -24,7 +24,7 @@ export class QuizService {
   selectQuiz(id: string, user: Patient) {
     let copy = undefined;
     console.log(id);
-    if (id != "") {
+    if (id) {
       let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
       if (!returnedQuiz) console.error("No quiz found with ID " + id);
       copy = structuredClone(returnedQuiz);
