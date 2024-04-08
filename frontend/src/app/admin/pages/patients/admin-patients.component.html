@@ -1,1 +1,5 @@
 <app-profile-list [users]="users" (userSelected)="openUser($event)"/>
+<app-button [routerLink]="'../patient'" [color]="'blue'">
+  <fa-icon [icon]="faAdd"/>
+  Ajouter un utilisateur
+</app-button>

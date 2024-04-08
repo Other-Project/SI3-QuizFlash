@@ -2,15 +2,21 @@ import {Component} from "@angular/core";
 import {UserService} from "../../../../service/user.service";
 import {User} from "../../../../models/user.models";
 import {ProfileListComponent} from "../../../profiles/profile-list/profile-list.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AccessRestriction} from "../../../../models/access-restriction.models";
+import {LayoutModule} from "../../../layout/layout.module";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {faAdd} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-admin-patients",
   templateUrl: "./admin-patients.component.html",
   standalone: true,
   imports: [
-    ProfileListComponent
+    ProfileListComponent,
+    RouterLink,
+    LayoutModule,
+    FaIconComponent
   ]
 })
 export class AdminPatientsComponent {
@@ -23,4 +29,6 @@ export class AdminPatientsComponent {
   openUser(user: User) {
     this.router.navigate(["../patient", user.id], {relativeTo: this.route}).then();
   }
+
+  protected readonly faAdd = faAdd;
 }
