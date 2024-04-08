@@ -2,14 +2,15 @@
   <div class="patient-picture">
     <app-image [src]="user?.pictureUrl" [alt]="'Profile picture'" [width]="115" [height]="115" />
   </div>
-  @if (edit) {
+  @if (edit || !user) {
     <info-form (patientInfoChange)="updatePatientInfo($event)" [user]="user"/>
   } @else {
     <div class="patient-info">
-      <h1 *ngIf="user">{{ user.lastname }}</h1>
-      <h1 *ngIf="user">{{ user.firstname }}</h1>
+      <h2 *ngIf="user">{{ user.lastname }}</h2>
+      <h2 *ngIf="user">{{ user.firstname }}</h2>
       <h3 *ngIf="user">{{ user.age }} ans</h3>
     </div>
     <edit-button (editButtonClick)="editPatientInfo()"/>
   }
+  <h1 *ngIf="!user"> Création d'un nouvel utilisateur</h1>
 </div>
