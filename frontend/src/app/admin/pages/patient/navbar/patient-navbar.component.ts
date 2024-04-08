@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {TabNavigation} from "../patient.component";
 
 @Component({
@@ -8,6 +8,7 @@ import {TabNavigation} from "../patient.component";
 })
 
 export class PatientNavbarComponent{
+  @Input() create: boolean = true;
   @Output() tabToSwitch: EventEmitter<TabNavigation> = new EventEmitter<TabNavigation>();
 
   switchTab(tab: TabNavigation) {

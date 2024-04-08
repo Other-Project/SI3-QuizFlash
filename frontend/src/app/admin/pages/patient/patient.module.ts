@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {PatientComponent} from "./patient.component";
-import {NgOptimizedImage, NgSwitch, NgSwitchCase} from "@angular/common";
+import {NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from "@angular/common";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {InformationComponent} from "./information/information.component";
 import {StatisticsModule} from "./statistics/statistics.module";
@@ -29,7 +29,8 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
     LayoutModule,
     NgMultiSelectDropDownModule,
     NgSwitch,
-    NgSwitchCase
+    NgSwitchCase,
+    NgIf
   ]
 })
 
