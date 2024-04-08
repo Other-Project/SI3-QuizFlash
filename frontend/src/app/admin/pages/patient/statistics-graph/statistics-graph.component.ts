@@ -27,7 +27,6 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   constructor(private statsService: StatisticsService) {
   }
 
-
   createChart(graphData: [string[], number[]]) {
     this.chart = new Chart("stat-chart", {
       type: 'line',
@@ -106,8 +105,9 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
     this.setTryGraphOptions();
     this.selectedQuizId = quizSelectionData.quizId;
     this.selectedQuestionType = quizSelectionData.questionType;
-    if (quizSelectionData.quizId == "all")
-      this.updateChart(this.statsService.getAllQuizzesGraphData(this.patientId!, this.selectedQuestionType));
-    else this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TRIES));
+    let chartData = (quizSelectionData.quizId == "all") ?
+      this.statsService.getAllQuizzesGraphData(this.patientId!, this.selectedQuestionType) :
+      this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TRIES);
+    this.updateChart(chartData);
   }
 }
