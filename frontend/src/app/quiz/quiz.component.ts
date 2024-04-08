@@ -66,7 +66,7 @@ export class QuizComponent implements OnInit {
   }
 
   isFinish() {
-    return this.counter - 1 >= this.questions.length;
+    return this.counter > this.questions.length;
   }
 
   getCounter() {
@@ -76,9 +76,7 @@ export class QuizComponent implements OnInit {
 
   checkAnswer(answer: Answer) {
     let trueAnswer = this.currentQuestion!.answers.find(answer => answer.trueAnswer);
-    if (this.user!.replayAtEnd && answer != trueAnswer) {
-      this.replayAtEnd();
-    }
+    if (this.user!.replayAtEnd && answer != trueAnswer) this.replayAtEnd();
     this.fiftyFiftyActivated = false;
   }
 

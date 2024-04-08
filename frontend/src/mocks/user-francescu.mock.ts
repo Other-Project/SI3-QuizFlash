@@ -18,7 +18,7 @@ export const USER_FRANCESCU: Patient = {
   removeAnswers: false,
   answerHint: true,
   numberOfQuestion: 3,
-  automatedSkip: true,
+  automatedSkip: false,
 
   soundQuestion: false,
   autoStartAudio: false
