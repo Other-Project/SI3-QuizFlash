@@ -1,5 +1,5 @@
 <div class="question-result">
-  <p>Bravo, la bonne réponse était :</p>
+  <p>{{ correct ? 'Bravo, tu as raison, la bonne réponse était :' : 'La bonne réponse était :' }}</p>
   <app-button [color]="'yellow'" [disabled]="true" id="trueAnswer">{{ goodAnswer?.answerText }}</app-button>
   <app-button [color]="'yellow'" (click)="nextQuestion()" id="nextQuestion">Question suivante</app-button>
 </div>
