@@ -1,7 +1,10 @@
 <form [formGroup]="quizForm">
-  <input placeholder="Titre" formControlName="title"/>
-  <input placeholder="Theme" formControlName="theme"/>
-  <input placeholder="Image" formControlName="thumbnailUrl"/>
+  <input placeholder="Image" formControlName="thumbnailUrl" hidden="hidden"/>
+  <app-image-input [src]="quiz?.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150" (onImageUpdate)="quizForm.patchValue({thumbnailUrl: $event})"/>
 
-  <app-button (click)="save()">Sauvegarder</app-button>
+  <div>
+    <input placeholder="Titre" formControlName="title" id="title"/>
+    <input placeholder="Thème" formControlName="theme" id="theme"/>
+    <app-button (click)="save()">Sauvegarder</app-button>
+  </div>
 </form>
