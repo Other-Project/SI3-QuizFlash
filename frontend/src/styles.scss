@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use 'sass:color';
 @import "colors";
 @import "hobbies";
 
@@ -33,4 +34,11 @@ main {
 a {
   text-decoration: none;
   color: #00090f;
+}
+
+input {
+  border-radius: .5rem;
+  padding: .5em;
+  background-color: $white;
+  border: 1px solid color.scale($white, $lightness: -5%);
 }

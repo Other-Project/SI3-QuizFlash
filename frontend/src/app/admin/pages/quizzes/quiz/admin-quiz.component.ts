@@ -3,13 +3,15 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Quiz} from "../../../../../models/quiz.models";
 import {QuizService} from "../../../../../service/quiz-service.service";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {LayoutModule} from "../../../../layout/layout.module";
 
 @Component({
   selector: "app-admin-quiz",
   templateUrl: "./admin-quiz.component.html",
   styleUrl: "./admin-quiz.component.scss",
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutModule
   ],
   standalone: true
 })
