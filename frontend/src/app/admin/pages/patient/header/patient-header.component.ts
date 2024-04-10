@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../../../models/user.models";
+import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'patient-header',
@@ -23,4 +24,6 @@ export class PatientHeaderComponent implements OnInit{
     this.patientInfoChange.emit(newData);
     this.editPatientInfo();
   }
+
+  protected readonly faCircleUser = faCircleUser;
 }
