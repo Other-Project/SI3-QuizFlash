@@ -8,19 +8,15 @@
   min-height: 100px;
 
   .patient-picture, #default-profile-picture {
-    margin-left: 3vw;
     border-radius: 50%;
+    border-color: white;
+    margin-left: 3vw;
     overflow: hidden;
 
     app-image {
       width: 115px;
       height: 115px;
     }
-  }
-
-  #default-profile-picture {
-    font-size: 6em;
-    color: $darkBlue;
   }
 
   .patient-info {

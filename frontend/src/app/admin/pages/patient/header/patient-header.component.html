@@ -1,6 +1,6 @@
 <div class="patient-header">
   @if (edit || !user) {
-    <fa-icon id="default-profile-picture" [icon]="faCircleUser"/>
+    <app-profile-picture id="default-profile-picture"/>
     <info-form (patientInfoChange)="updatePatientInfo($event)" [user]="user"/>
   } @else {
     <div class="patient-picture">

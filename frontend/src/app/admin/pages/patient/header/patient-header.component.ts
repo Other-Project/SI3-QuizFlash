@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../../../models/user.models";
-import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
+import {faCircleUser, faPencil} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'patient-header',
@@ -26,4 +26,5 @@ export class PatientHeaderComponent implements OnInit{
   }
 
   protected readonly faCircleUser = faCircleUser;
+  protected readonly faPencil = faPencil;
 }
