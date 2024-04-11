@@ -1,0 +1,8 @@
+<div class="change-image-container" (click)="inputField.click()">
+  <app-image [width]="width" [height]="height" [alt]="alt" [src]="src"></app-image>
+  <div class="change-image-hover">
+    <fa-icon [icon]="faCamera"/>
+    Changer d'image
+  </div>
+</div>
+<input #inputField type="file" accept="image/*" hidden="hidden" (change)="imageUpdated($any($event.target).files)"/>

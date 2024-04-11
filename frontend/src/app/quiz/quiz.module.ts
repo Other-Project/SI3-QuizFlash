@@ -29,6 +29,9 @@ import {PlayButtonComponent} from "../layout/play-button/play-button.component";
     QuizSelectionCardComponent,
     SoundSettingsComponent
   ],
+  exports: [
+    QuizSelectionComponent
+  ],
   imports: [
     CommonModule,
     NgOptimizedImage,
@@ -36,7 +39,7 @@ import {PlayButtonComponent} from "../layout/play-button/play-button.component";
     RouterOutlet,
     RouterLink,
     SettingsModule,
-    PlayButtonComponent,
+    PlayButtonComponent
   ]
 })
 export class QuizModule {

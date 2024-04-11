@@ -1,0 +1,9 @@
+@import "/colors";
+
+section {
+  margin-bottom: 1em;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1em;
+}

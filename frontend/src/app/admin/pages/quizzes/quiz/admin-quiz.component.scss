@@ -1,0 +1,29 @@
+form {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1em;
+  height: 200px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+
+    input {
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0;
+
+      &#title {
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      &#theme {
+        font-size: 1.25em;
+      }
+    }
+  }
+}

@@ -14,6 +14,7 @@ import {QuizService} from "../../service/quiz-service.service";
 })
 export class QuizComponent implements OnInit {
   public user?: Patient;
+  public quizzes?: Quiz[];
   public quiz?: Quiz;
   protected counter: number = 1;
   protected currentQuestion?: Question;
@@ -27,6 +28,7 @@ export class QuizComponent implements OnInit {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
     });
+    quizService.quizzes$.subscribe(quizzes => this.quizzes = quizzes);
     this.quizService.quiz$.subscribe(quiz => {
       this.quiz = quiz;
       if (quiz) {
