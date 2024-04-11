@@ -28,7 +28,7 @@ export class StatisticsService {
   }
 
   private getRateByFilter(stats: QuizStats[], questionType?: QuestionType, successFilter: Predicate<QuestionStats> = question => question.success) {
-    if (this.quizStatistics.length == 0)
+    if (stats.length == 0)
       return -1;
 
     const result = stats.reduce((accumulator, current) => {
