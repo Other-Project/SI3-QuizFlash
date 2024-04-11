@@ -15,10 +15,6 @@ export class StatisticsService {
   constructor() {
   }
 
-  public static getQuestionType(questionType: string): QuestionType | undefined {
-    return questionType as unknown as QuestionType;
-  }
-
   private isQuestionOfType(question: QuestionStats, questionType?: QuestionType) {
     return !questionType || question.questionType == questionType;
   }
@@ -68,7 +64,6 @@ export class StatisticsService {
   }
 
   getQuizGraphData(patientId: string, graphType: GraphType, quizId: string, questionType?: QuestionType) {
-    console.log(graphType);
     if (graphType == GraphType.TRIES)
       return this.getQuizTriesGraphData(patientId, quizId, questionType);
     else return this.getTimeQuizGraphData(patientId, quizId, questionType);
