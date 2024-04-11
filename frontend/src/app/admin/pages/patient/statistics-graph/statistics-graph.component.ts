@@ -66,8 +66,8 @@ export class StatisticsGraphComponent implements AfterViewInit {
     else {
       this.chart.options.scales.y.suggestedMax = 15;
       this.chart.data.datasets[0].label = "Temps moyen par question";
-      this.updateChart(this.statsService.getQuizGraphData(this.patientId!, graphType, this.selectedQuizId, this.selectedQuestionType));
     }
+    this.updateChart(this.statsService.getQuizGraphData(this.patientId!, graphType, this.selectedQuizId, this.selectedQuestionType));
   }
 
   updateChart(graphData: [string[], number[]]) {

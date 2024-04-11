@@ -1,7 +1,7 @@
 <div class="selects">
 <h2>Choix des statistiques</h2>
   <select #quizSelect (change)="quizChoice(quizSelect.value, $any(questionType.value))" name="quizz-select">
-    <option value="all">Tous les quizz</option>
+    <option value="{{ undefined }}">Tous les quizz</option>
     @for (quiz of quizList; track quiz){
       <option value="{{ quiz.id }}">{{ quiz.title }}</option>
     }
