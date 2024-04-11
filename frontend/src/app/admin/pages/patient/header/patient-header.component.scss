@@ -3,7 +3,7 @@
 .patient-header {
   display: flex;
   align-items: center;
-  height: 9rem;
+  height: 10rem;
   border-bottom: 1px solid $blue;
   min-height: 100px;
 
@@ -12,11 +12,8 @@
     border-color: white;
     margin-left: 3vw;
     overflow: hidden;
-
-    app-image {
-      width: 115px;
-      height: 115px;
-    }
+    width: 150px;
+    height: 150px;
   }
 
   .patient-info {

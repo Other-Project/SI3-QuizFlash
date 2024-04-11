@@ -1,10 +1,10 @@
 <div class="patient-header">
   @if (edit || !user) {
-    <app-profile-picture id="default-profile-picture"/>
+    <app-image-input id="default-profile-picture" [src]="'/assets/users/anne.jpg'" [width]="20" [height]="20"/>
     <info-form (patientInfoChange)="updatePatientInfo($event)" [user]="user"/>
   } @else {
     <div class="patient-picture">
-      <app-image [src]="user?.pictureUrl" [alt]="'Profile picture'" [width]="115" [height]="115"/>
+      <app-image-input [src]="user?.pictureUrl" [alt]="'Profile picture'" [width]="115" [height]="115"/>
     </div>
     <div class="patient-info">
       <h2 *ngIf="user">{{ user.lastname }}</h2>
