@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import {StatisticsService} from "../../../../../service/statistics.service";
 import {Observable, Subscription} from "rxjs";
 import {GraphType} from "../../../../../models/graph-type.model";
+import {QuestionType} from "../../../../../models/question-type.models";
 
 
 @Component({
@@ -12,14 +13,14 @@ import {GraphType} from "../../../../../models/graph-type.model";
 })
 
 export class StatisticsGraphComponent implements OnInit, AfterViewInit {
-  @Input() quizSelectionEvent?: Observable<{ quizId: string, questionType: string }>;
+  @Input() quizSelectionEvent?: Observable<{ quizId: string, questionType: QuestionType }>;
   @Input() title: string = "";
   @Input() patientId?: string;
 
   @ViewChild("statsContainer") statsContainer?: ElementRef;
 
   protected selectedQuizId?: string;
-  private selectedQuestionType?: string;
+  private selectedQuestionType?: QuestionType;
   private eventSubscription?: Subscription;
   public chart: any;
   selectedValue: string = "tries";
@@ -58,7 +59,7 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      let data = this.statsService.getAllQuizzesGraphData(this.patientId!, "all");
+      let data = this.statsService.getAllQuizzesGraphData(this.patientId!);
       this.createChart(data);
       if (data[0].length == 0)
         this.displayChart(false);
@@ -76,7 +77,7 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
         this.chart.options.scales.y.suggestedMax = 15;
         this.chart.data.datasets[0].label = "Temps moyen par question";
       }
-      this.updateChart(this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, graphType));
+      this.updateChart(this.statsService.getQuizGraphData(this.patientId!, graphType, this.selectedQuizId, this.selectedQuestionType as unknown as QuestionType));
     }
   }
 
@@ -101,13 +102,13 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
     if (this.statsContainer) this.statsContainer.nativeElement.style.visibility = (bool) ? "visible" : "hidden";
   }
 
-  quizSelection(quizSelectionData: { quizId: string, questionType: string }) {
+  quizSelection(quizSelectionData: { quizId: string, questionType: QuestionType }) {
     this.setTryGraphOptions();
     this.selectedQuizId = quizSelectionData.quizId;
     this.selectedQuestionType = quizSelectionData.questionType;
     let chartData = (quizSelectionData.quizId == "all") ?
       this.statsService.getAllQuizzesGraphData(this.patientId!, this.selectedQuestionType) :
-      this.statsService.getQuizGraphData(this.patientId!, this.selectedQuizId, this.selectedQuestionType, GraphType.TRIES);
+      this.statsService.getQuizGraphData(this.patientId!, GraphType.TRIES, this.selectedQuizId, this.selectedQuestionType);
     this.updateChart(chartData);
   }
 }

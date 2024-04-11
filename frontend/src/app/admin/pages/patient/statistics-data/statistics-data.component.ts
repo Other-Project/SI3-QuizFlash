@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {QuizService} from "../../../../../service/quiz-service.service";
 import {Quiz} from "../../../../../models/quiz.models";
 import {StatisticsService} from "../../../../../service/statistics.service";
+import {QuestionType} from "../../../../../models/question-type.models";
 
 @Component({
   selector: 'stats-data',
@@ -31,16 +32,18 @@ export class StatisticsDataComponent implements OnInit{
     this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
     });
-    this.resetAllQuizzesData("all");
+    this.resetAllQuizzesData();
   }
 
-  resetAllQuizzesData(questionType: string) {
+  resetAllQuizzesData(questionType?: QuestionType) {
     this.successRate = this.statisticsService.getAllQuizzesSuccessRate(this.patientId!, questionType);
     this.answerHintRate = this.statisticsService.getAllQuizzesAnswerHintRate(this.patientId!, questionType);
   }
 
-  quizChoice(quizId: string, questionType: string): void {
+  quizChoice(quizId: string, stringQuestionType: string): void {
     this.quizSelected = quizId != "all";
+    const questionType: QuestionType | undefined = StatisticsService.getQuestionType(stringQuestionType);
+
     this.quizSelection?.emit({quizId, questionType});
 
     if (quizId == "all") {
