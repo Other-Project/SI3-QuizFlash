@@ -5,20 +5,20 @@ import {ButtonComponent} from "./button/button.component";
 import {ImageComponent} from "./image/image.component";
 import {RouterLink} from "@angular/router";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {ProfilePictureComponent} from "./profile-picture/profile-picture.component";
+import {ImageInputComponent} from "./image-input/image-input.component";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     ButtonComponent,
     ImageComponent,
-    ProfilePictureComponent
+    ImageInputComponent
   ],
   exports: [
     HeaderComponent,
     ButtonComponent,
     ImageComponent,
-    ProfilePictureComponent
+    ImageInputComponent
   ],
   imports: [
     NgOptimizedImage,

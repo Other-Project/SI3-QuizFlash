@@ -14,10 +14,11 @@ export const USER_MARTINE: Patient = {
   fontSize: 2,
   hobbies: ["culture", "famille", "theatre"],
 
-  automatedSkip: false,
-  showIncorrectResponse: false,
+  removeAnswers: false,
   answerHint: false,
   numberOfQuestion: 3,
+  replayAtEnd: false,
+  automatedSkip: true,
 
   soundQuestion: true,
   autoStartAudio: true

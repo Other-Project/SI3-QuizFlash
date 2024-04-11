@@ -14,10 +14,11 @@ export const USER_FRANCESCU: Patient = {
   fontSize: 1,
   hobbies: ["peche", "television"],
 
-  automatedSkip: false,
-  showIncorrectResponse: true,
+  replayAtEnd: true,
+  removeAnswers: false,
   answerHint: true,
   numberOfQuestion: 3,
+  automatedSkip: false,
 
   soundQuestion: false,
   autoStartAudio: false

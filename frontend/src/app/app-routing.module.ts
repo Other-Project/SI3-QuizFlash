@@ -4,12 +4,13 @@ import {AdminComponent} from "./admin/admin.component";
 import {QuizComponent} from "./quiz/quiz.component";
 import {AdminPatientsComponent} from "./admin/pages/patients/admin-patients.component";
 import {PatientComponent} from "./admin/pages/patient/patient.component";
-import {AdminQuizzComponent} from "./admin/pages/quizz/admin-quizz.component";
+import {AdminQuizzesComponent} from "./admin/pages/quizzes/admin-quizzes.component";
 import {InformationComponent} from "./admin/pages/patient/information/information.component";
 import {StatisticsComponent} from "./admin/pages/patient/statistics/statistics.component";
 import {ProfilesComponent} from "./profiles/profiles.component";
 import {AccessChecker} from "../service/access-checker.service";
 import {AccessRestriction} from "../models/access-restriction.models";
+import {AdminQuizComponent} from "./admin/pages/quizzes/quiz/admin-quiz.component";
 
 export const checkAccess = (restriction: AccessRestriction) => inject(AccessChecker).canActivate(restriction);
 
@@ -21,7 +22,13 @@ const routes: Routes = [
       {path: "patients", component: AdminPatientsComponent},
       {path: "patient", component: PatientComponent},
       {path: "patient/:user_id", component: PatientComponent},
-      {path: "quizz", component: AdminQuizzComponent}
+      {
+        path: "quizzes", children: [
+          {path: "", pathMatch: "full", component: AdminQuizzesComponent},
+          {path: "quiz", component: AdminQuizComponent},
+          {path: "quiz/:quiz_id", component: AdminQuizComponent}
+        ]
+      }
     ]
   },
   {path: "quiz", component: QuizComponent, canActivate: [() => checkAccess(AccessRestriction.User)]}

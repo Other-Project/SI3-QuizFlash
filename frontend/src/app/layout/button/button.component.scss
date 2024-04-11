@@ -3,7 +3,7 @@
 
 button {
   border-radius: .5rem;
-  padding: .25em;
+  padding: .5em;
   overflow: hidden;
   cursor: pointer;
   display: block;
@@ -30,7 +30,7 @@ button {
         box-shadow: 0 0 2px color.scale($background, $lightness: -50%);
       }
 
-      @if (lightness($background) < 40) {
+      @if (lightness($background) < 50) {
         color: $white;
       }
     }
