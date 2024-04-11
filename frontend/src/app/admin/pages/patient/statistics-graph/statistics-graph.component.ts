@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, Input, ViewChild} from "@angular/core";
 import Chart from 'chart.js/auto';
 import {StatisticsService} from "../../../../../service/statistics.service";
-import {Observable, Subscription} from "rxjs";
 import {GraphType} from "../../../../../models/graph-type.model";
 import {QuestionType} from "../../../../../models/question-type.models";
 
@@ -12,8 +11,8 @@ import {QuestionType} from "../../../../../models/question-type.models";
   styleUrls: ['statistics-graph.component.scss']
 })
 
-export class StatisticsGraphComponent implements OnInit, AfterViewInit {
-  @Input() quizSelectionEvent?: Observable<{ quizId: string, questionType: QuestionType }>;
+export class StatisticsGraphComponent implements AfterViewInit {
+  protected readonly GraphType = GraphType;
   @Input() title: string = "";
   @Input() patientId?: string;
 
@@ -21,9 +20,8 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
 
   protected selectedQuizId?: string;
   private selectedQuestionType?: QuestionType;
-  private eventSubscription?: Subscription;
   public chart: any;
-  selectedValue: string = "tries";
+  selectedValue: GraphType = GraphType.TRIES;
 
   constructor(private statsService: StatisticsService) {
   }
@@ -53,10 +51,6 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit(): void {
-    this.eventSubscription = this.quizSelectionEvent?.subscribe((quizId) => this.quizSelection(quizId));
-  }
-
   ngAfterViewInit(): void {
     setTimeout(() => {
       let data = this.statsService.getAllQuizzesGraphData(this.patientId!);
@@ -66,18 +60,13 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
     })
   }
 
-  selectedGraphType(selectedMode: string) {
-    if (this.selectedQuizId && this.selectedQuestionType) {
-      let graphType;
-      if (selectedMode == "tries") {
-        this.setTryGraphOptions();
-        graphType = GraphType.TRIES;
-      } else {
-        graphType = GraphType.TIME;
-        this.chart.options.scales.y.suggestedMax = 15;
-        this.chart.data.datasets[0].label = "Temps moyen par question";
-      }
-      this.updateChart(this.statsService.getQuizGraphData(this.patientId!, graphType, this.selectedQuizId, this.selectedQuestionType as unknown as QuestionType));
+  selectedGraphType(graphType: GraphType) {
+    if (!this.selectedQuizId) return;
+    if (graphType == GraphType.TRIES) this.setTryGraphOptions();
+    else {
+      this.chart.options.scales.y.suggestedMax = 15;
+      this.chart.data.datasets[0].label = "Temps moyen par question";
+      this.updateChart(this.statsService.getQuizGraphData(this.patientId!, graphType, this.selectedQuizId, this.selectedQuestionType));
     }
   }
 
@@ -93,7 +82,7 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   }
 
   setTryGraphOptions() {
-    this.selectedValue = "tries";
+    this.selectedValue = GraphType.TRIES;
     this.chart.data.datasets[0].label = "Taux de réussite";
     this.chart.options.scales.y.suggestedMax = 100;
   }
@@ -102,13 +91,13 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
     if (this.statsContainer) this.statsContainer.nativeElement.style.visibility = (bool) ? "visible" : "hidden";
   }
 
-  quizSelection(quizSelectionData: { quizId: string, questionType: QuestionType }) {
+  quizSelection(quizId?: string, questionType?: QuestionType) {
     this.setTryGraphOptions();
-    this.selectedQuizId = quizSelectionData.quizId;
-    this.selectedQuestionType = quizSelectionData.questionType;
-    let chartData = (quizSelectionData.quizId == "all") ?
-      this.statsService.getAllQuizzesGraphData(this.patientId!, this.selectedQuestionType) :
-      this.statsService.getQuizGraphData(this.patientId!, GraphType.TRIES, this.selectedQuizId, this.selectedQuestionType);
+    this.selectedQuizId = quizId;
+    this.selectedQuestionType = questionType;
+    let chartData = quizId ?
+      this.statsService.getQuizGraphData(this.patientId!, GraphType.TRIES, quizId, questionType) :
+      this.statsService.getAllQuizzesGraphData(this.patientId!, questionType);
     this.updateChart(chartData);
   }
 }

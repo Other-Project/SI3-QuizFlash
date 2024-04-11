@@ -68,6 +68,7 @@ export class StatisticsService {
   }
 
   getQuizGraphData(patientId: string, graphType: GraphType, quizId: string, questionType?: QuestionType) {
+    console.log(graphType);
     if (graphType == GraphType.TRIES)
       return this.getQuizTriesGraphData(patientId, quizId, questionType);
     else return this.getTimeQuizGraphData(patientId, quizId, questionType);

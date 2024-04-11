@@ -1,9 +1,10 @@
 <h2>{{ title }}</h2>
 @if (selectedQuizId && !(selectedQuizId == 'all')) {
 <label> Type de graphe :
-  <select [(ngModel)]="selectedValue" #graphSelect (change)="selectedGraphType(graphSelect.value)" name="graph-select">
-    <option value="tries">Essais</option>
-    <option value="time">Temps</option>
+  <select [(ngModel)]="selectedValue" #graphSelect (change)="selectedGraphType($any(graphSelect.value))"
+          name="graph-select">
+    <option value="{{GraphType.TRIES}}">Essais</option>
+    <option value="{{GraphType.TIME}}">Temps</option>
   </select>
 </label>
 }

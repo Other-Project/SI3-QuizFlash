@@ -1,3 +1,2 @@
 <stats-data (quizSelection)="quizSelection($event)" [patientId]="user?.id" [answerHint]="user?.answerHint ?? false"/>
-<stats-graph [quizSelectionEvent]="quizSelectionEvent.asObservable()" [patientId]="user?.id"
-             [title]="'Graphique des statistiques'"/>
+<stats-graph [patientId]="user?.id" [title]="'Graphique des statistiques'"/>

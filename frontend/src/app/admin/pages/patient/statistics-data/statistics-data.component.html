@@ -1,14 +1,15 @@
 <div class="selects">
 <h2>Choix des statistiques</h2>
-  <select #quizSelect (change)="quizChoice(quizSelect.value,questionType.value)" name="quizz-select">
+  <select #quizSelect (change)="quizChoice(quizSelect.value, $any(questionType.value))" name="quizz-select">
     <option value="all">Tous les quizz</option>
     @for (quiz of quizList; track quiz){
       <option value="{{ quiz.id }}">{{ quiz.title }}</option>
     }
   </select>
-  <select #questionType (change)="quizChoice(quizSelect.value,questionType.value)" name="type-select" id="type-select">
-    <option value="all">Tous les types de questions</option>
-    <option *ngFor="let questionType of questionTypes; let i = index" [value]="i">{{ questionType }}</option>
+  <select #questionType (change)="quizChoice(quizSelect.value, $any(questionType.value))" [value]="-1"
+          name="type-select" id="type-select">
+    <option *ngFor="let questionType of questionTypes | keyvalue" [value]="questionType.key">{{ questionType.value }}
+    </option>
   </select>
 </div>
 @if (successRate >= 0) {

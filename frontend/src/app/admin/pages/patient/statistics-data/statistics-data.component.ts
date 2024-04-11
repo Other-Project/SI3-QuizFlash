@@ -16,8 +16,13 @@ export class StatisticsDataComponent implements OnInit{
 
   @Output() quizSelection: EventEmitter<any> = new EventEmitter<any>();
 
+  questionTypes = {
+    [-1]: "Tous les types de questions",
+    [QuestionType.Sound]: "Questions auditives",
+    [QuestionType.Image]: "Questions visuelles",
+    [QuestionType.TextOnly]: "Questions textuelles"
+  };
 
-  questionTypes: string[] = ["Questions auditives", "Questions visuelles", "Questions textuelles"];
   successRate: number = 0;
   answerHintRate: number = 0;
   spentTime: number = 0;
@@ -40,13 +45,13 @@ export class StatisticsDataComponent implements OnInit{
     this.answerHintRate = this.statisticsService.getAllQuizzesAnswerHintRate(this.patientId!, questionType);
   }
 
-  quizChoice(quizId: string, stringQuestionType: string): void {
-    this.quizSelected = quizId != "all";
-    const questionType: QuestionType | undefined = StatisticsService.getQuestionType(stringQuestionType);
 
+  quizChoice(quizId: string, questionType?: QuestionType): void {
+    this.quizSelected = quizId != undefined;
+    if (questionType == -1 as QuestionType) questionType = undefined;
     this.quizSelection?.emit({quizId, questionType});
 
-    if (quizId == "all") {
+    if (!quizId) {
       this.resetAllQuizzesData(questionType);
       return;
     }

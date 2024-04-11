@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../../../service/user.service";
 import {Patient} from "../../../../../models/patient.models";
-import {Subject} from "rxjs";
 import {QuestionType} from "../../../../../models/question-type.models";
+import {StatisticsGraphComponent} from "../statistics-graph/statistics-graph.component";
 
 @Component({
   selector: 'statistics',
@@ -12,8 +12,8 @@ import {QuestionType} from "../../../../../models/question-type.models";
 })
 
 export class StatisticsComponent implements OnInit {
+  @ViewChild(StatisticsGraphComponent) graph!: StatisticsGraphComponent;
   public user?: Patient;
-  protected quizSelectionEvent: Subject<any> = new Subject<{ quizId: string, questionType: QuestionType }>();
 
   constructor(private route: ActivatedRoute, private userService: UserService) {
   }
@@ -25,7 +25,7 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
-  quizSelection(quizSelectionData: { quizId: string, questionType: QuestionType }) {
-    this.quizSelectionEvent.next(quizSelectionData);
+  quizSelection(quizSelectionData: { quizId?: string, questionType?: QuestionType }) {
+    this.graph.quizSelection(quizSelectionData.quizId, quizSelectionData.questionType);
   }
 }
