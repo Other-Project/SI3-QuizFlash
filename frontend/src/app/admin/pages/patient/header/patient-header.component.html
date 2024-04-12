@@ -1,6 +1,6 @@
 <div class="patient-header">
   @if (edit || !user) {
-    <app-image-input id="default-profile-picture" [src]="'/assets/users/anne.jpg'" [width]="20" [height]="20"/>
+    <app-image-input id="default-profile-picture" [src]="'/assets/profile.png'"/>
     <info-form (patientInfoChange)="updatePatientInfo($event)" [user]="user"/>
   } @else {
     <div class="patient-picture">

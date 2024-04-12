@@ -11,7 +11,7 @@ import {faCircleUser, faPencil} from "@fortawesome/free-solid-svg-icons";
 export class PatientHeaderComponent implements OnInit{
   @Input() user?: User;
   edit: boolean = false;
-  @Output() patientInfoChange = new EventEmitter<{ firstName: string; lastName: string; age: number }>();
+  @Output() patientInfoChange = new EventEmitter<{ firstname: string; lastname: string; age: number }>();
 
   ngOnInit(): void {
   }
@@ -20,7 +20,7 @@ export class PatientHeaderComponent implements OnInit{
     this.edit = !this.edit;
   }
 
-  updatePatientInfo(newData: { firstName: string, lastName: string, age: number }) {
+  updatePatientInfo(newData: { firstname: string, lastname: string, age: number }) {
     this.patientInfoChange.emit(newData);
     this.editPatientInfo();
   }

@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../../service/user.service";
 import {User} from "../../../../models/user.models";
 import {Patient} from "../../../../models/patient.models";
+import {Quiz} from "../../../../models/quiz.models";
 
 export enum TabNavigation {
   INFORMATION,
@@ -29,8 +30,8 @@ export class PatientComponent implements OnInit {
     });
   }
 
-  updatePatientInfo(newData: { firstName: string, lastName: string, age: number }) {
-    this.userService.updatePatientInfo(this.user!.id, newData.firstName, newData.lastName, newData.age);
+  updatePatientInfo(newData: { firstname: string, lastname: string, age: number }) {
+    this.userService.updatePatientInfo(this.user!.id, newData.firstname, newData.lastname, newData.age);
   }
 
   protected readonly TabNavigation = TabNavigation;

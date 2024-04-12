@@ -23,7 +23,10 @@ export class AdminPatientsComponent {
   public users?: User[];
 
   constructor(userService: UserService, private router: Router, private route: ActivatedRoute) {
-    userService.users$.subscribe(users => this.users = users.filter(user => user.access <= AccessRestriction.User));
+    userService.users$.subscribe(users => {
+      this.users = users.filter(user => user.access <= AccessRestriction.User);
+      console.log(users);
+    });
   }
 
   openUser(user: User) {

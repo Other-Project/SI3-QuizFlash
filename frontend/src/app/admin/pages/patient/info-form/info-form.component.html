@@ -1,9 +1,9 @@
 <form id="patient-form" (ngSubmit)="save()" [formGroup]="patientForm">
   <label> Nom :
-    <input type="text" formControlName="lastName">
+    <input type="text" formControlName="lastname">
   </label>
   <label> Prénom :
-    <input type="text" formControlName="firstName">
+    <input type="text" formControlName="firstname">
   </label>
   <label> Age :
     <input type="number" min="0" max="120" formControlName="age">
