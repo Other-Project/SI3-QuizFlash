@@ -81,7 +81,6 @@ export class StatisticsGraphComponent implements AfterViewInit {
   }
 
   quizSelection(quizId?: string, questionType?: QuestionType) {
-    console.log(this.patientId, quizId);
     if (!this.patientId) return;
     this.selectedQuizId = quizId;
     this.selectedQuestionType = questionType;
