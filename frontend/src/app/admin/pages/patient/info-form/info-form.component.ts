@@ -43,7 +43,6 @@ export class InfoFormComponent {
   save() {
     if (!this.patientForm.valid) return;
     if (this.currentUser) {
-      console.log("currentUser défini");
       this.patientInfoChange.emit();
       return this.userService.updateUser(this.currentUser.id, this.patientForm.value);
     }

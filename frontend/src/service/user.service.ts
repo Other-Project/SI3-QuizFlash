@@ -29,7 +29,6 @@ export class UserService {
     user.access = AccessRestriction.User;
     this.users.push(user);
     this.users$.next(this.users);
-    console.log(this.users);
     return user.id;
   }
 
@@ -52,11 +51,9 @@ export class UserService {
 
   updateUser(userId: string, updatedUser: User) {
     let userIndex = this.users.findIndex(user => user.id == userId);
-    console.log(userIndex);
     if (userIndex < 0) return;
     this.users[userIndex] = Object.assign({}, this.users[userIndex], updatedUser);
     this.users$.next(this.users);
-    console.log(this.users[userIndex]);
   }
 
   updateUserHobbies(patientId: string, newHobbies: string[]) {

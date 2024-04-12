@@ -10,6 +10,7 @@ import {faAdd} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-admin-patients",
+  styleUrls: ["./admin-patients.component.scss"],
   templateUrl: "./admin-patients.component.html",
   standalone: true,
   imports: [

@@ -21,7 +21,6 @@ export class PatientHeaderComponent implements OnInit{
   }
 
   updatePatientInfo() {
-    console.log("appel à updatePatientInfo");
     this.editPatientInfo();
   }
 }
