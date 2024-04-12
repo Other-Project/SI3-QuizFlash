@@ -43,14 +43,13 @@ export class InfoFormComponent {
   }
 
   save() {
-    if (this.patientForm.valid) {
-      if (this.currentUser) {
-        console.log("currentUser défini");
-        return this.userService.updateUser(this.currentUser.id, this.patientForm.value);
-      }
-      let id: string = this.userService.addUser(this.patientForm.value);
-      this.router.navigate([id], {relativeTo: this.route}).then();
+    if (!this.patientForm.valid) return;
+    if (this.currentUser) {
+      console.log("currentUser défini");
+      this.patientInfoChange.emit();
+      return this.userService.updateUser(this.currentUser.id, this.patientForm.value);
     }
-    this.patientInfoChange.emit();
+    let id: string = this.userService.addUser(this.patientForm.value);
+    this.router.navigate([id], {relativeTo: this.route}).then();
   }
 }

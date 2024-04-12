@@ -55,6 +55,7 @@ export class UserService {
     console.log(userIndex);
     if (userIndex < 0) return;
     this.users[userIndex] = Object.assign({}, this.users[userIndex], updatedUser);
+    this.users$.next(this.users);
     console.log(this.users[userIndex]);
   }
 

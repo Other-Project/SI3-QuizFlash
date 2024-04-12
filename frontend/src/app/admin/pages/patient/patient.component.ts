@@ -23,13 +23,8 @@ export class PatientComponent {
   constructor(private route: ActivatedRoute, private userService: UserService) {
     this.route.params.subscribe(params => {
       let user_id: string = params["user_id"];
-      this.user = this.userService.getUserById(user_id) as Patient;
+      this.userService.users$.subscribe(users => this.user = users.find(user => user.id == user_id) as Patient);
     });
-  }
-
-  updatePatientInfo() {
-    console.log(this.user);
-    this.userService.updateUser(this.user!.id, this.user as Patient);
   }
 
   protected readonly TabNavigation = TabNavigation;
