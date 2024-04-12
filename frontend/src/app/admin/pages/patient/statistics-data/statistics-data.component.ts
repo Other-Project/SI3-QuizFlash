@@ -45,9 +45,8 @@ export class StatisticsDataComponent implements OnInit{
     this.answerHintRate = this.statisticsService.getAllQuizzesAnswerHintRate(this.patientId!, questionType);
   }
 
-
-  quizChoice(quizId: string, questionType?: QuestionType): void {
-    this.quizSelected = quizId != undefined;
+  quizChoice(quizId?: string, questionType?: QuestionType): void {
+    this.quizSelected = quizId != "";
     if (questionType == -1 as QuestionType) questionType = undefined;
     this.quizSelection?.emit({quizId, questionType});
 
@@ -57,9 +56,7 @@ export class StatisticsDataComponent implements OnInit{
     }
 
     this.successRate = this.statisticsService.getQuizSuccessRate(this.patientId!, quizId, questionType);
-    const timeData = this.statisticsService.getTimeDataForQuiz(this.patientId!, quizId, questionType);
-    this.spentTime = timeData[0];
-    this.averageTimeSpent = timeData[1];
+    [this.spentTime, this.averageTimeSpent] = this.statisticsService.getTimeDataForQuiz(this.patientId!, quizId, questionType);
   }
 }
 

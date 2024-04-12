@@ -3,11 +3,11 @@
 <label> Type de graphe :
   <select [(ngModel)]="selectedValue" #graphSelect (change)="selectedGraphType($any(graphSelect.value))"
           name="graph-select">
-    <option value="{{GraphType.TRIES}}">Essais</option>
-    <option value="{{GraphType.TIME}}">Temps</option>
+    <option [value]="GraphType.TRIES">Essais</option>
+    <option [value]="GraphType.TIME">Temps</option>
   </select>
 </label>
 }
-<div #statsContainer class="stats-container">
+<div class="stats-container" [style.visibility]="dateAvailable ? 'visible': 'hidden'">
   <canvas id="stat-chart">{{ chart }}</canvas>
 </div>
