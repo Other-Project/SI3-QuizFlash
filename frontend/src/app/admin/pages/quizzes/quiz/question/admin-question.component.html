@@ -1,0 +1,2 @@
+<app-input [icon]="faQuestion" [value]="question?.text" [placeholder]="'Entrez la question'"/>
+<app-input *ngFor="let answer of question?.answers; index as i" [icon]="faReply" [value]="answer.answerText" [placeholder]="'Entrez la proposition ' + i"/>

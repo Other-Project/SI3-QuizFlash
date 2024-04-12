@@ -4,6 +4,7 @@ import {Quiz} from "../../../../../models/quiz.models";
 import {QuizService} from "../../../../../service/quiz-service.service";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LayoutModule} from "../../../../layout/layout.module";
+import {AdminQuestionsComponent} from "./questions/admin-questions.component";
 
 @Component({
   selector: "app-admin-quiz",
@@ -11,7 +12,8 @@ import {LayoutModule} from "../../../../layout/layout.module";
   styleUrl: "./admin-quiz.component.scss",
   imports: [
     ReactiveFormsModule,
-    LayoutModule
+    LayoutModule,
+    AdminQuestionsComponent
   ],
   standalone: true
 })

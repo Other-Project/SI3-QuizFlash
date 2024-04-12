@@ -8,3 +8,10 @@
     <app-button (click)="save()">Sauvegarder</app-button>
   </div>
 </form>
+
+<hr/>
+
+<section>
+  <h2>Questions</h2>
+  <app-admin-questions [questions]="quiz?.questions"/>
+</section>
