@@ -24,5 +24,7 @@ export class AdminQuestionsComponent {
   constructor() {
   }
 
-
+  removeQuestion(index: number) {
+    this.questions?.splice(index, 1);
+  }
 }

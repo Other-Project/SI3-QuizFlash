@@ -1,2 +1,16 @@
-<app-input [icon]="faQuestion" [value]="question?.text" [placeholder]="'Entrez la question'"/>
-<app-input *ngFor="let answer of question?.answers; index as i" [icon]="faReply" [value]="answer.answerText" [placeholder]="'Entrez la proposition ' + i"/>
+<div class="extra" *ngIf="question">
+  <select [(ngModel)]="question.type">
+    <option *ngFor="let type of QuestionTypes | keyvalue" [value]="type.key">{{ type.value }}</option>
+  </select>
+  <div [ngSwitch]="Number(question.type)">
+    <app-image-input *ngSwitchCase="QuestionType.Image" [src]="question.imageUrl" (onImageUpdate)="question.imageUrl = $event"/>
+    <p *ngSwitchCase="QuestionType.Sound">Son</p>
+  </div>
+</div>
+<app-input class="question" [icon]="faQuestion" [value]="question?.text" [placeholder]="'Entrez la question'"/>
+<div class="answers">
+  <app-input *ngFor="let answer of question?.answers; index as i" [icon]="faReply" [value]="answer.answerText" [placeholder]="'Entrez la proposition ' + (i+1)"/>
+</div>
+<app-button class="delete" [color]="'red'" (click)="questionRemoved.emit()">
+  <fa-icon [icon]="faTrash"/>
+</app-button>
