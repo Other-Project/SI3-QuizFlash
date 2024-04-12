@@ -18,5 +18,5 @@
       Ajouter une question
     </app-button>
   </div>
-  <app-admin-questions [questions]="quiz?.questions"/>
+  <app-admin-questions *ngIf="quiz" [(questions)]="quiz.questions"/>
 </section>

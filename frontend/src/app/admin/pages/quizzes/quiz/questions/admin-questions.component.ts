@@ -19,12 +19,17 @@ import {NgForOf} from "@angular/common";
 })
 export class AdminQuestionsComponent {
   @Input() public questions?: Question[];
-  @Output() public questionsUpdated = new EventEmitter<Question[]>();
+  @Output() public questionsChange = new EventEmitter<Question[]>();
 
   constructor() {
   }
 
   removeQuestion(index: number) {
     this.questions?.splice(index, 1);
+  }
+
+  updateQuestion(index: number, updated: Question) {
+    console.log(updated);
+    if (this.questions) this.questions[index] = updated;
   }
 }

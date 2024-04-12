@@ -10,6 +10,7 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {Question} from "../../../../../models/question.models";
 import {Answer} from "../../../../../models/answer.models";
 import {QuestionType} from "../../../../../models/question-type.models";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: "app-admin-quiz",
@@ -19,7 +20,8 @@ import {QuestionType} from "../../../../../models/question-type.models";
     ReactiveFormsModule,
     LayoutModule,
     AdminQuestionsComponent,
-    FaIconComponent
+    FaIconComponent,
+    NgIf
   ],
   standalone: true
 })
@@ -49,7 +51,11 @@ export class AdminQuizComponent {
 
   save() {
     if (this.quizForm.valid) {
-      if (this.quiz) return this.quizService.updateQuiz(this.quiz.id, this.quizForm.value);
+      if (this.quiz) {
+        let quiz = Object.assign({}, this.quiz, this.quizForm.value);
+        console.log(quiz);
+        return this.quizService.updateQuiz(this.quiz.id, quiz);
+      }
       let id = this.quizService.addQuiz(this.quizForm.value);
       this.router.navigate([id], {relativeTo: this.route}).then();
     }

@@ -27,8 +27,8 @@ import {QuestionType} from "../../../../../../models/question-type.models";
   standalone: true
 })
 export class AdminQuestionComponent {
-  @Input() public question?: Question;
-  @Output() public questionUpdated = new EventEmitter<Question>();
+  @Input() public question!: Question;
+  @Output() public questionChange = new EventEmitter<Question>();
   @Output() public questionRemoved = new EventEmitter<any>();
 
   constructor() {
