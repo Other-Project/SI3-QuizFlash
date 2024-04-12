@@ -1,20 +1,12 @@
 form {
-  width: 20vw;
   margin-left: 3vw;
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 150px 1fr 1fr 1fr;
+  gap: 1em;
 
-  input {
-    display: block;
-  }
-
-  :nth-child(2) {
-    margin-left: 1rem;
-  }
-
-  input, select {
-    width: 80%;
+  input:not([hidden]), select {
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: block;
@@ -37,7 +29,7 @@ form {
 
   button {
     width: 5em;
-    height: 5vh;
+    height: 2em;
     border-radius: 12px;
     cursor: pointer;
   }
@@ -51,7 +43,6 @@ form {
   grid-column: 1;
   border-radius: 50%;
   border-color: white;
-  margin-left: 3vw;
   overflow: hidden;
   width: 150px;
   height: 150px;

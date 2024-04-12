@@ -1,5 +1,7 @@
 <form id="patient-form" (ngSubmit)="save()" [formGroup]="patientForm">
-  <app-image-input id="default-profile-picture" [src]="currentUser?.pictureUrl"/>
+  <input type="text" placeholder="Image" formControlName="thumbnailUrl" hidden="hidden"/>
+  <app-image-input id="default-profile-picture" [src]="currentUser?.pictureUrl"
+                   (onImageUpdate)="patientForm.patchValue({pictureUrl: $event})"/>
   <label> Nom :
     <input type="text" formControlName="lastname">
   </label>

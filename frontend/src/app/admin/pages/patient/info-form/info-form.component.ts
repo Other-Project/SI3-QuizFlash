@@ -25,8 +25,6 @@ export class InfoFormComponent {
   };
 
   public currentUser?: User;
-  edit: boolean = false;
-  create: boolean = false;
 
   patientForm: FormGroup = new FormGroup({
     firstname: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]*")]),

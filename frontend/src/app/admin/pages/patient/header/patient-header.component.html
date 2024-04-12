@@ -8,7 +8,7 @@
     <div class="patient-info">
       <h2 *ngIf="user">{{ user.lastname }}</h2>
       <h2 *ngIf="user">{{ user.firstname }}</h2>
-      <h3 *ngIf="user">{{ user.age }} ans</h3>
+      <strong *ngIf="user">{{ user.age }} ans</strong>
     </div>
     <edit-button (editButtonClick)="editPatientInfo()"/>
   }
