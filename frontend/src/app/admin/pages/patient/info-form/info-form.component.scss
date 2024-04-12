@@ -2,7 +2,8 @@ form {
   width: 20vw;
   margin-left: 3vw;
   display: grid;
-  grid-template: auto auto / auto auto;
+  grid-template-rows: 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
 
   input {
     display: block;
@@ -13,7 +14,7 @@ form {
   }
 
   input, select {
-    width: 100%;
+    width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
     display: block;
@@ -29,10 +30,10 @@ form {
 }
 
 .submit-button {
-  display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 3vw;
+  margin-top: 6vw;
 
   button {
     width: 5em;
@@ -44,5 +45,15 @@ form {
 
 :host {
   display: flex;
+}
+
+#default-profile-picture {
+  grid-column: 1;
+  border-radius: 50%;
+  border-color: white;
+  margin-left: 3vw;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
 }
 

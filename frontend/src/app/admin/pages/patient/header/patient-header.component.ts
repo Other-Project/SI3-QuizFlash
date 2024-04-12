@@ -21,10 +21,8 @@ export class PatientHeaderComponent implements OnInit{
   }
 
   updatePatientInfo(newData: { firstname: string, lastname: string, age: number }) {
+    console.log("appel à updatePatientInfo");
     this.patientInfoChange.emit(newData);
     this.editPatientInfo();
   }
-
-  protected readonly faCircleUser = faCircleUser;
-  protected readonly faPencil = faPencil;
 }

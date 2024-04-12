@@ -1,4 +1,5 @@
 <form id="patient-form" (ngSubmit)="save()" [formGroup]="patientForm">
+  <app-image-input id="default-profile-picture" [src]="currentUser?.pictureUrl"/>
   <label> Nom :
     <input type="text" formControlName="lastname">
   </label>

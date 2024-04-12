@@ -13,8 +13,18 @@ import {Patient} from "../../../../../models/patient.models";
 
 export class InfoFormComponent {
   @Output() patientInfoChange: EventEmitter<any> = new EventEmitter;
-  @Input() user?: User;
 
+  @Input() set user(user: User | undefined) {
+    this.currentUser = user;
+    this.patientForm.setValue({
+      firstname: this.currentUser?.firstname ?? "",
+      lastname: this.currentUser?.lastname ?? "",
+      age: this.currentUser?.age ?? 1,
+      pictureUrl: this.currentUser?.pictureUrl ?? "/assets/profile.png"
+    });
+  };
+
+  public currentUser?: User;
   edit: boolean = false;
   create: boolean = false;
 
@@ -22,22 +32,25 @@ export class InfoFormComponent {
     firstname: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]*")]),
     lastname: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]*")]),
     age: new FormControl("", Validators.required),
-    pictureURL: new FormControl("")
+    pictureUrl: new FormControl("")
   });
 
   constructor(public userService: UserService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(params => {
       let id = params["user_id"];
-      this.user = this.userService.getUserById(id) as Patient;
+      this.currentUser = this.userService.getUserById(id) as Patient;
     });
   }
 
   save() {
     if (this.patientForm.valid) {
-      if (this.user) return this.userService.updateUser(this.user.id, this.patientForm.value);
+      if (this.currentUser) {
+        console.log("currentUser défini");
+        return this.userService.updateUser(this.currentUser.id, this.patientForm.value);
+      }
       let id: string = this.userService.addUser(this.patientForm.value);
       this.router.navigate([id], {relativeTo: this.route}).then();
-      console.log(id);
     }
+    this.patientInfoChange.emit();
   }
 }

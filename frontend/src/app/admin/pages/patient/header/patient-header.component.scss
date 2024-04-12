@@ -5,9 +5,9 @@
   align-items: center;
   height: 10rem;
   border-bottom: 1px solid $blue;
-  min-height: 100px;
+  min-height: 150px;
 
-  .patient-picture, #default-profile-picture {
+  .patient-picture {
     border-radius: 50%;
     border-color: white;
     margin-left: 3vw;

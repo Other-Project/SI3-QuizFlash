@@ -1,4 +1,4 @@
-<patient-header (patientInfoChange)="updatePatientInfo($event)" [user]="user"/>
+<patient-header (patientInfoChange)="updatePatientInfo()" [user]="user"/>
 <section class="patient-data">
   @if (user) {
     <patient-navbar (tabToSwitch)="tab=$event" [create]="false"/>

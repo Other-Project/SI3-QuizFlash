@@ -16,22 +16,20 @@ export enum TabNavigation {
   styleUrls: ['./patient.component.scss']
 })
 
-export class PatientComponent implements OnInit {
+export class PatientComponent {
   public user?: Patient;
   public tab: TabNavigation = TabNavigation.INFORMATION;
 
   constructor(private route: ActivatedRoute, private userService: UserService) {
-  }
-
-  ngOnInit() {
     this.route.params.subscribe(params => {
-      let user_id: string = params['user_id'];
+      let user_id: string = params["user_id"];
       this.user = this.userService.getUserById(user_id) as Patient;
     });
   }
 
-  updatePatientInfo(newData: { firstname: string, lastname: string, age: number }) {
-    this.userService.updatePatientInfo(this.user!.id, newData.firstname, newData.lastname, newData.age);
+  updatePatientInfo() {
+    console.log(this.user);
+    this.userService.updateUser(this.user!.id, this.user as Patient);
   }
 
   protected readonly TabNavigation = TabNavigation;
