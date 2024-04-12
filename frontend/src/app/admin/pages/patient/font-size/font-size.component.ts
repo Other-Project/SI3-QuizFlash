@@ -16,7 +16,7 @@ export class FontSizeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fontSize = this.user!.fontSize.toString() + "em";
+    this.fontSize = (this.user?.fontSize ?? 1) + "em";
   }
 
   changeFontSize($event: any): void {
