@@ -11,7 +11,12 @@
 
 <hr/>
 
-<section>
-  <h2>Questions</h2>
+<section id="questions">
+  <div id="questions-header"><h2>Questions</h2>
+    <app-button (click)="addQuestion()">
+      <fa-icon [icon]="faAdd"/>
+      Ajouter une question
+    </app-button>
+  </div>
   <app-admin-questions [questions]="quiz?.questions"/>
 </section>

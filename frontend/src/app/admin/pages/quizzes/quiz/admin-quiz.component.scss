@@ -34,3 +34,17 @@ hr {
   margin: 1.5em 0;
   border: 1px solid $darkBlue;
 }
+
+#questions {
+  #questions-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1em;
+
+    h2 {
+      margin: 0;
+      flex: 1;
+    }
+  }
+}

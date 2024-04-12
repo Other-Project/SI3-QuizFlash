@@ -5,6 +5,11 @@ import {QuizService} from "../../../../../service/quiz-service.service";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LayoutModule} from "../../../../layout/layout.module";
 import {AdminQuestionsComponent} from "./questions/admin-questions.component";
+import {faAdd} from "@fortawesome/free-solid-svg-icons";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {Question} from "../../../../../models/question.models";
+import {Answer} from "../../../../../models/answer.models";
+import {QuestionType} from "../../../../../models/question-type.models";
 
 @Component({
   selector: "app-admin-quiz",
@@ -13,7 +18,8 @@ import {AdminQuestionsComponent} from "./questions/admin-questions.component";
   imports: [
     ReactiveFormsModule,
     LayoutModule,
-    AdminQuestionsComponent
+    AdminQuestionsComponent,
+    FaIconComponent
   ],
   standalone: true
 })
@@ -48,4 +54,11 @@ export class AdminQuizComponent {
       this.router.navigate([id], {relativeTo: this.route}).then();
     }
   }
+
+  addQuestion() {
+    if (!this.quiz) return;
+    this.quiz.questions.push({answers: [{} as Answer, {} as Answer, {} as Answer, {} as Answer], type: QuestionType.TextOnly} as Question);
+  }
+
+  protected readonly faAdd = faAdd;
 }
