@@ -1,5 +1,10 @@
+<section id="searching-section">
+  <input type="text" id="search-bar" (change)="searchUser($any($event.target).value)"
+         placeholder="Chercher un utilisateur"/>
+  <app-button [routerLink]="'../patient'" [color]="'blue'">
+    <fa-icon [icon]="faAdd"/>
+    Ajouter un utilisateur
+  </app-button>
+</section>
 <app-profile-list [users]="users" (userSelected)="openUser($event)"/>
-<app-button [routerLink]="'../patient'" [color]="'blue'">
-  <fa-icon [icon]="faAdd"/>
-  Ajouter un utilisateur
-</app-button>
+

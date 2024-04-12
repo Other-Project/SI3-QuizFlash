@@ -20,17 +20,23 @@ import {faAdd} from "@fortawesome/free-solid-svg-icons";
   ]
 })
 export class AdminPatientsComponent {
+  public allUsers?: User[];
   public users?: User[];
 
   constructor(userService: UserService, private router: Router, private route: ActivatedRoute) {
     userService.users$.subscribe(users => {
-      this.users = users.filter(user => user.access <= AccessRestriction.User);
-      console.log(users);
-    });
+        this.users = this.allUsers = users.filter(user => user.access <= AccessRestriction.User);
+      }
+    )
+    ;
   }
 
   openUser(user: User) {
     this.router.navigate(["../patient", user.id], {relativeTo: this.route}).then();
+  }
+
+  searchUser(text: string) {
+    this.users = text ? this.allUsers?.filter(user => user.firstname.toLowerCase().includes(text!.toLowerCase())) : this.allUsers;
   }
 
   protected readonly faAdd = faAdd;
