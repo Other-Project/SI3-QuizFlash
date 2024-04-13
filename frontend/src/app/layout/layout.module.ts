@@ -7,6 +7,7 @@ import {RouterLink} from "@angular/router";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {ImageInputComponent} from "./image-input/image-input.component";
 import {InputComponent} from "./input/input.component";
+import {FileInputComponent} from "./file-input/file-input.component";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {InputComponent} from "./input/input.component";
     ButtonComponent,
     ImageComponent,
     ImageInputComponent,
+    FileInputComponent,
     InputComponent
   ],
   exports: [
@@ -21,6 +23,7 @@ import {InputComponent} from "./input/input.component";
     ButtonComponent,
     ImageComponent,
     ImageInputComponent,
+    FileInputComponent,
     InputComponent
   ],
   imports: [
