@@ -6,19 +6,25 @@ import {ImageComponent} from "./image/image.component";
 import {RouterLink} from "@angular/router";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {ImageInputComponent} from "./image-input/image-input.component";
+import {InputComponent} from "./input/input.component";
+import {FileInputComponent} from "./file-input/file-input.component";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     ButtonComponent,
     ImageComponent,
-    ImageInputComponent
+    ImageInputComponent,
+    FileInputComponent,
+    InputComponent
   ],
   exports: [
     HeaderComponent,
     ButtonComponent,
     ImageComponent,
-    ImageInputComponent
+    ImageInputComponent,
+    FileInputComponent,
+    InputComponent
   ],
   imports: [
     NgOptimizedImage,

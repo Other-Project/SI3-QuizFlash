@@ -1,0 +1,29 @@
+@use 'sass:color';
+@import "/styles";
+
+:host {
+  border-radius: .5rem;
+  padding: .5em;
+  background-color: $white;
+  border: 1px solid color.scale($white, $lightness: -5%);
+  display: flex;
+  gap: .5em;
+
+  &:has(.ng-invalid) {
+    border-color: $red;
+    color: color.scale($red, $lightness: -5%);
+  }
+
+  &:focus-within {
+    outline: 1px solid $blue;
+  }
+
+  input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: -0.5em 0;
+  }
+}

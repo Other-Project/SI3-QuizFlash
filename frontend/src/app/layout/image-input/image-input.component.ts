@@ -14,13 +14,8 @@ export class ImageInputComponent extends ImageComponent {
     super();
   }
 
-  imageUpdated(images: FileList) {
-    if (images.length !== 1) return;
-
-    const reader = new FileReader();
-    reader.readAsDataURL(images[0]);
-    reader.onload = () => this.onImageUpdate.emit(this.src = reader.result as string);
-
+  imageUpdated(image: string) {
+    this.onImageUpdate.emit(this.src = image);
   }
 
   protected readonly faCamera = faCamera;
