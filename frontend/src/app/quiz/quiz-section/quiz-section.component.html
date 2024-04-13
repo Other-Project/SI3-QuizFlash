@@ -5,8 +5,8 @@
                      (inactive)='this.inactive = true'/>
   </div>
   <app-question-result [goodAnswer]="trueAnswer" [correct]="correct" [automatedSkip]="user!.automatedSkip" (continue)='continueQuiz()' *ngIf="questionResult"/>
-  <finish-page [title]="finish ? 'Bravo !' : 'Quiz terminé'"
-               [text]="finish ? 'Vous avez terminé' : 'Le quiz a été clos automatiquement en raison d\'une longue période d\'inactivité.'"
-               [textButton]="'Revenir au menu'"
-               (returnSelectionPage)="selectionPage()" *ngIf="inactive || finish"/>
+  <finish-page [title]="'Bravo !'" [text]="'Vous avez terminé'" [textButton]="'Revenir au menu'"
+               (returnSelectionPage)="selectionPage()" *ngIf="finish"/>
+  <finish-page [title]="'Quiz terminé'" [text]="'Le quiz a été clos automatiquement en raison d\'une longue période d\'inactivité.'" [textButton]="'Revenir au menu'"
+               (returnSelectionPage)="selectionPage()" *ngIf="inactive"/>
 </div>
