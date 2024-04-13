@@ -35,10 +35,6 @@ export class PatientHeaderComponent implements OnInit{
     this.delete = !this.delete;
   }
 
-  updatePatientInfo() {
-    this.editPatientInfo();
-  }
-
   protected readonly faTrash = faTrash;
   protected readonly faCheck = faCheck;
   protected readonly faXmark = faXmark;

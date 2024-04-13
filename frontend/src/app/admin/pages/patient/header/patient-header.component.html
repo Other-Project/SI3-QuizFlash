@@ -1,6 +1,6 @@
 <div class="patient-header">
   @if (edit || !user) {
-    <info-form id="form" (patientInfoChange)="updatePatientInfo()" [user]="user"/>
+    <info-form id="form" (patientInfoChange)="editPatientInfo()" [user]="user"/>
   } @else if (delete) {
     <h1> Voulez-vous supprimer l'utilisateur {{ user.firstname }} ?</h1>
     <app-button id="check-button" (click)="deletePatient()" [color]="'blue'">
@@ -10,9 +10,7 @@
       <fa-icon [icon]="faXmark" size="2x" id="xmark-icon"/>
     </app-button>
   } @else {
-    <div class="patient-picture">
-      <app-image [src]="user.pictureUrl" [alt]="'Profile picture'" [width]="150" [height]="150"/>
-    </div>
+    <app-image class="patient-picture" [src]="user.pictureUrl" [alt]="'Profile picture'" [width]="150" [height]="150"/>
     <div class="patient-info">
       <h2 *ngIf="user">{{ user.lastname }}</h2>
       <h2 *ngIf="user">{{ user.firstname }}</h2>
