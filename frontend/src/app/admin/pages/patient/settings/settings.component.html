@@ -2,7 +2,7 @@
 <section class="settings">
   <article class="diseases">
     <range [defaultValue]="user?.dementiaLevel ?? 0" (changeEvent)="dementiaLevelChange($event)" [subject]="'dementia'"
-           [title]="'Niveau de démence'" [tags]="['Léger','Intermédiaire','Elevé']"/>
+           [title]="'Stade de la maladie d\'Alzheimer'" [tags]="['Léger','Modéré','Elevé']"/>
     <font-size-selector [user]="user"/>
   </article>
   <options [user]="user"/>
