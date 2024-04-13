@@ -5,12 +5,12 @@ import {StatisticsService} from "../../../../../service/statistics.service";
 import {QuestionType} from "../../../../../models/question-type.models";
 
 @Component({
-  selector: 'stats-data',
-  templateUrl: 'statistics-data.component.html',
-  styleUrls: ['statistics-data.component.scss']
+  selector: "stats-data",
+  templateUrl: "statistics-data.component.html",
+  styleUrls: ["statistics-data.component.scss"]
 })
 
-export class StatisticsDataComponent implements OnInit{
+export class StatisticsDataComponent implements OnInit {
   @Input() answerHint?: boolean;
   @Input() patientId?: string;
 
@@ -37,12 +37,7 @@ export class StatisticsDataComponent implements OnInit{
     this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
     });
-    this.resetAllQuizzesData();
-  }
-
-  resetAllQuizzesData(questionType?: QuestionType) {
-    this.successRate = this.statisticsService.getAllQuizzesSuccessRate(this.patientId!, questionType);
-    this.answerHintRate = this.statisticsService.getAllQuizzesAnswerHintRate(this.patientId!, questionType);
+    this.quizChoice();
   }
 
   quizChoice(quizId?: string, questionType?: QuestionType): void {
@@ -50,13 +45,9 @@ export class StatisticsDataComponent implements OnInit{
     if (questionType == -1 as QuestionType) questionType = undefined;
     this.quizSelection?.emit({quizId, questionType});
 
-    if (!quizId) {
-      this.resetAllQuizzesData(questionType);
-      return;
-    }
-
-    this.successRate = this.statisticsService.getQuizSuccessRate(this.patientId!, quizId, questionType);
-    [this.spentTime, this.averageTimeSpent] = this.statisticsService.getTimeDataForQuiz(this.patientId!, quizId, questionType);
+    this.successRate = this.statisticsService.getSuccessRate(this.patientId!, quizId, questionType);
+    this.answerHintRate = this.statisticsService.getAnswerHintRate(this.patientId!, quizId, questionType);
+    if (quizId) [this.spentTime, this.averageTimeSpent] = this.statisticsService.getTime(this.patientId!, quizId, questionType);
   }
 }
 

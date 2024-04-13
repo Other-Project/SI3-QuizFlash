@@ -52,8 +52,7 @@ export class StatisticsGraphComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      let data = this.statsService.getAllQuizzesGraphData(this.patientId!);
-      this.createChart(data);
+      this.createChart(this.statsService.getTries(this.patientId!));
     });
   }
 
@@ -81,15 +80,12 @@ export class StatisticsGraphComponent implements AfterViewInit {
     if (!this.patientId) return;
     this.selectedQuizId = quizId;
     this.selectedQuestionType = questionType;
-    let chartData = quizId
-      ? this.getQuizGraphData(this.patientId, GraphType.TRIES, quizId, questionType)
-      : this.statsService.getAllQuizzesGraphData(this.patientId, questionType);
-    this.selectedGraphType(GraphType.TRIES, chartData);
+    this.selectedGraphType(GraphType.TRIES, this.statsService.getTries(this.patientId, quizId, questionType));
   }
 
   getQuizGraphData(patientId: string, graphType: GraphType, quizId: string, questionType?: QuestionType) {
     return graphType == GraphType.TRIES
-      ? this.statsService.getQuizTriesGraphData(patientId, quizId, questionType)
-      : this.statsService.getTimeQuizGraphData(patientId, quizId, questionType);
+      ? this.statsService.getTries(patientId, quizId, questionType)
+      : this.statsService.getTimeQuiz(patientId, quizId, questionType);
   }
 }
