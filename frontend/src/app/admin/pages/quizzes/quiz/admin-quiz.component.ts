@@ -26,7 +26,7 @@ import {NgIf} from "@angular/common";
   standalone: true
 })
 export class AdminQuizComponent {
-  public quiz?: Quiz;
+  public quiz: Quiz = {id: "", theme: "", thumbnailUrl: "", title: "", questions: []};
 
   quizForm: FormGroup = new FormGroup({
     title: new FormControl("", [Validators.required]),
@@ -36,7 +36,7 @@ export class AdminQuizComponent {
 
   constructor(public quizService: QuizService, private route: ActivatedRoute, private router: Router) {
     this.quizService.quiz$.subscribe(quiz => {
-      this.quiz = quiz;
+      if (quiz) this.quiz = quiz;
       this.quizForm.setValue({
         title: this.quiz?.title ?? "",
         theme: this.quiz?.theme ?? "",
@@ -51,18 +51,14 @@ export class AdminQuizComponent {
 
   save() {
     if (this.quizForm.valid) {
-      if (this.quiz) {
-        let quiz = Object.assign({}, this.quiz, this.quizForm.value);
-        console.log(quiz);
-        return this.quizService.updateQuiz(this.quiz.id, quiz);
-      }
-      let id = this.quizService.addQuiz(this.quizForm.value);
+      let quiz = Object.assign({}, this.quiz, this.quizForm.value);
+      if (this.quiz.id) return this.quizService.updateQuiz(this.quiz.id, quiz);
+      let id = this.quizService.addQuiz(quiz);
       this.router.navigate([id], {relativeTo: this.route}).then();
     }
   }
 
   addQuestion() {
-    if (!this.quiz) return;
     this.quiz.questions.push({answers: [{} as Answer, {} as Answer, {} as Answer, {} as Answer], type: QuestionType.TextOnly} as Question);
   }
 
