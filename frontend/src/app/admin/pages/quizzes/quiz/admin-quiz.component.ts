@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnDestroy} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Quiz} from "../../../../../models/quiz.models";
 import {QuizService} from "../../../../../service/quiz-service.service";
@@ -25,7 +25,7 @@ import {NgIf} from "@angular/common";
   ],
   standalone: true
 })
-export class AdminQuizComponent {
+export class AdminQuizComponent implements OnDestroy {
   public quiz: Quiz = {id: "", theme: "", thumbnailUrl: "", title: "", questions: []};
 
   quizForm: FormGroup = new FormGroup({
@@ -47,6 +47,10 @@ export class AdminQuizComponent {
       let id = params["quiz_id"];
       this.quizService.selectQuiz(id);
     });
+  }
+
+  ngOnDestroy() {
+    this.quizService.selectQuiz("");
   }
 
   save() {
