@@ -4,7 +4,12 @@
   </select>
   <div [ngSwitch]="Number(question.type)">
     <app-image-input *ngSwitchCase="QuestionType.Image" [src]="question.imageUrl" (onImageUpdate)="question.imageUrl = $event"/>
-    <p *ngSwitchCase="QuestionType.Sound">Son</p>
+    <div *ngSwitchCase="QuestionType.Sound">
+      <app-file-input (valueChange)="question.soundUrl = $event" [accept]="'audio/*'">
+        <app-button>{{ question.soundUrl ? 'Changer le fichier' : 'Ajouter un fichier' }}</app-button>
+      </app-file-input>
+      <app-play-button *ngIf="question.soundUrl" [src]="question.soundUrl"/>
+    </div>
   </div>
 </div>
 <app-input class="question" [icon]="faQuestion" [value]="question.text" (change)="question.text = $any($event.target).value" [placeholder]="'Entrez la question'"/>

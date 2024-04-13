@@ -1,4 +1,4 @@
-<app-file-input (valueChange)="imageUpdated($event)">
+<app-file-input [accept]="'image/*'" (valueChange)="imageUpdated($event)">
   <div class="change-image-container">
   <app-image [width]="width" [height]="height" [alt]="alt" [src]="src"></app-image>
   <div class="change-image-hover">

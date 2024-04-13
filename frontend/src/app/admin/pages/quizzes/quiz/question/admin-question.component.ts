@@ -6,6 +6,7 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faQuestion, faReply, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {DecimalPipe, KeyValuePipe, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 import {QuestionType} from "../../../../../../models/question-type.models";
+import {PlayButtonComponent} from "../../../../../layout/play-button/play-button.component";
 
 @Component({
   selector: "app-admin-question",
@@ -22,7 +23,8 @@ import {QuestionType} from "../../../../../../models/question-type.models";
     NgSwitchCase,
     NgSwitchDefault,
     DecimalPipe,
-    FormsModule
+    FormsModule,
+    PlayButtonComponent
   ],
   standalone: true
 })

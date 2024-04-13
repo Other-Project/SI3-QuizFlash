@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {ImageComponent} from "../image/image.component";
 
 @Component({
@@ -7,6 +7,7 @@ import {ImageComponent} from "../image/image.component";
   styleUrls: ["./file-input.component.scss"]
 })
 export class FileInputComponent extends ImageComponent {
+  @Input() accept!: string;
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
