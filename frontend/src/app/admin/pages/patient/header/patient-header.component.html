@@ -3,7 +3,7 @@
     <info-form id="form" (patientInfoChange)="updatePatientInfo()" [user]="user"/>
   } @else if (delete) {
     <h1> Voulez-vous supprimer l'utilisateur {{ user.firstname }} ?</h1>
-    <app-button (click)="deletePatient()" routerLink="/admin/patients/" [color]="'blue'">
+    <app-button (click)="deletePatient()" [color]="'blue'">
       <fa-icon [icon]="faCheck" size="2x" id="check-icon"/>
     </app-button>
     <app-button (click)="displayDelete()" [color]="'red'">
@@ -11,15 +11,19 @@
     </app-button>
   } @else {
     <div class="patient-picture">
-      <app-image-input [src]="user.pictureUrl" [alt]="'Profile picture'" [width]="150" [height]="150"/>
+      <app-image [src]="user.pictureUrl" [alt]="'Profile picture'" [width]="150" [height]="150"/>
     </div>
     <div class="patient-info">
       <h2 *ngIf="user">{{ user.lastname }}</h2>
       <h2 *ngIf="user">{{ user.firstname }}</h2>
       <strong *ngIf="user">{{ user.age }} ans</strong>
     </div>
-    <edit-button (editButtonClick)="editPatientInfo()"/>
-    <delete-button (deleteButtonClick)="displayDelete()"/>
+    <app-button id="edit-button" (click)="editPatientInfo()" [color]="'blue'">
+      <fa-icon [icon]="faEdit" size="2x" id="edit-icon"/>
+    </app-button>
+    <app-button id="delete-button" (click)="displayDelete()" [color]="'red'">
+      <fa-icon [icon]="faTrash" size="2x" id="delete-icon"/>
+    </app-button>
   }
   <h1 *ngIf="!user"> Création d'un nouvel utilisateur</h1>
 </div>

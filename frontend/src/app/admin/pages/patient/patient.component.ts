@@ -17,18 +17,17 @@ export enum TabNavigation {
 })
 
 export class PatientComponent {
+  private userId?: string;
   public user?: Patient;
   public tab: TabNavigation = TabNavigation.INFORMATION;
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
-    this.route.params.subscribe(params => {
-      let user_id: string = params["user_id"];
-      if (!user_id) this.user = undefined;
+    this.route.params.subscribe(params => this.userId = params["user_id"]);
+    this.userService.users$.subscribe(users => {
+      if (!this.userId) this.user = undefined;
       else {
-        this.userService.users$.subscribe(users => {
-          this.user = users.find(user => user.id == user_id) as Patient;
-          if (!this.user) this.router.navigate([".."], {relativeTo: this.route}).then();
-        });
+        this.user = users.find(user => user.id == this.userId) as Patient;
+        if (!this.user) this.router.navigate([".."], {relativeTo: this.route}).then();
       }
     });
   }

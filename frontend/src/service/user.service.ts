@@ -33,10 +33,9 @@ export class UserService {
   }
 
   deleteUser(id: string): void {
-    console.log("call to deleteUser");
     let userIndex = this.users.findIndex(user => user.id == id);
     if (userIndex < 0) return;
-    this.users = this.users.filter((ele, ind) => ind !== userIndex);
+    this.users.splice(userIndex, 1);
     this.users$.next(this.users);
   }
 

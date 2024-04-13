@@ -32,4 +32,15 @@
     color: $blue;
     margin: auto;
   }
+
+  #delete-button, #edit-button {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+    padding: 0;
+    margin-left: 3vw;
+  }
+
+
 }

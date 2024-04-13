@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../../../models/user.models";
-import {faCheck, faCircleUser, faPencil, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faCircleUser, faEdit, faPencil, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {Patient} from "../../../../../models/patient.models";
 import {UserService} from "../../../../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -42,4 +42,5 @@ export class PatientHeaderComponent implements OnInit{
   protected readonly faTrash = faTrash;
   protected readonly faCheck = faCheck;
   protected readonly faXmark = faXmark;
+  protected readonly faEdit = faEdit;
 }

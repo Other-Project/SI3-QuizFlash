@@ -54,10 +54,6 @@ export class InfoFormComponent {
   });
 
   constructor(public userService: UserService, private route: ActivatedRoute, private router: Router) {
-    this.route.params.subscribe(params => {
-      let id = params["user_id"];
-      this.currentPatient = this.userService.getUserById(id) as Patient;
-    });
   }
 
   save() {
