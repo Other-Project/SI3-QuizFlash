@@ -1,9 +1,7 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Component, OnDestroy} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../../service/user.service";
-import {User} from "../../../../models/user.models";
 import {Patient} from "../../../../models/patient.models";
-import {Quiz} from "../../../../models/quiz.models";
 
 export enum TabNavigation {
   INFORMATION,
@@ -14,6 +12,7 @@ export enum TabNavigation {
   selector: 'patient',
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.scss']
+
 })
 
 export class PatientComponent implements OnDestroy {

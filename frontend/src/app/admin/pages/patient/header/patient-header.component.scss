@@ -6,11 +6,11 @@
   height: 10rem;
   border-bottom: 1px solid $blue;
   min-height: 150px;
+  padding: 0 2em;
 
   .patient-picture {
     border-radius: 50%;
     border-color: white;
-    margin-left: 3vw;
     overflow: hidden;
     width: 150px;
     height: 150px;
@@ -44,6 +44,4 @@
   #check-button {
     margin-right: 1em;
   }
-
-
 }
