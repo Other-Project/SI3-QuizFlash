@@ -7,6 +7,7 @@ import {NgIf, NgStyle} from "@angular/common";
 import {InfoFormComponent} from "../info-form/info-form.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {DeleteButtonComponent} from "../delete-button/delete-button.component";
+import {RouterLink} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {DeleteButtonComponent} from "../delete-button/delete-button.component";
     NgStyle,
     NgIf,
     ReactiveFormsModule,
-    FaIconComponent
+    FaIconComponent,
+    RouterLink
   ]
 })
 

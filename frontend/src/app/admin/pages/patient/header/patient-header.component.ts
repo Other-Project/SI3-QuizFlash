@@ -3,6 +3,7 @@ import {User} from "../../../../../models/user.models";
 import {faCheck, faCircleUser, faPencil, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {Patient} from "../../../../../models/patient.models";
 import {UserService} from "../../../../../service/user.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'patient-header',
@@ -16,7 +17,7 @@ export class PatientHeaderComponent implements OnInit{
   delete: boolean = false;
   @Output() patientInfoChange = new EventEmitter<{ firstname: string; lastname: string; age: number }>();
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, private route: ActivatedRoute, private router: Router) {
   }
   ngOnInit(): void {
   }
@@ -27,8 +28,7 @@ export class PatientHeaderComponent implements OnInit{
 
   deletePatient() {
     this.userService.deleteUser(this.user!.id);
-    // TODO
-    this.delete = !this.delete;
+    this.router.navigate(["../../patients"], {relativeTo: this.route}).then();
   }
 
   displayDelete() {
