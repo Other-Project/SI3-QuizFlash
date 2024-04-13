@@ -4,6 +4,7 @@ import {User} from "../models/user.models";
 import {USERS} from "../mocks/users.mock";
 import {HOBBIES} from "../mocks/hobbies.mock";
 import {Patient} from "../models/patient.models";
+import {AccessRestriction} from "../models/access-restriction.models";
 
 const USER_KEY = "user";
 
@@ -21,13 +22,20 @@ export class UserService {
     if (json) this.setLoggedUser(JSON.parse(json));
   }
 
-  addUser(user: User) {
-    this.users.push(user);
+  addUser(patient: Patient) {
+    patient.id = "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+      (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+    );
+    patient.access = AccessRestriction.User;
+    this.users.push(patient);
     this.users$.next(this.users);
+    return patient.id;
   }
 
   deleteUser(id: string): void {
-    // TODO
+    let userIndex = this.users.findIndex(user => user.id == id);
+    if (userIndex < 0) return;
+    this.users.splice(userIndex, 1);
     this.users$.next(this.users);
   }
 
@@ -41,6 +49,13 @@ export class UserService {
 
   updatePatientInfo(patientId: string, newFirstName: string, newLastName: string, newAge: number) {
     // TODO update in the server
+  }
+
+  updateUser(userId: string, updatedUser: User) {
+    let userIndex = this.users.findIndex(user => user.id == userId);
+    if (userIndex < 0) return;
+    this.users[userIndex] = Object.assign({}, this.users[userIndex], updatedUser);
+    this.users$.next(this.users);
   }
 
   updateUserHobbies(patientId: string, newHobbies: string[]) {

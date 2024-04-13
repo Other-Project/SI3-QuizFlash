@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../../../service/user.service";
 import {Patient} from "../../../../../models/patient.models";
@@ -11,18 +11,13 @@ import {Patient} from "../../../../../models/patient.models";
 })
 
 export class InformationComponent implements OnInit {
-  public user?: Patient;
+  @Input() public user?: Patient;
   hobbies?: string[];
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
-    this.route.parent!.params.subscribe(params => {
-      let user_id: string = params['user_id'];
-      this.user = this.userService.getUserById(user_id) as Patient;
-    });
-
     this.userService.hobbies$.subscribe(hobbies => {
       this.hobbies = hobbies;
     });

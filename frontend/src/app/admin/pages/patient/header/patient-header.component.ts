@@ -1,5 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../../../models/user.models";
+import {faCheck, faCircleUser, faEdit, faPencil, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {Patient} from "../../../../../models/patient.models";
+import {UserService} from "../../../../../service/user.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'patient-header',
@@ -8,10 +12,13 @@ import {User} from "../../../../../models/user.models";
 })
 
 export class PatientHeaderComponent implements OnInit{
-  @Input() user?: User;
+  @Input() user?: Patient;
   edit: boolean = false;
-  @Output() patientInfoChange = new EventEmitter<{ firstName: string; lastName: string; age: number }>();
+  delete: boolean = false;
+  @Output() patientInfoChange = new EventEmitter<{ firstname: string; lastname: string; age: number }>();
 
+  constructor(public userService: UserService, private route: ActivatedRoute, private router: Router) {
+  }
   ngOnInit(): void {
   }
 
@@ -19,8 +26,17 @@ export class PatientHeaderComponent implements OnInit{
     this.edit = !this.edit;
   }
 
-  updatePatientInfo(newData: { firstName: string, lastName: string, age: number }) {
-    this.patientInfoChange.emit(newData);
-    this.editPatientInfo();
+  deletePatient() {
+    this.userService.deleteUser(this.user!.id);
+    this.router.navigate(["../../patients"], {relativeTo: this.route}).then();
   }
+
+  displayDelete() {
+    this.delete = !this.delete;
+  }
+
+  protected readonly faTrash = faTrash;
+  protected readonly faCheck = faCheck;
+  protected readonly faXmark = faXmark;
+  protected readonly faEdit = faEdit;
 }

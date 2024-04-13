@@ -1,7 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Component, OnDestroy} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../../service/user.service";
-import {User} from "../../../../models/user.models";
+import {Patient} from "../../../../models/patient.models";
+
+export enum TabNavigation {
+  INFORMATION,
+  STATISTICS
+}
 
 @Component({
   selector: 'patient',
@@ -9,20 +14,29 @@ import {User} from "../../../../models/user.models";
   styleUrls: ['./patient.component.scss']
 })
 
-export class PatientComponent implements OnInit {
-  public user?: User;
+export class PatientComponent implements OnDestroy {
+  private userId?: string;
+  public user?: Patient;
+  public tab: TabNavigation = TabNavigation.INFORMATION;
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
-  }
+  private routeSub;
+  private userSub;
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      let user_id: string = params['user_id'];
-      this.user = this.userService.getUserById(user_id);
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
+    this.routeSub = this.route.params.subscribe(params => this.userId = params["user_id"]);
+    this.userSub = this.userService.users$.subscribe(users => {
+      if (!this.userId) this.user = undefined;
+      else {
+        this.user = users.find(user => user.id == this.userId) as Patient;
+        if (!this.user) this.router.navigate([".."], {relativeTo: this.route}).then();
+      }
     });
   }
 
-  updatePatientInfo(newData: { firstName: string, lastName: string, age: number }) {
-    this.userService.updatePatientInfo(this.user!.id, newData.firstName, newData.lastName, newData.age);
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
+
+  protected readonly TabNavigation = TabNavigation;
 }

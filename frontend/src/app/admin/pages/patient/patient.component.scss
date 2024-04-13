@@ -1,7 +1,14 @@
-.patient-data{
+.patient-data {
   margin: 4vh 4vw
 }
 
-main{
+main {
   padding: 0;
+}
+
+#boxed-container {
+  padding-top: 0.5rem;
+  height: 100%;
+  border: 1px solid rgb(0, 45, 129);
+  display: block;
 }

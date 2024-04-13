@@ -3,38 +3,45 @@
 .patient-header {
   display: flex;
   align-items: center;
-  height: 9rem;
+  height: 10rem;
   border-bottom: 1px solid $blue;
-  min-height: 100px;
+  min-height: 150px;
+  padding: 0 2em;
 
   .patient-picture {
-    margin-left: 3vw;
     border-radius: 50%;
+    border-color: white;
     overflow: hidden;
-
-    app-image {
-      width: 115px;
-      height: 115px;
-    }
+    width: 150px;
+    height: 150px;
   }
 
   .patient-info {
     margin: 1em;
     display: grid;
+    gap: .75em;
     align-items: normal;
     grid-template: auto auto / auto auto;
 
     * {
-      margin-top: 0;
+      margin: 0;
     }
+  }
 
-    :nth-child(2) {
-      margin-left: 1rem;
-    }
+  h1 {
+    color: $blue;
+    margin: auto;
+  }
 
-    h3 {
-      margin-top: 0.2rem;
-      font-size: 1rem;
-    }
+  #delete-button, #edit-button {
+    margin-left: .5em;
+  }
+
+  #xmark-button {
+    margin-right: 16em;
+  }
+
+  #check-button {
+    margin-right: 1em;
   }
 }

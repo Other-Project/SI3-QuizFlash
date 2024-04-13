@@ -1,4 +1,4 @@
 <nav class="patient-nav">
-  <a routerLink="infos">Infos</a>
-  <a routerLink="stats">Stats</a>
+  <button (click)="switchTab(TabNavigation.INFORMATION)">Infos</button>
+  <button (click)="switchTab(TabNavigation.STATISTICS)">Stats</button>
 </nav>
