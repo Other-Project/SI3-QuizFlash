@@ -27,9 +27,4 @@ export class AdminQuestionsComponent {
   removeQuestion(index: number) {
     this.questions?.splice(index, 1);
   }
-
-  updateQuestion(index: number, updated: Question) {
-    console.log(updated);
-    if (this.questions) this.questions[index] = updated;
-  }
 }
