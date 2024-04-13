@@ -1,6 +1,6 @@
 :host {
   display: grid;
-  grid-template-columns: 10em 1fr 2em;
+  grid-template: 2.5em 5em / 10em 1fr 2em;
   gap: .25em;
 }
 
@@ -14,6 +14,7 @@
 
   div {
     flex: 1;
+    min-height: 0;
   }
 }
 

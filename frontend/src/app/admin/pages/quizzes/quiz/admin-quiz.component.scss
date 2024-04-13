@@ -2,9 +2,8 @@
 
 form {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template: 200px / 300px 1fr;
   gap: 1em;
-  height: 200px;
 
   div {
     display: flex;
