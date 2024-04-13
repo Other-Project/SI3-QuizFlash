@@ -3,10 +3,10 @@
     <info-form id="form" (patientInfoChange)="updatePatientInfo()" [user]="user"/>
   } @else if (delete) {
     <h1> Voulez-vous supprimer l'utilisateur {{ user.firstname }} ?</h1>
-    <app-button (click)="deletePatient()" [color]="'blue'">
+    <app-button id="check-button" (click)="deletePatient()" [color]="'blue'">
       <fa-icon [icon]="faCheck" size="2x" id="check-icon"/>
     </app-button>
-    <app-button (click)="displayDelete()" [color]="'red'">
+    <app-button id="xmark-button" (click)="displayDelete()" [color]="'red'">
       <fa-icon [icon]="faXmark" size="2x" id="xmark-icon"/>
     </app-button>
   } @else {
