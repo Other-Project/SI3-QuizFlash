@@ -30,7 +30,14 @@ export class AdminQuestionComponent {
   @Input() public question!: Question;
   @Output() public questionRemoved = new EventEmitter<any>();
 
+  private static instance = 0;
+  instance = AdminQuestionComponent.instance++;
+
   constructor() {
+  }
+
+  changeTrueAnswer(index: number) {
+    this.question.answers.forEach((answer, i) => answer.trueAnswer = i == index);
   }
 
   protected readonly faQuestion = faQuestion;

@@ -9,8 +9,9 @@
 </div>
 <app-input class="question" [icon]="faQuestion" [value]="question.text" (change)="question.text = $any($event.target).value" [placeholder]="'Entrez la question'"/>
 <div class="answers">
-  <app-input *ngFor="let answer of question.answers; index as i" [icon]="faReply" [value]="answer.answerText" (change)="question.answers[i].answerText = $any($event.target).value"
-             [placeholder]="'Entrez la proposition ' + (i+1)"/>
+  <app-input *ngFor="let answer of question.answers; index as i" [icon]="faReply" [placeholder]="'Entrez la proposition ' + (i+1)" [(value)]="answer.answerText">
+    <input type="radio" name="trueAnswer-{{instance}}" [checked]="answer.trueAnswer" [value]="i" (change)="changeTrueAnswer($any($event.target).value)"/>
+  </app-input>
 </div>
 <app-button class="delete" [color]="'red'" (click)="questionRemoved.emit()">
   <fa-icon [icon]="faTrash"/>

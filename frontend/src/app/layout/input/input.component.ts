@@ -10,9 +10,9 @@ import {IconProp} from "@fortawesome/fontawesome-svg-core";
 export class InputComponent extends ImageComponent {
   @Input() icon?: IconProp;
   @Input() value?: string;
+  @Output() valueChange = new EventEmitter<string>();
   @Input() placeholder?: string;
   @Input() type = "text";
-  @Output() valueChanged = new EventEmitter<string>();
 
   constructor() {
     super();
