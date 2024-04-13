@@ -34,7 +34,7 @@ export class StatisticsGraphComponent implements AfterViewInit {
           label: 'Taux de réussite',
           backgroundColor: "rgba(0,0,255,1.0)",
           borderColor: "rgba(0,0,255,0.1)",
-          data: graphData[1]
+          data: graphData[1].map(value => Math.round(value * 10) / 10)
         }]
       },
       options: {
@@ -76,7 +76,7 @@ export class StatisticsGraphComponent implements AfterViewInit {
       return;
     }
     this.chart.data.labels = graphData[0];
-    this.chart.data.datasets[0].data = graphData[1];
+    this.chart.data.datasets[0].data = graphData[1].map(value => Math.round(value * 10) / 10);
     this.chart.update();
   }
 

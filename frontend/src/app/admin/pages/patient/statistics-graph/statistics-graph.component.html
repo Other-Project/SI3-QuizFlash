@@ -1,13 +1,11 @@
 <h2>{{ title }}</h2>
-@if (selectedQuizId && !(selectedQuizId == 'all')) {
-<label> Type de graphe :
+<label *ngIf="selectedQuizId && selectedQuizId!=''"> Type de graphe :
   <select [(ngModel)]="selectedValue" #graphSelect (change)="selectedGraphType($any(graphSelect.value))"
           name="graph-select">
     <option [value]="GraphType.TRIES">Essais</option>
     <option [value]="GraphType.TIME">Temps</option>
   </select>
 </label>
-}
 <div class="stats-container" [style.visibility]="dateAvailable ? 'visible': 'hidden'">
   <canvas id="stat-chart">{{ chart }}</canvas>
 </div>

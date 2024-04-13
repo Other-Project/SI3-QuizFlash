@@ -41,7 +41,7 @@ export class StatisticsService {
     if (result.questionCount == 0)
       return -1;
 
-    return this.roundUp(result.filterCount / result.questionCount) * 100;
+    return result.filterCount / result.questionCount * 100;
   }
 
   getAllQuizzesAnswerHintRate(patientId: string, questionType?: QuestionType) {
@@ -111,10 +111,6 @@ export class StatisticsService {
     return this.getRateByFilter(patientStats, questionType);
   }
 
-  private roundUp(value: number) {
-    return Math.round(value * 10) / 10;
-  }
-
   private getTimeDataQuizStats(stats: QuizStats[], questionType?: QuestionType) {
     let totalTimeForQuestion = 0;
     let numberOfQuestion = 0;
@@ -128,7 +124,7 @@ export class StatisticsService {
       });
     });
 
-    return [this.roundUp(totalTimeForQuestion), (numberOfQuestion == 0) ? 0 : this.roundUp(totalTimeForQuestion / numberOfQuestion)];
+    return [totalTimeForQuestion, (numberOfQuestion == 0) ? 0 : totalTimeForQuestion / numberOfQuestion];
   }
 
   getTimeDataForQuiz(patientId: string, quizId: string, questionType?: QuestionType) {
