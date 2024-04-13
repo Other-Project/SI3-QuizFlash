@@ -27,6 +27,30 @@ export const QUESTIONSTAT3: QuestionStats = {
   answerHint: false
 }
 
+export const QUESTIONSTAT4: QuestionStats = {
+  questionId: "4",
+  questionType: QuestionType.TextOnly,
+  success: true,
+  timeSpent: 2.4,
+  answerHint: false
+}
+
+export const QUESTIONSTAT5: QuestionStats = {
+  questionId: "5",
+  questionType: QuestionType.TextOnly,
+  success: true,
+  timeSpent: 3.6,
+  answerHint: false
+}
+
+export const QUESTIONSTAT6: QuestionStats = {
+  questionId: "6",
+  questionType: QuestionType.Image,
+  success: true,
+  timeSpent: 2.5,
+  answerHint: false
+}
+
 export const QUESTIONSTAT1TRY2: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
@@ -51,25 +75,25 @@ export const QUESTIONSTAT3TRY2: QuestionStats = {
   answerHint: false
 }
 
-export const MARTINE_QUIZTRY1: QuizStats = {
+export const MARTINE_QUIZ1TRY1: QuizStats = {
   userId: "134b849f-fd4b-4b13-b377-f283b117365d",
-  quizId: "1",
+  quizId: "2",
 
   questionsStats: [QUESTIONSTAT1, QUESTIONSTAT2, QUESTIONSTAT3]
 }
 
-export const MARTINE_QUIZTRY2: QuizStats = {
+export const MARTINE_QUIZ1TRY2: QuizStats = {
   userId: "134b849f-fd4b-4b13-b377-f283b117365d",
-  quizId: "1",
+  quizId: "2",
 
   questionsStats: [QUESTIONSTAT1TRY2, QUESTIONSTAT2TRY2, QUESTIONSTAT3TRY2]
 }
 
-export const MARTINE_QUIZSTAT2: QuizStats = {
+export const MARTINE_QUIZ2: QuizStats = {
   userId: "134b849f-fd4b-4b13-b377-f283b117365d",
-  quizId: "2",
+  quizId: "1",
 
-  questionsStats: [QUESTIONSTAT1, QUESTIONSTAT2]
+  questionsStats: [QUESTIONSTAT4, QUESTIONSTAT5, QUESTIONSTAT6]
 }
 
 

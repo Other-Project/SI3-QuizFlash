@@ -3,7 +3,7 @@ import {QuestionStats} from "../models/question-stats.model";
 import {QuestionType} from "../models/question-type.models";
 
 export const QUESTIONSTAT1: QuestionStats = {
-  questionId: "4",
+  questionId: "1",
   questionType: QuestionType.TextOnly,
   success: true,
   timeSpent: 2.2,
@@ -11,10 +11,10 @@ export const QUESTIONSTAT1: QuestionStats = {
 }
 
 export const QUESTIONSTAT2: QuestionStats = {
-  questionId: "5",
+  questionId: "2",
   questionType: QuestionType.TextOnly,
   success: true,
-  timeSpent: 2.2,
+  timeSpent: 4.3,
   answerHint: false
 }
 
