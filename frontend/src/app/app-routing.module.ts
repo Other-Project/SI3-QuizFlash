@@ -20,13 +20,8 @@ const routes: Routes = [
     path: "admin", component: AdminComponent, canActivate: [() => checkAccess(AccessRestriction.Admin)], children: [
       {path: "", pathMatch: "full", redirectTo: "patients"},
       {path: "patients", component: AdminPatientsComponent},
-      {
-        path: "patient/:user_id", component: PatientComponent, children: [
-          {path: "", pathMatch: "full", redirectTo: "infos"},
-          {path: "infos", component: InformationComponent},
-          {path: "stats", component: StatisticsComponent}
-        ]
-      },
+      {path: "patient", component: PatientComponent},
+      {path: "patient/:user_id", component: PatientComponent},
       {
         path: "quizzes", children: [
           {path: "", pathMatch: "full", component: AdminQuizzesComponent},
