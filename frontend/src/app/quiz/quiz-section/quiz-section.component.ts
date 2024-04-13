@@ -53,4 +53,9 @@ export class QuizSectionComponent {
   selectionPage() {
     this.returnSelectionPage.emit();
   }
+
+  setInactivity() {
+    this.inactive = true;
+    this.finish = true;
+  }
 }
