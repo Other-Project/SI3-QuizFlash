@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, Input} from "@angular/core";
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
 import {StatisticsService} from "../../../../../service/statistics.service";
 import {GraphType} from "../../../../../models/graph-type.model";
 import {QuestionType} from "../../../../../models/question-type.models";
 
 
 @Component({
-  selector: 'stats-graph',
-  templateUrl: 'statistics-graph.component.html',
-  styleUrls: ['statistics-graph.component.scss']
+  selector: "stats-graph",
+  templateUrl: "statistics-graph.component.html",
+  styleUrls: ["statistics-graph.component.scss"]
 })
 
 export class StatisticsGraphComponent implements AfterViewInit {
@@ -27,11 +27,11 @@ export class StatisticsGraphComponent implements AfterViewInit {
 
   createChart(graphData: [string[], number[]]) {
     this.chart = new Chart("stat-chart", {
-      type: 'line',
+      type: "line",
       data: {
         labels: graphData[0],
         datasets: [{
-          label: 'Taux de réussite',
+          label: "Taux de réussite",
           backgroundColor: "rgba(0,0,255,1.0)",
           borderColor: "rgba(0,0,255,0.1)",
           data: graphData[1].map(value => Math.round(value * 10) / 10)
@@ -52,9 +52,8 @@ export class StatisticsGraphComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      let data = this.statsService.getAllQuizzesGraphData(this.patientId!);
-      this.createChart(data);
-    })
+      this.createChart(this.statsService.getTries(this.patientId!));
+    });
   }
 
   selectedGraphType(graphType: GraphType, graphData?: [string[], number[]]) {
@@ -62,19 +61,16 @@ export class StatisticsGraphComponent implements AfterViewInit {
     if (graphType == GraphType.TRIES) {
       this.chart.options.scales!["y"]!.suggestedMax = 100;
       this.chart.data.datasets[0].label = "Taux de réussite";
-    }
-    else {
+    } else {
       this.chart.options.scales!["y"]!.suggestedMax = 15;
       this.chart.data.datasets[0].label = "Temps moyen par question";
     }
-    this.updateChart(graphData ?? this.statsService.getQuizGraphData(this.patientId!, graphType, this.selectedQuizId!, this.selectedQuestionType));
+    this.updateChart(graphData ?? this.getQuizGraphData(this.patientId!, graphType, this.selectedQuizId!, this.selectedQuestionType));
   }
 
   updateChart(graphData: [string[], number[]]) {
     this.dateAvailable = graphData[0].length != 0;
-    if (graphData[0].length == 0 || !this.chart) {
-      return;
-    }
+    if (graphData[0].length == 0 || !this.chart) return;
     this.chart.data.labels = graphData[0];
     this.chart.data.datasets[0].data = graphData[1].map(value => Math.round(value * 10) / 10);
     this.chart.update();
@@ -84,9 +80,12 @@ export class StatisticsGraphComponent implements AfterViewInit {
     if (!this.patientId) return;
     this.selectedQuizId = quizId;
     this.selectedQuestionType = questionType;
-    let chartData = quizId ?
-      this.statsService.getQuizGraphData(this.patientId, GraphType.TRIES, quizId, questionType) :
-      this.statsService.getAllQuizzesGraphData(this.patientId, questionType);
-    this.selectedGraphType(GraphType.TRIES, chartData);
+    this.selectedGraphType(GraphType.TRIES, this.statsService.getTries(this.patientId, quizId, questionType));
+  }
+
+  getQuizGraphData(patientId: string, graphType: GraphType, quizId: string, questionType?: QuestionType) {
+    return graphType == GraphType.TRIES
+      ? this.statsService.getTries(patientId, quizId, questionType)
+      : this.statsService.getTimeQuiz(patientId, quizId, questionType);
   }
 }
