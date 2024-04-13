@@ -8,7 +8,6 @@ import {TabNavigation} from "../patient.component";
 })
 
 export class PatientNavbarComponent{
-  @Input() create: boolean = true;
   @Output() tabToSwitch: EventEmitter<TabNavigation> = new EventEmitter<TabNavigation>();
 
   switchTab(tab: TabNavigation) {
