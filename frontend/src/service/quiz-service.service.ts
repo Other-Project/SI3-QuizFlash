@@ -52,6 +52,9 @@ export class QuizService {
     return quiz.id;
   }
 
-  deleteQuizzes(id: string): void {
+  deleteQuiz(quizId: string): void {
+    let quizIndex = this.quizzes.findIndex(quiz => quiz.id == quizId);
+    this.quizzes.splice(quizIndex, 1);
+    this.quizzes$.next(this.quizzes);
   }
 }

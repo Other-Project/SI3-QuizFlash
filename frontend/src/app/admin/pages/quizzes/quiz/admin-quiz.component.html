@@ -5,7 +5,16 @@
   <div>
     <input placeholder="Titre" formControlName="title" id="title"/>
     <input placeholder="Thème" formControlName="theme" id="theme"/>
-    <app-button (click)="save()">Sauvegarder</app-button>
+    <div class="actions">
+      <app-button (click)="save()">
+        <fa-icon [icon]="faSave"/>
+        Sauvegarder
+      </app-button>
+      <app-button (click)="delete()" [color]="'red'">
+        <fa-icon [icon]="faTrash"/>
+        Supprimer
+      </app-button>
+    </div>
   </div>
 </form>
 
