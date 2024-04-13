@@ -22,14 +22,14 @@ export class UserService {
     if (json) this.setLoggedUser(JSON.parse(json));
   }
 
-  addUser(user: User) {
-    user.id = "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+  addUser(patient: Patient) {
+    patient.id = "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
       (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
     );
-    user.access = AccessRestriction.User;
-    this.users.push(user);
+    patient.access = AccessRestriction.User;
+    this.users.push(patient);
     this.users$.next(this.users);
-    return user.id;
+    return patient.id;
   }
 
   deleteUser(id: string): void {

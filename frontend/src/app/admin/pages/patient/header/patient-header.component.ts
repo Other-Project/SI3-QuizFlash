@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../../../models/user.models";
 import {faCircleUser, faPencil} from "@fortawesome/free-solid-svg-icons";
+import {Patient} from "../../../../../models/patient.models";
 
 @Component({
   selector: 'patient-header',
@@ -9,7 +10,7 @@ import {faCircleUser, faPencil} from "@fortawesome/free-solid-svg-icons";
 })
 
 export class PatientHeaderComponent implements OnInit{
-  @Input() user?: User;
+  @Input() user?: Patient;
   edit: boolean = false;
   @Output() patientInfoChange = new EventEmitter<{ firstname: string; lastname: string; age: number }>();
 
