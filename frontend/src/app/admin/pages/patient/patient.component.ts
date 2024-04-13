@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../../service/user.service";
 import {User} from "../../../../models/user.models";
@@ -16,14 +16,17 @@ export enum TabNavigation {
   styleUrls: ['./patient.component.scss']
 })
 
-export class PatientComponent {
+export class PatientComponent implements OnDestroy {
   private userId?: string;
   public user?: Patient;
   public tab: TabNavigation = TabNavigation.INFORMATION;
 
+  private routeSub;
+  private userSub;
+
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
-    this.route.params.subscribe(params => this.userId = params["user_id"]);
-    this.userService.users$.subscribe(users => {
+    this.routeSub = this.route.params.subscribe(params => this.userId = params["user_id"]);
+    this.userSub = this.userService.users$.subscribe(users => {
       if (!this.userId) this.user = undefined;
       else {
         this.user = users.find(user => user.id == this.userId) as Patient;
@@ -32,6 +35,10 @@ export class PatientComponent {
     });
   }
 
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
+    this.userSub.unsubscribe();
+  }
 
   protected readonly TabNavigation = TabNavigation;
 }
