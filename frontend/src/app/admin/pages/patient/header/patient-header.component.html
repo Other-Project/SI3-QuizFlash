@@ -11,6 +11,7 @@
       <strong *ngIf="user">{{ user.age }} ans</strong>
     </div>
     <edit-button (editButtonClick)="editPatientInfo()"/>
+    <delete-button/>
   }
   <h1 *ngIf="!user"> Création d'un nouvel utilisateur</h1>
 </div>
