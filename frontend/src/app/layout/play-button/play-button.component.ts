@@ -5,7 +5,6 @@ import {LayoutModule} from "../layout.module";
 @Component({
   selector: 'app-play-button',
   templateUrl: './play-button.component.html',
-  styleUrls: ['./play-button.component.scss'],
   imports: [
     NgIf,
     NgOptimizedImage,
@@ -16,6 +15,7 @@ import {LayoutModule} from "../layout.module";
 export class PlayButtonComponent {
   @Input() public src?: string;
   @Input() set volume(gainValue: number) {
+    if (!gainValue || gainValue <= 0) return;
     this.gainValue = gainValue;
     if (this.gainNode)
       this.gainNode.gain.value = this.gainValue;
