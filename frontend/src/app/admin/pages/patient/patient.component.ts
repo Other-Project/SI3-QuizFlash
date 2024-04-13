@@ -12,7 +12,6 @@ export enum TabNavigation {
   selector: 'patient',
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.scss']
-
 })
 
 export class PatientComponent implements OnDestroy {
