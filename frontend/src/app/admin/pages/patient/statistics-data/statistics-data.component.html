@@ -13,10 +13,12 @@
   </select>
 </div>
 @if (successRate >= 0) {
-  <p>Taux de réussite : {{ successRate.toFixed() }}%</p>
-  <p *ngIf="answerHint && answerHintRate>=0">Proportion de réponses assistées : {{ answerHintRate.toFixed() }}%</p>
-  <p *ngIf="quizSelected && spentTime>=0">Temps passé sur le quizz : {{ spentTime.toFixed() }} minutes</p>
-  <p *ngIf="quizSelected && averageTimeSpent>=0">Temps moyen par question : {{ averageTimeSpent.toFixed() }} minutes</p>
+  <p>Taux de réussite : {{ successRate.toFixed(1) }}%</p>
+  <p *ngIf="answerHint && answerHintRate>=0">Proportion de réponses assistées : {{ answerHintRate.toFixed(1) }}%</p>
+  <p *ngIf="quizSelected && spentTime>=0">Temps passé sur le quiz
+    : {{ spentTime * 60000 | date:"mm 'minutes' ss 'secondes'":'UTC' }}</p>
+  <p *ngIf="quizSelected && averageTimeSpent>=0">Temps moyen par question
+    : {{ averageTimeSpent * 60000 | date:"mm 'minutes' ss 'secondes'":'UTC' }}</p>
 } @else {
   <h3>Aucune donnée n'est disponible</h3>
 }

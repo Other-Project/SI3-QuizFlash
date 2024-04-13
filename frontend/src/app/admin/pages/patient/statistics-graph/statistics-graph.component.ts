@@ -86,6 +86,6 @@ export class StatisticsGraphComponent implements AfterViewInit {
   getQuizGraphData(patientId: string, graphType: GraphType, quizId: string, questionType?: QuestionType) {
     return graphType == GraphType.TRIES
       ? this.statsService.getTries(patientId, quizId, questionType)
-      : this.statsService.getTimeQuiz(patientId, quizId, questionType);
+      : this.statsService.getTimePerQuestion(patientId, quizId, questionType);
   }
 }

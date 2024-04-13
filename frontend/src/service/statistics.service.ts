@@ -28,7 +28,7 @@ export class StatisticsService {
     return this.getTimeDataQuizStats(this.getPatientQuizzes(patientId, undefined, quizId), questionType);
   }
 
-  getTimeQuiz(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
+  getTimePerQuestion(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
     let result = this.getPatientQuizzes(patientId, questionType, quizId)
       .flatMap(quiz => quiz.questionsStats.filter(question => this.isQuestionOfType(question, questionType)))
       .reduce((groups, question) => {
