@@ -33,8 +33,8 @@ export class UserService {
   }
 
   deleteUser(id: string): void {
-    // TODO
-    this.users$.next(this.users);
+    console.log("call to deleteUSer");
+    // this.users$.next(this.users);
   }
 
   updateFontSize(userId: string, newFontSize: number): void {
