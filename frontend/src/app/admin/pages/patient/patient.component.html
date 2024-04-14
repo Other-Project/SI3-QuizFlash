@@ -3,6 +3,6 @@
     <patient-navbar (tabToSwitch)="tab=$event"/>
     <section id="boxed-container" [ngSwitch]="tab">
       <information *ngSwitchCase="TabNavigation.INFORMATION" [user]="user"/>
-      <statistics *ngSwitchCase="TabNavigation.STATISTICS" [user]="user"/>
+      <statistics *ngSwitchCase="TabNavigation.STATISTICS"/>
     </section>
 </section>

@@ -19,13 +19,13 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.parent?.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       let user_id: string = params['user_id'];
       this.user = this.userService.getUserById(user_id) as Patient;
     });
   }
 
   quizSelection(quizSelectionData: { quizId?: string, questionType?: QuestionType }) {
-    this.graph.quizSelection(quizSelectionData.quizId, quizSelectionData.questionType);
+    this.graph?.quizSelection(quizSelectionData.quizId, quizSelectionData.questionType);
   }
 }
