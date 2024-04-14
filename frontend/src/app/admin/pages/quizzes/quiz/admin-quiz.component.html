@@ -1,0 +1,31 @@
+<form [formGroup]="quizForm">
+  <input type="text" placeholder="Image" formControlName="thumbnailUrl" hidden="hidden"/>
+  <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150" (onImageUpdate)="quizForm.patchValue({thumbnailUrl: $event})"/>
+
+  <div>
+    <input type="text" placeholder="Titre" formControlName="title" id="title"/>
+    <input type="text" placeholder="Thème" formControlName="theme" id="theme"/>
+    <div class="actions">
+      <app-button (click)="save()">
+        <fa-icon [icon]="faSave"/>
+        Sauvegarder
+      </app-button>
+      <app-button (click)="delete()" [color]="'red'">
+        <fa-icon [icon]="faTrash"/>
+        Supprimer
+      </app-button>
+    </div>
+  </div>
+</form>
+
+<hr/>
+
+<section id="questions">
+  <div id="questions-header"><h2>Questions</h2>
+    <app-button (click)="addQuestion()">
+      <fa-icon [icon]="faAdd"/>
+      Ajouter une question
+    </app-button>
+  </div>
+  <app-admin-questions [(questions)]="quiz.questions"/>
+</section>

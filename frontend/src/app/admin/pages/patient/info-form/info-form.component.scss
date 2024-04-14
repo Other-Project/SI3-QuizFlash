@@ -1,22 +1,9 @@
 form {
-  width: 20vw;
-  margin-left: 3vw;
   display: grid;
-  grid-template: auto auto / auto auto;
+  grid-template: 1fr / 150px 1fr 1fr 1fr;
+  gap: 1em;
 
-  input {
-    display: block;
-  }
-
-  :nth-child(2) {
-    margin-left: 1rem;
-  }
-
-  .ng-invalid:not(form) {
-    border: 1px solid red
-  }
-
-  input, select {
+  input:not([hidden]), select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -33,14 +20,14 @@ form {
 }
 
 .submit-button {
-  display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 3vw;
+  margin-left: 3em;
+  margin-top: 6em;
 
   button {
     width: 5em;
-    height: 5vh;
+    height: 2em;
     border-radius: 12px;
     cursor: pointer;
   }
@@ -48,5 +35,14 @@ form {
 
 :host {
   display: flex;
+}
+
+#profile-picture {
+  grid-column: 1;
+  border-radius: 50%;
+  border-color: white;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
 }
 

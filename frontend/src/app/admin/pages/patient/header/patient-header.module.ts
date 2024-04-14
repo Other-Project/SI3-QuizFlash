@@ -1,16 +1,15 @@
 import {NgModule} from "@angular/core";
 import {PatientHeaderComponent} from "./patient-header.component";
-import {EditButtonComponent} from "../edit-button/edit-button.component";
 import {LayoutModule} from "../../../../layout/layout.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgIf, NgStyle} from "@angular/common";
 import {InfoFormComponent} from "../info-form/info-form.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {RouterLink} from "@angular/router";
 
 @NgModule({
   declarations: [
     PatientHeaderComponent,
-    EditButtonComponent,
     InfoFormComponent
   ],
   exports: [
@@ -22,7 +21,8 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
     NgStyle,
     NgIf,
     ReactiveFormsModule,
-    FaIconComponent
+    FaIconComponent,
+    RouterLink
   ]
 })
 

@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Output} from "@angular/core";
-import {QuizService} from "../../../service/quiz-service.service";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Quiz} from "../../../models/quiz.models";
 
 
@@ -9,11 +8,10 @@ import {Quiz} from "../../../models/quiz.models";
   styleUrls: ['./quiz-selection.component.scss']
 })
 export class QuizSelectionComponent {
-  public quizzes?: Quiz[];
+  @Input() public quizzes?: Quiz[];
   @Output() returnQuizSelected: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor(public quizListService: QuizService) {
-    quizListService.quizzes$.subscribe(quizzes => this.quizzes = quizzes);
+  constructor() {
   }
 
   returnQuiz(quiz: Quiz) {

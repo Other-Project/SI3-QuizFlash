@@ -1,15 +1,27 @@
 <div class="patient-header">
-  <div class="patient-picture">
-    <app-image [src]="user?.pictureUrl" [alt]="'Profile picture'" [width]="115" [height]="115" />
-  </div>
-  @if (edit) {
-    <info-form (patientInfoChange)="updatePatientInfo($event)" [user]="user"/>
+  @if (edit || !user) {
+    <info-form id="form" (patientInfoChange)="editPatientInfo()" [user]="user"/>
+  } @else if (delete) {
+    <h1> Voulez-vous supprimer l'utilisateur {{ user.firstname }} ?</h1>
+    <app-button id="check-button" (click)="deletePatient()" [color]="'blue'">
+      <fa-icon [icon]="faCheck" size="2x" id="check-icon"/>
+    </app-button>
+    <app-button id="xmark-button" (click)="displayDelete()" [color]="'red'">
+      <fa-icon [icon]="faXmark" size="2x" id="xmark-icon"/>
+    </app-button>
   } @else {
+    <app-image class="patient-picture" [src]="user.pictureUrl" [alt]="'Profile picture'" [width]="150" [height]="150"/>
     <div class="patient-info">
-      <h1 *ngIf="user">{{ user.lastname }}</h1>
-      <h1 *ngIf="user">{{ user.firstname }}</h1>
-      <h3 *ngIf="user">{{ user.age }} ans</h3>
+      <h2 *ngIf="user">{{ user.lastname }}</h2>
+      <h2 *ngIf="user">{{ user.firstname }}</h2>
+      <strong *ngIf="user">{{ user.age }} ans</strong>
     </div>
-    <edit-button (editButtonClick)="editPatientInfo()"/>
+    <app-button id="edit-button" (click)="editPatientInfo()" [color]="'blue'">
+      <fa-icon [icon]="faEdit" size="2x" id="edit-icon"/>
+    </app-button>
+    <app-button id="delete-button" (click)="displayDelete()" [color]="'red'">
+      <fa-icon [icon]="faTrash" size="2x" id="delete-icon"/>
+    </app-button>
   }
+  <h1 *ngIf="!user"> Création d'un nouvel utilisateur</h1>
 </div>

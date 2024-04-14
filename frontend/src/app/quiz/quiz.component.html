@@ -3,11 +3,11 @@
     <app-header [homePage]="'/quiz'" [interactive]="quiz == undefined">
       <quiz-header [counter]="getCounter()" [quizTheme]="quiz?.theme"
                    [numberOfQuestion]="questions.length" *ngIf="!selection && !isFinish()">
-        <app-button [color]="'blue'" (click)="fiftyFifty()" *ngIf="user!.answerHint && fiftyFiftyNotUse">50/50</app-button>
+        <app-button [color]="'blue'" (click)="fiftyFifty()" [disabled]="!fiftyFiftyEnabled" *ngIf="user!.answerHint">50/50</app-button>
       </quiz-header>
     </app-header>
     <main>
-      <app-quiz-selection (returnQuizSelected)="setQuiz($event)" *ngIf="selection"/>
+      <app-quiz-selection [quizzes]="quizzes" (returnQuizSelected)="setQuiz($event)" *ngIf="selection"/>
       <sound-settings *ngIf="soundSetting && !selection" (soundSettingsFinish)="getGainToTransfer($event)"/>
       <app-quiz-section [values]="currentQuestion" [user]="user" [finish]="isFinish()" [audioGain]="audioGain"
                         (nextQuestion)='nextQuestion()' (returnSelectionPage)="returnSelectionPage()" (chosenAnswer)="checkAnswer($event)"

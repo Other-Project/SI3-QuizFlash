@@ -1,0 +1,9 @@
+<section>
+  <app-input id="search-bar" (valueChange)="searchQuiz($event)" [placeholder]="'Chercher un quiz'"/>
+  <app-button [routerLink]="'./quiz'" id="create-quiz">
+    <fa-icon [icon]="faAdd"/>
+    Créer un quiz
+  </app-button>
+</section>
+
+<app-quiz-selection [quizzes]="quizzes" (returnQuizSelected)="manageQuiz($event)"/>

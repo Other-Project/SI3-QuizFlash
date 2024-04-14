@@ -1,0 +1,4 @@
+<div (click)="inputField.click()">
+  <ng-content/>
+</div>
+<input #inputField type="file" [accept]="accept" hidden="hidden" (change)="valueChanged($any($event.target).files)"/>
