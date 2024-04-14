@@ -4,7 +4,7 @@
     <select [(ngModel)]="filter" #filterSelect
             (change)="selectedGraphType($any(filterSelect.value),$any(dataTypeSelect.value))"
             name="graph-select">
-      <option [value]="StatsFilter.TRIES">Essais</option>
+      <option [value]="StatsFilter.TRIES">Tentatives</option>
       <option [value]="StatsFilter.QUESTIONS">Questions</option>
     </select>
   </label>

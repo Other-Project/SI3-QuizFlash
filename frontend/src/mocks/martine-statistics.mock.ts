@@ -95,6 +95,3 @@ export const MARTINE_QUIZ2: QuizStats = {
 
   questionsStats: [QUESTIONSTAT4, QUESTIONSTAT5, QUESTIONSTAT6]
 }
-
-
-

@@ -66,7 +66,7 @@ export class StatisticsGraphComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.createChart(this.statsService.getTries(this.patientId!))
+      this.createChart(this.statsService.getSuccessRatePerTry(this.patientId!));
     });
   }
 
@@ -115,16 +115,16 @@ export class StatisticsGraphComponent implements AfterViewInit {
     this.filter = StatsFilter.TRIES;
     this.selectedQuizId = quizId;
     this.selectedQuestionType = questionType;
-    this.selectedGraphType(this.filter, this.dataType, this.statsService.getTries(this.patientId, quizId, questionType));
+    this.selectedGraphType(this.filter, this.dataType, this.statsService.getSuccessRatePerTry(this.patientId, quizId, questionType));
   }
 
   getQuizGraphData(patientId: string, dataType: DataTypes, filter: StatsFilter, quizId: string, questionType?: QuestionType) {
     if (filter == StatsFilter.TRIES)
       return (dataType == DataTypes.TIME_AVERAGE)
         ? this.statsService.getTimePerTries(patientId, quizId, questionType)
-        : this.statsService.getTries(patientId, quizId, questionType);
+        : this.statsService.getSuccessRatePerTry(patientId, quizId, questionType);
     else return (dataType == DataTypes.TIME_AVERAGE)
       ? this.statsService.getTimePerQuestion(patientId, quizId, questionType)
-      : this.statsService.getQuestionsSuccessRate(patientId, quizId, questionType);
+      : this.statsService.getSuccessRatePerQuestion(patientId, quizId, questionType);
   }
 }

@@ -19,13 +19,13 @@ export class StatisticsService {
     return this.getRateByFilter(this.getPatientQuizzes(patientId, undefined, quizId), questionType);
   }
 
-  getTries(patientId: string, quizId?: string, questionType?: QuestionType): [string[], number[]] {
-    const patientStats = this.getPatientQuizzes(patientId, questionType, quizId);
-    return [patientStats.map(stat => stat.quizId), patientStats.map(stat => this.getRateByFilter([stat], questionType))];
-  }
-
   getTime(patientId: string, quizId: string, questionType?: QuestionType) {
     return this.getTimeDataQuizStats(this.getPatientQuizzes(patientId, undefined, quizId), questionType);
+  }
+
+  getSuccessRatePerTry(patientId: string, quizId?: string, questionType?: QuestionType): [string[], number[]] {
+    const patientStats = this.getPatientQuizzes(patientId, questionType, quizId);
+    return [patientStats.map(stat => stat.quizId), patientStats.map(stat => this.getRateByFilter([stat], questionType))];
   }
 
   getTimePerQuestion(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
@@ -38,7 +38,7 @@ export class StatisticsService {
     return [patientStats.map(stat => stat.quizId), patientStats.map(stat => this.sum(stat.questionsStats.flatMap(q => q.timeSpent)))];
   }
 
-  getQuestionsSuccessRate(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
+  getSuccessRatePerQuestion(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
     let result = this.getAccumulateQuestionStats(patientId, quizId, questionType);
     return [Object.keys(result), Object.values(result).map(question => this.questionSuccessRate(question) ?? 0)];
   }
@@ -48,7 +48,8 @@ export class StatisticsService {
    *********/
 
   private questionSuccessRate(questionStats: QuestionStats[]) {
-    return questionStats.length === 0 ? undefined : (questionStats.filter(question => question.success).length / questionStats.length) * 100;
+    let result = this.average(questionStats.map(question => question.success ? 1 : 0));
+    return result ? result * 100 : undefined;
   }
 
   private getAccumulateQuestionStats(patientId: string, quizId: string, questionType?: QuestionType): Record<string, QuestionStats[]> {
