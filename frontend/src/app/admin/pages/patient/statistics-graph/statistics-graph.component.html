@@ -1,2 +1,22 @@
 <h2>{{ title }}</h2>
-<img ngSrc="{{ src }}" alt="Statistics graph"  width="850" height="250">
+<div *ngIf="selectedQuizId && selectedQuizId!=''" class="graph-selectors">
+  <label> Filtre :
+    <select [(ngModel)]="filter" #filterSelect
+            (change)="selectedGraphType($any(filterSelect.value),$any(dataTypeSelect.value))"
+            name="graph-select">
+      <option [value]="StatsFilter.TRIES">Tentatives</option>
+      <option [value]="StatsFilter.QUESTIONS">Questions</option>
+    </select>
+  </label>
+  <label> Type de donnée :
+    <select [(ngModel)]="dataType" #dataTypeSelect
+            (change)="selectedGraphType($any(filterSelect.value),$any(dataTypeSelect.value))"
+            name="graph-select">
+      <option [value]="DataType.SUCCESS_RATE">Taux de réussite</option>
+      <option [value]="DataType.TIME_AVERAGE">Temps moyen</option>
+    </select>
+  </label>
+</div>
+<div class="stats-container" [style.visibility]="dataAvailable ? 'visible': 'hidden'">
+  <canvas id="stat-chart">{{ chart }}</canvas>
+</div>

@@ -1,2 +1,2 @@
-<stats-data />
-<stats-graph [title]="'Graphique des statistiques'" [src]="'../../assets/stats.png'" />
+<stats-data (quizSelection)="quizSelection($event)" [patientId]="user?.id" [answerHint]="user?.answerHint ?? false"/>
+<stats-graph [patientId]="user?.id" [title]="'Graphique des statistiques'"/>

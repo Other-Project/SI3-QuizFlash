@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {StatisticsGraphComponent} from "../statistics-graph/statistics-graph.component";
-import {AsyncPipe, NgIf, NgOptimizedImage} from "@angular/common";
+import {AsyncPipe, DatePipe, KeyValuePipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {StatisticsDataComponent} from "../statistics-data/statistics-data.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,10 @@ import {StatisticsDataComponent} from "../statistics-data/statistics-data.compon
     NgOptimizedImage,
     AsyncPipe,
     NgIf,
+    NgForOf,
+    FormsModule,
+    KeyValuePipe,
+    DatePipe,
   ]
 })
 

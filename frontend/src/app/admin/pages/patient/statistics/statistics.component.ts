@@ -1,5 +1,7 @@
-import {Component, Input} from "@angular/core";
-import {User} from "../../../../../models/user.models";
+import {Component, Input, ViewChild} from "@angular/core";
+import {Patient} from "../../../../../models/patient.models";
+import {QuestionType} from "../../../../../models/question-type.models";
+import {StatisticsGraphComponent} from "../statistics-graph/statistics-graph.component";
 
 @Component({
   selector: 'statistics',
@@ -7,9 +9,11 @@ import {User} from "../../../../../models/user.models";
   styleUrls: ['statistics.component.scss']
 })
 
-export class StatisticsComponent{
-  @Input() public user?: User;
+export class StatisticsComponent {
+  @ViewChild(StatisticsGraphComponent) graph!: StatisticsGraphComponent;
+  @Input() public user?: Patient;
 
-  constructor() {
+  quizSelection(quizSelectionData: { quizId?: string, questionType?: QuestionType }) {
+    this.graph?.quizSelection(quizSelectionData.quizId, quizSelectionData.questionType);
   }
 }
