@@ -2,9 +2,7 @@
 <h2>Choix des statistiques</h2>
   <select #quizSelect (change)="quizChoice(quizSelect.value, $any(questionType.value))" name="quizz-select">
     <option value="">Tous les quizz</option>
-    @for (quiz of quizList; track quiz){
-      <option value="{{ quiz.id }}">{{ quiz.title }}</option>
-    }
+    <option *ngFor="let quiz of quizList" [value]="quiz.id">{{ quiz.title }}</option>
   </select>
   <select #questionType (change)="quizChoice(quizSelect.value, $any(questionType.value))" [value]="-1"
           name="type-select" id="type-select">
