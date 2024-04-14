@@ -105,6 +105,7 @@ export class StatisticsGraphComponent implements AfterViewInit {
 
     this.chart.data.labels = graphData[0];
     this.chart.data.datasets[0].data = graphData[1].map(value => Math.round(value * 10) / 10);
+    this.chart.data.datasets[0].label = this.dataType;
     this.chart.update();
   }
 
