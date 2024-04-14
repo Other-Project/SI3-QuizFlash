@@ -41,7 +41,7 @@ export class StatisticsDataComponent implements OnInit {
   }
 
   quizChoice(quizId?: string, questionType?: QuestionType): void {
-    this.quizSelected = quizId != "";
+    if (quizId) this.quizSelected = quizId != "";
     if (questionType == -1 as QuestionType) questionType = undefined;
     this.quizSelection?.emit({quizId, questionType});
 

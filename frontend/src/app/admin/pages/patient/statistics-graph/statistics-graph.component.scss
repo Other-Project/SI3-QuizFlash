@@ -4,6 +4,16 @@
   flex-direction: column;
 }
 
+.graph-selectors {
+  font-size: 0.9em;
+  margin-top: 0.5em;
+  margin-bottom: 1.4em;
+
+  label:last-child {
+    margin-left: 2em;
+  }
+}
+
 #stat-chart {
   @media screen and (min-width: 1000px) {
     width: 40vw;

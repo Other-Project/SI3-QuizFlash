@@ -29,18 +29,36 @@ export class StatisticsService {
   }
 
   getTimePerQuestion(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
-    let result = this.getPatientQuizzes(patientId, questionType, quizId)
-      .flatMap(quiz => quiz.questionsStats.filter(question => this.isQuestionOfType(question, questionType)))
-      .reduce((groups, question) => {
-        (groups[question.questionId] ||= []).push(question);
-        return groups;
-      }, {} as Record<string, QuestionStats[]>);
+    let result = this.getAccumulateQuestionStats(patientId, quizId, questionType);
     return [Object.keys(result), Object.values(result).map(question => this.average(question.map(stat => stat.timeSpent)) ?? 0)];
+  }
+
+  getTimePerTries(patientId: string, quizId?: string, questionType?: QuestionType): [string[], number[]] {
+    const patientStats = this.getPatientQuizzes(patientId, questionType, quizId);
+    return [patientStats.map(stat => stat.quizId), patientStats.map(stat => this.sum(stat.questionsStats.flatMap(q => q.timeSpent)))];
+  }
+
+  getQuestionsSuccessRate(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
+    let result = this.getAccumulateQuestionStats(patientId, quizId, questionType);
+    return [Object.keys(result), Object.values(result).map(question => this.questionSuccessRate(question) ?? 0)];
   }
 
   /*********
    * UTILS *
    *********/
+
+  private questionSuccessRate(questionStats: QuestionStats[]) {
+    return questionStats.length === 0 ? undefined : (questionStats.filter(question => question.success).length / questionStats.length) * 100;
+  }
+
+  private getAccumulateQuestionStats(patientId: string, quizId: string, questionType?: QuestionType): Record<string, QuestionStats[]> {
+    return this.getPatientQuizzes(patientId, questionType, quizId)
+      .flatMap(quiz => quiz.questionsStats.filter(question => this.isQuestionOfType(question, questionType)))
+      .reduce((groups, question) => {
+        (groups[question.questionId] ||= []).push(question);
+        return groups;
+      }, {} as Record<string, QuestionStats[]>);
+  }
 
   private isQuestionOfType(question: QuestionStats, questionType?: QuestionType) {
     return !questionType || question.questionType == questionType;
