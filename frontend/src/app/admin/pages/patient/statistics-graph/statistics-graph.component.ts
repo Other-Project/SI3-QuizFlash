@@ -16,7 +16,7 @@ export class StatisticsGraphComponent implements AfterViewInit {
   @Input() title: string = "";
   @Input() patientId?: string;
 
-  protected dateAvailable: boolean = true;
+  protected dateAvailable: boolean = false;
   protected selectedQuizId?: string;
   private selectedQuestionType?: QuestionType;
   public chart?: Chart;
@@ -26,6 +26,7 @@ export class StatisticsGraphComponent implements AfterViewInit {
   }
 
   createChart(graphData: [string[], number[]]) {
+    this.dateAvailable = graphData[0].length != 0;
     this.chart = new Chart("stat-chart", {
       type: "line",
       data: {
