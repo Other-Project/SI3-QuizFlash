@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import Chart from "chart.js/auto";
 import {StatisticsService} from "../../../../../service/statistics.service";
 import {DataTypes, StatsFilter} from "../../../../../models/stats-enumerates";
@@ -11,7 +11,7 @@ import {QuestionType} from "../../../../../models/question-type.models";
   styleUrls: ["statistics-graph.component.scss"]
 })
 
-export class StatisticsGraphComponent implements AfterViewInit {
+export class StatisticsGraphComponent implements OnInit {
   protected readonly StatsFilter = StatsFilter;
   protected readonly DataType = DataTypes;
   @Input() title: string = "";
@@ -64,10 +64,8 @@ export class StatisticsGraphComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.createChart(this.statsService.getSuccessRatePerTry(this.patientId!));
-    });
+  ngOnInit(): void {
+    this.createChart(this.statsService.getSuccessRatePerTry(this.patientId!));
   }
 
   selectedGraphType(filter: StatsFilter, dataType: DataTypes, graphData?: [string[], number[]]) {
