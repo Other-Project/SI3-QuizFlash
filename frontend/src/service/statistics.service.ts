@@ -75,7 +75,7 @@ export class StatisticsService {
     let result = this.average(stats.flatMap(quiz => quiz.questionsStats
       .filter(question => this.isQuestionOfType(question, questionType))
       .map(question => successFilter(question) ? 1 : 0)));
-    return result ? result * 100 : -1;
+    return result != undefined ? result * 100 : -1;
   }
 
   private getTimeDataQuizStats(stats: QuizStats[], questionType?: QuestionType) {
