@@ -1,4 +1,4 @@
-<audio #sound src="{{src}}"></audio>
+<audio #sound src="{{src}}" loop></audio>
 <app-button [color]="'dark-blue'" (click)="playPause()">
   <span class="accessibility_text">{{soundPlayed ? "Cliquez sur moi pour arrêter le son" : "Cliquez sur moi pour lancer le son"}}</span>
 </app-button>
