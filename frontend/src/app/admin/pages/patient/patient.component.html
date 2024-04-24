@@ -4,5 +4,6 @@
     <section id="boxed-container" [ngSwitch]="tab">
       <information *ngSwitchCase="TabNavigation.INFORMATION" [user]="user"/>
       <statistics [user]="user" *ngSwitchCase="TabNavigation.STATISTICS"/>
+      <historic *ngSwitchCase="TabNavigation.HISTORIC"/>
     </section>
 </section>

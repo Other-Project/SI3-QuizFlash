@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule} from "@angular/core";
 import {PatientComponent} from "./patient.component";
 import {NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from "@angular/common";
 import {StatisticsComponent} from "./statistics/statistics.component";
@@ -10,6 +10,7 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 import {LayoutModule} from "../../../layout/layout.module";
 import {PatientHeaderModule} from "./header/patient-header.module";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {HistoricComponent} from "./historic/historic.component";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
     PatientComponent,
     StatisticsComponent,
     InformationComponent,
-    PatientNavbarComponent
+    PatientNavbarComponent,
+    HistoricComponent
   ],
   imports: [
     PatientHeaderModule,

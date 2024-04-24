@@ -68,7 +68,11 @@ export class AdminQuizComponent implements OnDestroy {
   }
 
   addQuestion() {
-    this.quiz.questions.push({answers: [{} as Answer, {} as Answer, {} as Answer, {} as Answer], type: QuestionType.TextOnly} as Question);
+    this.quiz.questions.push({
+      id: (this.quiz.questions.length + 1).toString(),
+      answers: [{id: "1"} as Answer, {id: "2"} as Answer, {id: "3"} as Answer, {id: "4"} as Answer],
+      type: QuestionType.TextOnly
+    } as Question);
   }
 
   protected readonly faAdd = faAdd;

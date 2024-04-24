@@ -6,6 +6,7 @@ export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
   success: true,
+  answerChosenId: 4,
   timeSpent: 2.2,
   answerHint: true
 }
@@ -14,6 +15,7 @@ export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
   success: true,
+  answerChosenId: 4,
   timeSpent: 4.3,
   answerHint: false
 }

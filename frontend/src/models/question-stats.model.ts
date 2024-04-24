@@ -4,6 +4,7 @@ export interface QuestionStats {
   questionId: string;
 
   questionType: QuestionType;
+  answerChosenId: number;
   success: boolean;
   timeSpent: number;
   answerHint: boolean;
