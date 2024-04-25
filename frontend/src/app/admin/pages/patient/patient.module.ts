@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {PatientComponent} from "./patient.component";
-import {NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from "@angular/common";
+import {DatePipe, KeyValuePipe, NgForOf, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from "@angular/common";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {InformationComponent} from "./information/information.component";
 import {StatisticsModule} from "./statistics/statistics.module";
@@ -11,6 +11,9 @@ import {LayoutModule} from "../../../layout/layout.module";
 import {PatientHeaderModule} from "./header/patient-header.module";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {HistoricComponent} from "./historic/historic.component";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {PlayButtonComponent} from "../../../layout/play-button/play-button.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -32,7 +35,15 @@ import {HistoricComponent} from "./historic/historic.component";
     NgMultiSelectDropDownModule,
     NgSwitch,
     NgSwitchCase,
-    NgIf
+    NgIf,
+    FaIconComponent,
+    KeyValuePipe,
+    NgForOf,
+    PlayButtonComponent,
+    ReactiveFormsModule
+  ],
+  providers: [
+    DatePipe,
   ]
 })
 

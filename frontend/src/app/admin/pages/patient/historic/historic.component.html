@@ -1,3 +1,30 @@
 <div class="historic">
-  <p>test</p>
+  <h2>Choix de l'historique</h2>
+  <select #quizSelect (change)="quizChoice(quizSelect.value)" name="quizz-select">
+    <option value="">Aucun quizz</option>
+    <option *ngFor="let value of historic; index as i" [value]="i">{{ getTitle(value[0].quizId) }}  {{ this.datepipe.transform(value[1], 'yyyy/MM/dd') }}</option>
+  </select>
+  <!--<div class="extra">
+    <select [(ngModel)]="question.type">
+      <option *ngFor="let type of QuestionTypes | keyvalue" [value]="type.key">{{ type.value }}</option>
+    </select>
+    <div [ngSwitch]="Number(question.type)">
+      <app-image-input *ngSwitchCase="QuestionType.Image" [src]="question.imageUrl" (onImageUpdate)="question.imageUrl = $event"/>
+      <div *ngSwitchCase="QuestionType.Sound">
+        <app-file-input (valueChange)="question.soundUrl = $event" [accept]="'audio/*'">
+          <app-button>{{ question.soundUrl ? 'Changer le fichier' : 'Ajouter un fichier' }}</app-button>
+        </app-file-input>
+        <app-play-button *ngIf="question.soundUrl" [src]="question.soundUrl"/>
+      </div>
+    </div>
+  </div>
+  <app-input class="question" [icon]="faQuestion" [value]="question.text" (change)="question.text = $any($event.target).value" [placeholder]="'Entrez la question'"/>
+  <div class="answers">
+    <app-input *ngFor="let answer of question.answers; index as i" [icon]="faReply" [placeholder]="'Entrez la proposition ' + (i+1)" [(value)]="answer.answerText">
+      <input type="radio" name="trueAnswer-{{instance}}" [checked]="answer.trueAnswer" [value]="i" (change)="changeTrueAnswer($any($event.target).value)"/>
+    </app-input>
+  </div>
+  <app-button class="delete" [color]="'red'" (click)="questionRemoved.emit()">
+    <fa-icon [icon]="faTrash"/>
+  </app-button>   -->
 </div>
