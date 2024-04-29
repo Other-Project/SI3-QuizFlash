@@ -16,6 +16,7 @@ export class HistoricComponent implements OnInit {
   protected historic?: [QuizStats, Date][];
   @Input() user?: Patient;
   quizList?: Quiz[];
+  quizSelected: boolean = false;
 
   constructor(private quizListService: QuizService, public historicService: HistoricService, public datepipe: DatePipe) {
   }
@@ -25,6 +26,7 @@ export class HistoricComponent implements OnInit {
     this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
     });
+    this.quizSelected = false;
   }
 
 
@@ -33,6 +35,11 @@ export class HistoricComponent implements OnInit {
   }
 
   protected quizChoice(value: string) {
-    var number = parseInt(value);
+    let pos = parseInt(value);
+    if (value[0] != "") {
+      this.quizSelected = true;
+      this.quizListService.selectQuiz(this.historic![pos][0].quizId);
+      this.historicService.getUserQuizHistoric(this.historic![pos][0].quizId, this.user!.id, this.historic![pos][1]);
+    } else this.quizSelected = false;
   }
 }

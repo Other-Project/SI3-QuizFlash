@@ -6,7 +6,7 @@ import {QuestionType} from "../models/question-type.models";
 export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  answerChosenId: 4,
+  answerChosenId: "4",
   success: true,
   timeSpent: 2.2,
   answerHint: false
@@ -15,7 +15,7 @@ export const QUESTIONSTAT1: QuestionStats = {
 export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  answerChosenId: 4,
+  answerChosenId: "4",
   success: true,
   timeSpent: 3.1,
   answerHint: false
@@ -24,7 +24,7 @@ export const QUESTIONSTAT2: QuestionStats = {
 export const QUESTIONSTAT3: QuestionStats = {
   questionId: "3",
   questionType: QuestionType.Sound,
-  answerChosenId: 1,
+  answerChosenId: "1",
   success: false,
   timeSpent: 5,
   answerHint: false
@@ -33,7 +33,7 @@ export const QUESTIONSTAT3: QuestionStats = {
 export const QUESTIONSTAT4: QuestionStats = {
   questionId: "4",
   questionType: QuestionType.TextOnly,
-  answerChosenId: 4,
+  answerChosenId: "4",
   success: true,
   timeSpent: 2.4,
   answerHint: false
@@ -42,7 +42,7 @@ export const QUESTIONSTAT4: QuestionStats = {
 export const QUESTIONSTAT5: QuestionStats = {
   questionId: "5",
   questionType: QuestionType.TextOnly,
-  answerChosenId: 4,
+  answerChosenId: "4",
   success: true,
   timeSpent: 3.6,
   answerHint: false
@@ -51,7 +51,7 @@ export const QUESTIONSTAT5: QuestionStats = {
 export const QUESTIONSTAT6: QuestionStats = {
   questionId: "6",
   questionType: QuestionType.Image,
-  answerChosenId: 3,
+  answerChosenId: "3",
   success: true,
   timeSpent: 2.5,
   answerHint: false
@@ -60,7 +60,7 @@ export const QUESTIONSTAT6: QuestionStats = {
 export const QUESTIONSTAT1TRY2: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  answerChosenId: 1,
+  answerChosenId: "1",
   success: false,
   timeSpent: 2,
   answerHint: false
@@ -69,7 +69,7 @@ export const QUESTIONSTAT1TRY2: QuestionStats = {
 export const QUESTIONSTAT2TRY2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  answerChosenId: 4,
+  answerChosenId: "4",
   success: true,
   timeSpent: 2.8,
   answerHint: false
@@ -78,7 +78,7 @@ export const QUESTIONSTAT2TRY2: QuestionStats = {
 export const QUESTIONSTAT3TRY2: QuestionStats = {
   questionId: "3",
   questionType: QuestionType.Sound,
-  answerChosenId: 3,
+  answerChosenId: "3",
   success: true,
   timeSpent: 3,
   answerHint: false

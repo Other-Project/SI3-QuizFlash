@@ -1,0 +1,22 @@
+.attempt-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.answers {
+  grid-column: 2;
+  grid-row: 2;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .25em;
+}
+
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
+}

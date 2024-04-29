@@ -1,0 +1,19 @@
+<div class="attempt-summary">
+  <div class="question" *ngFor="let question of quiz!.questions; index as indexQuestion">
+    <div [ngSwitch]="Number(question.type)">
+      <app-image [src]="question.imageUrl" [alt]="'image'" [width]="150" [height]="150"/>
+      <div *ngSwitchCase="QuestionType.Sound">
+        <app-play-button *ngIf="question.soundUrl" [src]="question.soundUrl"/>
+      </div>
+    </div>
+    <app-input class="question" [icon]="faQuestion" [value]="question.text" [disable]="true"/>
+    <div class="answers" *ngIf="detail[indexQuestion]">
+      <ng-template ngFor let-answer [ngForOf]="question.answers">
+        <app-input class="red" [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="chosen(question.id, answer) && !answer.trueAnswer"/>
+        <app-input class="green" [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="answer.trueAnswer"/>
+        <app-input [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="!chosen(question.id, answer) && !answer.trueAnswer"/>
+      </ng-template>
+    </div>
+    <button (click)="setDetail(indexQuestion)" *ngIf="!detail[indexQuestion]">Détails</button>
+  </div>
+</div>

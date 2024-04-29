@@ -1,3 +1,3 @@
 <fa-icon *ngIf="icon" [icon]="icon"/>
-<input [value]="value ?? ''" (change)="valueChange.emit($any($event.target).value)" [type]="type" [placeholder]="placeholder ?? ''"/>
+<input [value]="value ?? ''" (change)="valueChange.emit($any($event.target).value)" [type]="type" [placeholder]="placeholder ?? ''" [disabled]="disable"/>
 <ng-content/>

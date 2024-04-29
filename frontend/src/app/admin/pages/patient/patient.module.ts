@@ -14,6 +14,7 @@ import {HistoricComponent} from "./historic/historic.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {PlayButtonComponent} from "../../../layout/play-button/play-button.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {AttemptSummaryComponent} from "./attempt-summary/attempt-summary.component";
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     StatisticsComponent,
     InformationComponent,
     PatientNavbarComponent,
-    HistoricComponent
+    HistoricComponent,
+    AttemptSummaryComponent
   ],
   imports: [
     PatientHeaderModule,
