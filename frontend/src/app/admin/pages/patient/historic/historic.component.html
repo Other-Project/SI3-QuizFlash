@@ -1,8 +1,10 @@
 <div class="historic">
-  <h2>Choix de l'historique</h2>
-  <select #quizSelect (change)="quizChoice(quizSelect.value)" name="quizz-select">
-    <option value="">Aucun quizz</option>
-    <option *ngFor="let value of historic; index as i" [value]="i">{{ getTitle(value[0].quizId) }}  {{ this.datepipe.transform(value[1], 'yyyy/MM/dd') }}</option>
-  </select>
+  <div class="historic-header">
+    <h2>Choix du quiz pour en visualiser l'historique :</h2>
+    <select #quizSelect (change)="quizChoice(quizSelect.value)" name="quizz-select">
+      <option value="-1">Aucun quizz</option>
+      <option *ngFor="let value of historic; index as i" [value]="i">{{ getTitle(value[0].quizId) }}  {{ this.datepipe.transform(value[1], 'yyyy/MM/dd') }}</option>
+    </select>
+  </div>
   <attempt-summary [user]="user" *ngIf="quizSelected"/>
 </div>

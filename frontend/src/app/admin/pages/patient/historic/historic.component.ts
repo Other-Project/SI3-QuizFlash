@@ -36,10 +36,12 @@ export class HistoricComponent implements OnInit {
 
   protected quizChoice(value: string) {
     let pos = parseInt(value);
-    if (value[0] != "") {
+    if (value != "-1") {
       this.quizSelected = true;
       this.quizListService.selectQuiz(this.historic![pos][0].quizId);
       this.historicService.getUserQuizHistoric(this.historic![pos][0].quizId, this.user!.id, this.historic![pos][1]);
-    } else this.quizSelected = false;
+      return;
+    }
+    this.quizSelected = false;
   }
 }

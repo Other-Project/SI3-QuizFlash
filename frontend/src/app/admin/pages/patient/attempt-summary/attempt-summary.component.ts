@@ -8,6 +8,7 @@ import {QuestionType} from "../../../../../models/question-type.models";
 import {faQuestion, faReply} from "@fortawesome/free-solid-svg-icons";
 import {Answer} from "../../../../../models/answer.models";
 
+
 @Component({
   selector: "attempt-summary",
   templateUrl: "attempt-summary.component.html",
@@ -44,6 +45,6 @@ export class AttemptSummaryComponent implements OnInit {
   }
 
   setDetail(index: number) {
-    this.detail[index] = true;
+    this.detail[index] = !this.detail[index];
   }
 }

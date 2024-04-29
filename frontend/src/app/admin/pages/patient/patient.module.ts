@@ -13,7 +13,7 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {HistoricComponent} from "./historic/historic.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {PlayButtonComponent} from "../../../layout/play-button/play-button.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AttemptSummaryComponent} from "./attempt-summary/attempt-summary.component";
 
 
@@ -42,7 +42,8 @@ import {AttemptSummaryComponent} from "./attempt-summary/attempt-summary.compone
     KeyValuePipe,
     NgForOf,
     PlayButtonComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     DatePipe,
