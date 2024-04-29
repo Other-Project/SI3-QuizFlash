@@ -1,39 +1,51 @@
 <!--TODO check if the file could be slice in component and add stats-->
 
 <div class="attempt-summary">
-  <div class="questions" *ngFor="let question of quiz!.questions; index as indexQuestion">
+  <div class="questions" *ngFor="let question of questionsStats; index as indexQuestion">
     <div class="main-part">
-      <div class="switch" [ngSwitch]="Number(question.type)">
+      <div class="switch" [ngSwitch]="Number(getQuestion(question.questionId).type)">
         <div class="textuelle" *ngSwitchCase="QuestionType.TextOnly">
-          <p>Textuelle</p>
+          <p class="questionType">Textuelle</p>
         </div>
         <div class="visuelle" *ngSwitchCase="QuestionType.Image">
-          <p>Visuelle</p>
+          <p class="questionType">Visuelle</p>
         </div>
         <div class="sonore" *ngSwitchCase="QuestionType.Sound">
-          <p>Sonore</p>
+          <p class="questionType">Sonore</p>
         </div>
       </div>
-      <app-input class="question" [icon]="faQuestion" [value]="question.text" [disable]="true"/>
+      <app-input class="question" [icon]="faQuestion" [value]="getQuestion(question.questionId).text" [disable]="true"/>
 
       <detail-button (detail)="setDetail(indexQuestion)"/>
 
-      <div class="switch2" [ngSwitch]="Number(question.type)">
+      <div class="switch2" [ngSwitch]="Number(getQuestion(question.questionId).type)">
         <div class="visuelle2" *ngSwitchCase="QuestionType.Image">
-          <app-image [src]="question.imageUrl" [alt]="'image'"/>
+          <app-image [src]="getQuestion(question.questionId).imageUrl" [alt]="'image'"/>
         </div>
         <div class="sonore2" *ngSwitchCase="QuestionType.Sound">
-          <app-play-button *ngIf="question.soundUrl" [src]="question.soundUrl"/>
+          <app-play-button *ngIf="getQuestion(question.questionId).soundUrl" [src]="getQuestion(question.questionId).soundUrl"/>
+        </div>
       </div>
-    </div>
+
+      <div class="stats">
+        <p *ngIf="question.success">Question réussite</p>
+        <p *ngIf="!question.success">Question non réussite</p>
+        <p *ngIf="user!.answerHint && question.answerHint">50/50 Utilisé pour cette question</p>
+        <p *ngIf="user!.answerHint && !question.answerHint">50/50 Non utilisé pour cette question</p>
+        <p *ngIf="user!.removeAnswers">Nombre de tentatives : {{ question.numberOfAttempt }}</p>
+        <p>Temps passé sur cette question : {{ question.timeSpent }} minutes</p>
+      </div>
   </div>
-    <div class="details-part">
-      <div class="answers" *ngIf="detail[indexQuestion]">
-        <ng-template ngFor let-answer [ngForOf]="question.answers">
-          <app-input class="red" [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="chosen(question.id, answer) && !answer.trueAnswer"/>
-          <app-input class="green" [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="answer.trueAnswer"/>
-          <app-input [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="!chosen(question.id, answer) && !answer.trueAnswer"/>
-        </ng-template>
+    <div class="details-part" *ngIf="detail[indexQuestion]">
+      <div class="attempt" *ngFor="let number of numberOfAttemptArray(question.numberOfAttempt)">
+        <p class="attemptDescription" *ngIf="question.numberOfAttempt>1">Tentative numéro {{ number + 1 }} :</p>
+        <div class="answers">
+          <ng-template ngFor let-answer [ngForOf]="getQuestion(question.questionId).answers">
+            <app-input class="red" [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="answer.id == question.answerChosenId[number] && !answer.trueAnswer"/>
+            <app-input class="green" [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="answer.trueAnswer"/>
+            <app-input [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="answer.id != question.answerChosenId[number] && !answer.trueAnswer"/>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>
