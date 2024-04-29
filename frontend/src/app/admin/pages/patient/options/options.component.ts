@@ -1,5 +1,6 @@
-import {Component, ElementRef, Input, ViewChild} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Patient} from "../../../../../models/patient.models";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'options',
@@ -7,39 +8,69 @@ import {Patient} from "../../../../../models/patient.models";
   styleUrls: ['options.component.scss']
 })
 
-export class OptionsComponent{
-  @ViewChild("removeFalseAnswer") removeFalseAnswerCheckBox?: ElementRef;
-  @ViewChild("replayQuestion") replayCheckBox?: ElementRef;
-  @ViewChild("automatedSkip") automatedSkip?: ElementRef;
-  @ViewChild('answerHint') fiftyFiftyCheckBox?: ElementRef;
-  @ViewChild('auditive') auditiveCheckBox?: ElementRef;
-  @ViewChild('audioLaunch') audioLaunchCheckBox?: ElementRef;
+export class OptionsComponent implements OnInit {
+  @Output() userParametersChange: EventEmitter<Patient> = new EventEmitter<Patient>();
 
-  @Input() user?: Patient;
+  @Input() patient?: Patient;
+
+  protected patientParametersForm: FormGroup = new FormGroup({
+    removeAnswers: new FormControl(""),
+    automatedSkip: new FormControl(""),
+    answerHint: new FormControl(""),
+    replayAtEnd: new FormControl(""),
+    soundQuestion: new FormControl(""),
+    autoStartAudio: new FormControl("")
+  });
+
+  ngOnInit() {
+    this.patientParametersForm.patchValue({
+      removeAnswers: this.patient?.removeAnswers,
+      automatedSkip: this.patient?.automatedSkip,
+      answerHint: this.patient?.answerHint,
+      replayAtEnd: this.patient?.replayAtEnd,
+      soundQuestion: this.patient?.soundQuestion,
+      autoStartAudio: this.patient?.autoStartAudio
+    });
+
+    if (!this.patient?.autoStartAudio)
+      this.patientParametersForm.get("autoStartAudio")!.disable();
+  }
 
   changeDementiaLevel(newLevel: number): void {
+    if (!this.patientParametersForm)
+      return;
+
     const lowOrIntermediate: boolean = newLevel == 0 || newLevel == 1;
     const low: boolean = newLevel == 0;
 
-    if (this.fiftyFiftyCheckBox)
-      this.fiftyFiftyCheckBox.nativeElement.checked = low;
-    if (this.automatedSkip)
-      this.automatedSkip.nativeElement.checked = true;
-    if (this.replayCheckBox)
-      this.replayCheckBox.nativeElement.checked = low;
-    if (this.removeFalseAnswerCheckBox)
-      this.removeFalseAnswerCheckBox.nativeElement.checked = (newLevel == 2);
-    if (this.auditiveCheckBox)
-      this.auditiveCheckBox.nativeElement.checked = lowOrIntermediate;
-    if (this.audioLaunchCheckBox) {
-      this.audioLaunchCheckBox.nativeElement.checked = (newLevel == 1);
-      this.audioLaunchCheckBox.nativeElement.disabled = !lowOrIntermediate;
-    }
+    this.patientParametersForm.setValue({
+      removeAnswers: newLevel == 2,
+      automatedSkip: true,
+      answerHint: low,
+      replayAtEnd: low,
+      soundQuestion: lowOrIntermediate,
+      autoStartAudio: lowOrIntermediate
+    });
+
+    this.changedParameters();
   }
 
-  audioChange(audioEnabled: boolean) {
-    if (!this.audioLaunchCheckBox) return;
-    this.audioLaunchCheckBox.nativeElement.checked = audioEnabled;
-    this.audioLaunchCheckBox.nativeElement.disabled = !audioEnabled;
+  changedParameters() {
+    if (!this.patient || !this.patientParametersForm)
+      return;
+
+    let formValues = this.patientParametersForm.getRawValue();
+    this.patient.removeAnswers = formValues.removeAnswers;
+    this.patient.automatedSkip = formValues.automatedSkip;
+    this.patient.answerHint = formValues.answerHint;
+    this.patient.replayAtEnd = formValues.replayAtEnd;
+    this.patient.soundQuestion = formValues.soundQuestion;
+    this.patient.autoStartAudio = formValues.autoStartAudio;
+
+    let autoStartCheckbox = this.patientParametersForm.get("autoStartAudio");
+
+    (this.patient.soundQuestion) ? autoStartCheckbox?.enable() : autoStartCheckbox?.disable();
+
+    this.userParametersChange.emit(this.patient);
   }
 }

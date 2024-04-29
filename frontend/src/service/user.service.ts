@@ -39,16 +39,16 @@ export class UserService {
     this.users$.next(this.users);
   }
 
-  updateFontSize(userId: string, newFontSize: number): void {
-    // TODO update in the server
+  updateFontSize(patientId: string, newFontSize: number): void {
+    let patient = this.getUserById(patientId) as Patient;
+    if (patient)
+      patient.fontSize = newFontSize;
   }
 
-  updateDementiaLevel(userId: string, newDementiaLevel: number): void {
-    // TODO update in the server
-  }
-
-  updatePatientInfo(patientId: string, newFirstName: string, newLastName: string, newAge: number) {
-    // TODO update in the server
+  updateDementiaLevel(patientId: string, newDementiaLevel: number): void {
+    let patient = this.getUserById(patientId) as Patient;
+    if (patient)
+      patient.dementiaLevel = newDementiaLevel;
   }
 
   updateUser(userId: string, updatedUser: User) {
