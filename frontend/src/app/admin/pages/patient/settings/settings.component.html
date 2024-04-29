@@ -5,5 +5,5 @@
            [title]="'Stade de la maladie d\'Alzheimer'" [tags]="['Léger','Modéré','Elevé']"/>
     <font-size-selector [patient]="patient"/>
   </article>
-  <options [patient]="patient"/>
+  <options [patient]="patient" (onUserOptionsChange)="optionsChanges($event)"/>
 </section>

@@ -9,7 +9,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 
 export class OptionsComponent implements OnInit {
-  @Output() userParametersChange: EventEmitter<Patient> = new EventEmitter<Patient>();
+  @Output() onUserOptionsChange: EventEmitter<Patient> = new EventEmitter<Patient>();
 
   @Input() patient?: Patient;
 
@@ -71,6 +71,6 @@ export class OptionsComponent implements OnInit {
 
     (this.patient.soundQuestion) ? autoStartCheckbox?.enable() : autoStartCheckbox?.disable();
 
-    this.userParametersChange.emit(this.patient);
+    this.onUserOptionsChange.emit(this.patient);
   }
 }

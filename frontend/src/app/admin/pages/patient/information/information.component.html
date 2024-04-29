@@ -1,4 +1,4 @@
 <hobbies-select (newHobbiesSelected)="updateHobbies($event)" (addedHobby)="addHobby($event)"
                 (removedHobby)="removeHobby($event)"
                 [userHobbies]="patient?.hobbies" [hobbies]="hobbies"/>
-<patient-settings (dementiaLevelUpdate)="newDementiaLevel($event)" [patient]="patient"/>
+<patient-settings (dementiaLevelUpdate)="newDementiaLevel($event)" [patient]="patient" (onSettingsChange)="updateSettings($event)"/>

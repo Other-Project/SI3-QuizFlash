@@ -37,4 +37,8 @@ export class InformationComponent implements OnInit {
   removeHobby(hobby: string) {
     if (this.patient) this.userService.removeUserHobby(this.patient.id, hobby);
   }
+
+  updateSettings(patient: Patient) {
+    this.userService.updateUser(patient.id, patient);
+  }
 }
