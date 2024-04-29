@@ -11,7 +11,7 @@ import {Patient} from "../../../../../models/patient.models";
 export class PatientSettingsComponent{
   @ViewChild(OptionsComponent) optionsComponent?: OptionsComponent;
   @Output() dementiaLevelUpdate: EventEmitter<any> = new EventEmitter
-  @Input() user?: Patient;
+  @Input() patient?: Patient;
 
   dementiaLevelChange(newDementiaLevel: number) {
     this.optionsComponent?.changeDementiaLevel(newDementiaLevel);

@@ -11,7 +11,7 @@ import {StatisticsGraphComponent} from "../statistics-graph/statistics-graph.com
 
 export class StatisticsComponent {
   @ViewChild(StatisticsGraphComponent) graph!: StatisticsGraphComponent;
-  @Input() public user?: Patient;
+  @Input() public patient?: Patient;
 
   quizSelection(quizSelectionData: { quizId?: string, questionType?: QuestionType }) {
     this.graph?.quizSelection(quizSelectionData.quizId, quizSelectionData.questionType);

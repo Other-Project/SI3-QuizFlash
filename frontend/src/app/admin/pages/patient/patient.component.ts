@@ -16,7 +16,7 @@ export enum TabNavigation {
 
 export class PatientComponent implements OnDestroy {
   private userId?: string;
-  public user?: Patient;
+  public patient?: Patient;
   public tab: TabNavigation = TabNavigation.INFORMATION;
 
   private routeSub;
@@ -25,10 +25,10 @@ export class PatientComponent implements OnDestroy {
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
     this.routeSub = this.route.params.subscribe(params => this.userId = params["user_id"]);
     this.userSub = this.userService.users$.subscribe(users => {
-      if (!this.userId) this.user = undefined;
+      if (!this.userId) this.patient = undefined;
       else {
-        this.user = users.find(user => user.id == this.userId) as Patient;
-        if (!this.user) this.router.navigate([".."], {relativeTo: this.route}).then();
+        this.patient = users.find(user => user.id == this.userId) as Patient;
+        if (!this.patient) this.router.navigate([".."], {relativeTo: this.route}).then();
       }
     });
   }

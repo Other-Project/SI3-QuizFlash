@@ -9,19 +9,19 @@ import {Patient} from "../../../../../models/patient.models";
 })
 
 export class FontSizeComponent implements OnInit {
-  @Input() user?: Patient;
+  @Input() patient?: Patient;
   fontSize: string = "";
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit() {
-    this.fontSize = (this.user?.fontSize ?? 1) + "em";
+    this.fontSize = (this.patient?.fontSize ?? 1) + "em";
   }
 
   changeFontSize($event: any): void {
     const value = $event.target.value;
     this.fontSize = value + "em";
-    this.userService.updateFontSize(this.user!.id, value);
+    this.userService.updateFontSize(this.patient!.id, value);
   }
 }
