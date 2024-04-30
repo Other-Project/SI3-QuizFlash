@@ -69,7 +69,12 @@ export class OptionsComponent implements OnInit {
 
     let autoStartCheckbox = this.patientParametersForm.get("autoStartAudio");
 
-    (this.patient.soundQuestion) ? autoStartCheckbox?.enable() : autoStartCheckbox?.disable();
+    if (this.patient.soundQuestion)
+      autoStartCheckbox?.enable();
+    else {
+      autoStartCheckbox?.setValue(false);
+      autoStartCheckbox?.disable();
+    }
 
     this.onUserOptionsChange.emit(this.patient);
   }
