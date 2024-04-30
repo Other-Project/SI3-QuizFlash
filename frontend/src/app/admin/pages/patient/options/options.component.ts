@@ -13,30 +13,35 @@ export class OptionsComponent implements OnInit {
 
   @Input() patient?: Patient;
 
-  protected patientParametersForm: FormGroup = new FormGroup({
-    removeAnswers: new FormControl(""),
-    automatedSkip: new FormControl(""),
-    answerHint: new FormControl(""),
-    replayAtEnd: new FormControl(""),
-    soundQuestion: new FormControl(""),
-    autoStartAudio: new FormControl("")
-  });
+  protected patientParametersForm!: FormGroup;
 
   ngOnInit() {
+    this.initializeForm();
+    this.subscribeToSoundQuestionChanges();
     this.patientParametersForm.patchValue(this.patient as {});
+  }
 
+  subscribeToSoundQuestionChanges(): void {
     this.patientParametersForm.get("soundQuestion")?.valueChanges.subscribe(soundQuestionEnabled => {
-      let autoStartCheckbox = this.patientParametersForm.get("autoStartAudio");
+      const autoStartCheckbox = this.patientParametersForm.get("autoStartAudio");
       soundQuestionEnabled ? autoStartCheckbox?.enable() : autoStartCheckbox?.disable();
       if (!soundQuestionEnabled) autoStartCheckbox?.setValue(false);
     });
+  }
 
-    if (!this.patient?.autoStartAudio)
-      this.patientParametersForm.get("autoStartAudio")!.disable();
+  initializeForm(): void {
+    const formGroupConfig: any = {};
+    const patientKeys = Object.keys(this.patient || {});
+
+    patientKeys.forEach(key => {
+      formGroupConfig[key] = new FormControl("");
+    });
+
+    this.patientParametersForm = new FormGroup(formGroupConfig);
   }
 
   changeDementiaLevel(newLevel: number): void {
-    this.patientParametersForm.setValue({
+    this.patientParametersForm.patchValue({
       removeAnswers: newLevel >= 2,
       automatedSkip: true,
       answerHint: newLevel <= 0,
@@ -52,8 +57,7 @@ export class OptionsComponent implements OnInit {
     if (!this.patient)
       return;
 
-    let formValues = this.patientParametersForm.getRawValue();
-    this.patient = Object.assign({}, this.patient, formValues);
-    this.onUserOptionsChange.emit(this.patient);
+    let formValues: Patient = this.patientParametersForm.getRawValue();
+    this.onUserOptionsChange.emit(formValues);
   }
 }

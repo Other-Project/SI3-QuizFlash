@@ -22,6 +22,9 @@ export class FontSizeComponent implements OnInit {
   changeFontSize($event: any): void {
     const value = $event.target.value;
     this.fontSize = value + "em";
-    this.userService.updateFontSize(this.patient!.id, value);
+    if (this.patient) {
+      this.patient.fontSize = value;
+      this.userService.updateUser(this.patient.id, this.patient);
+    }
   }
 }

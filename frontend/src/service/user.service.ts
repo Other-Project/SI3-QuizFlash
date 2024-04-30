@@ -45,38 +45,11 @@ export class UserService {
       patient.fontSize = newFontSize;
   }
 
-  updateDementiaLevel(patientId: string, newDementiaLevel: number): void {
-    let patient = this.getUserById(patientId) as Patient;
-    if (patient)
-      patient.dementiaLevel = newDementiaLevel;
-  }
-
   updateUser(userId: string, updatedUser: User) {
     let userIndex = this.users.findIndex(user => user.id == userId);
     if (userIndex < 0) return;
     this.users[userIndex] = Object.assign({}, this.users[userIndex], updatedUser);
     this.users$.next(this.users);
-  }
-
-  updateUserHobbies(patientId: string, newHobbies: string[]) {
-    let patient = this.getUserById(patientId) as Patient;
-    if (patient)
-      patient.hobbies = newHobbies;
-  }
-
-  addUserHobby(patientId: string, newHobby: string) {
-    let patient = this.getUserById(patientId) as Patient;
-    patient?.hobbies.push(newHobby);
-  }
-
-  removeUserHobby(patientId: string, hobby: string) {
-    let patient = this.getUserById(patientId) as Patient;
-    if (patient) {
-      let itemIndex: number = patient.hobbies.indexOf(hobby);
-      if (itemIndex > -1) {
-        patient.hobbies.splice(itemIndex, 1);
-      }
-    }
   }
 
   public getUserById(id: string): User | undefined {
