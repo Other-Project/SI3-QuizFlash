@@ -1,0 +1,12 @@
+<div class="details-part">
+  <div class="attempt" *ngFor="let number of numberOfAttemptArray(question.numberOfAttempt)">
+    <p class="attemptDescription" *ngIf="question.numberOfAttempt>1">Tentative numéro {{ number + 1 }} :</p>
+    <div class="answers">
+      <ng-template ngFor let-answer [ngForOf]="getQuestion(question.questionId).answers">
+        <app-input class="red" [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="answer.id == question.answerChosenId[number] && !answer.trueAnswer"/>
+        <app-input class="green" [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="answer.trueAnswer"/>
+        <app-input [icon]="faReply" [(value)]="answer.answerText" [disable]="true" *ngIf="answer.id != question.answerChosenId[number] && !answer.trueAnswer"/>
+      </ng-template>
+    </div>
+  </div>
+</div>

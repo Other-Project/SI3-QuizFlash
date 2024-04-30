@@ -4,7 +4,7 @@ import {Patient} from "../../../../../models/patient.models";
 import {Quiz} from "../../../../../models/quiz.models";
 import {QuizService} from "../../../../../service/quiz-service.service";
 import {QuestionType} from "../../../../../models/question-type.models";
-import {faQuestion, faReply} from "@fortawesome/free-solid-svg-icons";
+import {faQuestion} from "@fortawesome/free-solid-svg-icons";
 import {QuestionStats} from "../../../../../models/question-stats.model";
 import {Question} from "../../../../../models/question.models";
 
@@ -22,10 +22,9 @@ export class AttemptSummaryComponent implements OnInit {
   protected question?: Question;
   protected questionsStats: QuestionStats[] = [];
 
-  protected readonly Number = Number;
+
   protected readonly QuestionType = QuestionType;
   protected readonly faQuestion = faQuestion;
-  protected readonly faReply = faReply;
 
   constructor(private quizService: QuizService, private historicService: HistoricService) {
   }
@@ -41,10 +40,6 @@ export class AttemptSummaryComponent implements OnInit {
         this.detail = Array(attempt[0].questionsStats.length).fill(false);
       }
     }));
-  }
-
-  numberOfAttemptArray(number: number) {
-    return Array(number).fill(0).map((x, i) => i);
   }
 
   setDetail(index: number) {

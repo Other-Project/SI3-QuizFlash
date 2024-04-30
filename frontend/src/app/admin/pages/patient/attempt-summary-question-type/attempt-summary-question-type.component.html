@@ -1,0 +1,13 @@
+<div class="switch" [ngSwitch]="Number(getQuestion(question.questionId).type)">
+  <div class="textual" *ngSwitchCase="QuestionType.TextOnly">
+    <p class="questionType" *ngIf="description">Textuelle</p>
+  </div>
+  <div class="visual" *ngSwitchCase="QuestionType.Image">
+    <p class="questionType" *ngIf="description">Visuelle</p>
+    <app-image *ngIf="!description" [src]="getQuestion(question.questionId).imageUrl" [alt]="'image'"/>
+  </div>
+  <div class="sound" *ngSwitchCase="QuestionType.Sound">
+    <p class="questionType" *ngIf="description">Sonore</p>
+    <app-play-button *ngIf="getQuestion(question.questionId).soundUrl && !description" [src]="getQuestion(question.questionId).soundUrl"/>
+  </div>
+</div>

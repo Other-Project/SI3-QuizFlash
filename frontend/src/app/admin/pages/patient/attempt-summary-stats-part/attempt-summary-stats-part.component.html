@@ -1,0 +1,9 @@
+<div class="stats">
+  <p class="succeed" *ngIf="question.success">Question réussie</p>
+  <p class="notSucceed" *ngIf="!question.success">Question non réussie</p>
+  <p *ngIf="user!.answerHint && question.answerHint">50/50 Utilisé pour cette question</p>
+  <p *ngIf="user!.answerHint && !question.answerHint">50/50 Non utilisé pour cette question</p>
+  <p *ngIf="user!.removeAnswers">Nombre de tentatives : {{ question.numberOfAttempt }}</p>
+  <p [ngStyle]="{'grid-column': calculateColumn()}">Temps passé sur cette question : {{ question.timeSpent }} minutes</p>
+</div>
+

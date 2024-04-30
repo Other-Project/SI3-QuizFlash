@@ -1,0 +1,22 @@
+@use 'sass:color';
+@import "/styles";
+
+.stats {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr 1fr;
+  text-align: center;
+  height: 100%;
+  align-items: center;
+}
+
+.succeed {
+  color: $green1;
+}
+
+.notSucceed {
+  color: $red2;
+}
+
+p {
+  margin: 0;
+}

@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {PatientComponent} from "./patient.component";
-import {DatePipe, KeyValuePipe, NgForOf, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from "@angular/common";
+import {DatePipe, KeyValuePipe, NgForOf, NgIf, NgOptimizedImage, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {InformationComponent} from "./information/information.component";
 import {StatisticsModule} from "./statistics/statistics.module";
@@ -15,6 +15,9 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {PlayButtonComponent} from "../../../layout/play-button/play-button.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AttemptSummaryComponent} from "./attempt-summary/attempt-summary.component";
+import {AttemptSummaryStatsPartComponent} from "./attempt-summary-stats-part/attempt-summary-stats-part.component";
+import {AttemptSummaryDetailsPartComponent} from "./attempt-summary-details-part/attempt-summary-details-part.component";
+import {AttemptSummaryQuestionTypeComponent} from "./attempt-summary-question-type/attempt-summary-question-type.component";
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import {AttemptSummaryComponent} from "./attempt-summary/attempt-summary.compone
     InformationComponent,
     PatientNavbarComponent,
     HistoricComponent,
-    AttemptSummaryComponent
+    AttemptSummaryComponent,
+    AttemptSummaryStatsPartComponent,
+    AttemptSummaryDetailsPartComponent,
+    AttemptSummaryQuestionTypeComponent
   ],
   imports: [
     PatientHeaderModule,
@@ -43,7 +49,8 @@ import {AttemptSummaryComponent} from "./attempt-summary/attempt-summary.compone
     NgForOf,
     PlayButtonComponent,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgStyle
   ],
   providers: [
     DatePipe,

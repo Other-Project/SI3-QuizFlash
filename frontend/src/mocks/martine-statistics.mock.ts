@@ -6,8 +6,8 @@ import {QuestionType} from "../models/question-type.models";
 export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  answerChosenId: ["4", "4"],
-  numberOfAttempt: 2,
+  answerChosenId: ["4"],
+  numberOfAttempt: 1,
   success: true,
   timeSpent: 2.2,
   answerHint: false

@@ -1,0 +1,25 @@
+@use 'sass:color';
+@import "/styles";
+
+.answers {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .25em;
+  margin: 2rem;
+}
+
+.green {
+  background-color: $green1;
+  border: 1px solid $grey1;
+}
+
+.red {
+  background-color: $red2;
+  border: 1px solid $grey1;
+}
+
+.attempt {
+  margin: 0.5rem 0.5rem 0;
+}
