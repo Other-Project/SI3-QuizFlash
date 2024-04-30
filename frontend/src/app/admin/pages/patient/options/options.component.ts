@@ -23,13 +23,12 @@ export class OptionsComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.patientParametersForm.patchValue({
-      removeAnswers: this.patient?.removeAnswers,
-      automatedSkip: this.patient?.automatedSkip,
-      answerHint: this.patient?.answerHint,
-      replayAtEnd: this.patient?.replayAtEnd,
-      soundQuestion: this.patient?.soundQuestion,
-      autoStartAudio: this.patient?.autoStartAudio
+    this.patientParametersForm.patchValue(this.patient as {});
+
+    this.patientParametersForm.get("soundQuestion")?.valueChanges.subscribe(soundQuestionEnabled => {
+      let autoStartCheckbox = this.patientParametersForm.get("autoStartAudio");
+      soundQuestionEnabled ? autoStartCheckbox?.enable() : autoStartCheckbox?.disable();
+      if (!soundQuestionEnabled) autoStartCheckbox?.setValue(false);
     });
 
     if (!this.patient?.autoStartAudio)
@@ -37,45 +36,24 @@ export class OptionsComponent implements OnInit {
   }
 
   changeDementiaLevel(newLevel: number): void {
-    if (!this.patientParametersForm)
-      return;
-
-    const lowOrIntermediate: boolean = newLevel == 0 || newLevel == 1;
-    const low: boolean = newLevel == 0;
-
     this.patientParametersForm.setValue({
-      removeAnswers: newLevel == 2,
+      removeAnswers: newLevel >= 2,
       automatedSkip: true,
-      answerHint: low,
-      replayAtEnd: low,
-      soundQuestion: lowOrIntermediate,
-      autoStartAudio: lowOrIntermediate
+      answerHint: newLevel <= 0,
+      replayAtEnd: newLevel <= 0,
+      soundQuestion: newLevel <= 1,
+      autoStartAudio: newLevel <= 1
     });
 
     this.changedParameters();
   }
 
   changedParameters() {
-    if (!this.patient || !this.patientParametersForm)
+    if (!this.patient)
       return;
 
     let formValues = this.patientParametersForm.getRawValue();
-    this.patient.removeAnswers = formValues.removeAnswers;
-    this.patient.automatedSkip = formValues.automatedSkip;
-    this.patient.answerHint = formValues.answerHint;
-    this.patient.replayAtEnd = formValues.replayAtEnd;
-    this.patient.soundQuestion = formValues.soundQuestion;
-    this.patient.autoStartAudio = formValues.autoStartAudio;
-
-    let autoStartCheckbox = this.patientParametersForm.get("autoStartAudio");
-
-    if (this.patient.soundQuestion)
-      autoStartCheckbox?.enable();
-    else {
-      autoStartCheckbox?.setValue(false);
-      autoStartCheckbox?.disable();
-    }
-
+    this.patient = Object.assign({}, this.patient, formValues);
     this.onUserOptionsChange.emit(this.patient);
   }
 }

@@ -18,8 +18,4 @@ export class PatientSettingsComponent{
     this.optionsComponent?.changeDementiaLevel(newDementiaLevel);
     this.dementiaLevelUpdate.emit(newDementiaLevel);
   }
-
-  optionsChanges(patient: Patient) {
-    this.onSettingsChange.emit(patient);
-  }
 }
