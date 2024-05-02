@@ -22,10 +22,13 @@ export class OptionsComponent implements OnInit {
     autoStartAudio: new FormControl()
   });
 
-  ngOnInit() {
+  constructor() {
     this.patientParametersForm.get("soundQuestion")?.valueChanges.subscribe(this.soundQuestionChanged.bind(this));
     this.patientParametersForm.valueChanges.subscribe(() =>
       this.onUserOptionsChange.emit(this.patientParametersForm.getRawValue()));
+  }
+
+  ngOnInit() {
     this.patientParametersForm.patchValue(this.patient as {});
   }
 

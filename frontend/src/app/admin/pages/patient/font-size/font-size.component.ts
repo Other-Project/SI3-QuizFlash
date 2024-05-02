@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {UserService} from "../../../../../service/user.service";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Patient} from "../../../../../models/patient.models";
 
 @Component({
@@ -8,23 +7,11 @@ import {Patient} from "../../../../../models/patient.models";
   styleUrls: ['font-size.component.scss']
 })
 
-export class FontSizeComponent implements OnInit {
+export class FontSizeComponent {
   @Input() patient?: Patient;
-  fontSize: string = "";
+  @Output() fontSizeChange: EventEmitter<Patient> = new EventEmitter();
 
-  constructor(private userService: UserService) {
-  }
-
-  ngOnInit() {
-    this.fontSize = (this.patient?.fontSize ?? 1) + "em";
-  }
-
-  changeFontSize($event: any): void {
-    const value = $event.target.value;
-    this.fontSize = value + "em";
-    if (this.patient) {
-      this.patient.fontSize = value;
-      this.userService.updateUser(this.patient.id, this.patient);
-    }
+  changeFontSize(newFontSize: number): void {
+    this.fontSizeChange.emit({fontSize: newFontSize} as Patient);
   }
 }
