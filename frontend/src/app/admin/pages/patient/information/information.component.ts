@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../../../service/user.service";
 import {Patient} from "../../../../../models/patient.models";
 
@@ -11,7 +10,7 @@ import {Patient} from "../../../../../models/patient.models";
 })
 
 export class InformationComponent implements OnInit {
-  @Input() public user?: Patient;
+  @Input() public patient?: Patient;
   hobbies?: string[];
 
   constructor(private userService: UserService) {
@@ -23,19 +22,11 @@ export class InformationComponent implements OnInit {
     });
   }
 
-  newDementiaLevel(dementiaLevel: number) {
-    this.userService.updateDementiaLevel(this.user!.id, dementiaLevel);
+  protected updatePatientHobbies(newHobbies: string[]) {
+    this.updateSettings({hobbies: newHobbies} as Patient);
   }
 
-  updateHobbies(newHobbies: string[]) {
-    if (this.user) this.userService.updateUserHobbies(this.user.id, newHobbies);
-  }
-
-  addHobby(hobby: string) {
-    if (this.user) this.userService.addUserHobby(this.user.id, hobby);
-  }
-
-  removeHobby(hobby: string) {
-    if (this.user) this.userService.removeUserHobby(this.user.id, hobby);
+  updateSettings(patient: Patient) {
+    if (this.patient) this.userService.updateUser(this.patient.id, patient);
   }
 }

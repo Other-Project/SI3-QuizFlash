@@ -1,8 +1,8 @@
 <div class="patient-header">
-  @if (edit || !user) {
-    <info-form id="form" (patientInfoChange)="editPatientInfo()" [user]="user"/>
+  @if (edit || !patient) {
+    <info-form id="form" (patientInfoChange)="editPatientInfo()" [user]="patient"/>
   } @else if (delete) {
-    <h1> Voulez-vous supprimer l'utilisateur {{ user.firstname }} ?</h1>
+    <h1> Voulez-vous supprimer l'utilisateur {{ patient.firstname }} ?</h1>
     <app-button id="check-button" (click)="deletePatient()" [color]="'blue'">
       <fa-icon [icon]="faCheck" size="2x" id="check-icon"/>
     </app-button>
@@ -10,11 +10,11 @@
       <fa-icon [icon]="faXmark" size="2x" id="xmark-icon"/>
     </app-button>
   } @else {
-    <app-image class="patient-picture" [src]="user.pictureUrl" [alt]="'Profile picture'" [width]="150" [height]="150"/>
+    <app-image class="patient-picture" [src]="patient.pictureUrl" [alt]="'Profile picture'" [width]="150" [height]="150"/>
     <div class="patient-info">
-      <h2 *ngIf="user">{{ user.lastname }}</h2>
-      <h2 *ngIf="user">{{ user.firstname }}</h2>
-      <strong *ngIf="user">{{ user.age }} ans</strong>
+      <h2 *ngIf="patient">{{ patient.lastname }}</h2>
+      <h2 *ngIf="patient">{{ patient.firstname }}</h2>
+      <strong *ngIf="patient">{{ patient.age }} ans</strong>
     </div>
     <app-button id="edit-button" (click)="editPatientInfo()" [color]="'blue'">
       <fa-icon [icon]="faEdit" size="2x" id="edit-icon"/>
@@ -23,5 +23,5 @@
       <fa-icon [icon]="faTrash" size="2x" id="delete-icon"/>
     </app-button>
   }
-  <h1 *ngIf="!user"> Création d'un nouvel utilisateur</h1>
+  <h1 *ngIf="!patient"> Création d'un nouvel utilisateur</h1>
 </div>

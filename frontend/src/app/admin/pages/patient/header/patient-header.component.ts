@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {User} from "../../../../../models/user.models";
-import {faCheck, faCircleUser, faEdit, faPencil, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {faCheck, faEdit, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {Patient} from "../../../../../models/patient.models";
 import {UserService} from "../../../../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -12,7 +11,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 
 export class PatientHeaderComponent implements OnInit{
-  @Input() user?: Patient;
+  @Input() patient?: Patient;
   edit: boolean = false;
   delete: boolean = false;
   @Output() patientInfoChange = new EventEmitter<{ firstname: string; lastname: string; age: number }>();
@@ -27,7 +26,7 @@ export class PatientHeaderComponent implements OnInit{
   }
 
   deletePatient() {
-    this.userService.deleteUser(this.user!.id);
+    this.userService.deleteUser(this.patient!.id);
     this.router.navigate(["../../patients"], {relativeTo: this.route}).then();
   }
 
