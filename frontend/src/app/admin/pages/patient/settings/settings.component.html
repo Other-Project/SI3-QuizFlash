@@ -1,9 +1,9 @@
 <h1>Paramétrage</h1>
 <section class="settings">
   <article class="diseases">
-    <range [defaultValue]="user?.dementiaLevel ?? 0" (changeEvent)="dementiaLevelChange($event)" [subject]="'dementia'"
+    <range [defaultValue]="patient?.dementiaLevel ?? 0" (changeEvent)="dementiaLevelChange($event)" [subject]="'dementia'"
            [title]="'Stade de la maladie d\'Alzheimer'" [tags]="['Léger','Modéré','Elevé']"/>
-    <font-size-selector [user]="user"/>
+    <font-size-selector (fontSizeChange)="onSettingsChange.emit($event)" [patient]="patient"/>
   </article>
-  <options [user]="user"/>
+  <options [patient]="patient" (onUserOptionsChange)="onSettingsChange.emit($event)"/>
 </section>

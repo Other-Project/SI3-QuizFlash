@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Patient} from "../../../../../models/patient.models";
 
 @Component({
   selector: 'hobbies-select',
@@ -8,10 +9,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 export class HobbiesComponent implements OnInit {
   @Input() hobbies?: string[];
-  @Input() userHobbies?: string[];
-  @Output() newHobbiesSelected: EventEmitter<string[]> = new EventEmitter<string[]>();
-  @Output() addedHobby: EventEmitter<string> = new EventEmitter<string>();
-  @Output() removedHobby: EventEmitter<string> = new EventEmitter<string>();
+  @Input() patient?: Patient;
+  @Output() newPatientHobbies: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   dropdownSettings = {
     singleSelection: false,
@@ -28,18 +27,31 @@ export class HobbiesComponent implements OnInit {
 
   ngOnInit() {
     this.data = this.hobbies?.slice();
-    this.selectedItems = this.userHobbies?.slice();
+    this.selectedItems = this.patient?.hobbies.slice();
+  }
+
+  setHobbies(newHobbies: any) {
+    if (!this.patient)
+      return;
+
+    this.newPatientHobbies.emit(newHobbies);
   }
 
   addHobby(hobby: any) {
-    this.addedHobby.emit(hobby);
-  }
+    if (!this.patient)
+      return;
 
-  setHobbies(hobbies: any) {
-    this.newHobbiesSelected.emit(hobbies);
+    this.patient.hobbies.push(hobby);
+    this.newPatientHobbies.emit(this.patient.hobbies);
   }
 
   removeHobby(hobby: any) {
-    this.removedHobby.emit(hobby);
+    if (!this.patient)
+      return;
+
+    let itemIndex: number = this.patient.hobbies.indexOf(hobby);
+    if (itemIndex >= 0)
+      this.patient.hobbies.splice(itemIndex, 1);
+    this.newPatientHobbies.emit(this.patient.hobbies);
   }
 }

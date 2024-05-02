@@ -1,5 +1,6 @@
-import {Component, ElementRef, Input, ViewChild} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Patient} from "../../../../../models/patient.models";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'options',
@@ -7,39 +8,44 @@ import {Patient} from "../../../../../models/patient.models";
   styleUrls: ['options.component.scss']
 })
 
-export class OptionsComponent{
-  @ViewChild("removeFalseAnswer") removeFalseAnswerCheckBox?: ElementRef;
-  @ViewChild("replayQuestion") replayCheckBox?: ElementRef;
-  @ViewChild("automatedSkip") automatedSkip?: ElementRef;
-  @ViewChild('answerHint') fiftyFiftyCheckBox?: ElementRef;
-  @ViewChild('auditive') auditiveCheckBox?: ElementRef;
-  @ViewChild('audioLaunch') audioLaunchCheckBox?: ElementRef;
+export class OptionsComponent implements OnInit {
+  @Output() onUserOptionsChange: EventEmitter<Patient> = new EventEmitter<Patient>();
 
-  @Input() user?: Patient;
+  @Input() patient?: Patient;
 
-  changeDementiaLevel(newLevel: number): void {
-    const lowOrIntermediate: boolean = newLevel == 0 || newLevel == 1;
-    const low: boolean = newLevel == 0;
+  protected patientParametersForm: FormGroup = new FormGroup({
+    removeAnswers: new FormControl(),
+    automatedSkip: new FormControl(),
+    answerHint: new FormControl(),
+    replayAtEnd: new FormControl(),
+    soundQuestion: new FormControl(),
+    autoStartAudio: new FormControl()
+  });
 
-    if (this.fiftyFiftyCheckBox)
-      this.fiftyFiftyCheckBox.nativeElement.checked = low;
-    if (this.automatedSkip)
-      this.automatedSkip.nativeElement.checked = true;
-    if (this.replayCheckBox)
-      this.replayCheckBox.nativeElement.checked = low;
-    if (this.removeFalseAnswerCheckBox)
-      this.removeFalseAnswerCheckBox.nativeElement.checked = (newLevel == 2);
-    if (this.auditiveCheckBox)
-      this.auditiveCheckBox.nativeElement.checked = lowOrIntermediate;
-    if (this.audioLaunchCheckBox) {
-      this.audioLaunchCheckBox.nativeElement.checked = (newLevel == 1);
-      this.audioLaunchCheckBox.nativeElement.disabled = !lowOrIntermediate;
-    }
+  constructor() {
+    this.patientParametersForm.get("soundQuestion")?.valueChanges.subscribe(this.soundQuestionChanged.bind(this));
+    this.patientParametersForm.valueChanges.subscribe(() =>
+      this.onUserOptionsChange.emit(this.patientParametersForm.getRawValue()));
   }
 
-  audioChange(audioEnabled: boolean) {
-    if (!this.audioLaunchCheckBox) return;
-    this.audioLaunchCheckBox.nativeElement.checked = audioEnabled;
-    this.audioLaunchCheckBox.nativeElement.disabled = !audioEnabled;
+  ngOnInit() {
+    this.patientParametersForm.patchValue(this.patient as {});
+  }
+
+  soundQuestionChanged(soundQuestionEnabled: boolean) {
+    const autoStartCheckbox = this.patientParametersForm.get("autoStartAudio");
+    soundQuestionEnabled ? autoStartCheckbox?.enable({emitEvent: false}) : autoStartCheckbox?.disable({emitEvent: false});
+    if (!soundQuestionEnabled) autoStartCheckbox?.setValue(false);
+  }
+
+  changeDementiaLevel(newLevel: number): void {
+    this.patientParametersForm.patchValue({
+      removeAnswers: newLevel >= 2,
+      automatedSkip: true,
+      answerHint: newLevel <= 0,
+      replayAtEnd: newLevel <= 0,
+      soundQuestion: newLevel <= 1,
+      autoStartAudio: newLevel <= 1
+    });
   }
 }
