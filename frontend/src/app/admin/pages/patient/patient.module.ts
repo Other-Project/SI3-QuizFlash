@@ -10,7 +10,7 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 import {LayoutModule} from "../../../layout/layout.module";
 import {PatientHeaderModule} from "./header/patient-header.module";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
-import {HistoricComponent} from "./historic/historic.component";
+import {HistoryComponent} from "./historic/history.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {PlayButtonComponent} from "../../../layout/play-button/play-button.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -26,7 +26,7 @@ import {AttemptSummaryQuestionTypeComponent} from "./attempt-summary-question-ty
     StatisticsComponent,
     InformationComponent,
     PatientNavbarComponent,
-    HistoricComponent,
+    HistoryComponent,
     AttemptSummaryComponent,
     AttemptSummaryStatsPartComponent,
     AttemptSummaryDetailsPartComponent,

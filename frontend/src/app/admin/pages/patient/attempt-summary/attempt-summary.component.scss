@@ -1,6 +1,3 @@
-@use 'sass:color';
-@import "/styles";
-
 .attempt-summary {
   display: flex;
   flex-direction: column;
@@ -17,6 +14,3 @@
     grid-column: 3;
   }
 }
-
-
-

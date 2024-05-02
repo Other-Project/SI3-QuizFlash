@@ -5,13 +5,13 @@ $blackBlue: #00090f;
 $yellow: #f2e86d;
 $grey1: #646464;
 $white: #f1f1f1;
-$red1: #d12020;
-$red2: #ff3232;
+$darkRed: #d12020;
+$lightRed: #ff3232;
 $green1: #19c800;
 
 $colors: (
   "white": $white,
-  "red": $red1,
+  "red": $darkRed,
   "blue": $blue,
   "dark-blue": $darkBlue,
   "yellow": $yellow

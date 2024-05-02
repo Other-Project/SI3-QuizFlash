@@ -2,7 +2,7 @@
   <div class="historic-header">
     <h2>Choix du quiz pour en visualiser l'historique :</h2>
     <select #quizSelect (change)="quizChoice(quizSelect.value)" name="quizz-select">
-      <option value="-1">Aucun quizz</option>
+      <option value="-1">Selectionnez un quiz</option>
       <option *ngFor="let value of historic; index as i" [value]="i">{{ getTitle(value.quizId) }}  {{ this.datepipe.transform(value.date, 'yyyy/MM/dd') }}</option>
     </select>
   </div>

@@ -16,8 +16,8 @@ form {
     box-sizing: border-box;
 
     &.ng-invalid {
-      border-color: $red1;
-      color: color.scale($red1, $lightness: -5%);
+      border-color: $darkRed;
+      color: color.scale($darkRed, $lightness: -5%);
     }
   }
 

@@ -10,8 +10,8 @@
   gap: .5em;
 
   &:has(.ng-invalid) {
-    border-color: $red1;
-    color: color.scale($red1, $lightness: -5%);
+    border-color: $darkRed;
+    color: color.scale($darkRed, $lightness: -5%);
   }
 
   &:focus-within {

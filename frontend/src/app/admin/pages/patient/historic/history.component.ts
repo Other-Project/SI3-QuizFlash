@@ -8,11 +8,11 @@ import {DatePipe} from "@angular/common";
 
 @Component({
   selector: "historic",
-  templateUrl: "historic.component.html",
-  styleUrls: ["historic.component.scss"]
+  templateUrl: "history.component.html",
+  styleUrls: ["history.component.scss"]
 })
 
-export class HistoricComponent implements OnInit {
+export class HistoryComponent implements OnInit {
   protected historic?: QuizStats[];
   @Input() user?: Patient;
   quizList?: Quiz[];

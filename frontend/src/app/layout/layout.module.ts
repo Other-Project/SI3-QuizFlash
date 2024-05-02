@@ -16,7 +16,7 @@ import {FileInputComponent} from "./file-input/file-input.component";
     ImageComponent,
     ImageInputComponent,
     FileInputComponent,
-    InputComponent,
+    InputComponent
   ],
   exports: [
     HeaderComponent,
@@ -24,7 +24,7 @@ import {FileInputComponent} from "./file-input/file-input.component";
     ImageComponent,
     ImageInputComponent,
     FileInputComponent,
-    InputComponent,
+    InputComponent
   ],
   imports: [
     NgOptimizedImage,

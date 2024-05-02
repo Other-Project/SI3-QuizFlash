@@ -1,8 +1,8 @@
 import {Component, Input} from "@angular/core";
-import {Quiz} from "../../../../../models/quiz.models";
 import {QuestionStats} from "../../../../../models/question-stats.model";
 import {faReply} from "@fortawesome/free-solid-svg-icons";
 import {QuestionType} from "../../../../../models/question-type.models";
+import {Question} from "../../../../../models/question.models";
 
 
 @Component({
@@ -12,17 +12,13 @@ import {QuestionType} from "../../../../../models/question-type.models";
 })
 
 export class AttemptSummaryDetailsPartComponent {
-  @Input() question!: QuestionStats;
-  @Input() quiz!: Quiz;
+  @Input() questionStat!: QuestionStats;
+  @Input() question!: Question;
 
   protected readonly QuestionType = QuestionType;
   protected readonly faReply = faReply;
 
   constructor() {
-  }
-
-  getQuestion(questionId: string) {
-    return this.quiz.questions.find(question => question.id == questionId)!;
   }
 
   numberOfAttemptArray(number: number) {

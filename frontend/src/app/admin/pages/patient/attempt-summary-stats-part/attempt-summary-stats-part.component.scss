@@ -1,5 +1,4 @@
-@use 'sass:color';
-@import "/styles";
+@import "/colors";
 
 .stats {
   display: grid;
@@ -14,7 +13,7 @@
 }
 
 .notSucceed {
-  color: $red2;
+  color: $lightRed;
 }
 
 p {
