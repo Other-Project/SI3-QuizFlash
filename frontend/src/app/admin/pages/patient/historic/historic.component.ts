@@ -13,7 +13,7 @@ import {DatePipe} from "@angular/common";
 })
 
 export class HistoricComponent implements OnInit {
-  protected historic?: [QuizStats, Date][];
+  protected historic?: QuizStats[];
   @Input() user?: Patient;
   quizList?: Quiz[];
   quizSelected: boolean = false;
@@ -38,8 +38,8 @@ export class HistoricComponent implements OnInit {
     let pos = parseInt(value);
     if (value != "-1") {
       this.quizSelected = true;
-      this.quizListService.selectQuiz(this.historic![pos][0].quizId);
-      this.historicService.getUserQuizHistoric(this.historic![pos][0].quizId, this.user!.id, this.historic![pos][1]);
+      this.quizListService.selectQuiz(this.historic![pos].quizId);
+      this.historicService.getUserQuizHistoric(this.historic![pos].quizId, this.user!.id, this.historic![pos].date);
       return;
     }
     this.quizSelected = false;

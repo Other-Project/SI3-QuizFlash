@@ -8,7 +8,6 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {ImageInputComponent} from "./image-input/image-input.component";
 import {InputComponent} from "./input/input.component";
 import {FileInputComponent} from "./file-input/file-input.component";
-import {DetailButtonComponent} from "./detail-button/detail-button.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import {DetailButtonComponent} from "./detail-button/detail-button.component";
     ImageInputComponent,
     FileInputComponent,
     InputComponent,
-    DetailButtonComponent
   ],
   exports: [
     HeaderComponent,
@@ -27,7 +25,6 @@ import {DetailButtonComponent} from "./detail-button/detail-button.component";
     ImageInputComponent,
     FileInputComponent,
     InputComponent,
-    DetailButtonComponent
   ],
   imports: [
     NgOptimizedImage,

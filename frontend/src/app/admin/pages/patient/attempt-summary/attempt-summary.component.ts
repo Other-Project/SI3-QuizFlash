@@ -32,12 +32,13 @@ export class AttemptSummaryComponent implements OnInit {
   ngOnInit() {
     this.quizService.quiz$.subscribe((quiz?: Quiz) => {
       this.quiz = quiz;
+      console.log(this.quiz);
     });
     this.historicService.attempt_summary$.subscribe((attempt => {
       this.detail = [];
       if (attempt) {
-        this.questionsStats = attempt[0].questionsStats;
-        this.detail = Array(attempt[0].questionsStats.length).fill(false);
+        this.questionsStats = attempt.questionsStats;
+        this.detail = Array(attempt.questionsStats.length).fill(false);
       }
     }));
   }

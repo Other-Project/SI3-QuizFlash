@@ -47,6 +47,7 @@ export class QuizService {
     quiz.id = "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
       (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
     );
+    quiz.questions.forEach(question => question.answers.forEach((answer, index) => answer.id = (index + 1).toString()));
     this.quizzes.push(quiz);
     this.quizzes$.next(this.quizzes);
     return quiz.id;

@@ -25,6 +25,6 @@ export const QUESTIONSTAT2: QuestionStats = {
 export const FRANCESCU_QUIZSTATS: QuizStats = {
   userId: "e1840a2b-9e61-4c2f-a002-d683b806ce3a",
   quizId: "2",
-
+  date: new Date(2024, 1, 2),
   questionsStats: [QUESTIONSTAT1, QUESTIONSTAT2]
 }
