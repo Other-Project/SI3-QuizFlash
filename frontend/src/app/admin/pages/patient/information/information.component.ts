@@ -23,8 +23,7 @@ export class InformationComponent implements OnInit {
   }
 
   protected updatePatientHobbies(newHobbies: string[]) {
-    if (this.patient)
-      this.updateSettings({hobbies: newHobbies} as Patient);
+    this.updateSettings({hobbies: newHobbies} as Patient);
   }
 
   updateSettings(patient: Patient) {
