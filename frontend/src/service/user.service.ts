@@ -39,21 +39,11 @@ export class UserService {
     this.users$.next(this.users);
   }
 
-  updateFontSize(patientId: string, newFontSize: number): void {
-    let patient = this.getUserById(patientId) as Patient;
-    if (patient)
-      patient.fontSize = newFontSize;
-  }
-
   updateUser(userId: string, updatedUser: User) {
     let userIndex = this.users.findIndex(user => user.id == userId);
     if (userIndex < 0) return;
     this.users[userIndex] = Object.assign({}, this.users[userIndex], updatedUser);
     this.users$.next(this.users);
-  }
-
-  public getUserById(id: string): User | undefined {
-    return this.users.find(user => user.id == id);
   }
 
   public setLoggedUser(user?: User): void {

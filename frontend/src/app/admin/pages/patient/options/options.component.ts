@@ -13,31 +13,26 @@ export class OptionsComponent implements OnInit {
 
   @Input() patient?: Patient;
 
-  protected patientParametersForm!: FormGroup;
+  protected patientParametersForm: FormGroup = new FormGroup({
+    removeAnswers: new FormControl(),
+    automatedSkip: new FormControl(),
+    answerHint: new FormControl(),
+    replayAtEnd: new FormControl(),
+    soundQuestion: new FormControl(),
+    autoStartAudio: new FormControl()
+  });
 
   ngOnInit() {
-    this.initializeForm();
-    this.subscribeToSoundQuestionChanges();
+    this.patientParametersForm.get("soundQuestion")?.valueChanges.subscribe(this.soundQuestionChanged.bind(this));
+    this.patientParametersForm.valueChanges.subscribe(() =>
+      this.onUserOptionsChange.emit(this.patientParametersForm.getRawValue()));
     this.patientParametersForm.patchValue(this.patient as {});
   }
 
-  subscribeToSoundQuestionChanges(): void {
-    this.patientParametersForm.get("soundQuestion")?.valueChanges.subscribe(soundQuestionEnabled => {
-      const autoStartCheckbox = this.patientParametersForm.get("autoStartAudio");
-      soundQuestionEnabled ? autoStartCheckbox?.enable() : autoStartCheckbox?.disable();
-      if (!soundQuestionEnabled) autoStartCheckbox?.setValue(false);
-    });
-  }
-
-  initializeForm(): void {
-    const formGroupConfig: any = {};
-    const patientKeys = Object.keys(this.patient || {});
-
-    patientKeys.forEach(key => {
-      formGroupConfig[key] = new FormControl("");
-    });
-
-    this.patientParametersForm = new FormGroup(formGroupConfig);
+  soundQuestionChanged(soundQuestionEnabled: boolean) {
+    const autoStartCheckbox = this.patientParametersForm.get("autoStartAudio");
+    soundQuestionEnabled ? autoStartCheckbox?.enable({emitEvent: false}) : autoStartCheckbox?.disable({emitEvent: false});
+    if (!soundQuestionEnabled) autoStartCheckbox?.setValue(false);
   }
 
   changeDementiaLevel(newLevel: number): void {
@@ -49,15 +44,5 @@ export class OptionsComponent implements OnInit {
       soundQuestion: newLevel <= 1,
       autoStartAudio: newLevel <= 1
     });
-
-    this.changedParameters();
-  }
-
-  changedParameters() {
-    if (!this.patient)
-      return;
-
-    let formValues: Patient = this.patientParametersForm.getRawValue();
-    this.onUserOptionsChange.emit(formValues);
   }
 }

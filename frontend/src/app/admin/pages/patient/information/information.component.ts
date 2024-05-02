@@ -22,37 +22,12 @@ export class InformationComponent implements OnInit {
     });
   }
 
-  newDementiaLevel(dementiaLevel: number) {
-    if (this.patient) {
-      this.patient.dementiaLevel = dementiaLevel;
-      this.userService.updateUser(this.patient.id, this.patient);
-    }
-  }
-
-  updateHobbies(newHobbies: string[]) {
-    if (this.patient) {
-      this.patient.hobbies = newHobbies;
-      this.userService.updateUser(this.patient.id, this.patient);
-    }
-  }
-
-  addHobby(hobby: string) {
-    if (this.patient) {
-      this.patient.hobbies.push(hobby);
-      this.userService.updateUser(this.patient.id, this.patient);
-    }
-  }
-
-  removeHobby(hobby: string) {
-    if (this.patient) {
-      let itemIndex: number = this.patient.hobbies.indexOf(hobby);
-      if (itemIndex > -1)
-        this.patient.hobbies.splice(itemIndex, 1);
-      this.userService.updateUser(this.patient.id, this.patient);
-    }
+  protected updatePatientHobbies(newHobbies: string[]) {
+    if (this.patient)
+      this.userService.updateUser(this.patient.id, {hobbies: newHobbies} as Patient);
   }
 
   updateSettings(patient: Patient) {
-    this.userService.updateUser(patient.id, patient);
+    if (this.patient) this.userService.updateUser(this.patient.id, patient);
   }
 }
