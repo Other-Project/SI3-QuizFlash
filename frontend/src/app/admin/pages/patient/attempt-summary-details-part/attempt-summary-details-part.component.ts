@@ -22,10 +22,6 @@ export class AttemptSummaryDetailsPartComponent {
   constructor() {
   }
 
-  numberOfAttemptArray(number: number) {
-    return Array(number).fill(0).map((x, i) => i);
-  }
-
   getAnswerClass(attemptAnswer: string, answer: Answer) {
     if (answer.id == attemptAnswer) return answer.trueAnswer ? "green" : "red";
     if (answer.trueAnswer) return "green-notfound";

@@ -9,15 +9,15 @@ import {BehaviorSubject} from "rxjs";
 export class StatisticsService {
   quizStatistics: QuizStats[] = STATISTICS;
 
-  attempt_summary?: QuizStats;
-  attempt_summary$: BehaviorSubject<QuizStats | undefined> = new BehaviorSubject<QuizStats | undefined>(this.attempt_summary);
+  userQuizStats: QuizStats[] = [];
+  userQuizStats$: BehaviorSubject<QuizStats[] | []> = new BehaviorSubject<QuizStats[] | []>(this.userQuizStats);
 
 
   constructor() {
   }
 
   /*****************
-   * STATISTIQUES *
+   * STATISTICS *
    * ****************/
 
   getAnswerHintRate(patientId: string, quizId?: string, questionType?: QuestionType) {
@@ -53,16 +53,12 @@ export class StatisticsService {
   }
 
   /**************
-   * HISTORIC *
+   * HISTORY *
    **************/
 
-  public getUserQuizHistoric(quizId: string, userId: string, date: Date) {
-    this.attempt_summary = this.quizStatistics.find(statistic => statistic.userId == userId && statistic.quizId == quizId && statistic.date == date);
-    this.attempt_summary$.next(this.attempt_summary);
-  }
-
-  public getUserHistoric(userId: string) {
-    return this.quizStatistics.filter(statistic => statistic.userId == userId);
+  public getUserHistory(userId: string) {
+    this.userQuizStats = this.quizStatistics.filter(statistic => statistic.userId == userId);
+    this.userQuizStats$.next(this.userQuizStats);
   }
 
   /*********

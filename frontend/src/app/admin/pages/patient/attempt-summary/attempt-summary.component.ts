@@ -6,7 +6,6 @@ import {QuestionType} from "../../../../../models/question-type.models";
 import {faQuestion} from "@fortawesome/free-solid-svg-icons";
 import {QuestionStats} from "../../../../../models/question-stats.model";
 import {Question} from "../../../../../models/question.models";
-import {StatisticsService} from "../../../../../service/statistics.service";
 
 
 @Component({
@@ -17,24 +16,21 @@ import {StatisticsService} from "../../../../../service/statistics.service";
 
 export class AttemptSummaryComponent implements OnInit {
   @Input() user?: Patient;
+  @Input() questionsStats: QuestionStats[] = [];
   protected quiz?: Quiz;
   protected detail: boolean[] = [];
   protected question?: Question;
-  protected questionsStats: QuestionStats[] = [];
 
 
   protected readonly QuestionType = QuestionType;
   protected readonly faQuestion = faQuestion;
 
-  constructor(private quizService: QuizService, private statisticsService: StatisticsService) {
+  constructor(private quizService: QuizService) {
+    this.detail = this.questionsStats ? Array(this.questionsStats.length).fill(false) : [];
   }
 
   ngOnInit() {
     this.quizService.quiz$.subscribe(quiz => this.quiz = quiz);
-    this.statisticsService.attempt_summary$.subscribe((attempt => {
-      this.questionsStats = attempt?.questionsStats ?? [];
-      this.detail = attempt ? Array(attempt.questionsStats.length).fill(false) : [];
-    }));
   }
 
   setDetail(index: number) {

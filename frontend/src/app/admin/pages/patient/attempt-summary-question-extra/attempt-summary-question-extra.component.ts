@@ -1,7 +1,7 @@
 import {Component, Input} from "@angular/core";
-import {Quiz} from "../../../../../models/quiz.models";
 import {QuestionStats} from "../../../../../models/question-stats.model";
 import {QuestionType} from "../../../../../models/question-type.models";
+import {Question} from "../../../../../models/question.models";
 
 @Component({
   selector: "attempt-summary-question-extra",
@@ -10,16 +10,11 @@ import {QuestionType} from "../../../../../models/question-type.models";
 })
 
 export class AttemptSummaryQuestionExtraComponent {
-  @Input() question!: QuestionStats;
-  @Input() quiz!: Quiz;
-  @Input() description!: boolean;
+  @Input() questionStats!: QuestionStats;
+  @Input() question!: Question;
   protected readonly Number = Number;
   protected readonly QuestionType = QuestionType;
 
   constructor() {
-  }
-
-  getQuestion(questionId: string) {
-    return this.quiz.questions.find(question => question.id == questionId)!;
   }
 }

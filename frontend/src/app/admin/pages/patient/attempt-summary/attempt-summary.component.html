@@ -4,7 +4,7 @@
       <attempt-summary-question-type [quiz]="quiz" [question]="question" [description]="true"/>
       <app-input class="question" [icon]="faQuestion" [value]="getQuestion(question.questionId).text" [disabled]="true"/>
       <app-button class="detail" (click)="setDetail(indexQuestion)">{{ detail[indexQuestion] ? 'Cacher les détails' : 'Montrer les détails' }}</app-button>
-      <attempt-summary-question-extra [quiz]="quiz" [question]="question" [description]="false"/>
+      <attempt-summary-question-extra [question]="getQuestion(question.questionId)" [questionStats]="question"/>
       <attempt-summary-stats [user]="user" [question]="question"/>
     </div>
     <attempt-summary-details [questionStat]="question" [question]="getQuestion(question.questionId)" *ngIf="detail[indexQuestion]"/>

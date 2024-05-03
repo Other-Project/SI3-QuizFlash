@@ -94,6 +94,7 @@ export const QUESTIONSTAT3TRY2: QuestionStats = {
 }
 
 export const MARTINE_QUIZ1TRY1: QuizStats = {
+  id: "2",
   userId: "134b849f-fd4b-4b13-b377-f283b117365d",
   quizId: "2",
   date: new Date(2024, 2),
@@ -101,6 +102,7 @@ export const MARTINE_QUIZ1TRY1: QuizStats = {
 }
 
 export const MARTINE_QUIZ1TRY2: QuizStats = {
+  id: "3",
   userId: "134b849f-fd4b-4b13-b377-f283b117365d",
   quizId: "2",
   date: new Date(2024, 2, 9),
@@ -108,6 +110,7 @@ export const MARTINE_QUIZ1TRY2: QuizStats = {
 }
 
 export const MARTINE_QUIZ2: QuizStats = {
+  id: "4",
   userId: "134b849f-fd4b-4b13-b377-f283b117365d",
   quizId: "1",
   date: new Date(2024, 1, 30),

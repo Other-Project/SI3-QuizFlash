@@ -1,11 +1,3 @@
-<div class="switch" [ngSwitch]="Number(getQuestion(question.questionId).type)">
-  <div class="textual" *ngSwitchCase="QuestionType.TextOnly">
-    <p class="questionType" *ngIf="description">Textuelle</p>
-  </div>
-  <div class="visual" *ngSwitchCase="QuestionType.Image">
-    <p class="questionType" *ngIf="description">Visuelle</p>
-  </div>
-  <div class="sound" *ngSwitchCase="QuestionType.Sound">
-    <p class="questionType" *ngIf="description">Sonore</p>
-  </div>
+<div class="type">
+  <p class="questionType">{{ typeDictionaryText[question.questionType] }}</p>
 </div>

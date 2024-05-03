@@ -13,7 +13,8 @@ import {StatisticsService} from "../../../../../service/statistics.service";
 })
 
 export class HistoryComponent implements OnInit {
-  protected historic?: QuizStats[];
+  protected quizStats?: QuizStats[];
+  protected quizStat!: QuizStats;
   @Input() user?: Patient;
   quizList?: Quiz[];
   quizSelected: boolean = false;
@@ -22,7 +23,8 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.historic = this.statisticsService.getUserHistoric(this.user?.id!)!;
+    this.statisticsService.userQuizStats$.subscribe(historic => this.quizStats = historic);
+    this.statisticsService.getUserHistory(this.user?.id!);
     this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => {
       this.quizList = quizzes;
     });
@@ -35,11 +37,11 @@ export class HistoryComponent implements OnInit {
   }
 
   protected quizChoice(value: string) {
-    let pos = parseInt(value);
+    console.log(this.quizStats, value);
     if (value != "-1") {
       this.quizSelected = true;
-      this.quizListService.selectQuiz(this.historic![pos].quizId);
-      this.statisticsService.getUserQuizHistoric(this.historic![pos].quizId, this.user!.id, this.historic![pos].date);
+      this.quizStat = this.quizStats?.find(quizStats => quizStats.id == value)!;
+      this.quizListService.selectQuiz(this.quizStat.quizId);
       return;
     }
     this.quizSelected = false;

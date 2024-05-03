@@ -1,3 +1,4 @@
+@use "sass:color";
 @import "/colors";
 
 .answers {
@@ -16,7 +17,7 @@
 
 .green-notfound {
   border: 2px dashed $green;
-  background-color: $greenReducedOpacity;
+  background-color: color.scale($green, $lightness: 50%)
 }
 
 .red {

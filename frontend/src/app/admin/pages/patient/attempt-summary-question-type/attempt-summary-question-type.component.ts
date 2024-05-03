@@ -15,11 +15,12 @@ export class AttemptSummaryQuestionTypeComponent {
   @Input() description!: boolean;
   protected readonly Number = Number;
   protected readonly QuestionType = QuestionType;
+  protected typeDictionaryText = {
+    [QuestionType.TextOnly]: "Textuelle",
+    [QuestionType.Image]: "Visuelle",
+    [QuestionType.Sound]: "Sonore",
+  };
 
   constructor() {
-  }
-
-  getQuestion(questionId: string) {
-    return this.quiz.questions.find(question => question.id == questionId)!;
   }
 }
