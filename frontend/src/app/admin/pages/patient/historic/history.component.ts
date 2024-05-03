@@ -36,11 +36,11 @@ export class HistoryComponent implements OnInit {
     return this.quizList?.find(quiz => quiz.id == quizId)!.title;
   }
 
-  protected quizChoice(value: string) {
-    console.log(this.quizStats, value);
-    if (value != "-1") {
+  protected quizChoice(id: string) {
+    console.log(this.quizStats, id);
+    if (id != "-1") {
       this.quizSelected = true;
-      this.quizStat = this.quizStats?.find(quizStats => quizStats.id == value)!;
+      this.quizStat = this.quizStats?.find(quizStats => quizStats.id == id)!;
       this.quizListService.selectQuiz(this.quizStat.quizId);
       return;
     }
