@@ -6,7 +6,7 @@ import {Patient} from "../../../../models/patient.models";
 export enum TabNavigation {
   INFORMATION,
   STATISTICS,
-  HISTORIC
+  HISTORY
 }
 
 @Component({

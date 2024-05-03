@@ -10,13 +10,18 @@
 }
 
 .green {
-  background-color: $green1;
-  border: 1px solid $grey1;
+  background-color: $green;
+  border: 1px solid $grey;
+}
+
+.green-notfound {
+  border: 2px dashed $green;
+  background-color: $greenReducedOpacity;
 }
 
 .red {
   background-color: $lightRed;
-  border: 1px solid $grey1;
+  border: 1px solid $grey;
 }
 
 .attempt {

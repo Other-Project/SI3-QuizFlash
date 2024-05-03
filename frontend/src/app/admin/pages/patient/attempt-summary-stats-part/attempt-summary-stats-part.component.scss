@@ -9,7 +9,11 @@
 }
 
 .succeed {
-  color: $green1;
+  color: $green;
+}
+
+.partiallySucceed {
+  color: $orange;
 }
 
 .notSucceed {

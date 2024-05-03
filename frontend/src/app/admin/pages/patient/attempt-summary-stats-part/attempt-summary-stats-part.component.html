@@ -1,9 +1,8 @@
 <div class="stats">
-  <p class="succeed" *ngIf="question.success">Question réussie</p>
+  <p [class]="question.answerChosenId.length >= 2 ?'partiallySucceed' : 'succeed'" *ngIf="question.success">
+    {{ question.answerChosenId.length >= 2 ? 'Question partiellement réussie' : 'Question réussie' }}</p>
   <p class="notSucceed" *ngIf="!question.success">Question non réussie</p>
-  <p *ngIf="user!.answerHint && question.answerHint">50/50 Utilisé pour cette question</p>
-  <p *ngIf="user!.answerHint && !question.answerHint">50/50 Non utilisé pour cette question</p>
-  <p *ngIf="user!.removeAnswers">Nombre de tentatives : {{ question.numberOfAttempt }}</p>
-  <p [ngStyle]="{'grid-column': calculateColumn()}">Temps passé sur cette question : {{ question.timeSpent }} minutes</p>
-</div>
+  <p *ngIf="user?.answerHint">{{ question.answerHint ? '50/50 utilisé pour cette question' : '50/50 non utilisé pour cette question' }}</p>
+  <p *ngIf="user?.removeAnswers">Nombre de tentatives : {{ question.numberOfAttempt }}</p>
+  <p [ngStyle]="{'grid-column': this.user?.answerHint && this.user.removeAnswers ? '1/4' : 'auto'}">Temps passé sur cette question : {{ question.timeSpent }} minutes</p></div>
 

@@ -14,9 +14,4 @@ export class AttemptSummaryStatsPartComponent {
 
   constructor() {
   }
-
-  calculateColumn() {
-    if (this.user?.answerHint && this.user.removeAnswers) return "1/4";
-    else return "auto";
-  }
 }

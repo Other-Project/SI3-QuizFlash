@@ -59,6 +59,7 @@ export class AdminQuizComponent implements OnDestroy {
       if (this.quiz.id) return this.quizService.updateQuiz(this.quiz.id, quiz);
       let id = this.quizService.addQuiz(quiz);
       this.router.navigate([id], {relativeTo: this.route}).then();
+      console.log(quiz);
     }
   }
 
@@ -69,7 +70,6 @@ export class AdminQuizComponent implements OnDestroy {
 
   addQuestion() {
     this.quiz.questions.push({
-      id: (this.quiz.questions.length + 1).toString(),
       answers: [{} as Answer, {} as Answer, {} as Answer, {} as Answer],
       type: QuestionType.TextOnly
     } as Question);

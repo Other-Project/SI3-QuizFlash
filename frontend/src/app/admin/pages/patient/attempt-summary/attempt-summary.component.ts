@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {HistoricService} from "../../../../../service/historic.service";
 import {Patient} from "../../../../../models/patient.models";
 import {Quiz} from "../../../../../models/quiz.models";
 import {QuizService} from "../../../../../service/quiz-service.service";
@@ -7,6 +6,7 @@ import {QuestionType} from "../../../../../models/question-type.models";
 import {faQuestion} from "@fortawesome/free-solid-svg-icons";
 import {QuestionStats} from "../../../../../models/question-stats.model";
 import {Question} from "../../../../../models/question.models";
+import {StatisticsService} from "../../../../../service/statistics.service";
 
 
 @Component({
@@ -26,12 +26,12 @@ export class AttemptSummaryComponent implements OnInit {
   protected readonly QuestionType = QuestionType;
   protected readonly faQuestion = faQuestion;
 
-  constructor(private quizService: QuizService, private historicService: HistoricService) {
+  constructor(private quizService: QuizService, private statisticsService: StatisticsService) {
   }
 
   ngOnInit() {
     this.quizService.quiz$.subscribe(quiz => this.quiz = quiz);
-    this.historicService.attempt_summary$.subscribe((attempt => {
+    this.statisticsService.attempt_summary$.subscribe((attempt => {
       this.questionsStats = attempt?.questionsStats ?? [];
       this.detail = attempt ? Array(attempt.questionsStats.length).fill(false) : [];
     }));

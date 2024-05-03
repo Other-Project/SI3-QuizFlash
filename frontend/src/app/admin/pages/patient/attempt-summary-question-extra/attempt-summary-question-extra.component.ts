@@ -4,12 +4,12 @@ import {QuestionStats} from "../../../../../models/question-stats.model";
 import {QuestionType} from "../../../../../models/question-type.models";
 
 @Component({
-  selector: "attempt-summary-question-type",
-  templateUrl: "attempt-summary-question-type.component.html",
-  styleUrls: ["attempt-summary-question-type.component.scss"]
+  selector: "attempt-summary-question-extra",
+  templateUrl: "attempt-summary-question-extra.component.html",
+  styleUrls: ["attempt-summary-question-extra.component.scss"]
 })
 
-export class AttemptSummaryQuestionTypeComponent {
+export class AttemptSummaryQuestionExtraComponent {
   @Input() question!: QuestionStats;
   @Input() quiz!: Quiz;
   @Input() description!: boolean;
