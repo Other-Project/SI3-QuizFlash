@@ -18,7 +18,7 @@ export class AttemptSummaryComponent implements OnInit {
   @Input() user?: Patient;
   @Input() questionsStats: QuestionStats[] = [];
   protected quiz?: Quiz;
-  protected detail: boolean[] = [];
+  protected showDetails: boolean[] = [];
   protected question?: Question;
 
 
@@ -26,15 +26,15 @@ export class AttemptSummaryComponent implements OnInit {
   protected readonly faQuestion = faQuestion;
 
   constructor(private quizService: QuizService) {
-    this.detail = this.questionsStats ? Array(this.questionsStats.length).fill(false) : [];
   }
 
   ngOnInit() {
     this.quizService.quiz$.subscribe(quiz => this.quiz = quiz);
+    this.showDetails = this.questionsStats ? Array(this.questionsStats.length).fill(false) : [];
   }
 
   setDetail(index: number) {
-    this.detail[index] = !this.detail[index];
+    this.showDetails[index] = !this.showDetails[index];
   }
 
   getQuestion(questionId: string) {

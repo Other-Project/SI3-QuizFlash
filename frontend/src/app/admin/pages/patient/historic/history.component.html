@@ -3,8 +3,8 @@
     <h2>Choix du quiz pour en visualiser l'historique :</h2>
     <select #quizSelect (change)="quizChoice(quizSelect.value)" name="quizz-select">
       <option value="-1">Selectionnez un quiz</option>
-      <option *ngFor="let value of quizStats; index as i" [value]="value.id">{{ getTitle(value.quizId) }}  {{ this.datepipe.transform(value.date, 'yyyy/MM/dd') }}</option>
+      <option *ngFor="let value of quizStats" [value]="value.id">{{ getTitle(value.quizId) }}  {{ this.datepipe.transform(value.date, 'yyyy/MM/dd') }}</option>
     </select>
   </div>
-  <attempt-summary [user]="user" [questionsStats]="quizStat.questionsStats" *ngIf="quizSelected"/>
+  <attempt-summary [user]="user" [questionsStats]="quizStat!.questionsStats" *ngIf="quizSelected"/>
 </div>
