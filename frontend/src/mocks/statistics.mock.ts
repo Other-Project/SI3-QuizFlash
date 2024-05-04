@@ -1,7 +1,8 @@
 import {QuizStats} from "../models/quiz-stats.model";
 import {MARTINE_QUIZ1TRY1, MARTINE_QUIZ1TRY2, MARTINE_QUIZ2} from "./martine-statistics.mock";
 import {FRANCESCU_QUIZSTATS} from "./francescu-statistics.mock";
+import {BERNARD_QUIZ1} from "./bernard-statistics.mock";
 
 export const STATISTICS: QuizStats[] = [
-  MARTINE_QUIZ1TRY1, MARTINE_QUIZ2, MARTINE_QUIZ1TRY2, FRANCESCU_QUIZSTATS
+  MARTINE_QUIZ1TRY1, MARTINE_QUIZ2, MARTINE_QUIZ1TRY2, FRANCESCU_QUIZSTATS, BERNARD_QUIZ1
 ]
