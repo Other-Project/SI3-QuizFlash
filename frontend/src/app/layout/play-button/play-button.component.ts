@@ -45,8 +45,8 @@ export class PlayButtonComponent {
     this.soundPlayed = !this.soundPlayed;
   }
 
-  onLoadedAudio() {
-    if (this.autoPlay)
+  onAudioLoaded() {
+    if (this.autoPlay && !this.soundPlayed)
       this.playPause();
   }
 }
