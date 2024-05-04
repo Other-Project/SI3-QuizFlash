@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from "@angular/core";
 
 @Component({
   selector: 'question-section',
@@ -9,8 +9,8 @@ export class QuestionSectionComponent implements OnInit {
   @Input() question: string = ""; //To have the text of the question in parameter
   @Input() image: string = ""; //To have the image url of the question in parameter
   @Input() sound: string = ""; //To have the sound url of the question in parameter
-  @Input() fontSize!: string;
-  @Input() volume!:number;
+  @Input() volume!: number;
+  @Input() autoPlay!: boolean;
 
   constructor() {
   }
