@@ -24,9 +24,9 @@ export class AttemptSummaryDetailsPartComponent {
 
   getAnswerClass(attemptAnswer: string, answer: Answer) {
     if (answer.id == attemptAnswer) return answer.trueAnswer ? "right" : "wrong";
-    if (answer.trueAnswer) return "notfound";
-    let answerIndex = this.questionStat.answerChosenId.indexOf(answer.id);
-    if (answerIndex >= 0 && answerIndex < this.questionStat.answerChosenId.indexOf(attemptAnswer)) return "hidden";
+    if (answer.trueAnswer) return "notFound";
+    let answerIndex = this.questionStat.chosenAnswersId.indexOf(answer.id);
+    if (answerIndex >= 0 && answerIndex < this.questionStat.chosenAnswersId.indexOf(attemptAnswer) || this.questionStat.answersHide.find(answerId => answerId == answer.id)) return "hidden";
     return undefined;
   }
 }

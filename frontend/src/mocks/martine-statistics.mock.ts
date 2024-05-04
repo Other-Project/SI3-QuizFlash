@@ -6,91 +6,100 @@ import {QuestionType} from "../models/question-type.models";
 export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  answerChosenId: ["4"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["4"],
+  numberOfAttempts: 1,
   success: true,
   timeSpent: 2.2,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  answerChosenId: ["4"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["4"],
+  numberOfAttempts: 1,
   success: true,
   timeSpent: 3.1,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const QUESTIONSTAT3: QuestionStats = {
   questionId: "3",
   questionType: QuestionType.Sound,
-  answerChosenId: ["1"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["1"],
+  numberOfAttempts: 1,
   success: false,
   timeSpent: 5,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const QUESTIONSTAT4: QuestionStats = {
   questionId: "4",
   questionType: QuestionType.TextOnly,
-  answerChosenId: ["4"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["4"],
+  numberOfAttempts: 1,
   success: true,
   timeSpent: 2.4,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const QUESTIONSTAT5: QuestionStats = {
   questionId: "5",
   questionType: QuestionType.TextOnly,
-  answerChosenId: ["4"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["4"],
+  numberOfAttempts: 1,
   success: true,
   timeSpent: 3.6,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const QUESTIONSTAT6: QuestionStats = {
   questionId: "6",
   questionType: QuestionType.Image,
-  answerChosenId: ["3"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["3"],
+  numberOfAttempts: 1,
   success: true,
   timeSpent: 2.5,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const QUESTIONSTAT1TRY2: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  answerChosenId: ["1"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["1"],
+  numberOfAttempts: 1,
   success: false,
   timeSpent: 2,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const QUESTIONSTAT2TRY2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  answerChosenId: ["4"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["4"],
+  numberOfAttempts: 1,
   success: true,
   timeSpent: 2.8,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const QUESTIONSTAT3TRY2: QuestionStats = {
   questionId: "3",
   questionType: QuestionType.Sound,
-  answerChosenId: ["3"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["3"],
+  numberOfAttempts: 1,
   success: true,
   timeSpent: 3,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const MARTINE_QUIZ1TRY1: QuizStats = {

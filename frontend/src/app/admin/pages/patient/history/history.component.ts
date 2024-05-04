@@ -39,6 +39,6 @@ export class HistoryComponent implements OnInit {
     if (!this.quizSelected) return;
 
     this.quizStat = this.quizStats?.find(quizStats => quizStats.id == id);
-    this.quizListService.selectQuiz(this.quizStat?.quizId!);
+    this.quizListService.selectQuiz(this.quizStat?.quizId);
   }
 }

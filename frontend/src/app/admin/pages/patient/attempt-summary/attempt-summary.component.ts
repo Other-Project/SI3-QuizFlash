@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
 import {Patient} from "../../../../../models/patient.models";
 import {Quiz} from "../../../../../models/quiz.models";
 import {QuizService} from "../../../../../service/quiz-service.service";
@@ -14,7 +14,7 @@ import {Question} from "../../../../../models/question.models";
   styleUrls: ["attempt-summary.component.scss"]
 })
 
-export class AttemptSummaryComponent implements OnInit {
+export class AttemptSummaryComponent implements OnInit, OnChanges {
   @Input() user?: Patient;
   @Input() questionsStats: QuestionStats[] = [];
   protected quiz?: Quiz;
@@ -30,6 +30,9 @@ export class AttemptSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.quizService.quiz$.subscribe(quiz => this.quiz = quiz);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
     this.showDetails = this.questionsStats ? Array(this.questionsStats.length).fill(false) : [];
   }
 

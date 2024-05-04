@@ -6,21 +6,23 @@ import {QuestionType} from "../models/question-type.models";
 export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  answerChosenId: ["3", "2", "4"],
-  numberOfAttempt: 3,
+  chosenAnswersId: ["3", "2", "4"],
+  numberOfAttempts: 3,
   success: true,
   timeSpent: 5,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 };
 
 export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  answerChosenId: ["3", "2", "4"],
-  numberOfAttempt: 3,
+  chosenAnswersId: ["3", "2", "4"],
+  numberOfAttempts: 3,
   success: true,
   timeSpent: 3,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 };
 
 export const BERNARD_QUIZ1: QuizStats = {

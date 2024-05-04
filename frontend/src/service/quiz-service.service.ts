@@ -21,7 +21,7 @@ export class QuizService {
     });
   }
 
-  selectQuiz(id: string, user?: Patient) {
+  selectQuiz(id?: string, user?: Patient) {
     let copy = undefined;
     if (id) {
       let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);

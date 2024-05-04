@@ -6,20 +6,22 @@ export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
   success: true,
-  answerChosenId: ["4"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["4"],
+  numberOfAttempts: 1,
   timeSpent: 2.2,
-  answerHint: true
+  answerHint: true,
+  answersHide: ["1", "2"]
 }
 
 export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
   success: true,
-  answerChosenId: ["4"],
-  numberOfAttempt: 1,
+  chosenAnswersId: ["4"],
+  numberOfAttempts: 1,
   timeSpent: 4.3,
-  answerHint: false
+  answerHint: false,
+  answersHide: []
 }
 
 export const FRANCESCU_QUIZSTATS: QuizStats = {

@@ -15,7 +15,7 @@
   border-color: color.scale($green, $lightness: -25%);
 }
 
-.notfound {
+.notFound {
   background-color: color.scale($green, $lightness: 50%);
   border: 2px dashed color.scale($green, $lightness: -25%);
 }
@@ -25,11 +25,11 @@
   border-color: color.scale($lightRed, $lightness: -25%);
 }
 
-.attempt {
-  margin: 0.5rem 0.5rem 0;
-}
-
 .hidden {
   background-color: color.scale($grey, $lightness: 50%);
   border-color: color.scale($grey, $lightness: -25%);
+}
+
+.attempt {
+  margin: 0.5rem 0.5rem 0;
 }
