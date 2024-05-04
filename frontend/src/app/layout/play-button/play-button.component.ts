@@ -13,6 +13,7 @@ import {LayoutModule} from "../layout.module";
   standalone: true
 })
 export class PlayButtonComponent {
+  @Input() autoPlay: boolean = false;
   @Input() public src?: string;
   @Input() set volume(gainValue: number) {
     if (!gainValue || gainValue <= 0) return;
@@ -27,9 +28,6 @@ export class PlayButtonComponent {
   private gainValue: number = 2;
   protected soundPlayed: boolean = false;
 
-  constructor() {
-  }
-
   init(): void {
     if (this.audioContext || !this.audio) return;
     this.audioContext = new AudioContext();
@@ -38,11 +36,17 @@ export class PlayButtonComponent {
     this.gainNode.gain.value = this.gainValue;
     this.soundNode.connect(this.gainNode).connect(this.audioContext.destination);
   }
+
   playPause() {
     if (!this.audioContext) this.init();
     if (!this.audio || this.audio.nativeElement.readyState < 2) return;
     if (!this.soundPlayed) this.audio.nativeElement.play().then();
     else this.audio.nativeElement.pause()?.then();
     this.soundPlayed = !this.soundPlayed;
+  }
+
+  onAudioLoaded() {
+    if (this.autoPlay && !this.soundPlayed)
+      this.playPause();
   }
 }
