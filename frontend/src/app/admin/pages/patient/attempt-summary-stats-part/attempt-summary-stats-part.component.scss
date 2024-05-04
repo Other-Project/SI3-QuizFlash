@@ -1,3 +1,4 @@
+@use "sass:color";
 @import "/colors";
 
 .stats {
@@ -9,7 +10,7 @@
 }
 
 .succeed {
-  color: $green;
+  color: color.scale($green, $lightness: -25%);
 }
 
 .partiallySucceed {
@@ -17,7 +18,7 @@
 }
 
 .notSucceed {
-  color: $lightRed;
+  color: color.scale($lightRed, $lightness: -25%);
 }
 
 p {

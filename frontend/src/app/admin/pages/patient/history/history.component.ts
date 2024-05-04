@@ -25,9 +25,7 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
     this.statisticsService.userQuizStats$.subscribe(history => this.quizStats = history);
     if (this.user) this.statisticsService.getUserHistory(this.user.id);
-    this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => {
-      this.quizList = quizzes;
-    });
+    this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => this.quizList = quizzes);
     this.quizSelected = false;
   }
 
@@ -40,7 +38,7 @@ export class HistoryComponent implements OnInit {
     this.quizSelected = id != "-1";
     if (!this.quizSelected) return;
 
-    this.quizStat = this.quizStats?.find(quizStats => quizStats.id == id)!;
-    this.quizListService.selectQuiz(this.quizStat.quizId);
+    this.quizStat = this.quizStats?.find(quizStats => quizStats.id == id);
+    this.quizListService.selectQuiz(this.quizStat?.quizId!);
   }
 }

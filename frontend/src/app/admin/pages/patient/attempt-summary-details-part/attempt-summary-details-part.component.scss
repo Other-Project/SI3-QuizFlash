@@ -10,21 +10,26 @@
   margin: 2rem;
 }
 
-.green {
+.right {
   background-color: $green;
-  border: 1px solid $grey;
+  border-color: color.scale($green, $lightness: -25%);
 }
 
-.green-notfound {
-  border: 2px dashed $green;
-  background-color: color.scale($green, $lightness: 50%)
+.notfound {
+  background-color: color.scale($green, $lightness: 50%);
+  border: 2px dashed color.scale($green, $lightness: -25%);
 }
 
-.red {
+.wrong {
   background-color: $lightRed;
-  border: 1px solid $grey;
+  border-color: color.scale($lightRed, $lightness: -25%);
 }
 
 .attempt {
   margin: 0.5rem 0.5rem 0;
+}
+
+.hidden {
+  background-color: color.scale($grey, $lightness: 50%);
+  border-color: color.scale($grey, $lightness: -25%);
 }

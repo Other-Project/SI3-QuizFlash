@@ -23,8 +23,10 @@ export class AttemptSummaryDetailsPartComponent {
   }
 
   getAnswerClass(attemptAnswer: string, answer: Answer) {
-    if (answer.id == attemptAnswer) return answer.trueAnswer ? "green" : "red";
-    if (answer.trueAnswer) return "green-notfound";
+    if (answer.id == attemptAnswer) return answer.trueAnswer ? "right" : "wrong";
+    if (answer.trueAnswer) return "notfound";
+    let answerIndex = this.questionStat.answerChosenId.indexOf(answer.id);
+    if (answerIndex >= 0 && answerIndex < this.questionStat.answerChosenId.indexOf(attemptAnswer)) return "hidden";
     return undefined;
   }
 }
