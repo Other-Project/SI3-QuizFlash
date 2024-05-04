@@ -2,17 +2,12 @@
   height: 100%;
 }
 
-app-play-button {
-  height: 100%;
-  display: block;
-}
-
 .visual, .sound, .textual {
   height: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 app-image {
   height: 100%;
-  border-radius: 0.5rem;
-  overflow: hidden;
 }
