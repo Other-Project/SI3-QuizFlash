@@ -10,7 +10,7 @@ export const QUESTIONSTAT1: QuestionStats = {
   numberOfAttempts: 1,
   timeSpent: 2.2,
   answerHint: true,
-  answersHide: ["1", "2"]
+  hiddenAnswers: ["1", "2"]
 }
 
 export const QUESTIONSTAT2: QuestionStats = {
@@ -21,7 +21,7 @@ export const QUESTIONSTAT2: QuestionStats = {
   numberOfAttempts: 1,
   timeSpent: 4.3,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const FRANCESCU_QUIZSTATS: QuizStats = {

@@ -11,7 +11,7 @@ export const QUESTIONSTAT1: QuestionStats = {
   success: true,
   timeSpent: 5,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 };
 
 export const QUESTIONSTAT2: QuestionStats = {
@@ -22,7 +22,7 @@ export const QUESTIONSTAT2: QuestionStats = {
   success: true,
   timeSpent: 3,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 };
 
 export const BERNARD_QUIZ1: QuizStats = {

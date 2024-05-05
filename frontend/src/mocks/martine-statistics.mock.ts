@@ -11,7 +11,7 @@ export const QUESTIONSTAT1: QuestionStats = {
   success: true,
   timeSpent: 2.2,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const QUESTIONSTAT2: QuestionStats = {
@@ -22,7 +22,7 @@ export const QUESTIONSTAT2: QuestionStats = {
   success: true,
   timeSpent: 3.1,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const QUESTIONSTAT3: QuestionStats = {
@@ -33,7 +33,7 @@ export const QUESTIONSTAT3: QuestionStats = {
   success: false,
   timeSpent: 5,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const QUESTIONSTAT4: QuestionStats = {
@@ -44,7 +44,7 @@ export const QUESTIONSTAT4: QuestionStats = {
   success: true,
   timeSpent: 2.4,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const QUESTIONSTAT5: QuestionStats = {
@@ -55,7 +55,7 @@ export const QUESTIONSTAT5: QuestionStats = {
   success: true,
   timeSpent: 3.6,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const QUESTIONSTAT6: QuestionStats = {
@@ -66,7 +66,7 @@ export const QUESTIONSTAT6: QuestionStats = {
   success: true,
   timeSpent: 2.5,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const QUESTIONSTAT1TRY2: QuestionStats = {
@@ -77,7 +77,7 @@ export const QUESTIONSTAT1TRY2: QuestionStats = {
   success: false,
   timeSpent: 2,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const QUESTIONSTAT2TRY2: QuestionStats = {
@@ -88,7 +88,7 @@ export const QUESTIONSTAT2TRY2: QuestionStats = {
   success: true,
   timeSpent: 2.8,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const QUESTIONSTAT3TRY2: QuestionStats = {
@@ -99,7 +99,7 @@ export const QUESTIONSTAT3TRY2: QuestionStats = {
   success: true,
   timeSpent: 3,
   answerHint: false,
-  answersHide: []
+  hiddenAnswers: []
 }
 
 export const MARTINE_QUIZ1TRY1: QuizStats = {

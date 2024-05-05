@@ -8,5 +8,5 @@ export interface QuestionStats {
   success: boolean;
   timeSpent: number;
   answerHint: boolean;
-  answersHide: string[];
+  hiddenAnswers: string[];
 }
