@@ -21,6 +21,6 @@ export class QuizStatsPartComponent {
   }
 
   getTimeSpent() {
-    return this.stats!.questionsStats.flatMap(attempt => attempt.attempts.map(attempt => attempt.timeSpent)).reduce((acc, c) => acc + c, 0);
+    return this.stats?.questionsStats.flatMap(attempt => attempt.attempts.map(attempt => attempt.timeSpent)).reduce((acc, c) => acc + c, 0);
   }
 }

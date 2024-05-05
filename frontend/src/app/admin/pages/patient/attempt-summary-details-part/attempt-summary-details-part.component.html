@@ -3,10 +3,10 @@
     <p class="attempt-description" *ngIf="questionStat.attempts.length>1">Tentative numéro {{ i + 1 }} :</p>
     <div class="extra" *ngIf="questionStat.attempts.length>1">
       <p>Temps passé sur cette tentative : {{ attempt.timeSpent }} minutes</p>
-      <p *ngIf="fiftyFiftyUsableOrUseInAttempt">{{ attempt.answerHint ? "50/50 utilisé lors de cette tentative" : "50/50 non utilisé lors de cette tentative" }}</p>
+      <p *ngIf="attempt.answerHint">"50/50 utilisé lors de cette tentative"</p>
     </div>
     <div class="answers">
-      <app-input *ngFor="let answer of question.answers" [icon]="faReply" [(value)]="answer.answerText" [disabled]="true" [class]="getAnswerClass(attempt, answer,i)"/>
+      <app-input *ngFor="let answer of question.answers" [icon]="faReply" [(value)]="answer.answerText" [disabled]="true" [class]="getAnswerClass(attempt, answer)"/>
     </div>
   </div>
 </div>

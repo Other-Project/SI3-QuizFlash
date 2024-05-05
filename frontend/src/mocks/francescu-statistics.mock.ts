@@ -5,7 +5,6 @@ import {QuestionType} from "../models/question-type.models";
 export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 1,
   success: true,
   attempts: [
     {
@@ -21,7 +20,6 @@ export const QUESTIONSTAT1: QuestionStats = {
 export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 1,
   success: true,
   attempts: [
     {

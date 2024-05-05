@@ -6,7 +6,6 @@ import {QuestionType} from "../models/question-type.models";
 export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 3,
   success: true,
   attempts: [
     {
@@ -21,14 +20,14 @@ export const QUESTIONSTAT1: QuestionStats = {
       chosenAnswersId: "2",
       timeSpent: 1.5,
       answerHint: false,
-      hiddenAnswers: [],
+      hiddenAnswers: ["3"],
     },
     {
       attemptId: "13",
       chosenAnswersId: "4",
       timeSpent: 3,
       answerHint: false,
-      hiddenAnswers: [],
+      hiddenAnswers: ["3", "2"],
     }
   ],
 };
@@ -36,7 +35,6 @@ export const QUESTIONSTAT1: QuestionStats = {
 export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 3,
   success: true,
   attempts: [
     {
@@ -51,14 +49,14 @@ export const QUESTIONSTAT2: QuestionStats = {
       chosenAnswersId: "2",
       timeSpent: 1.5,
       answerHint: false,
-      hiddenAnswers: [],
+      hiddenAnswers: ["3"],
     },
     {
       attemptId: "16",
       chosenAnswersId: "4",
       timeSpent: 3,
       answerHint: false,
-      hiddenAnswers: [],
+      hiddenAnswers: ["3", "2"],
     }
   ],
 };

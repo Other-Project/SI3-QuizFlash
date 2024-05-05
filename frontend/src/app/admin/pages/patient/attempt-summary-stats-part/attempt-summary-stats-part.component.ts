@@ -11,7 +11,6 @@ import {QuestionStats} from "../../../../../models/question-stats.model";
 export class AttemptSummaryStatsPartComponent {
   @Input() question!: QuestionStats;
   @Input() user!: Patient;
-  @Input() answerHintUse!: boolean;
 
   constructor() {
   }

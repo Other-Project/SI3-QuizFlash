@@ -6,7 +6,6 @@ import {QuestionType} from "../models/question-type.models";
 export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 1,
   success: true,
   attempts: [
     {
@@ -22,7 +21,6 @@ export const QUESTIONSTAT1: QuestionStats = {
 export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 1,
   success: true,
   attempts: [
     {
@@ -38,7 +36,6 @@ export const QUESTIONSTAT2: QuestionStats = {
 export const QUESTIONSTAT3: QuestionStats = {
   questionId: "3",
   questionType: QuestionType.Sound,
-  numberOfAttempts: 1,
   success: false,
   attempts: [
     {
@@ -54,7 +51,6 @@ export const QUESTIONSTAT3: QuestionStats = {
 export const QUESTIONSTAT4: QuestionStats = {
   questionId: "4",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 1,
   success: true,
   attempts: [
     {
@@ -70,7 +66,6 @@ export const QUESTIONSTAT4: QuestionStats = {
 export const QUESTIONSTAT5: QuestionStats = {
   questionId: "5",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 1,
   success: true,
   attempts: [
     {
@@ -86,7 +81,6 @@ export const QUESTIONSTAT5: QuestionStats = {
 export const QUESTIONSTAT6: QuestionStats = {
   questionId: "6",
   questionType: QuestionType.Image,
-  numberOfAttempts: 1,
   success: true,
   attempts: [
     {
@@ -102,7 +96,6 @@ export const QUESTIONSTAT6: QuestionStats = {
 export const QUESTIONSTAT1TRY2: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 1,
   success: false,
   attempts: [
     {
@@ -118,7 +111,6 @@ export const QUESTIONSTAT1TRY2: QuestionStats = {
 export const QUESTIONSTAT2TRY2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  numberOfAttempts: 1,
   success: true,
   attempts: [
     {
@@ -134,7 +126,6 @@ export const QUESTIONSTAT2TRY2: QuestionStats = {
 export const QUESTIONSTAT3TRY2: QuestionStats = {
   questionId: "3",
   questionType: QuestionType.Sound,
-  numberOfAttempts: 1,
   success: true,
   attempts: [
     {

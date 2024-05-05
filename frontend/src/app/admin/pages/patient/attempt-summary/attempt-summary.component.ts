@@ -40,10 +40,6 @@ export class AttemptSummaryComponent implements OnInit, OnChanges {
     this.showDetails[index] = !this.showDetails[index];
   }
 
-  answerHintUse() {
-    return this.questionsStats.some(question => question.attempts.some(attempt => attempt.answerHint));
-  }
-
   getQuestion(questionId: string) {
     return this.quiz?.questions.find(question => question.id == questionId)!;
   }

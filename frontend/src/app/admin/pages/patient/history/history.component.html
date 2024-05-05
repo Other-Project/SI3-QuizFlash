@@ -6,6 +6,6 @@
       <option *ngFor="let value of quizStats" [value]="value.id">{{ getTitle(value.quizId) }} ({{ this.datepipe.transform(value.date, 'dd/MM/yyyy') }})</option>
     </select>
   </div>
-  <quiz-stats [user]="user!" [stats]="quizStat!" *ngIf="quizSelected"/>
+  <quiz-stats [user]="user" [stats]="quizStat" *ngIf="quizSelected"/>
   <attempt-summary [user]="user" [questionsStats]="quizStat?.questionsStats ?? []" *ngIf="quizSelected"/>
 </div>
