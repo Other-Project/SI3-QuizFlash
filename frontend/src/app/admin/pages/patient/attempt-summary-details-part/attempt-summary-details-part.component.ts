@@ -4,6 +4,7 @@ import {faReply} from "@fortawesome/free-solid-svg-icons";
 import {QuestionType} from "../../../../../models/question-type.models";
 import {Question} from "../../../../../models/question.models";
 import {Answer} from "../../../../../models/answer.models";
+import {Attempt} from "../../../../../models/attempt.model";
 
 
 @Component({
@@ -22,11 +23,10 @@ export class AttemptSummaryDetailsPartComponent {
   constructor() {
   }
 
-  getAnswerClass(attemptAnswer: string, answer: Answer) {
-    if (answer.id == attemptAnswer) return answer.trueAnswer ? "right" : "wrong";
+  getAnswerClass(attempt: Attempt, answer: Answer) {
+    if (answer.id == attempt.chosenAnswersId) return answer.trueAnswer ? "right" : "wrong";
     if (answer.trueAnswer) return "notFound";
-    let answerIndex = this.questionStat.chosenAnswersId.indexOf(answer.id);
-    if (answerIndex >= 0 && answerIndex < this.questionStat.chosenAnswersId.indexOf(attemptAnswer) || this.questionStat.hiddenAnswers.includes(answer.id)) return "hidden";
+    if (attempt.hiddenAnswers.includes(answer.id)) return "hidden";
     return undefined;
   }
 }

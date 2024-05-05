@@ -6,23 +6,59 @@ import {QuestionType} from "../models/question-type.models";
 export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  chosenAnswersId: ["3", "2", "4"],
-  numberOfAttempts: 3,
   success: true,
-  timeSpent: 5,
-  answerHint: false,
-  hiddenAnswers: []
+  attempts: [
+    {
+      attemptId: "11",
+      chosenAnswersId: "3",
+      timeSpent: 1,
+      answerHint: false,
+      hiddenAnswers: [],
+    },
+    {
+      attemptId: "12",
+      chosenAnswersId: "2",
+      timeSpent: 1.5,
+      answerHint: false,
+      hiddenAnswers: ["3"],
+    },
+    {
+      attemptId: "13",
+      chosenAnswersId: "4",
+      timeSpent: 3,
+      answerHint: false,
+      hiddenAnswers: ["3", "2"],
+    }
+  ],
 };
 
 export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  chosenAnswersId: ["3", "2", "4"],
-  numberOfAttempts: 3,
   success: true,
-  timeSpent: 3,
-  answerHint: false,
-  hiddenAnswers: []
+  attempts: [
+    {
+      attemptId: "14",
+      chosenAnswersId: "3",
+      timeSpent: 1,
+      answerHint: false,
+      hiddenAnswers: [],
+    },
+    {
+      attemptId: "15",
+      chosenAnswersId: "2",
+      timeSpent: 1.5,
+      answerHint: false,
+      hiddenAnswers: ["3"],
+    },
+    {
+      attemptId: "16",
+      chosenAnswersId: "4",
+      timeSpent: 3,
+      answerHint: false,
+      hiddenAnswers: ["3", "2"],
+    }
+  ],
 };
 
 export const BERNARD_QUIZ1: QuizStats = {

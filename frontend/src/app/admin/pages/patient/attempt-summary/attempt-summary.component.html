@@ -5,7 +5,7 @@
       <app-input class="question" [icon]="faQuestion" [value]="getQuestion(questionStats.questionId).text" [disabled]="true"/>
       <app-button class="detail" (click)="setDetail(indexQuestion)">{{ showDetails[indexQuestion] ? 'Cacher les détails' : 'Montrer les détails' }}</app-button>
       <attempt-summary-question-extra [question]="getQuestion(questionStats.questionId)"/>
-      <attempt-summary-stats [user]="user" [question]="questionStats"/>
+      <attempt-summary-stats [question]="questionStats"/>
     </div>
     <attempt-summary-details [questionStat]="questionStats" [question]="getQuestion(questionStats.questionId)" *ngIf="showDetails[indexQuestion]"/>
   </div>

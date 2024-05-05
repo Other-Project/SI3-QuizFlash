@@ -1,0 +1,6 @@
+<div class="quiz-stats">
+  <p>Temps total sur le quiz : {{ getTimeSpent() }} minutes</p>
+  <p class="title">{{ quiz?.title }}</p>
+  <p *ngIf="stats">Réalisé le {{ this.datepipe.transform(stats.date, 'dd/MM/yyyy') }}</p>
+</div>
+
