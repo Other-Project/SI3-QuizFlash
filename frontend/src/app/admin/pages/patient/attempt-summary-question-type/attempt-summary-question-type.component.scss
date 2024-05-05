@@ -1,0 +1,18 @@
+@use 'sass:color';
+@import "/colors";
+
+.type {
+  height: 100%;
+}
+
+.questionType {
+  margin-top: 0;
+  margin-bottom: .25rem;
+  text-align: center;
+  align-content: center;
+  height: calc(100% - 1.5px);
+  border-radius: .5rem;
+  font-size: 90%;
+  background-color: $white;
+  border: 1px solid color.scale($white, $lightness: -5%);
+}

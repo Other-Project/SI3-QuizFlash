@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
+import {NgModule} from "@angular/core";
 import {PatientComponent} from "./patient.component";
-import {NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase} from "@angular/common";
+import {DatePipe, KeyValuePipe, NgForOf, NgIf, NgOptimizedImage, NgStyle, NgSwitch, NgSwitchCase} from "@angular/common";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {InformationComponent} from "./information/information.component";
 import {StatisticsModule} from "./statistics/statistics.module";
@@ -10,6 +10,15 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 import {LayoutModule} from "../../../layout/layout.module";
 import {PatientHeaderModule} from "./header/patient-header.module";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {HistoryComponent} from "./history/history.component";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {PlayButtonComponent} from "../../../layout/play-button/play-button.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AttemptSummaryComponent} from "./attempt-summary/attempt-summary.component";
+import {AttemptSummaryStatsPartComponent} from "./attempt-summary-stats-part/attempt-summary-stats-part.component";
+import {AttemptSummaryDetailsPartComponent} from "./attempt-summary-details-part/attempt-summary-details-part.component";
+import {AttemptSummaryQuestionTypeComponent} from "./attempt-summary-question-type/attempt-summary-question-type.component";
+import {AttemptSummaryQuestionExtraComponent} from "./attempt-summary-question-extra/attempt-summary-question-extra.component";
 
 
 @NgModule({
@@ -17,7 +26,13 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
     PatientComponent,
     StatisticsComponent,
     InformationComponent,
-    PatientNavbarComponent
+    PatientNavbarComponent,
+    HistoryComponent,
+    AttemptSummaryComponent,
+    AttemptSummaryStatsPartComponent,
+    AttemptSummaryDetailsPartComponent,
+    AttemptSummaryQuestionTypeComponent,
+    AttemptSummaryQuestionExtraComponent
   ],
   imports: [
     PatientHeaderModule,
@@ -30,7 +45,17 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
     NgMultiSelectDropDownModule,
     NgSwitch,
     NgSwitchCase,
-    NgIf
+    NgIf,
+    FaIconComponent,
+    KeyValuePipe,
+    NgForOf,
+    PlayButtonComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    NgStyle
+  ],
+  providers: [
+    DatePipe,
   ]
 })
 

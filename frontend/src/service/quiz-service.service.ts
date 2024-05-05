@@ -21,7 +21,7 @@ export class QuizService {
     });
   }
 
-  selectQuiz(id: string, user?: Patient) {
+  selectQuiz(id?: string, user?: Patient) {
     let copy = undefined;
     if (id) {
       let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
@@ -44,9 +44,9 @@ export class QuizService {
   }
 
   addQuiz(quiz: Quiz) {
-    quiz.id = "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
-      (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
-    );
+    quiz.id = this.idCreation();
+    quiz.questions.forEach(question => question.id = this.idCreation());
+    quiz.questions.forEach(question => question.answers.forEach(answer => answer.id = this.idCreation()));
     this.quizzes.push(quiz);
     this.quizzes$.next(this.quizzes);
     return quiz.id;
@@ -56,5 +56,11 @@ export class QuizService {
     let quizIndex = this.quizzes.findIndex(quiz => quiz.id == quizId);
     this.quizzes.splice(quizIndex, 1);
     this.quizzes$.next(this.quizzes);
+  }
+
+  idCreation() {
+    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+      (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+    );
   }
 }

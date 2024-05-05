@@ -1,0 +1,26 @@
+@use "sass:color";
+@import "/colors";
+
+.stats {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr 1fr;
+  text-align: center;
+  height: 100%;
+  align-items: center;
+}
+
+.succeed {
+  color: color.scale($green, $lightness: -25%);
+}
+
+.partiallySucceed {
+  color: $orange;
+}
+
+.notSucceed {
+  color: color.scale($lightRed, $lightness: -25%);
+}
+
+p {
+  margin: 0;
+}

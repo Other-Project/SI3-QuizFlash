@@ -8,18 +8,22 @@ const QUESTION1: Question = {
   type: QuestionType.TextOnly,
   answers: [
     {
+      id: "1",
       answerText: "Râteau",
       trueAnswer: false
     },
     {
+      id: "2",
       answerText: "Pelle",
       trueAnswer: false
     },
     {
+      id: "3",
       answerText: "Casserole",
       trueAnswer: false
     },
     {
+      id: "4",
       answerText: "Lit",
       trueAnswer: true
     }
@@ -34,18 +38,22 @@ const QUESTION2: Question = {
   type: QuestionType.TextOnly,
   answers: [
     {
+      id: "1",
       answerText: "Salle de bain",
       trueAnswer: false
     },
     {
+      id: "2",
       answerText: "Cuisine",
       trueAnswer: false
     },
     {
+      id: "3",
       answerText: "Chambre",
       trueAnswer: false
     },
     {
+      id: "4",
       answerText: "Garage",
       trueAnswer: true
     }
@@ -60,18 +68,22 @@ const QUESTION3: Question = {
   type: QuestionType.Sound,
   answers: [
     {
+      id: "1",
       answerText: "La bohème",
       trueAnswer: false
     },
     {
+      id: "2",
       answerText: "Non, je ne regrette rien",
       trueAnswer: false
     },
     {
+      id: "3",
       answerText: "La vie en rose",
       trueAnswer: true
     },
     {
+      id: "4",
       answerText: "Allumer le feu",
       trueAnswer: false
     }

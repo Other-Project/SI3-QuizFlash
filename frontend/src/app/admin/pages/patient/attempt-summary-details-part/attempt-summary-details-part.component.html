@@ -1,0 +1,8 @@
+<div class="details-part">
+  <div class="attempt" *ngFor="let attempt of questionStat.chosenAnswersId; index as i;">
+    <p class="attemptDescription" *ngIf="questionStat.chosenAnswersId.length>1">Tentative numéro {{ i + 1 }} :</p>
+    <div class="answers">
+      <app-input *ngFor="let answer of question.answers" [icon]="faReply" [(value)]="answer.answerText" [disabled]="true" [class]="getAnswerClass(attempt, answer)"/>
+    </div>
+  </div>
+</div>

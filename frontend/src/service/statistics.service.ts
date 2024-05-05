@@ -3,13 +3,22 @@ import {QuizStats} from "../models/quiz-stats.model";
 import {STATISTICS} from "../mocks/statistics.mock";
 import {QuestionStats} from "../models/question-stats.model";
 import {QuestionType} from "../models/question-type.models";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({providedIn: "root"})
 export class StatisticsService {
   quizStatistics: QuizStats[] = STATISTICS;
 
+  userQuizStats: QuizStats[] = [];
+  userQuizStats$: BehaviorSubject<QuizStats[] | []> = new BehaviorSubject<QuizStats[] | []>(this.userQuizStats);
+
+
   constructor() {
   }
+
+  /*****************
+   * STATISTICS *
+   * ****************/
 
   getAnswerHintRate(patientId: string, quizId?: string, questionType?: QuestionType) {
     return this.getRateByFilter(this.getPatientQuizzes(patientId, questionType, quizId), questionType, question => question.answerHint);
@@ -41,6 +50,15 @@ export class StatisticsService {
   getSuccessRatePerQuestion(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
     let result = this.getAccumulateQuestionStats(patientId, quizId, questionType);
     return [Object.keys(result), Object.values(result).map(question => this.questionSuccessRate(question) ?? 0)];
+  }
+
+  /**************
+   * HISTORY *
+   **************/
+
+  public getUserHistory(userId: string) {
+    this.userQuizStats = this.quizStatistics.filter(statistic => statistic.userId == userId);
+    this.userQuizStats$.next(this.userQuizStats);
   }
 
   /*********

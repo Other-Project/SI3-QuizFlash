@@ -1,0 +1,15 @@
+.historic-header {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  justify-content: center;
+
+  select {
+    height: fit-content;
+    align-self: center;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}

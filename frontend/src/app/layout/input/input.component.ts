@@ -13,6 +13,7 @@ export class InputComponent extends ImageComponent {
   @Output() valueChange = new EventEmitter<string>();
   @Input() placeholder?: string;
   @Input() type = "text";
+  @Input() disabled = false;
 
   constructor() {
     super();
