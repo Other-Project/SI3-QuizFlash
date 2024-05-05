@@ -29,7 +29,6 @@ export class HistoryComponent implements OnInit {
     this.quizSelected = false;
   }
 
-
   protected getTitle(quizId: string) {
     return this.quizList?.find(quiz => quiz.id == quizId)!.title;
   }
