@@ -7,7 +7,6 @@
       <attempt-summary-question-extra [question]="getQuestion(questionStats.questionId)"/>
       <attempt-summary-stats [question]="questionStats"/>
     </div>
-    <attempt-summary-details [questionStat]="questionStats" [question]="getQuestion(questionStats.questionId)"
-                             *ngIf="showDetails[indexQuestion]"/>
+    <attempt-summary-details [questionStat]="questionStats" [question]="getQuestion(questionStats.questionId)" *ngIf="showDetails[indexQuestion]"/>
   </div>
 </div>
