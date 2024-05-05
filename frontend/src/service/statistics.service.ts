@@ -21,7 +21,7 @@ export class StatisticsService {
    * ****************/
 
   getAnswerHintRate(patientId: string, quizId?: string, questionType?: QuestionType) {
-    return this.getRateByFilter(this.getPatientQuizzes(patientId, questionType, quizId), questionType, question => question.answerHint);
+    return this.getRateByFilter(this.getPatientQuizzes(patientId, questionType, quizId), questionType, question => question.attempts.some(attempt => attempt.answerHint));
   }
 
   getSuccessRate(patientId: string, quizId?: string, questionType?: QuestionType) {
@@ -39,12 +39,12 @@ export class StatisticsService {
 
   getTimePerQuestion(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
     let result = this.getAccumulateQuestionStats(patientId, quizId, questionType);
-    return [Object.keys(result), Object.values(result).map(question => this.average(question.map(stat => stat.timeSpent)) ?? 0)];
+    return [Object.keys(result), Object.values(result).map(question => this.average(question.flatMap(q => q.attempts.map(attempt => attempt.timeSpent))) ?? 0)];
   }
 
   getTimePerTries(patientId: string, quizId?: string, questionType?: QuestionType): [string[], number[]] {
     const patientStats = this.getPatientQuizzes(patientId, questionType, quizId);
-    return [patientStats.map(stat => stat.quizId), patientStats.map(stat => this.sum(stat.questionsStats.flatMap(q => q.timeSpent)))];
+    return [patientStats.map(stat => stat.quizId), patientStats.map(stat => this.sum(stat.questionsStats.flatMap(q => q.attempts.map(attempt => attempt.timeSpent))))];
   }
 
   getSuccessRatePerQuestion(patientId: string, quizId: string, questionType?: QuestionType): [string[], number[]] {
@@ -56,7 +56,7 @@ export class StatisticsService {
    * HISTORY *
    **************/
 
-  public getUserHistory(userId: string) {
+  getUserHistory(userId: string) {
     this.userQuizStats = this.quizStatistics.filter(statistic => statistic.userId == userId);
     this.userQuizStats$.next(this.userQuizStats);
   }
@@ -99,7 +99,7 @@ export class StatisticsService {
   private getTimeDataQuizStats(stats: QuizStats[], questionType?: QuestionType) {
     let timeSpent = stats.flatMap(stat => stat.questionsStats
       .filter(question => this.isQuestionOfType(question, questionType))
-      .map(question => question.timeSpent));
+      .flatMap(q => q.attempts.map(attempt => attempt.timeSpent)));
     return [this.sum(timeSpent), this.average(timeSpent) ?? 0];
   }
 

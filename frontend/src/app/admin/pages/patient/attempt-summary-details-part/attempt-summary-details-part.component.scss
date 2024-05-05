@@ -1,35 +1,59 @@
 @use "sass:color";
 @import "/colors";
 
-.answers {
-  grid-column: 2;
-  grid-row: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .25em;
-  margin: 2rem;
-}
+.details-part {
+  &.border {
+    border: solid 1px $darkBlue;
+    margin: 1rem;
+    border-radius: 0.5rem;
+  }
 
-.right {
-  background-color: $green;
-  border-color: color.scale($green, $lightness: -25%);
-}
+  .attempt:not(:last-child) {
+    border-bottom: solid $darkBlue 1px;
+  }
 
-.notFound {
-  background-color: color.scale($green, $lightness: 50%);
-  border: 2px dashed color.scale($green, $lightness: -25%);
-}
+  .attempt-description {
+    text-align: center;
+    font-size: 1.15em;
+    font-weight: bold;
+    margin: 1rem 0 1rem 0;
+  }
 
-.wrong {
-  background-color: $lightRed;
-  border-color: color.scale($lightRed, $lightness: -25%);
-}
+  .extra {
+    display: flex;
+    justify-content: space-around;
 
-.hidden {
-  background-color: color.scale($grey, $lightness: 50%);
-  border-color: color.scale($grey, $lightness: -25%);
-}
+    p {
+      margin: 0;
+    }
+  }
 
-.attempt {
-  margin: 0.5rem 0.5rem 0;
+  .answers {
+    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .25em;
+    margin: 1rem 2rem 2rem 2rem;
+  }
+
+  .right {
+    background-color: $green;
+    border-color: color.scale($green, $lightness: -25%);
+  }
+
+  .notFound {
+    background-color: color.scale($green, $lightness: 50%);
+    border: 2px dashed color.scale($green, $lightness: -25%);
+  }
+
+  .wrong {
+    background-color: $lightRed;
+    border-color: color.scale($lightRed, $lightness: -25%);
+  }
+
+  .hidden {
+    background-color: color.scale($grey, $lightness: 50%);
+    border-color: color.scale($grey, $lightness: -25%);
+  }
 }

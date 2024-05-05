@@ -5,23 +5,33 @@ import {QuestionType} from "../models/question-type.models";
 export const QUESTIONSTAT1: QuestionStats = {
   questionId: "1",
   questionType: QuestionType.TextOnly,
-  success: true,
-  chosenAnswersId: ["4"],
   numberOfAttempts: 1,
-  timeSpent: 2.2,
-  answerHint: true,
-  hiddenAnswers: ["1", "2"]
+  success: true,
+  attempts: [
+    {
+      attemptId: "1",
+      chosenAnswersId: "4",
+      timeSpent: 2.2,
+      answerHint: true,
+      hiddenAnswers: ["1", "2"],
+    }
+  ],
 }
 
 export const QUESTIONSTAT2: QuestionStats = {
   questionId: "2",
   questionType: QuestionType.TextOnly,
-  success: true,
-  chosenAnswersId: ["4"],
   numberOfAttempts: 1,
-  timeSpent: 4.3,
-  answerHint: false,
-  hiddenAnswers: []
+  success: true,
+  attempts: [
+    {
+      attemptId: "2",
+      chosenAnswersId: "4",
+      timeSpent: 4.3,
+      answerHint: false,
+      hiddenAnswers: [],
+    }
+  ],
 }
 
 export const FRANCESCU_QUIZSTATS: QuizStats = {

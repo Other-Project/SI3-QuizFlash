@@ -19,6 +19,7 @@ import {AttemptSummaryStatsPartComponent} from "./attempt-summary-stats-part/att
 import {AttemptSummaryDetailsPartComponent} from "./attempt-summary-details-part/attempt-summary-details-part.component";
 import {AttemptSummaryQuestionTypeComponent} from "./attempt-summary-question-type/attempt-summary-question-type.component";
 import {AttemptSummaryQuestionExtraComponent} from "./attempt-summary-question-extra/attempt-summary-question-extra.component";
+import {QuizStatsPartComponent} from "./quiz-stats-part/quiz-stats-part.component";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {AttemptSummaryQuestionExtraComponent} from "./attempt-summary-question-e
     AttemptSummaryStatsPartComponent,
     AttemptSummaryDetailsPartComponent,
     AttemptSummaryQuestionTypeComponent,
-    AttemptSummaryQuestionExtraComponent
+    AttemptSummaryQuestionExtraComponent,
+    QuizStatsPartComponent
   ],
   imports: [
     PatientHeaderModule,

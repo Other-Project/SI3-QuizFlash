@@ -4,6 +4,7 @@ import {faReply} from "@fortawesome/free-solid-svg-icons";
 import {QuestionType} from "../../../../../models/question-type.models";
 import {Question} from "../../../../../models/question.models";
 import {Answer} from "../../../../../models/answer.models";
+import {Attempt} from "../../../../../models/attempt.model";
 
 
 @Component({
@@ -15,6 +16,7 @@ import {Answer} from "../../../../../models/answer.models";
 export class AttemptSummaryDetailsPartComponent {
   @Input() questionStat!: QuestionStats;
   @Input() question!: Question;
+  @Input() fiftyFiftyUsableOrUseInAttempt!: boolean;
 
   protected readonly QuestionType = QuestionType;
   protected readonly faReply = faReply;
@@ -22,11 +24,11 @@ export class AttemptSummaryDetailsPartComponent {
   constructor() {
   }
 
-  getAnswerClass(attemptAnswer: string, answer: Answer) {
-    if (answer.id == attemptAnswer) return answer.trueAnswer ? "right" : "wrong";
+  getAnswerClass(attempt: Attempt, answer: Answer, i: number) {
+    if (answer.id == attempt.chosenAnswersId) return answer.trueAnswer ? "right" : "wrong";
     if (answer.trueAnswer) return "notFound";
-    let answerIndex = this.questionStat.chosenAnswersId.indexOf(answer.id);
-    if (answerIndex >= 0 && answerIndex < this.questionStat.chosenAnswersId.indexOf(attemptAnswer) || this.questionStat.hiddenAnswers.includes(answer.id)) return "hidden";
+    let answerIndex = this.questionStat.attempts.indexOf(this.questionStat.attempts.find(a => a.chosenAnswersId == answer.id) ?? {} as Attempt);
+    if (answerIndex >= 0 && answerIndex < i || this.questionStat.attempts[i].hiddenAnswers.includes(answer.id)) return "hidden";
     return undefined;
   }
 }

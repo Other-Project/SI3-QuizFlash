@@ -1,0 +1,13 @@
+.quiz-stats {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  font-size: 1.5rem;
+
+  .title {
+    text-decoration: underline;
+    text-align: center;
+  }
+}
+

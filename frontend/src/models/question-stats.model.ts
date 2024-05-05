@@ -1,12 +1,10 @@
 import {QuestionType} from "./question-type.models";
+import {Attempt} from "./attempt.model";
 
 export interface QuestionStats {
   questionId: string;
   questionType: QuestionType;
-  chosenAnswersId: string[];
   numberOfAttempts: number;
   success: boolean;
-  timeSpent: number;
-  answerHint: boolean;
-  hiddenAnswers: string[];
+  attempts: Attempt[];
 }
