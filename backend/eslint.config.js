@@ -1,9 +1,4 @@
 module.exports = {
-    extends: "airbnb-base",
-    env: {
-        jest: true,
-        node: true
-    },
     rules: {
         "max-len": ["warn", 200, { "ignoreStrings": true }],
         "no-underscore-dangle": ["warn", { "allow": ["_id"] }],
@@ -11,5 +6,8 @@ module.exports = {
         "semi": ["warn", "always"],
         "indent": ["warn", 4],
         "quotes": ["warn", "double"]
-    }
+    },
+    ignores: [
+        "node_modules"
+    ]
 };
