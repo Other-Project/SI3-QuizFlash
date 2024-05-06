@@ -5,7 +5,7 @@ module.exports = new BaseModel("User", {
     accessRestriction: Joi.string().valid("Guest", "User", "Admin").required(),
     lastName: Joi.string().required(),
     firstName: Joi.string().required(),
-    age: Joi.number().min(0).required(),
+    age: Joi.number().positive().required(),
     pictureUrl: Joi.string().base64().required(),
 
     //Patient attributes
