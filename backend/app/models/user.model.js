@@ -6,7 +6,7 @@ module.exports = new BaseModel("User", {
     lastName: Joi.string().required(),
     firstName: Joi.string().required(),
     age: Joi.number().min(0).required(),
-    pictureUrl: Joi.string().required(),
+    pictureUrl: Joi.string().base64().required(),
 
     //Patient attributes
     /* TODO: update hobbies */
