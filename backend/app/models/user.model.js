@@ -10,17 +10,21 @@ module.exports = new BaseModel("User", {
 
     //Patient attributes
     /* TODO: update hobbies */
-    hobbies: Joi.array().items(Joi.string()).when("accessRestriction", { is: "User", then: Joi.required() }),
-    dementiaLevel: Joi.string().valid("Mild", "Intermediate", "High").when("accessRestriction", { is: "User", then: Joi.required() }),
-    fontSize: Joi.number().min(1).max(2).when("accessRestriction", { is: "User", then: Joi.required() }),
-    removeAnswers: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required() }),
-    automatedSkip: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required() }),
-    answerHint: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required() }),
-    numberOfQuestion: Joi.number().min(1).when("accessRestriction", { is: "User", then: Joi.required() }),
-    replayAtEnd: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required() }),
-    soundQuestion: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required() }),
-    autoStartAudio: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required() }),
+    hobbies: Joi.array().items(Joi.string()).when("accessRestriction", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
+    dementiaLevel: Joi.string().valid("Mild", "Intermediate", "High").when("accessRestriction", {
+        is: "User",
+        then: Joi.required(),
+        otherwise: Joi.forbidden()
+    }),
+    fontSize: Joi.number().min(1).max(2).when("accessRestriction", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
+    removeAnswers: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
+    automatedSkip: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
+    answerHint: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
+    numberOfQuestion: Joi.number().min(1).when("accessRestriction", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
+    replayAtEnd: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
+    soundQuestion: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
+    autoStartAudio: Joi.boolean().when("accessRestriction", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
 
     //Admin attribute
-    password: Joi.string().when("accessRestriction", { is: "Admin", then: Joi.required() })
+    password: Joi.string().when("accessRestriction", { is: "Admin", then: Joi.required(), otherwise: Joi.forbidden() })
 });
