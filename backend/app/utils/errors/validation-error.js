@@ -5,6 +5,7 @@ function ValidationError(message, extra = {}) {
     this.name = this.constructor.name;
     this.message = message;
     this.extra = extra;
+    this.code = 400;
 }
 
 util.inherits(ValidationError, Error);
