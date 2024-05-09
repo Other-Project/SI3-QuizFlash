@@ -1,32 +1,30 @@
 const { Quiz } = require("../../models");
-const { filterQuestionsFromQuizz } = require("./questions/manager");
-const { filterAnswersFromQuestion } = require("./questions/answers/manager");
+const { getQuizQuestions } = require("./questions/manager");
+const { getQuestionAnswers } = require("./questions/answers/manager");
 
 /**
- * Function buildQuizz.
- * This function aggregates the questions and answers from the database to build a quizz with all the data needed by the clients.
- * @param quizId
+ * This function aggregates the questions and answers from the database to build a quiz with all the data needed by the clients
+ * @param {string|number} quizId
  */
-function buildQuizz(quizId) {
+function buildQuiz(quizId) {
     const quiz = Quiz.getById(quizId);
-    const questions = filterQuestionsFromQuizz(quiz.id);
+    const questions = getQuizQuestions(quiz.id);
     const questionWithAnswers = questions.map((question) => {
-        const answers = filterAnswersFromQuestion(question.id);
+        const answers = getQuestionAnswers(question.id);
         return { ...question, answers };
     });
     return { ...quiz, questions: questionWithAnswers };
 };
 
 /**
- * Function buildQuizzes.
- * This function aggregates the questions and answers from the database to build entire quizzes.
+ * This function aggregates the questions and answers from the database to build entire quizzes
  */
 function buildQuizzes() {
     const quizzes = Quiz.get();
-    return quizzes.map((quiz) => buildQuizz(quiz.id));
+    return quizzes.map((quiz) => buildQuiz(quiz.id));
 };
 
 module.exports = {
-    buildQuizz,
+    buildQuiz,
     buildQuizzes
 };

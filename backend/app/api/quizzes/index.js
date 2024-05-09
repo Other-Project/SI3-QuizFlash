@@ -3,7 +3,7 @@ const { Router } = require("express");
 const { Quiz } = require("../../models");
 const { catchErrors } = require("../../utils/errors/routes");
 const QuestionsRouter = require("./questions");
-const { buildQuizz, buildQuizzes } = require("./manager");
+const { buildQuiz, buildQuizzes } = require("./manager");
 
 const router = new Router();
 
@@ -14,7 +14,7 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
 }));
 
 router.get("/:quizId", (req, res) => catchErrors(req, res, () => {
-    res.status(200).json(buildQuizz(req.params.quizId));
+    res.status(200).json(buildQuiz(req.params.quizId));
 }));
 
 router.post("/", (req, res) => catchErrors(req, res, () => {

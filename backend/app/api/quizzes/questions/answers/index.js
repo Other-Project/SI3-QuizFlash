@@ -2,14 +2,14 @@ const { Router } = require("express");
 const { Answer } = require("../../../../models");
 
 const { getQuestionFromQuiz } = require("../manager");
-const { filterAnswersFromQuestion, getAnswerFromQuestion } = require("./manager");
+const { getQuestionAnswers, getAnswerFromQuestion } = require("./manager");
 const { catchErrors } = require("../../../../utils/errors/routes");
 
 const router = new Router({ mergeParams: true });
 
 router.get("/", (req, res) => catchErrors(req, res, () => {
     const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId);
-    const answers = filterAnswersFromQuestion(question.id);
+    const answers = getQuestionAnswers(question.id);
     res.status(200).json(answers);
 }));
 

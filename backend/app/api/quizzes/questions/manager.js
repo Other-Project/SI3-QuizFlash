@@ -2,11 +2,6 @@ const { Quiz, Question } = require("../../../models");
 const NotFoundError = require("../../../utils/errors/not-found-error.js");
 
 /**
- * Questions Manager.
- * This file contains all the logic needed to by the question routes.
- */
-
-/**
  * This function filters among the questions to return only the question linked with the given quizId
  * @param {string|number} quizId
  */
