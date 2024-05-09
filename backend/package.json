@@ -36,17 +36,17 @@
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "eslint": "^9.2.0",
-    "eslint-config-airbnb-base": "14.0.0",
-    "eslint-plugin-import": "2.20.0",
     "globals": "^15.1.0",
     "mkdirp": "^3.0.1",
     "nodemon": "2.0.2",
     "pre-commit": "1.2.2",
-    "rimraf": "^5.0.1"
+    "rimraf": "^5.0.1",
+    "swagger-autogen": "^2.23.7"
   },
   "nodemonConfig": {
     "ignore": [
-      "database/*"
+      "database/*",
+      "app/openapi.json"
     ]
   }
 }
