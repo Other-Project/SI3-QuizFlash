@@ -14,7 +14,7 @@ function buildQuiz(quizId) {
         return { ...question, answers };
     });
     return { ...quiz, questions: questionWithAnswers };
-};
+}
 
 /**
  * This function aggregates the questions and answers from the database to build entire quizzes
@@ -22,7 +22,7 @@ function buildQuiz(quizId) {
 function buildQuizzes() {
     const quizzes = Quiz.get();
     return quizzes.map((quiz) => buildQuiz(quiz.id));
-};
+}
 
 module.exports = {
     buildQuiz,

@@ -8,7 +8,7 @@ const NotFoundError = require("../../../utils/errors/not-found-error.js");
 function getQuizQuestions(quizId) {
     const parsedId = parseInt(quizId, 10);
     return Question.get().filter((question) => question.quizId === parsedId);
-};
+}
 
 /**
  * This function retrieves a question from a quiz
@@ -21,7 +21,7 @@ function getQuestionFromQuiz(quizId, questionId) {
 
     const quiz = Quiz.getById(quizId);
     throw new NotFoundError(`${question.name} id=${questionId} was not found for ${quiz.name} id=${quiz.id}`);
-};
+}
 
 module.exports = {
     getQuizQuestions,
