@@ -1,4 +1,4 @@
-const { Attempts, QuestionStats, QuizStats } = require("../../models");
+const { Attempts, QuestionStats, QuizStats, Question } = require("../../models");
 
 /**
  * This function aggregates the questionStats and attempts from the
@@ -27,7 +27,6 @@ function buildStat(quizStatId) {
 
 function getSuccessRatePerTry(patientId, quizId, questionType) {
     const patientStats = getPatientQuizzes(patientId, questionType, quizId);
-    console.log("patientStats", patientStats);
     return [patientStats.map(stat => stat.quizId), patientStats.map(stat => getRateByFilter([stat], questionType))];
 }
 
@@ -42,7 +41,6 @@ function getTimePerQuestion(patientId, quizId, questionType) {
 }
 
 function getTimePerTry(patientId, quizId, questionType) {
-    console.log(quizId);
     const patientStats = getPatientQuizzes(patientId, questionType, quizId);
     return [patientStats.map(stat => stat.quizId), patientStats.map(stat => sum(stat.questionsStats.flatMap(q => q.attempts.map(attempt => attempt.timeSpent))))];
 }
@@ -69,14 +67,12 @@ function getRateByFilter(stats, questionType, successFilter = question => questi
     let result = average(stats.flatMap(quiz => quiz.questionsStats
         .filter(questionStat => isQuestionOfType(questionStat, questionType))
         .map(question => successFilter(question) ? 1 : 0)));
-    console.log("result", result);
     return result !== undefined ? result * 100 : -1;
 }
 
 function getPatientQuizzes(userId, questionType, quizId) {
-    console.log(buildUserStats(userId));
     return buildUserStats(userId).filter(stat => (!quizId || stat.quizId === parseInt(quizId, 10))
-        && (!questionType || stat.questionsStats.some(question => isQuestionOfType(question))));
+        && (!questionType || stat.questionsStats.some(question => isQuestionOfType(question, questionType))));
 }
 
 /*********
@@ -107,7 +103,8 @@ function average(array) {
 }
 
 function isQuestionOfType(questionStat, questionType) {
-    return true;
+    const question = Question.get().find(question => question.id === questionStat.questionId);
+    return !questionType || (question && question.type === questionType);
 }
 
 function objectIntKeys(object) {

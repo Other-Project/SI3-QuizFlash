@@ -16,6 +16,7 @@ router.get("/:userId", (req, res) => {
 
 router.get("/success/:statType/:patientId/:quizId?/:questionType?", (req, res) => {
     const { statType, patientId, quizId, questionType } = req.params;
+    console.log("questionType1", questionType);
     try {
         let data;
         switch (statType) {
@@ -35,6 +36,7 @@ router.get("/success/:statType/:patientId/:quizId?/:questionType?", (req, res) =
 
 router.get("/time/:statType/:patientId/:quizId?/:questionType?", (req, res) => {
     const { statType, patientId, quizId, questionType } = req.params;
+    console.log("questionType1", questionType);
     try {
         let data;
         switch (statType) {
