@@ -6,7 +6,7 @@ import {QuizService} from "../../../../../service/quiz-service.service";
 import {DatePipe} from "@angular/common";
 
 @Component({
-  selector: "quiz-stats",
+  selector: "question-stats",
   templateUrl: "quiz-stats-part.component.html",
   styleUrls: ["quiz-stats-part.component.scss"]
 })

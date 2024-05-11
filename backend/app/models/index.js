@@ -1,5 +1,9 @@
-// const YourModel = require('./your-model.model.js')
+const QuizStats = require("./quiz-stats.model");
+const QuestionStats = require("./question-stats.model");
+const Attempts = require("./attempts.model");
 
 module.exports = {
-    // YourModel,
+    QuizStats,
+    QuestionStats,
+    Attempts
 };
