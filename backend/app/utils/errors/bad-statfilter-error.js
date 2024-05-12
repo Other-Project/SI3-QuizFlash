@@ -1,12 +1,12 @@
 const util = require("util");
 
-function BadStatTypeError(message) {
+function BadStatFilterError(message) {
     Error.captureStackTrace(this, this.constructor);
     this.name = this.constructor.name;
     this.message = message;
     this.code = 400;
 }
 
-util.inherits(BadStatTypeError, Error);
+util.inherits(BadStatFilterError, Error);
 
-module.exports = BadStatTypeError;
+module.exports = BadStatFilterError;

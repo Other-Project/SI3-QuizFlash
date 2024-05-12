@@ -10,9 +10,9 @@ router.get("/:userId", (req, res) => catchErrors(req, res, () => {
     res.status(200).json(buildUserStats(req.params.userId));
 }));
 
-router.get("/:dataType/:statType/:patientId/:quizId?/:questionType?", (req, res) => catchErrors(req, res, () => {
-    const { dataType, statType, patientId, quizId, questionType } = req.params;
-    res.status(200).json(getRequestedStat(dataType, statType, patientId, quizId, questionType));
+router.get("/:dataType/:statFilter/:patientId/:quizId?/:questionType?", (req, res) => catchErrors(req, res, () => {
+    const { dataType, statFilter, patientId, quizId, questionType } = req.params;
+    res.status(200).json(getRequestedStat(dataType, statFilter, patientId, quizId, questionType));
 }));
 
 module.exports = router;

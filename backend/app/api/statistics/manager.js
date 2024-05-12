@@ -1,8 +1,8 @@
 const { Attempts, QuestionStats, QuizStats, Question } = require("../../models");
-const BadStatTypeError = require("../../utils/errors/bad-stattype-error");
+const BadStatFilterError = require("../../utils/errors/bad-statfilter-error");
 const BadDataTypeError = require("../../utils/errors/bad-datatype-error");
 
-function getRequestedStat(dataType, statType, patientId, quizId, questionType) {
+function getRequestedStat(dataType, statFilter, patientId, quizId, questionType) {
     const statFunctions = {
         success: {
             try: getSuccessRatePerTry,
@@ -15,10 +15,10 @@ function getRequestedStat(dataType, statType, patientId, quizId, questionType) {
     };
     const functions = statFunctions[dataType];
     if (functions) {
-        if (functions[statType])
-            return functions[statType](patientId, quizId, questionType);
+        if (functions[statFilter])
+            return functions[statFilter](patientId, quizId, questionType);
         else
-            throw new BadStatTypeError("Invalid statType");
+            throw new BadStatFilterError("Invalid statFilter");
     } else
         throw new BadDataTypeError("Invalid dataType");
 }
