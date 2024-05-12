@@ -1,4 +1,4 @@
-const { Router, request } = require("express");
+const { Router } = require("express");
 
 
 const { buildUserStats, getRequestedStat } = require("./manager");
