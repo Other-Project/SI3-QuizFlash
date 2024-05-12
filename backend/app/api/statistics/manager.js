@@ -1,4 +1,27 @@
 const { Attempts, QuestionStats, QuizStats, Question } = require("../../models");
+const BadStatTypeError = require("../../utils/errors/bad-stattype-error");
+const BadDataTypeError = require("../../utils/errors/bad-datatype-error");
+
+function getRequestedStat(dataType, statType, patientId, quizId, questionType) {
+    const statFunctions = {
+        success: {
+            try: getSuccessRatePerTry,
+            question: getSuccessRatePerQuestion
+        },
+        time: {
+            try: getTimePerTry,
+            question: getTimePerQuestion
+        }
+    };
+    const functions = statFunctions[dataType];
+    if (functions) {
+        if (functions[statType])
+            return functions[statType](patientId, quizId, questionType);
+        else
+            throw new BadStatTypeError("Invalid statType");
+    } else
+        throw new BadDataTypeError("Invalid dataType");
+}
 
 /**
  * This function aggregates the questionStats and attempts from the
@@ -113,8 +136,5 @@ function objectIntKeys(object) {
 
 module.exports = {
     buildUserStats,
-    getSuccessRatePerTry,
-    getSuccessRatePerQuestion,
-    getTimePerTry,
-    getTimePerQuestion
+    getRequestedStat
 };
