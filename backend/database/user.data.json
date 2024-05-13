@@ -1,0 +1,75 @@
+[
+  {
+    "accessRestriction": "Admin",
+    "lastName": "Petit",
+    "firstName": "Anne",
+    "age": 40,
+    "password": "admin",
+    "pictureUrl": "test",
+    "id": 1715587135341
+  },
+  {
+    "accessRestriction": "User",
+    "lastName": "Luciani",
+    "firstName": "Francescu",
+    "age": 95,
+    "pictureUrl": "test",
+    "hobbies": [
+      "peche",
+      "television"
+    ],
+    "dementiaLevel": "Mild",
+    "fontSize": 1,
+    "removeAnswers": false,
+    "automatedSkip": false,
+    "answerHint": true,
+    "numberOfQuestion": 3,
+    "replayAtEnd": true,
+    "soundQuestion": false,
+    "autoStartAudio": false,
+    "id": 1715587553386
+  },
+  {
+    "accessRestriction": "User",
+    "lastName": "Dupont",
+    "firstName": "Martine",
+    "age": 70,
+    "pictureUrl": "test",
+    "hobbies": [
+      "culture",
+      "famille",
+      "theatre"
+    ],
+    "dementiaLevel": "Intermediate",
+    "fontSize": 2,
+    "removeAnswers": false,
+    "automatedSkip": true,
+    "answerHint": false,
+    "numberOfQuestion": 3,
+    "replayAtEnd": false,
+    "soundQuestion": true,
+    "autoStartAudio": true,
+    "id": 1715587751837
+  },
+  {
+    "accessRestriction": "User",
+    "lastName": "Martin",
+    "firstName": "Bernard",
+    "age": 85,
+    "pictureUrl": "test",
+    "hobbies": [
+      "peinture",
+      "lecture"
+    ],
+    "dementiaLevel": "High",
+    "fontSize": 1.25,
+    "removeAnswers": true,
+    "automatedSkip": true,
+    "answerHint": false,
+    "numberOfQuestion": 3,
+    "replayAtEnd": false,
+    "soundQuestion": false,
+    "autoStartAudio": false,
+    "id": 1715587877994
+  }
+]
