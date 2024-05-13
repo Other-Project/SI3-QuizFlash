@@ -1,0 +1,151 @@
+[
+  {
+    "questionStatId": 1215118801293,
+    "chosenAnswerId": 1715591136358,
+    "timeSpent": 1,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 9063480109471
+  },
+  {
+    "questionStatId": 1215118801293,
+    "chosenAnswerId": 1715591128203,
+    "timeSpent": 1.5,
+    "answerHint": false,
+    "hiddenAnswers": [
+      1715591136358
+    ],
+    "id": 2220277714179
+  },
+  {
+    "questionStatId": 1215118801293,
+    "chosenAnswerId": 1715591143361,
+    "timeSpent": 3,
+    "answerHint": false,
+    "hiddenAnswers": [
+      1715591136358,
+      1715591128203
+    ],
+    "id": 7097055089239
+  },
+  {
+    "questionStatId": 9215112101223,
+    "chosenAnswerId": 1715591266557,
+    "timeSpent": 1,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 3720479830503
+  },
+  {
+    "questionStatId": 9215112101223,
+    "chosenAnswerId": 1715591259291,
+    "timeSpent": 1.5,
+    "answerHint": false,
+    "hiddenAnswers": [
+      1715591266557
+    ],
+    "id": 1144838603746
+  },
+  {
+    "questionStatId": 9215112101223,
+    "chosenAnswerId": 1715591273681,
+    "timeSpent": 3,
+    "answerHint": false,
+    "hiddenAnswers": [
+      1715591266557,
+      1715591259291
+    ],
+    "id": 7763996813336
+  },
+  {
+    "questionStatId": 7215112101331,
+    "chosenAnswerId": 1715591143361,
+    "timeSpent": 2.2,
+    "answerHint": true,
+    "hiddenAnswers": [
+      1715591122204,
+      1715591128203
+    ],
+    "id": 9060476567624
+  },
+  {
+    "questionStatId": 3215112101341,
+    "chosenAnswerId": 1715591273681,
+    "timeSpent": 4.3,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 7392401585538
+  },
+  {
+    "questionStatId": 8215992101452,
+    "chosenAnswerId": 1715591143361,
+    "timeSpent": 2.2,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 3647848313510
+  },
+  {
+    "questionStatId": 1014529215992,
+    "chosenAnswerId": 1715591273681,
+    "timeSpent": 3.1,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 8270577709316
+  },
+  {
+    "questionStatId": 1444105014411,
+    "chosenAnswerId": 1715591304014,
+    "timeSpent": 5,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 9642716368959
+  },
+  {
+    "questionStatId": 4891438275525,
+    "chosenAnswerId": 1715590596207,
+    "timeSpent": 2.4,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 2625347467896
+  },
+  {
+    "questionStatId": 4655307100459,
+    "chosenAnswerId": 1715591273681,
+    "timeSpent": 3.6,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 4497288754441
+  },
+  {
+    "questionStatId": 3480564171672,
+    "chosenAnswerId": 1715590797352,
+    "timeSpent": 2.5,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 3775633465859
+  },
+  {
+    "questionStatId": 4515112101129,
+    "chosenAnswerId": 1715591143361,
+    "timeSpent": 2,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 7805219771715
+  },
+  {
+    "questionStatId": 1515112102139,
+    "chosenAnswerId": 1715590656578,
+    "timeSpent": 2.8,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 5913662656635
+  },
+  {
+    "questionStatId": 7515212301149,
+    "chosenAnswerId": 1715591400168,
+    "timeSpent": 3,
+    "answerHint": false,
+    "hiddenAnswers": [],
+    "id": 1329151889462
+  }
+]
