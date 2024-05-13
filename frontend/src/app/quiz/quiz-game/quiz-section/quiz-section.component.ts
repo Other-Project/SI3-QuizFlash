@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Question} from "../../../models/question.models";
-import {Patient} from "../../../models/patient.models";
-import {Answer} from "../../../models/answer.models";
+import {Question} from "../../../../models/question.models";
+import {Patient} from "../../../../models/patient.models";
+import {Answer} from "../../../../models/answer.models";
 
 
 @Component({

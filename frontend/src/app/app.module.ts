@@ -4,12 +4,12 @@ import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
 import {NgOptimizedImage} from "@angular/common";
 import {AdminModule} from "./admin/admin.module";
-import {QuizModule} from "./quiz/quiz.module";
+import {QuizModule} from "./quiz/quiz-game/quiz.module";
 import {ProfilesComponent} from "./profiles/profiles.component";
 import {LayoutModule} from "./layout/layout.module";
 import {AdminButtonComponent} from "./profiles/admin-button/admin-button.component";
 import {ProfileListComponent} from "./profiles/profile-list/profile-list.component";
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [

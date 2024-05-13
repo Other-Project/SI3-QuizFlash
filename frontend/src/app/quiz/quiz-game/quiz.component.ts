@@ -1,11 +1,12 @@
 import {Component, OnInit} from "@angular/core";
-import {UserService} from "../../service/user.service";
-import {Patient} from "../../models/patient.models";
-import {Quiz} from "../../models/quiz.models";
-import {Question} from "../../models/question.models";
-import {Answer} from "../../models/answer.models";
-import {QuestionType} from "../../models/question-type.models";
-import {QuizService} from "../../service/quiz-service.service";
+import {UserService} from "../../../service/user.service";
+import {Patient} from "../../../models/patient.models";
+import {Quiz} from "../../../models/quiz.models";
+import {Question} from "../../../models/question.models";
+import {Answer} from "../../../models/answer.models";
+import {QuestionType} from "../../../models/question-type.models";
+import {QuizService} from "../../../service/quiz-service.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-quiz',
@@ -24,7 +25,7 @@ export class QuizComponent implements OnInit {
   protected questions: Question[] = [];
   protected fiftyFiftyEnabled: boolean = true;
 
-  constructor(private userService: UserService, private quizService: QuizService) {
+  constructor(private userService: UserService, private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
     });
@@ -53,10 +54,6 @@ export class QuizComponent implements OnInit {
     this.update();
   }
 
-  setQuiz(quiz: Quiz) {
-    this.quizService.selectQuiz(quiz.id, this.user!);
-  }
-
   returnSelectionPage() {
     this.quizService.selectQuiz("", this.user!);
     this.fiftyFiftyEnabled = true;
@@ -65,6 +62,7 @@ export class QuizComponent implements OnInit {
     this.quiz = undefined;
     this.currentQuestion = undefined;
     this.questions = [];
+    this.router.navigate([".."], {relativeTo: this.route}).then();
   }
 
   isFinish() {

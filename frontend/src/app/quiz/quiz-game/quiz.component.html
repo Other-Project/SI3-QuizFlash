@@ -7,7 +7,7 @@
       </quiz-header>
     </app-header>
     <main>
-      <app-quiz-selection [quizzes]="quizzes" (returnQuizSelected)="setQuiz($event)" *ngIf="selection"/>
+      <!--<app-quiz-selection [quizzes]="quizzes" (returnQuizSelected)="setQuiz($event)" *ngIf="selection"/>-->
       <sound-settings *ngIf="soundSetting && !selection" (soundSettingsFinish)="getGainToTransfer($event)"/>
       <app-quiz-section [values]="currentQuestion" [user]="user" [finish]="isFinish()" [audioGain]="audioGain"
                         (nextQuestion)='nextQuestion()' (returnSelectionPage)="returnSelectionPage()" (chosenAnswer)="checkAnswer($event)"

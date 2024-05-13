@@ -1,3 +1,6 @@
-<section>
-  <app-quiz-selection-card *ngFor="let quiz of quizzes" [quiz]="quiz" (quizReturn)="returnQuiz($event)"/>
-</section>
+<app-header [homePage]="'/quiz'" [interactive]="true"/>
+<main>
+  <section>
+    <app-quiz-selection-card *ngFor="let quiz of quizzes" [quiz]="quiz" (quizReturn)="returnQuiz($event)"/>
+  </section>
+</main>

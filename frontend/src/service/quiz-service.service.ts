@@ -6,6 +6,9 @@ import {User} from "../models/user.models";
 import {UserService} from "./user.service";
 import {QuestionType} from "../models/question-type.models";
 import {Patient} from "../models/patient.models";
+import {StatisticsService} from "./statistics.service";
+
+//TODO quiz received contains some null part for example trueAnswer in Answer
 
 @Injectable({providedIn: "root"})
 export class QuizService {
@@ -15,7 +18,7 @@ export class QuizService {
   public quiz$: BehaviorSubject<Quiz | undefined> = new BehaviorSubject<Quiz | undefined>(this.quiz);
   private user?: User;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private statisticsService: StatisticsService) {
     this.userService.user$.subscribe((user?: User) => {
       this.user = user;
     });
@@ -62,5 +65,16 @@ export class QuizService {
     return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
       (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
     );
+  }
+
+  /*************
+   * IN SERVER *
+   *************/
+  startQuiz() {
+    return this.statisticsService.startQuiz(this.quiz!.id, this.user!.id);
+  }
+
+  chekAnswer(answerId: String) {
+
   }
 }
