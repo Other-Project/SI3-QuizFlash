@@ -28,6 +28,33 @@ const doc = {
             autoStartAudio: false,
 
             password: ""
+        },
+        Quiz: {
+            $title: "Les pièces de la maison",
+            $theme: "La maison",
+            thumbnailUrl: "assets/Chambre.jpg",
+            questions: [
+                {
+                    $ref: "#/definitions/Question"
+                }
+            ]
+        },
+        Question: {
+            $quizId: 1,
+            $text: "Quelle est cette pièce de la maison ?",
+            $type: "Image",
+            imageUrl: "assets/Chambre.jpg",
+            soundUrl: "",
+            answers: [
+                {
+                    $ref: "#/definitions/Answer"
+                }
+            ]
+        },
+        Answer: {
+            $questionId: 1,
+            $answerText: "Salle de bain",
+            $trueAnswer: false
         }
     }
 };

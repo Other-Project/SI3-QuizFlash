@@ -9,8 +9,9 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Users']
         #swagger.summary = 'Get all users'
         #swagger.responses[200] = {
-          schema: [{ $ref: '#/definitions/User' }]
+            schema: [{ $ref: '#/definitions/User' }]
         } */
+
     res.status(200).json(User.get());
 }));
 
@@ -18,11 +19,12 @@ router.get("/:userId", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Users']
         #swagger.summary = 'Get a specific user'
         #swagger.responses[200] = {
-          schema: { $ref: '#/definitions/User' }
+            schema: { $ref: '#/definitions/User' }
         }
         #swagger.responses[404] = {
-              description: 'No user found with this id'
+            description: 'No user found with this id'
         } */
+
     res.status(200).json(User.getById(req.params.userId));
 }));
 
@@ -34,10 +36,10 @@ router.post("/", (req, res) => catchErrors(req, res, () => {
             schema: { $ref: '#/definitions/User' }
         }
         #swagger.responses[201] = {
-          schema: { $ref: '#/definitions/User' }
+            schema: { $ref: '#/definitions/User' }
         }
         #swagger.responses[400] = {
-              description: 'Invalid request'
+            description: 'Invalid request'
         } */
 
     const user = User.create({ ...req.body });
@@ -52,13 +54,13 @@ router.put("/:userId", (req, res) => catchErrors(req, res, () => {
             schema: { $ref: '#/definitions/User' }
         }
         #swagger.responses[200] = {
-          schema: { $ref: '#/definitions/User' }
+            schema: { $ref: '#/definitions/User' }
         }
         #swagger.responses[400] = {
-              description: 'Invalid request'
+            description: 'Invalid request'
         }
         #swagger.responses[404] = {
-              description: 'No user found with this id'
+            description: 'No user found with this id'
         } */
 
     res.status(200).json(User.update(req.params.userId, req.body));
@@ -69,7 +71,7 @@ router.delete("/:userId", (req, res) => catchErrors(req, res, () => {
         #swagger.summary = 'Delete an user'
         #swagger.responses[204] = { }
         #swagger.responses[404] = {
-              description: 'No user found with this id'
+            description: 'No user found with this id'
         } */
 
     User.delete(req.params.userId);
