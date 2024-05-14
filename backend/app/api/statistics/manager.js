@@ -80,6 +80,21 @@ function getQuestionStatAttempts(questionStatId) {
  * STATISTICS *
  * ****************/
 
+function getAnswerHintRate(patientId, quizId, questionType) {
+    console.log(patientId, quizId, questionType);
+    return getRateByFilter(getUserQuizzes(patientId, questionType, quizId), questionType, question => question.attempts.some(attempt => attempt.answerHint));
+}
+
+function getSuccessRate(patientId, quizId, questionType) {
+    console.log(patientId, quizId, questionType);
+    return getRateByFilter(getUserQuizzes(patientId, undefined, quizId), questionType);
+}
+
+function getTime(patientId, quizId, questionType) {
+    console.log(patientId, quizId, questionType);
+    return getTimeDataQuizStats(getUserQuizzes(patientId, undefined, quizId), questionType);
+}
+
 function getSuccessRatePerTry(userId, quizId, questionType) {
     const userStats = getUserQuizzes(userId, questionType, quizId);
     return [userStats.map(stat => stat.quizId), userStats.map(stat => getRateByFilter([stat], questionType))];
@@ -87,12 +102,12 @@ function getSuccessRatePerTry(userId, quizId, questionType) {
 
 function getSuccessRatePerQuestion(userId, quizId, questionType) {
     let result = getAccumulateQuestionStats(userId, quizId, questionType);
-    return [objectIntKeys(result), Object.values(result).map(question => questionSuccessRate(question) ?? 0)];
+    return [Object.keys(result), Object.values(result).map(question => questionSuccessRate(question) ?? 0)];
 }
 
 function getTimePerQuestion(userId, quizId, questionType) {
     let result = getAccumulateQuestionStats(userId, quizId, questionType);
-    return [objectIntKeys(result), Object.values(result).map(question => average(question.flatMap(q => q.attempts.map(attempt => attempt.timeSpent))) ?? 0)];
+    return [Object.keys(result), Object.values(result).map(question => average(question.flatMap(q => q.attempts.map(attempt => attempt.timeSpent))) ?? 0)];
 }
 
 function getTimePerTry(userId, quizId, questionType) {
@@ -105,6 +120,13 @@ function getRateByFilter(stats, questionType, successFilter = question => questi
         .filter(questionStat => isQuestionOfType(questionStat, questionType))
         .map(question => successFilter(question) ? 1 : 0)));
     return result !== undefined ? result * 100 : -1;
+}
+
+function getTimeDataQuizStats(stats, questionType) {
+    let timeSpent = stats.flatMap(stat => stat.questionsStats
+        .filter(question => isQuestionOfType(question, questionType))
+        .flatMap(q => q.attempts.map(attempt => attempt.timeSpent)));
+    return [sum(timeSpent), average(timeSpent) ?? 0];
 }
 
 function getUserQuizzes(userId, questionType, quizId) {
@@ -144,11 +166,10 @@ function isQuestionOfType(questionStat, questionType) {
     return !questionType || (question && question.type === questionType);
 }
 
-function objectIntKeys(object) {
-    return Object.keys(object).map(k => parseInt(k, 10));
-}
-
 module.exports = {
     buildUserStats,
-    getRequestedStat
+    getRequestedStat,
+    getSuccessRate,
+    getTime,
+    getAnswerHintRate
 };
