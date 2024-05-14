@@ -81,17 +81,14 @@ function getQuestionStatAttempts(questionStatId) {
  * ****************/
 
 function getAnswerHintRate(patientId, quizId, questionType) {
-    console.log(patientId, quizId, questionType);
     return getRateByFilter(getUserQuizzes(patientId, questionType, quizId), questionType, question => question.attempts.some(attempt => attempt.answerHint));
 }
 
 function getSuccessRate(patientId, quizId, questionType) {
-    console.log(patientId, quizId, questionType);
     return getRateByFilter(getUserQuizzes(patientId, undefined, quizId), questionType);
 }
 
 function getTime(patientId, quizId, questionType) {
-    console.log(patientId, quizId, questionType);
     return getTimeDataQuizStats(getUserQuizzes(patientId, undefined, quizId), questionType);
 }
 
