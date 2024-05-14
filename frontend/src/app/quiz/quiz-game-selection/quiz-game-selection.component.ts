@@ -7,11 +7,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
-  selector: 'app-quiz-selection',
-  templateUrl: './quiz-selection.component.html',
-  styleUrls: ['./quiz-selection.component.scss']
+  selector: "app-quiz-game-selection",
+  templateUrl: "./quiz-game-selection.component.html",
+  styleUrls: ["./quiz-game-selection.component.scss"]
 })
-export class QuizSelectionComponent {
+export class QuizGameSelectionComponent {
   public user?: Patient;
   public quizzes?: Quiz[];
   @Output() returnIdQuizSelected: EventEmitter<String> = new EventEmitter<String>();
@@ -23,9 +23,8 @@ export class QuizSelectionComponent {
     quizService.quizzes$.subscribe(quizzes => this.quizzes = quizzes);
   }
 
-  returnQuiz(quiz: Quiz) {
-    this.quizService.selectQuiz(quiz.id, this.user!);
-    this.returnIdQuizSelected.emit(quiz.id);
-    this.router.navigate([quiz.id], {relativeTo: this.route}).then();
+  returnQuiz(quizId: string) {
+    this.quizService.selectQuiz(quizId, this.user!);
+    this.router.navigate(["quiz", quizId], {relativeTo: this.route}).then();
   }
 }

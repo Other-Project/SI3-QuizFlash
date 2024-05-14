@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {CommonModule, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
-import {QuizComponent} from "./quiz.component";
+import {QuizGameComponent} from "./quiz-game.component";
 import {LayoutModule} from "../../layout/layout.module";
 import {QuizHeaderComponent} from "./quiz-header/quiz-header.component";
 import {QuestionSectionComponent} from "./question-section/question-section.component";
@@ -16,7 +16,7 @@ import {PlayButtonComponent} from "../../layout/play-button/play-button.componen
 
 @NgModule({
   declarations: [
-    QuizComponent,
+    QuizGameComponent,
     QuizHeaderComponent,
     QuestionSectionComponent,
     AnswersComponent,
@@ -39,5 +39,5 @@ import {PlayButtonComponent} from "../../layout/play-button/play-button.componen
     NgForOf
   ]
 })
-export class QuizModule {
+export class QuizGameModule {
 }

@@ -30,7 +30,7 @@ export class ProfilesComponent {
   }
 
   navigateToHomePage(user: User) {
-    this.router.navigate([user.access == AccessRestriction.Admin ? "./admin" : "./quiz"]).then();
+    this.router.navigate([user.access == AccessRestriction.Admin ? "./admin" : "./quizzes"]).then();
   }
 
   protected readonly USER_ANNE = USER_ANNE;

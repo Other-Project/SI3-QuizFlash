@@ -7,6 +7,9 @@ import {UserService} from "./user.service";
 import {QuestionType} from "../models/question-type.models";
 import {Patient} from "../models/patient.models";
 import {StatisticsService} from "./statistics.service";
+import {QuizStats} from "../models/quiz-stats.model";
+import {QuestionStats} from "../models/question-stats.model";
+import {Attempt} from "../models/attempt.model";
 
 //TODO quiz received contains some null part for example trueAnswer in Answer
 
@@ -17,6 +20,7 @@ export class QuizService {
   public quiz?: Quiz;
   public quiz$: BehaviorSubject<Quiz | undefined> = new BehaviorSubject<Quiz | undefined>(this.quiz);
   private user?: User;
+  private quizStats?: QuizStats;
 
   constructor(private userService: UserService, private statisticsService: StatisticsService) {
     this.userService.user$.subscribe((user?: User) => {
@@ -29,7 +33,6 @@ export class QuizService {
     if (id) {
       let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
       if (!returnedQuiz) console.error("No quiz found with ID " + id);
-
       if (user && (copy = structuredClone(returnedQuiz))) {
         if (!user.soundQuestion)
           copy.questions = copy.questions.filter(question => question.type != QuestionType.Sound);
@@ -70,11 +73,32 @@ export class QuizService {
   /*************
    * IN SERVER *
    *************/
-  startQuiz() {
-    return this.statisticsService.startQuiz(this.quiz!.id, this.user!.id);
+
+  startQuiz(quizId: string) {
+    this.quizStats = {id: this.idCreation(), userId: this.user?.id, quizId: quizId, date: new Date(), questionsStats: []} as QuizStats;
+    return this.quizStats.id;
   }
 
-  chekAnswer(answerId: String) {
+  questionStatCreation(questionId: string) {
+    let questionStatistics = {
+      questionId: questionId,
+      questionType: this.quiz?.questions.find(question => question.id == questionId)!.type,
+      success: false,
+      attempts: []
+    } as QuestionStats;
+    this.quizStats!.questionsStats.push(questionStatistics);
+  }
 
+  chekAnswer(questionId: String, answerId: String, attempt: Attempt): string {
+    var questionStat = this.quizStats?.questionsStats.find(question => question.questionId == questionId)!;
+    questionStat.attempts.push(attempt);
+    var goodAnswerId = this.quiz!.questions.find(question => question.id == questionId)!.answers.find(answer => answer.trueAnswer)!.id;
+    if (goodAnswerId == answerId) questionStat.success = true;
+    return goodAnswerId;
+  }
+
+  finish() {
+    this.selectQuiz();
+    this.statisticsService.quizStatistics.push(this.quizStats!);
   }
 }

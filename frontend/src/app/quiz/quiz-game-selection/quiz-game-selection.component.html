@@ -1,0 +1,4 @@
+<app-header [homePage]="'/quiz'" [interactive]="true"/>
+<main>
+  <app-quiz-selection (returnIdQuizSelected)="returnQuiz($event)"></app-quiz-selection>
+</main>

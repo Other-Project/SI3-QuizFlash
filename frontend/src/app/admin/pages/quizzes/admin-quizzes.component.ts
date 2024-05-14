@@ -6,7 +6,7 @@ import {LayoutModule} from "../../../layout/layout.module";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faAdd} from "@fortawesome/free-solid-svg-icons";
-import {QuizSelectionModule} from "../../../quiz/quiz-selection/quiz-selection.module";
+import {QuizGameSelectionModule} from "../../../quiz/quiz-game-selection/quiz-game-selection.module";
 
 @Component({
   selector: "app-admin-quizzes",
@@ -15,7 +15,7 @@ import {QuizSelectionModule} from "../../../quiz/quiz-selection/quiz-selection.m
   standalone: true,
   imports: [
     ProfileListComponent,
-    QuizSelectionModule,
+    QuizGameSelectionModule,
     LayoutModule,
     RouterLink,
     FaIconComponent
@@ -33,7 +33,7 @@ export class AdminQuizzesComponent {
     this.quizzes = text ? this.allQuizzes?.filter(quiz => quiz.title.toLowerCase().includes(text!.toLowerCase())) : this.allQuizzes;
   }
 
-  manageQuiz(quizId: String) {
+  manageQuiz(quizId: string) {
     this.router.navigate(["./quiz", quizId], {relativeTo: this.route}).then();
   }
 

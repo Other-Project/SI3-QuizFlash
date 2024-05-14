@@ -1,5 +1,5 @@
 export interface Attempt {
-  attemptId: string;
+  attemptId?: string;
   chosenAnswersId: string;
   timeSpent: number;
   answerHint: boolean;

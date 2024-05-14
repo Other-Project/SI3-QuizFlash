@@ -1,12 +1,7 @@
 <div>
-  <div *ngIf="question && !questionResult && !finish && !inactive">
+  <div *ngIf="question">
     <question-section image="{{question.imageUrl}}" sound="{{question.soundUrl}}" question="{{question.text}}" [volume]="audioGain" [autoPlay]="user!.autoStartAudio"/>
     <answers-section [answers]="question.answers" [automatedSkip]="user!.automatedSkip" (returnedAnswer)='checkAnswer($event)'
                      (inactive)='setInactivity()'/>
   </div>
-  <app-question-result [goodAnswer]="trueAnswer" [correct]="correct" [automatedSkip]="user!.automatedSkip" (continue)='continueQuiz()' *ngIf="questionResult"/>
-  <finish-page [title]="inactive ? 'Quiz terminé' : 'Bravo !'"
-               [text]="inactive ? 'Le quiz a été clos automatiquement en raison d\'une longue période d\'inactivité.' : 'Vous avez terminé'"
-               [textButton]="'Revenir au menu'"
-               (returnSelectionPage)="selectionPage()" *ngIf="finish"/>
 </div>
