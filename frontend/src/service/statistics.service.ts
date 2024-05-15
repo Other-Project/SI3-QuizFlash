@@ -12,7 +12,6 @@ export class StatisticsService {
   userQuizStats: QuizStats[] = [];
   userQuizStats$: BehaviorSubject<QuizStats[] | []> = new BehaviorSubject<QuizStats[] | []>(this.userQuizStats);
 
-
   constructor() {
   }
 

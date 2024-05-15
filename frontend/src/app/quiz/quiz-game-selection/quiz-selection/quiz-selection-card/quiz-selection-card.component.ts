@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Quiz} from "../../../../models/quiz.models";
+import {Quiz} from "../../../../../models/quiz.models";
 
 
 @Component({

@@ -1,0 +1,22 @@
+<div class="quiz">
+  <div [ngStyle]="{'font-size': user!.fontSize.toString()+'em'}" class="quiz-content">
+    <app-header [homePage]="'/quiz'" [interactive]="false">
+      <quiz-header [counter]="getCounter()" [quizTheme]="quiz?.theme"
+                   [numberOfQuestion]="questions.length" *ngIf="!isFinish()">
+        <app-button [color]="'blue'" (click)="fiftyFifty()" [disabled]="!fiftyFiftyEnabled" *ngIf="user!.answerHint">50/50</app-button>
+      </quiz-header>
+    </app-header>
+    <main>
+      <sound-settings *ngIf="soundSetting" (soundSettingsFinish)="getGainToTransfer($event)"/>
+      <app-quiz-section [question]="currentQuestion" [user]="user" [audioGain]="audioGain"
+                        (chosenAnswer)="checkAnswer($event)" (inactive)="setInactivity()"
+                        *ngIf="!soundSetting && !questionResult && !isFinish()"/>
+      <app-question-result [goodAnswer]="trueAnswer" [correct]="check" [automatedSkip]="user!.automatedSkip" (continue)='nextQuestion()'
+                           *ngIf="questionResult && !isFinish()"/>
+      <finish-page [title]="inactivity ? 'Quiz terminé' : 'Bravo !'"
+                   [text]="inactivity ? 'Le quiz a été clos automatiquement en raison d\'une longue période d\'inactivité.' : 'Vous avez terminé'"
+                   [textButton]="'Revenir au menu'"
+                   (returnSelectionPage)="returnSelectionPage()" *ngIf="isFinish()"/>
+    </main>
+  </div>
+</div>
