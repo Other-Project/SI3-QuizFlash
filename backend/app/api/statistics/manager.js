@@ -43,7 +43,7 @@ function buildUserStats(userId) {
  * This function aggregates the questionStats and attempts from the
  * database to build the entire quizStats
  * @param {string} quizStatId
- * @return {*&{questionsStats:*}}
+ * @return {QuizStats&{id: number}&{questionsStats:*}}
  */
 function buildStat(quizStatId) {
     const quizStat = QuizStats.getById(quizStatId);
@@ -57,7 +57,7 @@ function buildStat(quizStatId) {
 /**
  * This function gets all the questionsStats of a QuizStats
  * @param {string} quizStatId
- * @return {QuestionStats[]}
+ * @return {QuestionStats&{id: number}[]}
  */
 function getQuizStatQuestionStats(quizStatId) {
     const parsedId = parseInt(quizStatId, 10);
@@ -66,11 +66,11 @@ function getQuizStatQuestionStats(quizStatId) {
 
 /**
  * This function gets all the attempts of a questionStat
- * @param {string} questionStatId
- * @return {Attempts[]}
+ * @param {number} questionStatId
+ * @return {Attempts&{id: number}[]}
  */
 function getQuestionStatAttempts(questionStatId) {
-    const parsedId = parseInt(questionStatId, 10);
+    const parsedId = questionStatId;
     return Attempts.get().filter(attempt => attempt.questionStatId === parsedId);
 }
 
