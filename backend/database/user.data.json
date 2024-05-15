@@ -1,6 +1,6 @@
 [
   {
-    "accessRestriction": "Admin",
+    "access": "Admin",
     "lastName": "Petit",
     "firstName": "Anne",
     "age": 40,
@@ -9,7 +9,7 @@
     "id": 1715587135341
   },
   {
-    "accessRestriction": "User",
+    "access": "User",
     "lastName": "Luciani",
     "firstName": "Francescu",
     "age": 95,
@@ -30,7 +30,7 @@
     "id": 1715587553386
   },
   {
-    "accessRestriction": "User",
+    "access": "User",
     "lastName": "Dupont",
     "firstName": "Martine",
     "age": 70,
