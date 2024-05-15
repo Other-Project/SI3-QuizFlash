@@ -11,8 +11,6 @@ import {QuizStats} from "../models/quiz-stats.model";
 import {QuestionStats} from "../models/question-stats.model";
 import {Attempt} from "../models/attempt.model";
 
-//TODO quiz received contains some null part for example trueAnswer in Answer
-
 @Injectable({providedIn: "root"})
 export class QuizService {
   public quizzes: Quiz[] = QUIZLIST;
