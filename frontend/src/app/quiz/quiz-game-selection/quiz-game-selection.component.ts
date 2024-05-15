@@ -23,7 +23,7 @@ export class QuizGameSelectionComponent {
     quizService.quizzes$.subscribe(quizzes => this.quizzes = quizzes);
   }
 
-  returnQuiz(quizId: string) {
+  playQuiz(quizId: string) {
     this.quizService.selectQuiz(quizId, this.user!);
     this.router.navigate(["quiz", quizId], {relativeTo: this.route}).then();
   }

@@ -1,6 +1,6 @@
 <div class="quiz">
   <div [ngStyle]="{'font-size': user!.fontSize.toString()+'em'}" class="quiz-content">
-    <app-header [homePage]="'/quiz'" [interactive]="quiz == undefined">
+    <app-header [homePage]="'/quiz'" [interactive]="false">
       <quiz-header [counter]="getCounter()" [quizTheme]="quiz?.theme"
                    [numberOfQuestion]="questions.length" *ngIf="!isFinish()">
         <app-button [color]="'blue'" (click)="fiftyFifty()" [disabled]="!fiftyFiftyEnabled" *ngIf="user!.answerHint">50/50</app-button>

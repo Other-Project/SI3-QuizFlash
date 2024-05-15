@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {UserService} from "../../../service/user.service";
 import {Patient} from "../../../models/patient.models";
 import {Quiz} from "../../../models/quiz.models";
@@ -7,7 +7,6 @@ import {Answer} from "../../../models/answer.models";
 import {QuestionType} from "../../../models/question-type.models";
 import {QuizService} from "../../../service/quiz-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {StatisticsService} from "../../../service/statistics.service";
 import {Attempt} from "../../../models/attempt.model";
 
 @Component({
@@ -15,7 +14,7 @@ import {Attempt} from "../../../models/attempt.model";
   templateUrl: "./quiz-game.component.html",
   styleUrls: ["./quiz-game.component.scss"]
 })
-export class QuizGameComponent implements OnInit {
+export class QuizGameComponent {
   public user?: Patient;
   public quiz?: Quiz;
   protected counter: number = 1;
@@ -32,46 +31,32 @@ export class QuizGameComponent implements OnInit {
   protected inactivity: boolean = false;
   protected hidenAnswers: Answer[] = [];
 
-  constructor(private userService: UserService, private quizService: QuizService, private statisticsService: StatisticsService, private router: Router, private route: ActivatedRoute) {
-    this.userService.user$.subscribe(user => {
-      this.user = user as Patient;
-      this.quizService.quiz$.subscribe(quiz => {
-        this.quiz = quiz;
-        if (quiz) {
-          this.questions = quiz.questions;
-          if (this.user!.soundQuestion && this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
-          this.statisticId = this.quizService.startQuiz(quiz.id);
-          this.update();
-        }
-      });
+  constructor(private userService: UserService, private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
+    this.userService.user$.subscribe(user => this.user = user as Patient);
+    this.quizService.quiz$.subscribe(quiz => {
+      this.quiz = quiz;
+      this.questions = quiz?.questions ?? [];
+      this.counter = 1;
+      this.statisticId = quiz ? this.quizService.startQuiz(quiz.id) : undefined;
+      if (this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true; // If the user has sound questions disabled, the list returned by the service shouldn't contain any
+      this.nextQuestion();
     });
-  }
-
-  ngOnInit(): void {
   }
 
   update() {
     this.hidenAnswers = [];
     this.currentQuestion = this.questions.at(this.counter - 1);
-    this.quizService.questionStatCreation(this.currentQuestion!.id);
+    if (this.currentQuestion) this.quizService.questionStatCreation(this.currentQuestion.id);
     this.questionResult = false;
     this.start = new Date();
   }
-
   nextQuestion() {
     this.fiftyFiftyEnabled = true;
     this.check = false;
     this.update();
   }
-
   returnSelectionPage() {
     this.quizService.finish();
-    this.quizService.selectQuiz("", this.user!);
-    this.fiftyFiftyEnabled = true;
-    this.counter = 1;
-    this.quiz = undefined;
-    this.currentQuestion = undefined;
-    this.questions = [];
     this.router.navigate(["../.."], {relativeTo: this.route}).then();
   }
 

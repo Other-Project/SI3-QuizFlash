@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Quiz} from "../../../../models/quiz.models";
-import {QuizService} from "../../../../service/quiz-service.service";
 import {UserService} from "../../../../service/user.service";
 import {Patient} from "../../../../models/patient.models";
 
@@ -12,14 +11,13 @@ import {Patient} from "../../../../models/patient.models";
 })
 export class QuizSelectionComponent {
   public user?: Patient;
-  public quizzes?: Quiz[];
+  @Input() quizzes?: Quiz[];
   @Output() returnIdQuizSelected: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private userService: UserService, private quizService: QuizService) {
+  constructor(private userService: UserService) {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
     });
-    this.quizService.quizzes$.subscribe(quizzes => this.quizzes = quizzes);
   }
 
   returnQuiz(quiz: Quiz) {
