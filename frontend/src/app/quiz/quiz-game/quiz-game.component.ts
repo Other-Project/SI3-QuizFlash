@@ -50,11 +50,13 @@ export class QuizGameComponent {
     this.questionResult = false;
     this.start = new Date();
   }
+
   nextQuestion() {
     this.fiftyFiftyEnabled = true;
     this.check = false;
     this.update();
   }
+
   returnSelectionPage() {
     this.quizService.finish();
     this.router.navigate(["../.."], {relativeTo: this.route}).then();
