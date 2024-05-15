@@ -6,4 +6,4 @@
   </app-button>
 </section>
 
-<app-quiz-selection (returnIdQuizSelected)="manageQuiz($event)"/>
+<app-quiz-selection [quizzes]="quizzes" (returnIdQuizSelected)="manageQuiz($event)"/>
