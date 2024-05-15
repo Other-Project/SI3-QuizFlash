@@ -1,7 +1,7 @@
 const { Router } = require("express");
 
 
-const { buildUserStats, getRequestedStat, getTime, getSuccessRate, getAnswerHintRate } = require("./manager");
+const { buildUserStats, getRequestedStat, getTimeData, getSuccessRate, getAnswerHintRate } = require("./manager");
 const { catchErrors } = require("../../utils/errors/routes");
 
 const router = new Router();
@@ -17,7 +17,7 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
 
 router.get("/time-data", (req, res) => catchErrors(req, res, () => {
     const { userId, quizId, questionType } = req.query;
-    res.status(200).json(getTime(userId, quizId, questionType));
+    res.status(200).json(getTimeData(userId, quizId, questionType));
 }));
 
 router.get("/success-rate", (req, res) => catchErrors(req, res, () => {
