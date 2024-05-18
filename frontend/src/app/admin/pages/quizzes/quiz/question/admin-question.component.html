@@ -2,7 +2,7 @@
   <select [(ngModel)]="question.type">
     <option *ngFor="let type of QuestionTypes | keyvalue" [value]="type.key">{{ type.value }}</option>
   </select>
-  <div [ngSwitch]="Number(question.type)">
+  <div [ngSwitch]="question.type">
     <app-image-input *ngSwitchCase="QuestionType.Image" [src]="question.imageUrl" (onImageUpdate)="question.imageUrl = $event"/>
     <div *ngSwitchCase="QuestionType.Sound">
       <app-file-input (valueChange)="question.soundUrl = $event" [accept]="'audio/*'">
