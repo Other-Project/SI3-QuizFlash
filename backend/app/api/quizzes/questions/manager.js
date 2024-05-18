@@ -47,7 +47,7 @@ function replaceQuestion(questionId, question) {
     const {answers, ...pureQuestion} = question;
     let result = Question.replace(questionId, pureQuestion);
     let currentAnswers = getQuestionAnswers(questionId);
-    currentAnswers.filter(answer => answer.every(a => a.id !== answer.id)).forEach(answer => Answer.delete(answer.id));
+    currentAnswers.filter(answer => answers.every(a => a.id !== answer.id)).forEach(answer => Answer.delete(answer.id));
     result.answers = answers.map(answer => answer.id ? Answer.replace(answer.id, answer) : Answer.create({...answer, questionId: result.id}));
     return result;
 }
