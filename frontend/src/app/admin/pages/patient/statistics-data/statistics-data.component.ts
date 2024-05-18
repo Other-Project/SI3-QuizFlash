@@ -42,7 +42,7 @@ export class StatisticsDataComponent implements OnInit {
 
   quizChoice(quizId?: string, questionType?: QuestionType): void {
     this.quizSelected = !!quizId && quizId != "";
-    if (questionType == -1 as QuestionType) questionType = undefined;
+    if (questionType == -1 as unknown) questionType = undefined;
     this.quizSelection?.emit({quizId, questionType});
 
     this.successRate = this.statisticsService.getSuccessRate(this.patientId!, quizId, questionType);
