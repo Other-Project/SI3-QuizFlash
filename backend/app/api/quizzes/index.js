@@ -66,6 +66,26 @@ router.put("/:quizId", (req, res) => catchErrors(req, res, () => {
             description: 'No quiz found with this id'
         } */
 
+    res.status(200).json(Quiz.replace(req.params.quizId, req.body));
+}));
+
+router.patch("/:quizId", (req, res) => catchErrors(req, res, () => {
+    /*  #swagger.tags = ['Quizzes']
+        #swagger.summary = 'Modify parts of an existing quiz'
+        #swagger.parameters['body'] = {
+            in: 'body',
+            schema: { $ref: '#/definitions/Quiz' }
+        }
+        #swagger.responses[200] = {
+            schema: { $ref: '#/definitions/Quiz' }
+        }
+        #swagger.responses[400] = {
+            description: 'Invalid request'
+        }
+        #swagger.responses[404] = {
+            description: 'No quiz found with this id'
+        } */
+
     res.status(200).json(Quiz.update(req.params.quizId, req.body));
 }));
 
