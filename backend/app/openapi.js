@@ -59,7 +59,7 @@ const doc = {
         QuizStats: {
             $quizId: 1715588161488,
             $userId: 1715587751837,
-            $date: "12-05-2024",
+            $date: "2024-05-12",
             $id: 7715019314381,
             $questionsStats: [
                 {
