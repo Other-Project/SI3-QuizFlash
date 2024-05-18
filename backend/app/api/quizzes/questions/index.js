@@ -3,7 +3,7 @@ const { Router } = require("express");
 const { Answer, Quiz, Question } = require("../../../models");
 const { catchErrors } = require("../../../utils/errors/routes");
 const AnswersRouter = require("./answers");
-const { getQuizQuestions, getQuestionFromQuiz } = require("./manager");
+const {getQuizQuestions, getQuestionFromQuiz, createQuestion, deleteQuestion} = require("./manager");
 
 const router = new Router({ mergeParams: true });
 
@@ -48,13 +48,7 @@ router.post("/", (req, res) => catchErrors(req, res, () => {
 
     Quiz.getById(req.params.quizId);
     const quizId = parseInt(req.params.quizId, 10);
-    let question = Question.create({ label: req.body.label, quizId });
-    // If answers have been provided in the request, we create the answer and update the response to send.
-    if (req.body.answers && req.body.answers.length > 0) {
-        const answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id }));
-        question = { ...question, answers };
-    }
-    res.status(201).json(question);
+    res.status(201).json(createQuestion(quizId, req.body));
 }));
 
 router.put("/:questionId", (req, res) => catchErrors(req, res, () => {
@@ -110,7 +104,7 @@ router.delete("/:questionId", (req, res) => catchErrors(req, res, () => {
         } */
 
     getQuestionFromQuiz(req.params.quizId, req.params.questionId);
-    Question.delete(req.params.questionId);
+    deleteQuestion(req.params.questionId);
     res.status(204).end();
 }));
 
