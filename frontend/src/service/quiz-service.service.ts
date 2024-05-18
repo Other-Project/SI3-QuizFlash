@@ -46,8 +46,8 @@ export class QuizService {
     else this.quiz$.next(this.quiz = undefined);
   }
 
-  updateQuiz(quizId: string, updatedQuiz: Quiz) {
-    this.http.patch<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase).subscribe(() => this.updateQuizList());
+  replaceQuiz(quizId: string, updatedQuiz: Quiz) {
+    this.http.put<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase).subscribe(() => this.updateQuizList());
   }
 
   addQuiz(quiz: Quiz, callback: ((quiz: Quiz) => void)) {
