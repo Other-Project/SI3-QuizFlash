@@ -5,6 +5,6 @@ module.exports = new BaseModel("Question", {
     quizId: Joi.number().required(),
     text: Joi.string().required(),
     type: Joi.string().valid("TextOnly", "Image", "Sound").required(),
-    imageUrl: Joi.string().base64(),
-    soundUrl: Joi.string().base64()
+    imageUrl: Joi.string().allow("").uri(),
+    soundUrl: Joi.string().allow("").uri()
 });

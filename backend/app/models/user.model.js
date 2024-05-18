@@ -6,7 +6,7 @@ module.exports = new BaseModel("User", {
     lastname: Joi.string().required(),
     firstname: Joi.string().required(),
     age: Joi.number().positive().required(),
-    pictureUrl: Joi.string().uri().required(),
+    pictureUrl: Joi.string().allow("").uri(),
 
     //Patient attributes
     hobbies: Joi.array().items(Joi.string()).when("access", { is: "User", then: Joi.required(), otherwise: Joi.forbidden() }),
