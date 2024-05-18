@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
 import {Quiz} from "../models/quiz.models";
-import {QUIZLIST} from "../mocks/quiz-list.mock";
 import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {UserService} from "./user.service";
@@ -10,56 +10,54 @@ import {StatisticsService} from "./statistics.service";
 import {QuizStats} from "../models/quiz-stats.model";
 import {QuestionStats} from "../models/question-stats.model";
 import {Attempt} from "../models/attempt.model";
+import {apiUrl, httpOptionsBase} from "../configs/server.config";
 
 @Injectable({providedIn: "root"})
 export class QuizService {
-  public quizzes: Quiz[] = QUIZLIST;
+  private readonly quizApiUrl = apiUrl + "/quizzes";
+
+  public quizzes: Quiz[] = [];
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject<Quiz[]>(this.quizzes);
   public quiz?: Quiz;
   public quiz$: BehaviorSubject<Quiz | undefined> = new BehaviorSubject<Quiz | undefined>(this.quiz);
   private user?: User;
   private quizStats?: QuizStats;
 
-  constructor(private userService: UserService, private statisticsService: StatisticsService) {
-    this.userService.user$.subscribe((user?: User) => {
-      this.user = user;
+  constructor(userService: UserService, private statisticsService: StatisticsService, private http: HttpClient) {
+    userService.user$.subscribe(user => this.user = user);
+    this.updateQuizList();
+  }
+
+  updateQuizList() {
+    this.http.get<Quiz[]>(this.quizApiUrl).subscribe(quizzes => {
+      this.quizzes$.next(this.quizzes = quizzes);
     });
   }
 
   selectQuiz(id?: string, user?: Patient) {
-    let copy = undefined;
-    if (id) {
-      let returnedQuiz = this.quizzes.find((quiz) => quiz.id == id);
-      if (!returnedQuiz) console.error("No quiz found with ID " + id);
-      if (user && (copy = structuredClone(returnedQuiz))) {
-        if (!user.soundQuestion)
-          copy.questions = copy.questions.filter(question => question.type != QuestionType.Sound);
-        copy.questions = copy.questions.sort(() => 0.5 - Math.random()).slice(0, user.numberOfQuestion);
-      } else copy = returnedQuiz;
-    }
-    this.quiz = copy;
-    this.quiz$.next(this.quiz);
+    if (id)
+      this.http.get<Quiz>(`${this.quizApiUrl}/${id}`).subscribe(quiz => {
+        // TODO: Migrate this server side
+        if (user && !user.soundQuestion) quiz.questions = quiz.questions.filter(question => question.type != QuestionType.Sound);
+        quiz.questions = quiz.questions.sort(() => 0.5 - Math.random()).slice(0, user?.numberOfQuestion);
+
+        this.quiz$.next(this.quiz = quiz);
+      });
+    else this.quiz$.next(this.quiz = undefined);
   }
 
   updateQuiz(quizId: string, updatedQuiz: Quiz) {
-    let quizIndex = this.quizzes.findIndex(quiz => quiz.id == quizId);
-    if (quizIndex < 0) return;
-    this.quizzes[quizIndex] = Object.assign({}, this.quizzes[quizIndex], updatedQuiz);
+    this.http.patch<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase).subscribe(() => this.updateQuizList());
   }
 
-  addQuiz(quiz: Quiz) {
-    quiz.id = this.idCreation();
-    quiz.questions.forEach(question => question.id = this.idCreation());
-    quiz.questions.forEach(question => question.answers.forEach(answer => answer.id = this.idCreation()));
-    this.quizzes.push(quiz);
-    this.quizzes$.next(this.quizzes);
-    return quiz.id;
+  addQuiz(quiz: Quiz, callback: ((quiz: Quiz) => void)) {
+    this.http.post<Quiz>(this.quizApiUrl, quiz, httpOptionsBase).subscribe(quiz => callback(quiz));
   }
 
-  deleteQuiz(quizId: string): void {
-    let quizIndex = this.quizzes.findIndex(quiz => quiz.id == quizId);
-    this.quizzes.splice(quizIndex, 1);
-    this.quizzes$.next(this.quizzes);
+  deleteQuiz(quizId: string) {
+    this.http.delete<Quiz>(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => {
+      this.updateQuizList();
+    });
   }
 
   idCreation() {
@@ -88,9 +86,9 @@ export class QuizService {
   }
 
   chekAnswer(questionId: String, answerId: String, attempt: Attempt): string {
-    var questionStat = this.quizStats?.questionsStats.find(question => question.questionId == questionId)!;
+    let questionStat = this.quizStats?.questionsStats.find(question => question.questionId == questionId)!;
     questionStat.attempts.push(attempt);
-    var goodAnswerId = this.quiz!.questions.find(question => question.id == questionId)!.answers.find(answer => answer.trueAnswer)!.id;
+    let goodAnswerId = this.quiz!.questions.find(question => question.id == questionId)!.answers.find(answer => answer.trueAnswer)!.id;
     if (goodAnswerId == answerId) questionStat.success = true;
     return goodAnswerId;
   }
