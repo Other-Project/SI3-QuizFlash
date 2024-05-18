@@ -26,7 +26,7 @@ export class PatientHeaderComponent implements OnInit{
   }
 
   deletePatient() {
-    this.userService.deleteUser(this.patient!.id);
+    this.userService.deleteUser(this.patient!);
     this.router.navigate(["../../patients"], {relativeTo: this.route}).then();
   }
 
