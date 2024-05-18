@@ -85,6 +85,20 @@ const doc = {
             $answerHint: false,
             $hiddenAnswers: [1, 2],
             $id: 3647848313510
+        },
+        SuccessStats: {
+            answerHintRate: 15.3,
+            successRate: 66.66666666666666,
+            graphData: [
+                {
+                    key: 1715588161488,
+                    value: 66.66666666666666
+                },
+                {
+                    key: 1715588161488,
+                    value: 66.66666666666666
+                }
+            ]
         }
     }
 };
