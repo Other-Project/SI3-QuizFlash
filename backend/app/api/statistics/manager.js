@@ -165,10 +165,9 @@ function getTimeData(userId, quizId, questionType) {
 function getSuccessRatePerTry(userId, quizId, questionType) {
     const userStats = getUserQuizzes(userId, questionType, quizId);
     return userStats.map(stat => ({
-            key: stat.quizId.toString(),
-            value: getRateByFilter([stat], questionType)
-        }
-    ));
+        key: stat.quizId.toString(),
+        value: getRateByFilter([stat], questionType)
+    }));
 }
 
 /**
