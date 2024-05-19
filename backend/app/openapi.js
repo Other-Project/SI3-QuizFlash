@@ -88,15 +88,15 @@ const doc = {
         },
         SuccessStats: {
             answerHintRate: 15.3,
-            successRate: 66.66666666666666,
+            successRate: 75,
             graphData: [
                 {
                     key: "2024-02-01",
-                    value: 66.66666666666666
+                    value: 50
                 },
                 {
                     key: "2023-07-10",
-                    value: 66.66666666666666
+                    value: 100
                 }
             ]
         }
