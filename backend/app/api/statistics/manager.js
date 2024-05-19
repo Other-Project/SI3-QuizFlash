@@ -54,12 +54,12 @@ function getSuccessRateStats(dataType, statType, userId, quizId, questionType) {
  * @param {string} userId the user id
  * @param {string|undefined} quizId the quiz id
  * @param {string|undefined} questionType the question type
- * @return {{timeData: [number, number], graphData: [string[], number[]]}}
+ * @return {{totalTime: number, averageTime: number, graphData: [string[], number[]]}}
  */
-function getTimeStats(dataType, statFilter, userId, quizId, questionType) {
+function getTimeStats(dataType, statType, userId, quizId, questionType) {
     return {
-        timeData: getTimeData(userId, quizId, questionType),
-        graphData: statFunctions[dataType][statFilter](userId, quizId, questionType)
+        ...getTimeData(userId, quizId, questionType),
+        graphData: statFunctions[dataType][statType](userId, quizId, questionType)
     };
 }
 
@@ -149,7 +149,7 @@ function getSuccessRate(userId, quizId, questionType) {
  * @param {string} userId the user id
  * @param {string|undefined} quizId the quiz id
  * @param {string|undefined} questionType the question type
- * @return {[number,number]} with first the total spent time and secondly the average spent time
+ * @return {{totalTime: number, averageTime: number}} with first the total spent time and secondly the average spent time
  */
 function getTimeData(userId, quizId, questionType) {
     return getTimeDataQuizStats(getUserQuizzes(userId, undefined, quizId), questionType);
@@ -230,7 +230,7 @@ function getTimeDataQuizStats(stats, questionType) {
     let timeSpent = stats.flatMap(stat => stat.questionsStats
         .filter(question => isQuestionOfType(question, questionType))
         .flatMap(q => q.attempts.map(attempt => attempt.timeSpent)));
-    return [sum(timeSpent), average(timeSpent) ?? 0];
+    return { totalTime: sum(timeSpent), averageTime: average(timeSpent) ?? 0 };
 }
 
 function getUserQuizzes(userId, questionType, quizId) {
