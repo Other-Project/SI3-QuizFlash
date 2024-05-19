@@ -2,11 +2,8 @@ const { Attempts, QuestionStats, QuizStats, Question } = require("../../models")
 const ValidationError = require("../../utils/errors/validation-error");
 
 const data = {
-    try: (userId, quizId, questionType, userQuizzes) =>
-        userQuizzes.map(stat => [stat.date.toString(), stat.questionsStats])
-            .sort((a, b) => new Date(b[0]) - new Date(a[0])),
-    question: (userId, quizId, questionType, userQuizzes) =>
-        Object.entries(getAccumulateQuestionStats(userId, quizId, questionType, userQuizzes))
+    try: userQuizzes => userQuizzes.sort((a, b) => b.date - a.date).map(stat => [stat.date.toString(), stat.questionsStats]),
+    question: (userQuizzes, questionType) => Object.entries(getAccumulateQuestionStats(userQuizzes, questionType))
 };
 
 const dataValue = {
@@ -41,8 +38,9 @@ function getRequestedStat(dataType, statType, userId, quizId, questionType) {
     if (!generalRates[dataType])
         throw new ValidationError("Invalid dataType");
 
-    const userQuizzes = getUserQuizzes(userId, questionType, quizId);
-    let result = data[statType](userId, quizId, questionType, userQuizzes);
+    const userQuizzes = buildUserStats(userId, quizId, questionType);
+    console.log(userQuizzes);
+    let result = data[statType](userQuizzes, questionType);
     const rateData = generalRates[dataType](userQuizzes.flatMap(stat => stat.questionsStats));
 
     return {
@@ -57,36 +55,41 @@ function getRequestedStat(dataType, statType, userId, quizId, questionType) {
 /**
  * Returns the list of quizStats aggregated for a user
  * @param {string} userId the user id
+ * @param {string|undefined} quizId the quiz id
+ * @param {string|undefined} questionType the questionType
  * @return {(QuizStats&{id: number, questionsStats: *})[]} the corresponding QuizStats
  */
-function buildUserStats(userId) {
-    const parsedId = parseInt(userId, 10);
-    const userStats = QuizStats.get().filter(quizStat => quizStat.userId === parsedId);
-    return userStats.map(quizStat => buildStat(quizStat.id));
+function buildUserStats(userId, quizId, questionType) {
+    const userStats = QuizStats.get().filter(quizStat => quizStat.userId === parseInt(userId, 10)
+        && (!quizId || quizStat.quizId === parseInt(quizId, 10)));
+    return userStats.map(quizStat => buildStat(quizStat.id, questionType)).filter(stats => stats !== null);
 }
 
 /**
  * This function aggregates the questionStats and attempts from the
  * database to build the entire quizStats
  * @param {number} quizStatId
- * @return {QuizStats&{id: number}&{questionsStats:*}}
+ * @param {questionType|undefined} questionType
+ * @return {QuizStats&{id: number, questionsStats: *}}
  */
-function buildStat(quizStatId) {
+function buildStat(quizStatId, questionType) {
     const quizStat = QuizStats.getById(quizStatId);
-    const questionsStats = getQuizStatQuestionStats(quizStatId).map(questionStats => {
+    const questionsStats = getQuizStatQuestionStats(quizStatId, questionType).map(questionStats => {
         const attempts = getQuestionStatAttempts(questionStats.id);
         return { ...questionStats, attempts };
     });
-    return { ...quizStat, questionsStats };
+    return !questionsStats.length ? null : { ...quizStat, questionsStats };
 }
 
 /**
  * This function gets all the questionsStats of a QuizStats
  * @param {number} quizStatId
+ * @param {questionType|undefined} questionType
  * @return {QuestionStats&{id: number}[]}
  */
-function getQuizStatQuestionStats(quizStatId) {
-    return QuestionStats.get().filter(questionStat => questionStat.quizStatId === quizStatId);
+function getQuizStatQuestionStats(quizStatId, questionType) {
+    return QuestionStats.get().filter(questionStat => questionStat.quizStatId === quizStatId &&
+        (!questionType || isQuestionOfType(questionStat.questionId, questionType)));
 }
 
 /**
@@ -104,11 +107,6 @@ function getQuestionStatAttempts(questionStatId) {
 
 function getRateByFilter(questionsStats, successFilter = question => question.success) {
     return average(questionsStats.map(question => successFilter(question) ? 100 : 0));
-}
-
-function getUserQuizzes(userId, questionType, quizId) {
-    return buildUserStats(userId).filter(stat => (!quizId || stat.quizId === parseInt(quizId, 10))
-        && (!questionType || stat.questionsStats.some(question => isQuestionOfType(question, questionType))));
 }
 
 function getAccumulateQuestionStats(userId, quizId, questionType, userQuizzes) {
