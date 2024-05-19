@@ -15,17 +15,9 @@ router.get("/history/:userId", (req, res) => catchErrors(req, res, () => {
     res.status(200).json(buildUserStats(req.params.userId));
 }));
 
-router.get("/", (req, res) => catchErrors(req, res, () => {
+router.get("/:userId", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Statistics']
     #swagger.summary = 'Get specific user statistics'
-    #swagger.parameters['userId'] = {
-        in: 'query',
-        description: 'The user id',
-        required: true,
-        schema: {
-            type: 'string'
-        }
-    }
     #swagger.parameters['dataType'] = {
         in: 'query',
         description: 'The type of data requested',
@@ -67,8 +59,8 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
     #swagger.responses[400] = {
         description: 'Invalid request'
     } */
-    const { dataType, statType, userId, quizId, questionType } = req.query;
-    res.status(200).json(getRequestedStat(dataType, statType, userId, quizId, questionType));
+    const { dataType, statType, quizId, questionType } = req.query;
+    res.status(200).json(getRequestedStat(dataType, statType, req.params.userId, quizId, questionType));
 }));
 
 module.exports = router;
