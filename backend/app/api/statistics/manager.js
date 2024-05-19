@@ -1,15 +1,27 @@
 const { Attempts, QuestionStats, QuizStats, Question } = require("../../models");
 const ValidationError = require("../../utils/errors/validation-error");
 
-const statFunctions = {
-    success: {
-        try: getSuccessRatePerTry,
-        question: getSuccessRatePerQuestion
-    },
-    time: {
-        try: getTimePerTry,
-        question: getTimePerQuestion
-    }
+const data = {
+    try: (userId, quizId, questionType) =>
+        getUserQuizzes(userId, questionType, quizId)
+            .map(stat => [stat.date.toString(), stat.questionsStats])
+            .sort((a, b) => new Date(b[0]) - new Date(a[0])),
+    question: (userId, quizId, questionType) =>
+        Object.entries(getAccumulateQuestionStats(userId, quizId, questionType))
+};
+
+const dataValue = {
+    success: value => average(value.map(question => question.success ? 100 : 0)) ?? 0,
+    time: value => average(value.flatMap(q => q.attempts.map(attempt => attempt.timeSpent))) ?? 0
+};
+
+const generalRates = {
+    time: (userId, quizId, questionType) => getTimeData(userId, quizId, questionType),
+    success: (userId, quizId, questionType) =>
+        ({
+            answerHintRate: getAnswerHintRate(userId, quizId, questionType),
+            successRate: getSuccessRate(userId, quizId, questionType)
+        })
 };
 
 /**
@@ -19,64 +31,31 @@ const statFunctions = {
  * @param {string} userId the user id
  * @param {string|undefined} quizId the quiz id
  * @param {string|undefined} questionType the question type
- * @return {{}} an object with the requested data
+ * @return {{data: {key: string, value: number}[]}} an object with the requested data
  */
+
 function getRequestedStat(dataType, statType, userId, quizId, questionType) {
-    checkStatType(dataType, statType);
-    if (dataType === "success")
-        return getSuccessRateStats(dataType, statType, userId, quizId, questionType);
-    if (dataType === "time")
-        return getTimeStats(dataType, statType, userId, quizId, questionType);
-    throw new ValidationError("Invalid dataType");
-}
-
-/**
- * Returns the success rate stats
- * @param {string} dataType the data type (success/time)
- * @param {string} statType the stat type (try/question)@param {string} userId the user id
- * @param {string} userId the user id
- * @param {string|undefined} quizId the quiz id
- * @param {string|undefined} questionType the question type
- * @return {{successRate: number, graphData: [string[], number[]]}}
- */
-function getSuccessRateStats(dataType, statType, userId, quizId, questionType) {
-    return {
-        answerHintRate: getAnswerHintRate(userId, quizId, questionType),
-        successRate: getSuccessRate(userId, quizId, questionType),
-        graphData: statFunctions[dataType][statType](userId, quizId, questionType)
-    };
-}
-
-/**
- * Returns the success time stats
- * @param {string} dataType the data type (success/time)
- * @param {string} statType the stat type (try/question)
- * @param {string} userId the user id
- * @param {string|undefined} quizId the quiz id
- * @param {string|undefined} questionType the question type
- * @return {{totalTime: number, averageTime: number, graphData: [string[], number[]]}}
- */
-function getTimeStats(dataType, statType, userId, quizId, questionType) {
-    return {
-        ...getTimeData(userId, quizId, questionType),
-        graphData: statFunctions[dataType][statType](userId, quizId, questionType)
-    };
-}
-
-/**
- * Check if the statType is correct
- * @param dataType the data type (success/time)
- * @param statType the stat type (try/question)
- */
-function checkStatType(dataType, statType) {
-    if (!statFunctions[dataType][statType])
+    if (!data[statType])
         throw new ValidationError("Invalid statType");
+    let result = data[statType](userId, quizId, questionType);
+
+    if (!generalRates[dataType])
+        throw new ValidationError("Invalid dataType");
+    const rateData = generalRates[dataType](userId, quizId, questionType);
+
+    return {
+        ...rateData,
+        data: result.map(([key, value]) => ({
+            key: key.toString(),
+            value: dataValue[dataType](value)
+        }))
+    };
 }
 
 /**
  * Returns the list of quizStats aggregated for a user
  * @param {string} userId the user id
- * @return {(QuizStats&{id: number}&{questionsStats: *})[]} the corresponding QuizStats
+ * @return {(QuizStats&{id: number, questionsStats: *})[]} the corresponding QuizStats
  */
 function buildUserStats(userId) {
     const parsedId = parseInt(userId, 10);
@@ -155,66 +134,6 @@ function getTimeData(userId, quizId, questionType) {
     return getTimeDataQuizStats(getUserQuizzes(userId, undefined, quizId), questionType);
 }
 
-/**
- * Gets the success rate per try
- * @param {string} userId the user id
- * @param {string|undefined} quizId the quiz id
- * @param {string|undefined} questionType the question type
- * @return {{key: string, value:number}[]} with the quiz field as key and the corresponding value
- */
-function getSuccessRatePerTry(userId, quizId, questionType) {
-    const userStats = getUserQuizzes(userId, questionType, quizId);
-    return userStats.map(stat => ({
-        key: stat.date.toString(),
-        value: getRateByFilter([stat], questionType)
-    }));
-}
-
-/**
- * Gets the success rate per question
- * @param {string} userId the user id
- * @param {string|undefined} quizId the quiz id
- * @param {string|undefined} questionType the question type
- * @return {{key: string, value:number}[]} with the quiz field as key and the corresponding value
- */
-function getSuccessRatePerQuestion(userId, quizId, questionType) {
-    let result = getAccumulateQuestionStats(userId, quizId, questionType);
-    return Object.keys(result).map(questionId => ({
-        key: questionId.toString(),
-        value: questionSuccessRate(result[questionId]) ?? 0
-    }));
-}
-
-/**
- * Gets the average time per question
- * @param {string} userId the user id
- * @param {string|undefined} quizId the quiz id
- * @param {string|undefined} questionType the question type
- * @return {{key: string, value:number}[]} with first the question ids and secondly corresponding the averages
- */
-function getTimePerQuestion(userId, quizId, questionType) {
-    let result = getAccumulateQuestionStats(userId, quizId, questionType);
-    return Object.keys(result).map(questionId => ({
-        key: questionId.toString(),
-        value: average(result[questionId].flatMap(q => q.attempts.map(attempt => attempt.timeSpent))) ?? 0
-    }));
-}
-
-/**
- * Gets the total time per try
- * @param {string} userId the user id
- * @param {string|undefined} quizId the quiz id
- * @param {string|undefined} questionType the question type
- * @return {{key: string, value:number}[]} with first the quiz ids and secondly the corresponding total times
- */
-function getTimePerTry(userId, quizId, questionType) {
-    const userStats = getUserQuizzes(userId, questionType, quizId);
-    return userStats.map(stat => ({
-        key: stat.date.toString(),
-        value: sum(stat.questionsStats.flatMap(q => q.attempts.map(attempt => attempt.timeSpent)))
-    }));
-}
-
 /*********
  * UTILS *
  *********/
@@ -236,11 +155,6 @@ function getTimeDataQuizStats(stats, questionType) {
 function getUserQuizzes(userId, questionType, quizId) {
     return buildUserStats(userId).filter(stat => (!quizId || stat.quizId === parseInt(quizId, 10))
         && (!questionType || stat.questionsStats.some(question => isQuestionOfType(question, questionType))));
-}
-
-function questionSuccessRate(questionStats) {
-    let result = average(questionStats.map(question => question.success ? 1 : 0));
-    return result ? result * 100 : undefined;
 }
 
 function getAccumulateQuestionStats(userId, quizId, questionType) {
