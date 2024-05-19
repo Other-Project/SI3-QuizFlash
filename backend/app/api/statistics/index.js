@@ -67,8 +67,8 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
     #swagger.responses[400] = {
         description: 'Invalid request'
     } */
-    const { dataType, statFilter, userId, quizId, questionType } = req.query;
-    res.status(200).json(getRequestedStat(dataType, statFilter, userId, quizId, questionType));
+    const { dataType, statType, userId, quizId, questionType } = req.query;
+    res.status(200).json(getRequestedStat(dataType, statType, userId, quizId, questionType));
 }));
 
 module.exports = router;

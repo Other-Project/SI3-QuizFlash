@@ -15,42 +15,42 @@ const statFunctions = {
 /**
  * Returns the data corresponding to the query with specific arguments
  * @param {string} dataType the data type (success/time)
- * @param {string} statFilter the stat filter (try/question)
+ * @param {string} statType the stat filter (try/question)
  * @param {string} userId the user id
  * @param {string|undefined} quizId the quiz id
  * @param {string|undefined} questionType the question type
  * @return {{}} an object with the requested data
  */
-function getRequestedStat(dataType, statFilter, userId, quizId, questionType) {
-    checkStatFilter(dataType, statFilter);
+function getRequestedStat(dataType, statType, userId, quizId, questionType) {
+    checkStatType(dataType, statType);
     if (dataType === "success")
-        return getSuccessRateStats(dataType, statFilter, userId, quizId, questionType);
+        return getSuccessRateStats(dataType, statType, userId, quizId, questionType);
     if (dataType === "time")
-        return getTimeStats(dataType, statFilter, userId, quizId, questionType);
+        return getTimeStats(dataType, statType, userId, quizId, questionType);
     throw new ValidationError("Invalid dataType");
 }
 
 /**
  * Returns the success rate stats
  * @param {string} dataType the data type (success/time)
- * @param {string} statFilter the stat filter (try/question)@param {string} userId the user id
+ * @param {string} statType the stat type (try/question)@param {string} userId the user id
  * @param {string} userId the user id
  * @param {string|undefined} quizId the quiz id
  * @param {string|undefined} questionType the question type
  * @return {{successRate: number, graphData: [string[], number[]]}}
  */
-function getSuccessRateStats(dataType, statFilter, userId, quizId, questionType) {
+function getSuccessRateStats(dataType, statType, userId, quizId, questionType) {
     return {
         answerHintRate: getAnswerHintRate(userId, quizId, questionType),
         successRate: getSuccessRate(userId, quizId, questionType),
-        graphData: statFunctions[dataType][statFilter](userId, quizId, questionType)
+        graphData: statFunctions[dataType][statType](userId, quizId, questionType)
     };
 }
 
 /**
  * Returns the success time stats
  * @param {string} dataType the data type (success/time)
- * @param {string} statFilter the stat filter (try/question)
+ * @param {string} statType the stat type (try/question)
  * @param {string} userId the user id
  * @param {string|undefined} quizId the quiz id
  * @param {string|undefined} questionType the question type
@@ -64,13 +64,13 @@ function getTimeStats(dataType, statFilter, userId, quizId, questionType) {
 }
 
 /**
- * Check if the statFilter is correct
+ * Check if the statType is correct
  * @param dataType the data type (success/time)
- * @param statFilter the stat filter (try/question)
+ * @param statType the stat type (try/question)
  */
-function checkStatFilter(dataType, statFilter) {
-    if (!statFunctions[dataType][statFilter])
-        throw new ValidationError("Invalid statFilter");
+function checkStatType(dataType, statType) {
+    if (!statFunctions[dataType][statType])
+        throw new ValidationError("Invalid statType");
 }
 
 /**
