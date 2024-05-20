@@ -39,7 +39,6 @@ function getRequestedStat(dataType, statType, userId, quizId, questionType) {
         throw new ValidationError("Invalid dataType");
 
     const userQuizzes = buildUserStats(userId, quizId, questionType);
-    console.log(userQuizzes);
     let result = data[statType](userQuizzes, questionType);
     const rateData = generalRates[dataType](userQuizzes.flatMap(stat => stat.questionsStats));
 
