@@ -7,7 +7,7 @@ const data = {
 };
 
 const dataValue = {
-    success: value => average(value.map(question => question.success ? 100 : 0)) ?? 0,
+    success: value => getRateByFilter(value),
     time: value => average(value.flatMap(q => q.attempts.map(attempt => attempt.timeSpent))) ?? 0
 };
 
