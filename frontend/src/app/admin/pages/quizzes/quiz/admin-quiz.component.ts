@@ -69,13 +69,12 @@ export class AdminQuizComponent implements OnDestroy {
 
   addQuestion() {
     this.quiz.questions.push({
-      answers: [{} as Answer, {} as Answer, {} as Answer, {} as Answer],
+      answers: [{} as Answer, {} as Answer],
       type: QuestionType.TextOnly
     } as Question);
   }
 
   protected readonly faAdd = faAdd;
-
   protected readonly faSave = faSave;
   protected readonly faTrash = faTrash;
 }
