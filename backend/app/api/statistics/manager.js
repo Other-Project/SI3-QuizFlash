@@ -88,7 +88,7 @@ function buildStat(quizStatId, questionType) {
  */
 function getQuizStatQuestionStats(quizStatId, questionType) {
     return QuestionStats.get().filter(questionStat => questionStat.quizStatId === quizStatId &&
-        (!questionType || isQuestionOfType(questionStat.questionId, questionType)));
+        isQuestionOfType(questionStat.questionId, questionType));
 }
 
 /**
