@@ -48,7 +48,7 @@ router.post("/", (req, res) => catchErrors(req, res, () => {
 
     Quiz.getById(req.params.quizId);
     const quizId = parseInt(req.params.quizId, 10);
-    let question = Question.create({ label: req.body.label, quizId });
+    let question = Question.create({ ...req.body, quizId });
     // If answers have been provided in the request, we create the answer and update the response to send.
     if (req.body.answers && req.body.answers.length > 0) {
         const answers = req.body.answers.map((answer) => Answer.create({ ...answer, questionId: question.id }));

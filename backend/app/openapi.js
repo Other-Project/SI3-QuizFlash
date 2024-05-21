@@ -55,6 +55,50 @@ const doc = {
             $questionId: 1,
             $answerText: "Salle de bain",
             $trueAnswer: false
+        },
+        QuizStats: {
+            $quizId: 1715588161488,
+            $userId: 1715587751837,
+            $date: "2024-05-12",
+            $id: 7715019314381,
+            $questionsStats: [
+                {
+                    $ref: "#/definitions/QuestionStats"
+                }
+            ]
+        },
+        QuestionStats: {
+            $quizStatId: 7715019314381,
+            $questionId: 1715589671681,
+            $success: true,
+            $id: 8215992101452,
+            $attempts: [
+                {
+                    $ref: "#/definitions/Attempt"
+                }
+            ]
+        },
+        Attempt: {
+            $questionStatId: 8215992101452,
+            $chosenAnswerId: 1715591143361,
+            $timeSpent: 2.2,
+            $answerHint: false,
+            $hiddenAnswers: [1, 2],
+            $id: 3647848313510
+        },
+        SuccessStats: {
+            answerHintRate: 15.3,
+            successRate: 75,
+            graphData: [
+                {
+                    key: "2024-02-01",
+                    value: 50
+                },
+                {
+                    key: "2023-07-10",
+                    value: 100
+                }
+            ]
         }
     }
 };
