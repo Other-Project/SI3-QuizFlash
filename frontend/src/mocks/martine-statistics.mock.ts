@@ -146,14 +146,6 @@ export const MARTINE_QUIZ1TRY1: QuizStats = {
   questionsStats: [QUESTIONSTAT1, QUESTIONSTAT2, QUESTIONSTAT3]
 }
 
-export const MARTINE_QUIZ1TRY2: QuizStats = {
-  id: "3",
-  userId: "134b849f-fd4b-4b13-b377-f283b117365d",
-  quizId: "2",
-  date: new Date(2024, 2, 9),
-  questionsStats: [QUESTIONSTAT1TRY2, QUESTIONSTAT2TRY2, QUESTIONSTAT3TRY2]
-}
-
 export const MARTINE_QUIZ2: QuizStats = {
   id: "4",
   userId: "134b849f-fd4b-4b13-b377-f283b117365d",
@@ -161,3 +153,12 @@ export const MARTINE_QUIZ2: QuizStats = {
   date: new Date(2024, 1, 30),
   questionsStats: [QUESTIONSTAT4, QUESTIONSTAT5, QUESTIONSTAT6]
 }
+
+export const MARTINE_QUIZ1TRY2: QuizStats = {
+  id: "3",
+  userId: "134b849f-fd4b-4b13-b377-f283b117365d",
+  quizId: "2",
+  date: new Date(2024, 2, 9),
+  questionsStats: [QUESTIONSTAT1TRY2, QUESTIONSTAT2TRY2, QUESTIONSTAT3TRY2]
+};
+
