@@ -3,7 +3,7 @@ const { Router } = require("express");
 const { Answer, Quiz, Question } = require("../../../models");
 const { catchErrors } = require("../../../utils/errors/routes");
 const AnswersRouter = require("./answers");
-const {getQuizQuestions, getQuestionFromQuiz, createQuestion, deleteQuestion} = require("./manager");
+const {getQuizQuestions, getQuestionFromQuiz, createQuestion, deleteQuestion, replaceQuestion, updateQuestion} = require("./manager");
 
 const router = new Router({ mergeParams: true });
 
@@ -68,9 +68,7 @@ router.put("/:questionId", (req, res) => catchErrors(req, res, () => {
             description: 'Ids don't match'
         } */
 
-    const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId);
-    const updatedQuestion = Question.replace(req.params.questionId, {label: req.body.label, quizId: question.quizId});
-    res.status(200).json(updatedQuestion);
+    res.status(200).json(replaceQuestion(req.params.quizId, req.body));
 }));
 
 router.patch("/:questionId", (req, res) => catchErrors(req, res, () => {
@@ -90,9 +88,7 @@ router.patch("/:questionId", (req, res) => catchErrors(req, res, () => {
             description: 'Ids don't match'
         } */
 
-    const question = getQuestionFromQuiz(req.params.quizId, req.params.questionId);
-    const updatedQuestion = Question.update(req.params.questionId, { label: req.body.label, quizId: question.quizId });
-    res.status(200).json(updatedQuestion);
+    res.status(200).json(updateQuestion(req.params.quizId, req.body));
 }));
 
 router.delete("/:questionId", (req, res) => catchErrors(req, res, () => {
@@ -103,7 +99,6 @@ router.delete("/:questionId", (req, res) => catchErrors(req, res, () => {
             description: 'Ids don't match'
         } */
 
-    getQuestionFromQuiz(req.params.quizId, req.params.questionId);
     deleteQuestion(req.params.questionId);
     res.status(204).end();
 }));
