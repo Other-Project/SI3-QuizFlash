@@ -1,5 +1,8 @@
-<p>{{ label }}</p>
-<span class="input-number-decrement" (click)="decrement()">–</span>
-<input class="input-number" type="text" [ngModel]="value" [min]="min" [max]="max">
-<span class="input-number-increment" (click)="increment()">+</span>
+<div class="quantity-input">
+  <p>{{ label }}</p>
+  <span class="input-number-decrement" (click)="decrement()">–</span>
+  <input class="input-number" type="text" [ngModel]="value" [min]="min" [max]="max">
+  <span class="input-number-increment" (click)="increment()">+</span>
+</div>
+
 
