@@ -63,6 +63,26 @@ router.put("/:userId", (req, res) => catchErrors(req, res, () => {
             description: 'No user found with this id'
         } */
 
+    res.status(200).json(User.replace(req.params.userId, req.body));
+}));
+
+router.patch("/:userId", (req, res) => catchErrors(req, res, () => {
+    /*  #swagger.tags = ['Users']
+        #swagger.summary = 'Modify parts of an existing user'
+        #swagger.parameters['body'] = {
+            in: 'body',
+            schema: { $ref: '#/definitions/User' }
+        }
+        #swagger.responses[200] = {
+            schema: { $ref: '#/definitions/User' }
+        }
+        #swagger.responses[400] = {
+            description: 'Invalid request'
+        }
+        #swagger.responses[404] = {
+            description: 'No user found with this id'
+        } */
+
     res.status(200).json(User.update(req.params.userId, req.body));
 }));
 
