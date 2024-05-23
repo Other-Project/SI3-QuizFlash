@@ -15,8 +15,12 @@ button {
     padding: 0;
   }
 
-  &:hover:not(:disabled) {
+  &.large:hover:not(:disabled) {
     transform: scale(1.025);
+  }
+
+  &.small:hover:not(:disabled) {
+    transform: scale(1.005);
   }
 
   @each $colorId, $background in $colors {
