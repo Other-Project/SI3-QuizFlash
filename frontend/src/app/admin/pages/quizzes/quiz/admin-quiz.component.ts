@@ -2,7 +2,7 @@ import {Component, OnDestroy} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Quiz} from "../../../../../models/quiz.models";
 import {QuizService} from "../../../../../service/quiz-service.service";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LayoutModule} from "../../../../layout/layout.module";
 import {AdminQuestionsComponent} from "./questions/admin-questions.component";
 import {faAdd, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +11,8 @@ import {Question} from "../../../../../models/question.models";
 import {Answer} from "../../../../../models/answer.models";
 import {QuestionType} from "../../../../../models/question-type.models";
 import {NgIf} from "@angular/common";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {UserService} from "../../../../../service/user.service";
 
 @Component({
   selector: "app-admin-quiz",
@@ -21,31 +23,49 @@ import {NgIf} from "@angular/common";
     LayoutModule,
     AdminQuestionsComponent,
     FaIconComponent,
-    NgIf
+    NgIf,
+    NgMultiSelectDropDownModule,
+    FormsModule
   ],
   standalone: true
 })
 export class AdminQuizComponent implements OnDestroy {
-  public quiz: Quiz = {id: "", theme: "", thumbnailUrl: "", title: "", questions: []};
+  availableTags: string[] = [];
+  public quiz: Quiz = {id: "", theme: "", thumbnailUrl: "", title: "", tags: [], questions: []};
 
   quizForm: FormGroup = new FormGroup({
     title: new FormControl("", [Validators.required]),
     theme: new FormControl("", [Validators.required]),
-    thumbnailUrl: new FormControl("")
+    thumbnailUrl: new FormControl(""),
+    tags: new FormControl([])
   });
 
-  constructor(public quizService: QuizService, private route: ActivatedRoute, private router: Router) {
+  dropdownSettings = {
+    singleSelection: false,
+    idField: "item",
+    textField: "item",
+    selectAllText: "Tout sélectionner",
+    unSelectAllText: "Tout désélectionner",
+    allowSearchFilter: true,
+    searchPlaceholderText: "Rechercher des tags"
+  };
+
+  constructor(public quizService: QuizService, userService: UserService, private route: ActivatedRoute, private router: Router) {
     this.quizService.quiz$.subscribe(quiz => {
       if (quiz) this.quiz = quiz;
       this.quizForm.setValue({
         title: this.quiz?.title ?? "",
         theme: this.quiz?.theme ?? "",
-        thumbnailUrl: this.quiz?.thumbnailUrl ?? ""
+        thumbnailUrl: this.quiz?.thumbnailUrl ?? "",
+        tags: quiz?.tags ?? []
       });
     });
     this.route.params.subscribe(params => {
       let id = params["quiz_id"];
       this.quizService.selectQuiz(id);
+    });
+    userService.hobbies$.subscribe(availableTags => {
+      this.availableTags = availableTags;
     });
   }
 
