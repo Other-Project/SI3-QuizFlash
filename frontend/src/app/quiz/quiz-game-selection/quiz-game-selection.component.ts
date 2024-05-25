@@ -40,7 +40,7 @@ export class QuizGameSelectionComponent {
       if (!quiz.title.toLowerCase().includes(this.search.toLowerCase())) return false;
       switch (this.filter) {
         case "interest":
-          if (!quiz.tags.every(tag => this.user?.hobbies.includes(tag))) return false;
+          if (!quiz.tags.every(tag => this.user?.hobbies?.includes(tag))) return false;
           break;
         default:
           break;
