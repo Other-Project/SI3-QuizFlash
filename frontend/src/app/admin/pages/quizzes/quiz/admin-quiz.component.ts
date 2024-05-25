@@ -31,11 +31,10 @@ import {UserService} from "../../../../../service/user.service";
 })
 export class AdminQuizComponent implements OnDestroy {
   availableTags: string[] = [];
-  public quiz: Quiz = {id: "", theme: "", thumbnailUrl: "", title: "", tags: [], questions: []};
+  public quiz: Quiz = {id: "", thumbnailUrl: "", title: "", tags: [], questions: []};
 
   quizForm: FormGroup = new FormGroup({
     title: new FormControl("", [Validators.required]),
-    theme: new FormControl("", [Validators.required]),
     thumbnailUrl: new FormControl(""),
     tags: new FormControl([])
   });
@@ -55,7 +54,6 @@ export class AdminQuizComponent implements OnDestroy {
       if (quiz) this.quiz = quiz;
       this.quizForm.setValue({
         title: this.quiz?.title ?? "",
-        theme: this.quiz?.theme ?? "",
         thumbnailUrl: this.quiz?.thumbnailUrl ?? "",
         tags: quiz?.tags ?? []
       });
