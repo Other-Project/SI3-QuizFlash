@@ -12,19 +12,40 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ["./quiz-game-selection.component.scss"]
 })
 export class QuizGameSelectionComponent {
+  public filter: string = "interest";
+  public search: string = "";
+  public filteredQuizzes?: Quiz[];
+
   public user?: Patient;
-  public quizzes?: Quiz[];
+  private quizzes?: Quiz[];
   @Output() returnIdQuizSelected: EventEmitter<String> = new EventEmitter<String>();
 
   constructor(private userService: UserService, private quizService: QuizService, private route: ActivatedRoute, private router: Router) {
     this.userService.user$.subscribe(user => {
       this.user = user as Patient;
     });
-    quizService.quizzes$.subscribe(quizzes => this.quizzes = quizzes);
+    quizService.quizzes$.subscribe(quizzes => {
+      this.quizzes = quizzes;
+      this.updateQuizzes();
+    });
   }
 
   playQuiz(quizId: string) {
     this.quizService.selectQuiz(quizId, this.user!);
     this.router.navigate(["quiz", quizId], {relativeTo: this.route}).then();
+  }
+
+  updateQuizzes() {
+    this.filteredQuizzes = this.quizzes?.filter(quiz => {
+      if (!quiz.title.toLowerCase().includes(this.search.toLowerCase())) return false;
+      switch (this.filter) {
+        case "interest":
+          if (!quiz.tags.every(tag => this.user?.hobbies.includes(tag))) return false;
+          break;
+        default:
+          break;
+      }
+      return true;
+    });
   }
 }
