@@ -4,7 +4,7 @@ import {User} from "../models/user.models";
 import {HOBBIES} from "../mocks/hobbies.mock";
 import {Patient} from "../models/patient.models";
 import {HttpClient} from "@angular/common/http";
-import {httpOptionsBase, serverUrl} from "../configs/server.config";
+import {apiUrl, httpOptionsBase} from "../configs/server.config";
 
 const USER_KEY = "user";
 
@@ -16,7 +16,7 @@ export class UserService {
   public user$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(this.user);
   public hobbies: string[] = HOBBIES;
   public hobbies$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(this.hobbies);
-  private userUrl = serverUrl + "/users";
+  private userUrl = apiUrl + "/users";
   private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
