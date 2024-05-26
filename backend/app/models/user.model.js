@@ -6,7 +6,7 @@ module.exports = new BaseModel("User", {
     lastname: Joi.string().required(),
     firstname: Joi.string().required(),
     age: Joi.number().positive().required(),
-    pictureUrl: Joi.string().base64().required(),
+    pictureUrl: Joi.string().allow("").uri(),
 
     //Patient attributes
     /* TODO: update hobbies */
@@ -25,5 +25,6 @@ module.exports = new BaseModel("User", {
     autoStartAudio: Joi.boolean().when("accessRestriction", { is: "User", otherwise: Joi.forbidden() }),
 
     //Admin attribute
-    password: Joi.string().when("accessRestriction", { is: "Admin", otherwise: Joi.forbidden() })
+    // TODO : accessRestriction?
+    password: Joi.string().when("access", { is: "Admin", then: Joi.required(), otherwise: Joi.forbidden() })
 });

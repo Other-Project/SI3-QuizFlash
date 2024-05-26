@@ -3,6 +3,7 @@
 node_modules/
 database/*
 !database/.gitkeep
+app/openapi.json
 
 # Lock file
 /package-lock.json

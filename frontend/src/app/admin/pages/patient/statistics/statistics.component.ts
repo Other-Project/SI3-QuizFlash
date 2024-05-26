@@ -4,7 +4,7 @@ import {QuestionType} from "../../../../../models/question-type.models";
 import {StatisticsGraphComponent} from "../statistics-graph/statistics-graph.component";
 
 @Component({
-  selector: 'statistics',
+  selector: "statistics",
   templateUrl: 'statistics.component.html',
   styleUrls: ['statistics.component.scss']
 })

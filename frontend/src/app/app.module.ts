@@ -4,13 +4,14 @@ import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
 import {NgOptimizedImage} from "@angular/common";
 import {AdminModule} from "./admin/admin.module";
-import {QuizModule} from "./quiz/quiz.module";
+import {QuizGameModule} from "./quiz/quiz-game/quiz-game.module";
 import {ProfilesComponent} from "./profiles/profiles.component";
 import {LayoutModule} from "./layout/layout.module";
 import {AdminButtonComponent} from "./profiles/admin-button/admin-button.component";
 import {ProfileListComponent} from "./profiles/profile-list/profile-list.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {HttpClientModule} from "@angular/common/http";
+import {QuizGameSelectionModule} from "./quiz/quiz-game-selection/quiz-game-selection.module";
 
 @NgModule({
   declarations: [
@@ -23,10 +24,11 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     NgOptimizedImage,
     AdminModule,
-    QuizModule,
+    QuizGameModule,
     LayoutModule,
     ProfileListComponent,
     FontAwesomeModule,
+    QuizGameSelectionModule,
     HttpClientModule
   ],
   providers: [],
