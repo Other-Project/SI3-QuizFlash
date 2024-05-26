@@ -5,6 +5,7 @@ import {HOBBIES} from "../mocks/hobbies.mock";
 import {Patient} from "../models/patient.models";
 import {HttpClient} from "@angular/common/http";
 import {apiUrl, httpOptionsBase} from "../configs/server.config";
+import {AccessRestriction} from "../models/access-restriction.models";
 
 const USER_KEY = "user";
 
@@ -40,6 +41,8 @@ export class UserService {
     this.users.push(patient);
     this.users$.next(this.users);
     return patient.id; */
+    patient.access = AccessRestriction.User;
+    console.log(patient.access);
     this.http.post<User>(this.userUrl, patient, this.httpOptions).subscribe(() => this.retrieveUsers());
   }
 

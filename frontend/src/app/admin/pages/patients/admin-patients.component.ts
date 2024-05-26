@@ -25,6 +25,7 @@ export class AdminPatientsComponent {
   public users?: User[];
 
   constructor(userService: UserService, private router: Router, private route: ActivatedRoute) {
+    //TODO : update filter
     userService.users$.subscribe(users => this.users = this.allUsers = users.filter(user => user.access <= AccessRestriction.User));
   }
 
