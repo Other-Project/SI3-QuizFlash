@@ -4,14 +4,13 @@ import {OptionsComponent} from "../options/options.component";
 import {FontSizeComponent} from "../font-size/font-size.component";
 import {NgStyle} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {QuantityInputComponent} from "../quantity-input/quantity-input.component";
+import {LayoutModule} from "../../../../layout/layout.module";
 
 @NgModule({
   declarations: [
     RangeComponent,
     OptionsComponent,
-    FontSizeComponent,
-    QuantityInputComponent
+    FontSizeComponent
   ],
   exports: [
     RangeComponent,
@@ -21,7 +20,8 @@ import {QuantityInputComponent} from "../quantity-input/quantity-input.component
   imports: [
     NgStyle,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    LayoutModule
   ]
 })
 
