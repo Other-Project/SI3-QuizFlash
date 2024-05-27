@@ -1,4 +1,7 @@
+@import "/colors";
+
 .range-input{
+  accent-color: $blue;
   width: 100%;
   + datalist{
     display: flex;
