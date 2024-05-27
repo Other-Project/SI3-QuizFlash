@@ -11,12 +11,9 @@ module.exports = new BaseModel("User", {
     pictureUrl: Joi.string().allow("").uri(),
 
     //Patient attributes
-    /* TODO: update hobbies */
     hobbies: Joi.array().items(Joi.string()).when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
-    dementiaLevel: Joi.number().valid(Object.values(DementiaLevel)).when("access", {
-        is: AccessRestriction.user,
-        otherwise: Joi.forbidden()
-    }),
+    dementiaLevel: Joi.number().valid(Object.values(DementiaLevel))
+        .when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     fontSize: Joi.number().min(1).max(2).when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     removeAnswers: Joi.boolean().when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     automatedSkip: Joi.boolean().when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),

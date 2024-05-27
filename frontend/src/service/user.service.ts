@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {BehaviorSubject, firstValueFrom} from "rxjs";
 import {User} from "../models/user.models";
 import {HOBBIES} from "../mocks/hobbies.mock";
-import {Patient} from "../models/patient.models";
 import {HttpClient} from "@angular/common/http";
 import {apiUrl, httpOptionsBase} from "../configs/server.config";
 
@@ -28,14 +27,12 @@ export class UserService {
     this.users$.next(this.users);
   }
 
-  addUser(patient: Patient, callback: ((user: User) => void)) {
-    this.http.post<User>(this.userUrl, patient, this.httpOptions).subscribe(user => {
-      this.retrieveUsers().then(() => callback(user));
-    });
+  addUser(user: User, callback: ((user: User) => void)) {
+    this.http.post<User>(this.userUrl, user, this.httpOptions).subscribe(user => this.retrieveUsers().then(() => callback(user)));
   }
 
-  deleteUser(user: User): void {
-    const urlWithId = this.userUrl + "/" + user.id;
+  deleteUser(userId: string): void {
+    const urlWithId = this.userUrl + "/" + userId;
     this.http.delete<User>(urlWithId, this.httpOptions).subscribe(() => this.retrieveUsers().then());
   }
 
