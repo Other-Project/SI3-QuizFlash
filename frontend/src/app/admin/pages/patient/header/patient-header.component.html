@@ -10,7 +10,7 @@
       <fa-icon [icon]="faXmark" size="2x" id="xmark-icon"/>
     </app-button>
   } @else {
-    <app-image class="patient-picture" [src]="patient.pictureUrl" [alt]="'Profile picture'" [width]="150" [height]="150"/>
+    <app-image class="patient-picture" [src]="patient.pictureUrl ?? '/assets/profile.png'" [alt]="'Profile picture'" [width]="150" [height]="150"/>
     <div class="patient-info">
       <h2 *ngIf="patient">{{ patient.lastname }}</h2>
       <h2 *ngIf="patient">{{ patient.firstname }}</h2>
