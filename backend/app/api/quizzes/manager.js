@@ -1,6 +1,7 @@
-const {Quiz, Question, Answer} = require("../../models");
+const { Quiz, Question, Answer, QuizStats, QuestionStats } = require("../../models");
 const {getQuizQuestions, createQuestion, updateQuestion, replaceQuestion, getQuestionFromQuiz, deleteQuestion} = require("./questions/manager");
 const {getQuestionAnswers} = require("./questions/answers/manager");
+const { buildStat } = require("../statistics/manager");
 
 /**
  * This function aggregates the questions and answers from the database to build a quiz with all the data needed by the clients
@@ -62,10 +63,18 @@ function deleteQuiz(quizId) {
     Quiz.delete(quizId);
 }
 
+function createStatQuiz(quizId, userId, date) {
+    return QuizStats.create({ quizStatId: quizId, userId: userId, date: date }).id;
+}
+
+function createStatQuestion(quizStatId, questionId) {
+    return QuestionStats.create({ quizStatId: quizStatId, questionId: questionId, success: false }).id;
+}
 module.exports = {
     buildQuiz,
     createQuiz,
     replaceQuiz,
     updateQuiz,
-    deleteQuiz
+    deleteQuiz,
+    createStatQuiz
 };

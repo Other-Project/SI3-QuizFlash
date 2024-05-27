@@ -37,9 +37,12 @@ export class QuizGameComponent {
       this.quiz = quiz;
       this.questions = quiz?.questions ?? [];
       this.counter = 1;
-      this.statisticId = quiz ? this.quizService.startQuiz(quiz.id) : undefined;
       if (this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true; // If the user has sound questions disabled, the list returned by the service shouldn't contain any
       this.nextQuestion();
+    });
+    this.quizService.quizStatId$.subscribe(id => {
+      this.statisticId = id;
+      console.log(id);
     });
   }
 

@@ -21,6 +21,8 @@ export class QuizService {
   public quiz?: Quiz;
   public quiz$: BehaviorSubject<Quiz | undefined> = new BehaviorSubject<Quiz | undefined>(this.quiz);
   private user?: User;
+  private quizStatsId?: string;
+  public quizStatId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.quizStatsId);
   private quizStats?: QuizStats;
 
   constructor(userService: UserService, private statisticsService: StatisticsService, private http: HttpClient) {
@@ -43,7 +45,26 @@ export class QuizService {
 
         this.quiz$.next(this.quiz = quiz);
       });
-    else this.quiz$.next(this.quiz = undefined);
+    else {
+      this.quiz$.next(this.quiz = undefined);
+    }
+  }
+
+  startQuiz(id?: string, user?: Patient, callback?: (({}) => void)) {
+    if (id)
+      this.http.get<{ quiz: Quiz, quizStatId: string }>(`${this.quizApiUrl}/${id}/${this.user?.id}/startQuiz`).subscribe(values => {
+        // TODO: Migrate this server side
+        if (user && !user.soundQuestion) values.quiz.questions = values.quiz.questions.filter(question => question.type != QuestionType.Sound);
+        values.quiz.questions = values.quiz.questions.sort(() => 0.5 - Math.random()).slice(0, user?.numberOfQuestion);
+
+        this.quiz$.next(this.quiz = values.quiz);
+        this.quizStatId$.next(this.quizStatsId = values.quizStatId);
+        callback!(values);
+      });
+    else {
+      this.quiz$.next(this.quiz = undefined);
+      this.quizStatId$.next(this.quizStatsId = undefined);
+    }
   }
 
   replaceQuiz(quizId: string, updatedQuiz: Quiz) {
@@ -70,7 +91,7 @@ export class QuizService {
    * IN SERVER *
    *************/
 
-  startQuiz(quizId: string) {
+  startQuiz2(quizId: string) {
     this.quizStats = {id: this.idCreation(), userId: this.user?.id, quizId: quizId, date: new Date(), questionsStats: []} as QuizStats;
     return this.quizStats.id;
   }
@@ -98,3 +119,5 @@ export class QuizService {
     this.statisticsService.quizStatistics.push(this.quizStats!);
   }
 }
+
+

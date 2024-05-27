@@ -3,7 +3,7 @@ const { Router } = require("express");
 const {Quiz} = require("../../models");
 const { catchErrors } = require("../../utils/errors/routes");
 const QuestionsRouter = require("./questions");
-const {buildQuiz, updateQuiz, replaceQuiz, createQuiz, deleteQuiz} = require("./manager");
+const { buildQuiz, updateQuiz, replaceQuiz, createQuiz, deleteQuiz, createStatQuiz } = require("./manager");
 
 const router = new Router();
 
@@ -30,6 +30,20 @@ router.get("/:quizId", (req, res) => catchErrors(req, res, () => {
         } */
 
     res.status(200).json(buildQuiz(req.params.quizId));
+}));
+
+//TODO remove userID
+router.get("/:quizId/:userId/startQuiz", (req, res) => catchErrors(req, res, () => {
+    /*  #swagger.tags = ['Quizzes']
+        #swagger.summary = 'Create the Statistics'
+        #swagger.responses[200] = {
+            schema: [quiz : { $ref: '#/definitions/Quiz'} , quizStatId : { $ref: '#/definitions/QuizStats'}]
+        }
+        #swagger.responses[404] = {
+            description: 'No quiz found with this id'
+        } */
+
+    res.status(200).json({ quiz: buildQuiz(req.params.quizId), quizStatId: createStatQuiz(req.params.quizId, parseInt(req.params.userId), Date.now()) });
 }));
 
 router.post("/", (req, res) => catchErrors(req, res, () => {
