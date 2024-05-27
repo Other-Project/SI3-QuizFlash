@@ -9,6 +9,7 @@ function catchErrors(req, res, fct) {
         fct();
     } catch (err) {
         manageAllErrors(res, err);
+        console.error(err);
     }
 }
 

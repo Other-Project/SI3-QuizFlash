@@ -4,8 +4,6 @@ import {Quiz} from "../models/quiz.models";
 import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {UserService} from "./user.service";
-import {QuestionType} from "../models/question-type.models";
-import {Patient} from "../models/patient.models";
 import {StatisticsService} from "./statistics.service";
 import {QuizStats} from "../models/quiz-stats.model";
 import {QuestionStats} from "../models/question-stats.model";
@@ -24,6 +22,8 @@ export class QuizService {
   private quizStatsId?: string;
   public quizStatId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.quizStatsId);
   private quizStats?: QuizStats;
+  private questionStatsId?: string;
+  public questionStatsId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.questionStatsId);
 
   constructor(userService: UserService, private statisticsService: StatisticsService, private http: HttpClient) {
     userService.user$.subscribe(user => this.user = user);
@@ -31,32 +31,26 @@ export class QuizService {
   }
 
   updateQuizList() {
+    //Todo différent en fonction user, ajout ou non des réponses
     this.http.get<Quiz[]>(this.quizApiUrl).subscribe(quizzes => {
       this.quizzes$.next(this.quizzes = quizzes);
     });
   }
 
-  selectQuiz(id?: string, user?: Patient) {
+  selectQuiz(id?: string) {
     if (id)
       this.http.get<Quiz>(`${this.quizApiUrl}/${id}`).subscribe(quiz => {
-        // TODO: Migrate this server side
-        if (user && !user.soundQuestion) quiz.questions = quiz.questions.filter(question => question.type != QuestionType.Sound);
-        quiz.questions = quiz.questions.sort(() => 0.5 - Math.random()).slice(0, user?.numberOfQuestion);
-
         this.quiz$.next(this.quiz = quiz);
       });
     else {
       this.quiz$.next(this.quiz = undefined);
     }
+    console.log(this.quiz);
   }
 
-  startQuiz(id?: string, user?: Patient, callback?: (({}) => void)) {
+  startQuiz(id?: string, callback?: (({}) => void)) {
     if (id)
       this.http.get<{ quiz: Quiz, quizStatId: string }>(`${this.quizApiUrl}/${id}/${this.user?.id}/startQuiz`).subscribe(values => {
-        // TODO: Migrate this server side
-        if (user && !user.soundQuestion) values.quiz.questions = values.quiz.questions.filter(question => question.type != QuestionType.Sound);
-        values.quiz.questions = values.quiz.questions.sort(() => 0.5 - Math.random()).slice(0, user?.numberOfQuestion);
-
         this.quiz$.next(this.quiz = values.quiz);
         this.quizStatId$.next(this.quizStatsId = values.quizStatId);
         callback!(values);
@@ -64,6 +58,15 @@ export class QuizService {
     else {
       this.quiz$.next(this.quiz = undefined);
       this.quizStatId$.next(this.quizStatsId = undefined);
+    }
+  }
+
+  nextQuestion(questionId?: string, callback?: ((id: string) => void)) {
+    if (questionId) {
+      this.http.get<string>(`${this.quizApiUrl}/${this.quizStatsId}/${questionId}/nextQuestion`).subscribe(id => {
+        this.questionStatsId$.next(this.questionStatsId = id);
+        callback!(id);
+      });
     }
   }
 

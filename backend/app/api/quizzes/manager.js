@@ -1,4 +1,4 @@
-const { Quiz, Question, Answer, QuizStats, QuestionStats } = require("../../models");
+const { Quiz, Question, Answer, QuizStats, QuestionStats, User } = require("../../models");
 const {getQuizQuestions, createQuestion, updateQuestion, replaceQuestion, getQuestionFromQuiz, deleteQuestion} = require("./questions/manager");
 const {getQuestionAnswers} = require("./questions/answers/manager");
 const { buildStat } = require("../statistics/manager");
@@ -11,15 +11,16 @@ const { buildStat } = require("../statistics/manager");
 function buildQuiz(quizId, userId) {
     const quiz = Quiz.getById(quizId);
     const questions = getQuizQuestions(quiz.id);
-    const questionWithAnswers = questions.map((question) => {
+    let questionWithAnswers = questions.map((question) => {
         let answers = getQuestionAnswers(question.id);
-        if (userId !== undefined) {
+        if (userId) {
             answers.map(answer => delete answer.trueAnswer);
         }
         return {...question, answers};
     });
-    if (userId !== undefined) {
-
+    if (userId) {
+        if (!User.getById(userId).soundQuestion) quiz.questions = quiz.questions.filter(question => question.type !== "Sound");
+        questionWithAnswers = questionWithAnswers.sort(() => 0.5 - Math.random()).slice(0, User.getById(userId).numberOfQuestion);
     }
     return {...quiz, questions: questionWithAnswers};
 }
@@ -71,8 +72,9 @@ function deleteQuiz(quizId) {
 }
 
 function createStatQuiz(quizId, userId, date) {
-    return QuizStats.create({ quizStatId: quizId, userId: userId, date: date }).id;
+    return QuizStats.create({ quizId: quizId, userId: userId, date: date }).id;
 }
+
 
 function createStatQuestion(quizStatId, questionId) {
     return QuestionStats.create({ quizStatId: quizStatId, questionId: questionId, success: false }).id;
@@ -83,5 +85,6 @@ module.exports = {
     replaceQuiz,
     updateQuiz,
     deleteQuiz,
-    createStatQuiz
+    createStatQuiz,
+    createStatQuestion
 };

@@ -4,7 +4,6 @@ import {Patient} from "../../../models/patient.models";
 import {Quiz} from "../../../models/quiz.models";
 import {Question} from "../../../models/question.models";
 import {Answer} from "../../../models/answer.models";
-import {QuestionType} from "../../../models/question-type.models";
 import {QuizService} from "../../../service/quiz-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Attempt} from "../../../models/attempt.model";
@@ -30,6 +29,7 @@ export class QuizGameComponent {
   protected check: boolean = false;
   protected inactivity: boolean = false;
   protected hidenAnswers: Answer[] = [];
+  protected questionStatsId?: string;
 
   constructor(private userService: UserService, private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.userService.user$.subscribe(user => this.user = user as Patient);
@@ -37,20 +37,28 @@ export class QuizGameComponent {
       this.quiz = quiz;
       this.questions = quiz?.questions ?? [];
       this.counter = 1;
-      if (this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true; // If the user has sound questions disabled, the list returned by the service shouldn't contain any
       this.nextQuestion();
     });
     this.quizService.quizStatId$.subscribe(id => {
       this.statisticId = id;
-      console.log(id);
+    });
+    this.quizService.questionStatsId$.subscribe(id => {
+      this.questionStatsId = id;
     });
   }
 
   update() {
     this.hidenAnswers = [];
     this.currentQuestion = this.questions.at(this.counter - 1);
-    if (this.currentQuestion) this.quizService.questionStatCreation(this.currentQuestion.id);
+    //if (this.currentQuestion) this.quizService.questionStatCreation(this.currentQuestion.id);
     this.questionResult = false;
+    if (this.currentQuestion) this.quizService.nextQuestion(this.currentQuestion?.id, () => {
+      this.startQuestion();
+    });
+  }
+
+  startQuestion() {
+    console.log(this.questionStatsId);
     this.start = new Date();
   }
 

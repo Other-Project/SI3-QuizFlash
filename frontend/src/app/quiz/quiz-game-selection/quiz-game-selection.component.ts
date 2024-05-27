@@ -31,7 +31,7 @@ export class QuizGameSelectionComponent {
   }
 
   playQuiz(quizId: string) {
-    this.quizService.startQuiz(quizId, this.user!, values => this.router.navigate(["quiz", quizId], {relativeTo: this.route}).then());
+    this.quizService.startQuiz(quizId, values => this.router.navigate(["quiz", quizId], {relativeTo: this.route}).then());
   }
 
   updateQuizzes() {
