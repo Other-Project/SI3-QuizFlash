@@ -27,5 +27,5 @@ module.exports = new BaseModel("User", {
     autoStartAudio: Joi.boolean().when("access", { is: AccessRestriction.User, otherwise: Joi.forbidden() }),
 
     //Admin attribute
-    password: Joi.string().when("access", { is: "Admin", then: Joi.required(), otherwise: Joi.forbidden() })
+    password: Joi.string().when("access", { is: AccessRestriction.Admin, then: Joi.required(), otherwise: Joi.forbidden() })
 });
