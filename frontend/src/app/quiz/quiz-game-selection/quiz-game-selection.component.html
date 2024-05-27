@@ -1,4 +1,11 @@
 <app-header [homePage]="'/quiz'" [interactive]="true"/>
 <main>
-  <app-quiz-selection [quizzes]="quizzes" (returnIdQuizSelected)="playQuiz($event)"></app-quiz-selection>
+  <section>
+    <select [(ngModel)]="filter" (change)="updateQuizzes()">
+      <option value="all">Tous</option>
+      <option value="interest">Mes centres d'intérêt</option>
+    </select>
+    <app-input id="search-bar" (valueChange)="search = $event; updateQuizzes()" [placeholder]="'Chercher un quiz'"/>
+  </section>
+  <app-quiz-selection [quizzes]="filteredQuizzes" (returnIdQuizSelected)="playQuiz($event)"></app-quiz-selection>
 </main>

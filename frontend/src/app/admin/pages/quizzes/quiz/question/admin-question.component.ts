@@ -7,6 +7,7 @@ import {faQuestion, faReply, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {DecimalPipe, KeyValuePipe, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 import {QuestionType} from "../../../../../../models/question-type.models";
 import {PlayButtonComponent} from "../../../../../layout/play-button/play-button.component";
+import {Answer} from "../../../../../../models/answer.models";
 
 @Component({
   selector: "app-admin-question",
@@ -31,7 +32,6 @@ import {PlayButtonComponent} from "../../../../../layout/play-button/play-button
 export class AdminQuestionComponent {
   @Input() public question!: Question;
   @Output() public questionRemoved = new EventEmitter<any>();
-
   private static instance = 0;
   instance = AdminQuestionComponent.instance++;
 
@@ -40,6 +40,14 @@ export class AdminQuestionComponent {
 
   changeTrueAnswer(index: number) {
     this.question.answers.forEach((answer, i) => answer.trueAnswer = i == index);
+  }
+
+  addAnswer() {
+    this.question.answers.push({} as Answer);
+  }
+
+  removeAnswer(index: number) {
+    this.question.answers.splice(index, 1);
   }
 
   protected readonly faQuestion = faQuestion;

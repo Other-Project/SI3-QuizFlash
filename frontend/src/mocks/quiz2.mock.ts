@@ -96,7 +96,7 @@ const QUESTION3: Question = {
 export const QUIZ2: Quiz = {
   id: "2",
   title: "Les pièces de la maison 2",
-  theme: "La maison",
+  tags: [],
   thumbnailUrl: "assets/Chambre.jpg",
   questions: [QUESTION1, QUESTION2, QUESTION3]
 }

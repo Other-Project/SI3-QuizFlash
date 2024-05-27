@@ -4,6 +4,7 @@ import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/q
 import {LayoutModule} from "../../layout/layout.module";
 import {NgForOf} from "@angular/common";
 import {QuizGameSelectionComponent} from "./quiz-game-selection.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import {QuizGameSelectionComponent} from "./quiz-game-selection.component";
   ],
     imports: [
       LayoutModule,
-      NgForOf
+      NgForOf,
+      FormsModule
     ]
   }
 )
