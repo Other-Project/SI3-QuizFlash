@@ -16,7 +16,7 @@
     <input formControlName="answerHint" id="answer-hint" type="checkbox" class="switch">
     <label for="answer-hint">Aide à la réponse (50/50)</label>
   </div>
-  <quantity-input [value]="patient?.numberOfQuestion ?? 0" [min]="5" [max]="99" [label]="'Nombre de questions par quiz'"
+  <quantity-input [value]="patient?.numberOfQuestion ?? 5" [min]="1" [max]="99" [label]="'Nombre de questions par quiz'"
                   (valueChange)="this.onUserOptionsChange.emit($any({numberOfQuestion: $event}))"/>
 
   <h2>Auditif</h2>
