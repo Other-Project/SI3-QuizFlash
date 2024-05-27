@@ -4,7 +4,13 @@
 
   <div>
     <input type="text" placeholder="Titre" formControlName="title" id="title"/>
-    <input type="text" placeholder="Thème" formControlName="theme" id="theme"/>
+    <ng-multiselect-dropdown
+      [placeholder]="'Sélectionnez des tags'"
+      [settings]="dropdownSettings"
+      [data]="availableTags"
+      formControlName="tags"
+    />
+
     <div class="actions">
       <app-button (click)="save()">
         <fa-icon [icon]="faSave"/>
