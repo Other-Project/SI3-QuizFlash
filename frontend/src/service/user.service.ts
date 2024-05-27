@@ -32,13 +32,11 @@ export class UserService {
   }
 
   deleteUser(userId: string): void {
-    const urlWithId = this.userUrl + "/" + userId;
-    this.http.delete<User>(urlWithId, this.httpOptions).subscribe(() => this.retrieveUsers().then());
+    this.http.delete<User>(`${this.userUrl}/${userId}`, this.httpOptions).subscribe(() => this.retrieveUsers().then());
   }
 
   updateUser(userId: string, updatedUser: User) {
-    const urlWithId = this.userUrl + "/" + userId;
-    this.http.patch<User>(urlWithId, updatedUser, this.httpOptions).subscribe(() => this.retrieveUsers().then());
+    this.http.patch<User>(`${this.userUrl}/${userId}`, updatedUser, this.httpOptions).subscribe(() => this.retrieveUsers().then());
   }
 
   public setLoggedUser(user?: User): void {
