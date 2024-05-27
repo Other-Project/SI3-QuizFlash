@@ -30,7 +30,7 @@ export class QuantityInputComponent {
 
   onChange(newVal: number): void {
     if (newVal > this.min && newVal < this.max)
-      this.valueChange.emit(this.value);
+      this.valueChange.emit(newVal);
   }
 
   checkValue(): void {
