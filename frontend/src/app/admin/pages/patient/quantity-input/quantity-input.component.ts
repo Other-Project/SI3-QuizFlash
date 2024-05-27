@@ -42,6 +42,6 @@ export class QuantityInputComponent {
       val = val.substring(0, val.toString().length - 1);
     if (isNegative)
       val = "-" + val;
-    this.valueInput.nativeElement.value = val;
+    this.value = val;
   }
 }
