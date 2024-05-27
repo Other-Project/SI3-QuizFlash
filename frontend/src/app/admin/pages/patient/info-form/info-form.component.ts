@@ -20,7 +20,7 @@ export class InfoFormComponent {
       firstname: this.currentPatient?.firstname ?? "",
       lastname: this.currentPatient?.lastname ?? "",
       age: this.currentPatient?.age ?? 1,
-      pictureUrl: this.currentPatient?.pictureUrl ?? "/assets/profile.png",
+      pictureUrl: this.currentPatient?.pictureUrl,
       hobbies: this.currentPatient?.hobbies ?? [],
       dementiaLevel: this.currentPatient?.dementiaLevel ?? Dementia.Mild,
       fontSize: this.currentPatient?.fontSize ?? 1,

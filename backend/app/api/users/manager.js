@@ -1,13 +1,13 @@
+const AccessRestriction = require("../../models/access-restriction.model");
+const { User } = require("../../models");
+
 /**
  * Create user entry
  *
  */
 function createUser(user) {
-    /* const {questions, ...pureQuiz} = quiz;
-    let result = Quiz.create(pureQuiz);
-    result.questions = questions.map(question => createQuestion(result.id, question));
-    return result;
-    */
+    user.access = AccessRestriction.user;
+    return User.create(user);
 }
 
 function replaceUser(userId, user) {
@@ -34,4 +34,6 @@ function deleteUser(userId) {
      */
 }
 
-module.exports = {};
+module.exports = {
+    createUser
+};
