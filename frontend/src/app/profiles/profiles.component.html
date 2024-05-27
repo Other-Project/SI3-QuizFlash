@@ -2,6 +2,10 @@
 <main>
   <app-admin-button class="admin-button" (connectAsAdmin)="loginAs(USER_ANNE)"></app-admin-button>
   <h1>Bienvenue dans Quiz Flash !</h1>
-  <h2>Sélectionnez un profil :</h2>
+  @if (users!.length <= 0) {
+    <h2>Pour créer un utilisateur, connectez-vous en tant qu'administrateur</h2>
+  } @else {
+    <h2>Sélectionnez un profil :</h2>
+  }
   <app-profile-list [users]="users" (userSelected)="loginAs($event)"/>
 </main>
