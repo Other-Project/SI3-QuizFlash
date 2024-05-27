@@ -2,6 +2,6 @@
   <div class="quiz-card-content">
     <app-image [src]="quiz.thumbnailUrl" [alt]="quiz.title" [width]="200" [height]="150"/>
     <p class="quiz-card-title">{{ quiz.title }}</p>
-    <p class="quiz-card-theme">{{ quiz.theme }}</p>
+    <p class="quiz-card-theme">{{ quiz.tags.join(", ") }}</p>
   </div>
 </app-button>

@@ -51,6 +51,29 @@ module.exports = class BaseModel {
         return item;
     }
 
+    /**
+     * Completely replace the values of an entry
+     * @param {string|number} id Entry id
+     * @param obj New entry object
+     * @returns The updated entry
+     */
+    replace(id, obj) {
+        if (typeof id === "string") id = parseInt(id, 10);
+        const prevObjIndex = this.items.findIndex((item) => item.id === id);
+        if (prevObjIndex === -1) throw new NotFoundError(`Cannot replace ${this.name} id=${id} : not found`);
+        const {error} = Joi.validate(obj, this.schema);
+        if (error) throw new ValidationError(`Replace Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
+        this.items[prevObjIndex] = obj;
+        this.save();
+        return obj;
+    }
+
+    /**
+     * Update some of the values of an entry
+     * @param {string|number} id Entry id
+     * @param obj The fields to update
+     * @returns The updated entry
+     */
     update(id, obj) {
         if (typeof id === "string") id = parseInt(id, 10);
         const prevObjIndex = this.items.findIndex((item) => item.id === id);

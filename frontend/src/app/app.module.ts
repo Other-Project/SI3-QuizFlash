@@ -11,6 +11,7 @@ import {AdminButtonComponent} from "./profiles/admin-button/admin-button.compone
 import {ProfileListComponent} from "./profiles/profile-list/profile-list.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {QuizGameSelectionModule} from "./quiz/quiz-game-selection/quiz-game-selection.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {QuizGameSelectionModule} from "./quiz/quiz-game-selection/quiz-game-sele
     LayoutModule,
     ProfileListComponent,
     FontAwesomeModule,
-    QuizGameSelectionModule
+    QuizGameSelectionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

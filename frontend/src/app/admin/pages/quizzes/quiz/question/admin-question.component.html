@@ -2,7 +2,7 @@
   <select [(ngModel)]="question.type">
     <option *ngFor="let type of QuestionTypes | keyvalue" [value]="type.key">{{ type.value }}</option>
   </select>
-  <div [ngSwitch]="Number(question.type)">
+  <div [ngSwitch]="question.type">
     <app-image-input *ngSwitchCase="QuestionType.Image" [src]="question.imageUrl" (onImageUpdate)="question.imageUrl = $event"/>
     <div *ngSwitchCase="QuestionType.Sound">
       <app-file-input (valueChange)="question.soundUrl = $event" [accept]="'audio/*'">
@@ -16,7 +16,9 @@
 <div class="answers">
   <app-input *ngFor="let answer of question.answers; index as i" [icon]="faReply" [placeholder]="'Entrez la proposition ' + (i+1)" [(value)]="answer.answerText">
     <input type="radio" name="trueAnswer-{{instance}}" [checked]="answer.trueAnswer" [value]="i" (change)="changeTrueAnswer($any($event.target).value)"/>
+    <fa-icon class="remove" [icon]="faTrash" (click)="removeAnswer(i)" *ngIf="question.answers.length > 2"/>
   </app-input>
+  <app-button [color]="'yellow'" [scale]="false" (click)="addAnswer()" *ngIf="question.answers.length < 4">Ajouter une proposition</app-button>
 </div>
 <app-button class="delete" [color]="'red'" (click)="questionRemoved.emit()">
   <fa-icon [icon]="faTrash"/>

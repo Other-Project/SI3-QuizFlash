@@ -33,10 +33,13 @@
 .answers {
   grid-column: 2;
   grid-row: 2;
-
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: .25em;
+
+  fa-icon:hover {
+    transform: scale(1.05);
+  }
 }
 
 .delete {

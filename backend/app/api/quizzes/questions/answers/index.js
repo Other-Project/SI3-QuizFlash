@@ -70,7 +70,29 @@ router.put("/:answerId", (req, res) => catchErrors(req, res, () => {
         } */
 
     const answer = getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId);
-    const updatedAnswer = Answer.update(req.params.answerId, { ...req.body, questionId: answer.questionId });
+    const updatedAnswer = Answer.replace(req.params.answerId, {...req.body, questionId: answer.questionId});
+    res.status(200).json(updatedAnswer);
+}));
+
+router.patch("/:answerId", (req, res) => catchErrors(req, res, () => {
+    /*  #swagger.tags = ['Answers']
+        #swagger.summary = 'Modify parts of an existing answer'
+        #swagger.parameters['body'] = {
+            in: 'body',
+            schema: { $ref: '#/definitions/Answer' }
+        }
+        #swagger.responses[200] = {
+            schema: { $ref: '#/definitions/Answer' }
+        }
+        #swagger.responses[400] = {
+            description: 'Invalid request'
+        }
+        #swagger.responses[404] = {
+            description: 'Ids don't match'
+        } */
+
+    const answer = getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId);
+    const updatedAnswer = Answer.update(req.params.answerId, {...req.body, questionId: answer.questionId});
     res.status(200).json(updatedAnswer);
 }));
 
