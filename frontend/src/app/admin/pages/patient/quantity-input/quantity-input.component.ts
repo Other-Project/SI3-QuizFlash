@@ -29,7 +29,6 @@ export class QuantityInputComponent {
   }
 
   onChange(newVal: number): void {
-    console.log(newVal);
     if (newVal > this.min && newVal < this.max)
       this.valueChange.emit(this.value);
   }
