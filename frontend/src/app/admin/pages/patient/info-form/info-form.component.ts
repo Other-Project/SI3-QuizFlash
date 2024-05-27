@@ -65,7 +65,6 @@ export class InfoFormComponent {
     this.userService.addUser(this.patientForm.value, user => {
       console.log(this.userService.users);
       this.router.navigate([user.id], {relativeTo: this.route}).then();
-
     });
   }
 }
