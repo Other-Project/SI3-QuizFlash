@@ -35,10 +35,8 @@ export class QuantityInputComponent {
 
   checkValue(): void {
     let val = this.valueInput.nativeElement.value;
-    let isNegative = this.min < 0 ? val.charAt(0) === "-" : false;
-    val = val.replace(/^0+|\D/g, "");
-    let refValue = (isNegative) ? Math.abs(this.min) : this.max;
-    if (parseInt(val) > refValue)
+    val = (this.min < 0) ? val.replace(/^(-)*\D*0*|^0|\D+/g, "$1") : val.replace(/^0+|\D/g, "");
+    if (parseInt(val) < this.min || parseInt(val) > this.max)
       val = val.substring(0, val.toString().length - 1);
     this.valueInput.nativeElement.value = val;
     this.value = val;
