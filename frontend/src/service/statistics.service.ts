@@ -4,15 +4,18 @@ import {STATISTICS} from "../mocks/statistics.mock";
 import {QuestionStats} from "../models/question-stats.model";
 import {QuestionType} from "../models/question-type.models";
 import {BehaviorSubject} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {apiUrl} from "../configs/server.config";
 
 @Injectable({providedIn: "root"})
 export class StatisticsService {
+  private readonly quizApiUrl = apiUrl + "/statistics";
   quizStatistics: QuizStats[] = STATISTICS;
 
   userQuizStats: QuizStats[] = [];
   userQuizStats$: BehaviorSubject<QuizStats[] | []> = new BehaviorSubject<QuizStats[] | []>(this.userQuizStats);
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
   /*****************
@@ -56,8 +59,12 @@ export class StatisticsService {
    **************/
 
   getUserHistory(userId: string) {
-    this.userQuizStats = this.quizStatistics.filter(statistic => statistic.userId == userId);
-    this.userQuizStats$.next(this.userQuizStats);
+    this.http.get<QuizStats[]>(this.quizApiUrl + "/history/" + userId).subscribe(quizzes => {
+      this.userQuizStats = quizzes;
+      this.userQuizStats$.next(this.userQuizStats);
+    });
+    //this.userQuizStats = this.quizStatistics.filter(statistic => statistic.userId == userId);
+    //this.userQuizStats$.next(this.userQuizStats);
   }
 
   /*********

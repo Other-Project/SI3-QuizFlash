@@ -1,7 +1,7 @@
-const { Quiz, Question, Answer, QuizStats, QuestionStats, User } = require("../../models");
-const {getQuizQuestions, createQuestion, updateQuestion, replaceQuestion, getQuestionFromQuiz, deleteQuestion} = require("./questions/manager");
+const { Quiz, Question, Answer, QuizStats, QuestionStats, User, Attempts } = require("../../models");
+const { getQuizQuestions, createQuestion, updateQuestion, replaceQuestion, deleteQuestion } = require("./questions/manager");
 const {getQuestionAnswers} = require("./questions/answers/manager");
-const { buildStat } = require("../statistics/manager");
+const NotFoundError = require("../../utils/errors/not-found-error");
 
 /**
  * This function aggregates the questions and answers from the database to build a quiz with all the data needed by the clients
@@ -12,7 +12,7 @@ function buildQuiz(quizId, userId) {
     const quiz = Quiz.getById(quizId);
     const questions = getQuizQuestions(quiz.id);
     let questionWithAnswers = questions.map((question) => {
-        let answers = getQuestionAnswers(question.id);
+        let answers = JSON.parse(JSON.stringify(getQuestionAnswers(question.id)));
         if (userId) {
             answers.map(answer => delete answer.trueAnswer);
         }
@@ -75,10 +75,26 @@ function createStatQuiz(quizId, userId, date) {
     return QuizStats.create({ quizId: quizId, userId: userId, date: date }).id;
 }
 
-
 function createStatQuestion(quizStatId, questionId) {
-    return QuestionStats.create({ quizStatId: quizStatId, questionId: questionId, success: false }).id;
+    return QuestionStats.create({ quizStatId: parseInt(quizStatId), questionId: parseInt(questionId), success: false }).id;
 }
+
+function checkAnswer(questionStatId, questionAttempt) {
+    let attempt = Attempts.create({ questionStatId: parseInt(questionStatId), ...questionAttempt }).id;
+    let result = Answer.get().find(answer => (answer.questionId === parseInt(QuestionStats.getById(questionStatId).questionId)) && answer.trueAnswer);
+    if (!result) throw new NotFoundError(`No true answer find in the question ${Question.getById(QuestionStats.getById(Attempts.getById(attempt).questionStatId).questionId).text}`);
+    if (result.id === Attempts.getById(attempt).chosenAnswersId) {
+        QuestionStats.getById(questionStatId).success = true;
+        return result.id.toString();
+    } else {
+        return result.id.toString();
+    }
+}
+
+function removedAnswers(questionId) {
+    return Answer.get().filter(answer => answer.questionId === parseInt(questionId)).filter(answer => !answer.trueAnswer);
+}
+
 module.exports = {
     buildQuiz,
     createQuiz,
@@ -86,5 +102,7 @@ module.exports = {
     updateQuiz,
     deleteQuiz,
     createStatQuiz,
-    createStatQuestion
+    createStatQuestion,
+    checkAnswer,
+    removedAnswers
 };

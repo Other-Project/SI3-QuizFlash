@@ -28,8 +28,8 @@ export class QuizGameComponent {
   protected trueAnswer?: Answer;
   protected check: boolean = false;
   protected inactivity: boolean = false;
-  protected hidenAnswers: Answer[] = [];
   protected questionStatsId?: string;
+  protected finishPage: boolean = false;
 
   constructor(private userService: UserService, private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.userService.user$.subscribe(user => this.user = user as Patient);
@@ -48,9 +48,12 @@ export class QuizGameComponent {
   }
 
   update() {
-    this.hidenAnswers = [];
     this.currentQuestion = this.questions.at(this.counter - 1);
     //if (this.currentQuestion) this.quizService.questionStatCreation(this.currentQuestion.id);
+    if (this.isFinish()) {
+      this.finishPage = true;
+      return;
+    }
     this.questionResult = false;
     if (this.currentQuestion) this.quizService.nextQuestion(this.currentQuestion?.id, () => {
       this.startQuestion();
@@ -58,7 +61,6 @@ export class QuizGameComponent {
   }
 
   startQuestion() {
-    console.log(this.questionStatsId);
     this.start = new Date();
   }
 
@@ -69,7 +71,7 @@ export class QuizGameComponent {
   }
 
   returnSelectionPage() {
-    this.quizService.finish();
+    this.quizService.selectQuiz();
     this.router.navigate(["../.."], {relativeTo: this.route}).then();
   }
 
@@ -82,14 +84,7 @@ export class QuizGameComponent {
     return this.counter;
   }
 
-  checkAnswer(answer: Answer) {
-    let duration = (new Date().getTime() - this.start!.getTime()) / 1000;
-    let attempt = {} as Attempt;
-    attempt.chosenAnswersId = answer.id;
-    attempt.answerHint = !this.fiftyFiftyEnabled;
-    attempt.timeSpent = duration;
-    attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
-    let trueAnswerId = this.quizService.chekAnswer(this.currentQuestion!.id, answer.id, attempt);
+  test(answer: Answer, trueAnswerId: number) {
     this.check = trueAnswerId == answer.id;
     this.trueAnswer = this.currentQuestion!.answers.find(answer => answer.id == trueAnswerId);
     if (this.user!.removeAnswers && !this.check) {
@@ -97,10 +92,23 @@ export class QuizGameComponent {
       this.start = new Date();
       return;
     } else if (this.user!.replayAtEnd && !this.check) this.replayAtEnd();
-    //this.fiftyFiftyEnabled = false;
     this.counter++;
     this.questionResult = true;
   }
+
+  checkAnswer(answer: Answer) {
+    let duration = (new Date().getTime() - this.start!.getTime()) / 1000;
+    let attempt = {} as Attempt;
+    attempt.chosenAnswersId = answer.id;
+    attempt.answerHint = !this.fiftyFiftyEnabled;
+    attempt.timeSpent = duration;
+    attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
+    this.quizService.chekAnswer(attempt, (trueAnswerId => {
+      this.test(answer, parseInt(trueAnswerId));
+    }));
+  }
+
+
 
   replayAtEnd() {
     if (this.questions.filter(question => question == this.currentQuestion).length <= 1) {
@@ -112,8 +120,13 @@ export class QuizGameComponent {
   fiftyFifty() {
     if (!this.fiftyFiftyEnabled) return;
     this.fiftyFiftyEnabled = false;
-    let falseAnswers = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
-    falseAnswers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(falseAnswers.length / 2)).forEach(answer => answer.hide = true);
+    this.quizService.fiftyFifty(parseInt(this.currentQuestion?.id!), answers => this.hideAnswers(answers));
+  }
+
+  hideAnswers(answers: Answer[]) {
+    console.log(answers);
+    answers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(answers.length / 2)).forEach(answer2 => this.currentQuestion!.answers.filter(answer => answer.id == answer2.id)[0].hide = true);
+
   }
 
   getGainToTransfer(event: number) {

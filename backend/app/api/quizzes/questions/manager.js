@@ -21,7 +21,6 @@ function getQuestionFromQuiz(quizId, questionId) {
     const quizIdInt = parseInt(quizId, 10);
     const question = Question.getById(questionId);
     if (question.quizId === quizIdInt) return question;
-
     const quiz = Quiz.getById(quizId);
     throw new NotFoundError(`${question.name} id=${questionId} was not found for ${quiz.name} id=${quiz.id}`);
 }
@@ -75,7 +74,6 @@ function deleteQuestion(questionId) {
 
 module.exports = {
     getQuizQuestions,
-    getQuestionFromQuiz,
     createQuestion,
     replaceQuestion,
     updateQuestion,

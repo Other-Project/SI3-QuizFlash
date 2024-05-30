@@ -5,10 +5,9 @@ import {BehaviorSubject} from "rxjs";
 import {User} from "../models/user.models";
 import {UserService} from "./user.service";
 import {StatisticsService} from "./statistics.service";
-import {QuizStats} from "../models/quiz-stats.model";
-import {QuestionStats} from "../models/question-stats.model";
 import {Attempt} from "../models/attempt.model";
 import {apiUrl, httpOptionsBase} from "../configs/server.config";
+import {Answer} from "../models/answer.models";
 
 @Injectable({providedIn: "root"})
 export class QuizService {
@@ -21,7 +20,6 @@ export class QuizService {
   private user?: User;
   private quizStatsId?: string;
   public quizStatId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.quizStatsId);
-  private quizStats?: QuizStats;
   private questionStatsId?: string;
   public questionStatsId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.questionStatsId);
 
@@ -31,7 +29,6 @@ export class QuizService {
   }
 
   updateQuizList() {
-    //Todo différent en fonction user, ajout ou non des réponses
     this.http.get<Quiz[]>(this.quizApiUrl).subscribe(quizzes => {
       this.quizzes$.next(this.quizzes = quizzes);
     });
@@ -70,6 +67,13 @@ export class QuizService {
     }
   }
 
+  chekAnswer(attempt: Attempt, callback?: ((check: string) => void)) {
+    console.log(this.questionStatsId + "ghbhbjjhjjbhjnhjn");
+    if (attempt) {
+      this.http.post<string>(this.quizApiUrl + "/" + this.questionStatsId + "/checkAnswer", attempt, httpOptionsBase).subscribe(result => callback!(result));
+    }
+  }
+
   replaceQuiz(quizId: string, updatedQuiz: Quiz) {
     this.http.put<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase).subscribe(() => this.updateQuizList());
   }
@@ -84,42 +88,10 @@ export class QuizService {
     });
   }
 
-  idCreation() {
-    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
-      (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+  fiftyFifty(questionId: number, callback: ((answers: Answer[]) => void)) {
+    this.http.get<Answer[]>(`${this.quizApiUrl}/removedAnswer/${questionId}`, httpOptionsBase).subscribe(
+      answers => callback(answers)
     );
-  }
-
-  /*************
-   * IN SERVER *
-   *************/
-
-  startQuiz2(quizId: string) {
-    this.quizStats = {id: this.idCreation(), userId: this.user?.id, quizId: quizId, date: new Date(), questionsStats: []} as QuizStats;
-    return this.quizStats.id;
-  }
-
-  questionStatCreation(questionId: string) {
-    let questionStatistics = {
-      questionId: questionId,
-      questionType: this.quiz?.questions.find(question => question.id == questionId)!.type,
-      success: false,
-      attempts: []
-    } as QuestionStats;
-    this.quizStats!.questionsStats.push(questionStatistics);
-  }
-
-  chekAnswer(questionId: String, answerId: String, attempt: Attempt): string {
-    let questionStat = this.quizStats?.questionsStats.find(question => question.questionId == questionId)!;
-    questionStat.attempts.push(attempt);
-    let goodAnswerId = this.quiz!.questions.find(question => question.id == questionId)!.answers.find(answer => answer.trueAnswer)!.id;
-    if (goodAnswerId == answerId) questionStat.success = true;
-    return goodAnswerId;
-  }
-
-  finish() {
-    this.selectQuiz();
-    this.statisticsService.quizStatistics.push(this.quizStats!);
   }
 }
 

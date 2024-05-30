@@ -11,6 +11,7 @@ export class QuestionResultComponent implements OnInit {
   @Input() correct?: boolean;
   @Input() automatedSkip: boolean = false;
   @Output() continue = new EventEmitter<Answer>();
+  @Input() finish?: boolean;
   private timeOutId?: number;
 
   constructor() {

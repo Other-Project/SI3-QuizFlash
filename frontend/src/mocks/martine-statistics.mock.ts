@@ -10,7 +10,7 @@ export const QUESTIONSTAT1: QuestionStats = {
   attempts: [
     {
       attemptId: "3",
-      chosenAnswersId: "4",
+      chosenAnswersId: 4,
       timeSpent: 2.2,
       answerHint: false,
       hiddenAnswers: [],
@@ -25,7 +25,7 @@ export const QUESTIONSTAT2: QuestionStats = {
   attempts: [
     {
       attemptId: "4",
-      chosenAnswersId: "4",
+      chosenAnswersId: 4,
       timeSpent: 3.1,
       answerHint: false,
       hiddenAnswers: [],
@@ -40,7 +40,7 @@ export const QUESTIONSTAT3: QuestionStats = {
   attempts: [
     {
       attemptId: "5",
-      chosenAnswersId: "1",
+      chosenAnswersId: 1,
       timeSpent: 5,
       answerHint: false,
       hiddenAnswers: [],
@@ -55,7 +55,7 @@ export const QUESTIONSTAT4: QuestionStats = {
   attempts: [
     {
       attemptId: "6",
-      chosenAnswersId: "4",
+      chosenAnswersId: 4,
       timeSpent: 2.4,
       answerHint: false,
       hiddenAnswers: [],
@@ -70,7 +70,7 @@ export const QUESTIONSTAT5: QuestionStats = {
   attempts: [
     {
       attemptId: "7",
-      chosenAnswersId: "4",
+      chosenAnswersId: 4,
       timeSpent: 3.6,
       answerHint: false,
       hiddenAnswers: [],
@@ -85,7 +85,7 @@ export const QUESTIONSTAT6: QuestionStats = {
   attempts: [
     {
       attemptId: "7",
-      chosenAnswersId: "3",
+      chosenAnswersId: 3,
       timeSpent: 2.5,
       answerHint: false,
       hiddenAnswers: [],
@@ -100,7 +100,7 @@ export const QUESTIONSTAT1TRY2: QuestionStats = {
   attempts: [
     {
       attemptId: "8",
-      chosenAnswersId: "1",
+      chosenAnswersId: 1,
       timeSpent: 2,
       answerHint: false,
       hiddenAnswers: [],
@@ -115,7 +115,7 @@ export const QUESTIONSTAT2TRY2: QuestionStats = {
   attempts: [
     {
       attemptId: "9",
-      chosenAnswersId: "4",
+      chosenAnswersId: 4,
       timeSpent: 2.8,
       answerHint: false,
       hiddenAnswers: [],
@@ -130,7 +130,7 @@ export const QUESTIONSTAT3TRY2: QuestionStats = {
   attempts: [
     {
       attemptId: "10",
-      chosenAnswersId: "3",
+      chosenAnswersId: 3,
       timeSpent: 3,
       answerHint: false,
       hiddenAnswers: [],

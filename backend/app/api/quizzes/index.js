@@ -1,9 +1,9 @@
 const { Router } = require("express");
 
-const { Quiz, QuestionStats } = require("../../models");
+const { Quiz } = require("../../models");
 const { catchErrors } = require("../../utils/errors/routes");
 const QuestionsRouter = require("./questions");
-const { buildQuiz, updateQuiz, replaceQuiz, createQuiz, deleteQuiz, createStatQuiz, createStatQuestion } = require("./manager");
+const { buildQuiz, updateQuiz, replaceQuiz, createQuiz, deleteQuiz, createStatQuiz, createStatQuestion, checkAnswer, removedAnswers } = require("./manager");
 
 const router = new Router();
 
@@ -33,15 +33,14 @@ router.get("/:quizId", (req, res) => catchErrors(req, res, () => {
 }));
 
 //TODO remove userID
+router.get("/removedAnswer/:questionId", (req, res) => catchErrors(req, res, () => {
+
+
+    res.status(200).json(removedAnswers(req.params.questionId));
+}));
+
 router.get("/:quizId/:userId/startQuiz", (req, res) => catchErrors(req, res, () => {
-    /*  #swagger.tags = ['Quizzes']
-        #swagger.summary = 'Create the Statistics'
-        #swagger.responses[200] = {
-            schema: [quiz : { $ref: '#/definitions/Quiz'} , quizStatId : { $ref: '#/definitions/QuizStats'}]
-        }
-        #swagger.responses[404] = {
-            description: 'No quiz found with this id'
-        } */
+
 
     res.status(200).json({
         quiz: buildQuiz(req.params.quizId, req.params.userId),
@@ -50,16 +49,15 @@ router.get("/:quizId/:userId/startQuiz", (req, res) => catchErrors(req, res, () 
 }));
 
 router.get("/:quizStatId/:questionId/nextQuestion", (req, res) => catchErrors(req, res, () => {
-    /*  #swagger.tags = ['Quizzes']
-        #swagger.summary = 'Create the Statistics'
-        #swagger.responses[200] = {
-            schema: [quiz : { $ref: '#/definitions/Quiz'} , quizStatId : { $ref: '#/definitions/QuizStats'}]
-        }
-        #swagger.responses[404] = {
-            description: 'No quiz found with this id'
-        } */
+
     res.status(200).json(createStatQuestion(req.params.quizStatId, req.params.questionId));
 }));
+
+router.post("/:questionStatId/checkAnswer", (req, res) => catchErrors(req, res, () => {
+
+    res.status(200).json(checkAnswer(req.params.questionStatId, req.body));
+}));
+
 
 router.post("/", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
