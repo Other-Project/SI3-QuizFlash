@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {QuizService} from "../../../../../service/quiz-service.service";
 import {Quiz} from "../../../../../models/quiz.models";
-import {StatisticsService} from "../../../../../service/statistics.service";
 import {QuestionType} from "../../../../../models/question-type.models";
+import {DataTypes} from "../../../../../models/stats-enumerates";
 
 @Component({
   selector: "stats-data",
@@ -11,32 +10,22 @@ import {QuestionType} from "../../../../../models/question-type.models";
 })
 
 export class StatisticsDataComponent implements OnInit {
+  @Input() data?: any;
+  @Input() quizList?: Quiz[];
   @Input() answerHint?: boolean;
-  @Input() patientId?: string;
-
+  @Input() patientId!: string;
   @Output() quizSelection: EventEmitter<any> = new EventEmitter<any>();
 
+  quizSelected: boolean = false;
   questionTypes = {
     [-1]: "Tous les types de questions",
     [QuestionType.Sound]: "Questions auditives",
     [QuestionType.Image]: "Questions visuelles",
     [QuestionType.TextOnly]: "Questions textuelles"
   };
-
-  successRate: number = 0;
-  answerHintRate: number = 0;
-  spentTime: number = 0;
-  averageTimeSpent: number = 0;
-  quizList?: Quiz[];
-  quizSelected: boolean = false;
-
-  constructor(private quizListService: QuizService, private statisticsService: StatisticsService) {
-  }
+  protected readonly DataTypes = DataTypes;
 
   ngOnInit(): void {
-    this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => {
-      this.quizList = quizzes;
-    });
     this.quizChoice();
   }
 
@@ -44,10 +33,6 @@ export class StatisticsDataComponent implements OnInit {
     this.quizSelected = !!quizId && quizId != "";
     if (questionType == -1 as unknown) questionType = undefined;
     this.quizSelection?.emit({quizId, questionType});
-
-    this.successRate = this.statisticsService.getSuccessRate(this.patientId!, quizId, questionType);
-    this.answerHintRate = this.statisticsService.getAnswerHintRate(this.patientId!, quizId, questionType);
-    if (quizId) [this.spentTime, this.averageTimeSpent] = this.statisticsService.getTime(this.patientId!, quizId, questionType);
   }
 }
 

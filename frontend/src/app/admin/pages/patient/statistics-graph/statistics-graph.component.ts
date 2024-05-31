@@ -1,9 +1,7 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import Chart from "chart.js/auto";
-import {StatisticsService} from "../../../../../service/statistics.service";
 import {DataTypes, StatsFilter} from "../../../../../models/stats-enumerates";
-import {QuestionType} from "../../../../../models/question-type.models";
-
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: "stats-graph",
@@ -14,18 +12,36 @@ import {QuestionType} from "../../../../../models/question-type.models";
 export class StatisticsGraphComponent implements OnInit {
   protected readonly StatsFilter = StatsFilter;
   protected readonly DataType = DataTypes;
+
   @Input() title: string = "";
-  @Input() patientId?: string;
+  @Input() patientId!: string;
+
+  @Input()
+  set graphData(graphData: [string[], number[]]) {
+    if (!this.chart)
+      this.createChart(graphData);
+    else this.updateChart(graphData);
+  }
+
+  @Output() optionsSelection: EventEmitter<{ dataType: DataTypes, statFilter: StatsFilter }> = new EventEmitter();
 
   protected dataAvailable: boolean = false;
   protected selectedQuizId?: string;
-  private selectedQuestionType?: QuestionType;
-  public chart?: Chart;
-  protected filter: StatsFilter = StatsFilter.TRIES;
-  protected dataType: DataTypes = DataTypes.SUCCESS_RATE;
+  public chart?: any;
+  protected filter: StatsFilter = StatsFilter.TRY;
+  protected dataType: DataTypes = DataTypes.SUCCESS;
 
+  private yLabels = {
+    try: "Date de réalisation du quiz",
+    question: "Intitulé de la question"
+  }
 
-  constructor(private statsService: StatisticsService) {
+  private dataLabels = {
+    success: "Taux de réussite",
+    time: "Temps de réponse"
+  };
+
+  constructor(private datePipe: DatePipe) {
   }
 
   createChart(graphData: [string[], number[]]) {
@@ -37,20 +53,29 @@ export class StatisticsGraphComponent implements OnInit {
       data: {
         labels: graphData[0],
         datasets: [{
-          label: this.dataType,
-          backgroundColor: primaryColor,
-          borderColor: "rgba(0,0,255,0.1)",
+          borderWidth: 1,
+          fill: true,
+          label: this.dataLabels[this.dataType],
+          backgroundColor: this.addAlpha(primaryColor, 0.5),
+          borderColor: primaryColor,
           data: graphData[1].map(value => Math.round(value * 10) / 10)
         }]
       },
       options: {
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: (data: any) => this.toolTipLabel(data)
+            }
+          }
+        },
         responsive: true,
         aspectRatio: 2.5,
         scales: {
           y: {
             title: {
               display: true,
-              text: this.dataType
+              text: this.dataLabels[this.dataType]
             },
             suggestedMin: 0,
             suggestedMax: 100
@@ -58,7 +83,7 @@ export class StatisticsGraphComponent implements OnInit {
           x: {
             title: {
               display: true,
-              text: this.filter
+              text: this.yLabels[this.filter]
             }
           }
         }
@@ -67,37 +92,49 @@ export class StatisticsGraphComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createChart(this.statsService.getSuccessRatePerTry(this.patientId!));
+    //wthis.createChart(this.statsService.getSuccessRatePerTry(this.patientId!));
   }
 
-  selectedGraphType(filter: StatsFilter, dataType: DataTypes, graphData?: [string[], number[]]) {
-    this.dataType = dataType;
-    this.filter = filter;
-    if (!this.chart) return;
-    this.updateChart(graphData ?? this.getQuizGraphData(this.patientId!, dataType, filter, this.selectedQuizId!, this.selectedQuestionType));
+  selectedGraphType(filter: StatsFilter, dataType: DataTypes) {
+    this.optionsSelection.emit({dataType: dataType, statFilter: filter});
   }
 
   updateChart(graphData: [string[], number[]]) {
     this.dataAvailable = graphData[0].length != 0;
     if (graphData[0].length == 0 || !this.chart) return;
+    let graphType = "line";
+
+    if (this.filter === StatsFilter.QUESTION) {
+      this.chart.data.datasets[0].barThickness = 30;
+      graphType = "bar";
+    }
+
+    this.chart.config.type = graphType;
 
     this.chart.options = {
       responsive: true,
       aspectRatio: 2.5,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (data: any) => this.toolTipLabel(data)
+          }
+        }
+      },
       scales: {
         y: {
           title: {
             display: true,
-            text: this.dataType
+            text: this.dataLabels[this.dataType]
           },
           suggestedMin: 0,
-          suggestedMax: (this.dataType == DataTypes.SUCCESS_RATE) ? 100
+          suggestedMax: (this.dataType == DataTypes.SUCCESS) ? 100
             : Math.max.apply(null, graphData[1]) * 1.5
         },
         x: {
           title: {
             display: true,
-            text: this.filter
+            text: this.yLabels[this.filter]
           }
         }
       }
@@ -105,26 +142,30 @@ export class StatisticsGraphComponent implements OnInit {
 
     this.chart.data.labels = graphData[0];
     this.chart.data.datasets[0].data = graphData[1].map(value => Math.round(value * 10) / 10);
-    this.chart.data.datasets[0].label = this.dataType;
+    this.chart.data.datasets[0].label = this.dataLabels[this.dataType];
     this.chart.update();
   }
 
-  quizSelection(quizId?: string, questionType?: QuestionType) {
+  quizSelection(quizId?: string) {
     if (!this.patientId) return;
-    this.dataType = DataTypes.SUCCESS_RATE;
-    this.filter = StatsFilter.TRIES;
+    this.dataType = DataTypes.SUCCESS;
+    this.filter = StatsFilter.TRY;
     this.selectedQuizId = quizId;
-    this.selectedQuestionType = questionType;
-    this.selectedGraphType(this.filter, this.dataType, this.statsService.getSuccessRatePerTry(this.patientId, quizId, questionType));
   }
 
-  getQuizGraphData(patientId: string, dataType: DataTypes, filter: StatsFilter, quizId: string, questionType?: QuestionType) {
-    if (filter == StatsFilter.TRIES)
-      return (dataType == DataTypes.TIME_AVERAGE)
-        ? this.statsService.getTimePerTries(patientId, quizId, questionType)
-        : this.statsService.getSuccessRatePerTry(patientId, quizId, questionType);
-    else return (dataType == DataTypes.TIME_AVERAGE)
-      ? this.statsService.getTimePerQuestion(patientId, quizId, questionType)
-      : this.statsService.getSuccessRatePerQuestion(patientId, quizId, questionType);
+  private addAlpha(color: string, opacity: number) {
+    const _opacity = Math.round(Math.min(Math.max(opacity ?? 1, 0), 1) * 255);
+    return color + _opacity.toString(16).toUpperCase();
+  }
+
+  private toolTipLabel(data: any): string {
+    const title: string = data.dataset.label;
+    const value: number = data.dataset.data[data.dataIndex];
+    let formattedValue: string;
+
+    if (this.dataType === DataTypes.TIME)
+      formattedValue = this.datePipe.transform(value * 60000, "mm 'minutes' ss 'secondes'", "UTC")!;
+    else formattedValue = value + " %";
+    return title + " : " + formattedValue;
   }
 }

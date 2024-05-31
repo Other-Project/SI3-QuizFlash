@@ -4,16 +4,16 @@
     <select [(ngModel)]="filter" #filterSelect
             (change)="selectedGraphType($any(filterSelect.value),$any(dataTypeSelect.value))"
             name="graph-select">
-      <option [value]="StatsFilter.TRIES">Tentatives</option>
-      <option [value]="StatsFilter.QUESTIONS">Questions</option>
+      <option [value]="StatsFilter.TRY">Tentatives</option>
+      <option [value]="StatsFilter.QUESTION">Questions</option>
     </select>
   </label>
   <label> Type de donnée :
     <select [(ngModel)]="dataType" #dataTypeSelect
             (change)="selectedGraphType($any(filterSelect.value),$any(dataTypeSelect.value))"
             name="graph-select">
-      <option [value]="DataType.SUCCESS_RATE">Taux de réussite</option>
-      <option [value]="DataType.TIME_AVERAGE">Temps moyen</option>
+      <option [value]="DataType.SUCCESS">Taux de réussite</option>
+      <option [value]="DataType.TIME">Temps</option>
     </select>
   </label>
 </div>
