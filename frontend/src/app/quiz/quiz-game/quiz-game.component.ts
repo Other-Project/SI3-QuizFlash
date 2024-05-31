@@ -120,12 +120,12 @@ export class QuizGameComponent {
   fiftyFifty() {
     if (!this.fiftyFiftyEnabled) return;
     this.fiftyFiftyEnabled = false;
-    this.quizService.fiftyFifty(parseInt(this.currentQuestion?.id!), answers => this.hideAnswers(answers));
+    if (this.currentQuestion!.answers.length > 2) this.quizService.fiftyFifty(parseInt(this.currentQuestion?.id!), this.currentQuestion!.answers.length / 2, answers => this.hideAnswers(answers));
   }
 
   hideAnswers(answers: Answer[]) {
     console.log(answers);
-    answers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(answers.length / 2)).forEach(answer2 => this.currentQuestion!.answers.filter(answer => answer.id == answer2.id)[0].hide = true);
+    answers.forEach(answer2 => this.currentQuestion!.answers.filter(answer => answer.id == answer2.id)[0].hide = true);
 
   }
 

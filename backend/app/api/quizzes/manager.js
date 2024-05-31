@@ -71,14 +71,31 @@ function deleteQuiz(quizId) {
     Quiz.delete(quizId);
 }
 
+/**
+ * Create a new quizStat object
+ * @param {number} quizId
+ * @param {number} userId
+ * @param {Date} date
+ */
 function createStatQuiz(quizId, userId, date) {
     return QuizStats.create({ quizId: quizId, userId: userId, date: date }).id;
 }
 
+/**
+ * Create a new questionStat object
+ * @param {string} quizStatId
+ * @param {string} questionId
+ */
 function createStatQuestion(quizStatId, questionId) {
     return QuestionStats.create({ quizStatId: parseInt(quizStatId), questionId: parseInt(questionId), success: false }).id;
 }
 
+/**
+ * Check if the answer is good or not
+ * @param {string} questionStatId
+ * @param {string | number} questionAttempt
+ */
+//TODO renvoyer la réponse que si le joueur ne rejoue pas la quetsion
 function checkAnswer(questionStatId, questionAttempt) {
     let attempt = Attempts.create({ questionStatId: parseInt(questionStatId), ...questionAttempt }).id;
     let result = Answer.get().find(answer => (answer.questionId === parseInt(QuestionStats.getById(questionStatId).questionId)) && answer.trueAnswer);
@@ -91,8 +108,14 @@ function checkAnswer(questionStatId, questionAttempt) {
     }
 }
 
-function removedAnswers(questionId) {
-    return Answer.get().filter(answer => answer.questionId === parseInt(questionId)).filter(answer => !answer.trueAnswer);
+/**
+ * Return the answers could be removed to the choice
+ * @param {string} questionId
+ * @param {number} number
+ */
+function removedAnswers(questionId, number) {
+    let answers = Answer.get().filter(answer => answer.questionId === parseInt(questionId)).filter(answer => !answer.trueAnswer);
+    return answers.sort(() => 0.5 - Math.random()).slice(0, number);
 }
 
 module.exports = {
