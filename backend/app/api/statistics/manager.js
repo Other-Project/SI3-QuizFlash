@@ -1,4 +1,4 @@
-const { Attempts, QuestionStats, QuizStats, Question } = require("../../models");
+const { Attempts, QuestionStats, QuizStats, Question, Quiz } = require("../../models");
 const ValidationError = require("../../utils/errors/validation-error");
 
 const data = {
@@ -46,7 +46,7 @@ function getRequestedStat(dataType, statType, userId, quizId, questionType) {
         ...rateData,
         data: result.map(([key, value]) => ({
             key: key.toString(),
-            value: dataValue[dataType](value.filter(question => isQuestionOfType(question, questionType)))
+            value: dataValue[dataType](value.filter(questionStat => isQuestionOfType(questionStat.questionId, questionType)))
         }))
     };
 }
@@ -68,7 +68,7 @@ function buildUserStats(userId, quizId, questionType) {
  * This function aggregates the questionStats and attempts from the
  * database to build the entire quizStats
  * @param {number} quizStatId
- * @param {questionType|undefined} questionType
+ * @param {string|undefined} questionType
  * @return {QuizStats&{id: number, questionsStats: *}}
  */
 function buildStat(quizStatId, questionType) {
@@ -110,6 +110,7 @@ function getRateByFilter(questionsStats, successFilter = question => question.su
 
 function getAccumulateQuestionStats(userId, quizId, questionType, userQuizzes) {
     return userQuizzes.flatMap(quiz => quiz.questionsStats.filter(question => isQuestionOfType(question, questionType)))
+    return userQuizzes.flatMap(quiz => quiz.questionsStats.filter(question => isQuestionOfType(question.questionId, questionType)))
         .reduce((groups, question) => {
             (groups[question.questionId] ||= []).push(question);
             return groups;
@@ -124,12 +125,41 @@ function average(array) {
     return array.length === 0 ? undefined : sum(array) / array.length;
 }
 
-function isQuestionOfType(questionStat, questionType) {
-    const question = Question.get().find(question => question.id === questionStat.questionId);
+function isQuestionOfType(questionId, questionType) {
+    const question = Question.get().find(question => question.id === questionId);
     return !questionType || (question && question.type === questionType);
+}
+
+/**
+ * Return the title of the corresponding question
+ * @param {string} questionId
+ */
+function getQuestionStatText(questionId) {
+    return Question.get().filter(question => question.id === questionId)[0].text;
+}
+
+function getQuizzesId(userId) {
+    return [...new Set(QuizStats.get().filter(stat => stat.userId === parseInt(userId, 10)).map(stat => stat.quizId))];
+}
+
+function getQuizzesNames(quizIds) {
+    return quizIds.map(quizId => ({
+            id: quizId,
+            title: getQuizTitle(quizId)
+        }
+    ));
+}
+
+function getUserQuizzesParticipation(userId) {
+    return getQuizzesNames(getQuizzesId(userId));
+}
+
+function getQuizTitle(quizId) {
+    return Quiz.get().filter(quiz => quiz.id === quizId).map(quiz => quiz.title)[0];
 }
 
 module.exports = {
     buildUserStats,
-    getRequestedStat
+    getRequestedStat,
+    getUserQuizzesParticipation
 };
