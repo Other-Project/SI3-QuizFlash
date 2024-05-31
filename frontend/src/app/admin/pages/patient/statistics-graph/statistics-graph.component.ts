@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import Chart from "chart.js/auto";
 import {DataTypes, StatsFilter} from "../../../../../models/stats-enumerates";
 import {DatePipe} from "@angular/common";
@@ -9,7 +9,7 @@ import {DatePipe} from "@angular/common";
   styleUrls: ["statistics-graph.component.scss"]
 })
 
-export class StatisticsGraphComponent implements OnInit {
+export class StatisticsGraphComponent {
   protected readonly StatsFilter = StatsFilter;
   protected readonly DataType = DataTypes;
 
@@ -89,10 +89,6 @@ export class StatisticsGraphComponent implements OnInit {
         }
       }
     });
-  }
-
-  ngOnInit(): void {
-    //wthis.createChart(this.statsService.getSuccessRatePerTry(this.patientId!));
   }
 
   selectedGraphType(filter: StatsFilter, dataType: DataTypes) {
