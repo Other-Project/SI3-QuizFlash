@@ -19,11 +19,9 @@ export class StatisticsService {
   }
 
   getUserHistory(userId: string) {
-    //this.userQuizStats = this.quizStatistics.filter(statistic => statistic.userId == userId);
-    //this.userQuizStats$.next(this.userQuizStats);
+    //TODO Implement history
   }
 
-  //TODO
   getUserQuizzesParticipation(userId: number, callback: ((quizzes: Quiz[]) => void)) {
     this.http.get<Quiz[]>(`${this.quizApiUrl}/quizzes/${userId}`).subscribe(quizzes => {
       callback(quizzes);
