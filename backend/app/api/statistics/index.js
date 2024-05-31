@@ -1,9 +1,8 @@
 const { Router } = require("express");
 
 
-const { buildUserStats, getRequestedStat } = require("./manager");
+const { buildUserStats, getRequestedStat, getUserQuizzesParticipation } = require("./manager");
 const { catchErrors } = require("../../utils/errors/routes");
-
 const router = new Router();
 
 router.get("/history/:userId", (req, res) => catchErrors(req, res, () => {
@@ -15,7 +14,7 @@ router.get("/history/:userId", (req, res) => catchErrors(req, res, () => {
     res.status(200).json(buildUserStats(req.params.userId));
 }));
 
-router.get("/:userId", (req, res) => catchErrors(req, res, () => {
+router.get("/:userId/:dataType/:statType", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Statistics']
     #swagger.summary = 'Get specific user statistics'
     #swagger.parameters['dataType'] = {
@@ -59,8 +58,16 @@ router.get("/:userId", (req, res) => catchErrors(req, res, () => {
     #swagger.responses[400] = {
         description: 'Invalid request'
     } */
-    const { dataType, statType, quizId, questionType } = req.query;
-    res.status(200).json(getRequestedStat(dataType, statType, req.params.userId, quizId, questionType));
+    const { userId, dataType, statType } = req.params;
+    const { quizId, questionType } = req.query;
+    res.status(200).json(getRequestedStat(dataType, statType, userId, quizId, questionType));
+}));
+
+router.get("/quizzes/:userId", (req, res) => catchErrors(req, res, () => {
+    /*  #swagger.tags = ['Statistics']
+    #swagger.summary = 'Get user quiz participation'
+     */
+    res.status(200).json(getUserQuizzesParticipation(req.params.userId));
 }));
 
 module.exports = router;
