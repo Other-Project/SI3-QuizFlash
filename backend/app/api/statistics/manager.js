@@ -43,8 +43,8 @@ function getRequestedStat(dataType, statType, userId, quizId, questionType) {
     const rateData = generalRates[dataType](userQuizzes.flatMap(stat => stat.questionsStats));
 
     return {
-        ...rateData,
-        data: result.map(([key, value]) => ({
+        data: !userQuizzes.length ? {} : { dataType, ...rateData },
+        graphData: result.map(([key, value]) => ({
             key: key.toString(),
             value: dataValue[dataType](value.filter(questionStat => isQuestionOfType(questionStat.questionId, questionType)))
         }))
@@ -108,11 +108,10 @@ function getRateByFilter(questionsStats, successFilter = question => question.su
     return average(questionsStats.map(question => successFilter(question) ? 100 : 0));
 }
 
-function getAccumulateQuestionStats(userId, quizId, questionType, userQuizzes) {
-    return userQuizzes.flatMap(quiz => quiz.questionsStats.filter(question => isQuestionOfType(question, questionType)))
+function getAccumulateQuestionStats(userQuizzes, questionType) {
     return userQuizzes.flatMap(quiz => quiz.questionsStats.filter(question => isQuestionOfType(question.questionId, questionType)))
         .reduce((groups, question) => {
-            (groups[question.questionId] ||= []).push(question);
+            (groups[getQuestionStatText(question.questionId)] ||= []).push(question);
             return groups;
         }, {});
 }
@@ -144,10 +143,9 @@ function getQuizzesId(userId) {
 
 function getQuizzesNames(quizIds) {
     return quizIds.map(quizId => ({
-            id: quizId,
-            title: getQuizTitle(quizId)
-        }
-    ));
+        id: quizId,
+        title: getQuizTitle(quizId)
+    }));
 }
 
 function getUserQuizzesParticipation(userId) {
