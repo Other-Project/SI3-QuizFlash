@@ -1,7 +1,7 @@
 import {Question} from "./question.models";
 
 export interface Quiz {
-  id: string;
+  id: number;
   title: string;
   tags: string[];
   thumbnailUrl: string;

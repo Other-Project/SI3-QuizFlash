@@ -1,7 +1,7 @@
 import {AccessRestriction} from "./access-restriction.models";
 
 export interface User {
-  id: string;
+  id: number;
   access: AccessRestriction;
 
   // Info

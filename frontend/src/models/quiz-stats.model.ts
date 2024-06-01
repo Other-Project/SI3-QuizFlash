@@ -1,9 +1,9 @@
 import {QuestionStats} from "./question-stats.model";
 
 export interface QuizStats {
-  id: string;
-  userId: string;
-  quizId: string;
+  id: number;
+  userId: number;
+  quizId: number;
   date: Date;
   questionsStats: QuestionStats[];
 }

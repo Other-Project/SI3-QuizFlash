@@ -4,26 +4,26 @@ import {QuestionType} from "../models/question-type.models";
 
 
 export const QUESTIONSTAT1: QuestionStats = {
-  questionId: "1",
+  questionId: 1,
   questionType: QuestionType.TextOnly,
   success: true,
   attempts: [
     {
-      attemptId: "11",
+      attemptId: 11,
       chosenAnswersId: 3,
       timeSpent: 1,
       answerHint: false,
       hiddenAnswers: [],
     },
     {
-      attemptId: "12",
+      attemptId: 12,
       chosenAnswersId: 2,
       timeSpent: 1.5,
       answerHint: false,
       hiddenAnswers: [3]
     },
     {
-      attemptId: "13",
+      attemptId: 13,
       chosenAnswersId: 4,
       timeSpent: 3,
       answerHint: false,
@@ -33,26 +33,26 @@ export const QUESTIONSTAT1: QuestionStats = {
 };
 
 export const QUESTIONSTAT2: QuestionStats = {
-  questionId: "2",
+  questionId: 2,
   questionType: QuestionType.TextOnly,
   success: true,
   attempts: [
     {
-      attemptId: "14",
+      attemptId: 14,
       chosenAnswersId: 3,
       timeSpent: 1,
       answerHint: false,
       hiddenAnswers: [],
     },
     {
-      attemptId: "15",
+      attemptId: 15,
       chosenAnswersId: 2,
       timeSpent: 1.5,
       answerHint: false,
       hiddenAnswers: [3]
     },
     {
-      attemptId: "16",
+      attemptId: 16,
       chosenAnswersId: 4,
       timeSpent: 3,
       answerHint: false,
@@ -62,9 +62,9 @@ export const QUESTIONSTAT2: QuestionStats = {
 };
 
 export const BERNARD_QUIZ1: QuizStats = {
-  id: "7",
-  userId: "98f9f0da-f011-431a-9361-482ab17f8561",
-  quizId: "2",
+  id: 7,
+  userId: 1716802522593,
+  quizId: 2,
   date: new Date(2024, 2),
   questionsStats: [QUESTIONSTAT1, QUESTIONSTAT2]
 };
