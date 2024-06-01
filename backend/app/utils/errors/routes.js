@@ -13,4 +13,4 @@ function catchErrors(req, res, fct) {
     }
 }
 
-module.exports = { catchErrors };
+module.exports = {manageAllErrors, catchErrors};
