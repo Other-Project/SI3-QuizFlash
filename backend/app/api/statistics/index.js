@@ -17,34 +17,14 @@ router.get("/history/:userId", (req, res) => catchErrors(req, res, () => {
 router.get("/:userId/:dataType/:statType", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Statistics']
     #swagger.summary = 'Get specific user statistics'
-    #swagger.parameters['dataType'] = {
-        in: 'query',
-        description: 'The type of data requested',
-        required: true,
-        schema: {
-            type: 'string',
-            enum: ['success','time']
-        }
-    }
-    #swagger.parameters['statType'] = {
-        in: 'query',
-        description: 'The type of stat requested',
-        required: true,
-        schema: {
-            type: 'string',
-            enum: ['try','question']
-        }
-    }
     #swagger.parameters['quizId'] = {
         in: 'query',
-        description: 'The quiz id',
         schema: {
             type: 'string'
         }
     }
     #swagger.parameters['questionType'] = {
         in: 'query',
-        description: 'The question type',
         schema: {
             type: 'string',
             enum: ['TextOnly','Image','Sound']
@@ -65,8 +45,10 @@ router.get("/:userId/:dataType/:statType", (req, res) => catchErrors(req, res, (
 
 router.get("/quizzes/:userId", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Statistics']
-    #swagger.summary = 'Get user quiz participation'
-     */
+    #swagger.summary = 'Get user participation'
+    #swagger.responses[200] = {
+        schema: [{ $ref: '#/definitions/UserParticipation' }]
+    } */
     res.status(200).json(getUserQuizzesParticipation(req.params.userId));
 }));
 

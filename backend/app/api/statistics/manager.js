@@ -142,6 +142,11 @@ function getQuizzesId(userId) {
 }
 
 function getQuizzesNames(quizIds) {
+/**
+ * Returns the titles and ids of quizzes in which a user has taken part
+ * @param {string} userId
+ * @return {{id: number, title: string}[]} the ids and titles
+ */
     return quizIds.map(quizId => ({
         id: quizId,
         title: getQuizTitle(quizId)
