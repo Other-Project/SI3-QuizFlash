@@ -38,7 +38,7 @@ export class StatisticsGraphComponent {
 
   private dataLabels = {
     success: "Taux de réussite",
-    time: "Temps de réponse"
+    time: "Temps moyen de réponse"
   };
 
   constructor(private datePipe: DatePipe) {
