@@ -88,7 +88,7 @@ export class QuizService {
     });
   }
 
-  fiftyFifty(questionId: number, n: number, callback: ((answers: Answer[]) => void)) {
+  fiftyFifty(questionId: String, n: number, callback: ((answers: Answer[]) => void)) {
     this.http.get<Answer[]>(`${this.quizApiUrl}/removedAnswer/${questionId}/${n}`, httpOptionsBase).subscribe(
       answers => callback(answers)
     );
