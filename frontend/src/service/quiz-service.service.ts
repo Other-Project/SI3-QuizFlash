@@ -63,7 +63,7 @@ export class QuizService {
   }
 
   checkAnswer(attempt: Attempt, callback?: ((check: string) => void)) {
-    this.http.post<string>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/checkAnswer`, attempt, httpOptionsBase).subscribe(result => callback!(result));
+    this.http.post<string>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/${this.user!.id}/checkAnswer`, attempt, httpOptionsBase).subscribe(result => callback!(result));
   }
 
   replaceQuiz(quizId: string, updatedQuiz: Quiz) {
@@ -81,7 +81,7 @@ export class QuizService {
   }
 
   fiftyFifty(questionId: String) {
-    return firstValueFrom(this.http.get<Answer[]>(`${this.quizApiUrl}/${this.quiz!.id}/questions/${questionId}/removedAnswer`, httpOptionsBase));
+    return firstValueFrom(this.http.get<Answer[]>(`${this.quizApiUrl}/${this.quiz!.id}/questions/${questionId}/halveAnswers`, httpOptionsBase));
   }
 }
 

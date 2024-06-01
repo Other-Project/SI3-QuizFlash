@@ -103,9 +103,9 @@ router.delete("/:questionId", (req, res) => catchErrors(req, res, () => {
     res.status(204).end();
 }));
 
-router.get("/:questionId/removedAnswer", (req, res) => catchErrors(req, res, () => {
+router.get("/:questionId/halveAnswers", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
-        #swagger.summary = 'Return the half of the answer in the question'
+        #swagger.summary = 'Halve the number of answers to the question'
         #swagger.responses[200] = {
             schema: [{ $ref: '#/definitions/Answer' }]
         }

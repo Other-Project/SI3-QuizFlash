@@ -91,15 +91,19 @@ function createStatQuestion(quizStatId, questionId) {
 
 /**
  * Check if the answer is good or not
+ * @param {string} quizStatId
  * @param {string} questionStatId
  * @param {string | number} questionAttempt
+ * @param {string} userId
  */
-function checkAnswer(questionStatId, questionAttempt) {
-    let attempt = Attempts.create({ questionStatId: parseInt(questionStatId), ...questionAttempt }).id;
+function checkAnswer(quizStatId, questionStatId, questionAttempt, userId) {
+    let attempt = Attempts.create({ questionStatId: parseInt(questionStatId), ...questionAttempt });
     let result = Answer.get().find(answer => (answer.questionId === parseInt(QuestionStats.getById(questionStatId).questionId)) && answer.trueAnswer);
-    if (!result) throw new NotFoundError(`No true answer find in the question ${Question.getById(QuestionStats.getById(Attempts.getById(attempt).questionStatId).questionId).text}`);
-    if (result.id === Attempts.getById(attempt).chosenAnswersId) QuestionStats.getById(questionStatId).success = true;
-    return result.id.toString();
+    let questionStats = QuestionStats.getById(parseInt(questionStatId));
+    if (parseInt(quizStatId) !== questionStats.quizStatId) throw new NotFoundError(`The quizStatId ${quizStatId} does not contain the questionStat with id ${questionStatId}`);
+    if (!result) throw new NotFoundError(`No true answer found in the question ${Question.getById(questionStats.questionId).text}`);
+    if (result.id === attempt.chosenAnswersId) QuestionStats.getById(questionStatId).success = true;
+    if (!User.getById(parseInt(userId)).removeAnswers || result.id === attempt.chosenAnswersId) return result.id.toString();
 }
 
 module.exports = {

@@ -34,7 +34,7 @@ router.get("/:quizId", (req, res) => catchErrors(req, res, () => {
 
 router.get("/:quizId/startQuiz", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
-        #swagger.summary = 'Return a quiz without tureAnswer parameter inside answers and the id of the QuizStats object created'
+        #swagger.summary = 'Return a quiz without trueAnswer parameter inside answers and the id of the QuizStats object created'
         #swagger.parameters['userId'] = {
             in: 'query',
             description: 'The user id',
@@ -43,10 +43,10 @@ router.get("/:quizId/startQuiz", (req, res) => catchErrors(req, res, () => {
             }
         }
         #swagger.responses[200] = {
-                    schema:{
-                        quiz : { $ref: '#/definitions/Quiz' },
-                        quizStatId : ''
-                    }
+            schema:{
+                quiz : { $ref: '#/definitions/Quiz' },
+                quizStatId : ''
+            }
         }
         #swagger.responses[404] = {
             description: 'No quiz found with this id or no user found with this id'
@@ -71,16 +71,16 @@ router.get("/:quizStatId/:questionId/createQuestionStat", (req, res) => catchErr
     res.status(200).json(createStatQuestion(req.params.quizStatId, req.params.questionId));
 }));
 
-router.post("/:quizStatId/:questionStatId/checkAnswer", (req, res) => catchErrors(req, res, () => {
+router.post("/:quizStatId/:questionStatId/:userId/checkAnswer", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
-        #swagger.summary = 'Return the good answer to a question'
+        #swagger.summary = 'Checks if the given proposition is the correct answer'
         #swagger.responses[200] = {
                 schema : { $ref: '#/definitions/Answer' },
             }
         #swagger.responses[404] = {
             description: 'No questionStat found with this id'
         } */
-    res.status(200).json(checkAnswer(req.params.questionStatId, req.body));
+    res.status(200).json(checkAnswer(req.params.quizStatId, req.params.questionStatId, req.body, req.params.userId));
 }));
 
 

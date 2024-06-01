@@ -77,14 +77,15 @@ export class QuizGameComponent {
     return this.counter;
   }
 
-  result(answer: Answer, trueAnswerId: number) {
-    this.check = trueAnswerId == answer.id;
-    this.trueAnswer = this.currentQuestion!.answers.find(answer => answer.id == trueAnswerId);
-    if (this.user!.removeAnswers && !this.check) {
+  result(answer: Answer, trueAnswerId?: string) {
+    if (!trueAnswerId) {
       this.currentQuestion!.answers.find(a => answer == a)!.hide = true;
       this.start = new Date();
       return;
-    } else if (this.user!.replayAtEnd && !this.check) this.replayAtEnd();
+    }
+    this.check = parseInt(trueAnswerId) == answer.id;
+    this.trueAnswer = this.currentQuestion!.answers.find(answer => answer.id == parseInt(trueAnswerId));
+    if (this.user!.replayAtEnd && !this.check) this.replayAtEnd();
     this.counter++;
     this.questionResult = true;
   }
@@ -96,7 +97,7 @@ export class QuizGameComponent {
     attempt.answerHint = !this.fiftyFiftyEnabled;
     attempt.timeSpent = duration;
     attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
-    this.quizService.checkAnswer(attempt, (trueAnswerId => this.result(answer, parseInt(trueAnswerId))));
+    this.quizService.checkAnswer(attempt, (trueAnswerId => this.result(answer, trueAnswerId)));
   }
 
   replayAtEnd() {

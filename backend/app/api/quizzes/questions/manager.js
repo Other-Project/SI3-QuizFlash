@@ -73,7 +73,7 @@ function deleteQuestion(questionId) {
 }
 
 /**
- * Return the answers could be removed to the choice
+ * Returns the answers to remove from the choices
  * @param {string} questionId
  */
 function removedAnswers(questionId) {
