@@ -3,7 +3,7 @@ import {AccessRestriction} from "../models/access-restriction.models";
 import {Patient} from "../models/patient.models";
 
 export const USER_MARTINE: Patient = {
-  id: 1716802568716,
+  id: "134b849f-fd4b-4b13-b377-f283b117365d",
   access: AccessRestriction.User,
 
   pictureUrl: "assets/users/martine.jpg",
