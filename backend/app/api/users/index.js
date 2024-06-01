@@ -1,8 +1,7 @@
 const { Router } = require("express");
-
 const { User } = require("../../models");
 const { catchErrors } = require("../../utils/errors/routes");
-
+const { createUser } = require("./manager");
 const router = new Router();
 
 router.get("/", (req, res) => catchErrors(req, res, () => {
@@ -42,8 +41,7 @@ router.post("/", (req, res) => catchErrors(req, res, () => {
             description: 'Invalid request'
         } */
 
-    const user = User.create({ ...req.body });
-    res.status(201).json(user);
+    res.status(201).json(createUser(req.body));
 }));
 
 router.put("/:userId", (req, res) => catchErrors(req, res, () => {

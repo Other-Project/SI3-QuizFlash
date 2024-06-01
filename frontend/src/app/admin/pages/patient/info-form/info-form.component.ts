@@ -20,7 +20,7 @@ export class InfoFormComponent {
       firstname: this.currentPatient?.firstname ?? "",
       lastname: this.currentPatient?.lastname ?? "",
       age: this.currentPatient?.age ?? 1,
-      pictureUrl: this.currentPatient?.pictureUrl ?? "/assets/profile.png",
+      pictureUrl: this.currentPatient?.pictureUrl,
       hobbies: this.currentPatient?.hobbies ?? [],
       dementiaLevel: this.currentPatient?.dementiaLevel ?? Dementia.Mild,
       fontSize: this.currentPatient?.fontSize ?? 1,
@@ -62,7 +62,6 @@ export class InfoFormComponent {
       this.patientInfoChange.emit();
       return this.userService.updateUser(this.currentPatient.id, this.patientForm.value);
     }
-    let id: string = this.userService.addUser(this.patientForm.value);
-    this.router.navigate([id], {relativeTo: this.route}).then();
+    this.userService.addUser(this.patientForm.value, user => this.router.navigate([user.id], {relativeTo: this.route}).then());
   }
 }

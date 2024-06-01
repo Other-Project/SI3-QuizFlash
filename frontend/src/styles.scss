@@ -5,6 +5,10 @@
 
 $defaultFontSize: 2rem;
 
+:root {
+  --primaryColor: #{$blue};
+}
+
 html {
   width: 100%;
   height: 100%;
