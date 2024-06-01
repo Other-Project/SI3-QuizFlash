@@ -54,7 +54,8 @@ import {QuizStatsPartComponent} from "./quiz-stats-part/quiz-stats-part.componen
     PlayButtonComponent,
     ReactiveFormsModule,
     FormsModule,
-    NgStyle
+    NgStyle,
+    DatePipe
   ],
   providers: [
     DatePipe,
