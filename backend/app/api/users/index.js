@@ -1,7 +1,7 @@
-const { Router } = require("express");
-const { User } = require("../../models");
-const { catchErrors } = require("../../utils/errors/routes");
-const { createUser } = require("./manager");
+const {Router} = require("express");
+const {User} = require("../../models");
+const {catchErrors} = require("../../utils/errors/routes");
+const {createUser} = require("./manager");
 const checkAuthentification = require("../../utils/auth-checker");
 const access = require("../../models/access-restriction.model");
 const router = new Router();
@@ -13,10 +13,16 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
             schema: [{ $ref: '#/definitions/User' }]
         } */
 
-    res.status(200).json(User.get());
+    res.status(200).json(User.get().map(user => ({
+        id: user.id,
+        access: user.access,
+        pictureUrl: user.pictureUrl,
+        lastname: user.lastname,
+        firstname: user.firstname
+    })));
 }));
 
-router.get("/:userId", (req, res) => catchErrors(req, res, () => {
+router.get("/:userId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Users']
         #swagger.summary = 'Get a specific user'
         #swagger.responses[200] = {
