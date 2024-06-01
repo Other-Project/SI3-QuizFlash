@@ -137,7 +137,7 @@ function getQuestionStatText(questionId) {
     return Question.get().filter(question => question.id === questionId)[0].text;
 }
 
-function getQuizzesId(userId) {
+function getQuizzesParticipationIds(userId) {
     return [...new Set(QuizStats.get().filter(stat => stat.userId === parseInt(userId, 10)).map(stat => stat.quizId))];
 }
 
@@ -156,14 +156,6 @@ function getUserQuizzesParticipation(userId) {
         id: quizId,
         title: getQuizTitle(quizId)
     }));
-}
-
-function getUserQuizzesParticipation(userId) {
-    return getQuizzesNames(getQuizzesId(userId));
-}
-
-function getQuizTitle(quizId) {
-    return Quiz.get().filter(quiz => quiz.id === quizId).map(quiz => quiz.title)[0];
 }
 
 module.exports = {
