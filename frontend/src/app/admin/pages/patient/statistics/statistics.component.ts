@@ -35,8 +35,10 @@ export class StatisticsComponent implements OnInit {
   quizSelection(quizSelectionData: { quizId?: string, questionType?: QuestionType }) {
     this.quizId = quizSelectionData.quizId;
     this.questionType = quizSelectionData.questionType;
-    this.statFilter = StatsFilter.TRY;
-    this.dataType = DataTypes.SUCCESS;
+    if (!this.quizId) {
+      this.statFilter = StatsFilter.TRY;
+      this.dataType = DataTypes.SUCCESS;
+    }
     this.updateStats();
     this.graph?.quizSelection(quizSelectionData.quizId);
   }
