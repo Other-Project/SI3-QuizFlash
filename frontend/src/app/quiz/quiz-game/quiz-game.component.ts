@@ -39,25 +39,18 @@ export class QuizGameComponent {
       this.counter = 1;
       this.nextQuestion();
     });
-    this.quizService.quizStatId$.subscribe(id => {
-      this.statisticId = id;
-    });
-    this.quizService.questionStatsId$.subscribe(id => {
-      this.questionStatsId = id;
-    });
+    this.quizService.quizStatId$.subscribe(id => this.statisticId = id);
+    this.quizService.questionStatsId$.subscribe(id => this.questionStatsId = id);
   }
 
   update() {
     this.currentQuestion = this.questions.at(this.counter - 1);
-    //if (this.currentQuestion) this.quizService.questionStatCreation(this.currentQuestion.id);
     if (this.isFinish()) {
       this.finishPage = true;
       return;
     }
     this.questionResult = false;
-    if (this.currentQuestion) this.quizService.nextQuestion(this.currentQuestion?.id, () => {
-      this.startQuestion();
-    });
+    if (this.currentQuestion) this.quizService.nextQuestion(this.currentQuestion!.id).then(() => this.startQuestion());
   }
 
   startQuestion() {
@@ -103,10 +96,8 @@ export class QuizGameComponent {
     attempt.answerHint = !this.fiftyFiftyEnabled;
     attempt.timeSpent = duration;
     attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
-    this.quizService.chekAnswer(attempt, (trueAnswerId => this.result(answer, parseInt(trueAnswerId))));
+    this.quizService.checkAnswer(attempt, (trueAnswerId => this.result(answer, parseInt(trueAnswerId))));
   }
-
-
 
   replayAtEnd() {
     if (this.questions.filter(question => question == this.currentQuestion).length <= 1) {
@@ -118,7 +109,7 @@ export class QuizGameComponent {
   fiftyFifty() {
     if (!this.fiftyFiftyEnabled) return;
     this.fiftyFiftyEnabled = false;
-    if (this.currentQuestion!.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion?.id!, this.currentQuestion!.answers.length / 2, answers => this.hideAnswers(answers));
+    if (this.currentQuestion!.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion?.id!).then(answers => this.hideAnswers(answers));
   }
 
   hideAnswers(answers: Answer[]) {

@@ -12,7 +12,7 @@ router.get("/history/:userId", (req, res) => catchErrors(req, res, () => {
     #swagger.responses[200] = {
         schema: [{ $ref: '#/definitions/QuizStats' }]
     } */
-    res.status(200).json(buildUserStats(req.params.userId, undefined, undefined));
+    res.status(200).json(buildUserStats(req.params.userId));
 }));
 
 router.get("/:userId", (req, res) => catchErrors(req, res, () => {

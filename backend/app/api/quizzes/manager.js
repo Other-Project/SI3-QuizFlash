@@ -8,19 +8,18 @@ const NotFoundError = require("../../utils/errors/not-found-error");
  * @param {string|number} quizId
  * @param {string|number|undefined} userId
  */
-function buildQuiz(quizId, userId) {
+function buildQuiz(quizId, userId = undefined) {
     const quiz = Quiz.getById(quizId);
     const questions = getQuizQuestions(quiz.id);
     let questionWithAnswers = questions.map((question) => {
-        let answers = JSON.parse(JSON.stringify(getQuestionAnswers(question.id)));
-        if (userId) {
-            answers.map(answer => delete answer.trueAnswer);
-        }
+        let answers = structuredClone(getQuestionAnswers(question.id));
+        if (userId) answers.map(answer => delete answer.trueAnswer);
         return {...question, answers};
     });
     if (userId) {
-        if (!User.getById(userId).soundQuestion) quiz.questions = quiz.questions.filter(question => question.type !== "Sound");
-        questionWithAnswers = questionWithAnswers.sort(() => 0.5 - Math.random()).slice(0, User.getById(userId).numberOfQuestion);
+        let user = User.getById(userId);
+        if (!user.soundQuestion) quiz.questions = quiz.questions.filter(question => question.type !== "Sound");
+        questionWithAnswers = questionWithAnswers.sort(() => 0.5 - Math.random()).slice(0, user.numberOfQuestion);
     }
     return {...quiz, questions: questionWithAnswers};
 }
@@ -95,27 +94,12 @@ function createStatQuestion(quizStatId, questionId) {
  * @param {string} questionStatId
  * @param {string | number} questionAttempt
  */
-//TODO renvoyer la réponse que si le joueur ne rejoue pas la quetsion
 function checkAnswer(questionStatId, questionAttempt) {
     let attempt = Attempts.create({ questionStatId: parseInt(questionStatId), ...questionAttempt }).id;
     let result = Answer.get().find(answer => (answer.questionId === parseInt(QuestionStats.getById(questionStatId).questionId)) && answer.trueAnswer);
     if (!result) throw new NotFoundError(`No true answer find in the question ${Question.getById(QuestionStats.getById(Attempts.getById(attempt).questionStatId).questionId).text}`);
-    if (result.id === Attempts.getById(attempt).chosenAnswersId) {
-        QuestionStats.getById(questionStatId).success = true;
-        return result.id.toString();
-    } else {
-        return result.id.toString();
-    }
-}
-
-/**
- * Return the answers could be removed to the choice
- * @param {string} questionId
- * @param {number} number
- */
-function removedAnswers(questionId, number) {
-    let answers = Answer.get().filter(answer => answer.questionId === parseInt(questionId)).filter(answer => !answer.trueAnswer);
-    return answers.sort(() => 0.5 - Math.random()).slice(0, number);
+    if (result.id === Attempts.getById(attempt).chosenAnswersId) QuestionStats.getById(questionStatId).success = true;
+    return result.id.toString();
 }
 
 module.exports = {
@@ -126,6 +110,5 @@ module.exports = {
     deleteQuiz,
     createStatQuiz,
     createStatQuestion,
-    checkAnswer,
-    removedAnswers
+    checkAnswer
 };

@@ -13,8 +13,7 @@
                         (chosenAnswer)="checkAnswer($event)" (inactive)="setInactivity()"
                         *ngIf="!soundSetting && !questionResult && !isFinish()"/>
       <app-question-result [goodAnswer]="trueAnswer" [correct]="check" [automatedSkip]="user!.automatedSkip" [finish]="isFinish()"
-                           (continue)='nextQuestion()'
-                           *ngIf="questionResult && !finishPage"/>
+                           (continue)='nextQuestion()' *ngIf="questionResult && !finishPage"/>
       <finish-page [title]="inactivity ? 'Quiz terminé' : 'Bravo !'"
                    [text]="inactivity ? 'Le quiz a été clos automatiquement en raison d\'une longue période d\'inactivité.' : 'Vous avez terminé'"
                    [textButton]="'Revenir au menu'"

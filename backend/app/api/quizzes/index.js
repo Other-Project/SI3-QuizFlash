@@ -3,7 +3,7 @@ const { Router } = require("express");
 const { Quiz } = require("../../models");
 const { catchErrors } = require("../../utils/errors/routes");
 const QuestionsRouter = require("./questions");
-const { buildQuiz, updateQuiz, replaceQuiz, createQuiz, deleteQuiz, createStatQuiz, createStatQuestion, checkAnswer, removedAnswers } = require("./manager");
+const { buildQuiz, updateQuiz, replaceQuiz, createQuiz, deleteQuiz, createStatQuiz, createStatQuestion, checkAnswer } = require("./manager");
 
 const router = new Router();
 
@@ -29,26 +29,19 @@ router.get("/:quizId", (req, res) => catchErrors(req, res, () => {
             description: 'No quiz found with this id'
         } */
 
-    res.status(200).json(buildQuiz(req.params.quizId, ""));
+    res.status(200).json(buildQuiz(req.params.quizId));
 }));
 
-
-router.get("/removedAnswer/:questionId/:n", (req, res) => catchErrors(req, res, () => {
-    /*  #swagger.tags = ['Quizzes']
-        #swagger.summary = 'Return a specific number of not true answers'
-        #swagger.responses[200] = {
-            schema: [{ $ref: '#/definitions/Answer' }]
-        }
-        #swagger.responses[404] = {
-            description: 'No question found with this id'
-        } */
-
-    res.status(200).json(removedAnswers(req.params.questionId, req.params.n));
-}));
-
-router.get("/:quizId/:userId/startQuiz", (req, res) => catchErrors(req, res, () => {
+router.get("/:quizId/startQuiz", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Return a quiz without tureAnswer parameter inside answers and the id of the QuizStats object created'
+        #swagger.parameters['userId'] = {
+            in: 'query',
+            description: 'The user id',
+            schema: {
+                type: 'string',
+            }
+        }
         #swagger.responses[200] = {
                     schema:{
                         quiz : { $ref: '#/definitions/Quiz' },
@@ -59,13 +52,14 @@ router.get("/:quizId/:userId/startQuiz", (req, res) => catchErrors(req, res, () 
             description: 'No quiz found with this id or no user found with this id'
         } */
 
+    const { userId } = req.query;
     res.status(200).json({
         quiz: buildQuiz(req.params.quizId, req.params.userId),
-        quizStatId: createStatQuiz(req.params.quizId, parseInt(req.params.userId), Date.now())
+        quizStatId: createStatQuiz(req.params.quizId, parseInt(userId), Date.now())
     });
 }));
 
-router.get("/:quizStatId/:questionId/nextQuestion", (req, res) => catchErrors(req, res, () => {
+router.get("/:quizStatId/:questionId/createQuestionStat", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Create a QuestionStat and return its id'
         #swagger.responses[200] = {
@@ -77,7 +71,7 @@ router.get("/:quizStatId/:questionId/nextQuestion", (req, res) => catchErrors(re
     res.status(200).json(createStatQuestion(req.params.quizStatId, req.params.questionId));
 }));
 
-router.post("/:questionStatId/checkAnswer", (req, res) => catchErrors(req, res, () => {
+router.post("/:quizStatId/:questionStatId/checkAnswer", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Return the good answer to a question'
         #swagger.responses[200] = {

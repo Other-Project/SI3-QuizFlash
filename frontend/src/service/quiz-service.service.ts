@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Quiz} from "../models/quiz.models";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, firstValueFrom} from "rxjs";
 import {User} from "../models/user.models";
 import {UserService} from "./user.service";
 import {StatisticsService} from "./statistics.service";
@@ -39,39 +39,31 @@ export class QuizService {
       this.http.get<Quiz>(`${this.quizApiUrl}/${id}`).subscribe(quiz => {
         this.quiz$.next(this.quiz = quiz);
       });
-    else {
-      this.quiz$.next(this.quiz = undefined);
-    }
-    console.log(this.quiz);
+    else this.quiz$.next(this.quiz = undefined);
   }
 
-  startQuiz(id?: string, callback?: (({}) => void)) {
-    if (id)
-      this.http.get<{ quiz: Quiz, quizStatId: string }>(`${this.quizApiUrl}/${id}/${this.user?.id}/startQuiz`).subscribe(values => {
-        this.quiz$.next(this.quiz = values.quiz);
-        this.quizStatId$.next(this.quizStatsId = values.quizStatId);
-        callback!(values);
-      });
-    else {
+  async startQuiz(id?: string) {
+    if (!id) {
       this.quiz$.next(this.quiz = undefined);
       this.quizStatId$.next(this.quizStatsId = undefined);
+      return;
     }
+    let params = new HttpParams();
+    params = params.append("userId", this.user!.id);
+    let result = await firstValueFrom(this.http.get<{ quiz: Quiz, quizStatId: string }>(`${this.quizApiUrl}/${id}/startQuiz`, {params}));
+    this.quiz$.next(this.quiz = result.quiz);
+    this.quizStatId$.next(this.quizStatsId = result.quizStatId);
+    return result;
   }
 
-  nextQuestion(questionId?: string, callback?: ((id: string) => void)) {
-    if (questionId) {
-      this.http.get<string>(`${this.quizApiUrl}/${this.quizStatsId}/${questionId}/nextQuestion`).subscribe(id => {
-        this.questionStatsId$.next(this.questionStatsId = id);
-        callback!(id);
-      });
-    }
+  async nextQuestion(questionId: string) {
+    let result = await firstValueFrom(this.http.get<string>(`${this.quizApiUrl}/${this.quizStatsId}/${questionId}/createQuestionStat`));
+    this.questionStatsId$.next(this.questionStatsId = result);
+    return result;
   }
 
-  chekAnswer(attempt: Attempt, callback?: ((check: string) => void)) {
-    console.log(this.questionStatsId + "ghbhbjjhjjbhjnhjn");
-    if (attempt) {
-      this.http.post<string>(this.quizApiUrl + "/" + this.questionStatsId + "/checkAnswer", attempt, httpOptionsBase).subscribe(result => callback!(result));
-    }
+  checkAnswer(attempt: Attempt, callback?: ((check: string) => void)) {
+    this.http.post<string>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/checkAnswer`, attempt, httpOptionsBase).subscribe(result => callback!(result));
   }
 
   replaceQuiz(quizId: string, updatedQuiz: Quiz) {
@@ -88,10 +80,8 @@ export class QuizService {
     });
   }
 
-  fiftyFifty(questionId: String, n: number, callback: ((answers: Answer[]) => void)) {
-    this.http.get<Answer[]>(`${this.quizApiUrl}/removedAnswer/${questionId}/${n}`, httpOptionsBase).subscribe(
-      answers => callback(answers)
-    );
+  fiftyFifty(questionId: String) {
+    return firstValueFrom(this.http.get<Answer[]>(`${this.quizApiUrl}/${this.quiz!.id}/questions/${questionId}/removedAnswer`, httpOptionsBase));
   }
 }
 

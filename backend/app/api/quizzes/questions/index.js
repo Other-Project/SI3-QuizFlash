@@ -1,9 +1,9 @@
 const { Router } = require("express");
 
-const { Answer, Quiz, Question } = require("../../../models");
 const { catchErrors } = require("../../../utils/errors/routes");
 const AnswersRouter = require("./answers");
 const {getQuizQuestions, getQuestionFromQuiz, createQuestion, deleteQuestion, replaceQuestion, updateQuestion} = require("./manager");
+const { removedAnswers } = require("./manager");
 
 const router = new Router({ mergeParams: true });
 
@@ -101,6 +101,19 @@ router.delete("/:questionId", (req, res) => catchErrors(req, res, () => {
 
     deleteQuestion(req.params.questionId);
     res.status(204).end();
+}));
+
+router.get("/:questionId/removedAnswer", (req, res) => catchErrors(req, res, () => {
+    /*  #swagger.tags = ['Quizzes']
+        #swagger.summary = 'Return the half of the answer in the question'
+        #swagger.responses[200] = {
+            schema: [{ $ref: '#/definitions/Answer' }]
+        }
+        #swagger.responses[404] = {
+            description: 'No question found with this id'
+        } */
+
+    res.status(200).json(removedAnswers(req.params.questionId));
 }));
 
 router.use("/:questionId/answers", AnswersRouter);

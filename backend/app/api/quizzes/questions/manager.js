@@ -72,10 +72,22 @@ function deleteQuestion(questionId) {
     Question.delete(questionId);
 }
 
+/**
+ * Return the answers could be removed to the choice
+ * @param {string} questionId
+ */
+function removedAnswers(questionId) {
+    let answers = Answer.get().filter(answer => answer.questionId === parseInt(questionId));
+    if (answers.length < 3) return [];
+    let answersRemoved = answers.filter(answer => !answer.trueAnswer);
+    return answersRemoved.sort(() => 0.5 - Math.random()).slice(0, answers.length / 2);
+}
+
 module.exports = {
     getQuizQuestions,
     createQuestion,
     replaceQuestion,
     updateQuestion,
-    deleteQuestion
+    deleteQuestion,
+    removedAnswers
 };

@@ -59,12 +59,10 @@ export class StatisticsService {
    **************/
 
   getUserHistory(userId: string) {
-    this.http.get<QuizStats[]>(this.quizApiUrl + "/history/" + userId).subscribe(quizzes => {
+    this.http.get<QuizStats[]>(`${this.quizApiUrl}/history/${userId}`).subscribe(quizzes => {
       this.userQuizStats = quizzes;
       this.userQuizStats$.next(this.userQuizStats);
     });
-    //this.userQuizStats = this.quizStatistics.filter(statistic => statistic.userId == userId);
-    //this.userQuizStats$.next(this.userQuizStats);
   }
 
   /*********
