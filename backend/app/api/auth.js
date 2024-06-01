@@ -42,18 +42,15 @@ passport.deserializeUser(function (user, cb) {
 
 const router = new Router();
 
-
-router.post("/login/password", (req, res) => catchErrors(req, res, () =>
-    passport.authenticate("local", {failWithError: true}, (err, user) => catchErrors(req, res, () => {
-        if (err || !user) throw new AuthenticationError(err);
-        res.status(200).json(user);
-    }))(req, res)));
-
-router.post("/logout", function (req, res, next) {
-    req.logout(function (err) {
-        if (err) return next(err);
-        res.status(200).end();
-    });
+router.post("/login/password", passport.authenticate("local"), function (req, res) {
+    res.status(200).json(req.user);
 });
+
+router.post("/logout", (req, res) => catchErrors(req, res, () => {
+    req.logout(err => catchErrors(req, res, () => {
+        if (err) throw new Error(err);
+        res.status(200).end();
+    }));
+}));
 
 module.exports = router;

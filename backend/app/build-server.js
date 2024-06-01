@@ -16,7 +16,7 @@ module.exports = (cb) => {
         secret: "bmw3NLzcGlEVQNoR3z6M516JFXoILd6N",
         resave: false,
         saveUninitialized: false,
-        cookie: {secure: true}
+        cookie: {secure: false}
     }));
     app.use(passport.authenticate("session"));
     app.use("/api", api);
