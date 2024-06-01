@@ -27,6 +27,10 @@ export class UserService {
     this.users$.next(this.users);
   }
 
+  getUser(userId: string) {
+    return firstValueFrom(this.http.get<User>(`${this.userUrl}/${userId}`, this.httpOptions));
+  }
+
   addUser(user: User, callback: ((user: User) => void)) {
     this.http.post<User>(this.userUrl, user, this.httpOptions).subscribe(user => this.retrieveUsers().then(() => callback(user)));
   }

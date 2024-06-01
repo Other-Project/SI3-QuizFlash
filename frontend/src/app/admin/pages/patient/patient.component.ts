@@ -10,9 +10,9 @@ export enum TabNavigation {
 }
 
 @Component({
-  selector: 'patient',
-  templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.scss']
+  selector: "patient",
+  templateUrl: "./patient.component.html",
+  styleUrls: ["./patient.component.scss"]
 })
 
 export class PatientComponent implements OnDestroy {
@@ -21,22 +21,20 @@ export class PatientComponent implements OnDestroy {
   public tab: TabNavigation = TabNavigation.INFORMATION;
 
   private routeSub;
-  private userSub;
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
-    this.routeSub = this.route.params.subscribe(params => this.userId = params["user_id"]);
-    this.userSub = this.userService.users$.subscribe(users => {
+    this.routeSub = this.route.params.subscribe(params => {
+      this.userId = params["user_id"];
       if (!this.userId) this.patient = undefined;
-      else {
-        this.patient = users.find(user => user.id == this.userId) as Patient;
+      else this.userService.getUser(this.userId).then(user => {
+        this.patient = user as Patient;
         if (!this.patient) this.router.navigate([".."], {relativeTo: this.route}).then();
-      }
+      });
     });
   }
 
   ngOnDestroy() {
     this.routeSub.unsubscribe();
-    this.userSub.unsubscribe();
   }
 
   protected readonly TabNavigation = TabNavigation;
