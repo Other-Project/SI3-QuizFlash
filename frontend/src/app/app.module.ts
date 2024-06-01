@@ -11,8 +11,7 @@ import {AdminButtonComponent} from "./profiles/admin-button/admin-button.compone
 import {ProfileListComponent} from "./profiles/profile-list/profile-list.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {QuizGameSelectionModule} from "./quiz/quiz-game-selection/quiz-game-selection.module";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthInterceptor} from "../interceptors/auth.interceptor";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -32,12 +31,7 @@ import {AuthInterceptor} from "../interceptors/auth.interceptor";
     QuizGameSelectionModule,
     HttpClientModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

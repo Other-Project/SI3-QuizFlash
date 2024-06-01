@@ -16,14 +16,16 @@ export class HeaderComponent {
   loggedIn: boolean = false;
 
   constructor(private userService: UserService, private quizService: QuizService, private router: Router) {
-    userService.user$.subscribe(user => this.loggedIn = user != undefined);
+    userService.user$.subscribe(user => {
+      if (this.loggedIn && !user) this.router.navigate(["/"]).then();
+      this.loggedIn = !!user;
+    });
   }
 
   public logout() {
-    this.quizService.selectQuiz("");
     if (!this.loggedIn) return;
-    this.userService.setLoggedUser();
-    this.router.navigate(["/"]).then();
+    this.quizService.selectQuiz("");
+    this.userService.logout();
   }
 
   protected readonly faSignOut = faSignOut;
