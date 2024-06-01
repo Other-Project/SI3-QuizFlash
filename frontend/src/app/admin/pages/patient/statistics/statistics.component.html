@@ -1,3 +1,3 @@
-<stats-data (quizSelection)="quizSelection($event)" [data]="data" [quizList]="patientPlayedQuizzes" [patientId]="patient.id"
-            [answerHint]="patient.answerHint"/>
+<stats-data [data]="data" [quizList]="patientPlayedQuizzes" [patientId]="patient.id" [answerHint]="patient.answerHint"
+            (quizSelection)="quizSelection($event)"/>
 <stats-graph (optionsSelection)="optionSelection($event)" [graphData]="graphData" [patientId]="patient.id" [title]="'Graphique des statistiques'"/>

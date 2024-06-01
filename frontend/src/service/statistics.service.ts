@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {QuizStats} from "../models/quiz-stats.model";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, firstValueFrom} from "rxjs";
 import {apiUrl} from "../configs/server.config";
 import {Quiz} from "../models/quiz.models";
 import {HttpClient, HttpParams} from "@angular/common/http";
@@ -22,10 +22,8 @@ export class StatisticsService {
     //TODO Implement history
   }
 
-  getUserQuizzesParticipation(userId: number, callback: ((quizzes: Quiz[]) => void)) {
-    this.http.get<Quiz[]>(`${this.quizApiUrl}/quizzes/${userId}`).subscribe(quizzes => {
-      callback(quizzes);
-    });
+  getUserQuizzesParticipation(userId: number) {
+    return firstValueFrom(this.http.get<Quiz[]>(`${this.quizApiUrl}/quizzes/${userId}`));
   }
 
   refreshUserStatistics(userId: string, dataType: string, statType: string, quizId?: string, questionType?: string) {

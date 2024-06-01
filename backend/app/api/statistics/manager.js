@@ -43,7 +43,7 @@ function getRequestedStat(dataType, statType, userId, quizId, questionType) {
     const rateData = generalRates[dataType](userQuizzes.flatMap(stat => stat.questionsStats));
 
     return {
-        data: !userQuizzes.length ? {} : { dataType, ...rateData },
+        data: userQuizzes.length ? { dataType, ...rateData } : {},
         graphData: result.map(([key, value]) => ({
             key: key.toString(),
             value: dataValue[dataType](value.filter(questionStat => isQuestionOfType(questionStat.questionId, questionType)))
@@ -134,7 +134,7 @@ function isQuestionOfType(questionId, questionType) {
  * @param {string} questionId
  */
 function getQuestionStatText(questionId) {
-    return Question.get().filter(question => question.id === questionId)[0].text;
+    return Question.get().find(question => question.id === questionId).text;
 }
 
 function getQuizzesParticipationIds(userId) {
@@ -142,7 +142,7 @@ function getQuizzesParticipationIds(userId) {
 }
 
 function getQuizTitle(quizId) {
-    return Quiz.get().filter(quiz => quiz.id === quizId).map(quiz => quiz.title)[0];
+    return Quiz.get().find(quiz => quiz.id === quizId).title;
 }
 
 /**
