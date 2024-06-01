@@ -141,12 +141,17 @@ function getQuizzesId(userId) {
     return [...new Set(QuizStats.get().filter(stat => stat.userId === parseInt(userId, 10)).map(stat => stat.quizId))];
 }
 
-function getQuizzesNames(quizIds) {
+function getQuizTitle(quizId) {
+    return Quiz.get().filter(quiz => quiz.id === quizId).map(quiz => quiz.title)[0];
+}
+
 /**
  * Returns the titles and ids of quizzes in which a user has taken part
  * @param {string} userId
  * @return {{id: number, title: string}[]} the ids and titles
  */
+function getUserQuizzesParticipation(userId) {
+    const quizIds = getQuizzesParticipationIds(userId);
     return quizIds.map(quizId => ({
         id: quizId,
         title: getQuizTitle(quizId)
