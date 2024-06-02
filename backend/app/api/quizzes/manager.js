@@ -93,7 +93,7 @@ function createStatQuestion(quizStatId, questionId) {
  * Check if the answer is good or not
  * @param {string} quizStatId
  * @param {string} questionStatId
- * @param {string | number} questionAttempt
+ * @param {Attempts} questionAttempt
  * @param {string} userId
  */
 function checkAnswer(quizStatId, questionStatId, questionAttempt, userId) {
