@@ -7,10 +7,11 @@ import {Answer} from "../../../../models/answer.models";
   styleUrls: ['./question-result.component.scss']
 })
 export class QuestionResultComponent implements OnInit {
-  @Input() goodAnswer?: Answer;
+  @Input() goodAnswer?: string;
   @Input() correct?: boolean;
   @Input() automatedSkip: boolean = false;
   @Output() continue = new EventEmitter<Answer>();
+  @Input() finish?: boolean;
   private timeOutId?: number;
 
   constructor() {

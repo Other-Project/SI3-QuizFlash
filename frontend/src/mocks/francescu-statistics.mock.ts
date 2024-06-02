@@ -9,10 +9,10 @@ export const QUESTIONSTAT1: QuestionStats = {
   attempts: [
     {
       attemptId: "1",
-      chosenAnswersId: "4",
+      chosenAnswersId: 4,
       timeSpent: 2.2,
       answerHint: true,
-      hiddenAnswers: ["1", "2"],
+      hiddenAnswers: [1, 2]
     }
   ],
 }
@@ -24,7 +24,7 @@ export const QUESTIONSTAT2: QuestionStats = {
   attempts: [
     {
       attemptId: "2",
-      chosenAnswersId: "4",
+      chosenAnswersId: 4,
       timeSpent: 4.3,
       answerHint: false,
       hiddenAnswers: [],

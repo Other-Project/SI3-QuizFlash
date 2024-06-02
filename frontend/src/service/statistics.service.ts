@@ -19,7 +19,10 @@ export class StatisticsService {
   }
 
   getUserHistory(userId: string) {
-    //TODO Implement history
+    this.http.get<QuizStats[]>(`${this.quizApiUrl}/history/${userId}`).subscribe(quizzes => {
+      this.userQuizStats = quizzes;
+      this.userQuizStats$.next(this.userQuizStats);
+    });
   }
 
   getUserQuizzesParticipation(userId: number) {

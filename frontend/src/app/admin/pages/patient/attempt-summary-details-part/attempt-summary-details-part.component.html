@@ -2,7 +2,7 @@
   <div class="attempt" *ngFor="let attempt of questionStat.attempts; index as i;">
     <p class="attempt-description" *ngIf="questionStat.attempts.length>1">Tentative numéro {{ i + 1 }} :</p>
     <div class="extra" *ngIf="questionStat.attempts.length>1">
-      <p>Temps passé sur cette tentative : {{ attempt.timeSpent }} minutes</p>
+      <p>Temps passé sur cette tentative : {{ attempt.timeSpent * 60000 | date:"mm 'minutes' ss 'secondes'":'UTC' }}</p>
       <p *ngIf="attempt.answerHint">50/50 utilisé lors de cette tentative</p>
     </div>
     <div class="answers">

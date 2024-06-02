@@ -21,7 +21,6 @@ function getQuestionFromQuiz(quizId, questionId) {
     const quizIdInt = parseInt(quizId, 10);
     const question = Question.getById(questionId);
     if (question.quizId === quizIdInt) return question;
-
     const quiz = Quiz.getById(quizId);
     throw new NotFoundError(`${question.name} id=${questionId} was not found for ${quiz.name} id=${quiz.id}`);
 }
@@ -73,11 +72,22 @@ function deleteQuestion(questionId) {
     Question.delete(questionId);
 }
 
+/**
+ * Returns the answers to remove from the choices
+ * @param {string} questionId
+ */
+function removedAnswers(questionId) {
+    let answers = Answer.get().filter(answer => answer.questionId === parseInt(questionId));
+    if (answers.length < 3) return [];
+    let answersRemoved = answers.filter(answer => !answer.trueAnswer);
+    return answersRemoved.sort(() => 0.5 - Math.random()).slice(0, answers.length / 2);
+}
+
 module.exports = {
     getQuizQuestions,
-    getQuestionFromQuiz,
     createQuestion,
     replaceQuestion,
     updateQuestion,
-    deleteQuestion
+    deleteQuestion,
+    removedAnswers
 };

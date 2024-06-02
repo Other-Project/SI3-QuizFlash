@@ -2,7 +2,7 @@
   <p [class]="question.attempts.length >= 2 ?'partiallySucceed' : 'succeed'" *ngIf="question.success">
     {{ question.attempts.length >= 2 ? 'Question partiellement réussie' : 'Question réussie' }}</p>
   <p class="notSucceed" *ngIf="!question.success">Question non réussie</p>
-  <p>Temps passé sur cette question : {{ getTimeSpent() }} minutes</p>
+  <p>Temps passé sur cette question : {{ getTimeSpent() * 60000 | date:"mm 'minutes' ss 'secondes'":'UTC' }}</p>
   <p *ngIf="question.attempts.length > 1">Nombre de tentatives : {{ question.attempts.length }}</p>
   <p [ngStyle]="{'grid-column': question.attempts.length > 1 ? '1/4' : 'auto'}" *ngIf="fiftyFiftyUse()">50/50 utilisé pour cette question</p>
 </div>

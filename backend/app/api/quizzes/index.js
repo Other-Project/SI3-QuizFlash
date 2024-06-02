@@ -1,9 +1,9 @@
 const { Router } = require("express");
 
-const {Quiz} = require("../../models");
+const { Quiz } = require("../../models");
 const { catchErrors } = require("../../utils/errors/routes");
 const QuestionsRouter = require("./questions");
-const {buildQuiz, updateQuiz, replaceQuiz, createQuiz, deleteQuiz} = require("./manager");
+const { buildQuiz, updateQuiz, replaceQuiz, createQuiz, deleteQuiz, createStatQuiz, createStatQuestion, checkAnswer } = require("./manager");
 const checkAuthentification = require("../../utils/auth-checker");
 const access = require("../../models/access-restriction.model");
 
@@ -33,6 +33,56 @@ router.get("/:quizId", checkAuthentification(access.user), (req, res) => catchEr
 
     res.status(200).json(buildQuiz(req.params.quizId));
 }));
+
+router.get("/:quizId/startQuiz", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
+    /*  #swagger.tags = ['Quizzes']
+        #swagger.summary = 'Return a quiz without trueAnswer parameter inside answers and the id of the QuizStats object created'
+        #swagger.responses[200] = {
+            schema:{
+                quiz : { $ref: '#/definitions/Quiz' },
+                quizStatId : ''
+            }
+        }
+        #swagger.responses[404] = {
+            description: 'No quiz found with this id or no user found with this id'
+        } */
+
+    res.status(200).json({
+        quiz: buildQuiz(req.params.quizId, req.user.id),
+        quizStatId: createStatQuiz(req.params.quizId, req.user.id)
+    });
+}));
+
+router.get("/:quizStatId/:questionId/createQuestionStat", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
+    /*  #swagger.tags = ['Quizzes']
+        #swagger.summary = 'Create a QuestionStat and return its id'
+        #swagger.responses[200] = {
+                schema : 1
+            }
+        #swagger.responses[404] = {
+            description: 'No question found with this id or no quiStat found with this id'
+        } */
+    res.status(200).json(createStatQuestion(req.params.quizStatId, req.params.questionId));
+}));
+
+router.post("/:quizStatId/:questionStatId/checkAnswer", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
+    /*  #swagger.tags = ['Quizzes']
+        #swagger.summary = 'Checks if the given proposition is the correct answer'
+        #swagger.responses[200] = {
+            schema:{
+                isTrue : true,
+                expected : {
+                    id : 1,
+                    text : " "
+                    }
+            }
+        }
+        #swagger.responses[404] = {
+            description: 'No questionStat found with this id'
+        } */
+    res.status(200).json(checkAnswer(req.params.quizStatId, req.params.questionStatId, req.body, req.user.id));
+}));
+
 
 router.post("/", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']

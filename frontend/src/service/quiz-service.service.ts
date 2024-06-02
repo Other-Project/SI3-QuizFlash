@@ -1,16 +1,13 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Quiz} from "../models/quiz.models";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, firstValueFrom} from "rxjs";
 import {User} from "../models/user.models";
 import {UserService} from "./user.service";
-import {QuestionType} from "../models/question-type.models";
-import {Patient} from "../models/patient.models";
 import {StatisticsService} from "./statistics.service";
-import {QuizStats} from "../models/quiz-stats.model";
-import {QuestionStats} from "../models/question-stats.model";
 import {Attempt} from "../models/attempt.model";
 import {apiUrl, httpOptionsBase} from "../configs/server.config";
+import {Answer} from "../models/answer.models";
 
 @Injectable({providedIn: "root"})
 export class QuizService {
@@ -21,7 +18,10 @@ export class QuizService {
   public quiz?: Quiz;
   public quiz$: BehaviorSubject<Quiz | undefined> = new BehaviorSubject<Quiz | undefined>(this.quiz);
   private user?: User;
-  private quizStats?: QuizStats;
+  private quizStatsId?: string;
+  public quizStatId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.quizStatsId);
+  private questionStatsId?: string;
+  public questionStatsId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.questionStatsId);
 
   constructor(userService: UserService, private statisticsService: StatisticsService, private http: HttpClient) {
     userService.user$.subscribe(user => {
@@ -36,16 +36,37 @@ export class QuizService {
     });
   }
 
-  selectQuiz(id?: string, user?: Patient) {
+  selectQuiz(id?: string) {
     if (id)
       this.http.get<Quiz>(`${this.quizApiUrl}/${id}`).subscribe(quiz => {
-        // TODO: Migrate this server side
-        if (user && !user.soundQuestion) quiz.questions = quiz.questions.filter(question => question.type != QuestionType.Sound);
-        quiz.questions = quiz.questions.sort(() => 0.5 - Math.random()).slice(0, user?.numberOfQuestion);
-
         this.quiz$.next(this.quiz = quiz);
       });
     else this.quiz$.next(this.quiz = undefined);
+  }
+
+  async startQuiz(id?: string) {
+    if (!id) {
+      this.quiz$.next(this.quiz = undefined);
+      this.quizStatId$.next(this.quizStatsId = undefined);
+      return;
+    }
+    let result = await firstValueFrom(this.http.get<{ quiz: Quiz, quizStatId: string }>(`${this.quizApiUrl}/${id}/startQuiz`, httpOptionsBase));
+    this.quiz$.next(this.quiz = result.quiz);
+    this.quizStatId$.next(this.quizStatsId = result.quizStatId);
+    return result;
+  }
+
+  async nextQuestion(questionId: string) {
+    let result = await firstValueFrom(this.http.get<string>(`${this.quizApiUrl}/${this.quizStatsId}/${questionId}/createQuestionStat`));
+    this.questionStatsId$.next(this.questionStatsId = result);
+    return result;
+  }
+
+  async checkAnswer(attempt: Attempt) {
+    return await firstValueFrom(this.http.post<{
+      isTrue: boolean,
+      expected: { id: string, text: string }
+    }>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/checkAnswer`, attempt, httpOptionsBase));
   }
 
   replaceQuiz(quizId: string, updatedQuiz: Quiz) {
@@ -62,41 +83,9 @@ export class QuizService {
     });
   }
 
-  idCreation() {
-    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
-      (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
-    );
-  }
-
-  /*************
-   * IN SERVER *
-   *************/
-
-  startQuiz(quizId: string) {
-    this.quizStats = {id: this.idCreation(), userId: this.user?.id, quizId: quizId, date: new Date(), questionsStats: []} as QuizStats;
-    return this.quizStats.id;
-  }
-
-  questionStatCreation(questionId: string) {
-    let questionStatistics = {
-      questionId: questionId,
-      questionType: this.quiz?.questions.find(question => question.id == questionId)!.type,
-      success: false,
-      attempts: []
-    } as QuestionStats;
-    this.quizStats!.questionsStats.push(questionStatistics);
-  }
-
-  chekAnswer(questionId: String, answerId: String, attempt: Attempt): string {
-    let questionStat = this.quizStats?.questionsStats.find(question => question.questionId == questionId)!;
-    questionStat.attempts.push(attempt);
-    let goodAnswerId = this.quiz!.questions.find(question => question.id == questionId)!.answers.find(answer => answer.trueAnswer)!.id;
-    if (goodAnswerId == answerId) questionStat.success = true;
-    return goodAnswerId;
-  }
-
-  finish() {
-    this.selectQuiz();
-    //TODO SAVE TO SERVER
+  fiftyFifty(questionId: String) {
+    return firstValueFrom(this.http.get<Answer[]>(`${this.quizApiUrl}/${this.quiz!.id}/questions/${questionId}/halveAnswers`, httpOptionsBase));
   }
 }
+
+

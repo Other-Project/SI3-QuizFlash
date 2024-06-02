@@ -1,7 +1,7 @@
 export interface Attempt {
   attemptId?: string;
-  chosenAnswersId: string;
+  chosenAnswersId: number;
   timeSpent: number;
   answerHint: boolean;
-  hiddenAnswers: string[];
+  hiddenAnswers: number[];
 }

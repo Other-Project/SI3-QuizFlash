@@ -4,7 +4,6 @@ import {Patient} from "../../../models/patient.models";
 import {Quiz} from "../../../models/quiz.models";
 import {Question} from "../../../models/question.models";
 import {Answer} from "../../../models/answer.models";
-import {QuestionType} from "../../../models/question-type.models";
 import {QuizService} from "../../../service/quiz-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Attempt} from "../../../models/attempt.model";
@@ -26,10 +25,11 @@ export class QuizGameComponent {
   protected statisticId?: String;
   protected start?: Date;
   protected questionResult: boolean = false;
-  protected trueAnswer?: Answer;
+  protected trueAnswerText?: string;
   protected check: boolean = false;
   protected inactivity: boolean = false;
-  protected hidenAnswers: Answer[] = [];
+  protected questionStatsId?: string;
+  protected finishPage: boolean = false;
 
   constructor(private userService: UserService, private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.userService.user$.subscribe(user => this.user = user as Patient);
@@ -37,18 +37,25 @@ export class QuizGameComponent {
       this.quiz = quiz;
       this.questions = quiz?.questions ?? [];
       this.counter = 1;
-      this.statisticId = quiz ? this.quizService.startQuiz(quiz.id) : undefined;
-      if (this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true; // If the user has sound questions disabled, the list returned by the service shouldn't contain any
       this.nextQuestion();
     });
+    this.quizService.quizStatId$.subscribe(id => this.statisticId = id);
+    this.quizService.questionStatsId$.subscribe(id => this.questionStatsId = id);
   }
 
   update() {
-    this.hidenAnswers = [];
     this.currentQuestion = this.questions.at(this.counter - 1);
-    if (this.currentQuestion) this.quizService.questionStatCreation(this.currentQuestion.id);
+    if (this.isFinish()) {
+      this.finishPage = true;
+      return;
+    }
     this.questionResult = false;
+    if (this.currentQuestion) this.quizService.nextQuestion(this.currentQuestion!.id).then(() => this.startQuestion());
+  }
+
+  startQuestion() {
     this.start = new Date();
+    if (this.currentQuestion!.answers.length <= 2) this.fiftyFiftyEnabled = false;
   }
 
   nextQuestion() {
@@ -58,7 +65,7 @@ export class QuizGameComponent {
   }
 
   returnSelectionPage() {
-    this.quizService.finish();
+    this.quizService.selectQuiz();
     this.router.navigate(["../.."], {relativeTo: this.route}).then();
   }
 
@@ -71,24 +78,29 @@ export class QuizGameComponent {
     return this.counter;
   }
 
+  result(answer: Answer, text?: string) {
+    this.start = new Date();
+    if (text == "") {
+      this.currentQuestion!.answers.find(a => answer == a)!.hide = true;
+      return;
+    }
+    this.trueAnswerText = text;
+    if (this.user!.replayAtEnd && !this.check) this.replayAtEnd();
+    this.counter++;
+    this.questionResult = true;
+  }
+
   checkAnswer(answer: Answer) {
-    let duration = (new Date().getTime() - this.start!.getTime()) / 1000;
+    let duration = (new Date().getTime() - this.start!.getTime()) / 60000;
     let attempt = {} as Attempt;
     attempt.chosenAnswersId = answer.id;
     attempt.answerHint = !this.fiftyFiftyEnabled;
     attempt.timeSpent = duration;
     attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
-    let trueAnswerId = this.quizService.chekAnswer(this.currentQuestion!.id, answer.id, attempt);
-    this.check = trueAnswerId == answer.id;
-    this.trueAnswer = this.currentQuestion!.answers.find(answer => answer.id == trueAnswerId);
-    if (this.user!.removeAnswers && !this.check) {
-      this.currentQuestion!.answers.find(a => answer == a)!.hide = true;
-      this.start = new Date();
-      return;
-    } else if (this.user!.replayAtEnd && !this.check) this.replayAtEnd();
-    //this.fiftyFiftyEnabled = false;
-    this.counter++;
-    this.questionResult = true;
+    this.quizService.checkAnswer(attempt).then((result => {
+      this.check = result.isTrue;
+      this.result(answer, result.expected.text ? result.expected.text : "");
+    }));
   }
 
   replayAtEnd() {
@@ -101,8 +113,11 @@ export class QuizGameComponent {
   fiftyFifty() {
     if (!this.fiftyFiftyEnabled) return;
     this.fiftyFiftyEnabled = false;
-    let falseAnswers = this.currentQuestion!.answers.filter(answer => !answer.trueAnswer);
-    falseAnswers.sort(() => 0.5 - Math.random()).slice(0, Math.ceil(falseAnswers.length / 2)).forEach(answer => answer.hide = true);
+    if (this.currentQuestion && this.currentQuestion.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion.id!).then(answers => this.hideAnswers(answers));
+  }
+
+  hideAnswers(answers: Answer[]) {
+    answers.forEach(answer2 => this.currentQuestion!.answers.find(answer => answer.id == answer2.id)!.hide = true);
   }
 
   getGainToTransfer(event: number) {

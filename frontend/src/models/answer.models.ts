@@ -1,5 +1,5 @@
 export interface Answer {
-  id: string;
+  id: number;
   answerText: string;
   trueAnswer?: boolean;
   hide?: boolean;//TODO Remove this
