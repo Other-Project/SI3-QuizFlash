@@ -13,7 +13,7 @@ function buildQuiz(quizId, userId = undefined) {
     const questions = getQuizQuestions(quiz.id);
     let questionWithAnswers = questions.map((question) => {
         let answers = structuredClone(getQuestionAnswers(question.id));
-        if (userId) answers.map(answer => delete answer.trueAnswer);
+        if (userId) answers.forEach(answer => delete answer.trueAnswer);
         return {...question, answers};
     });
     if (userId) {
@@ -98,12 +98,15 @@ function createStatQuestion(quizStatId, questionId) {
  */
 function checkAnswer(quizStatId, questionStatId, questionAttempt, userId) {
     let attempt = Attempts.create({ questionStatId: parseInt(questionStatId), ...questionAttempt });
-    let result = Answer.get().find(answer => (answer.questionId === parseInt(QuestionStats.getById(questionStatId).questionId)) && answer.trueAnswer);
-    let questionStats = QuestionStats.getById(parseInt(questionStatId));
+    let questionStats = QuestionStats.getById(questionStatId);
     if (parseInt(quizStatId) !== questionStats.quizStatId) throw new NotFoundError(`The quizStatId ${quizStatId} does not contain the questionStat with id ${questionStatId}`);
+    let result = Answer.get().find(answer => answer.questionId === questionStats.questionId && answer.trueAnswer);
     if (!result) throw new NotFoundError(`No true answer found in the question ${Question.getById(questionStats.questionId).text}`);
-    if (result.id === attempt.chosenAnswersId) QuestionStats.getById(questionStatId).success = true;
-    if (!User.getById(parseInt(userId)).removeAnswers || result.id === attempt.chosenAnswersId) return result.id.toString();
+    if (result.id === attempt.chosenAnswersId) {
+        QuestionStats.update(questionStatId, { success: true });
+        questionStats.success = true;
+    } else if (User.getById(parseInt(userId)).removeAnswers) return { isTrue: false };
+    return { isTrue: questionStats.success, expected: { id: result.id, text: result.answerText } };
 }
 
 module.exports = {

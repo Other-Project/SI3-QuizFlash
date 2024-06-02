@@ -64,8 +64,11 @@ export class QuizService {
     return result;
   }
 
-  checkAnswer(attempt: Attempt, callback?: ((check: string) => void)) {
-    this.http.post<string>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/${this.user!.id}/checkAnswer`, attempt, httpOptionsBase).subscribe(result => callback!(result));
+  async checkAnswer(attempt: Attempt) {
+    return await firstValueFrom(this.http.post<{
+      isTrue: boolean,
+      expected: { id: string, text: string }
+    }>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/${this.user!.id}/checkAnswer`, attempt, httpOptionsBase));
   }
 
   replaceQuiz(quizId: string, updatedQuiz: Quiz) {

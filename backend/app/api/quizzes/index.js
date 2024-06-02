@@ -34,7 +34,7 @@ router.get("/:quizId", checkAuthentification(access.user), (req, res) => catchEr
     res.status(200).json(buildQuiz(req.params.quizId));
 }));
 
-router.get("/:quizId/startQuiz", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.get("/:quizId/startQuiz", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Return a quiz without trueAnswer parameter inside answers and the id of the QuizStats object created'
         #swagger.parameters['userId'] = {
@@ -61,11 +61,11 @@ router.get("/:quizId/startQuiz", checkAuthentification(access.admin), (req, res)
     });
 }));
 
-router.get("/:quizStatId/:questionId/createQuestionStat", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.get("/:quizStatId/:questionId/createQuestionStat", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Create a QuestionStat and return its id'
         #swagger.responses[200] = {
-                schema : 1111111111,
+                schema : 1,
             }
         #swagger.responses[404] = {
             description: 'No question found with this id or no quiStat found with this id'
@@ -73,12 +73,18 @@ router.get("/:quizStatId/:questionId/createQuestionStat", checkAuthentification(
     res.status(200).json(createStatQuestion(req.params.quizStatId, req.params.questionId));
 }));
 
-router.post("/:quizStatId/:questionStatId/:userId/checkAnswer", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.post("/:quizStatId/:questionStatId/:userId/checkAnswer", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Checks if the given proposition is the correct answer'
         #swagger.responses[200] = {
-                schema : { $ref: '#/definitions/Answer' },
+            schema:{
+                isTrue : true,
+                expected : {
+                    id : 1,
+                    text : " "
+                    },
             }
+        }
         #swagger.responses[404] = {
             description: 'No questionStat found with this id'
         } */

@@ -25,7 +25,7 @@ export class QuizGameComponent {
   protected statisticId?: String;
   protected start?: Date;
   protected questionResult: boolean = false;
-  protected trueAnswer?: Answer;
+  protected trueAnswerText?: string;
   protected check: boolean = false;
   protected inactivity: boolean = false;
   protected questionStatsId?: string;
@@ -77,14 +77,13 @@ export class QuizGameComponent {
     return this.counter;
   }
 
-  result(answer: Answer, trueAnswerId?: string) {
-    if (!trueAnswerId) {
+  result(answer: Answer, text?: string) {
+    if (!text) {
       this.currentQuestion!.answers.find(a => answer == a)!.hide = true;
       this.start = new Date();
       return;
     }
-    this.check = parseInt(trueAnswerId) == answer.id;
-    this.trueAnswer = this.currentQuestion!.answers.find(answer => answer.id == parseInt(trueAnswerId));
+    this.trueAnswerText = text;
     if (this.user!.replayAtEnd && !this.check) this.replayAtEnd();
     this.counter++;
     this.questionResult = true;
@@ -97,7 +96,10 @@ export class QuizGameComponent {
     attempt.answerHint = !this.fiftyFiftyEnabled;
     attempt.timeSpent = duration;
     attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
-    this.quizService.checkAnswer(attempt, (trueAnswerId => this.result(answer, trueAnswerId)));
+    this.quizService.checkAnswer(attempt).then((result => {
+      this.check = result.isTrue;
+      this.result(answer, result.expected.text);
+    }));
   }
 
   replayAtEnd() {

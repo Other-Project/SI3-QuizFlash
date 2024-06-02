@@ -105,7 +105,7 @@ router.delete("/:questionId", checkAuthentification(access.admin), (req, res) =>
     res.status(204).end();
 }));
 
-router.get("/:questionId/halveAnswers", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.get("/:questionId/halveAnswers", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Halve the number of answers to the question'
         #swagger.responses[200] = {
