@@ -1,10 +1,9 @@
-import {Injectable, Predicate} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {QuizStats} from "../models/quiz-stats.model";
 import {BehaviorSubject, firstValueFrom} from "rxjs";
 import {apiUrl} from "../configs/server.config";
 import {Quiz} from "../models/quiz.models";
 import {HttpClient, HttpParams} from "@angular/common/http";
-
 
 @Injectable({providedIn: "root"})
 export class StatisticsService {

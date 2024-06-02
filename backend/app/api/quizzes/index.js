@@ -37,13 +37,6 @@ router.get("/:quizId", checkAuthentification(access.user), (req, res) => catchEr
 router.get("/:quizId/startQuiz", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Return a quiz without trueAnswer parameter inside answers and the id of the QuizStats object created'
-        #swagger.parameters['userId'] = {
-            in: 'query',
-            description: 'The user id',
-            schema: {
-                type: 'string',
-            }
-        }
         #swagger.responses[200] = {
             schema:{
                 quiz : { $ref: '#/definitions/Quiz' },
@@ -55,7 +48,7 @@ router.get("/:quizId/startQuiz", checkAuthentification(access.user), (req, res) 
         } */
 
     res.status(200).json({
-        quiz: buildQuiz(req.params.quizId, req.params.userId),
+        quiz: buildQuiz(req.params.quizId, req.user.id),
         quizStatId: createStatQuiz(req.params.quizId, req.user.id, Date.now())
     });
 }));

@@ -55,6 +55,7 @@ export class QuizGameComponent {
 
   startQuestion() {
     this.start = new Date();
+    if (this.currentQuestion!.answers.length <= 2) this.fiftyFiftyEnabled = false;
   }
 
   nextQuestion() {
@@ -78,7 +79,7 @@ export class QuizGameComponent {
   }
 
   result(answer: Answer, text?: string) {
-    if (!text) {
+    if (text == "") {
       this.currentQuestion!.answers.find(a => answer == a)!.hide = true;
       this.start = new Date();
       return;
@@ -91,7 +92,6 @@ export class QuizGameComponent {
 
   checkAnswer(answer: Answer) {
     let duration = (new Date().getTime() - this.start!.getTime()) / 60000;
-    console.log(duration);
     let attempt = {} as Attempt;
     attempt.chosenAnswersId = answer.id;
     attempt.answerHint = !this.fiftyFiftyEnabled;
@@ -99,7 +99,7 @@ export class QuizGameComponent {
     attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
     this.quizService.checkAnswer(attempt).then((result => {
       this.check = result.isTrue;
-      this.result(answer, result.expected.text);
+      this.result(answer, result.expected.text ? result.expected.text : "");
     }));
   }
 
