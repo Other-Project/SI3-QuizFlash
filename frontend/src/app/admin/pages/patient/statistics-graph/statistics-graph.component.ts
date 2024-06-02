@@ -29,6 +29,8 @@ export class StatisticsGraphComponent implements OnInit {
   }
 
   createChart(graphData: [string[], number[]]) {
+    const style = window.getComputedStyle(document.body);
+    const primaryColor = style.getPropertyValue("--primaryColor");
     this.dataAvailable = graphData[0].length != 0;
     this.chart = new Chart("stat-chart", {
       type: "line",
@@ -36,7 +38,7 @@ export class StatisticsGraphComponent implements OnInit {
         labels: graphData[0],
         datasets: [{
           label: this.dataType,
-          backgroundColor: "rgba(0,0,255,1.0)",
+          backgroundColor: primaryColor,
           borderColor: "rgba(0,0,255,0.1)",
           data: graphData[1].map(value => Math.round(value * 10) / 10)
         }]

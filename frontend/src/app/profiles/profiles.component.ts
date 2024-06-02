@@ -4,6 +4,7 @@ import {UserService} from "../../service/user.service";
 import {Router} from "@angular/router";
 import {AccessRestriction} from "../../models/access-restriction.models";
 import {USER_ANNE} from "../../mocks/user-anne.mock";
+import {Admin} from "../../models/admin.models";
 
 
 @Component({
@@ -25,8 +26,7 @@ export class ProfilesComponent {
   }
 
   loginAs(user: User) {
-    this.userService.setLoggedUser(user);
-    this.navigateToHomePage(user);
+    this.userService.login(user.id, (user as Admin)?.password);
   }
 
   navigateToHomePage(user: User) {

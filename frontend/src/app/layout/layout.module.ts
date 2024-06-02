@@ -8,6 +8,8 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {ImageInputComponent} from "./image-input/image-input.component";
 import {InputComponent} from "./input/input.component";
 import {FileInputComponent} from "./file-input/file-input.component";
+import {QuantityInputComponent} from "./quantity-input/quantity-input.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import {FileInputComponent} from "./file-input/file-input.component";
     ImageComponent,
     ImageInputComponent,
     FileInputComponent,
-    InputComponent
+    InputComponent,
+    QuantityInputComponent
   ],
   exports: [
     HeaderComponent,
@@ -24,14 +27,16 @@ import {FileInputComponent} from "./file-input/file-input.component";
     ImageComponent,
     ImageInputComponent,
     FileInputComponent,
-    InputComponent
+    InputComponent,
+    QuantityInputComponent
   ],
   imports: [
     NgOptimizedImage,
     NgStyle,
     NgIf,
     RouterLink,
-    FaIconComponent
+    FaIconComponent,
+    FormsModule
   ]
 })
 export class LayoutModule {

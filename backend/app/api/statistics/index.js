@@ -1,12 +1,12 @@
 const { Router } = require("express");
-
-
 const { buildUserStats, getRequestedStat } = require("./manager");
 const { catchErrors } = require("../../utils/errors/routes");
+const checkAuthentification = require("../../utils/auth-checker");
+const access = require("../../models/access-restriction.model");
 
 const router = new Router();
 
-router.get("/history/:userId", (req, res) => catchErrors(req, res, () => {
+router.get("/history/:userId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Statistics']
     #swagger.summary = 'Get user history'
     #swagger.responses[200] = {
@@ -15,7 +15,7 @@ router.get("/history/:userId", (req, res) => catchErrors(req, res, () => {
     res.status(200).json(buildUserStats(req.params.userId));
 }));
 
-router.get("/:userId", (req, res) => catchErrors(req, res, () => {
+router.get("/:userId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Statistics']
     #swagger.summary = 'Get specific user statistics'
     #swagger.parameters['dataType'] = {

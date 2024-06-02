@@ -10,8 +10,8 @@ import {LayoutModule} from "./layout/layout.module";
 import {AdminButtonComponent} from "./profiles/admin-button/admin-button.component";
 import {ProfileListComponent} from "./profiles/profile-list/profile-list.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {HttpClientModule} from "@angular/common/http";
 import {QuizGameSelectionModule} from "./quiz/quiz-game-selection/quiz-game-selection.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [

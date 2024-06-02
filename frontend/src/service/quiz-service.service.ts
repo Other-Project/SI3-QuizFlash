@@ -24,8 +24,10 @@ export class QuizService {
   public questionStatsId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.questionStatsId);
 
   constructor(userService: UserService, private statisticsService: StatisticsService, private http: HttpClient) {
-    userService.user$.subscribe(user => this.user = user);
-    this.updateQuizList();
+    userService.user$.subscribe(user => {
+      this.user = user;
+      if (user) this.updateQuizList();
+    });
   }
 
   updateQuizList() {

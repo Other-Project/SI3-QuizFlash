@@ -27,6 +27,10 @@ export class UserService {
     this.users$.next(this.users);
   }
 
+  getUser(userId: string) {
+    return firstValueFrom(this.http.get<User>(`${this.userUrl}/${userId}`, this.httpOptions));
+  }
+
   addUser(user: User, callback: ((user: User) => void)) {
     this.http.post<User>(this.userUrl, user, this.httpOptions).subscribe(user => this.retrieveUsers().then(() => callback(user)));
   }
@@ -39,9 +43,15 @@ export class UserService {
     this.http.patch<User>(`${this.userUrl}/${userId}`, updatedUser, this.httpOptions).subscribe(() => this.retrieveUsers().then());
   }
 
-  public setLoggedUser(user?: User): void {
-    if (user) sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    else sessionStorage.removeItem(USER_KEY);
-    this.user$.next(this.user = user);
+  public login(username: string, password?: string) {
+    this.http.post<User>(`${apiUrl}/auth/login/password`, {username: username, password: password ?? "dummy"}, this.httpOptions)
+      .subscribe(user => {
+        this.user$.next(this.user = user);
+      });
+  }
+
+  public logout() {
+    this.http.post<User>(`${apiUrl}/auth/logout`, this.httpOptions)
+      .subscribe(() => this.user$.next(this.user = undefined));
   }
 }
