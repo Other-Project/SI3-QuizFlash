@@ -10,13 +10,20 @@
     </option>
   </select>
 </div>
-@if (successRate >= 0) {
-  <p>Taux de réussite : {{ successRate.toFixed(1) }}%</p>
-  <p *ngIf="answerHint && answerHintRate>=0">Proportion de réponses assistées : {{ answerHintRate.toFixed(1) }}%</p>
-  <p *ngIf="quizSelected && spentTime>=0">Temps passé sur le quiz
-    : {{ spentTime * 60000 | date:"mm 'minutes' ss 'secondes'":'UTC' }}</p>
-  <p *ngIf="quizSelected && averageTimeSpent>=0">Temps moyen par question
-    : {{ averageTimeSpent * 60000 | date:"mm 'minutes' ss 'secondes'":'UTC' }}</p>
-} @else {
+<ng-container *ngIf="(data | keyvalue)?.length; else noAvailableData">
+  @switch (data["dataType"]) {
+    @case (DataTypes.SUCCESS) {
+      <p>Taux de réussite : {{ data?.["successRate"].toFixed(1) }}%</p>
+      <p *ngIf="answerHint && data?.['answerHintRate']>=0">Proportion de réponses assistées : {{ data?.["answerHintRate"].toFixed(1) }}%</p>
+    }
+    @case (DataTypes.TIME) {
+      <p *ngIf="quizSelected && data?.['totalTime']>=0">Temps passé sur le quiz
+        : {{ data?.['totalTime'] * 60000 | date:"mm 'minutes' ss 'secondes'":'UTC' }}</p>
+      <p *ngIf="quizSelected && data?.['averageTime']>=0">Temps moyen par question
+        : {{ data?.['averageTime'] * 60000 | date:"mm 'minutes' ss 'secondes'":'UTC' }}</p>
+    }
+  }
+</ng-container>
+<ng-template #noAvailableData>
   <h3>Aucune donnée n'est disponible</h3>
-}
+</ng-template>

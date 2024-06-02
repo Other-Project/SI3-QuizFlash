@@ -97,6 +97,6 @@ export class QuizService {
 
   finish() {
     this.selectQuiz();
-    this.statisticsService.quizStatistics.push(this.quizStats!);
+    //TODO SAVE TO SERVER
   }
 }

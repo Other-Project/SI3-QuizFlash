@@ -87,8 +87,11 @@ const doc = {
             $id: 3647848313510
         },
         SuccessStats: {
-            answerHintRate: 15.3,
-            successRate: 75,
+            data: {
+                dataType: "success",
+                answerHintRate: 15.3,
+                successRate: 75
+            },
             graphData: [
                 {
                     key: "2024-02-01",
@@ -99,7 +102,17 @@ const doc = {
                     value: 100
                 }
             ]
-        }
+        },
+        UserParticipation: [
+            {
+                id: 4715528161488,
+                title: "Les pièces de la maison 2"
+            },
+            {
+                id: 3715518126798,
+                title: "Quelle est cette pièce de la maison ?"
+            }
+        ]
     }
 };
 
