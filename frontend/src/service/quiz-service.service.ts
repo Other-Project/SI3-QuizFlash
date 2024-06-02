@@ -24,8 +24,10 @@ export class QuizService {
   private quizStats?: QuizStats;
 
   constructor(userService: UserService, private statisticsService: StatisticsService, private http: HttpClient) {
-    userService.user$.subscribe(user => this.user = user);
-    this.updateQuizList();
+    userService.user$.subscribe(user => {
+      this.user = user;
+      if (user) this.updateQuizList();
+    });
   }
 
   updateQuizList() {
