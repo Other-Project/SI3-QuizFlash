@@ -4,10 +4,12 @@ const { Answer } = require("../../../../models");
 const { getQuestionFromQuiz } = require("../manager");
 const { getQuestionAnswers, getAnswerFromQuestion } = require("./manager");
 const { catchErrors } = require("../../../../utils/errors/routes");
+const checkAuthentification = require("../../../../utils/auth-checker");
+const access = require("../../../../models/access-restriction.model");
 
 const router = new Router({ mergeParams: true });
 
-router.get("/", (req, res) => catchErrors(req, res, () => {
+router.get("/", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
     /* #swagger.tags = ['Answers']
        #swagger.summary = 'Get all answers'
        #swagger.responses[200] = {
@@ -19,7 +21,7 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
     res.status(200).json(answers);
 }));
 
-router.get("/:answerId", (req, res) => catchErrors(req, res, () => {
+router.get("/:answerId", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
     /* #swagger.tags = ['Answers']
        #swagger.summary = 'Get a specific answers'
        #swagger.responses[200] = {
@@ -33,7 +35,7 @@ router.get("/:answerId", (req, res) => catchErrors(req, res, () => {
     res.status(200).json(answer);
 }));
 
-router.post("/", (req, res) => catchErrors(req, res, () => {
+router.post("/", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
     /* #swagger.tags = ['Answers']
        #swagger.summary = 'Add new answer'
        #swagger.parameters['body'] = {
@@ -52,7 +54,7 @@ router.post("/", (req, res) => catchErrors(req, res, () => {
     res.status(201).json(answer);
 }));
 
-router.put("/:answerId", (req, res) => catchErrors(req, res, () => {
+router.put("/:answerId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Answers']
         #swagger.summary = 'Modify an existing answer'
         #swagger.parameters['body'] = {
@@ -74,7 +76,7 @@ router.put("/:answerId", (req, res) => catchErrors(req, res, () => {
     res.status(200).json(updatedAnswer);
 }));
 
-router.patch("/:answerId", (req, res) => catchErrors(req, res, () => {
+router.patch("/:answerId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Answers']
         #swagger.summary = 'Modify parts of an existing answer'
         #swagger.parameters['body'] = {
@@ -96,7 +98,7 @@ router.patch("/:answerId", (req, res) => catchErrors(req, res, () => {
     res.status(200).json(updatedAnswer);
 }));
 
-router.delete("/:answerId", (req, res) => catchErrors(req, res, () => {
+router.delete("/:answerId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
     /* #swagger.tags = ['Answers']
        #swagger.summary = 'Delete an answer'
        #swagger.responses[204] = { }

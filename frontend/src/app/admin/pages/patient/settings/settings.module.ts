@@ -3,7 +3,8 @@ import {RangeComponent} from "../range/range.component";
 import {OptionsComponent} from "../options/options.component";
 import {FontSizeComponent} from "../font-size/font-size.component";
 import {NgStyle} from "@angular/common";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {LayoutModule} from "../../../../layout/layout.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import {ReactiveFormsModule} from "@angular/forms";
   ],
   imports: [
     NgStyle,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    LayoutModule
   ]
 })
 

@@ -58,7 +58,7 @@ function getRequestedStat(dataType, statType, userId, quizId, questionType) {
  * @param {string|undefined} questionType the questionType
  * @return {(QuizStats&{id: number, questionsStats: *})[]} the corresponding QuizStats
  */
-function buildUserStats(userId, quizId, questionType) {
+function buildUserStats(userId, quizId = undefined, questionType = undefined) {
     const userStats = QuizStats.get().filter(quizStat => quizStat.userId === parseInt(userId, 10)
         && (!quizId || quizStat.quizId === parseInt(quizId, 10)));
     return userStats.map(quizStat => buildStat(quizStat.id, questionType)).filter(stats => stats !== null);
