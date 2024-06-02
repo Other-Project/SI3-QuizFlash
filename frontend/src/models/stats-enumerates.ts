@@ -1,9 +1,9 @@
 export enum DataTypes {
-  SUCCESS_RATE = "Taux de réussite",
-  TIME_AVERAGE = "Temps moyen"
+  SUCCESS = "success",
+  TIME = "time"
 }
 
 export enum StatsFilter {
-  TRIES = "Tentative",
-  QUESTIONS = "Question"
+  TRY = "try",
+  QUESTION = "question"
 }
