@@ -79,9 +79,9 @@ export class QuizGameComponent {
   }
 
   result(answer: Answer, text?: string) {
+    this.start = new Date();
     if (text == "") {
       this.currentQuestion!.answers.find(a => answer == a)!.hide = true;
-      this.start = new Date();
       return;
     }
     this.trueAnswerText = text;

@@ -49,7 +49,7 @@ router.get("/:quizId/startQuiz", checkAuthentification(access.user), (req, res) 
 
     res.status(200).json({
         quiz: buildQuiz(req.params.quizId, req.user.id),
-        quizStatId: createStatQuiz(req.params.quizId, req.user.id, Date.now())
+        quizStatId: createStatQuiz(req.params.quizId, req.user.id)
     });
 }));
 

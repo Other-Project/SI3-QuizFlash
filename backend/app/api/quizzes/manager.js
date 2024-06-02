@@ -72,12 +72,12 @@ function deleteQuiz(quizId) {
 
 /**
  * Create a new quizStat object
- * @param {number} quizId
+ * @param {string} quizId
  * @param {number} userId
- * @param {Date} date
  */
-function createStatQuiz(quizId, userId, date) {
-    return QuizStats.create({ quizId: quizId, userId: userId, date: date }).id;
+function createStatQuiz(quizId, userId) {
+    const date = new Date();
+    return QuizStats.create({ quizId: parseInt(quizId), userId: userId, date: date.toISOString().split("T")[0] }).id;
 }
 
 /**
