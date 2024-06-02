@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Quiz} from "../models/quiz.models";
 import {BehaviorSubject, firstValueFrom} from "rxjs";
 import {User} from "../models/user.models";
@@ -50,9 +50,7 @@ export class QuizService {
       this.quizStatId$.next(this.quizStatsId = undefined);
       return;
     }
-    let params = new HttpParams();
-    params = params.append("userId", this.user!.id);
-    let result = await firstValueFrom(this.http.get<{ quiz: Quiz, quizStatId: string }>(`${this.quizApiUrl}/${id}/startQuiz`, {params}));
+    let result = await firstValueFrom(this.http.get<{ quiz: Quiz, quizStatId: string }>(`${this.quizApiUrl}/${id}/startQuiz`, httpOptionsBase));
     this.quiz$.next(this.quiz = result.quiz);
     this.quizStatId$.next(this.quizStatsId = result.quizStatId);
     return result;
@@ -68,7 +66,7 @@ export class QuizService {
     return await firstValueFrom(this.http.post<{
       isTrue: boolean,
       expected: { id: string, text: string }
-    }>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/${this.user!.id}/checkAnswer`, attempt, httpOptionsBase));
+    }>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/checkAnswer`, attempt, httpOptionsBase));
   }
 
   replaceQuiz(quizId: string, updatedQuiz: Quiz) {

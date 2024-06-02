@@ -90,7 +90,8 @@ export class QuizGameComponent {
   }
 
   checkAnswer(answer: Answer) {
-    let duration = (new Date().getTime() - this.start!.getTime()) / 1000;
+    let duration = (new Date().getTime() - this.start!.getTime()) / 60000;
+    console.log(duration);
     let attempt = {} as Attempt;
     attempt.chosenAnswersId = answer.id;
     attempt.answerHint = !this.fiftyFiftyEnabled;
@@ -112,11 +113,11 @@ export class QuizGameComponent {
   fiftyFifty() {
     if (!this.fiftyFiftyEnabled) return;
     this.fiftyFiftyEnabled = false;
-    if (this.currentQuestion!.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion?.id!).then(answers => this.hideAnswers(answers));
+    if (this.currentQuestion && this.currentQuestion.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion.id!).then(answers => this.hideAnswers(answers));
   }
 
   hideAnswers(answers: Answer[]) {
-    answers.forEach(answer2 => this.currentQuestion!.answers.filter(answer => answer.id == answer2.id)[0].hide = true);
+    answers.forEach(answer2 => this.currentQuestion!.answers.find(answer => answer.id == answer2.id)!.hide = true);
   }
 
   getGainToTransfer(event: number) {

@@ -54,10 +54,9 @@ router.get("/:quizId/startQuiz", checkAuthentification(access.user), (req, res) 
             description: 'No quiz found with this id or no user found with this id'
         } */
 
-    const { userId } = req.query;
     res.status(200).json({
         quiz: buildQuiz(req.params.quizId, req.params.userId),
-        quizStatId: createStatQuiz(req.params.quizId, parseInt(userId), Date.now())
+        quizStatId: createStatQuiz(req.params.quizId, req.user.id, Date.now())
     });
 }));
 
@@ -65,7 +64,7 @@ router.get("/:quizStatId/:questionId/createQuestionStat", checkAuthentification(
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Create a QuestionStat and return its id'
         #swagger.responses[200] = {
-                schema : 1,
+                schema : 1
             }
         #swagger.responses[404] = {
             description: 'No question found with this id or no quiStat found with this id'
@@ -73,7 +72,7 @@ router.get("/:quizStatId/:questionId/createQuestionStat", checkAuthentification(
     res.status(200).json(createStatQuestion(req.params.quizStatId, req.params.questionId));
 }));
 
-router.post("/:quizStatId/:questionStatId/:userId/checkAnswer", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
+router.post("/:quizStatId/:questionStatId/checkAnswer", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Checks if the given proposition is the correct answer'
         #swagger.responses[200] = {
@@ -82,13 +81,13 @@ router.post("/:quizStatId/:questionStatId/:userId/checkAnswer", checkAuthentific
                 expected : {
                     id : 1,
                     text : " "
-                    },
+                    }
             }
         }
         #swagger.responses[404] = {
             description: 'No questionStat found with this id'
         } */
-    res.status(200).json(checkAnswer(req.params.quizStatId, req.params.questionStatId, req.body, req.params.userId));
+    res.status(200).json(checkAnswer(req.params.quizStatId, req.params.questionStatId, req.body, req.user.id));
 }));
 
 
