@@ -86,7 +86,7 @@ export class AdminQuizComponent implements OnDestroy {
 
   addQuestion() {
     this.quiz.questions.push({
-      answers: [{} as Answer, {} as Answer],
+      answers: [{trueAnswer: false} as Answer, {trueAnswer: false} as Answer],
       type: QuestionType.TextOnly
     } as Question);
   }
