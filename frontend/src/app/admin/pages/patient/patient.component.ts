@@ -25,10 +25,12 @@ export class PatientComponent implements OnDestroy {
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
     this.routeSub = this.route.params.subscribe(params => {
       this.userId = params["user_id"];
-      if (!this.userId) this.patient = undefined;
-      else this.userService.getUser(this.userId).then(user => {
-        this.patient = user as Patient;
-        if (!this.patient) this.router.navigate([".."], {relativeTo: this.route}).then();
+      this.userService.users$.subscribe(() => {
+        if (!this.userId) this.patient = undefined;
+        else this.userService.getUser(this.userId).then(user => {
+          this.patient = user as Patient;
+          if (!this.patient) this.router.navigate([".."], {relativeTo: this.route}).then();
+        });
       });
     });
   }
