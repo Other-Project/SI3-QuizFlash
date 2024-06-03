@@ -1,4 +1,4 @@
 export const HOBBIES: string[] = [
-  "theatre", "culture", "cuisine", "peche", "chasse", "peinture", "musique", "histoire", "lecture",
-  "television", "famille"
+  "théâtre", "culture", "cuisine", "pêche", "chasse", "peinture", "musique", "histoire", "lecture",
+  "télévision", "famille"
 ]

@@ -12,7 +12,7 @@ export const USER_FRANCESCU: Patient = {
   age: 95,
   dementiaLevel: Dementia.Mild,
   fontSize: 1,
-  hobbies: ["peche", "television"],
+  hobbies: ["pêche", "télévision"],
 
   replayAtEnd: true,
   removeAnswers: false,

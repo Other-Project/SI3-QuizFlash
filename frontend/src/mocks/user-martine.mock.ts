@@ -12,7 +12,7 @@ export const USER_MARTINE: Patient = {
   age: 70,
   dementiaLevel: Dementia.Intermediate,
   fontSize: 2,
-  hobbies: ["culture", "famille", "theatre"],
+  hobbies: ["culture", "famille", "théâtre"],
 
   removeAnswers: false,
   answerHint: false,
