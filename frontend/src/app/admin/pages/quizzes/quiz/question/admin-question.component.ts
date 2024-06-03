@@ -43,7 +43,7 @@ export class AdminQuestionComponent {
   }
 
   addAnswer() {
-    this.question.answers.push({} as Answer);
+    this.question.answers.push({trueAnswer: false} as Answer);
   }
 
   removeAnswer(index: number) {

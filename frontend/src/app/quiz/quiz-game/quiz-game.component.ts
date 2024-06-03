@@ -99,7 +99,7 @@ export class QuizGameComponent {
     attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
     this.quizService.checkAnswer(attempt).then((result => {
       this.check = result.isTrue;
-      this.result(answer, result.expected.text ? result.expected.text : "");
+      this.result(answer, result.expected?.text ?? "");
     }));
   }
 
