@@ -65,7 +65,7 @@ export class QuizService {
   async checkAnswer(attempt: Attempt) {
     return await firstValueFrom(this.http.post<{
       isTrue: boolean,
-      expected: { id: string, text: string }
+      expected: { id: string, text: string } | undefined
     }>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/checkAnswer`, attempt, httpOptionsBase));
   }
 
