@@ -62,6 +62,7 @@ export class StatisticsGraphComponent {
         }]
       },
       options: {
+        maintainAspectRatio: false,
         plugins: {
           tooltip: {
             callbacks: {
@@ -108,6 +109,7 @@ export class StatisticsGraphComponent {
     this.chart.config.type = graphType;
 
     this.chart.options = {
+      maintainAspectRatio: false,
       responsive: true,
       aspectRatio: 2.5,
       plugins: {
@@ -144,8 +146,10 @@ export class StatisticsGraphComponent {
 
   quizSelection(quizId?: string) {
     if (!this.patientId) return;
-    this.dataType = DataTypes.SUCCESS;
-    this.filter = StatsFilter.TRY;
+    if (!quizId) {
+      this.dataType = DataTypes.SUCCESS;
+      this.filter = StatsFilter.TRY;
+    }
     this.selectedQuizId = quizId;
   }
 

@@ -15,10 +15,6 @@
 }
 
 #stat-chart {
-  @media screen and (min-width: 1000px) {
-    width: 40vw;
-  }
-  @media screen and (max-width: 1000px) {
-    width: 80vw;
-  }
+  height: 310px;
+  width: 800px;
 }
