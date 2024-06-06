@@ -22,9 +22,7 @@ export class QuizGameSelectionComponent {
   @Output() returnIdQuizSelected: EventEmitter<String> = new EventEmitter<String>();
 
   constructor(private userService: UserService, private quizService: QuizService, private route: ActivatedRoute, private router: Router) {
-    this.userService.user$.subscribe(user => {
-      this.user = user as Patient;
-    });
+    this.userService.user$.subscribe(user => this.user = user as Patient);
     this.userService.hobbies$.subscribe(tags => this.tags = tags);
     quizService.quizzes$.subscribe(quizzes => {
       this.quizzes = quizzes;

@@ -7,6 +7,9 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faAdd} from "@fortawesome/free-solid-svg-icons";
 import {QuizGameSelectionModule} from "../../../quiz/quiz-game-selection/quiz-game-selection.module";
+import {FormsModule} from "@angular/forms";
+import {NgForOf} from "@angular/common";
+import {UserService} from "../../../../service/user.service";
 
 @Component({
   selector: "app-admin-quizzes",
@@ -18,23 +21,43 @@ import {QuizGameSelectionModule} from "../../../quiz/quiz-game-selection/quiz-ga
     QuizGameSelectionModule,
     LayoutModule,
     RouterLink,
-    FaIconComponent
+    FaIconComponent,
+    FormsModule,
+    NgForOf
   ]
 })
 export class AdminQuizzesComponent {
+  public filter: string = "all";
+  public tags: string[] = [];
+  public search: string = "";
   private allQuizzes?: Quiz[];
   public quizzes?: Quiz[];
 
-  constructor(public quizService: QuizService, public router: Router, public route: ActivatedRoute) {
+  constructor(public quizService: QuizService, private userService: UserService, public router: Router, public route: ActivatedRoute) {
+    this.userService.hobbies$.subscribe(tags => this.tags = tags);
     quizService.quizzes$.subscribe(quizzes => this.quizzes = this.allQuizzes = quizzes);
   }
 
   searchQuiz(text: string) {
-    this.quizzes = text ? this.allQuizzes?.filter(quiz => quiz.title.toLowerCase().includes(text!.toLowerCase())) : this.allQuizzes;
+    this.updateQuizzes();
   }
 
   manageQuiz(quizId: string) {
     this.router.navigate(["./quiz", quizId], {relativeTo: this.route}).then();
+  }
+
+  updateQuizzes() {
+    this.quizzes = this.allQuizzes?.filter(quiz => {
+      if (!quiz.title.toLowerCase().includes(this.search.toLowerCase())) return false;
+      switch (this.filter) {
+        case "all":
+          break;
+        default:
+          if (!quiz.tags.some(tag => tag == this.filter)) return false;
+          break;
+      }
+      return true;
+    });
   }
 
   protected readonly faAdd = faAdd;
