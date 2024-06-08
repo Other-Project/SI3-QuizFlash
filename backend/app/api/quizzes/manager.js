@@ -77,7 +77,7 @@ function deleteQuiz(quizId) {
  */
 function createStatQuiz(quizId, userId) {
     const date = new Date();
-    return QuizStats.create({ quizId: parseInt(quizId), userId: userId, date: date.toISOString().split("T")[0] }).id;
+    return QuizStats.create({ quizId: parseInt(quizId), userId: userId, date: date.toISOString() }).id;
 }
 
 /**
