@@ -2,9 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Quiz} from "../models/quiz.models";
 import {BehaviorSubject, firstValueFrom} from "rxjs";
-import {User} from "../models/user.models";
 import {UserService} from "./user.service";
-import {StatisticsService} from "./statistics.service";
 import {Attempt} from "../models/attempt.model";
 import {apiUrl, httpOptionsBase} from "../configs/server.config";
 import {Answer} from "../models/answer.models";
@@ -17,15 +15,13 @@ export class QuizService {
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject<Quiz[]>(this.quizzes);
   public quiz?: Quiz;
   public quiz$: BehaviorSubject<Quiz | undefined> = new BehaviorSubject<Quiz | undefined>(this.quiz);
-  private user?: User;
   private quizStatsId?: string;
   public quizStatId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.quizStatsId);
   private questionStatsId?: string;
   public questionStatsId$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(this.questionStatsId);
 
-  constructor(userService: UserService, private statisticsService: StatisticsService, private http: HttpClient) {
+  constructor(userService: UserService, private http: HttpClient) {
     userService.user$.subscribe(user => {
-      this.user = user;
       if (user) this.updateQuizList();
     });
   }

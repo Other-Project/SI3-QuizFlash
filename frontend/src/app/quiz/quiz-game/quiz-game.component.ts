@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnDestroy} from "@angular/core";
 import {UserService} from "../../../service/user.service";
 import {Patient} from "../../../models/patient.models";
 import {Quiz} from "../../../models/quiz.models";
@@ -7,13 +7,15 @@ import {Answer} from "../../../models/answer.models";
 import {QuizService} from "../../../service/quiz-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Attempt} from "../../../models/attempt.model";
+import {Subscription} from "rxjs";
+import {QuestionType} from "../../../models/question-type.models";
 
 @Component({
   selector: 'app-quiz',
   templateUrl: "./quiz-game.component.html",
   styleUrls: ["./quiz-game.component.scss"]
 })
-export class QuizGameComponent {
+export class QuizGameComponent implements OnDestroy {
   public user?: Patient;
   public quiz?: Quiz;
   protected counter: number = 1;
@@ -22,7 +24,7 @@ export class QuizGameComponent {
   protected audioGain!: number;
   protected questions: Question[] = [];
   protected fiftyFiftyEnabled: boolean = true;
-  protected statisticId?: String;
+  protected statisticId?: string;
   protected start?: Date;
   protected questionResult: boolean = false;
   protected trueAnswerText?: string;
@@ -30,17 +32,25 @@ export class QuizGameComponent {
   protected inactivity: boolean = false;
   protected questionStatsId?: string;
   protected finishPage: boolean = false;
+  protected subscribeQuizStatsId: Subscription;
 
   constructor(private userService: UserService, private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.userService.user$.subscribe(user => this.user = user as Patient);
     this.quizService.quiz$.subscribe(quiz => {
       this.quiz = quiz;
       this.questions = quiz?.questions ?? [];
+      if (this.questions.some(question => question.type == QuestionType.Sound)) this.soundSetting = true;
       this.counter = 1;
-      this.nextQuestion();
     });
-    this.quizService.quizStatId$.subscribe(id => this.statisticId = id);
+    this.subscribeQuizStatsId = this.quizService.quizStatId$.subscribe(id => {
+      this.statisticId = id;
+      this.update();
+    });
     this.quizService.questionStatsId$.subscribe(id => this.questionStatsId = id);
+  }
+
+  ngOnDestroy(): void {
+    this.subscribeQuizStatsId.unsubscribe();
   }
 
   update() {
