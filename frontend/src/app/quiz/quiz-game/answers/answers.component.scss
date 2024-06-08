@@ -4,7 +4,8 @@ section {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(1, 1fr 1fr);
+  grid-template-columns: repeat(1, 1fr 1fr 1fr 1fr);
+  grid-auto-flow: row;
   gap: 25px;
   justify-items: center;
   margin-top: 1rem;
@@ -12,13 +13,18 @@ section {
   .answer-button {
     width: 100%;
     height: 100%;
+    grid-column: span 2;
 
     span {
       font-size: 0.90em;
     }
-  }
 
-  .answer-button-hide {
-    visibility: hidden;
+    &:nth-child(odd):last-child {
+      grid-column: 2 / 4;
+    }
+
+    &.invisible {
+      visibility: hidden;
+    }
   }
 }
