@@ -1,9 +1,27 @@
+@use 'sass:color';
 @import "/colors";
 
 section {
   margin-bottom: 1em;
 
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr auto;
   gap: 1em;
+
+  select {
+    font-size: 1em;
+
+    border-radius: .5rem;
+    padding: .5em;
+    background-color: $white;
+    border: 1px solid color.scale($white, $lightness: -5%);
+    display: flex;
+    gap: .5em;
+    outline: none;
+    color: black;
+
+    .tag {
+      font-size: 0.75em;
+    }
+  }
 }

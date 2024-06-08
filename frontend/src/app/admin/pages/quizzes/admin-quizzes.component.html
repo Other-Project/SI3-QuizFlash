@@ -1,4 +1,9 @@
 <section>
+  <select [(ngModel)]="filter" (change)="updateQuizzes()">
+    <option value="all">Tous</option>
+    <hr/>
+    <option *ngFor="let tag of tags" [value]="tag" class="tag">{{ tag }}</option>
+  </select>
   <app-input id="search-bar" (valueChange)="searchQuiz($event)" [placeholder]="'Chercher un quiz'"/>
   <app-button [routerLink]="'./quiz'" id="create-quiz">
     <fa-icon [icon]="faAdd"/>

@@ -4,6 +4,8 @@
     <select [(ngModel)]="filter" (change)="updateQuizzes()">
       <option value="all">Tous</option>
       <option value="interest">Mes centres d'intérêt</option>
+      <hr/>
+      <option *ngFor="let tag of tags" [value]="tag" class="tag">{{ tag }}</option>
     </select>
     <app-input id="search-bar" (valueChange)="search = $event; updateQuizzes()" [placeholder]="'Chercher un quiz'"/>
   </section>

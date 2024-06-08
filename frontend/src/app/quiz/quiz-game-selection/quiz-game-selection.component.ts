@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class QuizGameSelectionComponent {
   public filter: string = "interest";
+  public tags: string[] = [];
   public search: string = "";
   public filteredQuizzes?: Quiz[];
 
@@ -21,9 +22,8 @@ export class QuizGameSelectionComponent {
   @Output() returnIdQuizSelected: EventEmitter<String> = new EventEmitter<String>();
 
   constructor(private userService: UserService, private quizService: QuizService, private route: ActivatedRoute, private router: Router) {
-    this.userService.user$.subscribe(user => {
-      this.user = user as Patient;
-    });
+    this.userService.user$.subscribe(user => this.user = user as Patient);
+    this.userService.hobbies$.subscribe(tags => this.tags = tags);
     quizService.quizzes$.subscribe(quizzes => {
       this.quizzes = quizzes;
       this.updateQuizzes();
@@ -38,10 +38,13 @@ export class QuizGameSelectionComponent {
     this.filteredQuizzes = this.quizzes?.filter(quiz => {
       if (!quiz.title.toLowerCase().includes(this.search.toLowerCase())) return false;
       switch (this.filter) {
+        case "all":
+          break;
         case "interest":
           if (!quiz.tags.some(tag => this.user?.hobbies?.includes(tag))) return false;
           break;
         default:
+          if (!quiz.tags.some(tag => tag == this.filter)) return false;
           break;
       }
       return true;
