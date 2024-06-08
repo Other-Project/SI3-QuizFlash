@@ -171,7 +171,7 @@ export class StatisticsGraphComponent {
 
   private processLabels(graphLabels: string[]): string[] {
     if (this.filter == StatsFilter.TRY)
-      graphLabels = graphLabels.map(date => this.datePipe.transform(new Date(date), "dd/MM/yyyy',' HH'h'mm") ?? "");
+      return graphLabels.map(date => this.datePipe.transform(new Date(date), "dd/MM/yyyy',' HH'h'mm") ?? date);
     return graphLabels;
   }
 }
