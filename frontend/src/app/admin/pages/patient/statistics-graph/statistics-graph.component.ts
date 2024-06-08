@@ -51,7 +51,7 @@ export class StatisticsGraphComponent {
     this.chart = new Chart("stat-chart", {
       type: "line",
       data: {
-        labels: graphData[0],
+        labels: this.processLabels(graphData[0]),
         datasets: [{
           borderWidth: 1,
           fill: true,
@@ -138,7 +138,7 @@ export class StatisticsGraphComponent {
       }
     };
 
-    this.chart.data.labels = graphData[0];
+    this.chart.data.labels = this.processLabels(graphData[0]);
     this.chart.data.datasets[0].data = graphData[1].map(value => Math.round(value * 10) / 10);
     this.chart.data.datasets[0].label = this.dataLabels[this.dataType];
     this.chart.update();
@@ -167,5 +167,11 @@ export class StatisticsGraphComponent {
       formattedValue = this.datePipe.transform(value * 60000, "mm 'minutes' ss 'secondes'", "UTC")!;
     else formattedValue = value + " %";
     return title + " : " + formattedValue;
+  }
+
+  private processLabels(graphLabels: string[]): string[] {
+    if (this.filter == StatsFilter.TRY)
+      graphLabels = graphLabels.map(date => this.datePipe.transform(new Date(date), "dd/MM/yyyy',' HH'h'mm") ?? "");
+    return graphLabels;
   }
 }
