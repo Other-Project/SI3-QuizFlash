@@ -18,6 +18,5 @@ export class AttemptSummaryQuestionExtraComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.question);
   }
 }
