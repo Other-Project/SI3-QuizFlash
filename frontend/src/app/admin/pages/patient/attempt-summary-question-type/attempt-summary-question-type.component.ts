@@ -1,7 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {Quiz} from "../../../../../models/quiz.models";
-import {QuestionStats} from "../../../../../models/question-stats.model";
 import {QuestionType} from "../../../../../models/question-type.models";
+import {Question} from "../../../../../models/question.models";
 
 @Component({
   selector: "attempt-summary-question-type",
@@ -10,7 +10,7 @@ import {QuestionType} from "../../../../../models/question-type.models";
 })
 
 export class AttemptSummaryQuestionTypeComponent {
-  @Input() question!: QuestionStats;
+  @Input() question!: Question;
   @Input() quiz!: Quiz;
   @Input() description!: boolean;
   protected readonly Number = Number;

@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {QuestionType} from "../../../../../models/question-type.models";
 import {Question} from "../../../../../models/question.models";
 
@@ -8,11 +8,16 @@ import {Question} from "../../../../../models/question.models";
   styleUrls: ["attempt-summary-question-extra.component.scss"]
 })
 
-export class AttemptSummaryQuestionExtraComponent {
+export class AttemptSummaryQuestionExtraComponent implements OnInit {
   @Input() question!: Question;
   protected readonly Number = Number;
   protected readonly QuestionType = QuestionType;
 
   constructor() {
+    //console.log(this.question)
+  }
+
+  ngOnInit(): void {
+    console.log(this.question);
   }
 }

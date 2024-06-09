@@ -22,6 +22,7 @@ export class StatisticsService {
     this.http.get<QuizStats[]>(`${this.quizApiUrl}/history/${userId}`).subscribe(quizzes => {
       this.userQuizStats = quizzes;
       this.userQuizStats$.next(this.userQuizStats);
+      console.log(quizzes);
     });
   }
 

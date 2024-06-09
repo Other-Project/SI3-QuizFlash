@@ -1,7 +1,7 @@
 <div class="attempt-summary" *ngIf="quiz && user">
   <div class="questions" *ngFor="let questionStats of questionsStats; index as indexQuestion">
     <div class="main-part">
-      <attempt-summary-question-type [quiz]="quiz" [question]="questionStats" [description]="true"/>
+      <attempt-summary-question-type [quiz]="quiz" [question]="getQuestion(questionStats.questionId)" [description]="true"/>
       <app-input class="question" [icon]="faQuestion" [value]="getQuestion(questionStats.questionId).text" [disabled]="true"/>
       <app-button class="detail" (click)="setDetail(indexQuestion)">{{ showDetails[indexQuestion] ? 'Cacher les détails' : 'Montrer les détails' }}</app-button>
       <attempt-summary-question-extra [question]="getQuestion(questionStats.questionId)"/>

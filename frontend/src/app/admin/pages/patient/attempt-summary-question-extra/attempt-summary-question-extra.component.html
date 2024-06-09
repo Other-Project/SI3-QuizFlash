@@ -1,4 +1,4 @@
-<div class="switch" [ngSwitch]="Number(question.type)">
+<div class="switch" [ngSwitch]="question.type">
   <div class="visual" *ngSwitchCase="QuestionType.Image">
     <app-image [src]="question.imageUrl" [alt]="'image'"/>
   </div>
