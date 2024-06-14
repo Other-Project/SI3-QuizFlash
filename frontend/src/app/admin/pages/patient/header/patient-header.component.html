@@ -14,7 +14,7 @@
     <div class="patient-info">
       <h2 *ngIf="patient">{{ patient.lastname }}</h2>
       <h2 *ngIf="patient">{{ patient.firstname }}</h2>
-      <strong *ngIf="patient">{{ patient.age }} ans</strong>
+      <strong *ngIf="patient">{{ patient.birthDate | age }} ans</strong>
     </div>
     <app-button id="edit-button" (click)="editPatientInfo()" [color]="'blue'">
       <fa-icon [icon]="faEdit" size="2x" id="edit-icon"/>
