@@ -12,6 +12,7 @@ import {Dementia} from "../../../../../models/dementia.models";
 })
 
 export class InfoFormComponent {
+  protected readonly Date = Date;
   @Output() patientInfoChange: EventEmitter<any> = new EventEmitter;
 
   @Input() set user(patient: Patient | undefined) {
@@ -19,7 +20,7 @@ export class InfoFormComponent {
     this.patientForm.patchValue({
       firstname: this.currentPatient?.firstname ?? "",
       lastname: this.currentPatient?.lastname ?? "",
-      age: this.currentPatient?.age ?? 1,
+      birthDate: this.currentPatient?.birthDate ?? "",
       pictureUrl: this.currentPatient?.pictureUrl,
       hobbies: this.currentPatient?.hobbies ?? [],
       dementiaLevel: this.currentPatient?.dementiaLevel ?? Dementia.Mild,
@@ -39,7 +40,7 @@ export class InfoFormComponent {
   patientForm: FormGroup = new FormGroup({
     firstname: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]*")]),
     lastname: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]*")]),
-    age: new FormControl(1, Validators.required),
+    birthDate: new FormControl("", Validators.required),
     pictureUrl: new FormControl("/assets/profile.png"),
     hobbies: new FormControl([""]),
     dementiaLevel: new FormControl(Dementia.Mild),
@@ -63,5 +64,19 @@ export class InfoFormComponent {
       return this.userService.updateUser(this.currentPatient.id, this.patientForm.value);
     }
     this.userService.addUser(this.patientForm.value, user => this.router.navigate([user.id], {relativeTo: this.route}).then());
+  }
+
+  private getDate(offsetYears: number): string {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() + offsetYears);
+    return date.toISOString().split("T")[0];
+  }
+
+  protected getMaxDate(): string {
+    return this.getDate(-1);
+  }
+
+  protected getMinDate(): string {
+    return this.getDate(-120);
   }
 }

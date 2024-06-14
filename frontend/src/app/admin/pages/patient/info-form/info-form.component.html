@@ -8,10 +8,9 @@
   <label> Prénom :
     <input type="text" formControlName="firstname">
   </label>
-  <label> Age :
-    <input type="number" min="0" max="120" formControlName="age">
+  <label> Date de naissance :
+    <input type="date" id="start" formControlName="birthDate" [min]="getMinDate()" [max]="getMaxDate()"/>
   </label>
-</form>
-<div class="submit-button">
   <app-button (click)="save()" [color]="'blue'">Valider</app-button>
-</div>
+</form>
+
