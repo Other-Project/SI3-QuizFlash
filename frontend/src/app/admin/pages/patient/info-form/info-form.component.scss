@@ -3,7 +3,8 @@
 
 form {
   display: grid;
-  grid-template: 1fr / 150px 1fr 1fr 1fr;
+  grid-template: 1fr / 150px 1fr 1fr 1fr 1fr;
+  align-items: center;
   gap: 1em;
 
   input:not([hidden]), select {
@@ -27,18 +28,8 @@ form {
   }
 }
 
-.submit-button {
-  align-items: center;
-  justify-content: center;
-  margin-left: 3em;
-  margin-top: 6em;
-
-  button {
-    width: 5em;
-    height: 2em;
-    border-radius: 12px;
-    cursor: pointer;
-  }
+app-button {
+  margin-left: 2em;
 }
 
 :host {
