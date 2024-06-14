@@ -9,7 +9,7 @@
     <input type="text" formControlName="firstname">
   </label>
   <label> Date de naissance :
-    <input type="date" id="start" formControlName="birthDate" [min]="getMinDate()" [max]="getMaxDate()"/>
+    <input type="date" id="start" formControlName="birthDate" [min]="getMinBirthDate()" [max]="getMaxBirthDate()"/>
   </label>
   <app-button (click)="save()" [color]="'blue'">Valider</app-button>
 </form>

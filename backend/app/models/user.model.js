@@ -12,8 +12,8 @@ module.exports = new BaseModel("User", {
     //Patient attributes
     birthDate: Joi.date()
         .required()
-        .max(getMaxDate())
-        .min(getMinDate())
+        .max(getMaxBirthDate())
+        .min(getMinBirthDate())
         .when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     hobbies: Joi.array().items(Joi.string()).when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     dementiaLevel: Joi.number().valid(Object.values(DementiaLevel))
@@ -32,17 +32,17 @@ module.exports = new BaseModel("User", {
     salt: Joi.string().when("access", {is: AccessRestriction.admin, then: Joi.required(), otherwise: Joi.forbidden()})
 });
 
-function getDate(offsetYears) {
+function getDateByOffset(offsetYears) {
     const date = new Date();
     date.setFullYear(date.getFullYear() + offsetYears);
     date.setHours(0, 0, 0);
     return date;
 }
 
-function getMaxDate() {
-    return getDate(-1);
+function getMaxBirthDate() {
+    return getDateByOffset(-1);
 }
 
-function getMinDate() {
-    return getDate(-120);
+function getMinBirthDate() {
+    return getDateByOffset(-120);
 }

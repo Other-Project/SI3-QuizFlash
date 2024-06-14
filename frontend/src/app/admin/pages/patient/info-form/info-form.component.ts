@@ -66,17 +66,17 @@ export class InfoFormComponent {
     this.userService.addUser(this.patientForm.value, user => this.router.navigate([user.id], {relativeTo: this.route}).then());
   }
 
-  private getDate(offsetYears: number): string {
+  private getDateByOffset(offsetYears: number): string {
     const date = new Date();
     date.setFullYear(date.getFullYear() + offsetYears);
     return date.toISOString().split("T")[0];
   }
 
-  protected getMaxDate(): string {
-    return this.getDate(-1);
+  protected getMaxBirthDate(): string {
+    return this.getDateByOffset(-1);
   }
 
-  protected getMinDate(): string {
-    return this.getDate(-120);
+  protected getMinBirthDate(): string {
+    return this.getDateByOffset(-120);
   }
 }
