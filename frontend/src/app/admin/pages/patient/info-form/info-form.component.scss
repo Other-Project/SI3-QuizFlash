@@ -3,7 +3,7 @@
 
 form {
   display: grid;
-  grid-template: 1fr / 150px 1fr 1fr 1fr 1fr;
+  grid-template: 1fr / 150px repeat(4, 1fr);
   align-items: center;
   gap: 1em;
 
