@@ -33,7 +33,7 @@ function getQuestionFromQuiz(quizId, questionId) {
 function createQuestion(quizId, question) {
     const {answers, ...pureQuestion} = question;
     let result = Question.create({...pureQuestion, quizId});
-    result.answers = answers.map(answer => Answer.create({...answer, questionId: result.id}));
+    if (answers !== undefined) result.answers = answers.map(answer => Answer.create({...answer, questionId: result.id}));
     return result;
 }
 
@@ -45,9 +45,11 @@ function createQuestion(quizId, question) {
 function replaceQuestion(questionId, question) {
     const {answers, ...pureQuestion} = question;
     let result = Question.replace(questionId, pureQuestion);
-    let currentAnswers = getQuestionAnswers(questionId);
-    currentAnswers.filter(answer => answers.every(a => a.id !== answer.id)).forEach(answer => Answer.delete(answer.id));
-    result.answers = answers.map(answer => answer.id ? Answer.replace(answer.id, answer) : Answer.create({...answer, questionId: result.id}));
+    if (answers !== undefined) {
+        let currentAnswers = getQuestionAnswers(questionId);
+        currentAnswers.filter(answer => answers.every(a => a.id !== answer.id)).forEach(answer => Answer.delete(answer.id));
+        result.answers = answers.map(answer => answer.id ? Answer.replace(answer.id, answer) : Answer.create({...answer, questionId: result.id}));
+    }
     return result;
 }
 
@@ -59,7 +61,7 @@ function replaceQuestion(questionId, question) {
 function updateQuestion(questionId, question) {
     const {answers, ...pureQuestion} = question;
     let result = Question.update(questionId, pureQuestion);
-    result.answers = answers.map(answer => answer.id ? Answer.update(answer.id, answer) : Answer.create({...answer, questionId: result.id}));
+    if (answers !== undefined) result.answers = answers.map(answer => answer.id ? Answer.update(answer.id, answer) : Answer.create({...answer, questionId: result.id}));
     return result;
 }
 
