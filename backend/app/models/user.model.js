@@ -44,5 +44,5 @@ function getMaxBirthDate() {
 }
 
 function getMinBirthDate() {
-    return getDateByOffset(-120);
+    return getDateByOffset(-200);
 }

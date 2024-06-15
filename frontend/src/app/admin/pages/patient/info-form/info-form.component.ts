@@ -77,6 +77,6 @@ export class InfoFormComponent {
   }
 
   protected getMinBirthDate(): string {
-    return this.getDateByOffset(-120);
+    return this.getDateByOffset(-200);
   }
 }
