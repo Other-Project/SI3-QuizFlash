@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {UserService} from "../../../../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Patient} from "../../../../../models/patient.models";
@@ -40,7 +40,7 @@ export class InfoFormComponent {
   patientForm: FormGroup = new FormGroup({
     firstname: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]*")]),
     lastname: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]*")]),
-    birthDate: new FormControl("", Validators.required),
+    birthDate: new FormControl("", [Validators.required, this.dateValidator()]),
     pictureUrl: new FormControl("/assets/profile.png"),
     hobbies: new FormControl([""]),
     dementiaLevel: new FormControl(Dementia.Mild),
@@ -64,6 +64,14 @@ export class InfoFormComponent {
       return this.userService.updateUser(this.currentPatient.id, this.patientForm.value);
     }
     this.userService.addUser(this.patientForm.value, user => this.router.navigate([user.id], {relativeTo: this.route}).then());
+  }
+
+  private dateValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (control.value >= this.getMinBirthDate() && control.value <= this.getMaxBirthDate())
+        return null;
+      return {"dateInvalid": true};
+    };
   }
 
   private getDateByOffset(offsetYears: number): string {

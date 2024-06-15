@@ -1,15 +1,25 @@
-<form id="patient-form" (ngSubmit)="save()" [formGroup]="patientForm">
+<form id="patient-form" [formGroup]="patientForm">
   <input type="text" placeholder="Image" formControlName="pictureUrl" hidden="hidden"/>
   <app-image-input id="profile-picture" [src]="currentPatient?.pictureUrl ?? '/assets/profile.png'"
                    (onImageUpdate)="patientForm.patchValue({pictureUrl: $event})"/>
   <label> Nom :
     <input type="text" formControlName="lastname">
+    <div class="error-container">
+      <small *ngIf="patientForm.get('lastname')?.errors?.['pattern']">Seuls les caractères alphabétiques et les espaces sont autorisés.</small>
+    </div>
   </label>
   <label> Prénom :
     <input type="text" formControlName="firstname">
+    <div class="error-container">
+      <small *ngIf="patientForm.get('firstname')?.errors?.['pattern']">Seuls les caractères alphabétiques et les espaces sont autorisés.</small>
+    </div>
   </label>
   <label> Date de naissance :
     <input type="date" id="start" formControlName="birthDate" [min]="getMinBirthDate()" [max]="getMaxBirthDate()"/>
+    <div class="error-container">
+      <small *ngIf="patientForm.get('birthDate')?.value && patientForm.get('birthDate')?.errors?.['dateInvalid']">L'âge doit être compris entre 1 et
+        200 ans. (Actuel : {{ patientForm.get('birthDate')?.value | age }} ans)</small>
+    </div>
   </label>
   <app-button (click)="save()" [color]="'blue'">Valider</app-button>
 </form>

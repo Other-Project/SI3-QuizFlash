@@ -44,3 +44,12 @@ app-button {
   width: 150px;
   height: 150px;
 }
+
+.error-container {
+  height: 2em;
+  font-size: 0.9em;
+
+  small {
+    color: #b73e44;
+  }
+}
