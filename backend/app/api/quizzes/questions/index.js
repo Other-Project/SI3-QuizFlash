@@ -6,6 +6,7 @@ const {getQuizQuestions, getQuestionFromQuiz, createQuestion, deleteQuestion, re
 const { removedAnswers } = require("./manager");
 const checkAuthentification = require("../../../utils/auth-checker");
 const access = require("../../../models/access-restriction.model");
+const {Quiz} = require("../../../models");
 
 const router = new Router({ mergeParams: true });
 

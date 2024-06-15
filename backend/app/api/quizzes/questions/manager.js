@@ -87,6 +87,7 @@ function removedAnswers(questionId) {
 
 module.exports = {
     getQuizQuestions,
+    getQuestionFromQuiz,
     createQuestion,
     replaceQuestion,
     updateQuestion,
