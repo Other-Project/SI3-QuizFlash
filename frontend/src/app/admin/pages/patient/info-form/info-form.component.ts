@@ -38,8 +38,8 @@ export class InfoFormComponent {
   public currentPatient?: Patient;
 
   patientForm: FormGroup = new FormGroup({
-    firstname: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]*")]),
-    lastname: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]*")]),
+    firstname: new FormControl("", [Validators.required, Validators.pattern(/^\p{L}+(?:[ -]\p{L}+)*$/u)]),
+    lastname: new FormControl("", [Validators.required, Validators.pattern(/^\p{L}+(?:[ -]\p{L}+)*$/u)]),
     birthDate: new FormControl("", [Validators.required, this.dateValidator()]),
     pictureUrl: new FormControl("/assets/profile.png"),
     hobbies: new FormControl([""]),
