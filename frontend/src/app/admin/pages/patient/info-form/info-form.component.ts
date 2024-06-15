@@ -62,6 +62,6 @@ export class InfoFormComponent {
       this.patientInfoChange.emit();
       return this.userService.updateUser(this.currentPatient.id, this.patientForm.value);
     }
-    this.userService.addUser(this.patientForm.value, user => this.router.navigate([user.id], {relativeTo: this.route}).then());
+    this.userService.addUser(this.patientForm.value).then(user => this.router.navigate([user.id], {relativeTo: this.route}).then());
   }
 }
