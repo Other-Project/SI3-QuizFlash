@@ -8,8 +8,6 @@ import {AdminQuestionsComponent} from "./questions/admin-questions.component";
 import {faAdd, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {Question} from "../../../../../models/question.models";
-import {Answer} from "../../../../../models/answer.models";
-import {QuestionType} from "../../../../../models/question-type.models";
 import {NgIf} from "@angular/common";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {UserService} from "../../../../../service/user.service";
@@ -83,10 +81,7 @@ export class AdminQuizComponent implements OnDestroy {
   }
 
   addQuestion() {
-    this.quiz.questions.push({
-      answers: [{trueAnswer: false} as Answer, {trueAnswer: false} as Answer],
-      type: QuestionType.TextOnly
-    } as Question);
+    this.quiz.questions.push({} as Question);
   }
 
   protected readonly faAdd = faAdd;

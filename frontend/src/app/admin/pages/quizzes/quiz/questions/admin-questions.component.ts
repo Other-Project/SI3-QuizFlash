@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {LayoutModule} from "../../../../../layout/layout.module";
 import {Question} from "../../../../../../models/question.models";
 import {AdminQuestionComponent} from "../question/admin-question.component";
 import {NgForOf} from "@angular/common";
+import {QuizService} from "../../../../../../service/quiz-service.service";
 
 @Component({
   selector: "app-admin-questions",
@@ -19,12 +20,18 @@ import {NgForOf} from "@angular/common";
 })
 export class AdminQuestionsComponent {
   @Input() public questions?: Question[];
-  @Output() public questionsChange = new EventEmitter<Question[]>();
+  @Input() public quizId!: string;
 
-  constructor() {
+  constructor(public quizService: QuizService) {
   }
 
-  removeQuestion(index: number) {
-    this.questions?.splice(index, 1);
+  removeQuestion(questionId: string, index: number) {
+    if (questionId) this.quizService.deleteQuestion(this.quizId, questionId).then();
+    else this.questions?.splice(index, 1);
+  }
+
+  saveQuestion(questionId: string, question: Question) {
+    if (questionId) this.quizService.updateQuestion(this.quizId, questionId, question).then();
+    else this.quizService.addQuestion(this.quizId, question).then();
   }
 }
