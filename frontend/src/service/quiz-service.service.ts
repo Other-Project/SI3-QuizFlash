@@ -69,14 +69,14 @@ export class QuizService {
     this.http.put<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase).subscribe(() => this.updateQuizList());
   }
 
-  addQuiz(quiz: Quiz, callback: ((quiz: Quiz) => void)) {
-    this.http.post<Quiz>(this.quizApiUrl, quiz, httpOptionsBase).subscribe(quiz => callback(quiz));
+  async addQuiz(quiz: Quiz) {
+    let response = await firstValueFrom(this.http.post<Quiz>(this.quizApiUrl, quiz, httpOptionsBase));
+    this.updateQuizList();
+    return response;
   }
 
   deleteQuiz(quizId: string) {
-    this.http.delete<Quiz>(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => {
-      this.updateQuizList();
-    });
+    this.http.delete(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => this.updateQuizList());
   }
 
   fiftyFifty(questionId: String) {
