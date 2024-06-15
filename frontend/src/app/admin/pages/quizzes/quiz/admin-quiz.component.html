@@ -16,7 +16,7 @@
         <fa-icon [icon]="faSave"/>
         Sauvegarder
       </app-button>
-      <app-button (click)="delete()" [color]="'red'">
+      <app-button (click)="delete()" [color]="'red'" *ngIf="quiz.id">
         <fa-icon [icon]="faTrash"/>
         Supprimer
       </app-button>
@@ -26,7 +26,7 @@
 
 <hr/>
 
-<section id="questions">
+<section id="questions" *ngIf="quiz.id">
   <div id="questions-header"><h2>Questions</h2>
     <app-button (click)="addQuestion()">
       <fa-icon [icon]="faAdd"/>
