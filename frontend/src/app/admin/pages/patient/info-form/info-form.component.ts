@@ -13,6 +13,7 @@ import {Dementia} from "../../../../../models/dementia.models";
 
 export class InfoFormComponent {
   protected readonly Date = Date;
+  protected badNameInputText = "Seuls les lettres, les espaces et les traits d'union sont autorisés.";
   @Output() patientInfoChange: EventEmitter<any> = new EventEmitter;
 
   @Input() set user(patient: Patient | undefined) {

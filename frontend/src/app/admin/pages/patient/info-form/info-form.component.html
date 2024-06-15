@@ -5,13 +5,13 @@
   <label> Nom :
     <input type="text" formControlName="lastname">
     <div class="error-container">
-      <small *ngIf="patientForm.get('lastname')?.errors?.['pattern']">Seuls les caractères alphabétiques et les espaces sont autorisés.</small>
+      <small *ngIf="patientForm.get('lastname')?.errors?.['pattern']">{{ this.badNameInputText }}</small>
     </div>
   </label>
   <label> Prénom :
     <input type="text" formControlName="firstname">
     <div class="error-container">
-      <small *ngIf="patientForm.get('firstname')?.errors?.['pattern']">Seuls les caractères alphabétiques et les espaces sont autorisés.</small>
+      <small *ngIf="patientForm.get('firstname')?.errors?.['pattern']">{{ this.badNameInputText }}</small>
     </div>
   </label>
   <label> Date de naissance :
