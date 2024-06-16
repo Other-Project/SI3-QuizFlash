@@ -55,21 +55,16 @@ export class QuizService {
     this.http.delete(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => this.updateQuizList());
   }
 
-  async addQuestion(quizId: string, question: Question) {
-    let response = await firstValueFrom(this.http.post<Question>(`${this.quizApiUrl}/${quizId}/questions`, question, httpOptionsBase));
-    if (this.quiz?.id == quizId) this.selectQuiz(quizId);
-    return response;
+  addQuestion(quizId: string, question: Question) {
+    return firstValueFrom(this.http.post<Question>(`${this.quizApiUrl}/${quizId}/questions`, question, httpOptionsBase));
   }
 
-  async updateQuestion(quizId: string, questionId: string, question: Question) {
-    let response = await firstValueFrom(this.http.patch<Question>(`${this.quizApiUrl}/${quizId}/questions/${questionId}`, question, httpOptionsBase));
-    if (this.quiz?.id == quizId) this.selectQuiz(quizId);
-    return response;
+  updateQuestion(quizId: string, questionId: string, question: Question) {
+    return firstValueFrom(this.http.patch<Question>(`${this.quizApiUrl}/${quizId}/questions/${questionId}`, question, httpOptionsBase));
   }
 
-  async deleteQuestion(quizId: string, questionId: string) {
-    await firstValueFrom(this.http.delete(`${this.quizApiUrl}/${quizId}/questions/${questionId}`, httpOptionsBase));
-    if (this.quiz?.id == quizId) this.selectQuiz(quizId);
+  deleteQuestion(quizId: string, questionId: string) {
+    return firstValueFrom(this.http.delete(`${this.quizApiUrl}/${quizId}/questions/${questionId}`, httpOptionsBase));
   }
 
   //#region Gameplay

@@ -25,13 +25,17 @@ export class AdminQuestionsComponent {
   constructor(public quizService: QuizService) {
   }
 
-  removeQuestion(questionId: string, index: number) {
-    if (questionId) this.quizService.deleteQuestion(this.quizId, questionId).then();
-    else this.questions?.splice(index, 1);
+  async removeQuestion(questionId: string, index: number) {
+    if (questionId) await this.quizService.deleteQuestion(this.quizId, questionId);
+    this.questions?.splice(index, 1);
   }
 
-  saveQuestion(questionId: string, question: Question) {
-    if (questionId) this.quizService.updateQuestion(this.quizId, questionId, question).then();
-    else this.quizService.addQuestion(this.quizId, question).then();
+  saveQuestion(questionId: string, index: number, question: Question) {
+    (questionId
+        ? this.quizService.updateQuestion(this.quizId, questionId, question)
+        : this.quizService.addQuestion(this.quizId, question)
+    ).then(resp => {
+      if (this.questions) this.questions[index] = resp;
+    });
   }
 }
