@@ -7,6 +7,5 @@ export interface User {
   // Info
   lastname: string;
   firstname: string;
-  age: number;
   pictureUrl?: string;
 }
