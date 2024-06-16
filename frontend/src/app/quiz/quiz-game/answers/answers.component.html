@@ -1,5 +1,12 @@
-<section class="answer-section">
-  <app-button class="answer-button {{ answer.hide ? 'invisible' : ''}}" *ngFor="let answer of answers" (click)="returnAnswer(answer)"
+<section class="answer-section" [ngStyle]="{'row-gap':answers.length == 3 && fiftyFiftyActivated ? '50px' : '25px'}">
+  <app-button class="answer-button {{ answer.hide ? 'invisible' : ''}}" [scale]="answers.length == 3 && i==2 ? 'medium-scale' : 'large-scale'"
+              [padding]="answers.length == 3 && fiftyFiftyActivated ? i==2 ? 'answer-three-fifty-fifty' : 'other-answer-fifty-fifty' : ''"
+              [ngStyle]="{'--notchSizeHeight':!fiftyFiftyActivated ? '0%' : answers.length == 3 ? '35%' : '90%'}"
+              *ngFor="let answer of answers; index as i" (click)="returnAnswer(answer)"
               [color]="'yellow'">{{ answer.answerText }}
+  </app-button>
+  <app-button class="fifty-fifty-button" [color]="'blue'" [disabled]="fiftyFiftyDisabled" [borderRadius]="true"
+              [ngStyle]="{'display': fiftyFiftyDisabled ? 'none' : 'block'}"
+              (click)="fiftyFifty()" *ngIf="fiftyFiftyActivated">50/50
   </app-button>
 </section>

@@ -1,7 +1,8 @@
 <div>
   <div *ngIf="question">
     <question-section image="{{question.imageUrl}}" sound="{{question.soundUrl}}" question="{{question.text}}" [volume]="audioGain" [autoPlay]="user!.autoStartAudio"/>
-    <answers-section [answers]="question.answers" [automatedSkip]="user!.automatedSkip" (returnedAnswer)='checkAnswer($event)'
-                     (inactive)='setInactivity()'/>
+    <answers-section [answers]="question.answers" [automatedSkip]="user!.automatedSkip" [fiftyFiftyDisabled]="fiftyFiftyDisabled"
+                     [fiftyFiftyActivated]="fiftyFiftyActivated"
+                     (returnedAnswer)='checkAnswer($event)' (fiftyFiftyUsed)='fiftyFifty()' (inactive)='setInactivity()'/>
   </div>
 </div>

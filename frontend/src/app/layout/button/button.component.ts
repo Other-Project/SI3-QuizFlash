@@ -7,9 +7,10 @@ import {Component, Input} from "@angular/core";
 })
 export class ButtonComponent {
   @Input() color: string = "white";
-  @Input() padding: boolean = true;
+  @Input() padding: string = "";
   @Input() disabled: boolean = false;
-  @Input() scale: boolean = true;
+  @Input() scale: string = "large-scale";
+  @Input() borderRadius: boolean = false;
 
   constructor() {
   }

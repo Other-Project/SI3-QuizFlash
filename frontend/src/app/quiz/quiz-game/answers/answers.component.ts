@@ -10,8 +10,11 @@ export class AnswersComponent implements OnInit {
 
   @Input() answers: Answer[] = [];
   @Input() automatedSkip: boolean = false;
+  @Input() fiftyFiftyDisabled!: boolean;
+  @Input() fiftyFiftyActivated!: boolean;
   private timeOutId?: number;
   @Output() inactive: EventEmitter<undefined> = new EventEmitter();
+  @Output() fiftyFiftyUsed: EventEmitter<undefined> = new EventEmitter();
 
   constructor() {
   }
@@ -25,6 +28,10 @@ export class AnswersComponent implements OnInit {
   returnAnswer(value: Answer) {
     clearTimeout(this.timeOutId);
     this.returnedAnswer.emit(value); //To return value to the quiz-section.component
+  }
+
+  fiftyFifty() {
+    this.fiftyFiftyUsed.emit();
   }
 
   stopQuiz() {
