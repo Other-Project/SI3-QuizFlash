@@ -31,8 +31,10 @@ export class UserService {
     return firstValueFrom(this.http.get<User>(`${this.userUrl}/${userId}`, this.httpOptions));
   }
 
-  addUser(user: User, callback: ((user: User) => void)) {
-    this.http.post<User>(this.userUrl, user, this.httpOptions).subscribe(user => this.retrieveUsers().then(() => callback(user)));
+  async addUser(user: User) {
+    let response = await firstValueFrom(this.http.post<User>(this.userUrl, user, this.httpOptions));
+    await this.retrieveUsers();
+    return response;
   }
 
   deleteUser(userId: string): void {

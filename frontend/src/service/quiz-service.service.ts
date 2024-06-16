@@ -69,8 +69,8 @@ export class QuizService {
     this.http.put<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase).subscribe(() => this.updateQuizList());
   }
 
-  addQuiz(quiz: Quiz, callback: ((quiz: Quiz) => void)) {
-    this.http.post<Quiz>(this.quizApiUrl, quiz, httpOptionsBase).subscribe(quiz => callback(quiz));
+  addQuiz(quiz: Quiz) {
+    return firstValueFrom(this.http.post<Quiz>(this.quizApiUrl, quiz, httpOptionsBase));
   }
 
   deleteQuiz(quizId: string) {
