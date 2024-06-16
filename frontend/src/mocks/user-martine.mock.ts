@@ -9,7 +9,7 @@ export const USER_MARTINE: Patient = {
   pictureUrl: "assets/users/martine.jpg",
   firstname: "Martine",
   lastname: "Dupont",
-  age: 70,
+  birthDate: "1953-09-30",
   dementiaLevel: Dementia.Intermediate,
   fontSize: 2,
   hobbies: ["culture", "famille", "théâtre"],

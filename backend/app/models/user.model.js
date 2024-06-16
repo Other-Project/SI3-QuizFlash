@@ -7,10 +7,14 @@ module.exports = new BaseModel("User", {
     access: Joi.number().valid(Object.values(AccessRestriction)).required(),
     lastname: Joi.string().required(),
     firstname: Joi.string().required(),
-    age: Joi.number().positive().required(),
     pictureUrl: Joi.string().allow("").uri(),
 
     //Patient attributes
+    birthDate: Joi.date()
+        .required()
+        .max(getMaxBirthDate())
+        .min(getMinBirthDate())
+        .when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     hobbies: Joi.array().items(Joi.string()).when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     dementiaLevel: Joi.number().valid(Object.values(DementiaLevel))
         .when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
@@ -27,3 +31,18 @@ module.exports = new BaseModel("User", {
     password: Joi.string().when("access", {is: AccessRestriction.admin, then: Joi.required(), otherwise: Joi.forbidden()}),
     salt: Joi.string().when("access", {is: AccessRestriction.admin, then: Joi.required(), otherwise: Joi.forbidden()})
 });
+
+function getDateByOffset(offsetYears) {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() + offsetYears);
+    date.setHours(0, 0, 0);
+    return date;
+}
+
+function getMaxBirthDate() {
+    return getDateByOffset(-1);
+}
+
+function getMinBirthDate() {
+    return getDateByOffset(-200);
+}

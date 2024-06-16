@@ -4,14 +4,23 @@
                    (onImageUpdate)="patientForm.patchValue({pictureUrl: $event})"/>
   <label> Nom :
     <input type="text" formControlName="lastname">
+    <div class="error-container">
+      <small *ngIf="patientForm.get('lastname')?.errors?.['pattern']">{{ this.badNameInputText }}</small>
+    </div>
   </label>
   <label> Prénom :
     <input type="text" formControlName="firstname">
+    <div class="error-container">
+      <small *ngIf="patientForm.get('firstname')?.errors?.['pattern']">{{ this.badNameInputText }}</small>
+    </div>
   </label>
-  <label> Age :
-    <input type="number" min="0" max="120" formControlName="age">
+  <label> Date de naissance :
+    <input type="date" id="start" formControlName="birthDate" [min]="getMinBirthDate()" [max]="getMaxBirthDate()"/>
+    <div class="error-container">
+      <small *ngIf="patientForm.get('birthDate')?.value && patientForm.get('birthDate')?.errors?.['dateInvalid']">L'âge doit être compris entre 1 et
+        200 ans. (Actuel : {{ patientForm.get('birthDate')?.value | age }} ans)</small>
+    </div>
   </label>
-</form>
-<div class="submit-button">
   <app-button (click)="save()" [color]="'blue'">Valider</app-button>
-</div>
+</form>
+
