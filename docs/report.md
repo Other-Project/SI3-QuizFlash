@@ -1,34 +1,32 @@
-# Compte rendu de l'évaluation coopérative
+# Rapport du projet et des évaluations coopératives
 
 ------
 
 ## Personas et scénarios :
 
-Dans le cadre du projet, nous avons choisi une démarche centrée utilisateurs. Nous devons prendre en compte leurs besoins et les retranscrire dans des scénarios
-précis. Pour notre cas, nous avons choisi de nous pencher sur les personnes atteintes de la maladie d'Alzheimer. On traite du stade le plus léger à un stade
+Dans le cadre d'une démarche centrée utilisateurs, nous nous efforçons de prendre en compte leurs besoins et les retranscrire dans des scénarios
+précis. Dans ce projet, nous nous penchons sur les personnes atteintes de la maladie d'Alzheimer. On traite du stade le plus léger à un stade
 relativement avancé de la maladie.
 
-Afin de mieux distinguer les besoins de chacuns, on a crée 3 personas représentant chacun un accueilli d'un stade différent. C'est ainsi que l'on retrouve
+Afin de mieux distinguer les besoins de chacuns, nous avons crée 3 personas représentant chacun un accueilli d'un stade différent. C'est ainsi que l'on retrouve
 Francescu (stade initial), Martine (stade intermédiaire) et Bernard (stade avancé).
 
 - **Francescu** : Ancien berger retraité de 95 ans, Francescu est passioné par la pêche et aime regarder la télévision. Il s'agit d'une personne très souriante
   et très ouverte aux autres. Cependant, il possède très peu de connaissances dans la technologie et il est réticent quant au fait de les utiliser. Francescu
-  est atteint de surdité modérée, ce qui est à prendre en compte lors de l'élaboration de notre site.
+  est atteint de surdité modérée.
 - **Martine** :  Martine est une ancienne maîtresse des écoles agée de 70 ans. Elle aime la culture, et plus particulièrement le théâtre. Mais ce que préfère
   Martine par-dessus tout, ce sont ses petits-enfants. Elle aime beaucoup le contact humain en général et est très ravie de pouvoir partager ses connaissances
-  culturelles. Il s'agit d'une personne qui aime apprendre, la technologie ne faisant pas exception. On notera que martine est presbyte. Il faut que l'on en
-  tienne compte.
+  culturelles. Il s'agit d'une personne qui aime apprendre, la technologie ne faisant pas exception. On notera que martine est presbyte.
 - **Bernard** : Agé de 85 ans, Bernard, autrefois boucher, est passioné de lecture et de peinture. En revanche, il a beaucoup de mal à communiquer et a tendance
-  à trop se refermer sur lui-même. Il peut s'agacer assez vite sur les activités proposées s'il se sent perdu ou qu'il ne comprend pas. Il est également atteint
-  de tremblements léger.
+  à trop se refermer sur lui-même. Il peut s'agacer assez vite sur les activités proposées s'il se sent perdu ou qu'il ne comprend pas.
 
 On a également modélisé un persona pour représenter l'ergothérapeute en charge des accueillis :
 
 - **Anne** : Anne est une ergothérapeute en accueil de jour agée de 40 ans. Anne est une personne au coeur immense, ainsi elle a l'impression d'être née pour
-  faire son travail. Ainsi, elle aime s'occuper de ses accueillis avec qui elle est particulièrement attentionnée afin de répondre au mieux à leurs besoins. Ce
-  que recherche Anne, c'est de pouvoir proposer des ateliers adaptés à chacun et simple à mettre en place. Elle possède une expérience de base dans l'usage des
+  faire son travail. Elle aime s'occuper de ses accueillis avec qui elle est particulièrement attentionnée afin de répondre au mieux à leurs besoins. Anne
+  souhaite pouvoir proposer des ateliers adaptés à chacun et simple à mettre en place. Elle possède une expérience de base dans l'usage des
   technologies, étant donné qu'elle est habituée à utiliser son smartphone dans la vie de tous les jours. Elle sait également très bien se servir d'un
-  ordianteur pour envoyer des mails et utiliser un traitement de texte.
+  ordinateur pour envoyer des mails et utiliser un traitement de texte.
 
 #### Scénarios d'usages :
 
@@ -52,20 +50,54 @@ On a également modélisé un persona pour représenter l'ergothérapeute en cha
   capacité de répondre à certaines questions, je les retire. »
 
 
-- **Scénario 4 (Anne)** Faire l’activité : « Un accueilli présente un trouble du comportement. Je tente de le rassurer, mais le trouble persiste. Je lui propose
+- **Scénario 4.A (Anne)** Faire l’activité : « Un accueilli présente un trouble du comportement. Je tente de le rassurer, mais le trouble persiste. Je lui
+  propose
   donc de faire une activité flash (de moins de quinze minutes). Pour cela, je l’installe à l’ordinateur et je démarre QuizFlash. Je sélectionne son profil, et
   je lance un quiz sur un thème qu’il apprécie. Des questions musicales, illustrées et textuelles lui sont posées. Lorsqu’il se trompe, la proposition qu’il
   avait sélectionnée disparaît, de sorte qu'il trouve la réponse de lui-même, sans lui donner l'impression d'échec. Il est encouragé à chaque bonne réponse et
   une fois l’activité terminée, il est félicité quelle que soit sa performance. »
 
 
-- **Scénraio 4 suite (Martine)** Faire l’activité : « Je suis anxieuse durant un temps de repos, alors Anne me propose de réaliser un quiz sur QuizFlash. Anne
+- **Scénraio 4.B (Martine)** Faire l’activité : « Je suis anxieuse durant un temps de repos, alors Anne me propose de réaliser un quiz sur QuizFlash. Anne
   me signale que l’activité parlera de culture et de théâtre. Je commence ce quiz, il y a plein de questions différentes, certaines avec du son et d’autres avec
   du texte ou des images. Mais dans tous les cas, elles sont toutes adaptées à ma vision. Je termine cette activité, le site me félicite, car j’ai réussi à
   répondre à toutes les questions et je me sens apaisée. »
 
 --------
 
+## Procédure d'évaluation :
+
+Formation de notre Equipe : Jilian s'est dévoué pour devenir le directeur. Il nous a guidé lorsque c'était nécessaire et a aiguillé au mieux les évaluations.
+Les 3 autres membres du groupes, à savoir Théo, Evan et Antoine-Marie étaient observateurs. Ils se sont penchés attentivement sur les différentes remarques et
+ont pris des notes afin de tenir compte des améliorations potentielles proposées. Nous avons également tous été testeurs pour d'autres équipes. Nous nous sommes
+donc aussi chargés de faire des retours sur les différents sites que nous avons évalués.
+
+Lors des évaluations de notre site, nous avons demandé aux utilisateurs de reproduire un de nos scénarios d'usage en les plaçant dans le contexte de l'un de nos
+personas. Le but était de les aiguiller le moins possible pour voir tout d'abord si notre interface était intuitive, car l'objectif est seulement de les
+observer. Tout au long d'une évaluation, l'utilisateur nous communiquait les points qu'il jugeait aussi bien positifs que négatifs.
+
+A la fin d'une évaluation, nous avons posé les questions suivantes :
+
+- Qu'est ce qui pourrait être amélioré dans cette interface d'après toi ?
+- Quelles difficultés as-tu rencontré d'un point de vue ergonomique ?
+- L'interface est-elle agréable à utiliser ?
+- Est-ce que quelque chose manquait dans l'interface selon toi ?
+- Quelles sont les choses qui t'ont plues pendant ce test ?
+- Quelles sont les choses qui t'ont déplues pendant ce test ?
+
+**Résultats de nos tests :**
+
+Globalement, les résultats que nous avons obtenus ont été très satisfaisants, tant d'un point de vue ergothérapeute comme d'un point de vue utilisateur.
+L'interface est très agréable à utiliser et très intuitive. Cependant, quelques détails sont à modifier. On note donc :
+
+- **Une mise à jour de l'âge :** Actuellement, nous rentrons un âge. Il faudrait rentrer une date de naissance pour ne pas avoir à modifier l'âge manuellement.
+- **Le bouton de connexion en tant qu'administrateur** : Ce bouton n'est pas assez intuitif d'utilisation. Il faudrait revoir son design.
+- **Plus encourager les accueillis :** : Peut-être utiliser un peu plus de couleur pour valoriser une bonne réponse d'un accueilli.
+- **Le titre du quiz lors de sa création :** Revoir la manière de saisir le titre du quiz que l'on crée car pas assez intuitif actuellement
+- **Filtrer la recherche de quizz par thèmes :** Il faudrait pouvoir ajouter une option dans la barre de scroll de recherche de quizz pour filtrer les quizz
+  recherchés par thème.
+
+--------
 ## Retours des différentes équipes et professionnels quant à l’utilisation de notre application
 
 ### Test avec le groupe *Trivia*
@@ -112,6 +144,8 @@ Manque simplement un peu de retour quand un utilisateur réalise une action et l
 
 Site avec une interface globalement agréable à utiliser, manque de quelque retour utilisateur, à la fois du point de vue du patient et du professionnel.
 
+
+----
 ## Conclusion
 
 Dans l’ensemble les différents tests montrent que le site est plutôt plaisant et simple dans son utilisation.  
@@ -128,3 +162,17 @@ Pour résumer, nous devons :
 - Améliorer l’affichage des questions à trois propositions.
 - Meilleure mise en avant des boutons de la barre des tâches.
 - Améliorer le système d’âge des patients.
+
+------
+
+## Annexe
+
+##### Répartition du travail au sein du groupe :
+
+- Antoine : Implémentation de la visualisation des statistiques (front), ainsi que leur récupération (back) afin de calculer diverses métriques pour les
+  questions et les quizz. Implémentation de la page de paramètres pour un accueilli.
+- Théo : Implémentation de la création des utilisateurs, ainsi que l'envoi et la récupération de leurs données personnalisées (front et back)
+- Evan : Reviewer de code principal : a passé beaucoup de temps sur la relecture de code et les suggestions d'améliorations. S'est aussi occupé de toute la
+  partie de gestion de quizz (front et back). A aussi implémenté une authentification sur notre site, et également OpenAPI pour notre back
+- Jilian : S'est occupé de toute la partie du moteur de jeu, à savoir jouer à un quiz (front). Implémentation de l'historique (front) et l'envoi de statistiques
+  durant un quiz (back).
