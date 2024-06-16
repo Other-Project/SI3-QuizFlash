@@ -8,6 +8,7 @@ import {DecimalPipe, KeyValuePipe, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwit
 import {QuestionType} from "../../../../../../models/question-type.models";
 import {PlayButtonComponent} from "../../../../../layout/play-button/play-button.component";
 import {Answer} from "../../../../../../models/answer.models";
+import {QuizService} from "../../../../../../service/quiz-service.service";
 
 @Component({
   selector: "app-admin-question",
@@ -30,6 +31,7 @@ import {Answer} from "../../../../../../models/answer.models";
   standalone: true
 })
 export class AdminQuestionComponent implements OnInit {
+  @Input() public quizId!: string;
   @Input() public question!: Question;
   @Output() public questionRemoved = new EventEmitter<any>();
   @Output() public questionSaved = new EventEmitter<Question>();
@@ -37,6 +39,10 @@ export class AdminQuestionComponent implements OnInit {
   form!: FormGroup;
   answers = new FormArray<FormGroup<{ id: FormControl, answerText: FormControl, trueAnswer: FormControl }>>([]);
   changed = false;
+
+  constructor(private quizService: QuizService) {
+  }
+
 
   ngOnInit() {
     if (!this.question.type) this.question.type = QuestionType.TextOnly;
@@ -83,13 +89,17 @@ export class AdminQuestionComponent implements OnInit {
 
   dataChanged() {
     this.changed = this.form.valid;
-    if (this.changed && this.question.id) this.save();
   }
 
   save() {
     if (!this.changed || !this.form.valid) return;
-    this.questionSaved.emit(this.form.value);
-    this.changed = false;
+    (this.question.id
+        ? this.quizService.updateQuestion(this.quizId, this.question.id, this.form.value)
+        : this.quizService.addQuestion(this.quizId, this.form.value)
+    ).then(resp => {
+      this.questionSaved.emit(resp);
+      this.changed = false;
+    });
   }
 
   protected readonly faQuestion = faQuestion;

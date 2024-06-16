@@ -26,7 +26,7 @@
     <app-button [color]="'yellow'" [scale]="false" (click)="addAnswer()" *ngIf="answers.length < 4">Ajouter une proposition</app-button>
   </div>
   <div class="actions">
-    <app-button class="save" [color]="'blue'" (click)="save()" [disabled]="!changed" *ngIf="!question.id">
+    <app-button class="save" [color]="'blue'" (click)="save()" [disabled]="!changed">
       <fa-icon [icon]="faSave"/>
     </app-button>
     <app-button class="delete" [color]="'red'" (click)="questionRemoved.emit()">

@@ -30,12 +30,7 @@ export class AdminQuestionsComponent {
     this.questions?.splice(index, 1);
   }
 
-  saveQuestion(questionId: string, index: number, question: Question) {
-    (questionId
-        ? this.quizService.updateQuestion(this.quizId, questionId, question)
-        : this.quizService.addQuestion(this.quizId, question)
-    ).then(resp => {
-      if (this.questions) this.questions[index] = resp;
-    });
+  saveQuestion(index: number, question: Question) {
+    if (this.questions) this.questions[index] = question;
   }
 }
