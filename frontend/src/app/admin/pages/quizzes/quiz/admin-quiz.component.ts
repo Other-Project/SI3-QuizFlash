@@ -71,7 +71,7 @@ export class AdminQuizComponent implements OnDestroy {
 
   save() {
     if (!this.quizForm.valid) return;
-    if (this.quiz.id) return this.quizService.replaceQuiz(this.quiz.id, this.quizForm.value);
+    if (this.quiz.id) return this.quizService.updateQuiz(this.quiz.id, this.quizForm.value);
     this.quizService.addQuiz(this.quizForm.value).then(quiz => this.router.navigate([quiz.id], {relativeTo: this.route}).then());
   }
 
