@@ -67,7 +67,7 @@ On a également modélisé un persona pour représenter l'ergothérapeute en cha
 
 ## Procédure d'évaluation :
 
-Formation de notre équipe : Jilian a tenu le rôle de directeur. Il a guidé le testeur sur les personnas à jouer et sur les scénarios à suivre et les a guidé
+Formation de notre équipe : Jilian a tenu le rôle de directeur. Il a guidé le testeur sur les personnas à jouer, sur les scénarios à suivre et les a guidé
 lorsque c'était nécessaire. C'est lui qui a coordonnée les évaluations.
 Les 3 autres membres du groupes, à savoir Théo, Evan et Antoine-Marie étaient observateurs. Ils se sont penchés attentivement sur les différentes remarques et
 ont pris des notes afin de tenir compte des remarques afin de pouvoir proposer des améliorations. Nous avons également tous été testeurs pour d'autres équipes.
@@ -165,8 +165,7 @@ Pour résumer, nous devons :
   questions et les quizz. Implémentation de la page de paramètres pour un accueilli.
 - Théo : Implémentation de la création des utilisateurs, ainsi que l'envoi et la récupération de leurs données personnalisées (front-end et back-end)
 - Evan : Principal relecteur de code, il a passé beaucoup de temps sur la relecture de code et les suggestions d'améliorations. Il s'est aussi occupé de toute
-  la
-  partie de gestion de quizz (front-end et back-end). A aussi implémenté une authentification sur notre site, et également OpenAPI pour notre back
-- Jilian : S'est occupé de toute la partie du moteur de jeu, à savoir jouer à un quiz (front-end). Implémentation de l'historique et de son transfert (front-end
-  et back-end) et l'envoi de statistiques
-  durant un quiz (back-end).
+  la partie de gestion de quizz (front-end et back-end). Il a aussi implémenté une authentification sur notre site, et également OpenAPI pour notre back
+- Jilian : S'est occupé de toute la partie du moteur de jeu, à savoir jouer à un quiz (front-end).
+  Implémentation de l'historique et de son transfert (front-end et back-end)
+  et l'envoi de statistiques durant un quiz (back-end).
