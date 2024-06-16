@@ -35,41 +35,45 @@ export class AdminQuestionComponent implements OnInit {
   @Output() public questionSaved = new EventEmitter<Question>();
 
   form!: FormGroup;
+  answers = new FormArray<FormGroup<{ id: FormControl, answerText: FormControl, trueAnswer: FormControl }>>([]);
   changed = false;
 
   ngOnInit() {
     if (!this.question.type) this.question.type = QuestionType.TextOnly;
-    if (!this.question.answers) this.question.answers = [{trueAnswer: false} as Answer, {trueAnswer: false} as Answer];
+    if (!this.question.answers) this.question.answers = [{trueAnswer: true} as Answer, {trueAnswer: false} as Answer];
 
+    this.answers.clear();
     this.form = new FormGroup({
       text: new FormControl(this.question.text, [Validators.required]),
       type: new FormControl(this.question.type ?? QuestionType.TextOnly, [Validators.required]),
       imageUrl: new FormControl(this.question.imageUrl ?? ""),
       soundUrl: new FormControl(this.question.soundUrl ?? ""),
-      answers: new FormArray(this.question.answers.map(answer => new FormGroup({
-        answerText: new FormControl(answer.answerText, [Validators.required]),
-        trueAnswer: new FormControl(answer.trueAnswer ?? false, [Validators.required])
-      })))
+      answers: this.answers
     });
-    this.form.valueChanges.subscribe(() => this.changed = this.form.valid);
-  }
-
-  constructor() {
+    this.question.answers.forEach(answer => this.addAnswer(answer));
+    this.form.valueChanges.subscribe(() => this.dataChanged());
   }
 
   changeTrueAnswer(index: number) {
-    this.question.answers.forEach((answer, i) => answer.trueAnswer = i == index);
-    this.changed = this.form.valid;
+    this.answers.controls.forEach((answer, i) => answer.get("trueAnswer")?.setValue(i == index, {emitEvent: false}));
+    this.answers.updateValueAndValidity();
   }
 
-  addAnswer() {
-    this.question.answers.push({trueAnswer: false} as Answer);
-    this.changed = this.form.valid;
+  addAnswer(answer?: Answer) {
+    this.answers.push(new FormGroup({
+      id: new FormControl(answer?.id),
+      answerText: new FormControl(answer?.answerText, [Validators.required]),
+      trueAnswer: new FormControl(answer?.trueAnswer ?? false, [Validators.required])
+    }));
   }
 
   removeAnswer(index: number) {
-    this.question.answers.splice(index, 1);
+    this.answers.removeAt(index);
+  }
+
+  dataChanged() {
     this.changed = this.form.valid;
+    if (this.changed && this.question.id) this.save();
   }
 
   save() {
