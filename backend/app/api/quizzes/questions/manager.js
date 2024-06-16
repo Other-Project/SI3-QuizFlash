@@ -44,7 +44,7 @@ function createQuestion(quizId, question) {
  */
 function replaceQuestion(questionId, question) {
     const {answers, ...pureQuestion} = question;
-    let result = Question.replace(questionId, pureQuestion);
+    let result = structuredClone(Question.replace(questionId, pureQuestion));
     if (answers !== undefined) {
         let currentAnswers = getQuestionAnswers(questionId);
         currentAnswers.filter(answer => answers.every(a => a.id !== answer.id)).forEach(answer => Answer.delete(answer.id));
@@ -60,7 +60,7 @@ function replaceQuestion(questionId, question) {
  */
 function updateQuestion(questionId, question) {
     const {answers, ...pureQuestion} = question;
-    let result = Question.update(questionId, pureQuestion);
+    let result = structuredClone(Question.update(questionId, pureQuestion));
     if (answers !== undefined) result.answers = answers.map(answer => answer.id ? Answer.update(answer.id, answer) : Answer.create({...answer, questionId: result.id}));
     return result;
 }
