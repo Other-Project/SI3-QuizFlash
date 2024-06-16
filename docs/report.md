@@ -1,6 +1,6 @@
 ---
 title: "Rapport du projet et des évaluations coopératives"
-author: "QuizFlash"
+author: "QuizFlash : Evan Galli, Théo Lassauniere, Jilian Lubrat et Antoine-Marie Michelozzi"
 date: 2024-06-16
 geometry: margin=1in
 ---
