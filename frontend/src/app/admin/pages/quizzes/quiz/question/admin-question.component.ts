@@ -46,9 +46,16 @@ export class AdminQuestionComponent implements OnInit {
     this.form = new FormGroup({
       text: new FormControl(this.question.text, [Validators.required]),
       type: new FormControl(this.question.type ?? QuestionType.TextOnly, [Validators.required]),
-      imageUrl: new FormControl(this.question.imageUrl ?? ""),
-      soundUrl: new FormControl(this.question.soundUrl ?? ""),
+      imageUrl: new FormControl(this.question.imageUrl ?? "", this.question.type == QuestionType.Image ? Validators.required : undefined),
+      soundUrl: new FormControl(this.question.soundUrl ?? "", this.question.type == QuestionType.Sound ? Validators.required : undefined),
       answers: this.answers
+    });
+    this.form.get("type")?.valueChanges.subscribe(type => {
+      if (type == QuestionType.Image) this.form.get("imageUrl")?.addValidators(Validators.required);
+      else this.form.get("imageUrl")?.removeValidators(Validators.required);
+      if (type == QuestionType.Sound) this.form.get("soundUrl")?.addValidators(Validators.required);
+      else this.form.get("soundUrl")?.removeValidators(Validators.required);
+      this.form.updateValueAndValidity();
     });
     this.question.answers.forEach(answer => this.addAnswer(answer));
     this.form.valueChanges.subscribe(() => this.dataChanged());
