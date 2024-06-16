@@ -164,8 +164,9 @@ Pour résumer, nous devons :
   pour les
   questions et les quizz. Implémentation de la page de paramètres pour un accueilli.
 - Théo : Implémentation de la création des utilisateurs, ainsi que l'envoi et la récupération de leurs données personnalisées (front-end et back-end)
-- Evan : Principal relecteur de code, il a passé beaucoup de temps sur la relecture de code et les suggestions d'améliorations. Il s'est aussi occupé de toute
-  la partie de gestion de quizz (front-end et back-end). Il a aussi implémenté une authentification sur notre site, et également OpenAPI pour notre back
+- Evan : Principal relecteur de code, il a passé beaucoup de temps sur la relecture de code et les suggestions d'améliorations. Il s'est par ailleurs, occupé de
+  toute la partie de gestion de quizz (front-end et back-end). Il a aussi implémenté une authentification sur notre site, et également OpenAPI pour notre
+  back-end.
 - Jilian : S'est occupé de toute la partie du moteur de jeu, à savoir jouer à un quiz (front-end).
   Implémentation de l'historique et de son transfert (front-end et back-end)
   et l'envoi de statistiques durant un quiz (back-end).
