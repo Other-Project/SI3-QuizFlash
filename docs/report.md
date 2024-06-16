@@ -67,14 +67,17 @@ On a également modélisé un persona pour représenter l'ergothérapeute en cha
 
 ## Procédure d'évaluation :
 
-Formation de notre Equipe : Jilian s'est dévoué pour devenir le directeur. Il nous a guidé lorsque c'était nécessaire et a aiguillé au mieux les évaluations.
+Formation de notre équipe : Jilian a tenu le rôle de directeur. Il a guidé le testeur sur les personnas à jouer et sur les scénarios à suivre et les a guidé
+lorsque c'était nécessaire. C'est lui qui a coordonnée les évaluations.
 Les 3 autres membres du groupes, à savoir Théo, Evan et Antoine-Marie étaient observateurs. Ils se sont penchés attentivement sur les différentes remarques et
-ont pris des notes afin de tenir compte des améliorations potentielles proposées. Nous avons également tous été testeurs pour d'autres équipes. Nous nous sommes
+ont pris des notes afin de tenir compte des remarques afin de pouvoir proposer des améliorations. Nous avons également tous été testeurs pour d'autres équipes.
+Nous nous sommes
 donc aussi chargés de faire des retours sur les différents sites que nous avons évalués.
 
 Lors des évaluations de notre site, nous avons demandé aux utilisateurs de reproduire un de nos scénarios d'usage en les plaçant dans le contexte de l'un de nos
-personas. Le but était de les aiguiller le moins possible pour voir tout d'abord si notre interface était intuitive, car l'objectif est seulement de les
-observer. Tout au long d'une évaluation, l'utilisateur nous communiquait les points qu'il jugeait aussi bien positifs que négatifs.
+personas. Le but était de les aiguiller le moins possible pour voir tout d'abord si notre interface était intuitive. L'objectif étant principement de les
+observer pour discerner les difficultés. Tout au long d'une évaluation, l'utilisateur nous communiquait les points qu'il jugeait aussi bien positifs que
+négatifs.
 
 A la fin d'une évaluation, nous avons posé les questions suivantes :
 
@@ -84,18 +87,6 @@ A la fin d'une évaluation, nous avons posé les questions suivantes :
 - Est-ce que quelque chose manquait dans l'interface selon toi ?
 - Quelles sont les choses qui t'ont plues pendant ce test ?
 - Quelles sont les choses qui t'ont déplues pendant ce test ?
-
-**Résultats de nos tests :**
-
-Globalement, les résultats que nous avons obtenus ont été très satisfaisants, tant d'un point de vue ergothérapeute comme d'un point de vue utilisateur.
-L'interface est très agréable à utiliser et très intuitive. Cependant, quelques détails sont à modifier. On note donc :
-
-- **Une mise à jour de l'âge :** Actuellement, nous rentrons un âge. Il faudrait rentrer une date de naissance pour ne pas avoir à modifier l'âge manuellement.
-- **Le bouton de connexion en tant qu'administrateur** : Ce bouton n'est pas assez intuitif d'utilisation. Il faudrait revoir son design.
-- **Plus encourager les accueillis :** : Peut-être utiliser un peu plus de couleur pour valoriser une bonne réponse d'un accueilli.
-- **Le titre du quiz lors de sa création :** Revoir la manière de saisir le titre du quiz que l'on crée car pas assez intuitif actuellement
-- **Filtrer la recherche de quizz par thèmes :** Il faudrait pouvoir ajouter une option dans la barre de scroll de recherche de quizz pour filtrer les quizz
-  recherchés par thème.
 
 --------
 ## Retours des différentes équipes et professionnels quant à l’utilisation de notre application
@@ -169,10 +160,13 @@ Pour résumer, nous devons :
 
 ##### Répartition du travail au sein du groupe :
 
-- Antoine : Implémentation de la visualisation des statistiques (front), ainsi que leur récupération (back) afin de calculer diverses métriques pour les
+- Antoine-Marie : Implémentation de la visualisation des statistiques (front-end), ainsi que leur récupération (back-end) afin de calculer diverses métriques
+  pour les
   questions et les quizz. Implémentation de la page de paramètres pour un accueilli.
-- Théo : Implémentation de la création des utilisateurs, ainsi que l'envoi et la récupération de leurs données personnalisées (front et back)
-- Evan : Reviewer de code principal : a passé beaucoup de temps sur la relecture de code et les suggestions d'améliorations. S'est aussi occupé de toute la
-  partie de gestion de quizz (front et back). A aussi implémenté une authentification sur notre site, et également OpenAPI pour notre back
-- Jilian : S'est occupé de toute la partie du moteur de jeu, à savoir jouer à un quiz (front). Implémentation de l'historique (front) et l'envoi de statistiques
-  durant un quiz (back).
+- Théo : Implémentation de la création des utilisateurs, ainsi que l'envoi et la récupération de leurs données personnalisées (front-end et back-end)
+- Evan : Principal relecteur de code, il a passé beaucoup de temps sur la relecture de code et les suggestions d'améliorations. Il s'est aussi occupé de toute
+  la
+  partie de gestion de quizz (front-end et back-end). A aussi implémenté une authentification sur notre site, et également OpenAPI pour notre back
+- Jilian : S'est occupé de toute la partie du moteur de jeu, à savoir jouer à un quiz (front-end). Implémentation de l'historique et de son transfert (front-end
+  et back-end) et l'envoi de statistiques
+  durant un quiz (back-end).
