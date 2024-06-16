@@ -1,6 +1,6 @@
-const {Quiz, Question, Answer} = require("../../../models");
+const { Quiz, Question, Answer } = require("../../../models");
 const NotFoundError = require("../../../utils/errors/not-found-error.js");
-const {getQuestionAnswers} = require("./answers/manager");
+const { getQuestionAnswers } = require("./answers/manager");
 
 /**
  * This function filters among the questions to return only the question linked with the given quizId
@@ -31,9 +31,9 @@ function getQuestionFromQuiz(quizId, questionId) {
  * @param {Question&{answers: Answer[]}} question
  */
 function createQuestion(quizId, question) {
-    const {answers, ...pureQuestion} = question;
-    let result = Question.create({...pureQuestion, quizId});
-    if (answers !== undefined) result.answers = answers.map(answer => Answer.create({...answer, questionId: result.id}));
+    const { answers, ...pureQuestion } = question;
+    let result = Question.create({ ...pureQuestion, quizId });
+    if (answers !== undefined) return { ...result, answers: answers.map(answer => Answer.create({ ...answer, questionId: result.id })) };
     return result;
 }
 
@@ -43,12 +43,15 @@ function createQuestion(quizId, question) {
  * @param {Question&{answers: Answer[]}} question
  */
 function replaceQuestion(questionId, question) {
-    const {answers, ...pureQuestion} = question;
-    let result = structuredClone(Question.replace(questionId, pureQuestion));
+    const { answers, ...pureQuestion } = question;
+    let result = Question.replace(questionId, pureQuestion);
     if (answers !== undefined) {
         let currentAnswers = getQuestionAnswers(questionId);
         currentAnswers.filter(answer => answers.every(a => a.id !== answer.id)).forEach(answer => Answer.delete(answer.id));
-        result.answers = answers.map(answer => answer.id ? Answer.replace(answer.id, answer) : Answer.create({...answer, questionId: result.id}));
+        return {
+            ...result,
+            answers: answers.map(answer => answer.id ? Answer.replace(answer.id, answer) : Answer.create({ ...answer, questionId: result.id }))
+        };
     }
     return result;
 }
@@ -59,9 +62,12 @@ function replaceQuestion(questionId, question) {
  * @param {Question&{answers: Answer[]}} question
  */
 function updateQuestion(questionId, question) {
-    const {answers, ...pureQuestion} = question;
-    let result = structuredClone(Question.update(questionId, pureQuestion));
-    if (answers !== undefined) result.answers = answers.map(answer => answer.id ? Answer.update(answer.id, answer) : Answer.create({...answer, questionId: result.id}));
+    const { answers, ...pureQuestion } = question;
+    let result = Question.update(questionId, pureQuestion);
+    if (answers !== undefined) return {
+        ...result,
+        answers: answers.map(answer => answer.id ? Answer.update(answer.id, answer) : Answer.create({ ...answer, questionId: result.id }))
+    };
     return result;
 }
 

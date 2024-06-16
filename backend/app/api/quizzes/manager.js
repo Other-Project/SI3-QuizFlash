@@ -1,6 +1,6 @@
-const {Quiz, Question, Answer, QuizStats, QuestionStats, User, Attempts} = require("../../models");
-const {getQuizQuestions, createQuestion, updateQuestion, replaceQuestion, deleteQuestion} = require("./questions/manager");
-const {getQuestionAnswers} = require("./questions/answers/manager");
+const { Quiz, Question, Answer, QuizStats, QuestionStats, User, Attempts } = require("../../models");
+const { getQuizQuestions, createQuestion, updateQuestion, replaceQuestion, deleteQuestion } = require("./questions/manager");
+const { getQuestionAnswers } = require("./questions/answers/manager");
 const NotFoundError = require("../../utils/errors/not-found-error");
 
 /**
@@ -14,14 +14,14 @@ function buildQuiz(quizId, userId = undefined) {
     let questionWithAnswers = questions.map((question) => {
         let answers = structuredClone(getQuestionAnswers(question.id));
         if (userId) answers.forEach(answer => delete answer.trueAnswer);
-        return {...question, answers};
+        return { ...question, answers };
     });
     if (userId) {
         let user = User.getById(userId);
-        if (!user.soundQuestion) quiz.questions = quiz.questions.filter(question => question.type !== "Sound");
+        if (!user.soundQuestion) questionWithAnswers = questionWithAnswers.filter(question => question.type !== "Sound");
         questionWithAnswers = questionWithAnswers.sort(() => 0.5 - Math.random()).slice(0, user.numberOfQuestion);
     }
-    return {...quiz, questions: questionWithAnswers};
+    return { ...quiz, questions: questionWithAnswers };
 }
 
 /**
@@ -29,9 +29,9 @@ function buildQuiz(quizId, userId = undefined) {
  * @param {Quiz&{questions: (Question&{answers: Answer[]})[]}} quiz
  */
 function createQuiz(quiz) {
-    const {questions, ...pureQuiz} = quiz;
+    const { questions, ...pureQuiz } = quiz;
     let result = Quiz.create(pureQuiz);
-    if (questions !== undefined) result.questions = questions.map(question => createQuestion(result.id, question));
+    if (questions !== undefined) return { ...quiz, questions: questions.map(question => createQuestion(result.id, question)) };
     return result;
 }
 
@@ -41,12 +41,13 @@ function createQuiz(quiz) {
  * @param {Quiz&{questions: (Question&{answers: Answer[]})[]}} quiz
  */
 function replaceQuiz(quizId, quiz) {
-    const {questions, ...pureQuiz} = quiz;
+    const { questions, ...pureQuiz } = quiz;
     let result = Quiz.replace(quizId, pureQuiz);
     if (questions !== undefined) {
         let currentQuestions = getQuizQuestions(quiz.id);
         currentQuestions.filter(question => questions.every(q => q.id !== question.id)).forEach(question => Question.delete(question.id));
-        result.questions = questions.map(question => question.id ? replaceQuestion(question.id, question) : createQuestion(quiz.id, question));
+        currentQuestions = questions.map(question => question.id ? replaceQuestion(question.id, question) : createQuestion(quiz.id, question));
+        return { ...quiz, questions: currentQuestions };
     }
     return result;
 }
@@ -57,9 +58,10 @@ function replaceQuiz(quizId, quiz) {
  * @param {Quiz&{questions: (Question&{answers: Answer[]})[]}} quiz
  */
 function updateQuiz(quizId, quiz) {
-    const {questions, ...pureQuiz} = quiz;
+    const { questions, ...pureQuiz } = quiz;
     let result = Quiz.update(quizId, pureQuiz);
-    if (questions !== undefined) result.questions = questions.map(question => question.id ? updateQuestion(question.id, question) : createQuestion(quiz.id, question));
+    if (questions !== undefined)
+        return { ...quiz, questions: questions.map(question => question.id ? updateQuestion(question.id, question) : createQuestion(quiz.id, question)) };
     return result;
 }
 
@@ -79,7 +81,7 @@ function deleteQuiz(quizId) {
  */
 function createStatQuiz(quizId, userId) {
     const date = new Date();
-    return QuizStats.create({quizId: parseInt(quizId), userId: userId, date: date.toISOString()}).id;
+    return QuizStats.create({ quizId: parseInt(quizId), userId: userId, date: date.toISOString() }).id;
 }
 
 /**
@@ -88,7 +90,7 @@ function createStatQuiz(quizId, userId) {
  * @param {string} questionId
  */
 function createStatQuestion(quizStatId, questionId) {
-    return QuestionStats.create({quizStatId: parseInt(quizStatId), questionId: parseInt(questionId), success: false}).id;
+    return QuestionStats.create({ quizStatId: parseInt(quizStatId), questionId: parseInt(questionId), success: false }).id;
 }
 
 /**
@@ -99,16 +101,16 @@ function createStatQuestion(quizStatId, questionId) {
  * @param {string} userId
  */
 function checkAnswer(quizStatId, questionStatId, questionAttempt, userId) {
-    let attempt = Attempts.create({questionStatId: parseInt(questionStatId), ...questionAttempt});
+    let attempt = Attempts.create({ questionStatId: parseInt(questionStatId), ...questionAttempt });
     let questionStats = QuestionStats.getById(questionStatId);
     if (parseInt(quizStatId) !== questionStats.quizStatId) throw new NotFoundError(`The quizStatId ${quizStatId} does not contain the questionStat with id ${questionStatId}`);
     let result = Answer.get().find(answer => answer.questionId === questionStats.questionId && answer.trueAnswer);
     if (!result) throw new NotFoundError(`No true answer found in the question ${Question.getById(questionStats.questionId).text}`);
     if (result.id === attempt.chosenAnswersId) {
-        QuestionStats.update(questionStatId, {success: true});
+        QuestionStats.update(questionStatId, { success: true });
         questionStats.success = true;
-    } else if (User.getById(parseInt(userId)).removeAnswers) return {isTrue: false};
-    return {isTrue: questionStats.success, expected: {id: result.id, text: result.answerText}};
+    } else if (User.getById(parseInt(userId)).removeAnswers) return { isTrue: false };
+    return { isTrue: questionStats.success, expected: { id: result.id, text: result.answerText } };
 }
 
 module.exports = {

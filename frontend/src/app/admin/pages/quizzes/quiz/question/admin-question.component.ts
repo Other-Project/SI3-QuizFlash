@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LayoutModule} from "../../../../../layout/layout.module";
 import {Question} from "../../../../../../models/question.models";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
@@ -51,14 +51,17 @@ export class AdminQuestionComponent implements OnInit {
       answers: this.answers
     });
     this.form.get("type")?.valueChanges.subscribe(type => {
-      if (type == QuestionType.Image) this.form.get("imageUrl")?.addValidators(Validators.required);
-      else this.form.get("imageUrl")?.removeValidators(Validators.required);
-      if (type == QuestionType.Sound) this.form.get("soundUrl")?.addValidators(Validators.required);
-      else this.form.get("soundUrl")?.removeValidators(Validators.required);
-      this.form.updateValueAndValidity();
+      this.setRequired(this.form.get("imageUrl")!, type == QuestionType.Image);
+      this.setRequired(this.form.get("soundUrl")!, type == QuestionType.Sound);
     });
     this.question.answers.forEach(answer => this.addAnswer(answer));
     this.form.valueChanges.subscribe(() => this.dataChanged());
+  }
+
+  private setRequired(control: AbstractControl, required: boolean = true) {
+    if (required) control.addValidators(Validators.required);
+    else control.removeValidators(Validators.required);
+    control.updateValueAndValidity({emitEvent: false});
   }
 
   changeTrueAnswer(index: number) {
