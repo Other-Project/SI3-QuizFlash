@@ -1,5 +1,71 @@
 # Compte rendu de l'évaluation coopérative
 
+------
+
+## Personas et scénarios :
+
+Dans le cadre du projet, nous avons choisi une démarche centrée utilisateurs. Nous devons prendre en compte leurs besoins et les retranscrire dans des scénarios
+précis. Pour notre cas, nous avons choisi de nous pencher sur les personnes atteintes de la maladie d'Alzheimer. On traite du stade le plus léger à un stade
+relativement avancé de la maladie.
+
+Afin de mieux distinguer les besoins de chacuns, on a crée 3 personas représentant chacun un accueilli d'un stade différent. C'est ainsi que l'on retrouve
+Francescu (stade initial), Martine (stade intermédiaire) et Bernard (stade avancé).
+
+- **Francescu** : Ancien berger retraité de 95 ans, Francescu est passioné par la pêche et aime regarder la télévision. Il s'agit d'une personne très souriante
+  et très ouverte aux autres. Cependant, il possède très peu de connaissances dans la technologie et il est réticent quant au fait de les utiliser. Francescu
+  est atteint de surdité modérée, ce qui est à prendre en compte lors de l'élaboration de notre site.
+- **Martine** :  Martine est une ancienne maîtresse des écoles agée de 70 ans. Elle aime la culture, et plus particulièrement le théâtre. Mais ce que préfère
+  Martine par-dessus tout, ce sont ses petits-enfants. Elle aime beaucoup le contact humain en général et est très ravie de pouvoir partager ses connaissances
+  culturelles. Il s'agit d'une personne qui aime apprendre, la technologie ne faisant pas exception. On notera que martine est presbyte. Il faut que l'on en
+  tienne compte.
+- **Bernard** : Agé de 85 ans, Bernard, autrefois boucher, est passioné de lecture et de peinture. En revanche, il a beaucoup de mal à communiquer et a tendance
+  à trop se refermer sur lui-même. Il peut s'agacer assez vite sur les activités proposées s'il se sent perdu ou qu'il ne comprend pas. Il est également atteint
+  de tremblements léger.
+
+On a également modélisé un persona pour représenter l'ergothérapeute en charge des accueillis :
+
+- **Anne** : Anne est une ergothérapeute en accueil de jour agée de 40 ans. Anne est une personne au coeur immense, ainsi elle a l'impression d'être née pour
+  faire son travail. Ainsi, elle aime s'occuper de ses accueillis avec qui elle est particulièrement attentionnée afin de répondre au mieux à leurs besoins. Ce
+  que recherche Anne, c'est de pouvoir proposer des ateliers adaptés à chacun et simple à mettre en place. Elle possède une expérience de base dans l'usage des
+  technologies, étant donné qu'elle est habituée à utiliser son smartphone dans la vie de tous les jours. Elle sait également très bien se servir d'un
+  ordianteur pour envoyer des mails et utiliser un traitement de texte.
+
+#### Scénarios d'usages :
+
+- **Scénario 1 (Anne)** Ajout d'un accueilli : « J'accueille Bernard, un nouvel arrivant, pour cela, je réalise un premier rendez-vous. Bernard est dans mon
+  bureau avec sa famille pour cet entretien et ils me communiquent toutes les informations nécessaires à la création de son dossier. Je réalise un bilan
+  psychomoteur, les raccompagne lui et sa famille, et retourne ensuite dans mon bureau terminer le dossier. Je l’ajoute dans la base de données de QuizFlash.
+  Pour cela, je rentre son nom, son prénom, certaines de ses pathologies, le stade de sa maladie et ses différents centres d’intérêts pour obtenir des tests
+  adaptés. »
+
+
+- **Scénario 2 (Anne)** Création d’une activité : « Je suis sur un temps de création des activités pour les résidents. Francescu a réalisé toutes les activités
+  qui pouvaient lui être proposées, je dois donc lui en créer de nouvelles. Je vais me servir de QuizFlash regroupant l’ensemble des accueillis avec de
+  nombreuses informations les concernant. Je me lance dans la création d’un quiz sur le thème de la pêche, le site me propose différents types de questions (
+  sonore, illustrée, etc.), j’ajoute un ensemble de questions en alternant les types. Ainsi, une activité sera disponible au moment où il faudra en proposer à
+  Francescu. »
+
+
+- **Scénario 3 (Anne)** Visualisation de l’évolution : « Martine a réalisé plusieurs activités sur QuizFlash, je vais donc observer son évolution avec les
+  résultats qui sont enregistrés dans le site. Durant chaque activité, les données de la session sont collectées afin que je puisse y accéder pour les analyser
+  ultérieurement. Je peux alors visualiser l’évolution de Martine et ainsi adapter au mieux l’activité pour cette accueillie. Si j’observe qu’elle n’est plus en
+  capacité de répondre à certaines questions, je les retire. »
+
+
+- **Scénario 4 (Anne)** Faire l’activité : « Un accueilli présente un trouble du comportement. Je tente de le rassurer, mais le trouble persiste. Je lui propose
+  donc de faire une activité flash (de moins de quinze minutes). Pour cela, je l’installe à l’ordinateur et je démarre QuizFlash. Je sélectionne son profil, et
+  je lance un quiz sur un thème qu’il apprécie. Des questions musicales, illustrées et textuelles lui sont posées. Lorsqu’il se trompe, la proposition qu’il
+  avait sélectionnée disparaît, de sorte qu'il trouve la réponse de lui-même, sans lui donner l'impression d'échec. Il est encouragé à chaque bonne réponse et
+  une fois l’activité terminée, il est félicité quelle que soit sa performance. »
+
+
+- **Scénraio 4 suite (Martine)** Faire l’activité : « Je suis anxieuse durant un temps de repos, alors Anne me propose de réaliser un quiz sur QuizFlash. Anne
+  me signale que l’activité parlera de culture et de théâtre. Je commence ce quiz, il y a plein de questions différentes, certaines avec du son et d’autres avec
+  du texte ou des images. Mais dans tous les cas, elles sont toutes adaptées à ma vision. Je termine cette activité, le site me félicite, car j’ai réussi à
+  répondre à toutes les questions et je me sens apaisée. »
+
+--------
+
 ## Retours des différentes équipes et professionnels quant à l’utilisation de notre application
 
 ### Test avec le groupe *Trivia*
