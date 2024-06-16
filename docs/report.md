@@ -1,5 +1,9 @@
-# Rapport du projet et des évaluations coopératives
-
+---
+title: "Rapport du projet et des évaluations coopératives"
+author: "QuizFlash"
+date: 2024-06-16
+geometry: margin=1in
+---
 ------
 
 ## Personas et scénarios :
@@ -89,6 +93,7 @@ A la fin d'une évaluation, nous avons posé les questions suivantes :
 - Quelles sont les choses qui t'ont déplues pendant ce test ?
 
 --------
+
 ## Retours des différentes équipes et professionnels quant à l’utilisation de notre application
 
 ### Test avec le groupe *Trivia*
@@ -135,8 +140,8 @@ Manque simplement un peu de retour quand un utilisateur réalise une action et l
 
 Site avec une interface globalement agréable à utiliser, manque de quelque retour utilisateur, à la fois du point de vue du patient et du professionnel.
 
-
 ----
+
 ## Conclusion
 
 Dans l’ensemble les différents tests montrent que le site est plutôt plaisant et simple dans son utilisation.  
