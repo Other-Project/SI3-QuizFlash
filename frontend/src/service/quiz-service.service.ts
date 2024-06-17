@@ -6,6 +6,7 @@ import {UserService} from "./user.service";
 import {Attempt} from "../models/attempt.model";
 import {apiUrl, httpOptionsBase} from "../configs/server.config";
 import {Answer} from "../models/answer.models";
+import {Question} from "../models/question.models";
 
 @Injectable({providedIn: "root"})
 export class QuizService {
@@ -40,6 +41,34 @@ export class QuizService {
     else this.quiz$.next(this.quiz = undefined);
   }
 
+  updateQuiz(quizId: string, updatedQuiz: Quiz) {
+    this.http.patch<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase).subscribe(() => this.updateQuizList());
+  }
+
+  async addQuiz(quiz: Quiz) {
+    let response = await firstValueFrom(this.http.post<Quiz>(this.quizApiUrl, quiz, httpOptionsBase));
+    this.updateQuizList();
+    return response;
+  }
+
+  deleteQuiz(quizId: string) {
+    this.http.delete(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => this.updateQuizList());
+  }
+
+  addQuestion(quizId: string, question: Question) {
+    return firstValueFrom(this.http.post<Question>(`${this.quizApiUrl}/${quizId}/questions`, question, httpOptionsBase));
+  }
+
+  updateQuestion(quizId: string, questionId: string, question: Question) {
+    return firstValueFrom(this.http.patch<Question>(`${this.quizApiUrl}/${quizId}/questions/${questionId}`, question, httpOptionsBase));
+  }
+
+  deleteQuestion(quizId: string, questionId: string) {
+    return firstValueFrom(this.http.delete(`${this.quizApiUrl}/${quizId}/questions/${questionId}`, httpOptionsBase));
+  }
+
+  //#region Gameplay
+
   async startQuiz(id?: string) {
     if (!id) {
       this.quiz$.next(this.quiz = undefined);
@@ -65,23 +94,11 @@ export class QuizService {
     }>(`${this.quizApiUrl}/${this.quizStatsId}/${this.questionStatsId}/checkAnswer`, attempt, httpOptionsBase));
   }
 
-  replaceQuiz(quizId: string, updatedQuiz: Quiz) {
-    this.http.put<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase).subscribe(() => this.updateQuizList());
-  }
-
-  addQuiz(quiz: Quiz, callback: ((quiz: Quiz) => void)) {
-    this.http.post<Quiz>(this.quizApiUrl, quiz, httpOptionsBase).subscribe(quiz => callback(quiz));
-  }
-
-  deleteQuiz(quizId: string) {
-    this.http.delete<Quiz>(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => {
-      this.updateQuizList();
-    });
-  }
-
   fiftyFifty(questionId: String) {
     return firstValueFrom(this.http.get<Answer[]>(`${this.quizApiUrl}/${this.quiz!.id}/questions/${questionId}/halveAnswers`, httpOptionsBase));
   }
+
+  //#endregion
 }
 
 

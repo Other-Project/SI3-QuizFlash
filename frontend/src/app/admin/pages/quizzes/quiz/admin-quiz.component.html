@@ -1,9 +1,10 @@
 <form [formGroup]="quizForm">
   <input type="text" placeholder="Image" formControlName="thumbnailUrl" hidden="hidden"/>
-  <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150" (onImageUpdate)="quizForm.patchValue({thumbnailUrl: $event})"/>
+  <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150"
+                   (onImageUpdate)="quizForm.patchValue({thumbnailUrl: $event})"/>
 
   <div>
-    <input type="text" placeholder="Titre" formControlName="title" id="title"/>
+    <input type="text" placeholder="Entrez un titre" formControlName="title" id="title"/>
     <ng-multiselect-dropdown
       [placeholder]="'Sélectionnez des tags'"
       [settings]="dropdownSettings"
@@ -13,10 +14,10 @@
 
     <div class="actions">
       <app-button (click)="save()">
-        <fa-icon [icon]="faSave"/>
-        Sauvegarder
+        <fa-icon [icon]="quiz.id ? faSave : faAdd"/>
+        {{ quiz.id ? 'Sauvegarder' : 'Créer' }}
       </app-button>
-      <app-button (click)="delete()" [color]="'red'">
+      <app-button (click)="delete()" [color]="'red'" *ngIf="quiz.id">
         <fa-icon [icon]="faTrash"/>
         Supprimer
       </app-button>
@@ -26,12 +27,12 @@
 
 <hr/>
 
-<section id="questions">
+<section id="questions" *ngIf="quiz.id">
   <div id="questions-header"><h2>Questions</h2>
     <app-button (click)="addQuestion()">
       <fa-icon [icon]="faAdd"/>
       Ajouter une question
     </app-button>
   </div>
-  <app-admin-questions [(questions)]="quiz.questions"/>
+  <app-admin-questions [questions]="quiz.questions" [quizId]="quiz.id"/>
 </section>

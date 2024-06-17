@@ -18,13 +18,13 @@ export enum Scale {
   templateUrl: "./button.component.html",
   styleUrls: ["./button.component.scss"]
 })
-
 export class ButtonComponent {
   @Input() color: string = "white";
   @Input() padding: string = Padding.BASE;
   @Input() disabled: boolean = false;
   @Input() scale: string = Scale.LARGE_SCALE;
   @Input() borderRadius: boolean = false;
+  @Input() visiblyDisabled: boolean = true;
 
   constructor() {
   }

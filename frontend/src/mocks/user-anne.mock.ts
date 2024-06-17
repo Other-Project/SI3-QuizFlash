@@ -8,6 +8,5 @@ export const USER_ANNE: Admin = {
   pictureUrl: "assets/users/anne.jpg",
   firstname: "Anne",
   lastname: "Petit",
-  age: 40,
   password: "admin"
 };
