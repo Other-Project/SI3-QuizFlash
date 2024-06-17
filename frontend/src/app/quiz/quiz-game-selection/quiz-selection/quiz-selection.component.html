@@ -1,4 +1,8 @@
 <section *ngIf="quizzes">
   <app-quiz-selection-card *ngFor="let quiz of quizzes" [quiz]="quiz" (quizReturn)="returnQuiz($event)"/>
 </section>
-<spinner [small]="false" *ngIf="!quizzes"/>
+<section class="spinner" *ngIf="!quizzes">
+  <spinner [small]="false"/>
+  <p>Chargement des quiz</p>
+</section>
+
