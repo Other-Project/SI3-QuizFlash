@@ -41,8 +41,10 @@ export class QuizService {
     else this.quiz$.next(this.quiz = undefined);
   }
 
-  updateQuiz(quizId: string, updatedQuiz: Quiz) {
-    this.http.patch<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase).subscribe(() => this.updateQuizList());
+  async updateQuiz(quizId: string, updatedQuiz: Quiz) {
+    let result = await firstValueFrom(this.http.patch<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase));
+    this.updateQuizList();
+    return result;
   }
 
   async addQuiz(quiz: Quiz) {

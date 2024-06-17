@@ -29,6 +29,7 @@ import {UserService} from "../../../../../service/user.service";
 })
 export class AdminQuizComponent implements OnDestroy {
   availableTags: string[] = [];
+  public loading: boolean = false;
   public quiz: Quiz = {id: "", thumbnailUrl: "", title: "", tags: [], questions: []};
 
   quizForm: FormGroup = new FormGroup({
@@ -70,8 +71,12 @@ export class AdminQuizComponent implements OnDestroy {
   }
 
   save() {
+    this.loading = true;
     if (!this.quizForm.valid) return;
-    if (this.quiz.id) return this.quizService.updateQuiz(this.quiz.id, this.quizForm.value);
+    if (this.quiz.id) {
+      this.quizService.updateQuiz(this.quiz.id, this.quizForm.value).then(() => this.loading = false);
+      return;
+    }
     this.quizService.addQuiz(this.quizForm.value).then(quiz => this.router.navigate([quiz.id], {relativeTo: this.route}).then());
   }
 

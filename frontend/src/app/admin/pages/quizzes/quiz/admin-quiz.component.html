@@ -13,8 +13,9 @@
     />
 
     <div class="actions">
-      <app-button (click)="save()">
-        <fa-icon [icon]="quiz.id ? faSave : faAdd"/>
+      <app-button (click)="save()" [disabled]="loading">
+        <fa-icon [icon]="quiz.id ? faSave : faAdd" *ngIf="!loading"/>
+        <spinner *ngIf="loading"/>
         {{ quiz.id ? 'Sauvegarder' : 'Créer' }}
       </app-button>
       <app-button (click)="delete()" [color]="'red'" *ngIf="quiz.id">

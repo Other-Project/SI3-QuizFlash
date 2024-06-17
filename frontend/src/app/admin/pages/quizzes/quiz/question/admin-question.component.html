@@ -27,8 +27,9 @@
   </app-button>
   </div>
   <div class="actions">
-    <app-button class="save" [color]="'blue'" (click)="save()" [disabled]="!changed">
-      <fa-icon [icon]="faSave"/>
+    <app-button class="save" [color]="'blue'" (click)="save()" [disabled]="!changed || loading">
+      <fa-icon [icon]="faSave" *ngIf="!loading"/>
+      <spinner *ngIf="loading"/>
     </app-button>
     <app-button class="delete" [color]="'red'" (click)="questionRemoved.emit()">
       <fa-icon [icon]="faTrash"/>
