@@ -6,7 +6,7 @@
     <app-button class="answer-button {{ answer.hide ? 'invisible' : ''}}"
                 [scale]="answers.length == 3 && i==2 ? Scale.MEDIUM_SCALE : Scale.LARGE_SCALE"
                 [padding]="answers.length==3 && i==2 ? Padding.ANSWER_THREE_FIFTY_FIFTY : Padding.OTHER_ANSWER_FIFTY_FIFTY"
-                [ngStyle]="{'--notchSizeHeight':!fiftyFiftyActivated ? '0%' : '35%'}"
+                [ngStyle]="{'--notchSizeHeight':fiftyFiftyActivated && answers.length > 2 ? '35%' : '0%'}"
                 *ngFor="let answer of answers; index as i" (click)="returnAnswer(answer)"
                 [color]="'yellow'">{{ answer.answerText }}
     </app-button>
