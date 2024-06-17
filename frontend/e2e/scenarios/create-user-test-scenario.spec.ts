@@ -10,14 +10,24 @@ test.describe("Create user test display", () => {
   test("Create user test", async ({page}) => {
     await page.goto(testUrl);
 
-    // Fixture definitions
-    const profilesFixture = new ProfilesFixture(page);
-    const adminPatientsFixture = new AdminPatientsFixture(page);
+    await test.step("Create User Navigation", async () => {
+      const profilesFixture = new ProfilesFixture(page);
+
+      const adminButton = profilesFixture.getAdminButtonFixture().getAdminButton();
+
+      await expect(adminButton).toBeVisible();
+      await adminButton.click();
+      await expect(page).toHaveURL("http://localhost:4200/admin/patients");
+
+      const adminPatientsFixture = new AdminPatientsFixture(page);
+      const createUserButton = adminPatientsFixture.getCreateUserButton();
+      await expect(createUserButton).toBeVisible();
+
+      await createUserButton.click();
+      await expect(page).toHaveURL("http://localhost:4200/admin/patient");
+    });
     const patientFixture = new PatientFixture(page);
 
-    // Items definitions
-    const adminButton = profilesFixture.getAdminButtonFixture().getAdminButton();
-    const createUserButton = adminPatientsFixture.getCreateUserButton();
     const createUserTitle = patientFixture.getPatientHeaderFixture().getCreateUserTitle();
     const lastNameInput = patientFixture.getPatientHeaderFixture().getLastNameInput();
     const firstNameInput = patientFixture.getPatientHeaderFixture().getFirstNameInput();
@@ -28,18 +38,6 @@ test.describe("Create user test display", () => {
     const removeWrongAnswersInput = patientFixture.getPatientSettings().getRemoveWrongAnswers();
     const fiftyFiftyInput = patientFixture.getPatientSettings().getFiftyFifty();
     const audioQuestionsInput = patientFixture.getPatientSettings().getAudioQuestions();
-
-    await test.step("Create User Navigation", async () => {
-      // Admin page navigation
-      await expect(adminButton).toBeVisible();
-      // Admin patients page navigation
-      await adminButton.click();
-      await expect(page).toHaveURL("http://localhost:4200/admin/patients");
-      await expect(createUserButton).toBeVisible();
-
-      // Create User page navigation
-      await createUserButton.click();
-    });
 
     await test.step("User form presence verification", async () => {
       await expect(createUserTitle).toBeVisible();
