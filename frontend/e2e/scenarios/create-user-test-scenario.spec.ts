@@ -62,13 +62,15 @@ test.describe("Create user test display", () => {
       await expect(fontSizeInput).toBeVisible();
       await expect(removeWrongAnswersInput).toBeVisible();
       await expect(fiftyFiftyInput).toBeVisible();
-      await expect(fontSizeInput).toBeVisible();
       await expect(audioQuestionsInput).toBeVisible();
     });
 
     await test.step("Define user parameters", async () => {
       await dementiaInput.fill("2");
       await fontSizeInput.fill("1.25");
+      await expect(removeWrongAnswersInput).toBeChecked();
+      await expect(fiftyFiftyInput).toBeChecked({checked: false});
+      await expect(audioQuestionsInput).toBeChecked({checked: false});
     });
   });
 });
