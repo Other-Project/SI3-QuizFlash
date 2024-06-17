@@ -28,16 +28,19 @@ test.describe("Create user test display", () => {
     });
     const patientFixture = new PatientFixture(page);
 
-    const createUserTitle = patientFixture.getPatientHeaderFixture().getCreateUserTitle();
-    const lastNameInput = patientFixture.getPatientHeaderFixture().getLastNameInput();
-    const firstNameInput = patientFixture.getPatientHeaderFixture().getFirstNameInput();
-    const birthDateInput = patientFixture.getPatientHeaderFixture().getBirthDateInput();
-    const validateButton = patientFixture.getPatientHeaderFixture().getValidateButton();
-    const dementiaInput = patientFixture.getPatientSettings().getDementiaLevel();
-    const fontSizeInput = patientFixture.getPatientSettings().getFontSize();
-    const removeWrongAnswersInput = patientFixture.getPatientSettings().getRemoveWrongAnswers();
-    const fiftyFiftyInput = patientFixture.getPatientSettings().getFiftyFifty();
-    const audioQuestionsInput = patientFixture.getPatientSettings().getAudioQuestions();
+    const patientHeaderFixture = patientFixture.getPatientHeaderFixture();
+    const createUserTitle = patientHeaderFixture.getCreateUserTitle();
+    const lastNameInput = patientHeaderFixture.getLastNameInput();
+    const firstNameInput = patientHeaderFixture.getFirstNameInput();
+    const birthDateInput = patientHeaderFixture.getBirthDateInput();
+    const validateButton = patientHeaderFixture.getValidateButton();
+
+    const patientSettingsFixture = patientFixture.getPatientSettings();
+    const dementiaInput = patientSettingsFixture.getDementiaLevel();
+    const fontSizeInput = patientSettingsFixture.getFontSize();
+    const removeWrongAnswersInput = patientSettingsFixture.getRemoveWrongAnswers();
+    const fiftyFiftyInput = patientSettingsFixture.getFiftyFifty();
+    const audioQuestionsInput = patientSettingsFixture.getAudioQuestions();
 
     await test.step("User form presence verification", async () => {
       await expect(createUserTitle).toBeVisible();
