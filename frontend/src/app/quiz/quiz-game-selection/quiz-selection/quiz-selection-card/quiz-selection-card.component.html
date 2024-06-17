@@ -1,4 +1,4 @@
-<app-button id="{{quiz.id}}" (click)="selectQuiz()" [color]="'white'" [padding]="'no-padding'">
+<app-button id="{{quiz.id}}" (click)="selectQuiz()" [color]="'white'" [padding]="Padding.NO_PADDING">
   <div class="quiz-card-content">
     <app-image [src]="quiz.thumbnailUrl" [alt]="quiz.title" [width]="200" [height]="150"/>
     <p class="quiz-card-title">{{ quiz.title }}</p>
