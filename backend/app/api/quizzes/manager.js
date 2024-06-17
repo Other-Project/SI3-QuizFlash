@@ -2,6 +2,9 @@ const { Quiz, Question, Answer, QuizStats, QuestionStats, User, Attempts } = req
 const { getQuizQuestions, createQuestion, updateQuestion, replaceQuestion, deleteQuestion } = require("./questions/manager");
 const { getQuestionAnswers } = require("./questions/answers/manager");
 const NotFoundError = require("../../utils/errors/not-found-error");
+const { readFile, storeFile, deleteFile } = require("../../utils/file");
+
+const thumbnail = (quizId) => `${quizId}/thumbnail`;
 
 /**
  * This function aggregates the questions and answers from the database to build a quiz with all the data needed by the clients
@@ -21,7 +24,7 @@ function buildQuiz(quizId, userId = undefined) {
         if (!user.soundQuestion) questionWithAnswers = questionWithAnswers.filter(question => question.type !== "Sound");
         questionWithAnswers = questionWithAnswers.sort(() => 0.5 - Math.random()).slice(0, user.numberOfQuestion);
     }
-    return { ...quiz, questions: questionWithAnswers };
+    return { ...quiz, thumbnailUrl: readFile(quiz.thumbnailUrl), questions: questionWithAnswers };
 }
 
 /**
@@ -29,10 +32,11 @@ function buildQuiz(quizId, userId = undefined) {
  * @param {Quiz&{questions: (Question&{answers: Answer[]})[]}} quiz
  */
 function createQuiz(quiz) {
-    const { questions, ...pureQuiz } = quiz;
+    const { questions, thumbnailUrl, ...pureQuiz } = quiz;
     let result = Quiz.create(pureQuiz);
-    if (questions !== undefined) return { ...quiz, questions: questions.map(question => createQuestion(result.id, question)) };
-    return result;
+    Quiz.update(result.id, { thumbnailUrl: storeFile(thumbnail(result.id), thumbnailUrl) });
+    if (questions !== undefined) return { ...result, thumbnailUrl, questions: questions.map(question => createQuestion(result.id, question)) };
+    return { ...result, thumbnailUrl };
 }
 
 /**
@@ -41,15 +45,18 @@ function createQuiz(quiz) {
  * @param {Quiz&{questions: (Question&{answers: Answer[]})[]}} quiz
  */
 function replaceQuiz(quizId, quiz) {
-    const { questions, ...pureQuiz } = quiz;
+    const { questions, thumbnailUrl, ...pureQuiz } = quiz;
+
+    pureQuiz.thumbnailUrl = storeFile(thumbnail(quizId), thumbnailUrl);
     let result = Quiz.replace(quizId, pureQuiz);
+
     if (questions !== undefined) {
         let currentQuestions = getQuizQuestions(quiz.id);
         currentQuestions.filter(question => questions.every(q => q.id !== question.id)).forEach(question => Question.delete(question.id));
         currentQuestions = questions.map(question => question.id ? replaceQuestion(question.id, question) : createQuestion(quiz.id, question));
-        return { ...quiz, questions: currentQuestions };
+        return { ...result, thumbnailUrl, questions: currentQuestions };
     }
-    return result;
+    return { ...result, thumbnailUrl };
 }
 
 /**
@@ -58,11 +65,18 @@ function replaceQuiz(quizId, quiz) {
  * @param {Quiz&{questions: (Question&{answers: Answer[]})[]}} quiz
  */
 function updateQuiz(quizId, quiz) {
-    const { questions, ...pureQuiz } = quiz;
+    const { questions, thumbnailUrl, ...pureQuiz } = quiz;
+
+    pureQuiz.thumbnailUrl = storeFile(thumbnail(quizId), thumbnailUrl);
     let result = Quiz.update(quizId, pureQuiz);
+
     if (questions !== undefined)
-        return { ...quiz, questions: questions.map(question => question.id ? updateQuestion(question.id, question) : createQuestion(quiz.id, question)) };
-    return result;
+        return {
+            ...result,
+            thumbnailUrl,
+            questions: questions.map(question => question.id ? updateQuestion(question.id, question) : createQuestion(quiz.id, question))
+        };
+    return { ...result, thumbnailUrl };
 }
 
 /**
@@ -71,6 +85,7 @@ function updateQuiz(quizId, quiz) {
  */
 function deleteQuiz(quizId) {
     getQuizQuestions(quizId).forEach(question => deleteQuestion(question.id));
+    deleteFile(thumbnail(quizId));
     Quiz.delete(quizId);
 }
 

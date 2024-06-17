@@ -1,6 +1,11 @@
 const { Quiz, Question, Answer } = require("../../../models");
 const NotFoundError = require("../../../utils/errors/not-found-error.js");
 const { getQuestionAnswers } = require("./answers/manager");
+const { storeFile, readFile, deleteFile } = require("../../../utils/file");
+
+const image = (quizId, questionId) => `${quizId}/${questionId}/image`;
+const sound = (quizId, questionId) => `${quizId}/${questionId}/sound`;
+
 
 /**
  * This function filters among the questions to return only the question linked with the given quizId
@@ -9,7 +14,11 @@ const { getQuestionAnswers } = require("./answers/manager");
  */
 function getQuizQuestions(quizId) {
     const parsedId = parseInt(quizId, 10);
-    return Question.get().filter((question) => question.quizId === parsedId);
+    return Question.get().filter((question) => question.quizId === parsedId).map(question => ({
+        ...question,
+        imageUrl: readFile(question.imageUrl),
+        soundUrl: readFile(question.soundUrl)
+    }));
 }
 
 /**
@@ -20,7 +29,12 @@ function getQuizQuestions(quizId) {
 function getQuestionFromQuiz(quizId, questionId) {
     const quizIdInt = parseInt(quizId, 10);
     const question = Question.getById(questionId);
-    if (question.quizId === quizIdInt) return question;
+
+    if (question.quizId === quizIdInt) return {
+        ...question,
+        imageUrl: readFile(question.imageUrl),
+        soundUrl: readFile(question.soundUrl)
+    };
     const quiz = Quiz.getById(quizId);
     throw new NotFoundError(`${question.name} id=${questionId} was not found for ${quiz.name} id=${quiz.id}`);
 }
@@ -31,25 +45,39 @@ function getQuestionFromQuiz(quizId, questionId) {
  * @param {Question&{answers: Answer[]}} question
  */
 function createQuestion(quizId, question) {
-    const { answers, ...pureQuestion } = question;
+    const { answers, imageUrl, soundUrl, ...pureQuestion } = question;
     let result = Question.create({ ...pureQuestion, quizId });
-    if (answers !== undefined) return { ...result, answers: answers.map(answer => Answer.create({ ...answer, questionId: result.id })) };
-    return result;
+    Question.update(result.id, {
+        imageUrl: storeFile(image(result.quizId, result.id), imageUrl),
+        soundUrl: storeFile(sound(result.quizId, result.id), soundUrl)
+    });
+    if (answers !== undefined) return { ...result, imageUrl, soundUrl, answers: answers.map(answer => Answer.create({ ...answer, questionId: result.id })) };
+    return { ...result, imageUrl, soundUrl };
 }
 
 /**
  * Replace question entry
+ * @param {string|number} quizId
  * @param {string|number} questionId
  * @param {Question&{answers: Answer[]}} question
  */
-function replaceQuestion(questionId, question) {
-    const { answers, ...pureQuestion } = question;
+function replaceQuestion(quizId, questionId, question) {
+    const { answers, imageUrl, soundUrl, ...pureQuestion } = question;
+
+    if (typeof quizId === "string") quizId = parseInt(quizId, 10);
+    const questionInDb = Question.getById(questionId);
+    if (questionInDb.quizId !== quizId)
+        throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
+
+    pureQuestion.imageUrl = storeFile(image(quizId, questionId), imageUrl);
+    pureQuestion.soundUrl = storeFile(sound(quizId, questionId), soundUrl);
     let result = Question.replace(questionId, pureQuestion);
+
     if (answers !== undefined) {
         let currentAnswers = getQuestionAnswers(questionId);
         currentAnswers.filter(answer => answers.every(a => a.id !== answer.id)).forEach(answer => Answer.delete(answer.id));
         return {
-            ...result,
+            ...result, imageUrl, soundUrl,
             answers: answers.map(answer => answer.id ? Answer.replace(answer.id, answer) : Answer.create({ ...answer, questionId: result.id }))
         };
     }
@@ -58,25 +86,42 @@ function replaceQuestion(questionId, question) {
 
 /**
  * Update question fields
+ * @param {string|number} quizId
  * @param {string|number} questionId
  * @param {Question&{answers: Answer[]}} question
  */
-function updateQuestion(questionId, question) {
-    const { answers, ...pureQuestion } = question;
+function updateQuestion(quizId, questionId, question) {
+    const { answers, imageUrl, soundUrl, ...pureQuestion } = question;
+
+    if (typeof quizId === "string") quizId = parseInt(quizId, 10);
+    const questionInDb = Question.getById(questionId);
+    if (questionInDb.quizId !== quizId)
+        throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
+
+    pureQuestion.imageUrl = storeFile(image(quizId, questionId), imageUrl);
+    pureQuestion.soundUrl = storeFile(sound(quizId, questionId), soundUrl);
     let result = Question.update(questionId, pureQuestion);
+
     if (answers !== undefined) return {
-        ...result,
+        ...result, imageUrl, soundUrl,
         answers: answers.map(answer => answer.id ? Answer.update(answer.id, answer) : Answer.create({ ...answer, questionId: result.id }))
     };
-    return result;
+    return { ...result, imageUrl, soundUrl };
 }
 
 /**
  * Delete question entry
+ * @param {string|number} quizId
  * @param {string|number} questionId
  */
-function deleteQuestion(questionId) {
+function deleteQuestion(quizId, questionId) {
+    if (typeof quizId === "string") quizId = parseInt(quizId, 10);
+    const question = Question.getById(questionId);
+    if (question.quizId !== quizId)
+        throw new NotFoundError(`${question.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
     getQuestionAnswers(questionId).forEach(answer => Answer.delete(answer.id));
+    deleteFile(question.imageUrl);
+    deleteFile(question.soundUrl);
     Question.delete(questionId);
 }
 

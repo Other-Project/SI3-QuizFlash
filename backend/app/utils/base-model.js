@@ -3,6 +3,7 @@ const Joi = require("joi");
 const logger = require("../utils/logger.js");
 const ValidationError = require("./errors/validation-error.js");
 const NotFoundError = require("./errors/not-found-error.js");
+const { pathPrefix } = require("../utils/file");
 
 module.exports = class BaseModel {
     constructor(name, schema) {
@@ -11,7 +12,7 @@ module.exports = class BaseModel {
         this.schema = Joi.object().keys({ ...schema, id: Joi.number().required() });
         this.items = [];
         this.name = name;
-        this.filePath = `${__dirname}/../../database/${process.env.DB_FOLDER ?? ""}${this.name.toLowerCase()}.data.json`;
+        this.filePath = `${pathPrefix}/${this.name.toLowerCase()}.data.json`;
         this.load();
     }
 
