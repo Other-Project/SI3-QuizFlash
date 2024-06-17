@@ -1,6 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {User} from "../../../../models/user.models";
 import {LayoutModule} from "../../../layout/layout.module";
+import {Padding} from "../../../layout/button/button.component";
 
 
 @Component({
@@ -16,4 +17,6 @@ export class ProfileButtonComponent {
   @Input() public user!: User; // To get access to the user the profile gets
   constructor() {
   }
+
+  protected readonly Padding = Padding;
 }

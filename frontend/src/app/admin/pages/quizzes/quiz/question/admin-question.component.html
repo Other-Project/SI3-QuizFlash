@@ -23,7 +23,8 @@
         <fa-icon class="remove" [icon]="faTrash" (click)="removeAnswer(i)" *ngIf="answers.length > 2"/>
       </app-input>
     </div>
-    <app-button [color]="'yellow'" [scale]="false" (click)="addAnswer()" *ngIf="answers.length < 4">Ajouter une proposition</app-button>
+    <app-button [color]="'yellow'" [scale]="Scale.SMALL_SCALE" (click)="addAnswer()" *ngIf="answers.length < 4">Ajouter une proposition
+  </app-button>
   </div>
   <div class="actions">
     <app-button class="save" [color]="'blue'" (click)="save()" [disabled]="!changed">

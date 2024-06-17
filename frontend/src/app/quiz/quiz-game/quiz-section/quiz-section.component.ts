@@ -14,8 +14,11 @@ export class QuizSectionComponent {
   @Input() question?: Question;
   @Input() user?: Patient;
   @Input() audioGain!: number;
+  @Input() fiftyFiftyActivated!: boolean;
+  @Input() fiftyFiftyDisabled!: boolean;
   @Output() inactive: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() chosenAnswer: EventEmitter<Answer> = new EventEmitter<Answer>();
+  @Output() fiftyFiftyUsed: EventEmitter<undefined> = new EventEmitter<undefined>();
 
   constructor() {
   }
@@ -26,5 +29,9 @@ export class QuizSectionComponent {
 
   setInactivity() {
     this.inactive.emit(true);
+  }
+
+  fiftyFifty() {
+    this.fiftyFiftyUsed.emit();
   }
 }

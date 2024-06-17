@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Quiz} from "../../../../../models/quiz.models";
+import {Padding} from "../../../../layout/button/button.component";
 
 
 @Component({
@@ -18,4 +19,6 @@ export class QuizSelectionCardComponent {
   selectQuiz() {
     this.quizReturn.emit(this.quiz);
   }
+
+  protected readonly Padding = Padding;
 }
