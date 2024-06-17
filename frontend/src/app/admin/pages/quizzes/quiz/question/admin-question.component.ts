@@ -9,6 +9,7 @@ import {QuestionType} from "../../../../../../models/question-type.models";
 import {PlayButtonComponent} from "../../../../../layout/play-button/play-button.component";
 import {Answer} from "../../../../../../models/answer.models";
 import {QuizService} from "../../../../../../service/quiz-service.service";
+import {Scale} from "../../../../../layout/button/button.component";
 
 @Component({
   selector: "app-admin-question",
@@ -113,4 +114,5 @@ export class AdminQuestionComponent implements OnInit {
     [QuestionType.Sound]: "Sonore"
   };
   protected readonly faSave = faSave;
+  protected readonly Scale = Scale;
 }
