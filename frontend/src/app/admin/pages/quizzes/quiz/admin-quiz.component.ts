@@ -5,7 +5,7 @@ import {QuizService} from "../../../../../service/quiz-service.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LayoutModule} from "../../../../layout/layout.module";
 import {AdminQuestionsComponent} from "./questions/admin-questions.component";
-import {faAdd, faCheck, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faAdd, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {Question} from "../../../../../models/question.models";
 import {NgIf} from "@angular/common";
@@ -92,5 +92,4 @@ export class AdminQuizComponent implements OnDestroy {
   protected readonly faAdd = faAdd;
   protected readonly faSave = faSave;
   protected readonly faTrash = faTrash;
-  protected readonly faCheck = faCheck;
 }
