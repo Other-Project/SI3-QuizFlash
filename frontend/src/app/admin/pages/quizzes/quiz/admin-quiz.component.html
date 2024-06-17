@@ -1,9 +1,10 @@
 <form [formGroup]="quizForm">
   <input type="text" placeholder="Image" formControlName="thumbnailUrl" hidden="hidden"/>
-  <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150" (onImageUpdate)="quizForm.patchValue({thumbnailUrl: $event})"/>
+  <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150"
+                   (onImageUpdate)="quizForm.patchValue({thumbnailUrl: $event})"/>
 
   <div>
-    <input type="text" placeholder="Titre" formControlName="title" id="title"/>
+    <input type="text" placeholder="Entrez un titre" formControlName="title" id="title"/>
     <ng-multiselect-dropdown
       [placeholder]="'Sélectionnez des tags'"
       [settings]="dropdownSettings"
@@ -13,8 +14,8 @@
 
     <div class="actions">
       <app-button (click)="save()">
-        <fa-icon [icon]="faSave"/>
-        Sauvegarder
+        <fa-icon [icon]="quiz.id ? faSave : faAdd"/>
+        {{ quiz.id ? 'Sauvegarder' : 'Créer' }}
       </app-button>
       <app-button (click)="delete()" [color]="'red'" *ngIf="quiz.id">
         <fa-icon [icon]="faTrash"/>
