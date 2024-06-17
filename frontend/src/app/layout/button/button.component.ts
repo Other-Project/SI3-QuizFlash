@@ -9,6 +9,7 @@ export class ButtonComponent {
   @Input() color: string = "white";
   @Input() padding: boolean = true;
   @Input() disabled: boolean = false;
+  @Input() visiblyDisabled: boolean = true;
   @Input() scale: boolean = true;
 
   constructor() {

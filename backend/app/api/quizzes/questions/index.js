@@ -6,6 +6,7 @@ const {getQuizQuestions, getQuestionFromQuiz, createQuestion, deleteQuestion, re
 const { removedAnswers } = require("./manager");
 const checkAuthentification = require("../../../utils/auth-checker");
 const access = require("../../../models/access-restriction.model");
+const {Quiz} = require("../../../models");
 
 const router = new Router({ mergeParams: true });
 
@@ -70,7 +71,8 @@ router.put("/:questionId", checkAuthentification(access.admin), (req, res) => ca
             description: 'Ids don't match'
         } */
 
-    res.status(200).json(replaceQuestion(req.params.quizId, req.body));
+    Quiz.getById(req.params.quizId);
+    res.status(200).json(replaceQuestion(req.params.questionId, req.body));
 }));
 
 router.patch("/:questionId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
@@ -90,7 +92,8 @@ router.patch("/:questionId", checkAuthentification(access.admin), (req, res) => 
             description: 'Ids don't match'
         } */
 
-    res.status(200).json(updateQuestion(req.params.quizId, req.body));
+    Quiz.getById(req.params.quizId);
+    res.status(200).json(updateQuestion(req.params.questionId, req.body));
 }));
 
 router.delete("/:questionId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
@@ -101,6 +104,7 @@ router.delete("/:questionId", checkAuthentification(access.admin), (req, res) =>
             description: 'Ids don't match'
         } */
 
+    Quiz.getById(req.params.quizId);
     deleteQuestion(req.params.questionId);
     res.status(204).end();
 }));
@@ -115,6 +119,7 @@ router.get("/:questionId/halveAnswers", checkAuthentification(access.user), (req
             description: 'No question found with this id'
         } */
 
+    Quiz.getById(req.params.quizId);
     res.status(200).json(removedAnswers(req.params.questionId));
 }));
 
