@@ -9,7 +9,7 @@ import {ImageInputComponent} from "./image-input/image-input.component";
 import {InputComponent} from "./input/input.component";
 import {FileInputComponent} from "./file-input/file-input.component";
 import {QuantityInputComponent} from "./quantity-input/quantity-input.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import {FormsModule} from "@angular/forms";
     NgIf,
     RouterLink,
     FaIconComponent,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class LayoutModule {

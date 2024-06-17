@@ -36,6 +36,12 @@ button {
         box-shadow: 0 0 2px color.scale($background, $lightness: -50%);
       }
 
+      &:not(.no-disable):disabled {
+        $bg: mix($background, white, 37.5%);
+        background-color: $bg;
+        border-color: color.scale($bg, $lightness: -5%);
+      }
+
       @if (lightness($background) < 50) {
         color: $white;
       }
