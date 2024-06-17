@@ -18,6 +18,14 @@ test.describe("Create user test display", () => {
     const createUserButton = adminPatientsFixture.getCreateUserButton();
     const createUserTitle = patientFixture.getPatientHeaderFixture().getCreateUserTitle();
     const lastNameInput = patientFixture.getPatientHeaderFixture().getLastNameInput();
+    const firstNameInput = patientFixture.getPatientHeaderFixture().getFirstNameInput();
+    const birthDateInput = patientFixture.getPatientHeaderFixture().getBirthDateInput();
+    const validateButton = patientFixture.getPatientHeaderFixture().getValidateButton();
+    const dementiaInput = patientFixture.getPatientSettings().getDementiaLevel();
+    const fontSizeInput = patientFixture.getPatientSettings().getFontSize();
+    const removeWrongAnswersInput = patientFixture.getPatientSettings().getRemoveWrongAnswers();
+    const fiftyFiftyInput = patientFixture.getPatientSettings().getFiftyFifty();
+    const audioQuestionsInput = patientFixture.getPatientSettings().getAudioQuestions();
 
 
     await test.step("Create User Navigation", async () => {
@@ -34,9 +42,33 @@ test.describe("Create user test display", () => {
       await createUserButton.click();
     });
 
-    await test.step("Create User", async () => {
+    await test.step("User form presence verification", async () => {
       await expect(createUserTitle).toBeVisible();
       await expect(lastNameInput).toBeVisible();
+      await expect(firstNameInput).toBeVisible();
+      await expect(birthDateInput).toBeVisible();
+      await expect(validateButton).toBeVisible();
+    });
+
+    await test.step("Create User", async () => {
+      await lastNameInput.fill("Dupont");
+      await firstNameInput.fill("Bernard");
+      await birthDateInput.fill("1950-05-11");
+      await validateButton.click();
+    });
+
+    await test.step("User settings presence verification", async () => {
+      await expect(dementiaInput).toBeVisible();
+      await expect(fontSizeInput).toBeVisible();
+      await expect(removeWrongAnswersInput).toBeVisible();
+      await expect(fiftyFiftyInput).toBeVisible();
+      await expect(fontSizeInput).toBeVisible();
+      await expect(audioQuestionsInput).toBeVisible();
+    });
+
+    await test.step("Define user parameters", async () => {
+      await dementiaInput.fill("2");
+      await fontSizeInput.fill("1.25");
     });
   });
 });
