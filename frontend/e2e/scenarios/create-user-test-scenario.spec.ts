@@ -8,6 +8,8 @@ import {PatientFixture} from "../../src/app/admin/pages/patient/patient.fixture"
 // This file is here to test the playwright integration.
 test.describe("Create user test display", () => {
   test("Create user test", async ({page}) => {
+    await page.goto(testUrl);
+
     // Fixture definitions
     const profilesFixture = new ProfilesFixture(page);
     const adminPatientsFixture = new AdminPatientsFixture(page);
@@ -27,12 +29,9 @@ test.describe("Create user test display", () => {
     const fiftyFiftyInput = patientFixture.getPatientSettings().getFiftyFifty();
     const audioQuestionsInput = patientFixture.getPatientSettings().getAudioQuestions();
 
-
     await test.step("Create User Navigation", async () => {
       // Admin page navigation
-      await page.goto(testUrl);
       await expect(adminButton).toBeVisible();
-
       // Admin patients page navigation
       await adminButton.click();
       await expect(page).toHaveURL("http://localhost:4200/admin/patients");
