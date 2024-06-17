@@ -12,8 +12,8 @@ import {Question} from "../models/question.models";
 export class QuizService {
   private readonly quizApiUrl = apiUrl + "/quizzes";
 
-  public quizzes: Quiz[] = [];
-  public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject<Quiz[]>(this.quizzes);
+  public quizzes?: Quiz[];
+  public quizzes$: BehaviorSubject<Quiz[] | undefined> = new BehaviorSubject<Quiz[] | undefined>(this.quizzes);
   public quiz?: Quiz;
   public quiz$: BehaviorSubject<Quiz | undefined> = new BehaviorSubject<Quiz | undefined>(this.quiz);
   private quizStatsId?: string;
@@ -42,19 +42,24 @@ export class QuizService {
   }
 
   async updateQuiz(quizId: string, updatedQuiz: Quiz) {
+    this.quizzes$.next(this.quizzes = undefined);
     let result = await firstValueFrom(this.http.patch<Quiz>(`${this.quizApiUrl}/${quizId}`, updatedQuiz, httpOptionsBase));
     this.updateQuizList();
     return result;
   }
 
   async addQuiz(quiz: Quiz) {
+    this.quizzes$.next(this.quizzes = undefined);
     let response = await firstValueFrom(this.http.post<Quiz>(this.quizApiUrl, quiz, httpOptionsBase));
     this.updateQuizList();
     return response;
   }
 
   deleteQuiz(quizId: string) {
-    this.http.delete(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => this.updateQuizList());
+    this.quizzes$.next(this.quizzes = undefined);
+    this.http.delete(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => {
+      this.updateQuizList();
+    });
   }
 
   addQuestion(quizId: string, question: Question) {

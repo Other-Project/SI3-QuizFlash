@@ -45,7 +45,6 @@ export class AdminQuestionComponent implements OnInit {
   constructor(private quizService: QuizService) {
   }
 
-
   ngOnInit() {
     if (!this.question.type) this.question.type = QuestionType.TextOnly;
     if (!this.question.answers) this.question.answers = [{trueAnswer: true} as Answer, {trueAnswer: false} as Answer];

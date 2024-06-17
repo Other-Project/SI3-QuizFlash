@@ -18,7 +18,7 @@ export class QuizGameSelectionComponent {
   public filteredQuizzes?: Quiz[];
 
   public user?: Patient;
-  private quizzes?: Quiz[];
+  public quizzes?: Quiz[];
   @Output() returnIdQuizSelected: EventEmitter<String> = new EventEmitter<String>();
 
   constructor(private userService: UserService, private quizService: QuizService, private route: ActivatedRoute, private router: Router) {
@@ -26,7 +26,8 @@ export class QuizGameSelectionComponent {
     this.userService.hobbies$.subscribe(tags => this.tags = tags);
     quizService.quizzes$.subscribe(quizzes => {
       this.quizzes = quizzes;
-      this.updateQuizzes();
+      if (quizzes) this.updateQuizzes();
+      else this.filteredQuizzes = undefined;
     });
   }
 

@@ -6,15 +6,25 @@
 
 .spinner {
   display: inline-block;
+
+  &.big:before {
+    border-top: 5px solid #07d;
+    border-right: 5px solid transparent;
+  }
+
+  &.small:before {
+    border-top: 2px solid #07d;
+    border-right: 2px solid transparent;
+  }
 }
 
 .spinner:before {
   content: '';
   width: 1em;
   height: 1em;
+  align-self: center;
+  justify-self: center;
   display: inline-block;
   border-radius: 50%;
-  border-top: 2px solid #07d;
-  border-right: 2px solid transparent;
   animation: spinner .9s linear infinite;
 }

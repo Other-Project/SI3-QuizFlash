@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {QuizSelectionComponent} from "./quiz-selection/quiz-selection.component";
 import {QuizSelectionCardComponent} from "./quiz-selection/quiz-selection-card/quiz-selection-card.component";
 import {LayoutModule} from "../../layout/layout.module";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {QuizGameSelectionComponent} from "./quiz-game-selection.component";
 import {FormsModule} from "@angular/forms";
 
@@ -19,7 +19,8 @@ import {FormsModule} from "@angular/forms";
     imports: [
       LayoutModule,
       NgForOf,
-      FormsModule
+      FormsModule,
+      NgIf
     ]
   }
 )

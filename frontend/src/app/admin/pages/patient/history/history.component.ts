@@ -25,7 +25,7 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
     this.statisticsService.userQuizStats$.subscribe(history => this.quizStats = history);
     if (this.user) this.statisticsService.getUserHistory(this.user.id);
-    this.quizListService.quizzes$.subscribe((quizzes: Quiz[]) => this.quizList = quizzes);
+    this.quizListService.quizzes$.subscribe((quizzes) => this.quizList = quizzes);
     this.quizSelected = false;
   }
 
