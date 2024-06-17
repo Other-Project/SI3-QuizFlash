@@ -15,12 +15,11 @@ button {
   }
 
   &.answer-three-fifty-fifty {
-    padding: 1.5em .75em .5em;
-
+    padding: 1.5em .75em .75em;
   }
 
   &.other-answer-fifty-fifty {
-    padding: .75em;
+    padding: 1.125em;
   }
 
   &:hover:not(:disabled) {

@@ -1,7 +1,7 @@
 <div>
   <div *ngIf="question">
     <question-section image="{{question.imageUrl}}" sound="{{question.soundUrl}}" question="{{question.text}}" [volume]="audioGain" [autoPlay]="user!.autoStartAudio"/>
-    <answers-section [answers]="question.answers" [automatedSkip]="user!.automatedSkip" [fiftyFiftyDisabled]="fiftyFiftyDisabled"
+    <answers-section [answers]="question.answers" [automatedSkip]="user!.automatedSkip" [fiftyFiftyUsable]="fiftyFiftyDisabled"
                      [fiftyFiftyActivated]="fiftyFiftyActivated"
                      (returnedAnswer)='checkAnswer($event)' (fiftyFiftyUsed)='fiftyFifty()' (inactive)='setInactivity()'/>
   </div>

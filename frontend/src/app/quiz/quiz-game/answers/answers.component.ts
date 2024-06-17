@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Answer} from "../../../../models/answer.models";
+import {Padding, Scale} from "../../../layout/button/button.component";
 
 @Component({
   selector: 'answers-section',
@@ -10,7 +11,7 @@ export class AnswersComponent implements OnInit {
 
   @Input() answers: Answer[] = [];
   @Input() automatedSkip: boolean = false;
-  @Input() fiftyFiftyDisabled!: boolean;
+  @Input() fiftyFiftyUsable!: boolean;
   @Input() fiftyFiftyActivated!: boolean;
   private timeOutId?: number;
   @Output() inactive: EventEmitter<undefined> = new EventEmitter();
@@ -37,4 +38,7 @@ export class AnswersComponent implements OnInit {
   stopQuiz() {
     this.inactive.emit();
   }
+
+  protected readonly Scale = Scale;
+  protected readonly Padding = Padding;
 }
