@@ -17,14 +17,14 @@ test.describe("Create user test display", () => {
 
       await expect(adminButton).toBeVisible();
       await adminButton.click();
-      await expect(page).toHaveURL("http://localhost:4200/admin/patients");
+      await expect(page).toHaveURL(`${testUrl}/admin/patients`);
 
       const adminPatientsFixture = new AdminPatientsFixture(page);
       const createUserButton = adminPatientsFixture.getCreateUserButton();
       await expect(createUserButton).toBeVisible();
 
       await createUserButton.click();
-      await expect(page).toHaveURL("http://localhost:4200/admin/patient");
+      await expect(page).toHaveURL(`${testUrl}/admin/patient`);
     });
     const patientFixture = new PatientFixture(page);
 
