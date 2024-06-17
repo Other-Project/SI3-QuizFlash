@@ -2,7 +2,6 @@
 @import "/colors";
 
 button {
-  border-radius: .5rem;
   padding: .5em;
   overflow: hidden;
   cursor: pointer;
@@ -15,14 +14,34 @@ button {
     padding: 0;
   }
 
+  &.answer-three-fifty-fifty {
+    padding: 1.5em .75em .75em;
+  }
+
+  &.other-answer-fifty-fifty {
+    padding: 1.125em;
+  }
+
   &:hover:not(:disabled) {
-    &.large {
+    &.large-scale {
       transform: scale(1.025);
     }
 
-    &.small {
+    &.medium-scale {
+      transform: scale(1.012);
+    }
+
+    &.small-scale {
       transform: scale(1.005);
     }
+  }
+
+  &.large-border-radius {
+    border-radius: 100em;
+  }
+
+  &.small-border-radius {
+    border-radius: .5em;
   }
 
   @each $colorId, $background in $colors {
@@ -34,6 +53,12 @@ button {
         background-color: color.scale($background, $lightness: +5%);
         border-color: $background;
         box-shadow: 0 0 2px color.scale($background, $lightness: -50%);
+      }
+
+      &:not(.no-disable):disabled {
+        $bg: mix($background, white, 37.5%);
+        background-color: $bg;
+        border-color: color.scale($bg, $lightness: -5%);
       }
 
       @if (lightness($background) < 50) {

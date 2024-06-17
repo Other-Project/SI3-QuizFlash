@@ -3,14 +3,13 @@
     <app-header [homePage]="'/quiz'" [interactive]="false">
       <quiz-header [counter]="getCounter()" [quizTheme]="quiz?.title"
                    [numberOfQuestion]="questions.length" *ngIf="!isFinish()">
-        <app-button [color]="'blue'" (click)="fiftyFifty()" [disabled]="!fiftyFiftyEnabled" *ngIf="user!.answerHint && fiftyFiftyEnabled">50/50
-        </app-button>
       </quiz-header>
     </app-header>
     <main>
       <sound-settings *ngIf="soundSetting" (soundSettingsFinish)="getGainToTransfer($event)"/>
-      <app-quiz-section [question]="currentQuestion" [user]="user" [audioGain]="audioGain"
-                        (chosenAnswer)="checkAnswer($event)" (inactive)="setInactivity()"
+      <app-quiz-section [question]="currentQuestion" [user]="user" [audioGain]="audioGain" [fiftyFiftyDisabled]="!fiftyFiftyEnabled"
+                        [fiftyFiftyActivated]="user!.answerHint"
+                        (chosenAnswer)="checkAnswer($event)" (fiftyFiftyUsed)="fiftyFifty()" (inactive)="setInactivity()"
                         *ngIf="!soundSetting && !questionResult && !isFinish()"/>
       <app-question-result [goodAnswer]="trueAnswerText" [correct]="check" [automatedSkip]="user!.automatedSkip" [finish]="isFinish()"
                            (continue)='nextQuestion()' *ngIf="questionResult && !finishPage"/>
