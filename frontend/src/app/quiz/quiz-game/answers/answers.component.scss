@@ -31,6 +31,7 @@ section {
 
       &:nth-child(odd):last-child {
         grid-column: 1 / -1;
+        //noinspection CssInvalidFunction
         clip-path: polygon(
           /* Top Left horizontal parameterized point */
             calc(100% - var(--buttonSize)) calc(100% - var(--buttonSize)),
@@ -58,6 +59,7 @@ section {
       }
 
       &:nth-child(1) {
+        //noinspection CssInvalidFunction
         clip-path: polygon(
           /* Top Left horizontal parameterized point */
             calc(100% - var(--buttonSize)) calc(100% - var(--buttonSize)),
@@ -76,6 +78,7 @@ section {
       }
 
       &:nth-child(2) {
+        //noinspection CssInvalidFunction
         clip-path: polygon(
           /* Top Left horizontal parameterized point */
             calc(100% - var(--buttonSize)) calc(100% - var(--buttonSize)),
@@ -94,6 +97,7 @@ section {
       }
 
       &:nth-child(3):not(:last-child) {
+        //noinspection CssInvalidFunction
         clip-path: polygon(
           /* Top Left horizontal parameterized point */
             calc(100% - var(--buttonSize)) calc(100% - var(--buttonSize)),
@@ -112,6 +116,7 @@ section {
       }
 
       &:nth-child(4) {
+        //noinspection CssInvalidFunction
         clip-path: polygon(
           /* Top Left horizontal parameterized point */
             var(--notchSizeWidth) calc(100% - var(--buttonSize)),
