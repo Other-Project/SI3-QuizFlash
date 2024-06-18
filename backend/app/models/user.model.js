@@ -2,12 +2,13 @@ const Joi = require("joi");
 const AccessRestriction = require("./access-restriction.model");
 const DementiaLevel = { "Mild": 0, "Intermediate": 1, "High": 2 };
 const BaseModel = require("../utils/base-model.js");
+const { pathPattern } = require("../utils/file");
 
 module.exports = new BaseModel("User", {
     access: Joi.number().valid(...Object.values(AccessRestriction)).required(),
     lastname: Joi.string().required(),
     firstname: Joi.string().required(),
-    pictureUrl: Joi.string().allow("").uri(),
+    pictureUrl: Joi.string().allow("").pattern(pathPattern),
 
     //Patient attributes
     birthDate: Joi.date()
