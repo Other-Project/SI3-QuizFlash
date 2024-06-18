@@ -74,7 +74,6 @@ test.describe("Create user test display", () => {
       await expect(removeWrongAnswersInput).toBeChecked();
       await expect(fiftyFiftyInput).toBeChecked({checked: false});
       await expect(audioQuestionsInput).toBeChecked({checked: false});
-      await page.pause();
     });
   });
 });
