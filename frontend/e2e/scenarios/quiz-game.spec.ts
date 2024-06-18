@@ -47,11 +47,9 @@ test.describe("Playing of a quiz by a patient", () => {
       // Getting Martine's profile button
       const martineProfileButton = await profileListFixture.getUserButton("Martine");
 
-      // Check if the profile button is visible
-      await expect(martineProfileButton!).toBeVisible();
+      // Check if the profile button is visible and user selection
+      await checkVisibleAndClick(martineProfileButton!);
 
-      // User selection
-      await martineProfileButton!.click();
       await expect(page).toHaveURL(`${testUrl}/quizzes`);
     });
 
@@ -59,11 +57,9 @@ test.describe("Playing of a quiz by a patient", () => {
       // Getting French song quiz button
       const frenchSongQuizButton = await quizSelectionFixture.getQuizButton("Chansons Françaises");
 
-      // Check if the French song quiz button is visible
-      await expect(frenchSongQuizButton!).toBeVisible();
+      // Check if the French song quiz button is visible and launch it
+      await checkVisibleAndClick(frenchSongQuizButton!);
 
-      // Launch the French song quiz
-      await frenchSongQuizButton!.click();
       await expect(page).toHaveURL(`${testUrl}/quizzes/quiz/${quizId}`);
     });
 
@@ -73,19 +69,14 @@ test.describe("Playing of a quiz by a patient", () => {
 
       // Getting the switch to the quiz button
       const switchToQuizButton = quizGameFixture.getSoundSettingsFixture().getSwitchToQuizButton();
-      // Check if the switch to the quiz button is visible
-      await expect(switchToQuizButton).toBeVisible();
-
-      // Switch to the quiz
-      await switchToQuizButton.click();
+      // Check if the switch to the quiz button is visible and switch to the quiz
+      await checkVisibleAndClick(switchToQuizButton);
     });
 
     await test.step("Select a correct answer", async () => {
       await playQuestion(quiz, true, quizGameFixture);
       const nextButton = quizGameFixture.getQuestionResultFixture().getNextButton();
-      // Check if next button visible
-      await expect(nextButton).toBeVisible();
-      await nextButton.click();
+      await checkVisibleAndClick(nextButton);
     });
 
     await test.step("Select a wrong answer", async () => {
