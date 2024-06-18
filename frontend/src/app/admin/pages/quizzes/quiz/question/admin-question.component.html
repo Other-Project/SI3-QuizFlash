@@ -9,7 +9,7 @@
         <app-file-input [accept]="'audio/*'" formControlName="soundUrl">
           <app-button>{{ form.get('soundUrl')?.value ? 'Changer le fichier' : 'Ajouter un fichier' }}</app-button>
         </app-file-input>
-        <app-play-button *ngIf="form.get('soundUrl')?.value" [src]="question.soundUrl"/>
+        <app-play-button *ngIf="form.get('soundUrl')?.value" [src]="form.get('soundUrl')?.value"/>
       </div>
     </div>
   </div>
