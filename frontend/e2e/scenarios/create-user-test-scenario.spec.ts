@@ -30,6 +30,7 @@ test.describe("Create user test display", () => {
 
     const patientHeaderFixture = patientFixture.getPatientHeaderFixture();
     const createUserTitle = patientHeaderFixture.getCreateUserTitle();
+    const profilePictureInput = patientHeaderFixture.getProfilePictureInput();
     const lastNameInput = patientHeaderFixture.getLastNameInput();
     const firstNameInput = patientHeaderFixture.getFirstNameInput();
     const birthDateInput = patientHeaderFixture.getBirthDateInput();
@@ -51,6 +52,8 @@ test.describe("Create user test display", () => {
     });
 
     await test.step("Create User", async () => {
+      await page.pause();
+      await profilePictureInput.setInputFiles("./frontend/src/assets/users/bernard.jpg");
       await lastNameInput.fill("Dupont");
       await firstNameInput.fill("Bernard");
       await birthDateInput.fill("1950-05-11");
