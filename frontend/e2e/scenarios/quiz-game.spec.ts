@@ -46,7 +46,6 @@ test.describe("Playing of a quiz by a patient", () => {
     await test.step("Select User", async () => {
       // Getting Martine's profile button
       const martineProfileButton = await profileListFixture.getUserButton("Martine");
-
       // Check if the profile button is visible and user selection
       await checkVisibleAndClick(martineProfileButton!);
 
@@ -56,7 +55,6 @@ test.describe("Playing of a quiz by a patient", () => {
     await test.step("Select Quiz", async () => {
       // Getting French song quiz button
       const frenchSongQuizButton = await quizSelectionFixture.getQuizButton("Chansons Françaises");
-
       // Check if the French song quiz button is visible and launch it
       await checkVisibleAndClick(frenchSongQuizButton!);
 
