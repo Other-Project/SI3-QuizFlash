@@ -7,18 +7,15 @@ import {QuizGameFixture} from "../../src/app/quiz/quiz-game/quiz-game.fixture";
 import {Locator} from "playwright";
 
 async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
-  const questionFixture = quizGameFixture.getQuestionFixture();
-  const answersFixture = quizGameFixture.getAnswersFixture();
   const questionResultFixture = quizGameFixture.getQuestionResultFixture();
-
-  const questionTitle = await questionFixture.getQuestionTitle();
+  const questionTitle = await quizGameFixture.getQuestionFixture().getQuestionTitle();
 
   // Getting correct answer corresponding to the question
   const answer = quiz.questions.find(question => question.text == questionTitle)!
     .answers.find(answer => answer.trueAnswer == correctAnswer)!.answerText;
 
   // Obtain the button corresponding to the answer
-  const answerButton = answersFixture.getAnswerButton(answer);
+  const answerButton = quizGameFixture.getAnswersFixture().getAnswerButton(answer);
   await expect(answerButton).toBeVisible();
   await answerButton.click();
 
