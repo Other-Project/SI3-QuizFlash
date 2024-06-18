@@ -47,7 +47,6 @@ test.describe("Create Quiz test display", () => {
       const quizPicture = adminQuizFixture.getQuizPicture();
       await quizPicture.setInputFiles("./frontend/src/assets/quiz-test/fishing.jpg");
 
-      //TODO : replace when we find a better way
       await titlePlaceHolder.click();
 
       const createQuizButton = adminQuizFixture.getCreateQuizButton();
