@@ -1,9 +1,9 @@
-import {Page} from '@playwright/test';
+import {Locator, Page} from "@playwright/test";
 
 export class E2EComponentFixture {
-  protected page: Page;
+  protected page: Locator | Page;
 
-  constructor(page: Page) {
+  constructor(page: Locator | Page) {
     this.page = page;
   }
 }
