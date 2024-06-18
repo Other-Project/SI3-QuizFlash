@@ -5,6 +5,7 @@ import {ProfileListFixture} from "../../src/app/profiles/profile-list/profile-li
 import {Quiz} from "../../src/models/quiz.models";
 import {QuizGameFixture} from "../../src/app/quiz/quiz-game/quiz-game.fixture";
 import {Locator} from "playwright";
+import {getQuiz} from "../e2e.utils";
 
 async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
   const questionResultFixture = quizGameFixture.getQuestionResultFixture();
@@ -34,43 +35,13 @@ async function checkVisibleAndClick(button: Locator) {
 test.describe("Playing of a quiz by a patient", () => {
   test("Quiz test", async ({page, request}) => {
     const quizId = "1718692508978";
-
-    // Perform login and capture cookies
-    const loginResponse = await request.post(`${testUrl}/api/auth/login/password`, {
-      data: {
-        username: 1715587135341,
-        password: "admin"
-      }
-    });
-
-    if (!loginResponse.ok())
-      throw new Error("Failed to log in");
-
-    // Capture cookies from login response
-    const cookies = loginResponse.headers()["set-cookie"];
-
-    if (!cookies)
-      throw new Error("No cookies set after login");
-
-    // Fetch the quiz data using the request context with headers
-    const headers = {
-      "Cookie": cookies
-    };
-
-    const quizResponse = await request.get(`${testUrl}/api/quizzes/${quizId}`, {headers});
-    if (!quizResponse.ok()) {
-      throw new Error("Failed to fetch quiz data");
-    }
-    const quiz = await quizResponse.json() as Quiz;
+    const quiz = await getQuiz(quizId, request) as Quiz;
 
     await page.goto(testUrl);
-    const profileListFixture = new ProfileListFixture(page);
-    const quizSelectionFixture = new QuizSelectionFixture(page);
-    const quizGameFixture = new QuizGameFixture(page);
 
     await test.step("Select User", async () => {
       // Getting Martine's profile button
-      const martineProfileButton = await profileListFixture.getUserButton("Martine");
+      const martineProfileButton = await new ProfileListFixture(page).getUserButton("Martine");
       // Check if the profile button is visible and user selection
       await checkVisibleAndClick(martineProfileButton!);
 
@@ -79,12 +50,14 @@ test.describe("Playing of a quiz by a patient", () => {
 
     await test.step("Select Quiz", async () => {
       // Getting French song quiz button
-      const frenchSongQuizButton = await quizSelectionFixture.getQuizButton("Chansons Françaises");
+      const frenchSongQuizButton = await new QuizSelectionFixture(page).getQuizButton("Chansons Françaises");
       // Check if the French song quiz button is visible and launch it
       await checkVisibleAndClick(frenchSongQuizButton!);
 
       await expect(page).toHaveURL(`${testUrl}/quizzes/quiz/${quizId}`);
     });
+
+    const quizGameFixture = new QuizGameFixture(page);
 
     await test.step("Check Sound Config Page", async () => {
       // Check if the config sound text is in the page
