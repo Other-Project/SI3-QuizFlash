@@ -12,7 +12,7 @@ function createUser(user) {
     const { pictureUrl, ...pureUser } = user;
     pureUser.access = AccessRestriction.user;
     let result = User.create(pureUser);
-    User.update(result.id, { pictureUrl: storeFile(picture(result.id), user.pictureUrl) });
+    User.update(result.id, { pictureUrl: storeFile(picture(result.id), pictureUrl) });
     return { ...result, pictureUrl };
 }
 
