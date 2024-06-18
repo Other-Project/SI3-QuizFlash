@@ -52,7 +52,6 @@ test.describe("Create user test display", () => {
     });
 
     await test.step("Create User", async () => {
-      await profilePictureInput.setInputFiles([]);
       await profilePictureInput.setInputFiles(["./src/assets/users/bernard.jpg"]);
       await lastNameInput.fill("Dupont");
       await firstNameInput.fill("Bernard");
