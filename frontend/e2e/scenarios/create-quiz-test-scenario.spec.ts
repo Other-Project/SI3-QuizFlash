@@ -45,7 +45,7 @@ test.describe("Create Quiz test display", () => {
       await fishingTag.click();
 
       const quizPicture = adminQuizFixture.getQuizPicture();
-      await quizPicture.setInputFiles("./frontend/src/assets/quiz-test/fishing.jpg");
+      await quizPicture.setInputFiles("./src/assets/quiz-test/fishing.jpg");
 
       await titlePlaceHolder.click();
 
@@ -71,7 +71,7 @@ test.describe("Create Quiz test display", () => {
       await expect(questionTitle).toBeVisible();
       await questionTypeMenu.selectOption("Visuelle");
       const questionPicture = questionFixture.getQuestionPicture();
-      await questionPicture.setInputFiles("./frontend/src/assets/quiz-test/caviar.png");
+      await questionPicture.setInputFiles("./src/assets/quiz-test/caviar.png");
 
       await questionTitle.fill("De quel poisson le caviar vient-il ?");
       await questionFirstProposition.fill("Le requin");
@@ -125,7 +125,7 @@ test.describe("Create Quiz test display", () => {
 
       await questionTypeMenu.selectOption("Sonore");
       const questionAudioInput = questionFixture.getQuestionAudio();
-      await questionAudioInput.setInputFiles("./frontend/src/assets/quiz-test/la peche aux moules.mp3");
+      await questionAudioInput.setInputFiles("./src/assets/quiz-test/la peche aux moules.mp3");
 
       await questionTitle.fill("Quel est cette chanson connue sur la pêche ?");
       await questionFirstProposition.fill("Cueillir des fleur");

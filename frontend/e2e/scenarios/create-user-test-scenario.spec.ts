@@ -52,8 +52,8 @@ test.describe("Create user test display", () => {
     });
 
     await test.step("Create User", async () => {
-      await page.pause();
-      await profilePictureInput.setInputFiles("./frontend/src/assets/users/bernard.jpg");
+      await profilePictureInput.setInputFiles([]);
+      await profilePictureInput.setInputFiles(["./src/assets/users/bernard.jpg"]);
       await lastNameInput.fill("Dupont");
       await firstNameInput.fill("Bernard");
       await birthDateInput.fill("1950-05-11");
@@ -74,6 +74,7 @@ test.describe("Create user test display", () => {
       await expect(removeWrongAnswersInput).toBeChecked();
       await expect(fiftyFiftyInput).toBeChecked({checked: false});
       await expect(audioQuestionsInput).toBeChecked({checked: false});
+      await page.pause();
     });
   });
 });
