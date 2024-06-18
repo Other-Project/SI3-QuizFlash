@@ -79,7 +79,7 @@ module.exports = class BaseModel {
         if (typeof id === "string") id = parseInt(id, 10);
         const prevObjIndex = this.items.findIndex((item) => item.id === id);
         if (prevObjIndex === -1) throw new NotFoundError(`Cannot update ${this.name} id=${id} : not found`);
-        const updatedItem = { ...this.items[prevObjIndex], ...obj };
+        const updatedItem = assignIgnoreUndefined(this.items[prevObjIndex], obj);
         const { error } = this.schema.validate(updatedItem);
         if (error) throw new ValidationError(`Update Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
         this.items[prevObjIndex] = updatedItem;
@@ -95,3 +95,16 @@ module.exports = class BaseModel {
         this.save();
     }
 };
+
+function assignIgnoreUndefined(...args) {
+    const final = args.shift();
+    args.filter(arg => !!arg).forEach(arg => {
+        Object.entries(arg).forEach(nv => {
+            const [name, value] = nv;
+            if (value !== undefined) {
+                final[name] = value;
+            }
+        });
+    });
+    return final;
+}
