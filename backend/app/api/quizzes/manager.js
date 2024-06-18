@@ -47,6 +47,8 @@ function createQuiz(quiz) {
 function replaceQuiz(quizId, quiz) {
     const { questions, thumbnailUrl, ...pureQuiz } = quiz;
 
+    const previousQuiz = Quiz.getById(quizId);
+    deleteFile(previousQuiz.thumbnailUrl);
     pureQuiz.thumbnailUrl = storeFile(thumbnail(quizId), thumbnailUrl);
     let result = Quiz.replace(quizId, pureQuiz);
 
@@ -67,6 +69,8 @@ function replaceQuiz(quizId, quiz) {
 function updateQuiz(quizId, quiz) {
     const { questions, thumbnailUrl, ...pureQuiz } = quiz;
 
+    const previousQuiz = Quiz.getById(quizId);
+    deleteFile(previousQuiz.thumbnailUrl);
     pureQuiz.thumbnailUrl = storeFile(thumbnail(quizId), thumbnailUrl);
     let result = Quiz.update(quizId, pureQuiz);
 

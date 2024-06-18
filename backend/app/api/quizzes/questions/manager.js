@@ -74,6 +74,8 @@ function replaceQuestion(quizId, questionId, question) {
     if (questionInDb.quizId !== quizId)
         throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
 
+    deleteFile(questionInDb.imageUrl);
+    deleteFile(questionInDb.soundUrl);
     pureQuestion.imageUrl = storeFile(image(quizId, questionId), imageUrl);
     pureQuestion.soundUrl = storeFile(sound(quizId, questionId), soundUrl);
     let result = Question.replace(questionId, pureQuestion);
@@ -103,6 +105,8 @@ function updateQuestion(quizId, questionId, question) {
     if (questionInDb.quizId !== quizId)
         throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
 
+    deleteFile(questionInDb.imageUrl);
+    deleteFile(questionInDb.soundUrl);
     pureQuestion.imageUrl = storeFile(image(quizId, questionId), imageUrl);
     pureQuestion.soundUrl = storeFile(sound(quizId, questionId), soundUrl);
     let result = Question.update(questionId, pureQuestion);

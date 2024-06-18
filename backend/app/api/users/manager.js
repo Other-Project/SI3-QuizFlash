@@ -1,5 +1,5 @@
 const AccessRestriction = require("../../models/access-restriction.model");
-const { User, Quiz } = require("../../models");
+const { User } = require("../../models");
 const { storeFile, readFile, deleteFile } = require("../../utils/file");
 
 const picture = (userId) => `users/${userId}/picture`;
@@ -18,6 +18,8 @@ function createUser(user) {
 
 function replaceUser(userId, user) {
     const { pictureUrl, ...pureUser } = user;
+    const previousUser = User.getById(userId);
+    deleteFile(previousUser.pictureUrl);
     pureUser.pictureUrl = storeFile(picture(userId), pictureUrl);
     const result = User.replace(userId, pureUser);
     return { ...result, pictureUrl: readFile(result.pictureUrl) };
@@ -25,6 +27,8 @@ function replaceUser(userId, user) {
 
 function updateUser(userId, user) {
     const { pictureUrl, ...pureUser } = user;
+    const previousUser = User.getById(userId);
+    deleteFile(previousUser.pictureUrl);
     pureUser.pictureUrl = storeFile(picture(userId), pictureUrl);
     const result = User.update(userId, pureUser);
     return { ...result, pictureUrl: readFile(result.pictureUrl) };
