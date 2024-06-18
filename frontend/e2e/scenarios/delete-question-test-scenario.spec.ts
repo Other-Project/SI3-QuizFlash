@@ -40,7 +40,6 @@ test.describe("Delete a question display", () => {
 
       const quizSaveButton = adminQuizFixture.getSaveButton();
       await quizSaveButton.click();
-      await page.pause();
     });
   });
 });
