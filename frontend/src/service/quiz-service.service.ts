@@ -57,9 +57,7 @@ export class QuizService {
 
   deleteQuiz(quizId: string) {
     this.quizzes$.next(this.quizzes = undefined);
-    this.http.delete(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => {
-      this.updateQuizList();
-    });
+    this.http.delete(`${this.quizApiUrl}/${quizId}`, httpOptionsBase).subscribe(() => this.updateQuizList());
   }
 
   addQuestion(quizId: string, question: Question) {

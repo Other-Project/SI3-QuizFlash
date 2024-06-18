@@ -1,3 +1,5 @@
+@import "/colors";
+
 @keyframes spinner {
   to {
     transform: rotate(360deg);
@@ -8,13 +10,8 @@
   display: inline-block;
 
   &.big:before {
-    border-top: 5px solid #07d;
-    border-right: 5px solid transparent;
-  }
-
-  &.small:before {
-    border-top: 2px solid #07d;
-    border-right: 2px solid transparent;
+    border-top-width: 5px;
+    border-right-width: 5px;
   }
 }
 
@@ -27,4 +24,6 @@
   display: inline-block;
   border-radius: 50%;
   animation: spinner .9s linear infinite;
+  border-top: 2px solid $blue;
+  border-right: 2px solid transparent;
 }
