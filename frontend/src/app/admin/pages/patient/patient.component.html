@@ -1,4 +1,4 @@
-<patient-header [patient]="patient" *ngIf="!userId"/>
+<patient-header [patient]="patient" *ngIf="!userId || patient"/>
 <section class="patient-data" *ngIf="patient">
     <patient-navbar (tabToSwitch)="tab=$event"/>
     <section id="boxed-container" [ngSwitch]="tab">
