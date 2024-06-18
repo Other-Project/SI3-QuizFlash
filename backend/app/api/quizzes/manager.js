@@ -4,7 +4,7 @@ const { getQuestionAnswers } = require("./questions/answers/manager");
 const NotFoundError = require("../../utils/errors/not-found-error");
 const { readFile, storeFile, deleteFile } = require("../../utils/file");
 
-const thumbnail = (quizId) => `quiz/${quizId}/thumbnail`;
+const thumbnail = (quizId) => `quizzes/${quizId}/thumbnail`;
 
 /**
  * This function aggregates the questions and answers from the database to build a quiz with all the data needed by the clients

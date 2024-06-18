@@ -3,8 +3,8 @@ const NotFoundError = require("../../../utils/errors/not-found-error.js");
 const { getQuestionAnswers } = require("./answers/manager");
 const { storeFile, readFile, deleteFile } = require("../../../utils/file");
 
-const image = (quizId, questionId) => `quiz/${quizId}/${questionId}/image`;
-const sound = (quizId, questionId) => `quiz/${quizId}/${questionId}/sound`;
+const image = (quizId, questionId) => `quizzes/${quizId}/${questionId}/image`;
+const sound = (quizId, questionId) => `quizzes/${quizId}/${questionId}/sound`;
 
 
 /**
