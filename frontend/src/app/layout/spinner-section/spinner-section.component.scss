@@ -14,3 +14,16 @@
     font-size: 3rem;
   }
 }
+
+@keyframes apparition {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.spinner {
+  animation: apparition 0.1s steps(1, end) 0.5s both;
+}

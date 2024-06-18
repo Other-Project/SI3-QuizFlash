@@ -16,6 +16,7 @@ export class QuizGameSelectionComponent {
   public tags: string[] = [];
   public search: string = "";
   public filteredQuizzes?: Quiz[];
+  public loading: boolean = false;
 
   public user?: Patient;
   public quizzes?: Quiz[];
@@ -32,6 +33,7 @@ export class QuizGameSelectionComponent {
   }
 
   playQuiz(quizId: string) {
+    this.loading = true;
     this.quizService.startQuiz(quizId).then(() => this.router.navigate(["quiz", quizId], {relativeTo: this.route}).then());
   }
 

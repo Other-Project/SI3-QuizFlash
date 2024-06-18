@@ -10,18 +10,14 @@
       <app-quiz-section [question]="currentQuestion" [user]="user" [audioGain]="audioGain" [fiftyFiftyDisabled]="!fiftyFiftyEnabled"
                         [fiftyFiftyActivated]="user!.answerHint"
                         (chosenAnswer)="checkAnswer($event)" (fiftyFiftyUsed)="fiftyFifty()" (inactive)="setInactivity()"
-                        *ngIf="!soundSetting && !questionResult && !isFinish()"/>
-      <section class="spinner">
-        <spinner [small]="false"/>
-        <p>Vérification de la réponse</p>
-
-      </section>
+                        *ngIf="!soundSetting && !questionResult && !isFinish() && !loading"/>
+      <spinner-section [text]="this.textLoading" *ngIf="loading"/>
       <app-question-result [goodAnswer]="trueAnswerText" [correct]="check" [automatedSkip]="user!.automatedSkip" [finish]="isFinish()"
-                           (continue)='nextQuestion()' *ngIf="questionResult && !finishPage"/>
+                           (continue)='nextQuestion()' *ngIf="questionResult && !finishPage && !loading"/>
       <finish-page [title]="inactivity ? 'Quiz terminé' : 'Bravo !'"
                    [text]="inactivity ? 'Le quiz a été clos automatiquement en raison d\'une longue période d\'inactivité.' : 'Vous avez terminé'"
                    [textButton]="'Revenir au menu'"
-                   (returnSelectionPage)="returnSelectionPage()" *ngIf="finishPage"/>
+                   (returnSelectionPage)="returnSelectionPage()" *ngIf="finishPage && !loading"/>
     </main>
   </div>
 </div>
