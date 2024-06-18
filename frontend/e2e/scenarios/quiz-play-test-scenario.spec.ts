@@ -20,8 +20,8 @@ async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizGameFixt
   await answerButton.click();
 
   // Screen check
-  await ((correctAnswer) ? questionResultFixture.isCorrectScreen()
-    : questionResultFixture.isIncorrectScreen());
+  await ((correctAnswer) ? questionResultFixture.checkIsCorrectScreen()
+    : questionResultFixture.checkIsIncorrectScreen());
 }
 
 async function checkVisibleAndClick(button: Locator) {
@@ -127,7 +127,7 @@ test.describe("Playing of a quiz by a patient", () => {
     });
 
     await test.step("Check end", async () => {
-      await quizGameFixture.isFinishScreen();
+      await quizGameFixture.checkIsFinishScreen();
       // Getting the go back to menu button
       const goBackToMenuButton = quizGameFixture.getGoBackToMenuButton();
       await checkVisibleAndClick(goBackToMenuButton);

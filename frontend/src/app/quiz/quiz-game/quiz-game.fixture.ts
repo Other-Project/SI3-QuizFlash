@@ -22,7 +22,7 @@ export class QuizGameFixture extends E2EComponentFixture {
     return new AnswersFixture(this.page);
   }
 
-  async isFinishScreen() {
+  async checkIsFinishScreen() {
     await expect(this.page.getByText("Vous avez terminé")).toBeVisible();
   }
 
