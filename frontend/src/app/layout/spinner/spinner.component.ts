@@ -7,5 +7,5 @@ import {Component, Input} from "@angular/core";
 })
 
 export class SpinnerComponent {
-  @Input() small: boolean = true;
+  @Input() big: boolean = false;
 }
