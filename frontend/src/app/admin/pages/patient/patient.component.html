@@ -1,4 +1,4 @@
-<patient-header [patient]="patient"/>
+<patient-header [patient]="patient" *ngIf="!userId"/>
 <section class="patient-data" *ngIf="patient">
     <patient-navbar (tabToSwitch)="tab=$event"/>
     <section id="boxed-container" [ngSwitch]="tab">
@@ -7,3 +7,5 @@
       <history [user]="patient" *ngSwitchCase="TabNavigation.HISTORY"/>
     </section>
 </section>
+<spinner-section [text]="'Chargement du profil du patient'" *ngIf="!patient && userId"/>
+

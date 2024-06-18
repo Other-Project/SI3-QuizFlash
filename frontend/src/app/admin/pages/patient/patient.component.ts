@@ -16,7 +16,7 @@ export enum TabNavigation {
 })
 
 export class PatientComponent implements OnDestroy {
-  private userId?: string;
+  protected userId?: string;
   public patient?: Patient;
   public tab: TabNavigation = TabNavigation.INFORMATION;
 

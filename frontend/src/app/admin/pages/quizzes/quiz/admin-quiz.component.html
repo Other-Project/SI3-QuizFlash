@@ -1,4 +1,4 @@
-<form [formGroup]="quizForm">
+<form [formGroup]="quizForm" *ngIf="!loadingQuizData">
   <input type="text" placeholder="Image" formControlName="thumbnailUrl" hidden="hidden"/>
   <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150"
                    (onImageUpdate)="quizForm.patchValue({thumbnailUrl: $event})"/>
@@ -26,7 +26,7 @@
   </div>
 </form>
 
-<hr/>
+<hr *ngIf="!loadingQuizData"/>
 
 <section id="questions" *ngIf="quiz.id">
   <div id="questions-header"><h2>Questions</h2>
@@ -37,3 +37,7 @@
   </div>
   <app-admin-questions [questions]="quiz.questions" [quizId]="quiz.id"/>
 </section>
+
+
+<spinner-section [text]="'Chargement du quiz'" *ngIf="loadingQuizData"/>
+

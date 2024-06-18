@@ -29,6 +29,7 @@ import {UserService} from "../../../../../service/user.service";
 })
 export class AdminQuizComponent implements OnDestroy {
   availableTags: string[] = [];
+  public loadingQuizData: boolean = false;
   public loading: boolean = false;
   public quiz: Quiz = {id: "", thumbnailUrl: "", title: "", tags: [], questions: []};
 
@@ -50,7 +51,10 @@ export class AdminQuizComponent implements OnDestroy {
 
   constructor(public quizService: QuizService, userService: UserService, private route: ActivatedRoute, private router: Router) {
     this.quizService.quiz$.subscribe(quiz => {
-      if (quiz) this.quiz = quiz;
+      if (quiz) {
+        this.quiz = quiz;
+        this.loadingQuizData = false;
+      }
       this.quizForm.setValue({
         title: this.quiz?.title ?? "",
         thumbnailUrl: this.quiz?.thumbnailUrl ?? "",
@@ -58,8 +62,9 @@ export class AdminQuizComponent implements OnDestroy {
       });
     });
     this.route.params.subscribe(params => {
-      let id = params["quiz_id"];
-      this.quizService.selectQuiz(id);
+      let quizId = params["quiz_id"];
+      if (quizId) this.loadingQuizData = true;
+      this.quizService.selectQuiz(quizId);
     });
     userService.hobbies$.subscribe(availableTags => {
       this.availableTags = availableTags;
