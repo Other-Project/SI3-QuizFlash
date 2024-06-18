@@ -32,4 +32,8 @@ export class AdminQuestionFixture extends E2EComponentFixture {
   getSaveQuestionButton() {
     return this.page.locator("app-button.save");
   }
+
+  getDeleteQuestionButton() {
+    return this.page.locator("app-button.delete");
+  }
 }

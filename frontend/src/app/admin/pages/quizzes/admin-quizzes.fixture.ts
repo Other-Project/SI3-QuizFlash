@@ -9,4 +9,8 @@ export class AdminQuizzesFixture extends E2EComponentFixture {
   getAdminQuizFixture() {
     return new AdminQuizFixture(this.page);
   }
+
+  getAQuiz(string: string) {
+    return this.page.getByRole("button", {name: string});
+  }
 }
