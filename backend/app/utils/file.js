@@ -43,10 +43,14 @@ function deleteFile(filepath) {
     const dir = path.dirname(filepath);
     if (!fs.existsSync(dir)) return;
     if (fs.existsSync(filepath)) fs.rmSync(filepath);
-    fs.rmdir(dir, _ => {
-        // If it failed, the directory is probably not empty, so do nothing
-        // If it succeeds, nothing to do
-    });
+    rmWhileEmpty(dir);
+
+    function rmWhileEmpty(directory) {
+        fs.rmdir(directory, err => {
+            if (!err) rmWhileEmpty(path.dirname(directory));
+            // If it failed, the directory is probably not empty, so do nothing
+        });
+    }
 }
 
 module.exports = { pathPattern, pathPrefix, readFile, storeFile, deleteFile };
