@@ -1,16 +1,9 @@
 <form [formGroup]="quizForm" *ngIf="!loadingQuizData">
-  <input type="text" placeholder="Image" formControlName="thumbnailUrl" hidden="hidden"/>
-  <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150"
-                   (onImageUpdate)="quizForm.patchValue({thumbnailUrl: $event})"/>
+  <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150" formControlName="thumbnailUrl"/>
 
   <div>
     <input type="text" placeholder="Entrez un titre" formControlName="title" id="title"/>
-    <ng-multiselect-dropdown
-      [placeholder]="'Sélectionnez des tags'"
-      [settings]="dropdownSettings"
-      [data]="availableTags"
-      formControlName="tags"
-    />
+    <ng-multiselect-dropdown [placeholder]="'Sélectionnez des tags'" [settings]="dropdownSettings" [data]="availableTags" formControlName="tags"/>
 
     <div class="actions">
       <app-button (click)="save()" [disabled]="loading">

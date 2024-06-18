@@ -3,6 +3,7 @@ const Joi = require("joi");
 const logger = require("../utils/logger.js");
 const ValidationError = require("./errors/validation-error.js");
 const NotFoundError = require("./errors/not-found-error.js");
+const { pathPrefix } = require("../utils/file");
 
 module.exports = class BaseModel {
     constructor(name, schema) {
@@ -11,7 +12,7 @@ module.exports = class BaseModel {
         this.schema = Joi.object().keys({ ...schema, id: Joi.number().required() });
         this.items = [];
         this.name = name;
-        this.filePath = `${__dirname}/../../database/${process.env.DB_FOLDER ?? ""}${this.name.toLowerCase()}.data.json`;
+        this.filePath = `${pathPrefix}/${this.name.toLowerCase()}.data.json`;
         this.load();
     }
 
@@ -44,7 +45,7 @@ module.exports = class BaseModel {
 
     create(obj = {}) {
         const item = { ...obj, id: Date.now() };
-        const { error } = Joi.validate(item, this.schema);
+        const { error } = this.schema.validate(item);
         if (error) throw new ValidationError(`Create Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
         this.items.push(item);
         this.save();
@@ -61,7 +62,7 @@ module.exports = class BaseModel {
         if (typeof id === "string") id = parseInt(id, 10);
         const prevObjIndex = this.items.findIndex((item) => item.id === id);
         if (prevObjIndex === -1) throw new NotFoundError(`Cannot replace ${this.name} id=${id} : not found`);
-        const {error} = Joi.validate(obj, this.schema);
+        const { error } = this.schema.validate(item);
         if (error) throw new ValidationError(`Replace Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
         this.items[prevObjIndex] = obj;
         this.save();
@@ -78,8 +79,8 @@ module.exports = class BaseModel {
         if (typeof id === "string") id = parseInt(id, 10);
         const prevObjIndex = this.items.findIndex((item) => item.id === id);
         if (prevObjIndex === -1) throw new NotFoundError(`Cannot update ${this.name} id=${id} : not found`);
-        const updatedItem = { ...this.items[prevObjIndex], ...obj };
-        const { error } = Joi.validate(updatedItem, this.schema);
+        const updatedItem = assignIgnoreUndefined(this.items[prevObjIndex], obj);
+        const { error } = this.schema.validate(updatedItem);
         if (error) throw new ValidationError(`Update Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
         this.items[prevObjIndex] = updatedItem;
         this.save();
@@ -94,3 +95,16 @@ module.exports = class BaseModel {
         this.save();
     }
 };
+
+function assignIgnoreUndefined(...args) {
+    const final = args.shift();
+    args.filter(arg => !!arg).forEach(arg => {
+        Object.entries(arg).forEach(nv => {
+            const [name, value] = nv;
+            if (value !== undefined) {
+                final[name] = value;
+            }
+        });
+    });
+    return final;
+}

@@ -6,6 +6,7 @@ const QuestionsRouter = require("./questions");
 const { buildQuiz, updateQuiz, replaceQuiz, createQuiz, deleteQuiz, createStatQuiz, createStatQuestion, checkAnswer } = require("./manager");
 const checkAuthentification = require("../../utils/auth-checker");
 const access = require("../../models/access-restriction.model");
+const { readFile } = require("../../utils/file");
 
 const router = new Router();
 
@@ -18,7 +19,7 @@ router.get("/", checkAuthentification(access.user), (req, res) => catchErrors(re
             schema: [{ $ref: '#/definitions/Quiz' }]
         } */
 
-    res.status(200).json(Quiz.get());
+    res.status(200).json(Quiz.get().map(quiz => ({ ...quiz, thumbnailUrl: readFile(quiz.thumbnailUrl) })));
 }));
 
 router.get("/:quizId", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {

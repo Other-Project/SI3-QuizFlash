@@ -71,8 +71,7 @@ router.put("/:questionId", checkAuthentification(access.admin), (req, res) => ca
             description: 'Ids don't match'
         } */
 
-    Quiz.getById(req.params.quizId);
-    res.status(200).json(replaceQuestion(req.params.questionId, req.body));
+    res.status(200).json(replaceQuestion(req.params.quizId, req.params.questionId, req.body));
 }));
 
 router.patch("/:questionId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
@@ -92,8 +91,7 @@ router.patch("/:questionId", checkAuthentification(access.admin), (req, res) => 
             description: 'Ids don't match'
         } */
 
-    Quiz.getById(req.params.quizId);
-    res.status(200).json(updateQuestion(req.params.questionId, req.body));
+    res.status(200).json(updateQuestion(req.params.quizId, req.params.questionId, req.body));
 }));
 
 router.delete("/:questionId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
@@ -104,8 +102,7 @@ router.delete("/:questionId", checkAuthentification(access.admin), (req, res) =>
             description: 'Ids don't match'
         } */
 
-    Quiz.getById(req.params.quizId);
-    deleteQuestion(req.params.questionId);
+    deleteQuestion(req.params.quizId, req.params.questionId);
     res.status(204).end();
 }));
 
