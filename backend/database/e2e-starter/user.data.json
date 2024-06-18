@@ -25,7 +25,7 @@
     "removeAnswers": false,
     "automatedSkip": true,
     "answerHint": false,
-    "numberOfQuestion": 100,
+    "numberOfQuestion": 99,
     "replayAtEnd": false,
     "soundQuestion": true,
     "autoStartAudio": true,
