@@ -1,9 +1,10 @@
 const {Router} = require("express");
 const {User} = require("../../models");
 const {catchErrors} = require("../../utils/errors/routes");
-const {createUser} = require("./manager");
+const { createUser, replaceUser, updateUser, deleteUser } = require("./manager");
 const checkAuthentification = require("../../utils/auth-checker");
 const access = require("../../models/access-restriction.model");
+const { readFile, storeFile } = require("../../utils/file");
 const router = new Router();
 
 router.get("/", (req, res) => catchErrors(req, res, () => {
@@ -16,7 +17,7 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
     res.status(200).json(User.get().map(user => ({
         id: user.id,
         access: user.access,
-        pictureUrl: user.pictureUrl,
+        pictureUrl: readFile(user.pictureUrl),
         lastname: user.lastname,
         firstname: user.firstname
     })));
@@ -32,7 +33,8 @@ router.get("/:userId", checkAuthentification(access.admin), (req, res) => catchE
             description: 'No user found with this id'
         } */
 
-    res.status(200).json(User.getById(req.params.userId));
+    const user = User.getById(req.params.userId);
+    res.status(200).json({ ...user, pictureUrl: readFile(user.pictureUrl) });
 }));
 
 router.post("/", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
@@ -69,7 +71,7 @@ router.put("/:userId", checkAuthentification(access.admin), (req, res) => catchE
             description: 'No user found with this id'
         } */
 
-    res.status(200).json(User.replace(req.params.userId, req.body));
+    res.status(200).json(replaceUser(req.params.userId, req.body));
 }));
 
 router.patch("/:userId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
@@ -89,7 +91,7 @@ router.patch("/:userId", checkAuthentification(access.admin), (req, res) => catc
             description: 'No user found with this id'
         } */
 
-    res.status(200).json(User.update(req.params.userId, req.body));
+    res.status(200).json(updateUser(req.params.userId, req.body));
 }));
 
 router.delete("/:userId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
@@ -100,7 +102,7 @@ router.delete("/:userId", checkAuthentification(access.admin), (req, res) => cat
             description: 'No user found with this id'
         } */
 
-    User.delete(req.params.userId);
+    deleteUser(req.params.userId);
     res.status(204).end();
 }));
 

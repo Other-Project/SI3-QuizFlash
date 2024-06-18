@@ -1,9 +1,9 @@
 <app-file-input [accept]="'image/*'" (valueChange)="imageUpdated($event)">
-  <div class="change-image-container">
-  <app-image [width]="width" [height]="height" [alt]="alt" [src]="src"></app-image>
-  <div class="change-image-hover">
-    <fa-icon [icon]="faCamera"/>
-    Changer d'image
+  <div class="change-image-container {{src ? '' : 'no-image'}}">
+    <app-image [width]="width" [height]="height" [alt]="alt" [src]="src ?? defaultSrc"/>
+    <div class="change-image-hover">
+      <fa-icon [icon]="faCamera"/>
+      {{ src ? "Changer d'image" : "Ajouter une image" }}
+    </div>
   </div>
-</div>
 </app-file-input>

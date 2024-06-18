@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Output} from "@angular/core";
+import {Component, EventEmitter, forwardRef, Input, Output} from "@angular/core";
 import {ImageComponent} from "../image/image.component";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
@@ -16,6 +16,7 @@ export const CUSTOM_CONROL_VALUE_ACCESSOR: any = {
   providers: [CUSTOM_CONROL_VALUE_ACCESSOR]
 })
 export class ImageInputComponent extends ImageComponent implements ControlValueAccessor {
+  @Input() defaultSrc!: string;
   @Output() onImageUpdate: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {

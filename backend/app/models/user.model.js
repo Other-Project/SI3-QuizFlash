@@ -2,12 +2,13 @@ const Joi = require("joi");
 const AccessRestriction = require("./access-restriction.model");
 const DementiaLevel = { "Mild": 0, "Intermediate": 1, "High": 2 };
 const BaseModel = require("../utils/base-model.js");
+const { pathPattern } = require("../utils/file");
 
 module.exports = new BaseModel("User", {
-    access: Joi.number().valid(Object.values(AccessRestriction)).required(),
+    access: Joi.number().valid(...Object.values(AccessRestriction)).required(),
     lastname: Joi.string().required(),
     firstname: Joi.string().required(),
-    pictureUrl: Joi.string().allow("").uri(),
+    pictureUrl: Joi.string().allow("").pattern(pathPattern),
 
     //Patient attributes
     birthDate: Joi.date()
@@ -16,7 +17,7 @@ module.exports = new BaseModel("User", {
         .min(getMinBirthDate())
         .when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     hobbies: Joi.array().items(Joi.string()).when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
-    dementiaLevel: Joi.number().valid(Object.values(DementiaLevel))
+    dementiaLevel: Joi.number().valid(...Object.values(DementiaLevel))
         .when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     fontSize: Joi.number().min(1).max(2).when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
     removeAnswers: Joi.boolean().when("access", { is: AccessRestriction.user, otherwise: Joi.forbidden() }),
