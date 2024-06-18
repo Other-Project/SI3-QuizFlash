@@ -9,8 +9,8 @@ const USER_KEY = "user";
 
 @Injectable({providedIn: "root"})
 export class UserService {
-  public users: User[] = [];
-  public users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.users);
+  public users?: User[];
+  public users$: BehaviorSubject<User[] | undefined> = new BehaviorSubject<User[] | undefined>(this.users);
   public user?: User;
   public user$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(this.user);
   public hobbies: string[] = HOBBIES;
@@ -32,12 +32,14 @@ export class UserService {
   }
 
   async addUser(user: User) {
+    this.users$.next(this.users = undefined);
     let response = await firstValueFrom(this.http.post<User>(this.userUrl, user, this.httpOptions));
     await this.retrieveUsers();
     return response;
   }
 
   deleteUser(userId: string): void {
+    this.users$.next(this.users = undefined);
     this.http.delete<User>(`${this.userUrl}/${userId}`, this.httpOptions).subscribe(() => this.retrieveUsers().then());
   }
 

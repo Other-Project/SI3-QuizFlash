@@ -17,7 +17,7 @@ export class ProfilesComponent {
 
   constructor(public userService: UserService, private router: Router) {
     this.userService.users$.subscribe((users) => {
-      this.users = users.filter(user => user.access <= AccessRestriction.User);
+      if (users) this.users = users.filter(user => user.access <= AccessRestriction.User);
     });
 
     this.userService.user$.subscribe(user => {

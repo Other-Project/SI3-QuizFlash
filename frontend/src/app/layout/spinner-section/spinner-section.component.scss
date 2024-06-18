@@ -1,3 +1,5 @@
+@import "/colors";
+
 .spinner {
   display: flex;
   flex-direction: column;
@@ -11,7 +13,9 @@
   }
 
   & > p {
-    font-size: 3rem;
+    color: $darkBlue;
+    font-weight: bold;
+    font-size: 2em;
   }
 }
 
@@ -25,5 +29,5 @@
 }
 
 .spinner {
-  animation: apparition 0.1s steps(1, end) 0.5s both;
+  animation: apparition 0.1s steps(1, end) 0.3s both;
 }

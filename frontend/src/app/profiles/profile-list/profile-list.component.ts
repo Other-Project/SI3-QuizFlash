@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {User} from "../../../models/user.models";
 import {ProfileButtonComponent} from "./profile-button/profile-button.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {LayoutModule} from "../../layout/layout.module";
 
 @Component({
@@ -11,7 +11,8 @@ import {LayoutModule} from "../../layout/layout.module";
   imports: [
     ProfileButtonComponent,
     NgForOf,
-    LayoutModule
+    LayoutModule,
+    NgIf
   ],
   styleUrls: ["./profile-list.component.scss"]
 })

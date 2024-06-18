@@ -1,3 +1,4 @@
-<div class="profiles">
+<div class="profiles" *ngIf="users">
   <app-profiles-button *ngFor="let user of users" [user]="user" (click)="userSelected.emit(user)"/>
 </div>
+<spinner-section [text]="'Chargement des profils des patients'" *ngIf="!users"/>
