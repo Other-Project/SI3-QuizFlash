@@ -2,15 +2,15 @@ const { Router } = require("express");
 
 const { catchErrors } = require("../../../utils/errors/routes");
 const AnswersRouter = require("./answers");
-const {getQuizQuestions, getQuestionFromQuiz, createQuestion, deleteQuestion, replaceQuestion, updateQuestion} = require("./manager");
+const { getQuizQuestions, createQuestion, deleteQuestion, replaceQuestion, updateQuestion, getQuestionFromQuiz } = require("./manager");
 const { removedAnswers } = require("./manager");
-const checkAuthentification = require("../../../utils/auth-checker");
+const checkAuthentication = require("../../../utils/auth-checker");
 const access = require("../../../models/access-restriction.model");
 const {Quiz} = require("../../../models");
 
 const router = new Router({ mergeParams: true });
 
-router.get("/", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
+router.get("/", checkAuthentication(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Questions']
         #swagger.summary = 'Get all questions'
         #swagger.responses[200] = {
@@ -21,7 +21,7 @@ router.get("/", checkAuthentification(access.user), (req, res) => catchErrors(re
     res.status(200).json(getQuizQuestions(req.params.quizId));
 }));
 
-router.get("/:questionId", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
+router.get("/:questionId", checkAuthentication(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Questions']
         #swagger.summary = 'Get a specific question'
         #swagger.responses[200] = {
@@ -35,7 +35,7 @@ router.get("/:questionId", checkAuthentification(access.user), (req, res) => cat
     res.status(200).json(question);
 }));
 
-router.post("/", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.post("/", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
     /*   #swagger.tags = ['Questions']
          #swagger.summary = 'Add new question'
          #swagger.parameters['body'] = {
@@ -54,7 +54,7 @@ router.post("/", checkAuthentification(access.admin), (req, res) => catchErrors(
     res.status(201).json(createQuestion(quizId, req.body));
 }));
 
-router.put("/:questionId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.put("/:questionId", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Questions']
         #swagger.summary = 'Modify an existing question'
         #swagger.parameters['body'] = {
@@ -74,7 +74,7 @@ router.put("/:questionId", checkAuthentification(access.admin), (req, res) => ca
     res.status(200).json(replaceQuestion(req.params.quizId, req.params.questionId, req.body));
 }));
 
-router.patch("/:questionId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.patch("/:questionId", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Questions']
         #swagger.summary = 'Modify parts of an existing question'
         #swagger.parameters['body'] = {
@@ -94,7 +94,7 @@ router.patch("/:questionId", checkAuthentification(access.admin), (req, res) => 
     res.status(200).json(updateQuestion(req.params.quizId, req.params.questionId, req.body));
 }));
 
-router.delete("/:questionId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.delete("/:questionId", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Questions']
         #swagger.summary = 'Delete a question'
         #swagger.responses[204] = { }
@@ -106,7 +106,7 @@ router.delete("/:questionId", checkAuthentification(access.admin), (req, res) =>
     res.status(204).end();
 }));
 
-router.get("/:questionId/halveAnswers", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
+router.get("/:questionId/halveAnswers", checkAuthentication(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Quizzes']
         #swagger.summary = 'Halve the number of answers to the question'
         #swagger.responses[200] = {
