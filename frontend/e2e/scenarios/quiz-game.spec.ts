@@ -3,8 +3,36 @@ import {testUrl} from "../e2e.config";
 import {QuizSelectionFixture} from "../../src/app/quiz/quiz-game-selection/quiz-selection/quiz-selection.fixture";
 import {ProfileListFixture} from "../../src/app/profiles/profile-list/profile-list.fixture";
 import {Quiz} from "../../src/models/quiz.models";
-import {checkVisibleAndClick, playQuestionTest} from "../e2e.utils";
 import {QuizGameFixture} from "../../src/app/quiz/quiz-game/quiz-game.fixture";
+import {Locator} from "playwright";
+
+export async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
+  const questionFixture = quizGameFixture.getQuestionFixture();
+  const answersFixture = quizGameFixture.getAnswersFixture();
+  const questionResultFixture = quizGameFixture.getQuestionResultFixture();
+
+  const questionTitle = await questionFixture.getQuestionTitle();
+
+  // Getting correct answer corresponding to the question
+  const answer = quiz.questions.find(question => question.text == questionTitle)!
+    .answers.find(answer => answer.trueAnswer == correctAnswer)!.answerText;
+
+  // Obtain the button corresponding to the answer
+  const answerButton = answersFixture.getAnswerButton(answer);
+  await expect(answerButton).toBeVisible();
+  await answerButton.click();
+
+  // Screen check
+  await ((correctAnswer) ? questionResultFixture.isCorrectScreen()
+    : questionResultFixture.isIncorrectScreen());
+}
+
+export async function checkVisibleAndClick(button: Locator) {
+  // Check if the button is visible
+  await expect(button).toBeVisible();
+  // Click the button
+  await button.click();
+}
 
 test.describe("Playing of a quiz by a patient", () => {
   test("Quiz test", async ({page, request}) => {
