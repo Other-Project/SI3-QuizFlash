@@ -68,18 +68,7 @@ function createQuestion(quizId, question) {
  */
 function replaceQuestion(quizId, questionId, question) {
     const { answers, imageUrl, soundUrl, ...pureQuestion } = question;
-
-    if (typeof quizId === "string") quizId = parseInt(quizId, 10);
-    const questionInDb = Question.getById(questionId);
-    if (questionInDb.quizId !== quizId)
-        throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
-
-    deleteFile(questionInDb.imageUrl);
-    deleteFile(questionInDb.soundUrl);
-    pureQuestion.imageUrl = storeFile(image(quizId, questionId), imageUrl);
-    pureQuestion.soundUrl = storeFile(sound(quizId, questionId), soundUrl);
-    let result = Question.replace(questionId, pureQuestion);
-
+    let result = Question.replace(questionId, checkQuestionAndUpdateFiles(quizId, questionId, pureQuestion, imageUrl, soundUrl));
     if (answers !== undefined) {
         let currentAnswers = getQuestionAnswers(questionId);
         currentAnswers.filter(answer => answers.every(a => a.id !== answer.id)).forEach(answer => Answer.delete(answer.id));
@@ -99,18 +88,7 @@ function replaceQuestion(quizId, questionId, question) {
  */
 function updateQuestion(quizId, questionId, question) {
     const { answers, imageUrl, soundUrl, ...pureQuestion } = question;
-
-    if (typeof quizId === "string") quizId = parseInt(quizId, 10);
-    const questionInDb = Question.getById(questionId);
-    if (questionInDb.quizId !== quizId)
-        throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
-
-    deleteFile(questionInDb.imageUrl);
-    deleteFile(questionInDb.soundUrl);
-    pureQuestion.imageUrl = storeFile(image(quizId, questionId), imageUrl);
-    pureQuestion.soundUrl = storeFile(sound(quizId, questionId), soundUrl);
-    let result = Question.update(questionId, pureQuestion);
-
+    let result = Question.update(questionId, checkQuestionAndUpdateFiles(quizId, questionId, pureQuestion, imageUrl, soundUrl));
     if (answers !== undefined) return {
         ...result, imageUrl, soundUrl,
         answers: answers.map(answer => answer.id ? Answer.update(answer.id, answer) : Answer.create({ ...answer, questionId: result.id }))
@@ -143,6 +121,19 @@ function removedAnswers(questionId) {
     if (answers.length < 3) return [];
     let answersRemoved = answers.filter(answer => !answer.trueAnswer);
     return answersRemoved.sort(() => 0.5 - Math.random()).slice(0, answers.length / 2);
+}
+
+function checkQuestionAndUpdateFiles(quizId, questionId, pureQuestion, imageUrl, soundUrl) {
+    if (typeof quizId === "string") quizId = parseInt(quizId, 10);
+    const questionInDb = Question.getById(questionId);
+    if (questionInDb.quizId !== quizId)
+        throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
+
+    deleteFile(questionInDb.imageUrl);
+    deleteFile(questionInDb.soundUrl);
+    pureQuestion.imageUrl = storeFile(image(quizId, questionId), imageUrl);
+    pureQuestion.soundUrl = storeFile(sound(quizId, questionId), soundUrl);
+    return pureQuestion;
 }
 
 module.exports = {
