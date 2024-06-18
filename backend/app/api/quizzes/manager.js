@@ -4,7 +4,7 @@ const { getQuestionAnswers } = require("./questions/answers/manager");
 const NotFoundError = require("../../utils/errors/not-found-error");
 const { readFile, storeFile, deleteFile } = require("../../utils/file");
 
-const thumbnail = (quizId) => `${quizId}/thumbnail`;
+const thumbnail = (quizId) => `quiz/${quizId}/thumbnail`;
 
 /**
  * This function aggregates the questions and answers from the database to build a quiz with all the data needed by the clients
@@ -84,8 +84,9 @@ function updateQuiz(quizId, quiz) {
  * @param {string|number} quizId
  */
 function deleteQuiz(quizId) {
+    const quiz = Quiz.getById(quizId);
     getQuizQuestions(quizId).forEach(question => deleteQuestion(question.id));
-    deleteFile(thumbnail(quizId));
+    deleteFile(quiz.thumbnailUrl);
     Quiz.delete(quizId);
 }
 
