@@ -53,7 +53,7 @@ function replaceQuiz(quizId, quiz) {
     if (questions !== undefined) {
         let currentQuestions = getQuizQuestions(quiz.id);
         currentQuestions.filter(question => questions.every(q => q.id !== question.id)).forEach(question => Question.delete(question.id));
-        currentQuestions = questions.map(question => question.id ? replaceQuestion(question.id, question) : createQuestion(quiz.id, question));
+        currentQuestions = questions.map(question => question.id ? replaceQuestion(quizId, question.id, question) : createQuestion(quiz.id, question));
         return { ...result, thumbnailUrl, questions: currentQuestions };
     }
     return { ...result, thumbnailUrl };
@@ -74,7 +74,7 @@ function updateQuiz(quizId, quiz) {
         return {
             ...result,
             thumbnailUrl,
-            questions: questions.map(question => question.id ? updateQuestion(question.id, question) : createQuestion(quiz.id, question))
+            questions: questions.map(question => question.id ? updateQuestion(quizId, question.id, question) : createQuestion(quiz.id, question))
         };
     return { ...result, thumbnailUrl };
 }
@@ -85,7 +85,7 @@ function updateQuiz(quizId, quiz) {
  */
 function deleteQuiz(quizId) {
     const quiz = Quiz.getById(quizId);
-    getQuizQuestions(quizId).forEach(question => deleteQuestion(question.id));
+    getQuizQuestions(quizId).forEach(question => deleteQuestion(quizId, question.id));
     deleteFile(quiz.thumbnailUrl);
     Quiz.delete(quizId);
 }
