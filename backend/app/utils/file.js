@@ -2,19 +2,14 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 const mime = require("mime-types");
+const MIMEType = require("whatwg-mimetype");
 const deasync = require("deasync");
 const util = require("util");
+const parseDataURL = require("data-urls");
 
 
 const pathPrefix = path.resolve(`${__dirname}/../../database/${process.env.DB_FOLDER ?? ""}`);
 const pathPattern = /^(?:[A-Z]:[\/\\]|\/?)(?:[^\/\\:<>"|?*]+?[\/\\])*\.?[^\/\\:<>"|?*]+?(?:\.\w+)?$/;
-const promiseSync = deasync((promise, cb) => {
-    promise.then((result) => cb(null, result)).catch((error) => cb(error));
-});
-
-function getMime(dataUrl) {
-    return dataUrl.substring(dataUrl.indexOf(":") + 1, dataUrl.indexOf(";"));
-}
 
 function readFile(filepath) {
     if (!filepath || !fs.existsSync(filepath = `${pathPrefix}/assets/${filepath}`) || !fs.lstatSync(filepath).isFile()) return null;
@@ -25,17 +20,18 @@ function readFile(filepath) {
 
 function storeFile(filepath, base64url) {
     if (!base64url) return undefined;
-    let mimeType = getMime(base64url);
-    const mimeCat = mimeType.substring(0, mimeType.indexOf("/"));
-    let data = Buffer.from(base64url.split(",")[1], "base64");
-    if (mimeCat === "image") {
+    const dataUrl = parseDataURL(base64url);
+    if (!dataUrl) return undefined;
+    let mimeType = dataUrl.mimeType;
+    let data = Buffer.from(dataUrl.body, "base64");
+    if (mimeType.type === "image") {
         data = deasync(util.callbackify(() => sharp(data)
-            .resize(1024, 1024, { fit: "inside", withoutEnlargement: mimeType !== "image/svg+xml" })
+            .resize(1024, 1024, { fit: "inside", withoutEnlargement: mimeType.essence !== "image/svg+xml" })
             .toFormat("webp")
-            .toBuffer()));
-        mimeType = mime.lookup("webp");
+            .toBuffer()))();
+        mimeType = new MIMEType("image/webp");
     }
-    filepath = `${pathPrefix}/assets/${filepath}.${mime.extension(mimeType)}`;
+    filepath = `${pathPrefix}/assets/${filepath}.${mime.extension(mimeType.essence)}`;
     fs.mkdirSync(path.dirname(filepath), { recursive: true });
     fs.writeFileSync(filepath, data);
     return path.relative(`${pathPrefix}/assets`, filepath);
