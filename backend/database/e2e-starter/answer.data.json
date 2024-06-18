@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1718692627269,
+    "answerText": "Jean-Jacques Goldman",
+    "trueAnswer": false,
+    "questionId": 1718692627267
+  },
+  {
+    "id": 1718692627270,
+    "answerText": "Johny Hallyday",
+    "trueAnswer": true,
+    "questionId": 1718692627267
+  },
+  {
+    "id": 1718692627271,
+    "answerText": "Michel Sardou",
+    "trueAnswer": false,
+    "questionId": 1718692627267
+  },
+  {
+    "id": 1718692634102,
+    "answerText": "Édith Piaf",
+    "trueAnswer": true,
+    "questionId": 1718692634102
+  },
+  {
+    "id": 1718692634103,
+    "answerText": "Charles Aznavour",
+    "trueAnswer": false,
+    "questionId": 1718692634102
+  },
+  {
+    "id": 1718692634104,
+    "answerText": "Georges Brassens",
+    "trueAnswer": false,
+    "questionId": 1718692634102
+  },
+  {
+    "id": 1718692634104,
+    "answerText": "Jacques Brel",
+    "trueAnswer": false,
+    "questionId": 1718692634102
+  },
+  {
+    "id": 1718692722962,
+    "answerText": "Ne me quitte pas",
+    "trueAnswer": false,
+    "questionId": 1718692722954
+  },
+  {
+    "id": 1718692722964,
+    "answerText": "Comme d'habitude",
+    "trueAnswer": false,
+    "questionId": 1718692722954
+  },
+  {
+    "id": 1718692722964,
+    "answerText": "Les Champs-Élysées",
+    "trueAnswer": true,
+    "questionId": 1718692722954
+  },
+  {
+    "id": 1718692723519,
+    "answerText": "Patrick Sébastien",
+    "trueAnswer": true,
+    "questionId": 1718692723510
+  },
+  {
+    "id": 1718692723520,
+    "answerText": "Booba",
+    "trueAnswer": false,
+    "questionId": 1718692723510
+  },
+  {
+    "id": 1718692723521,
+    "answerText": "Céline Dion",
+    "trueAnswer": false,
+    "questionId": 1718692723510
+  }
+]

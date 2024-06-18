@@ -8,5 +8,48 @@
     "password": "1bd9aYKr6b30qsw6VKfP4nyy+gQdm8aHGkYivRkzuPc=",
     "salt": "thePasswordIsAdmin",
     "pictureUrl": ""
+  },
+  {
+    "access": 1,
+    "lastname": "Dupont",
+    "firstname": "Martine",
+    "birthDate": "1952-12-29",
+    "pictureUrl": "",
+    "hobbies": [
+      "culture",
+      "famille",
+      "théâtre"
+    ],
+    "dementiaLevel": 1,
+    "fontSize": 2,
+    "removeAnswers": false,
+    "automatedSkip": true,
+    "answerHint": false,
+    "numberOfQuestion": 99,
+    "replayAtEnd": false,
+    "soundQuestion": true,
+    "autoStartAudio": true,
+    "id": 1715587751837
+  },
+  {
+    "access": 1,
+    "lastname": "Luciani",
+    "firstname": "Francescu",
+    "birthDate": "1929-06-03",
+    "pictureUrl": "",
+    "hobbies": [
+      "pêche",
+      "télévision"
+    ],
+    "dementiaLevel": 0,
+    "fontSize": "1",
+    "removeAnswers": false,
+    "automatedSkip": false,
+    "answerHint": true,
+    "numberOfQuestion": 3,
+    "replayAtEnd": true,
+    "soundQuestion": false,
+    "autoStartAudio": false,
+    "id": 1715587553386
   }
 ]
