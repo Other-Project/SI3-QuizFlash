@@ -3,12 +3,12 @@ import {testUrl} from "../e2e.config";
 import {QuizSelectionFixture} from "../../src/app/quiz/quiz-game-selection/quiz-selection/quiz-selection.fixture";
 import {ProfileListFixture} from "../../src/app/profiles/profile-list/profile-list.fixture";
 import {Quiz} from "../../src/models/quiz.models";
-import {playQuestion} from "../e2e.utils";
+import {checkVisibleAndClick, playQuestion} from "../e2e.utils";
 import {QuizGameFixture} from "../../src/app/quiz/quiz-game/quiz-game.fixture";
 
 test.describe("Playing of a quiz by a patient", () => {
   test("Quiz test", async ({page, request}) => {
-    const quizId = "1717357602847";
+    const quizId = "1718692508978";
 
     // Perform login and capture cookies
     const loginResponse = await request.post(`${testUrl}/api/auth/login/password`, {
@@ -91,33 +91,25 @@ test.describe("Playing of a quiz by a patient", () => {
     await test.step("Select a wrong answer", async () => {
       await playQuestion(quiz, false, quizGameFixture);
       const nextButton = quizGameFixture.getQuestionResultFixture().getNextButton();
-      // Check if next button visible
-      await expect(nextButton).toBeVisible();
-      await nextButton.click();
+      await checkVisibleAndClick(nextButton);
     });
 
     await test.step("Select a wrong answer", async () => {
       await playQuestion(quiz, false, quizGameFixture);
       const nextButton = quizGameFixture.getQuestionResultFixture().getNextButton();
-      // Check if next button is visible
-      await expect(nextButton).toBeVisible();
-      await nextButton.click();
+      await checkVisibleAndClick(nextButton);
     });
 
     await test.step("Quiz end", async () => {
       await playQuestion(quiz, true, quizGameFixture);
       const finishButton = quizGameFixture.getQuestionResultFixture().getFinishButton();
-      // Check if the finish button is visible
-      await expect(finishButton).toBeVisible();
-      await finishButton.click();
+      await checkVisibleAndClick(finishButton);
     });
 
     await test.step("Check end", async () => {
       await quizGameFixture.isFinishScreen();
       const goBackToMenuButton = quizGameFixture.getGoBackToMenuButton();
-      // Check if the go back to menu button is visible
-      await expect(goBackToMenuButton).toBeVisible();
-      await goBackToMenuButton.click();
+      await checkVisibleAndClick(goBackToMenuButton);
 
       // Check that the redirection has worked
       await expect(page).toHaveURL(`${testUrl}/quizzes`);

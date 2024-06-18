@@ -1,6 +1,7 @@
 import {expect, Page} from "@playwright/test";
 import {Quiz} from "../src/models/quiz.models";
 import {QuizGameFixture} from "../src/app/quiz/quiz-game/quiz-game.fixture";
+import {Locator} from "playwright";
 
 export async function getButtonByText(page: Page, text: string, tag: string) {
   return page.locator(tag).getByRole("button").filter({hasText: text});
@@ -25,4 +26,11 @@ export async function playQuestion(quiz: Quiz, correctAnswer: boolean, quizGameF
   // Screen check
   await ((correctAnswer) ? questionResultFixture.isCorrectScreen()
     : questionResultFixture.isIncorrectScreen());
+}
+
+export async function checkVisibleAndClick(button: Locator) {
+  // Check if the button is visible
+  await expect(button).toBeVisible();
+  // Click the button
+  await button.click();
 }
