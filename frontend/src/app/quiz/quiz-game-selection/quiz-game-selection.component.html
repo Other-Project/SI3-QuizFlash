@@ -9,5 +9,6 @@
     </select>
     <app-input id="search-bar" (valueChange)="search = $event; updateQuizzes()" [placeholder]="'Chercher un quiz'"/>
   </section>
-  <app-quiz-selection [quizzes]="filteredQuizzes" (returnIdQuizSelected)="playQuiz($event)"></app-quiz-selection>
+  <app-quiz-selection [quizzes]="filteredQuizzes" (returnIdQuizSelected)="playQuiz($event)" *ngIf="!loading"/>
+  <spinner-section [text]="'Chargement du quiz'" *ngIf="this.loading"/>
 </main>

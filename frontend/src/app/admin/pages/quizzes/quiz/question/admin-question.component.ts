@@ -37,13 +37,13 @@ export class AdminQuestionComponent implements OnInit {
   @Output() public questionRemoved = new EventEmitter<any>();
   @Output() public questionSaved = new EventEmitter<Question>();
 
+  loading: boolean = false;
   form!: FormGroup;
   answers = new FormArray<FormGroup<{ id: FormControl, answerText: FormControl, trueAnswer: FormControl }>>([]);
   changed = false;
 
   constructor(private quizService: QuizService) {
   }
-
 
   ngOnInit() {
     if (!this.question.type) this.question.type = QuestionType.TextOnly;
@@ -93,6 +93,7 @@ export class AdminQuestionComponent implements OnInit {
   }
 
   save() {
+    this.loading = true;
     if (!this.changed || !this.form.valid) return;
     (this.question.id
         ? this.quizService.updateQuestion(this.quizId, this.question.id, this.form.value)
@@ -100,6 +101,7 @@ export class AdminQuestionComponent implements OnInit {
     ).then(resp => {
       this.questionSaved.emit(resp);
       this.changed = false;
+      this.loading = false;
     });
   }
 

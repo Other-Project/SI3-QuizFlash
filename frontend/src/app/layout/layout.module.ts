@@ -9,7 +9,9 @@ import {ImageInputComponent} from "./image-input/image-input.component";
 import {InputComponent} from "./input/input.component";
 import {FileInputComponent} from "./file-input/file-input.component";
 import {QuantityInputComponent} from "./quantity-input/quantity-input.component";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
+import {SpinnerComponent} from "./spinner/spinner.component";
+import {SpinnerSectionComponent} from "./spinner-section/spinner-section.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ImageInputComponent,
     FileInputComponent,
     InputComponent,
-    QuantityInputComponent
+    QuantityInputComponent,
+    SpinnerComponent,
+    SpinnerSectionComponent
   ],
   exports: [
     HeaderComponent,
@@ -28,7 +32,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ImageInputComponent,
     FileInputComponent,
     InputComponent,
-    QuantityInputComponent
+    QuantityInputComponent,
+    SpinnerComponent,
+    SpinnerSectionComponent
   ],
   imports: [
     NgOptimizedImage,
@@ -36,8 +42,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     NgIf,
     RouterLink,
     FaIconComponent,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
   ]
 })
 export class LayoutModule {

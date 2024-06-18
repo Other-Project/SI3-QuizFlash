@@ -1,0 +1,29 @@
+@import "/colors";
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  display: inline-block;
+
+  &.big:before {
+    border-top-width: 5px;
+    border-right-width: 5px;
+  }
+
+  &:before {
+    content: '';
+    width: 1em;
+    height: 1em;
+    align-self: center;
+    justify-self: center;
+    display: inline-block;
+    border-radius: 50%;
+    animation: spinner .9s linear infinite;
+    border-top: 2px solid $blue;
+    border-right: 2px solid transparent;
+  }
+}

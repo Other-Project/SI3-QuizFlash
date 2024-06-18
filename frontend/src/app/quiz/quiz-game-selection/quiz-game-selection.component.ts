@@ -16,9 +16,10 @@ export class QuizGameSelectionComponent {
   public tags: string[] = [];
   public search: string = "";
   public filteredQuizzes?: Quiz[];
+  public loading: boolean = false;
 
   public user?: Patient;
-  private quizzes?: Quiz[];
+  public quizzes?: Quiz[];
   @Output() returnIdQuizSelected: EventEmitter<String> = new EventEmitter<String>();
 
   constructor(private userService: UserService, private quizService: QuizService, private route: ActivatedRoute, private router: Router) {
@@ -26,11 +27,13 @@ export class QuizGameSelectionComponent {
     this.userService.hobbies$.subscribe(tags => this.tags = tags);
     quizService.quizzes$.subscribe(quizzes => {
       this.quizzes = quizzes;
-      this.updateQuizzes();
+      if (quizzes) this.updateQuizzes();
+      else this.filteredQuizzes = undefined;
     });
   }
 
   playQuiz(quizId: string) {
+    this.loading = true;
     this.quizService.startQuiz(quizId).then(() => this.router.navigate(["quiz", quizId], {relativeTo: this.route}).then());
   }
 

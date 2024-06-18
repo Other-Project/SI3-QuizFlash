@@ -33,6 +33,8 @@ export class QuizGameComponent implements OnDestroy {
   protected questionStatsId?: string;
   protected finishPage: boolean = false;
   protected subscribeQuizStatsId: Subscription;
+  protected loading: boolean = false;
+  protected textLoading?: string;
 
   constructor(private userService: UserService, private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.userService.user$.subscribe(user => this.user = user as Patient);
@@ -60,7 +62,14 @@ export class QuizGameComponent implements OnDestroy {
       return;
     }
     this.questionResult = false;
-    if (this.currentQuestion) this.quizService.nextQuestion(this.currentQuestion!.id).then(() => this.startQuestion());
+    if (this.currentQuestion) {
+      this.loading = true;
+      this.textLoading = "Passage à la question suivante en cours";
+      this.quizService.nextQuestion(this.currentQuestion!.id).then(() => {
+        this.startQuestion();
+        this.loading = false;
+      });
+    }
   }
 
   startQuestion() {
@@ -107,9 +116,12 @@ export class QuizGameComponent implements OnDestroy {
     attempt.answerHint = !this.fiftyFiftyEnabled;
     attempt.timeSpent = duration;
     attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
+    this.loading = true;
+    this.textLoading = "Vérification de la réponse";
     this.quizService.checkAnswer(attempt).then((result => {
       this.check = result.isTrue;
       this.result(answer, result.expected?.text ?? "");
+      this.loading = false;
     }));
   }
 
