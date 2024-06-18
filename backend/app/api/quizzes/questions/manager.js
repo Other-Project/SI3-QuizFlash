@@ -46,6 +46,11 @@ function getQuestionFromQuiz(quizId, questionId) {
  */
 function createQuestion(quizId, question) {
     const { answers, imageUrl, soundUrl, ...pureQuestion } = question;
+
+    // For the validation
+    pureQuestion.imageUrl = imageUrl ? "ok" : undefined;
+    pureQuestion.soundUrl = soundUrl ? "ok" : undefined;
+
     let result = Question.create({ ...pureQuestion, quizId });
     Question.update(result.id, {
         imageUrl: storeFile(image(result.quizId, result.id), imageUrl),
