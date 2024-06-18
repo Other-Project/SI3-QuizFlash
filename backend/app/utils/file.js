@@ -17,15 +17,10 @@ function getMime(dataUrl) {
 }
 
 function readFile(filepath) {
-    filepath = `${pathPrefix}/assets/${filepath}`;
-    if (!fs.existsSync(filepath)) return null;
-    try {
-        const mime_type = mime.lookup(filepath);
-        const content = fs.readFileSync(filepath);
-        return `data:${mime_type};base64,${content.toString("base64")}`;
-    } catch {
-        return null;
-    }
+    if (!filepath || !fs.existsSync(filepath = `${pathPrefix}/assets/${filepath}`) || !fs.lstatSync(filepath).isFile()) return null;
+    const mime_type = mime.lookup(filepath);
+    const content = fs.readFileSync(filepath);
+    return `data:${mime_type};base64,${content.toString("base64")}`;
 }
 
 function storeFile(filepath, base64url) {
@@ -47,6 +42,7 @@ function storeFile(filepath, base64url) {
 }
 
 function deleteFile(filepath) {
+    if (!filepath) return;
     filepath = `${pathPrefix}/assets/${filepath}`;
     const dir = path.dirname(filepath);
     if (!fs.existsSync(dir)) return;
