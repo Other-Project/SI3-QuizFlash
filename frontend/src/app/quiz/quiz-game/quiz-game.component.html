@@ -11,6 +11,11 @@
                         [fiftyFiftyActivated]="user!.answerHint"
                         (chosenAnswer)="checkAnswer($event)" (fiftyFiftyUsed)="fiftyFifty()" (inactive)="setInactivity()"
                         *ngIf="!soundSetting && !questionResult && !isFinish()"/>
+      <section class="spinner">
+        <spinner [small]="false"/>
+        <p>Vérification de la réponse</p>
+
+      </section>
       <app-question-result [goodAnswer]="trueAnswerText" [correct]="check" [automatedSkip]="user!.automatedSkip" [finish]="isFinish()"
                            (continue)='nextQuestion()' *ngIf="questionResult && !finishPage"/>
       <finish-page [title]="inactivity ? 'Quiz terminé' : 'Bravo !'"

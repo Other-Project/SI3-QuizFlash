@@ -4,20 +4,3 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
   font-size: 0.75em;
 }
-
-.spinner {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-
-  & > spinner {
-    margin-top: 3rem;
-    font-size: 12rem;
-  }
-
-  & > p {
-    font-size: 3rem;
-  }
-}

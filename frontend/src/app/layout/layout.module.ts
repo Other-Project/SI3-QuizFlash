@@ -11,6 +11,7 @@ import {FileInputComponent} from "./file-input/file-input.component";
 import {QuantityInputComponent} from "./quantity-input/quantity-input.component";
 import {FormsModule} from "@angular/forms";
 import {SpinnerComponent} from "./spinner/spinner.component";
+import {SpinnerSectionComponent} from "./spinner-section/spinner-section.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {SpinnerComponent} from "./spinner/spinner.component";
     FileInputComponent,
     InputComponent,
     QuantityInputComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SpinnerSectionComponent
   ],
   exports: [
     HeaderComponent,
@@ -31,7 +33,8 @@ import {SpinnerComponent} from "./spinner/spinner.component";
     FileInputComponent,
     InputComponent,
     QuantityInputComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SpinnerSectionComponent
   ],
   imports: [
     NgOptimizedImage,
