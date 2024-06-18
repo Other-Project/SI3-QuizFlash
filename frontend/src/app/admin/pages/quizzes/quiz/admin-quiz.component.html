@@ -1,36 +1,36 @@
-<form [formGroup]="quizForm" *ngIf="!loadingQuizData">
-  <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150" formControlName="thumbnailUrl"/>
+@if (!loadingQuizData) {
+  <form [formGroup]="quizForm">
+    <app-image-input [src]="quiz.thumbnailUrl" [alt]="'Image'" [width]="150" [height]="150" formControlName="thumbnailUrl"/>
 
-  <div>
-    <input type="text" placeholder="Entrez un titre" formControlName="title" id="title"/>
-    <ng-multiselect-dropdown [placeholder]="'Sélectionnez des tags'" [settings]="dropdownSettings" [data]="availableTags" formControlName="tags"/>
+    <div>
+      <input type="text" placeholder="Entrez un titre" formControlName="title" id="title"/>
+      <ng-multiselect-dropdown [placeholder]="'Sélectionnez des tags'" [settings]="dropdownSettings" [data]="availableTags" formControlName="tags"/>
 
-    <div class="actions">
-      <app-button (click)="save()" [disabled]="loading">
-        <fa-icon [icon]="quiz.id ? faSave : faAdd" *ngIf="!loading"/>
-        <spinner *ngIf="loading"/>
-        {{ quiz.id ? 'Sauvegarder' : 'Créer' }}
-      </app-button>
-      <app-button (click)="delete()" [color]="'red'" *ngIf="quiz.id">
-        <fa-icon [icon]="faTrash"/>
-        Supprimer
+      <div class="actions">
+        <app-button (click)="save()" [disabled]="loading">
+          <fa-icon [icon]="quiz.id ? faSave : faAdd" *ngIf="!loading"/>
+          <spinner *ngIf="loading"/>
+          {{ quiz.id ? 'Sauvegarder' : 'Créer' }}
+        </app-button>
+        <app-button (click)="delete()" [color]="'red'" *ngIf="quiz.id">
+          <fa-icon [icon]="faTrash"/>
+          Supprimer
+        </app-button>
+      </div>
+    </div>
+  </form>
+
+  <hr/>
+
+  <section id="questions" *ngIf="quiz.id">
+    <div id="questions-header"><h2>Questions</h2>
+      <app-button (click)="addQuestion()">
+        <fa-icon [icon]="faAdd"/>
+        Ajouter une question
       </app-button>
     </div>
-  </div>
-</form>
-
-<hr *ngIf="!loadingQuizData"/>
-
-<section id="questions" *ngIf="quiz.id">
-  <div id="questions-header"><h2>Questions</h2>
-    <app-button (click)="addQuestion()">
-      <fa-icon [icon]="faAdd"/>
-      Ajouter une question
-    </app-button>
-  </div>
-  <app-admin-questions [questions]="quiz.questions" [quizId]="quiz.id"/>
-</section>
-
-
-<spinner-section [text]="'Chargement du quiz'" *ngIf="loadingQuizData"/>
-
+    <app-admin-questions [questions]="quiz.questions" [quizId]="quiz.id"/>
+  </section>
+} @else {
+  <spinner-section [text]="'Chargement du quiz'"/>
+}
