@@ -6,7 +6,7 @@ import {Quiz} from "../../src/models/quiz.models";
 import {QuizGameFixture} from "../../src/app/quiz/quiz-game/quiz-game.fixture";
 import {Locator} from "playwright";
 
-export async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
+async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
   const questionFixture = quizGameFixture.getQuestionFixture();
   const answersFixture = quizGameFixture.getAnswersFixture();
   const questionResultFixture = quizGameFixture.getQuestionResultFixture();
@@ -27,7 +27,7 @@ export async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizG
     : questionResultFixture.isIncorrectScreen());
 }
 
-export async function checkVisibleAndClick(button: Locator) {
+async function checkVisibleAndClick(button: Locator) {
   // Check if the button is visible
   await expect(button).toBeVisible();
   // Click the button
