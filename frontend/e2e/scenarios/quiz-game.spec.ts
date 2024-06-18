@@ -3,7 +3,7 @@ import {testUrl} from "../e2e.config";
 import {QuizSelectionFixture} from "../../src/app/quiz/quiz-game-selection/quiz-selection/quiz-selection.fixture";
 import {ProfileListFixture} from "../../src/app/profiles/profile-list/profile-list.fixture";
 import {Quiz} from "../../src/models/quiz.models";
-import {checkVisibleAndClick, playQuestion} from "../e2e.utils";
+import {checkVisibleAndClick, playQuestionTest} from "../e2e.utils";
 import {QuizGameFixture} from "../../src/app/quiz/quiz-game/quiz-game.fixture";
 
 test.describe("Playing of a quiz by a patient", () => {
@@ -74,31 +74,38 @@ test.describe("Playing of a quiz by a patient", () => {
     });
 
     await test.step("Select a correct answer", async () => {
-      await playQuestion(quiz, true, quizGameFixture);
+      // Choose a true answer and select it
+      await playQuestionTest(quiz, true, quizGameFixture);
+
+      // Getting the next button
+      const nextButton = quizGameFixture.getQuestionResultFixture().getNextButton();
+      // Check if the button is visible and switch to the next question
+      await checkVisibleAndClick(nextButton);
+    });
+
+    await test.step("Select a wrong answer", async () => {
+      // Choose a false answer and select it
+      await playQuestionTest(quiz, false, quizGameFixture);
       const nextButton = quizGameFixture.getQuestionResultFixture().getNextButton();
       await checkVisibleAndClick(nextButton);
     });
 
     await test.step("Select a wrong answer", async () => {
-      await playQuestion(quiz, false, quizGameFixture);
-      const nextButton = quizGameFixture.getQuestionResultFixture().getNextButton();
-      await checkVisibleAndClick(nextButton);
-    });
-
-    await test.step("Select a wrong answer", async () => {
-      await playQuestion(quiz, false, quizGameFixture);
+      await playQuestionTest(quiz, false, quizGameFixture);
       const nextButton = quizGameFixture.getQuestionResultFixture().getNextButton();
       await checkVisibleAndClick(nextButton);
     });
 
     await test.step("Quiz end", async () => {
-      await playQuestion(quiz, true, quizGameFixture);
+      await playQuestionTest(quiz, true, quizGameFixture);
+      // Getting the quiz finish button
       const finishButton = quizGameFixture.getQuestionResultFixture().getFinishButton();
       await checkVisibleAndClick(finishButton);
     });
 
     await test.step("Check end", async () => {
       await quizGameFixture.isFinishScreen();
+      // Getting the go back to menu button
       const goBackToMenuButton = quizGameFixture.getGoBackToMenuButton();
       await checkVisibleAndClick(goBackToMenuButton);
 

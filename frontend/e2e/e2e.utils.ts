@@ -7,7 +7,7 @@ export async function getButtonByText(page: Page, text: string, tag: string) {
   return page.locator(tag).getByRole("button").filter({hasText: text});
 }
 
-export async function playQuestion(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
+export async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
   const questionFixture = quizGameFixture.getQuestionFixture();
   const answersFixture = quizGameFixture.getAnswersFixture();
   const questionResultFixture = quizGameFixture.getQuestionResultFixture();
