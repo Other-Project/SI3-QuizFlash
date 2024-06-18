@@ -6,7 +6,7 @@ export class SoundSettingsFixture extends E2EComponentFixture {
     return this.page.getByRole("button", {name: "Passer au Quiz"});
   }
 
-  async isVisible() {
+  async checkIsVisible() {
     await expect(this.page.getByText("Réglage du volume :")).toBeVisible();
   }
 }

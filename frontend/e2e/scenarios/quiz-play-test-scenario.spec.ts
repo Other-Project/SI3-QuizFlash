@@ -61,7 +61,7 @@ test.describe("Playing of a quiz by a patient", () => {
 
     await test.step("Check Sound Config Page", async () => {
       // Check if the config sound text is in the page
-      await quizGameFixture.getSoundSettingsFixture().isVisible();
+      await quizGameFixture.getSoundSettingsFixture().checkIsVisible();
 
       // Getting the switch to the quiz button
       const switchToQuizButton = quizGameFixture.getSoundSettingsFixture().getSwitchToQuizButton();
