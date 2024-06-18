@@ -1,4 +1,4 @@
-import { PlaywrightTestConfig } from '@playwright/test';
+import {PlaywrightTestConfig} from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
   reporter: [['html', { open: 'always' }]],
@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
     video: 'on-first-retry',
     screenshot: 'only-on-failure',
     launchOptions: {
-      slowMo: 1000,
+      slowMo: 100
     }
   },
 };

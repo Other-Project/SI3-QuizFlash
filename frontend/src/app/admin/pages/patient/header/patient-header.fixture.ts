@@ -20,4 +20,8 @@ export class PatientHeaderFixture extends E2EComponentFixture {
   getValidateButton() {
     return this.page.getByRole("button", {name: "Valider"});
   }
+
+  getProfilePictureInput() {
+    return this.page.locator("app-image-input input");
+  }
 }
