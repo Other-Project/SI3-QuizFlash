@@ -6,15 +6,15 @@ export class PatientHeaderFixture extends E2EComponentFixture {
   }
 
   getLastNameInput() {
-    return this.page.getByLabel("Nom :", {exact: true});
+    return this.page.locator("label").filter({hasText: "Nom :", hasNotText: "Pré"});
   }
 
   getFirstNameInput() {
-    return this.page.getByLabel("Prénom :", {exact: true});
+    return this.page.locator("label").filter({hasText: "Prénom :"});
   }
 
   getBirthDateInput() {
-    return this.page.getByLabel("Date de naissance :", {exact: true});
+    return this.page.locator("label").filter({hasText: "Date de naissance :"});
   }
 
   getValidateButton() {
