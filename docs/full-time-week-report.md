@@ -66,6 +66,39 @@ TODO
 ----
 
 ## Test Réalisés :
+
+La plupart de nos tests ayant besoins de données de départ pour être réalisés, nous avons créé une petite base de donnée de départ dans notre backend. Avant de
+lancer les tests, il est donc nécessaire de redémarrer le back-end avec la commande suivante : ``run start:e2e``
+
+Pour lancer tous les tests : ``run test:e2e``
+
+- **Test n°1** : ``quiz-play-test-scenario.spec.ts``
+    - Ce premier test vise à tester en intégralité une partie de quiz jouée sur notre site. Conformément au scénario, on commence par se connecter en tant que
+      Martine pour pouvoir jouer le quiz sur les chansons françaises. Comme attendu, il comporte trois types de questions : les questions sonores, textuelles et
+      visuelles. On va répondre certaines fois juste et d'autres faux afin de bien tester notre moteur de jeu. Nous jouons le quiz jusqu'à la fin, nous sommes
+      félicité, puis nous sommes redirigés vers la page des quizz pour Martine.
+
+
+- **Test n°2** : ``create-quiz-test-scenario.spec.ts``
+    - Ce deuxième test vise à tester en intégralité le processus de création d'un quiz. On commence donc par se connecter en tant qu'administrateur, puis on
+      accède à la liste des quizz. De là, on clique sur créer un quiz. On rentre un titre, un thème, une image et on le sauvegarde. Ensuite, on ajoute 3
+      questions, chacune d'un type différent en les sauvegardant au fur et à mesure. Pour la question sonore, on ajoute un fichier .mp3 et pour la question
+      visuelle, on ajoute une image. Enfin, on finit par sauvegarder le quiz.
+
+
+- **Test n°3** : ``create-user-test-scenario.spec.ts``
+    - Ce troisième test vise à tester entièrement le processus de création d'un utilisateur. Pour commencer, on se connecte en tant qu'administrateur, puis on
+      sélectionne créer un utilisateur. De là, on rentre son nom, son prénom et sa date de naissance. On lui ajoute également une photo de profil. On valide et
+      il est créé. Une fois créé, on a accès à ses paramètres. On va donc ajuster ceci conformément à notre scénario.
+
+
+- **Test n°4** : ``delete-question-test-scenario.spec.ts``
+    - Ce quatrième test est lié en partie au quatrième scénario. Dans le cas où une question devient trop difficile pour un accueilli, il faut qu'elle puisse
+      être supprimée du quiz. Dans ce test, on va donc se connecter en tant qu'administrateur pour accéder à un quiz. On le sélectionne et on supprime une
+      question. On vérifie qu'elle se supprime bien.
+
 ----
 
-## Documentation Ops : 
+## Documentation Ops :
+
+TODO
