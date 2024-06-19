@@ -26,7 +26,7 @@ FROM nginx:1.27.0-alpine-slim
 # Expose the port on which the application listens
 EXPOSE 80
 ENV BACK_URL=http://backend:9428
-HEALTHCHECK --interval=10s --timeout=30s --retries=5 CMD curl -f "http://localhost" || exit 1
+HEALTHCHECK --interval=10s --timeout=30s --start-period=10s --retries=5 CMD curl -f "http://localhost" || exit 1
 
 RUN apk add --no-cache --update curl
 COPY nginx-default.conf.template /etc/nginx/templates/default.conf.template

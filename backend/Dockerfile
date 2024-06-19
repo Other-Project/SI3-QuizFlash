@@ -1,7 +1,4 @@
-FROM node:20-alpine3.20
-
-# Healthcheck dependency
-RUN apk add --no-cache --update curl
+FROM node:20-alpine3.20 as build
 
 # Switch to the node user
 USER node
@@ -14,15 +11,22 @@ COPY --chown=node:node package*.json ./
 
 # Install the application dependencies
 RUN npm install --omit=dev
+COPY . .
+RUN rm package*.json
 
-# Copy the application
-COPY --chown=node:node . .
+FROM busybox:1.35.0-uclibc as busybox
+FROM gcr.io/distroless/nodejs22-debian12
 
 # Expose the port on which the application listens
 EXPOSE 9428
+ENV CLEAR_DB=""
+ENV INIT_DB=""
+ENV DB_FOLDER=""
+HEALTHCHECK --interval=10s --timeout=30s --start-period=10s --retries=5 CMD ["/nodejs/bin/node", "healthcheck.js"]
 
-HEALTHCHECK --interval=10s --timeout=30s --retries=5 CMD curl -f "http://localhost:9428/api/status" || exit 1
+COPY --from=busybox /bin/sh /bin/sh
+WORKDIR /app
+COPY --from=build /home/node/app .
 
 # Start the application
-ENTRYPOINT ["npm", "run"]
-CMD ["start"]
+ENTRYPOINT /nodejs/bin/node init_db.js && /nodejs/bin/node app/index.js

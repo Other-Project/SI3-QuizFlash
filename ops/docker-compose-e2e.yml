@@ -3,8 +3,10 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
-    command:
-      - "start:e2e"
+    environment:
+      - CLEAR_DB=true
+      - INIT_DB=/app/database/e2e-starter
+      - DB_FOLDER=e2e/
     volumes:
       - database_e2e:/home/node/app/database
 
