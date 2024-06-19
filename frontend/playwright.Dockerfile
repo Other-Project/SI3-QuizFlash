@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/playwright:v1.44.1-jammy
 
-ENV FRONT_URL=http://frontend:4200
+ENV FRONT_URL=http://frontend
 ENV HEADLESS=true
 
 # Create a working directory for the application and move into it

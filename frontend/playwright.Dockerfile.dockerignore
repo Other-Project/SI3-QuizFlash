@@ -1,5 +1,5 @@
 # Ignore all files by default
-**
+*
 
 # Do not ignore .fixture.ts files in all subfolders
 !**/*.fixture.ts
