@@ -7,4 +7,4 @@ export const httpOptionsBase = {
   withCredentials: true
 };
 
-export const apiUrl = "/api";
+export const apiUrl = "http://localhost:8080/api";

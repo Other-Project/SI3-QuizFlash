@@ -7,19 +7,19 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 # Install the application dependencies
-RUN npm install --omit=dev
+RUN npm install -g @angular/cli && npm install && apk add --update curl
 
 # Copy the application
 COPY . .
 
 # Change ownership of the node_modules directory to the node user
-RUN chown -R node:node ./node_modules
+RUN chown -R node:node .
 
 # Switch to the node user
 USER node
 
 # Expose the port on which the application listens
-EXPOSE 8080
+EXPOSE 4200
 
 # Start the application
 CMD ["npm", "start"]

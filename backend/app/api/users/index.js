@@ -2,7 +2,7 @@ const {Router} = require("express");
 const {User} = require("../../models");
 const {catchErrors} = require("../../utils/errors/routes");
 const { createUser, replaceUser, updateUser, deleteUser } = require("./manager");
-const checkAuthentification = require("../../utils/auth-checker");
+const checkAuthentication = require("../../utils/auth-checker");
 const access = require("../../models/access-restriction.model");
 const { readFile, storeFile } = require("../../utils/file");
 const router = new Router();
@@ -23,7 +23,7 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
     })));
 }));
 
-router.get("/:userId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.get("/:userId", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Users']
         #swagger.summary = 'Get a specific user'
         #swagger.responses[200] = {
@@ -37,7 +37,7 @@ router.get("/:userId", checkAuthentification(access.admin), (req, res) => catchE
     res.status(200).json({ ...user, pictureUrl: readFile(user.pictureUrl) });
 }));
 
-router.post("/", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.post("/", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Users']
         #swagger.summary = 'Add new user'
         #swagger.parameters['body'] = {
@@ -54,7 +54,7 @@ router.post("/", checkAuthentification(access.admin), (req, res) => catchErrors(
     res.status(201).json(createUser(req.body));
 }));
 
-router.put("/:userId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.put("/:userId", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Users']
         #swagger.summary = 'Modify an existing user'
         #swagger.parameters['body'] = {
@@ -74,7 +74,7 @@ router.put("/:userId", checkAuthentification(access.admin), (req, res) => catchE
     res.status(200).json(replaceUser(req.params.userId, req.body));
 }));
 
-router.patch("/:userId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.patch("/:userId", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Users']
         #swagger.summary = 'Modify parts of an existing user'
         #swagger.parameters['body'] = {
@@ -94,7 +94,7 @@ router.patch("/:userId", checkAuthentification(access.admin), (req, res) => catc
     res.status(200).json(updateUser(req.params.userId, req.body));
 }));
 
-router.delete("/:userId", checkAuthentification(access.admin), (req, res) => catchErrors(req, res, () => {
+router.delete("/:userId", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Users']
         #swagger.summary = 'Delete an user'
         #swagger.responses[204] = { }

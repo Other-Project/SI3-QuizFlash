@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    volumes:
+      - database:/home/node/app/database
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9428/api/status" ]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:4200"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  database:
