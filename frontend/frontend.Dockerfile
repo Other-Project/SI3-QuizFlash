@@ -28,7 +28,7 @@ EXPOSE 80
 ENV BACK_URL=http://backend:9428
 HEALTHCHECK --interval=10s --timeout=30s --retries=5 CMD curl -f "http://localhost" || exit 1
 
-RUN apk add --update curl
+RUN apk add --no-cache --update curl
 COPY nginx-default.conf.template /etc/nginx/templates/default.conf.template
 COPY --chown=nginx:nginx --from=build /home/node/app/dist/front-end /usr/share/nginx/html
 

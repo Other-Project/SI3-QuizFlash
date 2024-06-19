@@ -1,7 +1,7 @@
 FROM node:20-alpine3.20
 
 # Healthcheck dependency
-RUN apk add --update curl
+RUN apk add --no-cache --update curl
 
 # Switch to the node user
 USER node
