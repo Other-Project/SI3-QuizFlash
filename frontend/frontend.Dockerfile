@@ -1,5 +1,7 @@
 FROM node:20-alpine3.20
 
+ENV BACK_URL=http://backend:9428
+
 # Create a working directory for the application and move into it
 WORKDIR /home/node/app
 

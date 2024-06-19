@@ -1,7 +1,8 @@
 node_modules
 npm-debug.log
-Dockerfile
+*Dockerfile*
 .dockerignore
 .angular
 playwright-report
 test-results
+playwright.config.ts
