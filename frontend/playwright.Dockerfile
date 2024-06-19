@@ -12,7 +12,7 @@ RUN npm i -D @playwright/test playwright && npx playwright install
 COPY . .
 
 # Expose the port on which the application listens
-EXPOSE 4200
+EXPOSE 9323
 
 # Start the test
 CMD ["npx", "playwright", "test"]

@@ -1,7 +1,7 @@
 import { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
-  reporter: [['html', { open: 'always' }]],
+  reporter: [['html', { open: 'always', host: '0.0.0.0' }]],
   use: {
     headless: false,
     viewport: { width: 1280, height: 720 },
