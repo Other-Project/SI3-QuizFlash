@@ -9,7 +9,7 @@ const session = require("express-session");
 module.exports = (cb) => {
     const app = express();
     const corsOptions = {
-        origin: "http://localhost:8080",
+        origin: "http://frontend:4200",
         credentials: true
     };
     app.use(cors(corsOptions));
