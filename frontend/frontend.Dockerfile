@@ -2,23 +2,23 @@ FROM node:20-alpine3.20
 
 ENV BACK_URL=http://backend:9428
 
+# Healthcheck dependency
+RUN apk add --update curl
+
+# Switch to the node user
+USER node
+
 # Create a working directory for the application and move into it
 WORKDIR /home/node/app
 
 # Copy the package.json and package-lock.json files
-COPY package*.json ./
+COPY --chown=node:node package*.json ./
 
 # Install the application dependencies
-RUN npm install -g @angular/cli && npm install && apk add --update curl
+RUN npm config set prefix '~/.local/' && npm install -g @angular/cli && npm install
 
 # Copy the application
-COPY . .
-
-# Change ownership of the node_modules directory to the node user
-RUN chown -R node:node .
-
-# Switch to the node user
-USER node
+COPY --chown=node:node . .
 
 # Expose the port on which the application listens
 EXPOSE 4200
