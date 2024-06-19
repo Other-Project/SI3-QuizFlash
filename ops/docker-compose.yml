@@ -5,11 +5,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - database:/home/node/app/database
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9428/api/status" ]
-      interval: 10s
-      timeout: 30s
-      retries: 5
 
   frontend:
     build:

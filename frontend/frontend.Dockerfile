@@ -23,5 +23,7 @@ USER node
 # Expose the port on which the application listens
 EXPOSE 4200
 
+HEALTHCHECK --interval=10s --timeout=30s --retries=5 CMD curl -f "http://localhost:4200" || exit 1
+
 # Start the application
 CMD ["npm", "start"]
