@@ -1,9 +1,7 @@
-FROM node:20-alpine3.20
+FROM node:20-alpine3.20 AS build
 
-ENV BACK_URL=http://backend:9428
-
-# Healthcheck dependency
-RUN apk add --update curl
+# Global dependencies
+RUN npm install -g @angular/cli
 
 # Switch to the node user
 USER node
@@ -15,15 +13,24 @@ WORKDIR /home/node/app
 COPY --chown=node:node package*.json ./
 
 # Install the application dependencies
-RUN npm config set prefix '~/.local/' && npm install -g @angular/cli && npm install
+RUN npm install
 
 # Copy the application
 COPY --chown=node:node . .
 
+RUN npm run build
+
+
+FROM nginx:1.27.0-alpine-slim
+
 # Expose the port on which the application listens
-EXPOSE 4200
+EXPOSE 80
+ENV BACK_URL=http://backend:9428
+HEALTHCHECK --interval=10s --timeout=30s --retries=5 CMD curl -f "http://localhost" || exit 1
 
-HEALTHCHECK --interval=10s --timeout=30s --retries=5 CMD curl -f "http://localhost:4200" || exit 1
+RUN apk add --update curl
+COPY nginx-default.conf.template /etc/nginx/templates/default.conf.template
+COPY --chown=nginx:nginx --from=build /home/node/app/dist/front-end /usr/share/nginx/html
 
-# Start the application
-CMD ["npm", "start"]
+
+
