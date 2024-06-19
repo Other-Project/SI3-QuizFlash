@@ -2,9 +2,11 @@
   margin: 1em auto 3em;
   max-width: 50em;
   width: 70%;
-  text-align: center;
+  justify-content: center;
 
   h1 {
+    display: flex;
     margin-bottom: 2em;
+    justify-content: center;
   }
 }

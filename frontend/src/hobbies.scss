@@ -1,37 +1,20 @@
 @import "colors";
 
-.multiselect-dropdown {
-  .dropdown-btn {
-    padding: 3px !important;
-    padding-right: 40px !important;
-    position: relative;
-
-    .selected-item {
-      border: 1px solid $blue !important;
-      background: $blue !important;
-    }
-
-    & > span {
-      &:not(:last-child) {
-        display: flex !important;
-        margin: 3px !important;
-      }
-
-      &:last-child {
-        position: absolute;
-        right: 0;
-      }
-    }
-  }
-
-  .multiselect-item-checkbox input[type=checkbox] {
-    &:checked + div:before {
-      background: $blue !important;
-    }
-
-    + div:before {
-      color: $blue !important;
-      border: 2px solid $blue !important;
-    }
-  }
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  font-size: 1em;
+  color: white;
+  background-color: $blue;
 }
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: white;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-color: $blueClear;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  border-bottom: 1px solid $lightGray;
+}
+

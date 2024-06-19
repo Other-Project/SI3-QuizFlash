@@ -8,56 +8,46 @@ import {Patient} from "../../../../../models/patient.models";
 })
 
 export class HobbiesComponent implements OnInit {
-  @Input() hobbies?: string[];
+  @Input() hobbies: string[] = [];
   @Input() patient?: Patient;
   @Output() newPatientHobbies: EventEmitter<string[]> = new EventEmitter<string[]>();
 
-  data: any[] = [];
-  tagNames = ["test", "test2"];
-  selectedItems?: string[];
+  data: string[] = [];
+  selectedItems: string[] = [];
   ngOnInit() {
-    this.selectedItems = this.patient?.hobbies.slice();
-    this.tagNames.forEach((c: string, i: number) => {
-      this.data.push({id: i, name: c});
+    this.hobbies.forEach((c: string) => {
+      this.data.push(c);
+    });
+    this.patient?.hobbies.forEach((c: string) => {
+      if (!this.data.some(hobby => hobby == c)) this.data.push(c);
+      this.selectedItems.push(c);
     });
   }
 
-  setHobbies(newHobbies: any) {
-    if (!this.patient)
-      return;
-
-    this.newPatientHobbies.emit(newHobbies);
-  }
-
   newTag(hobby: any) {
-    //if (!this.patient)
-    //  return;
-    //console.log(this.patient)
-    //this.patient.hobbies.push(hobby);
-    //this.data?.push(hobby);
-    //this.newPatientHobbies.emit(this.patient.hobbies);
-    return new Promise((resolve) => resolve({id: 5, name: hobby, valid: true}));
+    return new Promise((resolve) => {
+      resolve(hobby);
+    });
   }
 
-  trackByFn(item: any) {
-    return item.id;
-  };
+  onAdd(hobby: any) {
+    if (!this.patient) return;
 
-  selectedHobbies(hobby: any) {
-    if (!this.patient)
-      return;
-    console.log(hobby);
     this.patient.hobbies.push(hobby);
     this.newPatientHobbies.emit(this.patient.hobbies);
   }
 
-  removeHobby(hobby: any) {
-    if (!this.patient)
-      return;
+  onRemove(removedHobby: any) {
+    if (!this.patient) return;
 
-    let itemIndex: number = this.patient.hobbies.indexOf(hobby);
-    if (itemIndex >= 0)
-      this.patient.hobbies.splice(itemIndex, 1);
+    this.patient.hobbies = this.patient.hobbies.filter(hobby => hobby != removedHobby);
+    this.newPatientHobbies.emit(this.patient.hobbies);
+  }
+
+  onRemoveAll() {
+    if (!this.patient) return;
+
+    this.patient.hobbies = [];
     this.newPatientHobbies.emit(this.patient.hobbies);
   }
 }

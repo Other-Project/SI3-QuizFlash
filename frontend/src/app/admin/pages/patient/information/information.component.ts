@@ -11,7 +11,7 @@ import {Patient} from "../../../../../models/patient.models";
 
 export class InformationComponent implements OnInit {
   @Input() public patient?: Patient;
-  hobbies?: string[];
+  hobbies: string[] = [];
 
   constructor(private userService: UserService) {
   }
