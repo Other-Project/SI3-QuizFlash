@@ -6,7 +6,6 @@ const MIMEType = require("whatwg-mimetype");
 const deasync = require("deasync");
 const util = require("util");
 const parseDataURL = require("data-urls");
-const slash = require("slash");
 
 
 const pathPrefix = path.resolve(`${__dirname}/../../database/${process.env.DB_FOLDER ?? ""}`);
@@ -35,7 +34,7 @@ function storeFile(filepath, base64url) {
     filepath = `${pathPrefix}/assets/${filepath}.${mime.extension(mimeType.essence)}`;
     fs.mkdirSync(path.dirname(filepath), { recursive: true });
     fs.writeFileSync(filepath, data);
-    return slash(path.relative(`${pathPrefix}/assets`, filepath));
+    return path.relative(`${pathPrefix}/assets`, filepath).replace(/\\/g, "/");
 }
 
 function deleteFile(filepath) {
