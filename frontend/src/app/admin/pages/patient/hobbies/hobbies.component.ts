@@ -12,16 +12,6 @@ export class HobbiesComponent implements OnInit {
   @Input() patient?: Patient;
   @Output() newPatientHobbies: EventEmitter<string[]> = new EventEmitter<string[]>();
 
-  dropdownSettings = {
-    singleSelection: false,
-    idField: 'item',
-    textField: 'item',
-    selectAllText: 'Tout sélectionner',
-    unSelectAllText: 'Tout désélectionner',
-    allowSearchFilter: true,
-    searchPlaceholderText: "Rechercher des centres d'intérêt",
-  };
-
   data?: string[];
   selectedItems?: string[];
 
@@ -35,6 +25,15 @@ export class HobbiesComponent implements OnInit {
       return;
 
     this.newPatientHobbies.emit(newHobbies);
+  }
+
+  newTag(hobby: any) {
+    if (!this.patient)
+      return;
+
+    this.patient.hobbies.push(hobby);
+    this.data?.push(hobby);
+    this.newPatientHobbies.emit(this.patient.hobbies);
   }
 
   addHobby(hobby: any) {
