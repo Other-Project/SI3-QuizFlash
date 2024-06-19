@@ -12,12 +12,14 @@ export class HobbiesComponent implements OnInit {
   @Input() patient?: Patient;
   @Output() newPatientHobbies: EventEmitter<string[]> = new EventEmitter<string[]>();
 
-  data?: string[];
+  data: any[] = [];
+  tagNames = ["test", "test2"];
   selectedItems?: string[];
-
   ngOnInit() {
-    this.data = this.hobbies?.slice();
     this.selectedItems = this.patient?.hobbies.slice();
+    this.tagNames.forEach((c: string, i: number) => {
+      this.data.push({id: i, name: c});
+    });
   }
 
   setHobbies(newHobbies: any) {
@@ -28,18 +30,23 @@ export class HobbiesComponent implements OnInit {
   }
 
   newTag(hobby: any) {
-    if (!this.patient)
-      return;
-
-    this.patient.hobbies.push(hobby);
-    this.data?.push(hobby);
-    this.newPatientHobbies.emit(this.patient.hobbies);
+    //if (!this.patient)
+    //  return;
+    //console.log(this.patient)
+    //this.patient.hobbies.push(hobby);
+    //this.data?.push(hobby);
+    //this.newPatientHobbies.emit(this.patient.hobbies);
+    return new Promise((resolve) => resolve({id: 5, name: hobby, valid: true}));
   }
 
-  addHobby(hobby: any) {
+  trackByFn(item: any) {
+    return item.id;
+  };
+
+  selectedHobbies(hobby: any) {
     if (!this.patient)
       return;
-
+    console.log(hobby);
     this.patient.hobbies.push(hobby);
     this.newPatientHobbies.emit(this.patient.hobbies);
   }

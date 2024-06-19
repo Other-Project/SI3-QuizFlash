@@ -1,12 +1,14 @@
 <div class="hobbies-select">
   <h1>Centres d'intérêt</h1>
-  <ng-select [items]="data ?? []"
-             bindLabel="name"
-             [addTag]="newTag"
-             [multiple]="true"
-             [hideSelected]="true"
-             [trackByFn]="addHobby"
-             [minTermLength]="2"
-             typeToSearchText="Please enter 2 or more characters">
+  <ng-select
+    [items]="data"
+    [addTag]="newTag"
+    [multiple]="true"
+    bindLabel="name"
+    typeToSearchText="Please enter 2 or more characters"
+    [(ngModel)]="selectedHobbies">
   </ng-select>
+  <ng-template ng-tag-tmp let-search="searchTerm">
+    <b>create new</b>: {{ search }}
+  </ng-template>
 </div>
