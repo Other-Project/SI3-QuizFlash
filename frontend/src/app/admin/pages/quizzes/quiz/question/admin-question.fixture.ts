@@ -33,6 +33,14 @@ export class AdminQuestionFixture extends E2EComponentFixture {
     return this.page.locator("app-button.save");
   }
 
+  getSaveButtonIcon() {
+    return this.getSaveQuestionButton().locator("fa-icon");
+  }
+
+  async isSaveButtonDisabled() {
+    return await (this.getSaveQuestionButton()).getAttribute("ng-reflect-disabled");
+  }
+
   getDeleteQuestionButton() {
     return this.page.locator("app-button.delete");
   }
