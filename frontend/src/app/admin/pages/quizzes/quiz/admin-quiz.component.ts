@@ -94,6 +94,10 @@ export class AdminQuizComponent implements OnDestroy {
     this.quiz.questions.push({} as Question);
   }
 
+  updateTags(tags: string[]) {
+    this.quiz.tags = tags;
+  }
+
   protected readonly faAdd = faAdd;
   protected readonly faSave = faSave;
   protected readonly faTrash = faTrash;

@@ -133,6 +133,13 @@ function checkAnswer(quizStatId, questionStatId, questionAttempt, userId) {
     return { isTrue: questionStats.success, expected: { id: result.id, text: result.answerText } };
 }
 
+function getTags() {
+    let quizList = Quiz.get();
+    let tags = [];
+    quizList.forEach((quiz) => tags.push(quiz.tags ?? []));
+    return tags.flat();
+}
+
 module.exports = {
     buildQuiz,
     createQuiz,
@@ -141,5 +148,6 @@ module.exports = {
     deleteQuiz,
     createStatQuiz,
     createStatQuestion,
-    checkAnswer
+    checkAnswer,
+    getTags
 };

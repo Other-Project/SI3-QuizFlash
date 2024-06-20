@@ -40,9 +40,17 @@ function deleteUser(userId) {
     User.delete(userId);
 }
 
+function getHobbies() {
+    let userList = User.get();
+    let hobbies = [];
+    userList.forEach((user) => hobbies.push(user.hobbies ?? []));
+    return hobbies.flat();
+}
+
 module.exports = {
     createUser,
     replaceUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getHobbies
 };

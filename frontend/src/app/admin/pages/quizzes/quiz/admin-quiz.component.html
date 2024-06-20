@@ -4,7 +4,7 @@
 
     <div>
       <input type="text" placeholder="Entrez un titre" formControlName="title" id="title"/>
-      <ng-multiselect-dropdown [placeholder]="'Sélectionnez des tags'" [settings]="dropdownSettings" [data]="availableTags" formControlName="tags"/>
+      <hobbies-select [placeHolder]="'Sélectionnez des tags'" [tags]="quiz.tags" (updateTags)="updateTags($event)"/>
 
       <div class="actions">
         <app-button (click)="save()" [disabled]="loading">
