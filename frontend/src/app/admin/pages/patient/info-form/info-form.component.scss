@@ -28,6 +28,10 @@ form {
       color: color.scale($darkRed, $lightness: -5%);
     }
 
+    option {
+      color: black;
+    }
+
     label {
       width: 10em;
       font-size: 1em;
