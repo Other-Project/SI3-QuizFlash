@@ -13,7 +13,10 @@ export class AnswersComponent implements OnInit {
   @Input() automatedSkip: boolean = false;
   @Input() fiftyFiftyUsable!: boolean;
   @Input() fiftyFiftyActivated!: boolean;
+  protected readonly Scale = Scale;
+  protected readonly Padding = Padding;
   private timeOutId?: number;
+  @Input() loading: boolean = false;
   @Output() inactive: EventEmitter<undefined> = new EventEmitter();
   @Output() fiftyFiftyUsed: EventEmitter<undefined> = new EventEmitter();
 
@@ -39,6 +42,7 @@ export class AnswersComponent implements OnInit {
     this.inactive.emit();
   }
 
-  protected readonly Scale = Scale;
-  protected readonly Padding = Padding;
+  fiftyFiftyShow() {
+    return !this.fiftyFiftyUsable && this.answers.filter(answer => !answer.hide).length > 2;
+  }
 }

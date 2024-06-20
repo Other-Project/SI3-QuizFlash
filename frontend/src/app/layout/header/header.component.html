@@ -5,7 +5,8 @@
     <ng-content></ng-content>
   </div>
 
-  <app-button *ngIf="interactive && loggedIn" [color]="'blue'" (click)="logout()" id="logout">
-    <fa-icon [icon]="faSignOut" size="2x" id="logout-icon"/>
+  <app-button *ngIf="interactive && loggedIn" [color]="'blue'" [disabled]="loading" (click)="logout()" id="logout">
+    <fa-icon [icon]="faSignOut" size="2x" id="logout-icon" *ngIf="!loading"/>
+    <spinner *ngIf="loading"/>
   </app-button>
 </header>
