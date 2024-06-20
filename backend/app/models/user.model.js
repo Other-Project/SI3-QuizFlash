@@ -8,7 +8,7 @@ module.exports = new BaseModel("User", {
     access: Joi.number().valid(...Object.values(AccessRestriction)).required(),
     lastname: Joi.string().required().pattern(/^\p{L}+(?:[ -]\p{L}+)*$/u),
     firstname: Joi.string().required().pattern(/^\p{L}+(?:[ -]\p{L}+)*$/u),
-    gender: Joi.string().required().valid("M", "F"),
+    gender: Joi.string().required().valid("M", "F", "LGBTQIA+"),
     pictureUrl: Joi.string().allow("").pattern(pathPattern),
 
     //Patient attributes
