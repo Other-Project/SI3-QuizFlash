@@ -12,18 +12,22 @@ import {QuizService} from "../../../service/quiz-service.service";
 export class HeaderComponent {
   @Input() homePage?: any[] | string;
   @Input() interactive: boolean = true;
-
+  protected loading: boolean = false;
   loggedIn: boolean = false;
 
   constructor(private userService: UserService, private quizService: QuizService, private router: Router) {
     userService.user$.subscribe(user => {
-      if (this.loggedIn && !user) this.router.navigate(["/"]).then();
+      if (this.loggedIn && !user) {
+        this.router.navigate(["/"]).then();
+        this.loading = false;
+      }
       this.loggedIn = !!user;
     });
   }
 
   public logout() {
     if (!this.loggedIn) return;
+    this.loading = true;
     this.quizService.selectQuiz("");
     this.userService.logout();
   }

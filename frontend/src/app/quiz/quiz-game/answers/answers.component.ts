@@ -16,6 +16,7 @@ export class AnswersComponent implements OnInit {
   protected readonly Scale = Scale;
   protected readonly Padding = Padding;
   private timeOutId?: number;
+  @Input() loading: boolean = false;
   @Output() inactive: EventEmitter<undefined> = new EventEmitter();
   @Output() fiftyFiftyUsed: EventEmitter<undefined> = new EventEmitter();
 

@@ -35,6 +35,7 @@ export class QuizGameComponent implements OnDestroy {
   protected subscribeQuizStatsId: Subscription;
   protected loading: boolean = false;
   protected textLoading?: string;
+  protected loadingFiftyFifty: boolean = false;
 
   constructor(private userService: UserService, private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.userService.user$.subscribe(user => this.user = user as Patient);
@@ -135,12 +136,12 @@ export class QuizGameComponent implements OnDestroy {
   }
 
   fiftyFifty() {
+    this.loadingFiftyFifty = true;
     if (!this.fiftyFiftyEnabled) return;
-    this.fiftyFiftyEnabled = false;
-    if (this.currentQuestion && this.currentQuestion.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion.id!).then(answers => this.hideAnswers(answers)).catch(() => {
-      alert("Il y a eu un problème avec le 50/50 essayez de le réutiliser");
-      this.fiftyFiftyEnabled = true;
-    });
+    if (this.currentQuestion && this.currentQuestion.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion.id!).then(answers => {
+      this.hideAnswers(answers);
+      this.fiftyFiftyEnabled = false;
+    }).catch(() => alert("Il y a eu un problème avec le 50/50 essayez de le réutiliser")).finally(() => this.loadingFiftyFifty = false);
   }
 
   hideAnswers(answers: Answer[]) {
