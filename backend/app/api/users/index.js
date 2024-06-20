@@ -4,7 +4,7 @@ const {catchErrors} = require("../../utils/errors/routes");
 const { createUser, replaceUser, updateUser, deleteUser } = require("./manager");
 const checkAuthentification = require("../../utils/auth-checker");
 const access = require("../../models/access-restriction.model");
-const { readFile, storeFile } = require("../../utils/file");
+const { readFile } = require("../../utils/file");
 const router = new Router();
 
 router.get("/", (req, res) => catchErrors(req, res, () => {
