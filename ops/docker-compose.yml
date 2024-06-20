@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    volumes:
+      - database:/home/node/app/database
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: frontend.Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  database:

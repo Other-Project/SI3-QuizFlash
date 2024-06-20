@@ -8,7 +8,7 @@
     <main>
       <sound-settings *ngIf="soundSetting" (soundSettingsFinish)="getGainToTransfer($event)"/>
       <app-quiz-section [question]="currentQuestion" [user]="user" [audioGain]="audioGain" [fiftyFiftyDisabled]="!fiftyFiftyEnabled"
-                        [fiftyFiftyActivated]="user!.answerHint"
+                        [fiftyFiftyActivated]="user!.answerHint" [loadingFiftyFifty]="loadingFiftyFifty"
                         (chosenAnswer)="checkAnswer($event)" (fiftyFiftyUsed)="fiftyFifty()" (inactive)="setInactivity()"
                         *ngIf="!soundSetting && !questionResult && !isFinish() && !loading"/>
       <spinner-section [text]="this.textLoading" *ngIf="loading"/>

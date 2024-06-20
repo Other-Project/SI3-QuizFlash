@@ -79,7 +79,9 @@ export class AdminQuizComponent implements OnDestroy {
     this.loading = true;
     if (!this.quizForm.valid) return;
     if (this.quiz.id) {
-      this.quizService.updateQuiz(this.quiz.id, this.quizForm.value).then(() => this.loading = false);
+      this.quizService.updateQuiz(this.quiz.id, this.quizForm.value).catch(() => {
+        alert("Il y a eu une erreur lors de la récupération des différents centres d'intérêt.\nVeuillez recharger la page");
+      }).finally(() => this.loading = false);
       return;
     }
     this.quizService.addQuiz(this.quizForm.value).then(quiz => this.router.navigate([quiz.id], {relativeTo: this.route}).then());

@@ -1,4 +1,4 @@
-import {E2EComponentFixture} from "e2e/e2e-component.fixture";
+import {E2EComponentFixture} from "../../../../../../e2e/e2e-component.fixture";
 
 export class PatientInfoFormFixture extends E2EComponentFixture {
   getLastNameInput() {

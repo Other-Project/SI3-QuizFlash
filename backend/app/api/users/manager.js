@@ -13,7 +13,7 @@ function createUser(user) {
     pureUser.access = AccessRestriction.user;
     const pict = validateAndNormaliseFile(pictureUrl, /image\/.*/);
     let result = User.create(pureUser);
-    User.update(result.id, { pictureUrl: storeFile(picture(result.id), pict) });
+    User.update(result.id, { pictureUrl: storeFile(picture(result.id), ...pict) });
     return { ...result, pictureUrl };
 }
 

@@ -1,0 +1,34 @@
+services:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    environment:
+      - CLEAR_DB=true
+      - INIT_DB=/app/database/e2e-starter
+      - DB_FOLDER=e2e/
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: frontend.Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  playwright:
+    build:
+      context: ../frontend
+      dockerfile: playwright.Dockerfile
+    ports:
+      - "8081:9323"
+    depends_on:
+      frontend:
+        condition: service_healthy
+    volumes:
+      - reports_e2e:/app/test-results
+
+volumes:
+  reports_e2e:
