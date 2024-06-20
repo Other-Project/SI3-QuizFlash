@@ -19,8 +19,8 @@ function createUser(user) {
 function replaceUser(userId, user) {
     const { pictureUrl, ...pureUser } = user;
     const previousUser = User.getById(userId);
-    deleteFile(previousUser.pictureUrl);
     pureUser.pictureUrl = storeFile(picture(userId), pictureUrl);
+    if (pureUser.pictureUrl && previousUser.pictureUrl !== pureUser.pictureUrl) deleteFile(previousUser.pictureUrl);
     const result = User.replace(userId, pureUser);
     return { ...result, pictureUrl: readFile(result.pictureUrl) };
 }
@@ -28,8 +28,8 @@ function replaceUser(userId, user) {
 function updateUser(userId, user) {
     const { pictureUrl, ...pureUser } = user;
     const previousUser = User.getById(userId);
-    deleteFile(previousUser.pictureUrl);
     pureUser.pictureUrl = storeFile(picture(userId), pictureUrl);
+    if (pureUser.pictureUrl && previousUser.pictureUrl !== pureUser.pictureUrl) deleteFile(previousUser.pictureUrl);
     const result = User.update(userId, pureUser);
     return { ...result, pictureUrl: readFile(result.pictureUrl) };
 }

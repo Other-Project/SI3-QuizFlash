@@ -34,7 +34,7 @@ function storeFile(filepath, base64url) {
     filepath = `${pathPrefix}/assets/${filepath}.${mime.extension(mimeType.essence)}`;
     fs.mkdirSync(path.dirname(filepath), { recursive: true });
     fs.writeFileSync(filepath, data);
-    return path.relative(`${pathPrefix}/assets`, filepath);
+    return path.relative(`${pathPrefix}/assets`, filepath).replace(/\\/g, "/");
 }
 
 function deleteFile(filepath) {

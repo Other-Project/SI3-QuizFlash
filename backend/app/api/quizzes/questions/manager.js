@@ -129,10 +129,10 @@ function checkQuestionAndUpdateFiles(quizId, questionId, pureQuestion, imageUrl,
     if (questionInDb.quizId !== quizId)
         throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
 
-    deleteFile(questionInDb.imageUrl);
-    deleteFile(questionInDb.soundUrl);
     pureQuestion.imageUrl = storeFile(image(quizId, questionId), imageUrl);
     pureQuestion.soundUrl = storeFile(sound(quizId, questionId), soundUrl);
+    if (pureQuestion.imageUrl && questionInDb.imageUrl !== pureQuestion.imageUrl) deleteFile(questionInDb.imageUrl);
+    if (pureQuestion.soundUrl && questionInDb.soundUrl !== pureQuestion.soundUrl) deleteFile(questionInDb.soundUrl);
     return pureQuestion;
 }
 

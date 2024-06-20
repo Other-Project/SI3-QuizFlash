@@ -4,7 +4,7 @@ import {OptionsFixture} from "./options/options.fixture";
 
 export class PatientFixture extends E2EComponentFixture {
   getPatientHeaderFixture() {
-    return new PatientHeaderFixture(this.page);
+    return new PatientHeaderFixture(this.page.locator("patient-header"));
   }
 
   getPatientSettings() {
