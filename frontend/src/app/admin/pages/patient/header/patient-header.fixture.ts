@@ -24,4 +24,8 @@ export class PatientHeaderFixture extends E2EComponentFixture {
   getProfilePictureInput() {
     return this.page.locator("app-image-input input");
   }
+
+  async getProfilePictureImage() {
+    return await (this.page.locator("app-image-input img")).getAttribute("src");
+  }
 }

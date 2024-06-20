@@ -44,7 +44,7 @@ test.describe("Create user with errors test display", () => {
     });
 
     await test.step("Create User with errors in name and firstname 1", async () => {
-      await profilePictureInput.setInputFiles(["./src/assets/users/bernard.jpg"]);
+      await profilePictureInput.setInputFiles("./src/assets/users/bernard.jpg");
       await lastNameInput.fill("12345");
       await firstNameInput.fill("12345");
       await birthDateInput.fill("1950-05-04");
@@ -80,6 +80,17 @@ test.describe("Create user with errors test display", () => {
       await validateButton.click();
       // We shouldn't be able to create such a user
       await expect(page).toHaveURL(`${testUrl}/admin/patient`);
+    });
+
+    await test.step("Create user with a wrong profile picture", async () => {
+      await birthDateInput.fill("1950-05-05");
+      const profilePictureImage = await patientHeaderFixture.getProfilePictureImage();
+      await profilePictureInput.setInputFiles("./src/assets/Dogs and Cats.mp3");
+      const profilePictureImage2 = await patientHeaderFixture.getProfilePictureImage();
+      // The preview shouldn't change as we pass it a wrong file
+      expect(profilePictureImage).toEqual(profilePictureImage2);
+      await profilePictureInput.setInputFiles([]);
+      await profilePictureInput.setInputFiles("./src/assets/users/bernard.jpg");
     });
 
     await test.step("Create User without errors", async () => {
