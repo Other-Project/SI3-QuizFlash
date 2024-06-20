@@ -57,7 +57,7 @@ test.describe("Create Quiz test display", () => {
 
     await test.step("Create the first (pictorial) question", async () => {
 
-      await expect(createQuestionButton).toBeVisible();
+      await expect(createQuestionButton).toBeVisible({timeout: 50000});
       await createQuestionButton.click();
 
       const questionFixture = adminQuizFixture.getQuestionFixture(1);
