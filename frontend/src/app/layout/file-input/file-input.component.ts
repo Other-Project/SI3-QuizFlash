@@ -25,6 +25,9 @@ export class FileInputComponent extends ImageComponent implements ControlValueAc
   valueChanged(files: FileList) {
     if (files.length !== 1) return;
 
+    const MIMEtype = new RegExp(this.accept.replace("*", ".\*"));
+    if (!Array.prototype.every.call(files, file => MIMEtype.test(file.type))) return;
+
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = () => this.valueChange.emit(this.src = reader.result as string);

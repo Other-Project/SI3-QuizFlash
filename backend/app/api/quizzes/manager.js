@@ -2,7 +2,7 @@ const { Quiz, Question, Answer, QuizStats, QuestionStats, User, Attempts } = req
 const { getQuizQuestions, createQuestion, updateQuestion, replaceQuestion, deleteQuestion } = require("./questions/manager");
 const { getQuestionAnswers } = require("./questions/answers/manager");
 const NotFoundError = require("../../utils/errors/not-found-error");
-const { readFile, storeFile, deleteFile } = require("../../utils/file");
+const { readFile, storeFile, deleteFile, validateAndNormaliseFile } = require("../../utils/file");
 
 const thumbnail = (quizId) => `quizzes/${quizId}/thumbnail`;
 
@@ -33,8 +33,9 @@ function buildQuiz(quizId, userId = undefined) {
  */
 function createQuiz(quiz) {
     const { questions, thumbnailUrl, ...pureQuiz } = quiz;
+    const thumb = validateAndNormaliseFile(thumbnailUrl, /image\/.*/);
     let result = Quiz.create(pureQuiz);
-    Quiz.update(result.id, { thumbnailUrl: storeFile(thumbnail(result.id), thumbnailUrl) });
+    Quiz.update(result.id, { thumbnailUrl: storeFile(thumbnail(result.id), thumb) });
     if (questions !== undefined) return { ...result, thumbnailUrl, questions: questions.map(question => createQuestion(result.id, question)) };
     return { ...result, thumbnailUrl };
 }
@@ -48,8 +49,8 @@ function replaceQuiz(quizId, quiz) {
     const { questions, thumbnailUrl, ...pureQuiz } = quiz;
 
     const previousQuiz = Quiz.getById(quizId);
-    deleteFile(previousQuiz.thumbnailUrl);
-    pureQuiz.thumbnailUrl = storeFile(thumbnail(quizId), thumbnailUrl);
+    pureQuiz.thumbnailUrl = storeFile(thumbnail(quizId), ...validateAndNormaliseFile(thumbnailUrl, /image\/.*/));
+    if (pureQuiz.thumbnailUrl && previousQuiz.thumbnailUrl !== pureQuiz.thumbnailUrl) deleteFile(previousQuiz.thumbnailUrl);
     let result = Quiz.replace(quizId, pureQuiz);
 
     if (questions !== undefined) {
@@ -70,8 +71,8 @@ function updateQuiz(quizId, quiz) {
     const { questions, thumbnailUrl, ...pureQuiz } = quiz;
 
     const previousQuiz = Quiz.getById(quizId);
-    deleteFile(previousQuiz.thumbnailUrl);
-    pureQuiz.thumbnailUrl = storeFile(thumbnail(quizId), thumbnailUrl);
+    pureQuiz.thumbnailUrl = storeFile(thumbnail(quizId), ...validateAndNormaliseFile(thumbnailUrl, /image\/.*/));
+    if (pureQuiz.thumbnailUrl && previousQuiz.thumbnailUrl !== pureQuiz.thumbnailUrl) deleteFile(previousQuiz.thumbnailUrl);
     let result = Quiz.update(quizId, pureQuiz);
 
     if (questions !== undefined)

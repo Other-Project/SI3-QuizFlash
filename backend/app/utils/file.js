@@ -6,6 +6,7 @@ const MIMEType = require("whatwg-mimetype");
 const deasync = require("deasync");
 const util = require("util");
 const parseDataURL = require("data-urls");
+const ValidationError = require("./errors/validation-error");
 
 
 const pathPrefix = path.resolve(`${__dirname}/../../database/${process.env.DB_FOLDER ?? ""}`);
@@ -18,11 +19,12 @@ function readFile(filepath) {
     return `data:${mime_type};base64,${content.toString("base64")}`;
 }
 
-function storeFile(filepath, base64url) {
-    if (!base64url) return undefined;
+function validateAndNormaliseFile(base64url, expectedMime = undefined) {
+    if (!base64url) return [];
     const dataUrl = parseDataURL(base64url);
-    if (!dataUrl) return undefined;
+    if (!dataUrl) return [];
     let mimeType = dataUrl.mimeType;
+    if (expectedMime && !mimeType.essence.match(expectedMime)) throw new ValidationError(`Incorrect file mime: ${mimeType.essence}`, null);
     let data = Buffer.from(dataUrl.body, "base64");
     if (mimeType.type === "image") {
         data = deasync(util.callbackify(() => sharp(data)
@@ -31,10 +33,15 @@ function storeFile(filepath, base64url) {
             .toBuffer()))();
         mimeType = new MIMEType("image/webp");
     }
+    return [data, mimeType];
+}
+
+function storeFile(filepath, data, mimeType) {
+    if (!filepath || !data || !mimeType) return undefined;
     filepath = `${pathPrefix}/assets/${filepath}.${mime.extension(mimeType.essence)}`;
     fs.mkdirSync(path.dirname(filepath), { recursive: true });
     fs.writeFileSync(filepath, data);
-    return path.relative(`${pathPrefix}/assets`, filepath);
+    return path.relative(`${pathPrefix}/assets`, filepath).replace(/\\/g, "/");
 }
 
 function deleteFile(filepath) {
@@ -53,4 +60,4 @@ function deleteFile(filepath) {
     }
 }
 
-module.exports = { pathPattern, pathPrefix, readFile, storeFile, deleteFile };
+module.exports = { pathPattern, pathPrefix, readFile, validateAndNormaliseFile, storeFile, deleteFile };
