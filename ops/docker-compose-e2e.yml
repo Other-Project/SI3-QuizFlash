@@ -3,33 +3,29 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
+    environment:
+      - CLEAR_DB=true
+      - INIT_DB=/app/database/e2e-starter
+      - DB_FOLDER=e2e/
     volumes:
       - database_e2e:/home/node/app/database
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9428/api/status" ]
-      interval: 10s
-      timeout: 30s
-      retries: 5
 
   frontend:
     build:
       context: ../frontend
       dockerfile: frontend.Dockerfile
     ports:
-      - "8080:4200"
+      - "8080:80"
     depends_on:
       backend:
         condition: service_healthy
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:4200/" ]
-      interval: 10s
-      timeout: 30s
-      retries: 5
 
   playwright:
     build:
       context: ../frontend
       dockerfile: playwright.Dockerfile
+    ports:
+      - "8081:9323"
     depends_on:
       frontend:
         condition: service_healthy

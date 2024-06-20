@@ -32,7 +32,7 @@ export async function getQuiz(quizId: string, request: APIRequestContext) {
 
   const quizResponse = await request.get(`${testUrl}/api/quizzes/${quizId}`, {headers});
   if (!quizResponse.ok()) {
-    throw new Error("Failed to fetch quiz data");
+    throw new Error(`Failed to fetch quiz data (at ${testUrl}/api/quizzes/${quizId}): ${quizResponse.status()} ${quizResponse.statusText()}`);
   }
   return await quizResponse.json() as Quiz;
 }

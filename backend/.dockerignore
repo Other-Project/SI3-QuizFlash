@@ -2,3 +2,5 @@ node_modules
 npm-debug.log
 Dockerfile
 .dockerignore
+database/
+!database/e2e-starter
