@@ -31,6 +31,3 @@ HEALTHCHECK --interval=10s --timeout=30s --start-period=10s --retries=5 CMD curl
 RUN apk add --no-cache --update curl
 COPY nginx-default.conf.template /etc/nginx/templates/default.conf.template
 COPY --chown=nginx:nginx --from=build /home/node/app/dist/front-end /usr/share/nginx/html
-
-
-

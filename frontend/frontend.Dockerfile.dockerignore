@@ -6,3 +6,4 @@ npm-debug.log
 playwright-report
 test-results
 playwright.config.ts
+package-lock.json
