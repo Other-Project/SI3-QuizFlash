@@ -1,4 +1,4 @@
 <app-button [color]="'white'" [padding]="Padding.NO_PADDING">
   <app-image [src]="user.pictureUrl ?? getDefaultProfilePicture(user.gender)" [alt]="user.firstname" [width]="200" [height]="200"/>
-  <p>{{ user.firstname }}</p>
+  <p>{{ user.firstname + " " + user.lastname }}</p>
 </app-button>

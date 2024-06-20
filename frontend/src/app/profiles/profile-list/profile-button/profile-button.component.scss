@@ -1,7 +1,10 @@
 @import "/colors";
 
-app-button {
+:host {
+  max-width: 200px;
+}
 
+app-button {
   app-image {
     width: 200px;
     height: 200px;
