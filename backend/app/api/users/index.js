@@ -19,7 +19,8 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
         access: user.access,
         pictureUrl: readFile(user.pictureUrl),
         lastname: user.lastname,
-        firstname: user.firstname
+        firstname: user.firstname,
+        gender: user.gender
     })));
 }));
 
@@ -34,6 +35,7 @@ router.get("/:userId", checkAuthentification(access.admin), (req, res) => catchE
         } */
 
     const user = User.getById(req.params.userId);
+    console.log(user);
     res.status(200).json({ ...user, pictureUrl: readFile(user.pictureUrl) });
 }));
 
