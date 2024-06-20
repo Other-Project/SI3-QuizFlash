@@ -11,8 +11,8 @@ COPY --chown=node:node package*.json ./
 
 # Install the application dependencies
 RUN npm install --omit=dev
-COPY . .
-RUN rm package*.json
+COPY --chown=node:node . .
+RUN rm package*.json && mv database/init/* database/
 
 FROM busybox:1.35.0-uclibc as busybox
 FROM gcr.io/distroless/nodejs22-debian12

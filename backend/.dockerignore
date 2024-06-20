@@ -4,3 +4,4 @@ Dockerfile
 .dockerignore
 database/
 !database/e2e-starter
+!database/init
