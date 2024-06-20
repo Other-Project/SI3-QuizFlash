@@ -30,10 +30,6 @@ export class AdminQuizFixture extends E2EComponentFixture {
     return this.page.getByRole("button", {name: "Ajouter une question", exact: true});
   }
 
-  getSaveButton() {
-    return this.page.getByRole("button", {name: "Sauvegarder", exact: true});
-  }
-
   async getNumberOfQuestions() {
     const locators = await this.page.locator("app-admin-question").all();
     return locators.length;

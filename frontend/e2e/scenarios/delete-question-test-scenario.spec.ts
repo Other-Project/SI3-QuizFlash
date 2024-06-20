@@ -30,16 +30,26 @@ test.describe("Delete a question display", () => {
 
     await test.step("Delete the targeted question", async () => {
       const adminQuizFixture = adminQuizzesFixture.getAdminQuizFixture();
-      let numberOfQuestionBeginning = await adminQuizFixture.getNumberOfQuestions();
+      await expect(adminQuizFixture.getQuizTitlePlaceHolder()).toBeVisible();
       const questionFixture = adminQuizFixture.getQuestionFixture(1);
+      const numberOfQuestionBeginning = await adminQuizFixture.getNumberOfQuestions();
       const deleteButton = questionFixture.getDeleteQuestionButton();
       await deleteButton.click();
-      let numberOfQuestionEnd = await adminQuizFixture.getNumberOfQuestions();
 
+      const quizzesButton = adminFixture.getAdminNavbarFixture().getQuizzes();
+      await expect(quizzesButton).toBeVisible();
+      await quizzesButton.click();
+      await expect(page).toHaveURL(`${testUrl}/admin/quizzes`);
+
+      const quizToTarget = adminQuizzesFixture.getAQuiz("Chansons Françaises");
+      await expect(quizToTarget).toBeVisible();
+      await quizToTarget.click();
+      await expect(adminQuizFixture.getQuizTitlePlaceHolder()).toBeVisible();
+
+      const numberOfQuestionEnd = await adminQuizFixture.getNumberOfQuestions();
+      console.log(numberOfQuestionEnd);
+      console.log(numberOfQuestionBeginning);
       expect(numberOfQuestionBeginning - numberOfQuestionEnd).toEqual(1);
-
-      const quizSaveButton = adminQuizFixture.getSaveButton();
-      await quizSaveButton.click();
     });
   });
 });
