@@ -16,6 +16,7 @@ export class QuizSectionComponent {
   @Input() audioGain!: number;
   @Input() fiftyFiftyActivated!: boolean;
   @Input() fiftyFiftyDisabled!: boolean;
+  @Input() loadingFiftyFifty!: boolean;
   @Output() inactive: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() chosenAnswer: EventEmitter<Answer> = new EventEmitter<Answer>();
   @Output() fiftyFiftyUsed: EventEmitter<undefined> = new EventEmitter<undefined>();
