@@ -1,6 +1,5 @@
 const { Answer } = require("../../../../models");
 const NotFoundError = require("../../../../utils/errors/not-found-error.js");
-const { getQuestionFromQuiz } = require("../manager");
 
 /**
  * This function filters among the questions to return only the question linked with the given quizId
@@ -18,7 +17,7 @@ function getQuestionAnswers(questionId) {
  * @throws NotFoundError If the answerId doesn't exist or the quizId/questionId in the answer is different from the one provided in parameter
  */
 function getAnswerFromQuestion(quizId, questionId, answerId) {
-    const question = getQuestionFromQuiz(quizId, questionId);
+    const question = require("../manager").getQuestionFromQuiz(quizId, questionId);
     const answer = Answer.getById(answerId);
     if (answer.questionId !== question.id)
         throw new NotFoundError(`${answer.name} id=${answerId} was not found for ${question.name} id=${question.id} : not found`);

@@ -1,4 +1,4 @@
-import {E2EComponentFixture} from "e2e/e2e-component.fixture";
+import {E2EComponentFixture} from "../../../../../../../e2e/e2e-component.fixture";
 
 export class AdminQuestionFixture extends E2EComponentFixture {
   getQuestionTitlePlaceHolder() {
@@ -31,5 +31,9 @@ export class AdminQuestionFixture extends E2EComponentFixture {
 
   getSaveQuestionButton() {
     return this.page.locator("app-button.save");
+  }
+
+  getDeleteQuestionButton() {
+    return this.page.locator("app-button.delete");
   }
 }

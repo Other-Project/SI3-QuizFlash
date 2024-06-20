@@ -30,6 +30,11 @@
     color: $white;
     opacity: 0;
     transition: opacity .2s ease-in-out;
+
+    :host.ng-invalid & {
+      background-color: color.scale($lightRed, $alpha: -50%);
+      color: color.scale($darkRed, $lightness: -5%);
+    }
   }
 
   &:hover, &.no-image {

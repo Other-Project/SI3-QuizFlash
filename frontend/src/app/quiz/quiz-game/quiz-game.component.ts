@@ -35,6 +35,7 @@ export class QuizGameComponent implements OnDestroy {
   protected subscribeQuizStatsId: Subscription;
   protected loading: boolean = false;
   protected textLoading?: string;
+  protected loadingFiftyFifty: boolean = false;
 
   constructor(private userService: UserService, private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.userService.user$.subscribe(user => this.user = user as Patient);
@@ -67,8 +68,9 @@ export class QuizGameComponent implements OnDestroy {
       this.textLoading = "Passage à la question suivante en cours";
       this.quizService.nextQuestion(this.currentQuestion!.id).then(() => {
         this.startQuestion();
-        this.loading = false;
-      });
+      }).catch(() => {
+        alert("Il y a eu une erreur lors du passage à la question suivante.\nVeuillez recommencer le quiz");
+      }).finally(() => this.loading = false);
     }
   }
 
@@ -121,8 +123,9 @@ export class QuizGameComponent implements OnDestroy {
     this.quizService.checkAnswer(attempt).then((result => {
       this.check = result.isTrue;
       this.result(answer, result.expected?.text ?? "");
-      this.loading = false;
-    }));
+    })).catch(() => {
+      alert("Il y a eu une erreur lors de la vérification de la réponse.\nVeuillez recommencer le quiz");
+    }).finally(() => this.loading = false);
   }
 
   replayAtEnd() {
@@ -133,9 +136,12 @@ export class QuizGameComponent implements OnDestroy {
   }
 
   fiftyFifty() {
+    this.loadingFiftyFifty = true;
     if (!this.fiftyFiftyEnabled) return;
-    this.fiftyFiftyEnabled = false;
-    if (this.currentQuestion && this.currentQuestion.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion.id!).then(answers => this.hideAnswers(answers));
+    if (this.currentQuestion && this.currentQuestion.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion.id!).then(answers => {
+      this.hideAnswers(answers);
+      this.fiftyFiftyEnabled = false;
+    }).catch(() => alert("Il y a eu un problème avec le 50/50 essayez de le réutiliser")).finally(() => this.loadingFiftyFifty = false);
   }
 
   hideAnswers(answers: Answer[]) {

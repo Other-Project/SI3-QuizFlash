@@ -1,0 +1,11 @@
+# Ignore all files by default
+*
+
+# Do not ignore .fixture.ts files in all subfolders
+!**/*.fixture.ts
+# Do not ignore e2e directory
+!/e2e
+# Do not ignore the playwright config file
+!playwright.config.ts
+!local.conf
+!chrome.json
