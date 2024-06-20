@@ -35,7 +35,7 @@ function createQuiz(quiz) {
     const { questions, thumbnailUrl, ...pureQuiz } = quiz;
     const thumb = validateAndNormaliseFile(thumbnailUrl, /image\/.*/);
     let result = Quiz.create(pureQuiz);
-    Quiz.update(result.id, { thumbnailUrl: storeFile(thumbnail(result.id), thumb) });
+    Quiz.update(result.id, { thumbnailUrl: storeFile(thumbnail(result.id), ...thumb) });
     if (questions !== undefined) return { ...result, thumbnailUrl, questions: questions.map(question => createQuestion(result.id, question)) };
     return { ...result, thumbnailUrl };
 }

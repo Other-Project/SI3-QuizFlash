@@ -55,8 +55,8 @@ function createQuestion(quizId, question) {
     const snd = validateAndNormaliseFile(soundUrl, /audio\/.*/);
     let result = Question.create({ ...pureQuestion, quizId });
     Question.update(result.id, {
-        imageUrl: storeFile(image(result.quizId, result.id), img),
-        soundUrl: storeFile(sound(result.quizId, result.id), snd)
+        imageUrl: storeFile(image(result.quizId, result.id), ...img),
+        soundUrl: storeFile(sound(result.quizId, result.id), ...snd)
     });
     if (answers !== undefined) return { ...result, imageUrl, soundUrl, answers: answers.map(answer => Answer.create({ ...answer, questionId: result.id })) };
     return { ...result, imageUrl, soundUrl };
