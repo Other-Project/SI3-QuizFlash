@@ -7,8 +7,6 @@ services:
       - CLEAR_DB=true
       - INIT_DB=/app/database/e2e-starter
       - DB_FOLDER=e2e/
-    volumes:
-      - database_e2e:/home/node/app/database
 
   frontend:
     build:
@@ -29,6 +27,8 @@ services:
     depends_on:
       frontend:
         condition: service_healthy
+    volumes:
+      - reports_e2e:/app/test-results
 
 volumes:
-  database_e2e:
+  reports_e2e:
