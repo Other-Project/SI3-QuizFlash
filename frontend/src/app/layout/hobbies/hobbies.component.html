@@ -8,7 +8,7 @@
   (add)="onAdd($event)"
   (remove)="onRemove($event)"
   (clear)="onRemoveAll()"
-  placeholder="placeHolder">
+  placeholder="{{placeHolder}}">
   <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
     <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{ item }}
   </ng-template>

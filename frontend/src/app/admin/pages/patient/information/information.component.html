@@ -1,5 +1,5 @@
 <div class="hobbies-select">
   <h1>Centres d'intérêt</h1>
-  <hobbies-select [placeHolder]="'Sélectionner ou créer un tag'" [tags]="patient?.hobbies ?? []" (updateTags)="updatePatientHobbies($event)"/>
+  <hobbies-select [placeHolder]="'Sélectionnez ou créez des hobbies'" [tags]="patient?.hobbies ?? []" (updateTags)="updatePatientHobbies($event)"/>
 </div>
 <patient-settings [patient]="patient" (onSettingsChange)="updateSettings($event)"/>
