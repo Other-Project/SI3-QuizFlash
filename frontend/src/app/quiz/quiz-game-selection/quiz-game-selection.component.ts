@@ -28,7 +28,7 @@ export class QuizGameSelectionComponent {
     this.utilsService.getTags().then(values => {
       this.tags = [...new Set(values)];
     }).catch(() => {
-      alert("Il y a eu une erreur lors de la récupération des différents hobbies \n Veuillez recharger la page");
+      alert("Il y a eu une erreur lors de la récupération des différents hobbies\nVeuillez recharger la page");
     });
     quizService.quizzes$.subscribe(quizzes => {
       this.quizzes = quizzes;

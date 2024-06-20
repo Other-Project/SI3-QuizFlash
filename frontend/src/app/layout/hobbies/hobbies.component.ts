@@ -18,15 +18,14 @@ export class HobbiesComponent implements OnInit {
 
   constructor(private utilsService: UtilsService) {
     this.utilsService.getTags().then(values => {
-      this.data = [...new Set(values)];
+      this.data = values;
     }).catch(() => {
-      alert("Il y a eu une erreur lors de la récupération des différents hobbies \n Veuillez recharger la page");
+      alert("Il y a eu une erreur lors de la récupération des différents centres d'intérêt.\nVeuillez recharger la page");
     }).finally(() => this.loading = false);
   }
 
   ngOnInit() {
     this.tags.forEach((c: string) => {
-      if (!this.data.some(hobby => hobby == c)) this.data.push(c);
       this.selectedItems.push(c);
     });
   }
@@ -36,7 +35,7 @@ export class HobbiesComponent implements OnInit {
   }
 
   onAdd(hobby: any) {
-    this.data = [...this.data, hobby];
+    this.data = [...this.data, hobby]; //https://github.com/ng-select/ng-select/tree/master
     this.tags.push(hobby);
     this.updateTags.emit(this.tags);
   }

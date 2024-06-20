@@ -1,20 +1,25 @@
+@use "sass:color";
 @import "colors";
 
 .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
   font-size: 1em;
   color: white;
   background-color: $blue;
-}
 
-.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
-  background-color: white;
-}
-
-.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
-  background-color: $blueClear;
+  .ng-value-icon:hover {
+    background-color: color.scale($blue, $lightness: +10%);
+  }
 }
 
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
   border-bottom: 1px solid $lightGray;
+
+  &.ng-option-marked {
+    background-color: color.scale($blue, $lightness: +90%);
+  }
+
+  &.ng-option-selected, &.ng-option-selected.ng-option-marked {
+    background-color: color.scale($darkBlue, $lightness: +90%);
+  }
 }
 
