@@ -15,7 +15,7 @@ form {
   gap: 1em;
 
   input:not([hidden]), select {
-    width: 11em;
+    width: 15em;
     padding: 12px 20px;
     margin: 8px 0;
     display: block;
@@ -52,7 +52,7 @@ app-button {
 
 #profile-picture {
   flex-shrink: 0;
-  margin-right: 2em;
+  margin: 0.5em 2em 0.5em 0;
   border-radius: 50%;
   border-color: white;
   overflow: hidden;
@@ -78,7 +78,7 @@ app-button {
 
 app-button {
   display: block;
-  height: 2em;
   width: 10em;
-  margin-bottom: 2em;
+  height: 2.5em;
+  margin-bottom: 2.5em;
 }

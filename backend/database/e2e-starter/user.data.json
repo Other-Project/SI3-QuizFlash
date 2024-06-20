@@ -4,6 +4,7 @@
     "access": 2,
     "lastname": "Petit",
     "firstname": "Anne",
+    "gender": "F",
     "age": 40,
     "password": "1bd9aYKr6b30qsw6VKfP4nyy+gQdm8aHGkYivRkzuPc=",
     "salt": "thePasswordIsAdmin",
@@ -13,6 +14,7 @@
     "access": 1,
     "lastname": "Dupont",
     "firstname": "Martine",
+    "gender": "F",
     "birthDate": "1952-12-29",
     "pictureUrl": "",
     "hobbies": [
@@ -35,6 +37,7 @@
     "access": 1,
     "lastname": "Luciani",
     "firstname": "Francescu",
+    "gender": "M",
     "birthDate": "1929-06-03",
     "pictureUrl": "",
     "hobbies": [

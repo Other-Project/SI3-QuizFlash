@@ -14,7 +14,7 @@
                [height]="150"/>
     <div class="patient-info">
       @if (patient) {
-        <h2>{{ patient.lastname + " " + patient.firstname }}</h2>
+        <h2>{{ patient.lastname }} {{ patient.firstname }}</h2>
         <div class="age-gender">
           <strong>{{ patient.birthDate | age }} ans</strong>
           <fa-icon class="{{ patient.gender }}" [icon]="getFaIcon(patient.gender)"/>
