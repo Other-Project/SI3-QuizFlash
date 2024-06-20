@@ -9,7 +9,7 @@ import {faAdd} from "@fortawesome/free-solid-svg-icons";
 import {QuizGameSelectionModule} from "../../../quiz/quiz-game-selection/quiz-game-selection.module";
 import {FormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
-import {UserService} from "../../../../service/user.service";
+import {UtilsService} from "../../../../service/utils.service";
 
 @Component({
   selector: "app-admin-quizzes",
@@ -33,8 +33,12 @@ export class AdminQuizzesComponent {
   private allQuizzes?: Quiz[];
   public quizzes?: Quiz[];
 
-  constructor(public quizService: QuizService, private userService: UserService, public router: Router, public route: ActivatedRoute) {
-    this.userService.hobbies$.subscribe(tags => this.tags = tags);
+  constructor(public quizService: QuizService, private utilsService: UtilsService, public router: Router, public route: ActivatedRoute) {
+    this.utilsService.getTags().then(values => {
+      this.tags = [...new Set(values)];
+    }).catch(() => {
+      alert("Il y a eu une erreur lors de la récupération des différents hobbies \n Veuillez recharger la page");
+    });
     quizService.quizzes$.subscribe(quizzes => this.quizzes = this.allQuizzes = quizzes);
   }
 

@@ -11,15 +11,11 @@ import {Patient} from "../../../../../models/patient.models";
 
 export class InformationComponent implements OnInit {
   @Input() public patient?: Patient;
-  hobbies: string[] = [];
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit() {
-    this.userService.hobbies$.subscribe(hobbies => {
-      this.hobbies = hobbies;
-    });
   }
 
   protected updatePatientHobbies(newHobbies: string[]) {

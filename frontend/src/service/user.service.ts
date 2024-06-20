@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, firstValueFrom} from "rxjs";
 import {User} from "../models/user.models";
-import {HOBBIES} from "../mocks/hobbies.mock";
 import {HttpClient} from "@angular/common/http";
 import {apiUrl, httpOptionsBase} from "../configs/server.config";
 
@@ -13,8 +12,6 @@ export class UserService {
   public users$: BehaviorSubject<User[] | undefined> = new BehaviorSubject<User[] | undefined>(this.users);
   public user?: User;
   public user$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(this.user);
-  public hobbies: string[] = HOBBIES;
-  public hobbies$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(this.hobbies);
   private userUrl = apiUrl + "/users";
   private httpOptions = httpOptionsBase;
 
