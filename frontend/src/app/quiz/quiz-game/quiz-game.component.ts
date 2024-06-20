@@ -69,7 +69,7 @@ export class QuizGameComponent implements OnDestroy {
       this.quizService.nextQuestion(this.currentQuestion!.id).then(() => {
         this.startQuestion();
       }).catch(() => {
-        alert("Il y a eu une erreur lors du passage à la question suivante \n Veuillez recommencez le quiz");
+        alert("Il y a eu une erreur lors du passage à la question suivante.\nVeuillez recommencer le quiz");
       }).finally(() => this.loading = false);
     }
   }
@@ -124,7 +124,7 @@ export class QuizGameComponent implements OnDestroy {
       this.check = result.isTrue;
       this.result(answer, result.expected?.text ?? "");
     })).catch(() => {
-      alert("Il y a eu une erreur lors de la vérification de la réponse \n Veuillez recommencez le quiz");
+      alert("Il y a eu une erreur lors de la vérification de la réponse.\nVeuillez recommencer le quiz");
     }).finally(() => this.loading = false);
   }
 

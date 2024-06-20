@@ -1,7 +1,7 @@
 <section class="answer-section">
   <app-button class="fifty-fifty-button" [color]="'blue'" [borderRadius]="true" [disabled]="loading"
               (click)="fiftyFifty()" *ngIf="fiftyFiftyActivated && fiftyFiftyShow()">
-    <p class="{{loading ? 'hidden' : ''}}"> 50/50 </p>
+    <p class="{{loading ? 'hidden' : ''}}">50/50</p>
     <spinner *ngIf="loading"/>
   </app-button>
   <div class="answer-grid">

@@ -80,7 +80,7 @@ export class AdminQuizComponent implements OnDestroy {
     if (!this.quizForm.valid) return;
     if (this.quiz.id) {
       this.quizService.updateQuiz(this.quiz.id, this.quizForm.value).catch(() => {
-        alert("Il y a eu une erreur lors de la récupération des différents hobbies \n Veuillez recharger la page");
+        alert("Il y a eu une erreur lors de la récupération des différents hobbies.\nVeuillez recharger la page");
       }).finally(() => this.loading = false);
       return;
     }
