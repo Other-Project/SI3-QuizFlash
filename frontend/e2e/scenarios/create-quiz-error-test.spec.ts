@@ -40,7 +40,7 @@ test.describe("Create Quiz with errors test display", () => {
       await titlePlaceHolder.fill("La pêche (error test)");
 
       const quizPicture = adminQuizFixture.getQuizPicture();
-      await quizPicture.setInputFiles("./src/assets/quiz-test/fishing.jpg");
+      await quizPicture.setInputFiles("./e2e/assets/fishing.jpg");
 
       const quizzesButton = adminFixture.getAdminNavbarFixture().getQuizzes();
       await expect(quizzesButton).toBeVisible();
@@ -67,7 +67,7 @@ test.describe("Create Quiz with errors test display", () => {
       await fishingTag.click();
 
       const quizPicture = adminQuizFixture.getQuizPicture();
-      await quizPicture.setInputFiles("./src/assets/quiz-test/fishing.jpg");
+      await quizPicture.setInputFiles("./e2e/assets/fishing.jpg");
       await titlePlaceHolder.click();
 
       const createQuizQuestionsButton = adminQuizFixture.getCreateQuizButton();
@@ -163,7 +163,7 @@ test.describe("Create Quiz with errors test display", () => {
       const questionPicture = questionFixture.getQuestionPicture();
       expect(await questionFixture.isSaveButtonDisabled()).toEqual("true");
 
-      await questionPicture.setInputFiles("./src/assets/quiz-test/bar.png");
+      await questionPicture.setInputFiles("./e2e/assets/bar.png");
       await questionTitle.fill("C'est quoi ça ?");
       await questionFirstProposition.fill("Le bar");
       expect(await questionFixture.isSaveButtonDisabled()).toEqual("true");
