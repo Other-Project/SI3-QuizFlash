@@ -4,6 +4,8 @@ import {UserService} from "../../../../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Patient} from "../../../../../models/patient.models";
 import {Dementia} from "../../../../../models/dementia.models";
+import {Genders} from "../../../../../models/genders.model";
+import {getDefaultProfilePicture} from "../../../../../utils/profile-picture.utils";
 
 @Component({
   selector: "info-form",
@@ -16,11 +18,18 @@ export class InfoFormComponent {
   protected badNameInputText = "Seuls les lettres, les espaces et les traits d'union sont autorisés.";
   @Output() patientInfoChange: EventEmitter<any> = new EventEmitter;
 
+  genders = {
+    [""]: "Sélectionnez votre genre",
+    [Genders.MALE]: "Homme",
+    [Genders.FEMALE]: "Femme"
+  };
+
   @Input() set user(patient: Patient | undefined) {
     this.currentPatient = patient;
     this.patientForm.patchValue({
       firstname: this.currentPatient?.firstname ?? "",
       lastname: this.currentPatient?.lastname ?? "",
+      gender: this.currentPatient?.gender ?? "",
       birthDate: this.currentPatient?.birthDate ?? "",
       pictureUrl: this.currentPatient?.pictureUrl,
       hobbies: this.currentPatient?.hobbies ?? [],
@@ -41,6 +50,7 @@ export class InfoFormComponent {
   patientForm: FormGroup = new FormGroup({
     firstname: new FormControl("", [Validators.required, Validators.pattern(/^\p{L}+(?:[ -]\p{L}+)*$/u)]),
     lastname: new FormControl("", [Validators.required, Validators.pattern(/^\p{L}+(?:[ -]\p{L}+)*$/u)]),
+    gender: new FormControl("", [Validators.required]),
     birthDate: new FormControl("", [Validators.required, this.dateValidator()]),
     pictureUrl: new FormControl("/assets/profile.png"),
     hobbies: new FormControl([""]),
@@ -88,4 +98,6 @@ export class InfoFormComponent {
   protected getMinBirthDate(): string {
     return this.getDateByOffset(-200);
   }
+
+  protected readonly getDefaultProfilePicture = getDefaultProfilePicture;
 }
