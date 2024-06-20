@@ -37,7 +37,7 @@ export class AdminQuizzesComponent {
     this.utilsService.getTags().then(values => {
       this.tags = [...new Set(values)];
     }).catch(() => {
-      alert("Il y a eu une erreur lors de la récupération des différents hobbies\nVeuillez recharger la page");
+      alert("Il y a eu une erreur lors de la récupération des différents centres d'intérêt.\nVeuillez recharger la page");
     });
     quizService.quizzes$.subscribe(quizzes => this.quizzes = this.allQuizzes = quizzes);
   }

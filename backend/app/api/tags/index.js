@@ -7,7 +7,7 @@ const access = require("../../models/access-restriction.model");
 const router = new Router();
 
 router.get("/", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
-    /*  #swagger.tags = ['Utils']
+    /*  #swagger.tags = ['Tags']
         #swagger.summary = 'Get existing tags'
         #swagger.responses[200] = {
             schema: ["string"]

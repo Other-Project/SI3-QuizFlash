@@ -13,7 +13,6 @@ export class HobbiesComponent implements OnInit {
   @Output() updateTags: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   data: string[] = [];
-  selectedItems: string[] = [];
   loading: boolean = true;
 
   constructor(private utilsService: UtilsService) {
@@ -25,9 +24,6 @@ export class HobbiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tags.forEach((c: string) => {
-      this.selectedItems.push(c);
-    });
   }
 
   newTag(hobby: any) {
