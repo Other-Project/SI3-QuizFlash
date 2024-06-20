@@ -4,12 +4,13 @@ const config: PlaywrightTestConfig = {
   reporter: [['html', { open: 'always' }]],
   timeout: 50000, // define timeout limit
   use: {
-    headless: false,
+    headless: !!process.env["HEADLESS"],
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
-    video: 'on-first-retry',
-    screenshot: 'only-on-failure',
+    video: "on",
+    screenshot: "only-on-failure",
     launchOptions: {
+      executablePath: process.env["CHROME_BIN"],
       slowMo: 100
     }
   },
