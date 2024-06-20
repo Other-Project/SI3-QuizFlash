@@ -175,7 +175,6 @@ test.describe("Create Quiz with errors test display", () => {
       await questionSaveButton.click();
       // To wait the image saving in the back-end
       await expect(questionFixture.getSaveButtonIcon()).toBeVisible({timeout: 50000});
-
     });
 
     await test.step("Create a third question (sound) with empty audio and check if it is saved", async () => {
@@ -192,7 +191,6 @@ test.describe("Create Quiz with errors test display", () => {
       await questionFirstProposition.fill("un bateau");
       await questionSecondProposition.fill("Un lac");
       const numberOfQuestionsBeginning = await adminQuizFixture.getNumberOfQuestions();
-      console.log(numberOfQuestionsBeginning);
 
       const quizzesButton = adminFixture.getAdminNavbarFixture().getQuizzes();
       await expect(quizzesButton).toBeVisible();
@@ -204,7 +202,6 @@ test.describe("Create Quiz with errors test display", () => {
       await currentQuiz.click();
       await expect(page.locator("app-admin-question").nth(1)).toBeVisible();
       const numberOfQuestionsEnd = await adminQuizFixture.getNumberOfQuestions();
-      console.log(numberOfQuestionsEnd);
       expect(numberOfQuestionsBeginning).toEqual(numberOfQuestionsEnd + 1);
     });
   });

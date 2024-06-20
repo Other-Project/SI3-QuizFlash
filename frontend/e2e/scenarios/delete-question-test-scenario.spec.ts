@@ -47,8 +47,6 @@ test.describe("Delete a question display", () => {
       await expect(adminQuizFixture.getQuizTitlePlaceHolder()).toBeVisible();
 
       const numberOfQuestionEnd = await adminQuizFixture.getNumberOfQuestions();
-      console.log(numberOfQuestionEnd);
-      console.log(numberOfQuestionBeginning);
       expect(numberOfQuestionBeginning - numberOfQuestionEnd).toEqual(1);
     });
   });
