@@ -1,16 +1,23 @@
-FROM mcr.microsoft.com/playwright:v1.44.1-jammy
+FROM node:20-alpine
 
 ENV FRONT_URL=http://frontend
 ENV HEADLESS=true
 
-# Create a working directory for the application and move into it
-WORKDIR /home/node/app
+# Install Chromium
+RUN apk add --no-cache --update chromium ttf-freefont font-noto-emoji wqy-zenhei ffmpeg
+COPY local.conf /etc/fonts/local.conf
 
-# Install the application dependencies
-RUN npm i -D @playwright/test playwright && npx playwright install
+USER node
+WORKDIR /app
+
+# Playwright
+ENV CHROME_BIN=/usr/bin/chromium-browser
+RUN mkdir -p /home/node/.cache/ms-playwright/ffmpeg-1009 \
+    && ln -s /usr/bin/ffmpeg /home/node/.cache/ms-playwright/ffmpeg-1009/ffmpeg-linux \
+    && npm i -D @playwright/test playwright
 
 # Copy the application
-COPY . .
+COPY --chown=node . .
 
 # Expose the port on which the application listens
 EXPOSE 9323

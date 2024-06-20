@@ -7,3 +7,5 @@
 !/e2e
 # Do not ignore the playwright config file
 !playwright.config.ts
+!local.conf
+!chrome.json
