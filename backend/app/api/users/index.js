@@ -35,7 +35,6 @@ router.get("/:userId", checkAuthentification(access.admin), (req, res) => catchE
         } */
 
     const user = User.getById(req.params.userId);
-    console.log(user);
     res.status(200).json({ ...user, pictureUrl: readFile(user.pictureUrl) });
 }));
 
