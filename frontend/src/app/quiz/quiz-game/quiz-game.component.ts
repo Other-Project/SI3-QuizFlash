@@ -67,8 +67,9 @@ export class QuizGameComponent implements OnDestroy {
       this.textLoading = "Passage à la question suivante en cours";
       this.quizService.nextQuestion(this.currentQuestion!.id).then(() => {
         this.startQuestion();
-        this.loading = false;
-      });
+      }).catch(() => {
+        alert("Il y a eu une erreur lors du passage à la question suivante \n Veuillez recommencez le quiz");
+      }).finally(() => this.loading = false);
     }
   }
 
@@ -121,8 +122,9 @@ export class QuizGameComponent implements OnDestroy {
     this.quizService.checkAnswer(attempt).then((result => {
       this.check = result.isTrue;
       this.result(answer, result.expected?.text ?? "");
-      this.loading = false;
-    }));
+    })).catch(() => {
+      alert("Il y a eu une erreur lors de la vérification de la réponse \n Veuillez recommencez le quiz");
+    }).finally(() => this.loading = false);
   }
 
   replayAtEnd() {
@@ -135,7 +137,10 @@ export class QuizGameComponent implements OnDestroy {
   fiftyFifty() {
     if (!this.fiftyFiftyEnabled) return;
     this.fiftyFiftyEnabled = false;
-    if (this.currentQuestion && this.currentQuestion.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion.id!).then(answers => this.hideAnswers(answers));
+    if (this.currentQuestion && this.currentQuestion.answers.length > 2) this.quizService.fiftyFifty(this.currentQuestion.id!).then(answers => this.hideAnswers(answers)).catch(() => {
+      alert("Il y a eu un problème avec le 50/50 essayez de le réutiliser");
+      this.fiftyFiftyEnabled = true;
+    });
   }
 
   hideAnswers(answers: Answer[]) {
