@@ -3,12 +3,13 @@ import {faBug, faMars, faVenus} from "@fortawesome/free-solid-svg-icons";
 
 export function getDefaultProfilePicture(gender: Genders | undefined) {
   switch (gender) {
-    case Genders.MALE:
-      return "/assets/male-profile-picture.png";
     case Genders.FEMALE:
       return "/assets/female-profile-picture.webp";
-    default:
+    case Genders.OTHER:
       return "/assets/default-profile-picture.jpg";
+    case Genders.MALE:
+    default:
+      return "/assets/male-profile-picture.png";
   }
 }
 
