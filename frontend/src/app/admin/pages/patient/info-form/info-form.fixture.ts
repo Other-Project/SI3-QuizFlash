@@ -1,10 +1,6 @@
 import {E2EComponentFixture} from "e2e/e2e-component.fixture";
 
-export class PatientHeaderFixture extends E2EComponentFixture {
-  getCreateUserTitle() {
-    return this.page.getByText("Création d'un nouvel utilisateur");
-  }
-
+export class PatientInfoFormFixture extends E2EComponentFixture {
   getLastNameInput() {
     return this.page.getByLabel("Nom :", {exact: true});
   }
@@ -23,5 +19,9 @@ export class PatientHeaderFixture extends E2EComponentFixture {
 
   getProfilePictureInput() {
     return this.page.locator("app-image-input input");
+  }
+
+  getGenderSelect() {
+    return this.page.getByLabel("Genre :");
   }
 }
