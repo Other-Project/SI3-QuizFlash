@@ -112,23 +112,23 @@ test.describe("Create Quiz with errors test display", () => {
       await questionTypeMenu.selectOption("Textuelle");
 
       await questionTitle.fill("Quel type de poisson est le plus souvent pêché pour le sport en mer ?");
-      expect(await questionFixture.isSaveButtonDisabled()).toEqual("true");
+      expect(await questionFixture.isSaveButtonDisabled()).toEqual(true);
 
       const questionFirstProposition = questionFixture.getProposition(1);
       await questionFirstProposition.fill("L'anguille");
-      expect(await questionFixture.isSaveButtonDisabled()).toEqual("true");
+      expect(await questionFixture.isSaveButtonDisabled()).toEqual(true);
 
       const questionSecondProposition = questionFixture.getProposition(2);
       await questionSecondProposition.fill("Le bar");
-      expect(await questionFixture.isSaveButtonDisabled()).toEqual("false");
+      expect(await questionFixture.isSaveButtonDisabled()).toEqual(false);
 
       const addProposition = questionFixture.getAddProposition();
       await addProposition.click();
 
       const questionThirdProposition = questionFixture.getProposition(3);
-      expect(await questionFixture.isSaveButtonDisabled()).toEqual("true");
+      expect(await questionFixture.isSaveButtonDisabled()).toEqual(true);
       await questionThirdProposition.fill("Le poisson chat");
-      expect(await questionFixture.isSaveButtonDisabled()).toEqual("false");
+      expect(await questionFixture.isSaveButtonDisabled()).toEqual(false);
 
       const questionSaveButton = questionFixture.getSaveQuestionButton();
       await expect(questionSaveButton).toBeVisible();
@@ -166,20 +166,20 @@ test.describe("Create Quiz with errors test display", () => {
 
       await questionTypeMenu.selectOption("Visuelle");
       const questionPicture = questionFixture.getQuestionPicture();
-      expect(await questionFixture.isSaveButtonDisabled()).toEqual("true");
+      expect(await questionFixture.isSaveButtonDisabled()).toEqual(true);
 
-      await questionPicture.setInputFiles("./e2e/assets/bar.png");
-      await questionTitle.fill("C'est quoi ça ?");
-      await questionFirstProposition.fill("Le bar");
-      expect(await questionFixture.isSaveButtonDisabled()).toEqual("true");
-      await questionSecondProposition.fill("Le bar");
-      expect(await questionFixture.isSaveButtonDisabled()).toEqual("false");
+      await questionPicture.setInputFiles("./e2e/assets/fishing.jpg");
+      await questionTitle.fill("Que fait-il ?");
+      await questionFirstProposition.fill("Il pêche");
+      expect(await questionFixture.isSaveButtonDisabled()).toEqual(true);
+      await questionSecondProposition.fill("Il a la pêche");
+      expect(await questionFixture.isSaveButtonDisabled()).toEqual(false);
 
       const questionSaveButton = questionFixture.getSaveQuestionButton();
       await expect(questionSaveButton).toBeVisible();
       await questionSaveButton.click();
       // To wait the image saving in the back-end
-      await expect(questionFixture.getSaveButtonIcon()).toBeVisible({timeout: 50000});
+      await expect(questionFixture.getSaveButtonIcon()).toBeVisible({timeout: 10000});
     });
 
     await test.step("Create a third question (sound) with empty audio and check if it is saved", async () => {

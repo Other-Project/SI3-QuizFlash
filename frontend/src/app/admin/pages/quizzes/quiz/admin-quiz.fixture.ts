@@ -15,7 +15,7 @@ export class AdminQuizFixture extends E2EComponentFixture {
   }
 
   getTagMenu() {
-    return this.page.getByText("Sélectionnez des tags", {exact: true});
+    return this.page.locator("ng-select");
   }
 
   getFishingTag() {
