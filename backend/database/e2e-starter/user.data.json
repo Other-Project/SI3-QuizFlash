@@ -23,7 +23,7 @@
       "théâtre"
     ],
     "dementiaLevel": 1,
-    "fontSize": 2,
+    "fontSize": 1.5,
     "removeAnswers": false,
     "automatedSkip": true,
     "answerHint": false,
