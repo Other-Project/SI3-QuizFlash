@@ -186,15 +186,32 @@ On le sélectionne et on supprime une question. On vérifie qu'elle se supprime 
 
 ## Documentation Ops :
 
-### Pour lancer notre application deux possibilitées :
+### Lancement facile avec Docker
 
-1. Lancement des tests end to end, lance le serveur en chargeant les données de tests, le front-end et playwright, il suffit de lancer le
-   script ```run-e2e.sh```
-2. Lancement de l'application dans sont ensemble, lance le serveur et le front-end de l'application, il suffit de lancer le script ``run.sh``
+1. Pour lancer les tests end-to-end, il suffit d'exécuter le script `run-e2e.sh`.
+   Ce script démarre le compose `docker-compose-e2e.yml` et déclare que celui-ci doit s'arrêter lorsque les tests sont terminés.
+2. Pour lancer le site en vue d'un usage en production, il suffit de lancer le script `run.sh`. Ce script démarre simplement le compose `docker-compose.yml`.
+
+### Images
+
+Notre site est découpé en 3 images :
+
+* Le backend, qui utilise l'image [distroless](https://github.com/GoogleContainerTools/distroless) de Node.JS fournie par Google afin de minimiser l'empreinte sur le disque.  
+  Pour ce faire, on installe dans un premier temps les dépendances du backend dans une image node classique.
+  Puis, on les copie dans l'image distroless puisque celle-ci ne contient rien d'autre que Node.JS.
+  Comme cette image ne contient pas curl, rm et mv, on réplique leur fonctionnement par des scripts js qu'on exécutera avec node
+  (on aurait pu ajouter ces programmes, mais celà aurait augmenté la taille de l'image).
+  Le seul programme ajouté est sh afin de pouvoir utiliser les && dans le point d'entrée.
+* Le frontend, qui utilise l'image nginx slim hébergeant les fichiers générés par Angular.
+  Dans un premier temps, on installe les dépendances dans une image node, et on exécute `ng build` pour obtenir des fichiers statiques du front.
+  Ces fichiers sont copiés dans l'image nginx afin de les héberger.
+* Les tests Playwright. Cette image est de loin la plus volumineuse à cause de la taille très importante des différentes dépendances de Playwright.
+  Des efforts ont été fait de notre côté en incluant un minimum de dépendance, mais node représentant 120mo et chromium pesant plus de 600mo,
+  il est difficile de réduire beaucoup plus.
 
 ### Fonctionnement :
 
-1. Pour les tests end to end, nous avons un docker composent qui génère 3 images :
+1. Pour les tests end to end, nous avons un docker compose qui génère 3 images :
     - La première image généré est celle du serveur, initialisé avec une base de donnée qui permet de réaliser les tests, cette base de données est
       est réinitialisé à chaque fois.
     - Une seconde qui contient le front-end, on créer une première image contenant node qui permet de générer les fichiers statiques du site avec angular. Puis
