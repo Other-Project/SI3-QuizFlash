@@ -1,0 +1,19 @@
+<ng-select
+  class="custom"
+  [items]="availableTags"
+  [(ngModel)]="tags"
+  [addTag]="newTag"
+  [multiple]="true"
+  [loading]="loading"
+  (add)="onAdd($event)"
+  (remove)="onRemove($event)"
+  (clear)="onRemoveAll()"
+  placeholder="{{placeHolder}}">
+  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{ item }}
+  </ng-template>
+  <ng-template ng-tag-tmp let-search="searchTerm">
+    Créer le tag : {{ search }}
+  </ng-template>
+</ng-select>
+

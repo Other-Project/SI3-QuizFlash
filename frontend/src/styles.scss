@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "@ng-select/ng-select/themes/default.theme.css";
 @import "colors";
 @import "hobbies";
 
@@ -37,9 +37,4 @@ main {
 a {
   text-decoration: none;
   color: #00090f;
-}
-
-ng-multiselect-dropdown {
-  display: block;
-  margin-right: 40px;
 }

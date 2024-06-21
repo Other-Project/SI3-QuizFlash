@@ -18,4 +18,8 @@ export class AdminQuizzesFixture extends E2EComponentFixture {
     const locators = await this.page.locator("app-quiz-selection-card").all();
     return locators.length;
   }
+
+  getFirstQuizElement() {
+    return this.page.locator("app-quiz-selection-card").first();
+  }
 }

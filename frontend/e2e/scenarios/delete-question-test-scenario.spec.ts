@@ -11,7 +11,9 @@ test.describe("Delete a question display", () => {
     const adminQuizzesFixture = adminFixture.getAdminQuizzesFixture();
     await test.step("Delete a question navigation", async () => {
       const profilesFixture = new ProfilesFixture(page);
+      const firstProfile = profilesFixture.getFirstProfile();
 
+      await expect(firstProfile).toBeVisible({timeout: 50000});
       const adminButton = profilesFixture.getAdminButtonFixture().getAdminButton();
 
       await expect(adminButton).toBeVisible();
@@ -41,7 +43,7 @@ test.describe("Delete a question display", () => {
       await quizzesButton.click();
       await expect(page).toHaveURL(`${testUrl}/admin/quizzes`);
 
-      const quizToTarget = adminQuizzesFixture.getAQuiz("Chansons Françaises");
+      const quizToTarget = adminQuizzesFixture.getAQuiz("Quiz delete question");
       await expect(quizToTarget).toBeVisible();
       await quizToTarget.click();
       await expect(adminQuizFixture.getQuizTitlePlaceHolder()).toBeVisible();
