@@ -36,6 +36,8 @@ export class HobbiesComponent implements ControlValueAccessor {
   }
 
   onAdd(hobby: any) {
+    if (this.availableTags.includes(hobby))
+      return;
     this.availableTags = [...this.availableTags, hobby]; //https://github.com/ng-select/ng-select/tree/master
     this.updateTags.emit(this.tags);
   }
