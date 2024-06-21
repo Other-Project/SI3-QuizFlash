@@ -30,7 +30,7 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
 
 ## Scénarios :
 
-- **Scénario 1 : Jouer à un quiz (point de vue accueilli)**
+### Scénario 1 : Jouer à un quiz (point de vue accueilli)
     - « Je suis anxieuse durant un temps de repos, alors Anne me propose de réaliser un quiz sur QuizFlash. Anne me signale que l’activité parlera de chansons
       françaises. Je commence ce quiz, il y a plein de questions différentes, certaines avec du son et d’autres avec du texte ou des images. Mais dans tous les
       cas, elles sont toutes adaptées à ma vision. Je termine cette activité, le site me félicite, car j’ai réussi à répondre à toutes les questions et je me
@@ -39,7 +39,7 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
       fonctionnelle, alors notre site ne sert à rien du tout.
 
 
-- **Scénario 2 : Création d'un quiz (point de vue ergothérapeute)**
+### Scénario 2 : Création d'un quiz (point de vue ergothérapeute)
     - « Je suis sur un temps de création des activités pour les résidents. Francescu a réalisé toutes les activités qui pouvaient lui être proposées, je dois
       donc lui en créer de nouvelles. Je vais me servir de QuizFlash regroupant l’ensemble des accueillis avec de nombreuses informations les concernant. Je me
       lance dans la création d’un quiz sur le thème de la pêche, le site me propose différents types de questions (sonore, illustrée, etc.), j’ajoute un
@@ -49,7 +49,7 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
       tester la création de quiz que jouer à un quiz en termes de priorité, car ça n'impacte alors pas directement le joueur (l'accueilli dans notre cas).
 
 
-- **Scénario 3 : Ajout d’un accueilli (point de vue ergothérapeute)**
+### Scénario 3 : Ajout d’un accueilli (point de vue ergothérapeute)
     - « J'accueille Bernard, un nouvel arrivant, pour cela, je réalise un premier rendez-vous. Bernard est dans mon bureau avec sa famille pour cet entretien et
       ils me communiquent toutes les informations nécessaires à la création de son dossier. Je réalise un bilan psychomoteur, les raccompagne lui et sa famille,
       et retourne ensuite dans mon bureau terminer le dossier. Je l’ajoute dans la base de données de QuizFlash. Pour cela, je rentre son nom, son prénom,
@@ -59,7 +59,7 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
       l'accueilli dans notre cas).
 
 
-- **Scénario 4 : Visualisation de l’évolution (point de vue ergothérapeute)**
+### Scénario 4 : Visualisation de l’évolution (point de vue ergothérapeute)
     - « Martine a réalisé plusieurs activités sur QuizFlash, je vais donc observer son évolution avec les résultats qui sont enregistrés dans le site. Durant
       chaque activité, les données de la session sont collectées afin que je puisse y accéder pour les analyser ultérieurement. Je peux alors visualiser
       l’évolution de Martine et ainsi adapter au mieux l’activité pour cette accueillie. Si j’observe qu’elle n’est plus en capacité de répondre à certaines
@@ -92,80 +92,71 @@ Pour savoir quels scénarios prioriser en termes de tests, nous avons pris en co
 
 ### Scénarios de tests par rapport à nos scénarios d'utilisation :
 
-#### Scénario de test n°1 : ``quiz-play-test-scenario.spec.ts``
+#### Scénario de test n°1 : `quiz-play-test-scenario.spec.ts`
 
-Ce premier scénario de test vise à tester en intégralité une partie de quiz jouée sur notre site. Conformément au scénario, on commence par se connecter
-en tant que
-Martine pour pouvoir jouer le quiz sur les chansons françaises. Comme attendu, il comporte trois types de questions : les questions sonores, textuelles et
+Ce premier scénario vise à tester en intégralité une partie de quiz jouée sur notre site. Conformément au scénario, on commence par se connecter
+en tant que Martine pour pouvoir jouer le quiz sur les chansons françaises. Comme attendu, il comporte trois types de questions : les questions sonores, textuelles et
 visuelles. On va répondre certaines fois juste et d'autres faux afin de bien tester notre moteur de jeu. Nous jouons le quiz jusqu'à la fin, nous sommes
 félicité, puis nous sommes redirigés vers la page des quizz pour Martine.
 
-#### Scénario de test n°2 : ``create-quiz-test-scenario.spec.ts``
+#### Scénario de test n°2 : `create-quiz-test-scenario.spec.ts`
 
-Ce deuxième scénario de test vise à tester en intégralité le processus de création d'un quiz. On commence donc par se connecter en tant qu'administrateur,
-puis on
-accède à la liste des quizz. De là, on clique sur créer un quiz. On rentre un titre, un thème, une image et on le sauvegarde. Ensuite, on ajoute 3
-questions, chacune d'un type différent en les sauvegardant au fur et à mesure. Pour la question sonore, on ajoute un fichier .mp3 et pour la question
-visuelle, on ajoute une image. Enfin, on finit par sauvegarder le quiz.
+Ce deuxième scénario vise à tester en intégralité le processus de création d'un quiz. On commence donc par se connecter en tant qu'administrateur,
+puis on accède à la liste des quizz. De là, on clique sur créer un quiz. On rentre un titre, un thème, une image et on le sauvegarde. 
+Ensuite, on ajoute 3 questions, chacune d'un type différent. Pour la question sonore, on ajoute un fichier .mp3 et pour la question visuelle, on ajoute une image.
+Enfin, on finit par sauvegarder le quiz.
 
-#### Scénario de test n°3 : ``create-user-test-scenario.spec.ts``
+#### Scénario de test n°3 : `create-user-test-scenario.spec.ts`
 
-Ce troisième scénario de test vise à tester entièrement le processus de création d'un utilisateur. Pour commencer, on se connecte en tant
-qu'administrateur, puis on
-sélectionne créer un utilisateur. De là, on rentre son nom, son prénom, son sexe et sa date de naissance. On lui ajoute également une photo de profil. On
-valide et
-il est créé. Une fois créé, on a accès à ses paramètres. On va donc ajuster ceci conformément à notre scénario.
+Ce troisième scénario vise à tester entièrement le processus de création d'un utilisateur.
+Pour commencer, on se connecte en tant qu'administrateur, puis on sélectionne "créer un utilisateur".
+De là, on rentre son nom, son prénom, son sexe et sa date de naissance. On lui ajoute également une photo de profil. On valide et il est créé.
+Une fois créé, on a accès à ses paramètres. On va donc ajuster ceux-ci conformément au [scénario n°3](#scénario-3--ajout-dun-accueilli-point-de-vue-ergothérapeute).
 
 ### Tests complémentaires :
 
-#### Scénario de test complémentaire n°1 : ``create-user-error-test.spec.ts``
+#### Scénario de test complémentaire n°1 : `create-user-error-test.spec.ts`
 
-Ce premier test complémentaire vise à tester plus en profondeur la création d'un utilisateur sur notre site en testant également les cas d'erreurs. Ici,
-on va tenter de créer des utilisateurs avec des prénoms erronés, des noms erronés et des dates de naissance erronées. On va aussi tester l'input de la
-photo de profil ainsi que le genre de l'utilisateur. Pour les inputs de noms et prénoms, on va passer des mauvais caractères dans les champs et on
-s'attend à ce que le champ ne soit pas valide. Pour la date de naissance, on passe une mauvaise année. Pour la photo de profil, on vérifie qu'elle existe
-bien quand on la passe.
+Ce premier scénario complémentaire vise à tester plus en profondeur la création d'un utilisateur sur notre site en vérifiant également les cas d'erreurs.
+Ici, on va tenter de créer des utilisateurs avec des prénoms erronés, des noms erronés et des dates de naissance erronées.
+On va aussi tester l'ajout de la photo de profil ainsi que la sélection genre de l'utilisateur. 
+Pour les noms et prénoms, on va passer des mauvais caractères dans les champs et on s'attend à ce que le champ ne soit pas valide.
+Pour la date de naissance, on passe une mauvaise année. Pour la photo de profil, on vérifie qu'elle existe bien quand on la passe.
+Pour le genre, ... TODO ...
 
-#### Scénario de test complémentaire n°2 : ``create-quiz-error-test.spec.ts``
+#### Scénario de test complémentaire n°2 : `create-quiz-error-test.spec.ts`
 
-Pour ce deuxième test complémentaire, on va tester plus en profondeur la création de quiz en gérant les cas d'erreurs potentiels. Tout d'abord, on
-s'assure que lorsque l'on ne sauvegarde pas un quiz, il n'apparaît pas dans la liste des quiz. On crée donc le quiz. Pour les questions, on commence par
-tester la même mécanique en réutilisant le même procédé. On va aussi tenter de créer des questions avec des propositions vides, avec des inputs d'images
-et de sons vides quand les cas se présentent, etc. En résumé, on s'assure que la question est bien paramétrée et dans son intégralité au moment de sa
-sauvegarde, et on teste que notre site réagit bien lorsque celles-ci ne sont pas bien définies.
+Pour ce deuxième scénario complémentaire, on va tester plus en profondeur la création de quiz en gérant les cas d'erreurs potentiels.
+Tout d'abord, on s'assure que lorsqu'on ne sauvegarde pas un quiz, il n'apparaît pas dans la liste des quiz. Puis, on réitère, mais en sauvegardant.
+Pour les questions, on commence par tester la même mécanique en réutilisant le même procédé.
+On va aussi tenter de créer des questions avec des propositions vides, avec des inputs d'images et de sons vides quand les cas se présentent, etc.
+En résumé, on s'assure que la question est bien paramétrée et dans son intégralité au moment de sa sauvegarde,
+et on teste que notre site réagit bien lorsque celles-ci ne sont pas bien définies.
 
-#### Scénario de test complémentaire n°3 : ``quiz-play-fiftyfifty-not-removed-test-scenario.spec.ts``
+#### Scénario de test complémentaire n°3 : `quiz-play-fiftyfifty-not-removed-test-scenario.spec.ts`
 
-Ce troisième test complémentaire est lié en partie au premier scénario d'utilisation. Ce scénario de test a pour but de tester l'utilisation du bouton
-50/50
-et le paramètre de
-suppression des mauvaises réponses. Dans ce test, la première question est jouée en utilisant le bouton '50/50' et on vérifie que certaines réponses ne
-sont
-plus visibles
-(2 réponses sont cachées lorsqu'il y en a 4 initialement et une seule est cachée s'il y en a 3 initialement). La seconde question est jouée de manière à
-répondre faux un maximum de fois jusqu'à ce qu'il ne reste que la bonne réponse,
-en vérifiant la disparition du bouton '50/50' dans le cas où le nombre de réponses restantes est strictement inférieur à 3. Le quiz est joué jusqu'à la
-fin, nous
-sommes
-félicités, puis nous sommes redirigés vers la page des quizz pour Martine.
+Ce troisième scénario complémentaire est lié en partie au [premier scénario d'utilisation](#scénario-1--jouer-à-un-quiz-point-de-vue-accueilli).
+Ce scénario de test a pour but de tester l'utilisation du bouton "50/50" et le paramètre de suppression des mauvaises réponses.
+Dans ce test, la première question est jouée en utilisant le bouton "50/50" et on vérifie que certaines réponses ne sont plus visibles
+(2 réponses sont cachées lorsqu'il y en a 4 initialement et une seule est cachée s'il y en a 3 initialement).
+La seconde question est jouée de manière à répondre faux un maximum de fois jusqu'à ce qu'il ne reste que la bonne réponse,
+en vérifiant la disparition du bouton "50/50" dans le cas où le nombre de réponses restantes est inférieur ou égal à 2.
+Le quiz est joué jusqu'à la fin, nous sommes félicités, puis nous sommes redirigés vers la page des quizz pour Martine.
 
-#### Scénario de test complémentaire n°4: ``quiz-play-replay-end-test-scenario.spec.ts``
+#### Scénario de test complémentaire n°4: `quiz-play-replay-end-test-scenario.spec.ts`
 
-Ce quatrième test complémentaire est lié en partie au premier scénario d'utilisation. Ce scénario de test a pour but de tester le paramètre 'Rejouer les
-questions'. Dans ce test,
-une mauvaise réponse est sélectionnée. Ainsi, cette réponse devra être reposée à la fin du quiz. Toutes les questions restantes ont une réponse juste.
-Lors de la dernière réponse,
-une vérification est effectuée afin de s'assurer que la dernière question est bien la question qui devait être reposée. Le quiz est joué jusqu'à la fin,
-nous sommes
-félicités, ensuite, nous sommes redirigés vers la page des quizz pour Martine.
+Ce quatrième scénario complémentaire est lié en partie au [premier scénario d'utilisation](#scénario-1--jouer-à-un-quiz-point-de-vue-accueilli).
+Ce scénario de test a pour but de tester le paramètre "Rejouer les questions".
+Dans ce test, une mauvaise réponse est sélectionnée. Ainsi, cette réponse devra être reposée à la fin du quiz. Toutes les questions restantes ont une réponse juste.
+Lors de la dernière réponse, une vérification est effectuée afin de s'assurer que la dernière question est bien la question qui devait être reposée.
+Le quiz est joué jusqu'à la fin, nous sommes félicités, ensuite, nous sommes redirigés vers la page des quizz pour Martine.
 
-#### Scénario de test complémentaire n°5 : ``delete-question-test-scenario.spec.ts``
+#### Scénario de test complémentaire n°5 : `delete-question-test-scenario.spec.ts`
 
-Ce cinquième test complémentaire est lié en partie au quatrième scénario d'utilisation. Dans le cas où une question devient trop difficile pour un
-accueilli,
-il faut qu'elle puisse
-être supprimée du quiz. Dans ce test, on va donc se connecter en tant qu'administrateur pour accéder à un quiz. On le sélectionne et on supprime une
-question. On vérifie qu'elle se supprime bien.
+Ce cinquième test complémentaire est lié en partie au [quatrième scénario d'utilisation](#scénario-4--visualisation-de-lévolution-point-de-vue-ergothérapeute).
+Dans le cas où une question devient trop difficile pour un accueilli, il faut qu'elle puisse être supprimée du quiz. 
+Dans ce test, on va donc se connecter en tant qu'administrateur pour accéder à un quiz.
+On le sélectionne et on supprime une question. On vérifie qu'elle se supprime bien.
 
 ### Ordre de priorisation des scénarios de tests :
 
