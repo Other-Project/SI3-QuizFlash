@@ -123,7 +123,7 @@ Ici, on va tenter de créer des utilisateurs avec des prénoms erronés, des nom
 On va aussi tester l'ajout de la photo de profil ainsi que la sélection genre de l'utilisateur.
 Pour les noms et prénoms, on va passer des mauvais caractères dans les champs et on s'attend à ce que le champ ne soit pas valide.
 Pour la date de naissance, on passe une mauvaise année. Pour la photo de profil, on vérifie qu'elle existe bien quand on la passe.
-Pour le genre, ... TODO ...
+On vérifie finalement que sélectionner le genre est bien nécessaire.
 
 #### Scénario de test complémentaire n°2 : `create-quiz-error-test.spec.ts`
 
