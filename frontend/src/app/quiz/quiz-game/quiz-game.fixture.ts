@@ -1,4 +1,4 @@
-import {E2EComponentFixture} from "e2e/e2e-component.fixture";
+import {E2EComponentFixture} from "../../../../e2e/e2e-component.fixture";
 import {expect} from "@playwright/test";
 import {QuestionFixture} from "./question-section/question-section.fixture";
 import {QuestionResultFixture} from "./question-result/question-result.fixture";

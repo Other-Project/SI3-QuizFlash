@@ -1,4 +1,4 @@
-import {E2EComponentFixture} from "e2e/e2e-component.fixture";
+import {E2EComponentFixture} from "../../../../../../e2e/e2e-component.fixture";
 import {AdminQuestionFixture} from "./question/admin-question.fixture";
 
 export class AdminQuizFixture extends E2EComponentFixture {
@@ -28,10 +28,6 @@ export class AdminQuizFixture extends E2EComponentFixture {
 
   getCreateQuestionButton() {
     return this.page.getByRole("button", {name: "Ajouter une question", exact: true});
-  }
-
-  getSaveButton() {
-    return this.page.getByRole("button", {name: "Sauvegarder", exact: true});
   }
 
   async getNumberOfQuestions() {

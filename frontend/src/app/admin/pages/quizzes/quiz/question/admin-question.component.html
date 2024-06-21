@@ -7,24 +7,28 @@
       <app-image-input *ngSwitchCase="QuestionType.Image" [src]="question.imageUrl" formControlName="imageUrl"/>
       <div *ngSwitchCase="QuestionType.Sound">
         <app-file-input [accept]="'audio/*'" formControlName="soundUrl">
-          <app-button>{{ form.get('soundUrl')?.value ? 'Changer le fichier' : 'Ajouter un fichier' }}</app-button>
+          <app-button [color]="form.get('soundUrl')?.valid ? 'white': 'red'">
+            {{ form.get('soundUrl')?.value ? 'Changer le fichier' : 'Ajouter un fichier' }}
+          </app-button>
         </app-file-input>
         <app-play-button *ngIf="form.get('soundUrl')?.value" [src]="form.get('soundUrl')?.value"/>
       </div>
     </div>
   </div>
-  <app-input class="question" [icon]="faQuestion" [value]="question.text" (change)="question.text = $any($event.target).value" [placeholder]="'Entrez la question'"
+  <app-input class="question" [icon]="faQuestion" [value]="question.text" (change)="question.text = $any($event.target).value"
+             [placeholder]="'Entrez la question'"
              formControlName="text"/>
   <div class="answers" formArrayName="answers">
     <div *ngFor="let answer of answers.controls; index as i" [formGroupName]="i">
       <input type="hidden" formControlName="id">
       <app-input [icon]="faReply" [placeholder]="'Entrez la proposition ' + (i+1)" formControlName="answerText">
-        <input type="radio" [checked]="answer.value.trueAnswer" [value]="i" (change)="changeTrueAnswer($any($event.target).value)" [name]="'trueAnswer-' + question.id"/>
+        <input type="radio" [checked]="answer.value.trueAnswer" [value]="i" (change)="changeTrueAnswer($any($event.target).value)"
+               [name]="'trueAnswer-' + question.id"/>
         <fa-icon class="remove" [icon]="faTrash" (click)="removeAnswer(i)" *ngIf="answers.length > 2"/>
       </app-input>
     </div>
     <app-button [color]="'yellow'" [scale]="Scale.SMALL_SCALE" (click)="addAnswer()" *ngIf="answers.length < 4">Ajouter une proposition
-  </app-button>
+    </app-button>
   </div>
   <div class="actions">
     <app-button class="save" [color]="'blue'" (click)="save()" [disabled]="!changed || loading">

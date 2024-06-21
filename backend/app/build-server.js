@@ -8,8 +8,12 @@ const session = require("express-session");
 
 module.exports = (cb) => {
     const app = express();
+    const corsOptions = {
+        origin: "*",
+        credentials: true
+    };
+    app.use(cors(corsOptions));
     app.disable("x-powered-by");
-    app.use(cors());
     app.use(bodyParser.json({limit: "50mb"}));
     app.use(morgan("[:date[iso]] :method :url :status :response-time ms - :res[content-length]"));
     app.use(session({
