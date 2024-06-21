@@ -196,16 +196,18 @@ On le sélectionne et on supprime une question. On vérifie qu'elle se supprime 
 
 Notre site est découpé en 3 images :
 
-* Le backend, qui utilise l'image [distroless](https://github.com/GoogleContainerTools/distroless) de Node.JS fournie par Google afin de minimiser l'empreinte sur le disque.  
+* Le backend, qui utilise l'image [distroless](https://github.com/GoogleContainerTools/distroless) de Node.JS fournie par Google
+  afin de minimiser l'empreinte sur le disque (187.3 MB).  
   Pour ce faire, on installe dans un premier temps les dépendances du backend dans une image node classique.
   Puis, on les copie dans l'image distroless puisque celle-ci ne contient rien d'autre que Node.JS.
   Comme cette image ne contient pas curl, rm et mv, on réplique leur fonctionnement par des scripts js qu'on exécutera avec node
   (on aurait pu ajouter ces programmes, mais celà aurait augmenté la taille de l'image).
   Le seul programme ajouté est sh afin de pouvoir utiliser les && dans le point d'entrée.
-* Le frontend, qui utilise l'image nginx slim hébergeant les fichiers générés par Angular.
+* Le frontend, qui utilise l'image nginx slim hébergeant les fichiers générés par Angular. Cette image est très légère (29.21 MB).
   Dans un premier temps, on installe les dépendances dans une image node, et on exécute `ng build` pour obtenir des fichiers statiques du front.
   Ces fichiers sont copiés dans l'image nginx afin de les héberger.
-* Les tests Playwright. Cette image est de loin la plus volumineuse à cause de la taille très importante des différentes dépendances de Playwright.
+* Les tests Playwright qui utilise l'image node à laquelle on ajoute Chromium et ffmpeg.
+  Cette image est de loin la plus volumineuse (899.3 MB) à cause de la taille très importante des différentes dépendances de Playwright.
   Des efforts ont été fait de notre côté en incluant un minimum de dépendance, mais node représentant 120mo et chromium pesant plus de 600mo,
   il est difficile de réduire beaucoup plus.
 
