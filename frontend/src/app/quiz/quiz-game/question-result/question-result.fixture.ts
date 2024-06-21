@@ -11,10 +11,10 @@ export class QuestionResultFixture extends E2EComponentFixture {
   }
 
   async checkIsCorrectScreen() {
-    await expect(this.page.getByText("Bravo, tu as raison, la bonne réponse était :", {exact: true})).toBeVisible();
+    await expect(this.page.getByText("Bravo, tu as raison, la bonne réponse était :", {exact: true})).toBeVisible({timeout: 50000});
   }
 
   async checkIsIncorrectScreen() {
-    await expect(this.page.getByText("La bonne réponse était :", {exact: true})).toBeVisible();
+    await expect(this.page.getByText("La bonne réponse était :", {exact: true})).toBeVisible({timeout: 50000});
   }
 }

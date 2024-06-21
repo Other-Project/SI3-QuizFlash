@@ -52,7 +52,7 @@ test.describe("Create user test display", () => {
     });
 
     await test.step("Create User", async () => {
-      await profilePictureInput.setInputFiles(["./src/assets/users/bernard.jpg"]);
+      await profilePictureInput.setInputFiles("./e2e/assets/bernard.jpg");
       await lastNameInput.fill("Dupont");
       await firstNameInput.fill("Bernard");
       await birthDateInput.fill("1950-05-11");
