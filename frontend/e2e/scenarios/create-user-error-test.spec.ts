@@ -35,12 +35,14 @@ test.describe("Create user with errors test display", () => {
     const firstNameInput = patientHeaderFixture.getFirstNameInput();
     const birthDateInput = patientHeaderFixture.getBirthDateInput();
     const validateButton = patientHeaderFixture.getValidateButton();
+    const genderInput = patientHeaderFixture.getGenderSelect();
 
     await test.step("User form presence verification", async () => {
       await expect(lastNameInput).toBeVisible();
       await expect(firstNameInput).toBeVisible();
       await expect(birthDateInput).toBeVisible();
       await expect(validateButton).toBeVisible();
+      await expect(genderInput).toBeVisible();
     });
 
     await test.step("Create User with errors in name and firstname 1", async () => {
@@ -48,6 +50,7 @@ test.describe("Create user with errors test display", () => {
       await lastNameInput.fill("12345");
       await firstNameInput.fill("12345");
       await birthDateInput.fill("1950-05-04");
+      await genderInput.selectOption("Homme");
       await validateButton.click();
       // We shouldn't be able to create such a user
       await expect(page).toHaveURL(`${testUrl}/admin/patient`);
