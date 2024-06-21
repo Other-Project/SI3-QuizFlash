@@ -40,7 +40,7 @@ const doc = {
             ]
         },
         Question: {
-            $quizId: 1,
+            $quizId: "77a4c4a5-2c7a-46d7-ab27-fbae47d2a394",
             $text: "Quelle est cette pièce de la maison ?",
             $type: "Image",
             imageUrl: "assets/Chambre.jpg",
@@ -52,15 +52,15 @@ const doc = {
             ]
         },
         Answer: {
-            $questionId: 1,
+            $questionId: "e5ac71ce-60b6-40d9-b6e9-5490026fa7eb",
             $answerText: "Salle de bain",
             $trueAnswer: false
         },
         QuizStats: {
-            $quizId: 1715588161488,
-            $userId: 1715587751837,
+            $quizId: "77a4c4a5-2c7a-46d7-ab27-fbae47d2a394",
+            $userId: "4c79ce94-db33-4a77-be9b-36b7cdb0866a",
             $date: "2024-05-12",
-            $id: 7715019314381,
+            $id: "98519f81-fb24-4721-a209-1e4ef51ab29d",
             $questionsStats: [
                 {
                     $ref: "#/definitions/QuestionStats"
@@ -68,10 +68,10 @@ const doc = {
             ]
         },
         QuestionStats: {
-            $quizStatId: 7715019314381,
-            $questionId: 1715589671681,
+            $quizStatId: "e052f4b2-91a7-433b-90aa-949ccf3bc510",
+            $questionId: "28b16110-c378-4025-adc0-99d73d12b178",
             $success: true,
-            $id: 8215992101452,
+            $id: "1b1ca04f-d2c1-4369-a546-c1af466ad198",
             $attempts: [
                 {
                     $ref: "#/definitions/Attempt"
@@ -79,12 +79,12 @@ const doc = {
             ]
         },
         Attempt: {
-            $questionStatId: 8215992101452,
-            $chosenAnswerId: 1715591143361,
+            $questionStatId: "4e0c31e5-1617-4308-a7ba-38f524d8d12d",
+            $chosenAnswerId: "9e2d9155-6b0e-45e8-a72b-337ca69270c9",
             $timeSpent: 2.2,
             $answerHint: false,
-            $hiddenAnswers: [1, 2],
-            $id: 3647848313510
+            $hiddenAnswers: ["c5eac1e3-6384-4b0b-bbcb-96c3a6915d7b", "acbe055d-8c31-4eff-9379-4ab161c4aeee"],
+            $id: "1dd270ad-80ad-4c8d-997e-9ca8e88d6cfb"
         },
         SuccessStats: {
             data: {
@@ -105,11 +105,11 @@ const doc = {
         },
         UserParticipation: [
             {
-                id: 4715528161488,
+                id: "7db2f9f6-7db9-4a84-8c27-999908ed5e77",
                 title: "Les pièces de la maison 2"
             },
             {
-                id: 3715518126798,
+                id: "fbeb1d9e-32e2-4620-8913-94b486593859",
                 title: "Quelle est cette pièce de la maison ?"
             }
         ]
