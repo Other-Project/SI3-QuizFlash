@@ -6,7 +6,7 @@ import {checkVisibleAndClick, endPageTest, finishQuiz, getQuiz, launchQuiz, play
 
 test.describe("Playing of a quiz by a patient", () => {
   test("Quiz test", async ({page, request}) => {
-    const quizId = "1718692508978";
+    const quizId = "136b8923-9b70-43ae-ae63-cd76e84a7e16";
     const quiz = await getQuiz(quizId, request) as Quiz;
 
     await page.goto(testUrl);
