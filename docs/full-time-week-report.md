@@ -1,7 +1,7 @@
 ---
 title: "Rapport de la semaine à temps plein"
 author: "QuizFlash : Evan Galli, Théo Lassauniere, Jilian Lubrat et Antoine-Marie Michelozzi"
-date: 2024-06-19
+date: 2024-06-21
 geometry: margin=1in
 ---
 
@@ -70,7 +70,15 @@ TODO
 La plupart de nos tests ayant besoins de données de départ pour être réalisés, nous avons créé une petite base de donnée de départ dans notre backend. Avant de
 lancer les tests, il est donc nécessaire de redémarrer le back-end avec la commande suivante : ``run start:e2e``
 
+Pour lancer nos tests, nous utilisons la configuration suivante :
+
+- Génération d'un ``.json`` quand les tests sont lancés avec Docker au lieu d'un ``.html``
+- ``video`` et ``screenshot`` mis sur ``on`` pour que les vidéos et screenshots de nos tests s'enregistrent et soient disponibles à la fin de ceux-ci
+- ``slowMo`` définit sur 500 et ``timeout`` sur 60000 (problèmes de performances du back-end sur certains pc du groupe)
+
 Pour lancer tous les tests : ``run test:e2e``
+
+### Tests par rapport à nos scénarios :
 
 - **Test n°1** : ``quiz-play-test-scenario.spec.ts``
     - Ce premier test vise à tester en intégralité une partie de quiz jouée sur notre site. Conformément au scénario, on commence par se connecter en tant que
@@ -96,6 +104,23 @@ Pour lancer tous les tests : ``run test:e2e``
     - Ce quatrième test est lié en partie au quatrième scénario. Dans le cas où une question devient trop difficile pour un accueilli, il faut qu'elle puisse
       être supprimée du quiz. Dans ce test, on va donc se connecter en tant qu'administrateur pour accéder à un quiz. On le sélectionne et on supprime une
       question. On vérifie qu'elle se supprime bien.
+
+### Tests complémentaires :
+
+- **Test complémentaire n°1 :** ``create-user-error-test.spec.ts``
+    - Ce premier test complémentaire vise à tester plus en profondeur la création d'un utilisateur sur notre site en testant également les cas d'erreurs. Ici,
+      on va tenter de créer des utilisateurs avec des prénoms erronés, des noms erronés et des dates de naissance erronées. On va également tester l'input de la
+      photo de profil ainsi que le genre de l'utilisateur. Pour les inputs de noms et prénoms, on va passer des mauvais caractères dans les champs et on
+      s'attend à ce que le champ ne soit pas valide. Pour la date de naissance on passe une mauvaise année. Pour la photo de profil, on vérifie qu'elle existe
+      bien quand on la passe.
+
+
+- **Test complémentaire n°2 :** ``create-quiz-error-test.spec.ts``
+    - Pour ce deuxième test complémentaire, on va tester plus en profondeur la création de quiz en gérant les cas d'erreurs potentiels. Tout d'abord, on
+      s'assure que lorsque l'on ne sauvegarde pas un quiz, il n'apparaît pas dans la liste des quiz. On crée donc le quiz. Pour les questions, on commence par
+      tester la même mécanique en réutilisant le même procédé. On va aussi tenter de créer des questions avec des propositions vides, avec des inputs d'images
+      et de sons vides quand les cas se présentent, etc. En résumé, on s'assure que la question est bien paramétrée et dans son intégralité au moment de sa
+      sauvegarde, et on teste que notre site réagit bien lorsque celles-ci ne sont pas bien définies.
 
 ----
 
