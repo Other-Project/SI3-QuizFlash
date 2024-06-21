@@ -1,12 +1,12 @@
 const { Router } = require("express");
 const { catchErrors } = require("../../utils/errors/routes");
 const { getAllTags } = require("./manager");
-const checkAuthentification = require("../../utils/auth-checker");
+const checkAuthentication = require("../../utils/auth-checker");
 const access = require("../../models/access-restriction.model");
 
 const router = new Router();
 
-router.get("/", checkAuthentification(access.user), (req, res) => catchErrors(req, res, () => {
+router.get("/", checkAuthentication(access.user), (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Tags']
         #swagger.summary = 'Get existing tags'
         #swagger.responses[200] = {

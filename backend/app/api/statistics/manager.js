@@ -56,20 +56,20 @@ function getRequestedStat(dataType, statType, userId, quizId, questionType) {
  * @param {string} userId the user id
  * @param {string|undefined} quizId the quiz id
  * @param {string|undefined} questionType the questionType
- * @return {(QuizStats&{id: number, questionsStats: *})[]} the corresponding QuizStats
+ * @return {(QuizStats&{id: string, questionsStats: *})[]} the corresponding QuizStats
  */
 function buildUserStats(userId, quizId = undefined, questionType = undefined) {
-    const userStats = QuizStats.get().filter(quizStat => quizStat.userId === parseInt(userId, 10)
-        && (!quizId || quizStat.quizId === parseInt(quizId, 10)));
+    const userStats = QuizStats.get().filter(quizStat => quizStat.userId === userId
+        && (!quizId || quizStat.quizId === quizId));
     return userStats.map(quizStat => buildStat(quizStat.id, questionType)).filter(stats => stats !== null);
 }
 
 /**
  * This function aggregates the questionStats and attempts from the
  * database to build the entire quizStats
- * @param {number} quizStatId
+ * @param {string} quizStatId
  * @param {string|undefined} questionType
- * @return {QuizStats&{id: number, questionsStats: *}}
+ * @return {QuizStats&{id: string, questionsStats: *}}
  */
 function buildStat(quizStatId, questionType) {
     const quizStat = QuizStats.getById(quizStatId);
@@ -82,9 +82,9 @@ function buildStat(quizStatId, questionType) {
 
 /**
  * This function gets all the questionsStats of a QuizStats
- * @param {number} quizStatId
+ * @param {string} quizStatId
  * @param {questionType|undefined} questionType
- * @return {QuestionStats&{id: number}[]}
+ * @return {QuestionStats&{id: string}[]}
  */
 function getQuizStatQuestionStats(quizStatId, questionType) {
     return QuestionStats.get().filter(questionStat => questionStat.quizStatId === quizStatId &&
@@ -93,8 +93,8 @@ function getQuizStatQuestionStats(quizStatId, questionType) {
 
 /**
  * This function gets all the attempts of a questionStat
- * @param {number} questionStatId
- * @return {Attempts&{id: number}[]}
+ * @param {string} questionStatId
+ * @return {Attempts&{id: string}[]}
  */
 function getQuestionStatAttempts(questionStatId) {
     return Attempts.get().filter(attempt => attempt.questionStatId === questionStatId);
@@ -138,7 +138,7 @@ function getQuestionStatText(questionId) {
 }
 
 function getQuizzesParticipationIds(userId) {
-    return [...new Set(QuizStats.get().filter(stat => stat.userId === parseInt(userId, 10)).map(stat => stat.quizId))];
+    return [...new Set(QuizStats.get().filter(stat => stat.userId === userId).map(stat => stat.quizId))];
 }
 
 function getQuizTitle(quizId) {
@@ -148,7 +148,7 @@ function getQuizTitle(quizId) {
 /**
  * Returns the titles and ids of quizzes in which a user has taken part
  * @param {string} userId
- * @return {{id: number, title: string}[]} the ids and titles
+ * @return {{id: string, title: string}[]} the ids and titles
  */
 function getUserQuizzesParticipation(userId) {
     const quizIds = getQuizzesParticipationIds(userId);

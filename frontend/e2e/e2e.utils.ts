@@ -15,7 +15,7 @@ export async function getQuiz(quizId: string, request: APIRequestContext) {
   // Perform login and capture cookies
   const loginResponse = await request.post(`${testUrl}/api/auth/login/password`, {
     data: {
-      username: 1715587135341,
+      username: "b84cba22-6388-4d5c-8b05-dd9d8637b5b6",
       password: "admin"
     }
   });

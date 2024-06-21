@@ -2,7 +2,7 @@ const Joi = require("joi");
 const BaseModel = require("../utils/base-model");
 
 module.exports = new BaseModel("QuestionStats", {
-    quizStatId: Joi.number().required(),
-    questionId: Joi.number().required(),
+    quizStatId: Joi.string().required().uuid(),
+    questionId: Joi.string().required().uuid(),
     success: Joi.boolean().required()
 });

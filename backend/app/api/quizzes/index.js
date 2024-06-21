@@ -73,7 +73,7 @@ router.post("/:quizStatId/:questionStatId/checkAnswer", checkAuthentication(acce
             schema:{
                 isTrue : true,
                 expected : {
-                    id : 1,
+                    id : "7b9c7712-1377-4912-9a85-d6c320a97fb9",
                     text : " "
                     }
             }
