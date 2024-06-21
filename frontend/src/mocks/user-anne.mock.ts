@@ -3,7 +3,7 @@ import {Admin} from "../models/admin.models";
 import {Genders} from "../models/genders.model";
 
 export const USER_ANNE: Admin = {
-  id: "1715587135341",
+  id: "b84cba22-6388-4d5c-8b05-dd9d8637b5b6",
   access: AccessRestriction.Admin,
 
   pictureUrl: "assets/users/anne.jpg",
