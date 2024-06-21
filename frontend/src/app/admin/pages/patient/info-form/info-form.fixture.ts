@@ -1,10 +1,6 @@
 import {E2EComponentFixture} from "../../../../../../e2e/e2e-component.fixture";
 
-export class PatientHeaderFixture extends E2EComponentFixture {
-  getCreateUserTitle() {
-    return this.page.getByText("Création d'un nouvel utilisateur");
-  }
-
+export class PatientInfoFormFixture extends E2EComponentFixture {
   getLastNameInput() {
     return this.page.locator("label").filter({hasText: "Nom :", hasNotText: "Pré"});
   }
@@ -31,5 +27,9 @@ export class PatientHeaderFixture extends E2EComponentFixture {
 
   async getCreatedUserProfilePicture() {
     return await this.page.locator("app-image img").getAttribute("src");
+  }
+
+  getGenderSelect() {
+    return this.page.getByLabel("Genre :");
   }
 }

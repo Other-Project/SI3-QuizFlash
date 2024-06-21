@@ -2,13 +2,20 @@
 @import "/colors";
 
 form {
-  display: grid;
-  grid-template: 1fr / 150px repeat(4, 1fr);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1em;
 
   input:not([hidden]), select {
-    width: 100%;
+    width: 15em;
     padding: 12px 20px;
     margin: 8px 0;
     display: block;
@@ -16,28 +23,36 @@ form {
     border-radius: 4px;
     box-sizing: border-box;
 
-    &.ng-invalid {
+    &.ng-invalid:not(option) {
       border-color: $darkRed;
       color: color.scale($darkRed, $lightness: -5%);
     }
-  }
 
-  label {
-    width: 10vw;
-    font-size: 1em;
+    option {
+      color: black;
+    }
+
+    label {
+      width: 10em;
+      font-size: 1em;
+    }
+  }
+}
+
+#gender-selection {
+  select {
+    width: fit-content;
   }
 }
 
 app-button {
+  width: 9em;
   margin-left: 2em;
 }
 
-:host {
-  display: flex;
-}
-
 #profile-picture {
-  grid-column: 1;
+  flex-shrink: 0;
+  margin: 0.5em 2em 0.5em 0;
   border-radius: 50%;
   border-color: white;
   overflow: hidden;
@@ -46,10 +61,24 @@ app-button {
 }
 
 .error-container {
-  height: 2em;
+  width: 10em;
+  height: 4em;
   font-size: 0.9em;
 
   small {
     color: #b73e44;
   }
+}
+
+.form-inputs {
+  display: flex;
+  align-items: center;
+  margin-top: 2em;
+}
+
+app-button {
+  display: block;
+  width: 10em;
+  height: 2.5em;
+  margin-bottom: 2.5em;
 }
