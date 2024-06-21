@@ -1,19 +1,22 @@
 import {PlaywrightTestConfig} from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
-  reporter: [['html', { open: 'always' }]],
+  outputDir: "./reports/test-results",
+  reporter: process.env["CI"]
+    ? [["json", {outputFile: "./reports/test-results.json"}], ["github"]]
+    : [["html", {open: "always", outputFolder: "./reports/html"}]],
   timeout: 60000, // define timeout limit
   use: {
     headless: !!process.env["HEADLESS"],
-    viewport: { width: 1280, height: 720 },
+    viewport: {width: 1280, height: 720},
     ignoreHTTPSErrors: true,
     video: "on",
-    screenshot: "only-on-failure",
+    screenshot: "on",
     launchOptions: {
       executablePath: process.env["CHROME_BIN"],
       slowMo: 500
     }
-  },
+  }
 };
 
 export default config;

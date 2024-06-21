@@ -22,13 +22,8 @@ services:
     build:
       context: ../frontend
       dockerfile: playwright.Dockerfile
-    ports:
-      - "8081:9323"
     depends_on:
       frontend:
         condition: service_healthy
     volumes:
-      - reports_e2e:/app/test-results
-
-volumes:
-  reports_e2e:
+      - ./playwright:/app/reports

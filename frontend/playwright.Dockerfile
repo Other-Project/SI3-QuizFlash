@@ -7,13 +7,14 @@ ENV HEADLESS=true
 RUN apk add --no-cache --update chromium ttf-freefont font-noto-emoji wqy-zenhei ffmpeg
 COPY local.conf /etc/fonts/local.conf
 
-USER node
+#USER node
 WORKDIR /app
 
 # Playwright
 ENV CHROME_BIN=/usr/bin/chromium-browser
-RUN mkdir -p /home/node/.cache/ms-playwright/ffmpeg-1009 \
-    && ln -s /usr/bin/ffmpeg /home/node/.cache/ms-playwright/ffmpeg-1009/ffmpeg-linux \
+ENV CI=true
+RUN mkdir -p ~/.cache/ms-playwright/ffmpeg-1009 \
+    && ln -s /usr/bin/ffmpeg ~/.cache/ms-playwright/ffmpeg-1009/ffmpeg-linux \
     && npm i -D @playwright/test playwright
 
 # Copy the application
