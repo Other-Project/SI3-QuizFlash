@@ -3,6 +3,7 @@
     "access": 2,
     "lastname": "Petit",
     "firstname": "Anne",
+    "gender": "F",
     "password": "1bd9aYKr6b30qsw6VKfP4nyy+gQdm8aHGkYivRkzuPc=",
     "salt": "thePasswordIsAdmin",
     "pictureUrl": "",

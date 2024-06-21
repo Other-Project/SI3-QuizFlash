@@ -19,7 +19,8 @@ router.get("/", (req, res) => catchErrors(req, res, () => {
         access: user.access,
         pictureUrl: readFile(user.pictureUrl),
         lastname: user.lastname,
-        firstname: user.firstname
+        firstname: user.firstname,
+        gender: user.gender
     })));
 }));
 
