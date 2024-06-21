@@ -12,7 +12,7 @@ Les objectifs de cette semaine à temps plein sont les suivants :
 - Implémenter des tests pour notre site en accord avec les scénarios définis
 - Conteneuriser notre application (tests compris)
 
-**Tests :**
+**[Tests :](#tests-réalisés-)**
 Pour cette partie, nous devons tester le déroulement des scénarios définis dans leur intégralité (tests dits end to end). Pour ce faire, nous avons ajouté la
 librairie playwright, qui est déjà très utilisé par les grosses entreprises. L'objectif est de tester notre interface de manière automatisée pour s'assurer que
 toutes les interactions avec celle-ci s'exécutent comme l'on s'y attend.
@@ -20,8 +20,11 @@ toutes les interactions avec celle-ci s'exécutent comme l'on s'y attend.
 Cependant, lors de ce sprint, il était clair dès le départ que nous n'aurions pas le temps de tester tous les scénarios dans tous leurs déroulements. Il a donc
 fallu établir quels scénarios nous souhaitions prioriser par rapport aux autres, pour savoir ce qui était important de tester en priorité pour notre site.
 
-**Docker :**
-TODO
+**[Docker :](#documentation-ops-)**
+Pour cette partie, on a mis en place un docker compose afin générant des conteneurs hébergeants le back, le front et les tests afin que l'ensemble de l'
+application
+soit portable et puisse être diffuser.
+
 ----
 
 ## Scénarios :
@@ -196,4 +199,35 @@ question. On vérifie qu'elle se supprime bien.
 
 ## Documentation Ops :
 
-TODO
+### Pour lancer notre application deux possibilitées :
+
+1. Lancement des tests end to end, lance le serveur en chargeant les données de tests, le front-end et playwright, il suffit de lancer le
+   script ```run-e2e.sh```
+2. Lancement de l'application dans sont ensemble, lance le serveur et le front-end de l'application, il suffit de lancer le script ``run.sh``
+
+### Fonctionnement :
+
+1. Pour les tests end to end, nous avons un docker composent qui génère 3 images :
+    - La première image généré est celle du serveur, initialisé avec une base de donnée qui permet de réaliser les tests, cette base de données est
+      est réinitialisé à chaque fois.
+    - Une seconde qui contient le front-end, on créer une première image contenant node qui permet de générer les fichiers statiques du site avec angular. Puis
+      on récupère les fichiers pour les copier dans une autre image avec NGINX qui va permettre de faire un serveur front-end avec une taille d'image la plus
+      raisonnable possible.
+    - Enfin la dernière contient playwright qui va permettre de lancer les tests end to end, les résultats des tests (rapport, vidéos, screenshot) sont placé
+      dans un dossier obs/playwright
+      qui est accessible depuis l'hôte.
+2. Pour une utilisation de l'application depuis un navigateur :
+    - La première image générée est celle du serveur, le fonctionnement est similaire à celui pour les tests end to end, à ceci près que la base de données est
+      stocké dans un volume afin qu'elle soit persistante.
+    - La seconde est celle du front-end, le fonctionnement est également similaire à celle des tests, on peut accédé au site depuis un navigateur
+      avec ``localhost``
+
+
+- Parler du réseaux créer par les docker compose, sur quel port écoute le serveur et le front --> dire que l'adrresse du back est passé au front par une
+  variable d'envirronement
+- Parler des 3 variables d'envirronement du back
+- Préciser les différentes tailles d'image si possible
+- Ne pas oublier si les tests prennent du temps de le préciser
+- 
+
+
