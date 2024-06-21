@@ -225,40 +225,27 @@ Pour le backend :
 
 Pour le frontend :
 
-| Variable  |                                  Description                                   |
-|:---------:|:------------------------------------------------------------------------------:|
-| BACK_URL  | URL du backend, sera utilisé par le proxy pour rediriger les requêtes sur /api |
+| Variable  |                                   Description                                   |
+|:---------:|:-------------------------------------------------------------------------------:|
+| BACK_URL  | URL du backend, sera utilisée par le proxy pour rediriger les requêtes sur /api |
 
 Pour Playwright :
 
-| Variable  |                Description                |
-|:---------:|:-----------------------------------------:|
-| FRONT_URL | URL du frontend utilisé pendant les tests |
+| Variable  |                Description                 |
+|:---------:|:------------------------------------------:|
+| FRONT_URL | URL du frontend utilisée pendant les tests |
 
 
-### Fonctionnement :
+### Fonctionnement
 
-1. Pour les tests end to end, nous avons un docker compose qui génère 3 images :
-    - La première image généré est celle du serveur, initialisé avec une base de donnée qui permet de réaliser les tests, cette base de données est
-      est réinitialisé à chaque fois.
-    - Une seconde qui contient le front-end, on créer une première image contenant node qui permet de générer les fichiers statiques du site avec angular. Puis
-      on récupère les fichiers pour les copier dans une autre image avec NGINX qui va permettre de faire un serveur front-end avec une taille d'image la plus
-      raisonnable possible.
-    - Enfin la dernière contient playwright qui va permettre de lancer les tests end to end, les résultats des tests (rapport, vidéos, screenshot) sont placé
-      dans un dossier obs/playwright
-      qui est accessible depuis l'hôte.
+1. Pour les tests end-to-end, nous avons un docker compose qui gère trois services :
+    - Le backend est initialisé avec une base de donnée réinitialisée à chaque lancement. Un jeu de donnée prédéfini est utilisé pour faciliter les tests.
+    - Le front-end géré par nginx qui à la fois héberge le site Angular et assure le reverse proxy vers le backend 
+    - Playwright qui lance les tests end-to-end.
+      Les résultats des tests (rapport JSON, vidéos, captures d'écran) sont placés sur l'hôte dans un dossier playwright à côté du docker compose.
 2. Pour une utilisation de l'application depuis un navigateur :
-    - La première image générée est celle du serveur, le fonctionnement est similaire à celui pour les tests end to end, à ceci près que la base de données est
-      stocké dans un volume afin qu'elle soit persistante.
-    - La seconde est celle du front-end, le fonctionnement est également similaire à celle des tests, on peut accédé au site depuis un navigateur
-      avec ``localhost``
+    - Le backend, qui est initilisé une seule fois avec quelques données de départ et dont la base de donnée est enregistrée dans un volume pour en assurer la persistance.
+    - Le frontend dont le fonctionnement est similaire à celui des tests, on peut accéder au site depuis un navigateur sur le port par défaut (80).
 
-
-- Parler du réseaux créer par les docker compose, sur quel port écoute le serveur et le front --> dire que l'adrresse du back est passé au front par une
-  variable d'envirronement
-- Parler des 3 variables d'envirronement du back
-- Préciser les différentes tailles d'image si possible
-- Ne pas oublier si les tests prennent du temps de le préciser
-- 
-
-
+Dans tous les cas, seul le frontend expose un port et celui-ci redirige si besoin vers le backend.
+Toutes les communications inter-services se font grâce réseau mis en place par docker au moment de la création des conteneurs.
