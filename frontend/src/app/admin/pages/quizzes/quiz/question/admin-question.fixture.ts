@@ -38,7 +38,7 @@ export class AdminQuestionFixture extends E2EComponentFixture {
   }
 
   async isSaveButtonDisabled() {
-    return await this.getSaveQuestionButton().getAttribute("ng-reflect-disabled");
+    return await this.getSaveQuestionButton().getByRole("button").isDisabled();
   }
 
   getDeleteQuestionButton() {
