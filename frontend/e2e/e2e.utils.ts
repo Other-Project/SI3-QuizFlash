@@ -5,6 +5,7 @@ import {APIRequestContext, Locator} from "playwright";
 import {QuizGameFixture} from "../src/app/quiz/quiz-game/quiz-game.fixture";
 import {ProfileListFixture} from "../src/app/profiles/profile-list/profile-list.fixture";
 import {QuizSelectionFixture} from "../src/app/quiz/quiz-game-selection/quiz-selection/quiz-selection.fixture";
+import {ProfilesFixture} from "../src/app/profiles/profiles.fixture";
 
 export async function getButtonByText(page: Page, text: string, tag: string) {
   return page.locator(tag).getByRole("button").filter({hasText: text});
@@ -71,7 +72,11 @@ export async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizG
 
 export async function launchQuiz(page: Page, quizId: string, patient: string) {
   await test.step("Select User", async () => {
-    // Getting Martine's profile button
+    const profilesFixture = new ProfilesFixture(page);
+    const firstProfile = profilesFixture.getFirstProfile();
+    // Wait for the server to load users
+    await expect(firstProfile).toBeVisible({timeout: 50000});
+    // Getting patient profile button
     const martineProfileButton = await new ProfileListFixture(page).getUserButton(patient);
     // Check if the profile button is visible and user selection
     await checkVisibleAndClick(martineProfileButton!);
