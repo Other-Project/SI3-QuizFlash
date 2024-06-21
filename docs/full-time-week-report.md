@@ -31,6 +31,7 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
 ## Scénarios :
 
 ### Scénario 1 : Jouer à un quiz (point de vue accueilli)
+
     - « Je suis anxieuse durant un temps de repos, alors Anne me propose de réaliser un quiz sur QuizFlash. Anne me signale que l’activité parlera de chansons
       françaises. Je commence ce quiz, il y a plein de questions différentes, certaines avec du son et d’autres avec du texte ou des images. Mais dans tous les
       cas, elles sont toutes adaptées à ma vision. Je termine cette activité, le site me félicite, car j’ai réussi à répondre à toutes les questions et je me
@@ -38,8 +39,8 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
     - Ce scénario est de priorité **critique**. En effet, il constitue la base de notre site (à savoir jouer à un quiz). Si cette partie n'est pas
       fonctionnelle, alors notre site ne sert à rien du tout.
 
-
 ### Scénario 2 : Création d'un quiz (point de vue ergothérapeute)
+
     - « Je suis sur un temps de création des activités pour les résidents. Francescu a réalisé toutes les activités qui pouvaient lui être proposées, je dois
       donc lui en créer de nouvelles. Je vais me servir de QuizFlash regroupant l’ensemble des accueillis avec de nombreuses informations les concernant. Je me
       lance dans la création d’un quiz sur le thème de la pêche, le site me propose différents types de questions (sonore, illustrée, etc.), j’ajoute un
@@ -48,8 +49,8 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
       on ne peut pas jouer à un quiz, ce qui explique l'importance de tester ce scénario. Cependant, on considère qu'il est (légèrement) moins important de
       tester la création de quiz que jouer à un quiz en termes de priorité, car ça n'impacte alors pas directement le joueur (l'accueilli dans notre cas).
 
-
 ### Scénario 3 : Ajout d’un accueilli (point de vue ergothérapeute)
+
     - « J'accueille Bernard, un nouvel arrivant, pour cela, je réalise un premier rendez-vous. Bernard est dans mon bureau avec sa famille pour cet entretien et
       ils me communiquent toutes les informations nécessaires à la création de son dossier. Je réalise un bilan psychomoteur, les raccompagne lui et sa famille,
       et retourne ensuite dans mon bureau terminer le dossier. Je l’ajoute dans la base de données de QuizFlash. Pour cela, je rentre son nom, son prénom,
@@ -58,8 +59,8 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
       de tester ce scénario. De même que précédemment, il est moins prioritaire par rapport au premier scénario, car cela n'impacte pas directement le joueur (
       l'accueilli dans notre cas).
 
-
 ### Scénario 4 : Visualisation de l’évolution (point de vue ergothérapeute)
+
     - « Martine a réalisé plusieurs activités sur QuizFlash, je vais donc observer son évolution avec les résultats qui sont enregistrés dans le site. Durant
       chaque activité, les données de la session sont collectées afin que je puisse y accéder pour les analyser ultérieurement. Je peux alors visualiser
       l’évolution de Martine et ainsi adapter au mieux l’activité pour cette accueillie. Si j’observe qu’elle n’est plus en capacité de répondre à certaines
@@ -102,7 +103,7 @@ félicité, puis nous sommes redirigés vers la page des quizz pour Martine.
 #### Scénario de test n°2 : `create-quiz-test-scenario.spec.ts`
 
 Ce deuxième scénario vise à tester en intégralité le processus de création d'un quiz. On commence donc par se connecter en tant qu'administrateur,
-puis on accède à la liste des quizz. De là, on clique sur créer un quiz. On rentre un titre, un thème, une image et on le sauvegarde. 
+puis on accède à la liste des quizz. De là, on clique sur créer un quiz. On rentre un titre, un thème, une image et on le sauvegarde.
 Ensuite, on ajoute 3 questions, chacune d'un type différent. Pour la question sonore, on ajoute un fichier .mp3 et pour la question visuelle, on ajoute une image.
 Enfin, on finit par sauvegarder le quiz.
 
@@ -119,7 +120,7 @@ Une fois créé, on a accès à ses paramètres. On va donc ajuster ceux-ci conf
 
 Ce premier scénario complémentaire vise à tester plus en profondeur la création d'un utilisateur sur notre site en vérifiant également les cas d'erreurs.
 Ici, on va tenter de créer des utilisateurs avec des prénoms erronés, des noms erronés et des dates de naissance erronées.
-On va aussi tester l'ajout de la photo de profil ainsi que la sélection genre de l'utilisateur. 
+On va aussi tester l'ajout de la photo de profil ainsi que la sélection genre de l'utilisateur.
 Pour les noms et prénoms, on va passer des mauvais caractères dans les champs et on s'attend à ce que le champ ne soit pas valide.
 Pour la date de naissance, on passe une mauvaise année. Pour la photo de profil, on vérifie qu'elle existe bien quand on la passe.
 Pour le genre, ... TODO ...
@@ -154,7 +155,7 @@ Le quiz est joué jusqu'à la fin, nous sommes félicités, ensuite, nous sommes
 #### Scénario de test complémentaire n°5 : `delete-question-test-scenario.spec.ts`
 
 Ce cinquième test complémentaire est lié en partie au [quatrième scénario d'utilisation](#scénario-4--visualisation-de-lévolution-point-de-vue-ergothérapeute).
-Dans le cas où une question devient trop difficile pour un accueilli, il faut qu'elle puisse être supprimée du quiz. 
+Dans le cas où une question devient trop difficile pour un accueilli, il faut qu'elle puisse être supprimée du quiz.
 Dans ce test, on va donc se connecter en tant qu'administrateur pour accéder à un quiz.
 On le sélectionne et on supprime une question. On vérifie qu'elle se supprime bien.
 
@@ -167,17 +168,18 @@ On le sélectionne et on supprime une question. On vérifie qu'elle se supprime 
        Ainsi, ces 3 éléments impactent de manière importante les patients dans la mesure où cela leur permet de jouer les quizz.
        Les éléments testés sont directement ou indirectement les plus vus par les patients et également par le professionnel.
     2. Les scénarios de test complémentaire [n°3](#scénario-de-test-complémentaire-n3--quiz-play-fiftyfifty-not-removed-test-scenariospects)
-       et [n°4](#scénario-de-test-complémentaire-n4-quiz-play-replay-end-test-scenariospects), ces deux scénarios sont placés au même niveau, 
+       et [n°4](#scénario-de-test-complémentaire-n4-quiz-play-replay-end-test-scenariospects), ces deux scénarios sont placés au même niveau,
        car ils sont liés au fait de jouer les quiz.
-       Concernant les critères, les éléments testés par ces scénarios peuvent impacter les patients si les paramètres associés sont activés pour le patient, 
+       Concernant les critères, les éléments testés par ces scénarios peuvent impacter les patients si les paramètres associés sont activés pour le patient,
        de même pour la fréquence de visionnage par le patient. Pour ce qui est de la fréquence de visualisation par le professionnel,
        les éléments ne sont jamais vu par les professionnels, car ils sont liés au moteur de jeu.
-    3. Le scénario de test complémentaire [n°5](#scénario-de-test-complémentaire-n5--delete-question-test-scenariospects) : ce scénario est là pour tester la suppression de questions dans un quiz, ainsi, il peut impacter un patient dans la
-       mesure où un quiz rejoué plusieurs fois peut être modifié en retirant des questions entre les différentes fois où il est joué.
+    3. Le scénario de test complémentaire [n°5](#scénario-de-test-complémentaire-n5--delete-question-test-scenariospects) : ce scénario est là pour tester la suppression de
+       questions dans un quiz.
+       Ainsi, il peut impacter un patient dans la mesure où un quiz rejoué plusieurs fois peut être modifié en retirant des questions entre les différentes fois où il est joué.
        De plus cela est géré par les professionnels donc sont souvent vu par ces deniers. Cependant, ce n'est pas vu directement par les patients.
     4. Les scénarios de test complémentaire [n°1](#scénario-de-test-complémentaire-n1--create-user-error-testspects)
-       et [n°2](#scénario-de-test-complémentaire-n2--create-quiz-error-testspects), ces deux scénarios sont placés au même niveau, car ils sont liés au fait de créer/modifier les patients ou les quiz.
-       Ces scénarios sont là pour tester des cas extrêmes concernant la création/modification des patients et des quiz.
+       et [n°2](#scénario-de-test-complémentaire-n2--create-quiz-error-testspects), ces deux scénarios sont placés au même niveau, car ils sont liés au fait de créer/modifier les
+       patients ou les quiz. Ces scénarios sont là pour tester des cas extrêmes concernant la création/modification des patients et des quiz.
        Ainsi, ils sont vu par le professionnel, mais n'impacte pas les patients et ne sont jamais vu par ces derniers.
 
 ----
