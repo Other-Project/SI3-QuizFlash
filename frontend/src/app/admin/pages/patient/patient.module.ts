@@ -9,7 +9,6 @@ import {PatientNavbarComponent} from "./navbar/patient-navbar.component";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {LayoutModule} from "../../../layout/layout.module";
 import {PatientHeaderModule} from "./header/patient-header.module";
-import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {HistoryComponent} from "./history/history.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {PlayButtonComponent} from "../../../layout/play-button/play-button.component";
@@ -44,7 +43,6 @@ import {QuizStatsPartComponent} from "./quiz-stats-part/quiz-stats-part.componen
     RouterOutlet,
     RouterLink,
     LayoutModule,
-    NgMultiSelectDropDownModule,
     NgSwitch,
     NgSwitchCase,
     NgIf,
