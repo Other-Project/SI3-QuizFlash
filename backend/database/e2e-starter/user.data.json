@@ -55,5 +55,27 @@
     "soundQuestion": false,
     "autoStartAudio": false,
     "id": "9ca1313f-ef1f-4874-b7e0-4734b5330e6b"
+  },
+  {
+    "access": 1,
+    "lastname": "Dufour",
+    "firstname": "Xavier",
+    "birthDate": "1952-12-29",
+    "pictureUrl": "",
+    "hobbies": [
+      "culture",
+      "famille",
+      "théâtre"
+    ],
+    "dementiaLevel": 1,
+    "fontSize": 2,
+    "removeAnswers": true,
+    "automatedSkip": true,
+    "answerHint": true,
+    "numberOfQuestion": 99,
+    "replayAtEnd": false,
+    "soundQuestion": false,
+    "autoStartAudio": false,
+    "id": "255f71fa-cf25-4b0d-b6d1-7dab60898cd0"
   }
 ]

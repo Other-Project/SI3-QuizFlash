@@ -1,12 +1,18 @@
 [
   {
     "title": "Chansons françaises",
-    "tags": [],
+    "tags": [
+      "culture",
+      "musique"
+    ],
     "id": "136b8923-9b70-43ae-ae63-cd76e84a7e16"
   },
   {
     "title": "Quiz delete question",
-    "tags": [],
+    "tags": [
+      "chasse",
+      "cuisine"
+    ],
     "id": "db6f5553-2dbe-4b86-9982-5fa5cde43b09"
   }
 ]
