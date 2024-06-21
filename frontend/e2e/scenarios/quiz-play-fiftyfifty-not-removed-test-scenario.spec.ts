@@ -74,13 +74,13 @@ async function checkVisibleAndClick(button: Locator) {
 
 test.describe("Playing of a quiz by a patient with all the possibilities", () => {
   test("Quiz test", async ({page, request}) => {
-    const quizId = "1718692508978";
+    const quizId = "136b8923-9b70-43ae-ae63-cd76e84a7e16";
     const quiz = await getQuiz(quizId, request) as Quiz;
 
     await page.goto(testUrl);
 
-    // Launch the quiz with the patient "Bernard"
-    await launchQuiz(page, quizId, "Bernard");
+    // Launch the quiz with the patient "Xavier"
+    await launchQuiz(page, quizId, "Xavier");
 
     const quizGameFixture = new QuizGameFixture(page);
 

@@ -54,7 +54,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.patientPlayedQuizzes = await this.statisticsService.getUserQuizzesParticipation(parseInt(this.patient.id));
+    this.patientPlayedQuizzes = await this.statisticsService.getUserQuizzesParticipation(this.patient.id);
     this.updateStats();
   }
 }

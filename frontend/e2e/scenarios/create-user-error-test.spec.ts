@@ -98,7 +98,7 @@ test.describe("Create user with errors test display", () => {
     await test.step("Create User without errors", async () => {
       await genderSelect.selectOption("Homme");
       await validateButton.click();
-      await expect(page).toHaveURL(new RegExp(`${testUrl}\/admin\/patient\/\\d+`), {timeout: 50000});
+      await expect(page).toHaveURL(new RegExp(`${testUrl}\/admin\/patient\/.+`), {timeout: 50000});
       // We should be able to create such a user
 
       const createdUserProfilePicture = await patientInfoFormFixture.getCreatedUserProfilePicture();

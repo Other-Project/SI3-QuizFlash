@@ -3,7 +3,7 @@ const NotFoundError = require("../../../../utils/errors/not-found-error.js");
 
 /**
  * This function filters among the questions to return only the question linked with the given quizId
- * @param {string|number} questionId
+ * @param {string} questionId
  */
 function getQuestionAnswers(questionId) {
     return Answer.get().filter(answer => answer.questionId === questionId);
@@ -11,9 +11,9 @@ function getQuestionAnswers(questionId) {
 
 /**
  * This function retrieves an answer from a question
- * @param {string|number} quizId
- * @param {string|number} questionId
- * @param {string|number} answerId
+ * @param {string} quizId
+ * @param {string} questionId
+ * @param {string} answerId
  * @throws NotFoundError If the answerId doesn't exist or the quizId/questionId in the answer is different from the one provided in parameter
  */
 function getAnswerFromQuestion(quizId, questionId, answerId) {

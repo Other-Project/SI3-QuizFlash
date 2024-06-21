@@ -1,13 +1,21 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, forwardRef, Input, Output} from "@angular/core";
 import {UtilsService} from "../../../service/utils.service";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+
+export const CUSTOM_CONROL_VALUE_ACCESSOR: any = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => HobbiesComponent),
+  multi: true
+};
 
 @Component({
   selector: "hobbies-select",
   templateUrl: "hobbies.component.html",
-  styleUrls: ["hobbies.component.scss"]
+  styleUrls: ["hobbies.component.scss"],
+  providers: [CUSTOM_CONROL_VALUE_ACCESSOR]
 })
 
-export class HobbiesComponent {
+export class HobbiesComponent implements ControlValueAccessor {
   @Input() tags: string[] = [];
   @Input() placeHolder: string = "";
   @Output() updateTags: EventEmitter<string[]> = new EventEmitter<string[]>();
@@ -28,8 +36,8 @@ export class HobbiesComponent {
   }
 
   onAdd(hobby: any) {
-    this.availableTags = [...this.availableTags, hobby]; //https://github.com/ng-select/ng-select/tree/master
-    this.tags.push(hobby);
+    if (!this.availableTags.includes(hobby))
+      this.availableTags = [...this.availableTags, hobby]; //https://github.com/ng-select/ng-select/tree/master
     this.updateTags.emit(this.tags);
   }
 
@@ -41,5 +49,16 @@ export class HobbiesComponent {
   onRemoveAll() {
     this.tags = [];
     this.updateTags.emit(this.tags);
+  }
+
+  registerOnChange(fn: any): void {
+    this.updateTags.subscribe(fn);
+  }
+
+  registerOnTouched(fn: any): void {
+  }
+
+  writeValue(obj: any): void {
+    this.tags = obj;
   }
 }

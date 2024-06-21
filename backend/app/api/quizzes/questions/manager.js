@@ -9,12 +9,11 @@ const sound = (quizId, questionId) => `quizzes/${quizId}/${questionId}/sound`;
 
 /**
  * This function filters among the questions to return only the question linked with the given quizId
- * @param {string|number} quizId
+ * @param {string} quizId
  * @returns {Question[]}
  */
 function getQuizQuestions(quizId) {
-    const parsedId = parseInt(quizId, 10);
-    return Question.get().filter((question) => question.quizId === parsedId).map(question => ({
+    return Question.get().filter((question) => question.quizId === quizId).map(question => ({
         ...question,
         imageUrl: readFile(question.imageUrl),
         soundUrl: readFile(question.soundUrl)
@@ -24,13 +23,12 @@ function getQuizQuestions(quizId) {
 /**
  * This function retrieves a question from a quiz
  * @throws NotFoundError If the questionId doesn't exist or the quizId in the question is different from the one provided in parameter
- * @returns {Question}
+ * @returns {Question&{id: string}}
  */
 function getQuestionFromQuiz(quizId, questionId) {
-    const quizIdInt = parseInt(quizId, 10);
     const question = Question.getById(questionId);
 
-    if (question.quizId === quizIdInt) return {
+    if (question.quizId === quizId) return {
         ...question,
         imageUrl: readFile(question.imageUrl),
         soundUrl: readFile(question.soundUrl)
@@ -41,7 +39,7 @@ function getQuestionFromQuiz(quizId, questionId) {
 
 /**
  * Create question entry
- * @param {string|number} quizId
+ * @param {string} quizId
  * @param {Question&{answers: Answer[]}} question
  */
 function createQuestion(quizId, question) {
@@ -64,9 +62,9 @@ function createQuestion(quizId, question) {
 
 /**
  * Replace question entry
- * @param {string|number} quizId
- * @param {string|number} questionId
- * @param {Question&{answers: Answer[]}} question
+ * @param {string} quizId
+ * @param {string} questionId
+ * @param {Question&{answers: Answer&{id: string}[]}} question
  */
 function replaceQuestion(quizId, questionId, question) {
     const { answers, imageUrl, soundUrl, ...pureQuestion } = question;
@@ -84,9 +82,9 @@ function replaceQuestion(quizId, questionId, question) {
 
 /**
  * Update question fields
- * @param {string|number} quizId
- * @param {string|number} questionId
- * @param {Question&{answers: Answer[]}} question
+ * @param {string} quizId
+ * @param {string} questionId
+ * @param {Question&{answers: Answer&{id: string}[]}} question
  */
 function updateQuestion(quizId, questionId, question) {
     const { answers, imageUrl, soundUrl, ...pureQuestion } = question;
@@ -100,11 +98,10 @@ function updateQuestion(quizId, questionId, question) {
 
 /**
  * Delete question entry
- * @param {string|number} quizId
- * @param {string|number} questionId
+ * @param {string} quizId
+ * @param {string} questionId
  */
 function deleteQuestion(quizId, questionId) {
-    if (typeof quizId === "string") quizId = parseInt(quizId, 10);
     const question = Question.getById(questionId);
     if (question.quizId !== quizId)
         throw new NotFoundError(`${question.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
@@ -119,14 +116,13 @@ function deleteQuestion(quizId, questionId) {
  * @param {string} questionId
  */
 function removedAnswers(questionId) {
-    let answers = Answer.get().filter(answer => answer.questionId === parseInt(questionId));
+    let answers = Answer.get().filter(answer => answer.questionId === questionId);
     if (answers.length < 3) return [];
     let answersRemoved = answers.filter(answer => !answer.trueAnswer);
     return answersRemoved.sort(() => 0.5 - Math.random()).slice(0, answers.length / 2);
 }
 
 function checkQuestionAndUpdateFiles(quizId, questionId, pureQuestion, imageUrl, soundUrl) {
-    if (typeof quizId === "string") quizId = parseInt(quizId, 10);
     const questionInDb = Question.getById(questionId);
     if (questionInDb.quizId !== quizId)
         throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);

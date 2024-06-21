@@ -4,7 +4,7 @@
 
     <div>
       <input type="text" placeholder="Entrez un titre" formControlName="title" id="title"/>
-      <hobbies-select [placeHolder]="'Sélectionnez ou créez des tags'" [tags]="quiz.tags" (updateTags)="updateTags($event)"/>
+      <hobbies-select [placeHolder]="'Sélectionnez ou créez des tags'" formControlName="tags"/>
 
       <div class="actions">
         <app-button (click)="save()" [disabled]="loading">

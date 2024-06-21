@@ -3,7 +3,7 @@ const BaseModel = require("../utils/base-model.js");
 const { pathPattern } = require("../utils/file");
 
 module.exports = new BaseModel("Question", {
-    quizId: Joi.number().required(),
+    quizId: Joi.string().required().uuid(),
     text: Joi.string().required(),
     type: Joi.string().valid("TextOnly", "Image", "Sound").required(),
     imageUrl: Joi.string().pattern(pathPattern).when("type", { is: "Image", then: Joi.required(), otherwise: Joi.allow("") }),
