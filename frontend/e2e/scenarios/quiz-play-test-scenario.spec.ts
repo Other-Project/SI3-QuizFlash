@@ -1,36 +1,8 @@
-import {expect, test} from "@playwright/test";
+import {test} from "@playwright/test";
 import {testUrl} from "../e2e.config";
-import {QuizSelectionFixture} from "../../src/app/quiz/quiz-game-selection/quiz-selection/quiz-selection.fixture";
-import {ProfileListFixture} from "../../src/app/profiles/profile-list/profile-list.fixture";
 import {Quiz} from "../../src/models/quiz.models";
 import {QuizGameFixture} from "../../src/app/quiz/quiz-game/quiz-game.fixture";
-import {Locator} from "playwright";
-import {getQuiz} from "../e2e.utils";
-
-async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
-  const questionResultFixture = quizGameFixture.getQuestionResultFixture();
-  const questionTitle = await quizGameFixture.getQuestionFixture().getQuestionTitle();
-
-  // Getting correct answer corresponding to the question
-  const answer = quiz.questions.find(question => question.text == questionTitle)!
-    .answers.find(answer => answer.trueAnswer == correctAnswer)!.answerText;
-
-  // Obtain the button corresponding to the answer
-  const answerButton = quizGameFixture.getAnswersFixture().getAnswerButton(answer);
-  await expect(answerButton).toBeVisible();
-  await answerButton.click();
-
-  // Screen check
-  await ((correctAnswer) ? questionResultFixture.checkIsCorrectScreen()
-    : questionResultFixture.checkIsIncorrectScreen());
-}
-
-async function checkVisibleAndClick(button: Locator) {
-  // Check if the button is visible
-  await expect(button).toBeVisible();
-  // Click the button
-  await button.click();
-}
+import {checkVisibleAndClick, endPageTest, finishQuiz, getQuiz, launchQuiz, playQuestionTest} from "../e2e.utils";
 
 test.describe("Playing of a quiz by a patient", () => {
   test("Quiz test", async ({page, request}) => {
@@ -39,23 +11,8 @@ test.describe("Playing of a quiz by a patient", () => {
 
     await page.goto(testUrl);
 
-    await test.step("Select User", async () => {
-      // Getting Martine's profile button
-      const martineProfileButton = await new ProfileListFixture(page).getUserButton("Martine");
-      // Check if the profile button is visible and user selection
-      await checkVisibleAndClick(martineProfileButton!);
-
-      await expect(page).toHaveURL(`${testUrl}/quizzes`);
-    });
-
-    await test.step("Select Quiz", async () => {
-      // Getting French song quiz button
-      const frenchSongQuizButton = await new QuizSelectionFixture(page).getQuizButton("Chansons Françaises");
-      // Check if the French song quiz button is visible and launch it
-      await checkVisibleAndClick(frenchSongQuizButton!);
-
-      await expect(page).toHaveURL(`${testUrl}/quizzes/quiz/${quizId}`);
-    });
+    // Launch the quiz with the patient "Martine"
+    await launchQuiz(page, quizId, "Martine");
 
     const quizGameFixture = new QuizGameFixture(page);
 
@@ -87,26 +44,14 @@ test.describe("Playing of a quiz by a patient", () => {
     });
 
     await test.step("Select a wrong answer", async () => {
+      // Choose a false answer and select it
       await playQuestionTest(quiz, false, quizGameFixture);
       const nextButton = quizGameFixture.getQuestionResultFixture().getNextButton();
       await checkVisibleAndClick(nextButton);
     });
 
-    await test.step("Quiz end", async () => {
-      await playQuestionTest(quiz, true, quizGameFixture);
-      // Getting the quiz finish button
-      const finishButton = quizGameFixture.getQuestionResultFixture().getFinishButton();
-      await checkVisibleAndClick(finishButton);
-    });
+    await finishQuiz(quiz, quizGameFixture);
 
-    await test.step("Check end", async () => {
-      await quizGameFixture.checkIsFinishScreen();
-      // Getting the go back to menu button
-      const goBackToMenuButton = quizGameFixture.getGoBackToMenuButton();
-      await checkVisibleAndClick(goBackToMenuButton);
-
-      // Check that the redirection has worked
-      await expect(page).toHaveURL(`${testUrl}/quizzes`);
-    });
+    await endPageTest(page, quizGameFixture);
   });
 });
