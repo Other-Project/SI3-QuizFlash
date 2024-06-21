@@ -41,6 +41,7 @@
     "birthDate": "1929-06-03",
     "pictureUrl": "",
     "hobbies": [
+      "culture",
       "pêche",
       "télévision"
     ],
@@ -54,5 +55,27 @@
     "soundQuestion": false,
     "autoStartAudio": false,
     "id": 1715587553386
+  },
+  {
+    "access": 1,
+    "lastname": "Dupont",
+    "firstname": "Bernard",
+    "birthDate": "1952-12-29",
+    "pictureUrl": "",
+    "hobbies": [
+      "culture",
+      "famille",
+      "théâtre"
+    ],
+    "dementiaLevel": 1,
+    "fontSize": 2,
+    "removeAnswers": true,
+    "automatedSkip": true,
+    "answerHint": true,
+    "numberOfQuestion": 99,
+    "replayAtEnd": false,
+    "soundQuestion": false,
+    "autoStartAudio": false,
+    "id": 1718725193366
   }
 ]
