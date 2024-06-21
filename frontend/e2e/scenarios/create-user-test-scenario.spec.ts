@@ -12,7 +12,9 @@ test.describe("Create user test display", () => {
 
     await test.step("Create User Navigation", async () => {
       const profilesFixture = new ProfilesFixture(page);
+      const firstProfile = profilesFixture.getFirstProfile();
 
+      await expect(firstProfile).toBeVisible({timeout: 50000});
       const adminButton = profilesFixture.getAdminButtonFixture().getAdminButton();
 
       await expect(adminButton).toBeVisible();

@@ -14,7 +14,9 @@ test.describe("Create Quiz with errors test display", () => {
 
     await test.step("Create Quiz Navigation", async () => {
       const profilesFixture = new ProfilesFixture(page);
+      const firstProfile = profilesFixture.getFirstProfile();
 
+      await expect(firstProfile).toBeVisible({timeout: 50000});
       const adminButton = profilesFixture.getAdminButtonFixture().getAdminButton();
 
       await expect(adminButton).toBeVisible();

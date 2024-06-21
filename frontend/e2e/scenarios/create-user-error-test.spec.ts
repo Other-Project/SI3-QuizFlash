@@ -12,7 +12,9 @@ test.describe("Create user with errors test display", () => {
       const profilesFixture = new ProfilesFixture(page);
 
       const adminButton = profilesFixture.getAdminButtonFixture().getAdminButton();
+      const firstProfile = profilesFixture.getFirstProfile();
 
+      await expect(firstProfile).toBeVisible({timeout: 50000});
       await expect(adminButton).toBeVisible();
       await adminButton.click();
       await expect(page).toHaveURL(`${testUrl}/admin/patients`);
