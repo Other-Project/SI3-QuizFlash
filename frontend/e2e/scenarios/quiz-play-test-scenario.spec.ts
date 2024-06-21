@@ -6,6 +6,7 @@ import {Quiz} from "../../src/models/quiz.models";
 import {QuizGameFixture} from "../../src/app/quiz/quiz-game/quiz-game.fixture";
 import {Locator} from "playwright";
 import {getQuiz} from "../e2e.utils";
+import {ProfilesFixture} from "../../src/app/profiles/profiles.fixture";
 
 async function playQuestionTest(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
   const questionResultFixture = quizGameFixture.getQuestionResultFixture();
@@ -40,6 +41,10 @@ test.describe("Playing of a quiz by a patient", () => {
     await page.goto(testUrl);
 
     await test.step("Select User", async () => {
+      const profilesFixture = new ProfilesFixture(page);
+      const firstProfile = profilesFixture.getFirstProfile();
+      // Wait for the server to load users
+      await expect(firstProfile).toBeVisible({timeout: 50000});
       // Getting Martine's profile button
       const martineProfileButton = await new ProfileListFixture(page).getUserButton("Martine");
       // Check if the profile button is visible and user selection
