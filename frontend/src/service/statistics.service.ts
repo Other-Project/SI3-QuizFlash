@@ -25,7 +25,7 @@ export class StatisticsService {
     });
   }
 
-  getUserQuizzesParticipation(userId: number) {
+  getUserQuizzesParticipation(userId: string) {
     return firstValueFrom(this.http.get<Quiz[]>(`${this.quizApiUrl}/quizzes/${userId}`));
   }
 

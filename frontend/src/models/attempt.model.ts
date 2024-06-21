@@ -3,5 +3,5 @@ export interface Attempt {
   chosenAnswersId: string;
   timeSpent: number;
   answerHint: boolean;
-  hiddenAnswers: number[];
+  hiddenAnswers: string[];
 }
