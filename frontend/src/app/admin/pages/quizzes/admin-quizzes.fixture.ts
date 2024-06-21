@@ -13,4 +13,9 @@ export class AdminQuizzesFixture extends E2EComponentFixture {
   getAQuiz(string: string) {
     return this.page.getByRole("button", {name: string});
   }
+
+  async getNumberOfQuizzes() {
+    const locators = await this.page.locator("app-quiz-selection-card").all();
+    return locators.length;
+  }
 }
