@@ -1,8 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {faCheck, faEdit, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {faCheck, faEdit, faTrash, faVenus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {Patient} from "../../../../../models/patient.models";
 import {UserService} from "../../../../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {getDefaultProfilePicture, getFaIcon} from "../../../../../utils/profile-picture.utils";
+import {Genders} from "../../../../../models/genders.model";
 
 @Component({
   selector: 'patient-header',
@@ -10,15 +12,13 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./patient-header.component.scss']
 })
 
-export class PatientHeaderComponent implements OnInit{
+export class PatientHeaderComponent {
   @Input() patient?: Patient;
   edit: boolean = false;
   delete: boolean = false;
   @Output() patientInfoChange = new EventEmitter<{ firstname: string; lastname: string; age: number }>();
 
   constructor(public userService: UserService, private route: ActivatedRoute, private router: Router) {
-  }
-  ngOnInit(): void {
   }
 
   editPatientInfo() {
@@ -39,4 +39,8 @@ export class PatientHeaderComponent implements OnInit{
   protected readonly faCheck = faCheck;
   protected readonly faXmark = faXmark;
   protected readonly faEdit = faEdit;
+  protected readonly faVenus = faVenus;
+  protected readonly getDefaultProfilePicture = getDefaultProfilePicture;
+  protected readonly Genders = Genders;
+  protected readonly getFaIcon = getFaIcon;
 }

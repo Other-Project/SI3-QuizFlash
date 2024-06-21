@@ -30,5 +30,17 @@
     "soundUrl": "",
     "quizId": 1718692508978,
     "id": 1718692723510
+  },
+  {
+    "text": "To delete",
+    "type": "TextOnly",
+    "quizId": 1718951951472,
+    "id": 1718951983617
+  },
+  {
+    "text": "Not to delete",
+    "type": "TextOnly",
+    "quizId": 1718951951472,
+    "id": 1718952106276
   }
 ]

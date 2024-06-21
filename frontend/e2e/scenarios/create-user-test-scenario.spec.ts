@@ -12,7 +12,9 @@ test.describe("Create user test display", () => {
 
     await test.step("Create User Navigation", async () => {
       const profilesFixture = new ProfilesFixture(page);
+      const firstProfile = profilesFixture.getFirstProfile();
 
+      await expect(firstProfile).toBeVisible({timeout: 50000});
       const adminButton = profilesFixture.getAdminButtonFixture().getAdminButton();
 
       await expect(adminButton).toBeVisible();
@@ -28,13 +30,13 @@ test.describe("Create user test display", () => {
     });
     const patientFixture = new PatientFixture(page);
 
-    const patientHeaderFixture = patientFixture.getPatientHeaderFixture();
-    const createUserTitle = patientHeaderFixture.getCreateUserTitle();
-    const profilePictureInput = patientHeaderFixture.getProfilePictureInput();
-    const lastNameInput = patientHeaderFixture.getLastNameInput();
-    const firstNameInput = patientHeaderFixture.getFirstNameInput();
-    const birthDateInput = patientHeaderFixture.getBirthDateInput();
-    const validateButton = patientHeaderFixture.getValidateButton();
+    const patientInfoFormFixture = patientFixture.getPatientInfoFormFixture();
+    const profilePictureInput = patientInfoFormFixture.getProfilePictureInput();
+    const lastNameInput = patientInfoFormFixture.getLastNameInput();
+    const firstNameInput = patientInfoFormFixture.getFirstNameInput();
+    const birthDateInput = patientInfoFormFixture.getBirthDateInput();
+    const genderSelect = patientInfoFormFixture.getGenderSelect();
+    const validateButton = patientInfoFormFixture.getValidateButton();
 
     const patientSettingsFixture = patientFixture.getPatientSettings();
     const dementiaInput = patientSettingsFixture.getDementiaLevel();
@@ -44,10 +46,10 @@ test.describe("Create user test display", () => {
     const audioQuestionsInput = patientSettingsFixture.getAudioQuestions();
 
     await test.step("User form presence verification", async () => {
-      await expect(createUserTitle).toBeVisible();
       await expect(lastNameInput).toBeVisible();
       await expect(firstNameInput).toBeVisible();
       await expect(birthDateInput).toBeVisible();
+      await expect(genderSelect).toBeVisible();
       await expect(validateButton).toBeVisible();
     });
 
@@ -55,6 +57,7 @@ test.describe("Create user test display", () => {
       await profilePictureInput.setInputFiles("./e2e/assets/bernard.jpg");
       await lastNameInput.fill("Dupont");
       await firstNameInput.fill("Bernard");
+      await genderSelect.selectOption("Homme");
       await birthDateInput.fill("1950-05-11");
       await validateButton.click();
     });

@@ -4,6 +4,7 @@ import {QuizService} from "../../../service/quiz-service.service";
 import {UserService} from "../../../service/user.service";
 import {Patient} from "../../../models/patient.models";
 import {ActivatedRoute, Router} from "@angular/router";
+import {UtilsService} from "../../../service/utils.service";
 
 
 @Component({
@@ -22,9 +23,13 @@ export class QuizGameSelectionComponent {
   public quizzes?: Quiz[];
   @Output() returnIdQuizSelected: EventEmitter<String> = new EventEmitter<String>();
 
-  constructor(private userService: UserService, private quizService: QuizService, private route: ActivatedRoute, private router: Router) {
+  constructor(private userService: UserService, private quizService: QuizService, private utilsService: UtilsService, private route: ActivatedRoute, private router: Router) {
     this.userService.user$.subscribe(user => this.user = user as Patient);
-    this.userService.hobbies$.subscribe(tags => this.tags = tags);
+    this.utilsService.getTags().then(values => {
+      this.tags = [...new Set(values)];
+    }).catch(() => {
+      alert("Il y a eu une erreur lors de la récupération des différents hobbies\nVeuillez recharger la page");
+    });
     quizService.quizzes$.subscribe(quizzes => {
       this.quizzes = quizzes;
       if (quizzes) this.updateQuizzes();

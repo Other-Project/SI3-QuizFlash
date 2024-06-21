@@ -1,6 +1,7 @@
 import {Dementia} from "../models/dementia.models";
 import {AccessRestriction} from "../models/access-restriction.models";
 import {Patient} from "../models/patient.models";
+import {Genders} from "../models/genders.model";
 
 export const USER_BERNARD: Patient = {
   id: "98f9f0da-f011-431a-9361-482ab17f8561",
@@ -9,6 +10,7 @@ export const USER_BERNARD: Patient = {
   pictureUrl: "assets/users/bernard.jpg",
   firstname: "Bernard",
   lastname: "Martin",
+  gender: Genders.MALE,
   birthDate: "1939-06-14",
   dementiaLevel: Dementia.High,
   fontSize: 1.25,

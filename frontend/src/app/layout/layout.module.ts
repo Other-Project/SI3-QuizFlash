@@ -12,6 +12,8 @@ import {QuantityInputComponent} from "./quantity-input/quantity-input.component"
 import {FormsModule} from "@angular/forms";
 import {SpinnerComponent} from "./spinner/spinner.component";
 import {SpinnerSectionComponent} from "./spinner-section/spinner-section.component";
+import {HobbiesComponent} from "./hobbies/hobbies.component";
+import {NgSelectModule} from "@ng-select/ng-select";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {SpinnerSectionComponent} from "./spinner-section/spinner-section.compone
     InputComponent,
     QuantityInputComponent,
     SpinnerComponent,
-    SpinnerSectionComponent
+    SpinnerSectionComponent,
+    HobbiesComponent
   ],
   exports: [
     HeaderComponent,
@@ -34,7 +37,8 @@ import {SpinnerSectionComponent} from "./spinner-section/spinner-section.compone
     InputComponent,
     QuantityInputComponent,
     SpinnerComponent,
-    SpinnerSectionComponent
+    SpinnerSectionComponent,
+    HobbiesComponent
   ],
   imports: [
     NgOptimizedImage,
@@ -42,7 +46,8 @@ import {SpinnerSectionComponent} from "./spinner-section/spinner-section.compone
     NgIf,
     RouterLink,
     FaIconComponent,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ]
 })
 export class LayoutModule {

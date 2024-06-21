@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {UserService} from "../../../../../service/user.service";
 import {Patient} from "../../../../../models/patient.models";
 
@@ -9,17 +9,10 @@ import {Patient} from "../../../../../models/patient.models";
   styleUrls: ['information.component.scss']
 })
 
-export class InformationComponent implements OnInit {
+export class InformationComponent {
   @Input() public patient?: Patient;
-  hobbies?: string[];
 
   constructor(private userService: UserService) {
-  }
-
-  ngOnInit() {
-    this.userService.hobbies$.subscribe(hobbies => {
-      this.hobbies = hobbies;
-    });
   }
 
   protected updatePatientHobbies(newHobbies: string[]) {
