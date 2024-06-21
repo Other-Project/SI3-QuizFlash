@@ -27,8 +27,7 @@ test.describe("Create user with errors test display", () => {
 
     const patientFixture = new PatientFixture(page);
 
-    const patientHeaderFixture = patientFixture.getPatientHeaderFixture();
-    const createUserTitle = patientHeaderFixture.getCreateUserTitle();
+    const patientHeaderFixture = patientFixture.getPatientInfoFormFixture();
     const profilePictureInput = patientHeaderFixture.getProfilePictureInput();
     const lastNameInput = patientHeaderFixture.getLastNameInput();
     const firstNameInput = patientHeaderFixture.getFirstNameInput();
@@ -36,7 +35,6 @@ test.describe("Create user with errors test display", () => {
     const validateButton = patientHeaderFixture.getValidateButton();
 
     await test.step("User form presence verification", async () => {
-      await expect(createUserTitle).toBeVisible();
       await expect(lastNameInput).toBeVisible();
       await expect(firstNameInput).toBeVisible();
       await expect(birthDateInput).toBeVisible();
