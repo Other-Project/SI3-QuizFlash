@@ -13,17 +13,18 @@ Les objectifs de cette semaine à temps plein sont les suivants :
 - Conteneuriser notre application (tests compris)
 
 **[Tests :](#tests-réalisés-)**
-Pour cette partie, nous devons tester le déroulement des scénarios définis dans leur intégralité (tests dits end to end). Pour ce faire, nous avons ajouté la
-librairie playwright, qui est déjà très utilisé par les grosses entreprises. L'objectif est de tester notre interface de manière automatisée pour s'assurer que
-toutes les interactions avec celle-ci s'exécutent comme l'on s'y attend.
+Pour cette partie, nous devions tester le déroulement des scénarios définis dans leur intégralité (tests dits "end-to-end"). Pour ce faire, nous avons ajouté la
+librairie [Playwright](https://playwright.dev/), qui est déjà très utilisé par les grosses entreprises.
+L'objectif est de tester notre interface de manière automatisée pour s'assurer que toutes les interactions avec celle-ci s'exécutent comme l'on s'y attend.
 
 Cependant, lors de ce sprint, il était clair dès le départ que nous n'aurions pas le temps de tester tous les scénarios dans tous leurs déroulements. Il a donc
 fallu établir quels scénarios nous souhaitions prioriser par rapport aux autres, pour savoir ce qui était important de tester en priorité pour notre site.
 
 **[Docker :](#documentation-ops-)**
-Pour cette partie, on a mis en place un docker compose afin générant des conteneurs hébergeants le back, le front et les tests afin que l'ensemble de l'
-application
-soit portable et puisse être diffuser.
+Pour cette seconde partie, nous devions conteneuriser l'ensemble de notre site afin d'en assurer la portabilité.
+Nous avons pour cela utilisé la technologie [Docker](https://www.docker.com/).
+Le backend, le frontend et les tests sont conteneurisés séparément pour améliorer la maintenabilité et la modularité des services.
+Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir la configuration de ces conteneurs.
 
 ----
 
