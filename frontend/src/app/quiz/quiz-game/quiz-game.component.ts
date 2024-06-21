@@ -115,7 +115,7 @@ export class QuizGameComponent implements OnDestroy {
     let duration = (new Date().getTime() - this.start!.getTime()) / 60000;
     let attempt = {} as Attempt;
     attempt.chosenAnswersId = answer.id;
-    attempt.answerHint = !this.fiftyFiftyEnabled;
+    attempt.answerHint = !this.fiftyFiftyEnabled && this.currentQuestion!.answers.length > 2;
     attempt.timeSpent = duration;
     attempt.hiddenAnswers = this.currentQuestion!.answers.filter(answer => answer.hide == true).map(answer => answer.id);
     this.loading = true;
