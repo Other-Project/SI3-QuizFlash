@@ -78,36 +78,40 @@ Pour lancer nos tests, nous utilisons la configuration suivante :
 
 Pour lancer tous les tests : ``run test:e2e``
 
-### Tests par rapport à nos scénarios :
+### Critères de priorisation des scénarios de tests :
 
-- **Test n°1** : ``quiz-play-test-scenario.spec.ts``
-    - Ce premier test vise à tester en intégralité une partie de quiz jouée sur notre site. Conformément au scénario, on commence par se connecter en tant que
+- À quel point l'élément impacte le patient
+- Fréquence de visionnage par le patient
+- Fréquence de visionnage par le professionel
+
+### Scénarios de tests par rapport à nos scénarios d'utilisation :
+
+- **Scénario de test n°1 :**``quiz-play-test-scenario.spec.ts``
+    - Ce premier scénario de test vise à tester en intégralité une partie de quiz jouée sur notre site. Conformément au scénario, on commence par se connecter
+      en tant que
       Martine pour pouvoir jouer le quiz sur les chansons françaises. Comme attendu, il comporte trois types de questions : les questions sonores, textuelles et
       visuelles. On va répondre certaines fois juste et d'autres faux afin de bien tester notre moteur de jeu. Nous jouons le quiz jusqu'à la fin, nous sommes
       félicité, puis nous sommes redirigés vers la page des quizz pour Martine.
 
 
-- **Test n°2** : ``create-quiz-test-scenario.spec.ts``
-    - Ce deuxième test vise à tester en intégralité le processus de création d'un quiz. On commence donc par se connecter en tant qu'administrateur, puis on
+- **Scénario de test n°2 :**``create-quiz-test-scenario.spec.ts``
+    - Ce deuxième scénario de test vise à tester en intégralité le processus de création d'un quiz. On commence donc par se connecter en tant qu'administrateur,
+      puis on
       accède à la liste des quizz. De là, on clique sur créer un quiz. On rentre un titre, un thème, une image et on le sauvegarde. Ensuite, on ajoute 3
       questions, chacune d'un type différent en les sauvegardant au fur et à mesure. Pour la question sonore, on ajoute un fichier .mp3 et pour la question
       visuelle, on ajoute une image. Enfin, on finit par sauvegarder le quiz.
 
 
-- **Test n°3** : ``create-user-test-scenario.spec.ts``
-    - Ce troisième test vise à tester entièrement le processus de création d'un utilisateur. Pour commencer, on se connecte en tant qu'administrateur, puis on
-      sélectionne créer un utilisateur. De là, on rentre son nom, son prénom et sa date de naissance. On lui ajoute également une photo de profil. On valide et
+- **Scénario de test n°3 :**``create-user-test-scenario.spec.ts``
+    - Ce troisième scénario de test vise à tester entièrement le processus de création d'un utilisateur. Pour commencer, on se connecte en tant
+      qu'administrateur, puis on
+      sélectionne créer un utilisateur. De là, on rentre son nom, son prénom, son sexe et sa date de naissance. On lui ajoute également une photo de profil. On
+      valide et
       il est créé. Une fois créé, on a accès à ses paramètres. On va donc ajuster ceci conformément à notre scénario.
-
-
-- **Test n°4** : ``delete-question-test-scenario.spec.ts``
-    - Ce quatrième test est lié en partie au quatrième scénario. Dans le cas où une question devient trop difficile pour un accueilli, il faut qu'elle puisse
-      être supprimée du quiz. Dans ce test, on va donc se connecter en tant qu'administrateur pour accéder à un quiz. On le sélectionne et on supprime une
-      question. On vérifie qu'elle se supprime bien.
 
 ### Tests complémentaires :
 
-- **Test complémentaire n°1 :** ``create-user-error-test.spec.ts``
+- **Scénario de test complémentaire n°1 :** ``create-user-error-test.spec.ts``
     - Ce premier test complémentaire vise à tester plus en profondeur la création d'un utilisateur sur notre site en testant également les cas d'erreurs. Ici,
       on va tenter de créer des utilisateurs avec des prénoms erronés, des noms erronés et des dates de naissance erronées. On va également tester l'input de la
       photo de profil ainsi que le genre de l'utilisateur. Pour les inputs de noms et prénoms, on va passer des mauvais caractères dans les champs et on
@@ -115,12 +119,61 @@ Pour lancer tous les tests : ``run test:e2e``
       bien quand on la passe.
 
 
-- **Test complémentaire n°2 :** ``create-quiz-error-test.spec.ts``
+- **Scénario de test complémentaire n°2 :** ``create-quiz-error-test.spec.ts``
     - Pour ce deuxième test complémentaire, on va tester plus en profondeur la création de quiz en gérant les cas d'erreurs potentiels. Tout d'abord, on
       s'assure que lorsque l'on ne sauvegarde pas un quiz, il n'apparaît pas dans la liste des quiz. On crée donc le quiz. Pour les questions, on commence par
       tester la même mécanique en réutilisant le même procédé. On va aussi tenter de créer des questions avec des propositions vides, avec des inputs d'images
       et de sons vides quand les cas se présentent, etc. En résumé, on s'assure que la question est bien paramétrée et dans son intégralité au moment de sa
       sauvegarde, et on teste que notre site réagit bien lorsque celles-ci ne sont pas bien définies.
+
+
+- **Scénario de test complémentaire n°3 :** ``quiz-play-fiftyfifty-not-removed-test-scenario.spec.ts``
+    - Ce cinquième scénario de test est lié en partie au premier scénario d'utilisation. Ce scénario de test a pour but de tester l'utilisation du bouton 50/50
+      et le paramètre de
+      suppression des mauvaises réponses. Dans ce test, la première question est jouée en utilisant le bouton '50/50' et vérifier que certaines réponses ne sont
+      plus visibles
+      (2 réponses sont cachées lorsqu'il y en a 4 initialement et une seule est caché si il y en a 3 initiallement). La seconde question est jouée de manière à
+      répondre faux un maximum de fois jusqu'à ce qu'il ne reste que la bonne réponse,
+      en vérifiant la disparition du bouton '50/50' lorsque le nombre de réponses restantes est strictement inférieur à 3. Le quiz est joué jusqu'à la fin, nous
+      sommes
+      félicité, puis nous sommes redirigés vers la page des quizz pour Martine.
+
+
+- **Scénario de test complémentaire n°4:**``quiz-play-replay-end-test-scenario.spec.ts``
+    - Ce sixième scénario de test est lié en partie au premier scénario d'utilisation. Ce scénario de test a pour but de tester le paramètre 'Rejouer les
+      questions'. Dans ce test,
+      une mauvaise réponse est séléctionner ainsi cette réponse devra être reposé à la fin du quiz puis toute les questions restantes sont répoondues juste.
+      Lors de la dernière réponse,
+      une vérification est effectuée afin de s'asssurer que la dernière question est bien la question qui devait être reposée. Le quiz est joué jusqu'à la fin,
+      nous sommes
+      félicité, puis nous sommes redirigés vers la page des quizz pour Martine.
+
+- **Scénario de test n°5 :**``delete-question-test-scenario.spec.ts``
+    - Ce quatrième scénario de test est lié en partie au quatrième scénario d'utilisation. Dans le cas où une question devient trop difficile pour un accueilli,
+      il faut qu'elle puisse
+      être supprimée du quiz. Dans ce test, on va donc se connecter en tant qu'administrateur pour accéder à un quiz. On le sélectionne et on supprime une
+      question. On vérifie qu'elle se supprime bien.
+
+### Ordre de priorisation des scénario de tests :
+
+- Cet ordre est basé sur les critères de priorisations décris plus haut :
+    1. Scénario de test n°1, n°2 et n°3, tout ces scénarios sont placés au même niveau car la création des quizs et des users permettent aux patient de jouer
+       tout comme le moteur de jeu lui même
+       ainsi ces 3 éléments testés impactent de manière importante les patients dans la mesure ou cela leur permet de jouer les quiz, les éléments testés sont
+       directement ou indirectement les plus vus par les patients
+       et également par le professionel.
+    2. Scénario de test complémentaire n°4 et n°5, ces deux scénarios sont placés au même niveau car ils sont liés au fait de jouer les quiz. Concernant les
+       critères, les éléments testés par ces scénarios peuvent
+       impacter les patients si les paramètres associés sont activés pour le patient, de même pour la fréquence de visionnage par le patient. Pour ce qui est de
+       la fréquence de visualisation par le prosionnel,
+       les éléments ne sont jamais vu par les professionels car ils sont liés au moteur de jeu.
+    3. Scénario de test complémentaire n°6, ce scénario est là pour tester la suppresion de questions dans un quiz, ainsi il peut impacter un patient dans la
+       mesure ou un quiz rejouer plusieurs fois peut être modifier en retirant des questions entre
+       les différentes fois où il est joué. De plus cela est géré par les professionels donc sont souvent vu par ces deniers. Cependant ce n'est pas vu
+       directement par les patients.
+    4. Scénario de test complémentaire n°1 et n°2, ces deux scénarios sont placés au même niveau car ils sont liés au fait de créer/modifier les patient ou les
+       quiz. Ces scénarios sont là pour tester des cas extrêmes concernant la création/modification
+       des patients et des quiz, ainsi ils sont vu par le professionel mais n'impacte pas les patient et ne sont jamais vu par ces derniers.
 
 ----
 
