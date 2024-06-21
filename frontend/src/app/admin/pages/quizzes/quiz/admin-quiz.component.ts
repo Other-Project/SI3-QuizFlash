@@ -9,7 +9,6 @@ import {faAdd, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {Question} from "../../../../../models/question.models";
 import {NgIf} from "@angular/common";
-import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {UserService} from "../../../../../service/user.service";
 
 @Component({
@@ -22,7 +21,6 @@ import {UserService} from "../../../../../service/user.service";
     AdminQuestionsComponent,
     FaIconComponent,
     NgIf,
-    NgMultiSelectDropDownModule,
     FormsModule
   ],
   standalone: true

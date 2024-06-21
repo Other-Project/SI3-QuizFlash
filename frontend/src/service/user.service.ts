@@ -52,7 +52,6 @@ export class UserService {
   }
 
   public logout() {
-    this.http.post<User>(`${apiUrl}/auth/logout`, this.httpOptions)
-      .subscribe(() => this.user$.next(this.user = undefined));
+    firstValueFrom(this.http.post<User>(`${apiUrl}/auth/logout`, this.httpOptions)).finally(() => this.user$.next(this.user = undefined));
   }
 }

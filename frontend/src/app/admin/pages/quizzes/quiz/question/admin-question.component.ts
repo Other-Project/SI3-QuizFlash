@@ -99,11 +99,9 @@ export class AdminQuestionComponent implements OnInit {
     (this.question.id
         ? this.quizService.updateQuestion(this.quizId, this.question.id, this.form.value)
         : this.quizService.addQuestion(this.quizId, this.form.value)
-    ).then(resp => {
-      this.questionSaved.emit(resp);
-      this.changed = false;
-      this.loading = false;
-    });
+    ).then(resp => this.questionSaved.emit(resp))
+      .catch(err => alert(`Erreur lors de la sauvegarde de la question: ${err}`))
+      .finally(() => this.loading = this.changed = false);
   }
 
   protected readonly faQuestion = faQuestion;

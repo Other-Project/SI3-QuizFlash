@@ -4,6 +4,7 @@ server {
     server_name  localhost;
 
     index  index.html;
+    client_max_body_size 50M;
     location / {
         root   /usr/share/nginx/html;
         try_files $uri$args $uri$args/ /index.html;
