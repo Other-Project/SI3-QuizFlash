@@ -162,30 +162,23 @@ On le sélectionne et on supprime une question. On vérifie qu'elle se supprime 
 
 - Cet ordre est basé sur les critères de priorisations décris plus haut :
     1. Les scénarios de test [n°1](#scénario-de-test-n1--quiz-play-test-scenariospects), [n°2](#scénario-de-test-n2--create-quiz-test-scenariospects)
-       et [n°3](#scénario-de-test-n3--create-user-test-scenariospects) sont placés au même niveau, car la création des quizz et des users permettent aux
-       patients de jouer
-       tout comme le moteur de jeu lui-même.
-       Ainsi, ces 3 éléments impactent de manière importante les patients dans la mesure où cela leur permet de jouer les quizz. Les éléments testés sont
-       directement ou indirectement les plus vus par les patients
-       et également par le professionnel.
+       et [n°3](#scénario-de-test-n3--create-user-test-scenariospects) sont placés au même niveau, car la création des quizz et des utilisateurs permettent aux
+       patients de jouer tout comme le moteur de jeu lui-même.
+       Ainsi, ces 3 éléments impactent de manière importante les patients dans la mesure où cela leur permet de jouer les quizz.
+       Les éléments testés sont directement ou indirectement les plus vus par les patients et également par le professionnel.
     2. Les scénarios de test complémentaire [n°3](#scénario-de-test-complémentaire-n3--quiz-play-fiftyfifty-not-removed-test-scenariospects)
-       et [n°4](#scénario-de-test-complémentaire-n4-quiz-play-replay-end-test-scenariospects), ces deux scénarios sont placés au même niveau, car ils sont liés
-       au fait de jouer les quiz. Concernant les
-       critères, les éléments testés par ces scénarios peuvent
-       impacter les patients si les paramètres associés sont activés pour le patient, de même pour la fréquence de visionnage par le patient. Pour ce qui est de
-       la fréquence de visualisation par le professionnel,
+       et [n°4](#scénario-de-test-complémentaire-n4-quiz-play-replay-end-test-scenariospects), ces deux scénarios sont placés au même niveau, 
+       car ils sont liés au fait de jouer les quiz.
+       Concernant les critères, les éléments testés par ces scénarios peuvent impacter les patients si les paramètres associés sont activés pour le patient, 
+       de même pour la fréquence de visionnage par le patient. Pour ce qui est de la fréquence de visualisation par le professionnel,
        les éléments ne sont jamais vu par les professionnels, car ils sont liés au moteur de jeu.
-    3. Le scénario de test complémentaire [n°5](#scénario-de-test-complémentaire-n5--delete-question-test-scenariospects) : ce scénario est là pour tester la
-       suppression de questions dans un quiz, ainsi, il peut impacter un patient dans la
-       mesure où un quiz rejoué plusieurs fois peut être modifié en retirant des questions entre
-       les différentes fois où il est joué. De plus cela est géré par les professionnels donc sont souvent vu par ces deniers. Cependant, ce n'est pas vu
-       directement par les patients.
-    4. Scénario de test complémentaire [n°1](#scénario-de-test-complémentaire-n1--create-user-error-testspects)
-       et [n°2](#scénario-de-test-complémentaire-n2--create-quiz-error-testspects), ces deux scénarios sont placés au même niveau, car ils sont liés au fait de
-       créer/modifier les patients ou
-       les
-       quiz. Ces scénarios sont là pour tester des cas extrêmes concernant la création/modification
-       des patients et des quiz, ainsi, ils sont vu par le professionnel, mais n'impacte pas les patients et ne sont jamais vu par ces derniers.
+    3. Le scénario de test complémentaire [n°5](#scénario-de-test-complémentaire-n5--delete-question-test-scenariospects) : ce scénario est là pour tester la suppression de questions dans un quiz, ainsi, il peut impacter un patient dans la
+       mesure où un quiz rejoué plusieurs fois peut être modifié en retirant des questions entre les différentes fois où il est joué.
+       De plus cela est géré par les professionnels donc sont souvent vu par ces deniers. Cependant, ce n'est pas vu directement par les patients.
+    4. Les scénarios de test complémentaire [n°1](#scénario-de-test-complémentaire-n1--create-user-error-testspects)
+       et [n°2](#scénario-de-test-complémentaire-n2--create-quiz-error-testspects), ces deux scénarios sont placés au même niveau, car ils sont liés au fait de créer/modifier les patients ou les quiz.
+       Ces scénarios sont là pour tester des cas extrêmes concernant la création/modification des patients et des quiz.
+       Ainsi, ils sont vu par le professionnel, mais n'impacte pas les patients et ne sont jamais vu par ces derniers.
 
 ----
 
