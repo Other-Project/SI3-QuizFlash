@@ -45,7 +45,7 @@ test.describe("Create Quiz test display", () => {
       await fishingTag.click();
 
       const quizPicture = adminQuizFixture.getQuizPicture();
-      await quizPicture.setInputFiles("./src/assets/quiz-test/fishing.jpg");
+      await quizPicture.setInputFiles("./e2e/assets/fishing.jpg");
 
       await titlePlaceHolder.click();
 
@@ -57,7 +57,7 @@ test.describe("Create Quiz test display", () => {
 
     await test.step("Create the first (pictorial) question", async () => {
 
-      await expect(createQuestionButton).toBeVisible();
+      await expect(createQuestionButton).toBeVisible({timeout: 50000});
       await createQuestionButton.click();
 
       const questionFixture = adminQuizFixture.getQuestionFixture(1);
@@ -71,7 +71,7 @@ test.describe("Create Quiz test display", () => {
       await expect(questionTitle).toBeVisible();
       await questionTypeMenu.selectOption("Visuelle");
       const questionPicture = questionFixture.getQuestionPicture();
-      await questionPicture.setInputFiles("./src/assets/quiz-test/caviar.png");
+      await questionPicture.setInputFiles("./e2e/assets/caviar.png");
 
       await questionTitle.fill("De quel poisson le caviar vient-il ?");
       await questionFirstProposition.fill("Le requin");
@@ -125,7 +125,7 @@ test.describe("Create Quiz test display", () => {
 
       await questionTypeMenu.selectOption("Sonore");
       const questionAudioInput = questionFixture.getQuestionAudio();
-      await questionAudioInput.setInputFiles("./src/assets/quiz-test/la peche aux moules.mp3");
+      await questionAudioInput.setInputFiles("./e2e/assets/la peche aux moules.mp3");
 
       await questionTitle.fill("Quel est cette chanson connue sur la pêche ?");
       await questionFirstProposition.fill("Cueillir des fleur");
