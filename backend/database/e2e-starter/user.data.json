@@ -11,36 +11,38 @@
     "pictureUrl": ""
   },
   {
-    "firstname": "Martine",
+    "access": 1,
     "lastname": "Dupont",
+    "firstname": "Martine",
     "gender": "F",
     "birthDate": "1952-12-29",
+    "pictureUrl": "",
     "hobbies": [
       "culture",
       "famille",
-      "théâtre",
       "théâtre"
     ],
-    "dementiaLevel": "1",
-    "fontSize": "1.5",
+    "dementiaLevel": 1,
+    "fontSize": 1.5,
     "removeAnswers": false,
     "automatedSkip": true,
     "answerHint": false,
-    "numberOfQuestion": 3,
+    "numberOfQuestion": 99,
     "replayAtEnd": false,
     "soundQuestion": true,
     "autoStartAudio": true,
-    "access": 1,
     "id": "aea9d1b3-5b0f-4f31-b585-c9901c2d46e6"
   },
   {
-    "firstname": "Francescu",
+    "access": 1,
     "lastname": "Luciani",
+    "firstname": "Francescu",
     "gender": "M",
     "birthDate": "1929-06-03",
+    "pictureUrl": "",
     "hobbies": [
+      "culture",
       "pêche",
-      "télévision",
       "télévision"
     ],
     "dementiaLevel": 0,
@@ -52,7 +54,6 @@
     "replayAtEnd": true,
     "soundQuestion": false,
     "autoStartAudio": false,
-    "access": 1,
     "id": "9ca1313f-ef1f-4874-b7e0-4734b5330e6b"
   }
 ]
