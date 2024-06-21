@@ -203,9 +203,11 @@ Notre site est découpé en 3 images :
   Comme cette image ne contient pas curl, rm et mv, on réplique leur fonctionnement par des scripts js qu'on exécutera avec node
   (on aurait pu ajouter ces programmes, mais celà aurait augmenté la taille de l'image).
   Le seul programme ajouté est sh afin de pouvoir utiliser les && dans le point d'entrée.
+  Le healthcheck est un simple appel CURL à l'endpoint `/api/status`.
 * Le frontend, qui utilise l'image nginx slim hébergeant les fichiers générés par Angular. Cette image est très légère (29.21 MB).
   Dans un premier temps, on installe les dépendances dans une image node, et on exécute `ng build` pour obtenir des fichiers statiques du front.
   Ces fichiers sont copiés dans l'image nginx afin de les héberger.
+  Le healthcheck est un simple appel CURL à la racine.
 * Les tests Playwright qui utilise l'image node à laquelle on ajoute Chromium et ffmpeg.
   Cette image est de loin la plus volumineuse (899.3 MB) à cause de la taille très importante des différentes dépendances de Playwright.
   Des efforts ont été fait de notre côté en incluant un minimum de dépendance, mais node représentant 120mo et chromium pesant plus de 600mo,
