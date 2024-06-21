@@ -28,7 +28,7 @@ router.get("/:answerId", checkAuthentication(access.user), (req, res) => catchEr
             schema: [{ $ref: '#/definitions/Answer' }]
        }
        #swagger.responses[404] = {
-            description: 'Ids don't match'
+            description: "Ids don't match"
        } */
 
     const answer = getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId);
@@ -68,7 +68,7 @@ router.put("/:answerId", checkAuthentication(access.admin), (req, res) => catchE
             description: 'Invalid request'
         }
         #swagger.responses[404] = {
-            description: 'Ids don't match'
+            description: "Ids don't match"
         } */
 
     const answer = getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId);
@@ -90,7 +90,7 @@ router.patch("/:answerId", checkAuthentication(access.admin), (req, res) => catc
             description: 'Invalid request'
         }
         #swagger.responses[404] = {
-            description: 'Ids don't match'
+            description: "Ids don't match"
         } */
 
     const answer = getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId);
@@ -103,7 +103,7 @@ router.delete("/:answerId", checkAuthentication(access.admin), (req, res) => cat
        #swagger.summary = 'Delete an answer'
        #swagger.responses[204] = { }
        #swagger.responses[404] = {
-            description: 'Ids don't match'
+            description: "Ids don't match"
        } */
 
     getAnswerFromQuestion(req.params.quizId, req.params.questionId, req.params.answerId);
