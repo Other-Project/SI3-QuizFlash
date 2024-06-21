@@ -22,7 +22,6 @@ async function playFiftyFiftyQuestionTest(quiz: Quiz, correctAnswer: boolean, qu
 
   // Check if the 50/50 button is hidden
   let buttons = quizGameFixture.getAnswersFixture().getAnswerButtons();
-  console.log(buttons);
 
   // Check if the good number of elements is hide by the 50/50
   await expect(buttons).toHaveCount(Math.floor(answers.length / 2), {timeout: 5000});
