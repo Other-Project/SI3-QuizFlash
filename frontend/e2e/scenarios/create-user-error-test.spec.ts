@@ -86,10 +86,16 @@ test.describe("Create user with errors test display", () => {
       await genderSelect.selectOption("");
     });
 
-    await test.step("Create User without errors", async () => {
+    await test.step("Create User with no gender selected", async () => {
       await lastNameInput.fill("Dupont");
       await firstNameInput.fill("Jean-Marie");
       await birthDateInput.fill("1950-05-05");
+      await validateButton.click();
+      // We shouldn't be able to create such a user
+      await expect(page).toHaveURL(`${testUrl}/admin/patient`);
+    });
+
+    await test.step("Create User without errors", async () => {
       await genderSelect.selectOption("Homme");
       await validateButton.click();
       await expect(page).toHaveURL(new RegExp(`${testUrl}\/admin\/patient\/\\d+`));
