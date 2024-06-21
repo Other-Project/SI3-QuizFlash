@@ -32,41 +32,41 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
 
 ### Scénario 1 : Jouer à un quiz (point de vue accueilli)
 
-    - « Je suis anxieuse durant un temps de repos, alors Anne me propose de réaliser un quiz sur QuizFlash. Anne me signale que l’activité parlera de chansons
-      françaises. Je commence ce quiz, il y a plein de questions différentes, certaines avec du son et d’autres avec du texte ou des images. Mais dans tous les
-      cas, elles sont toutes adaptées à ma vision. Je termine cette activité, le site me félicite, car j’ai réussi à répondre à toutes les questions et je me
-      sens apaisée. »
-    - Ce scénario est de priorité **critique**. En effet, il constitue la base de notre site (à savoir jouer à un quiz). Si cette partie n'est pas
-      fonctionnelle, alors notre site ne sert à rien du tout.
+- « Je suis anxieuse durant un temps de repos, alors Anne me propose de réaliser un quiz sur QuizFlash. Anne me signale que l’activité parlera de chansons
+  françaises. Je commence ce quiz, il y a plein de questions différentes, certaines avec du son et d’autres avec du texte ou des images. Mais dans tous les
+  cas, elles sont toutes adaptées à ma vision. Je termine cette activité, le site me félicite, car j’ai réussi à répondre à toutes les questions et je me
+  sens apaisée. »
+- Ce scénario est de priorité **critique**. En effet, il constitue la base de notre site (à savoir jouer à un quiz). Si cette partie n'est pas
+  fonctionnelle, alors notre site ne sert à rien du tout.
 
 ### Scénario 2 : Création d'un quiz (point de vue ergothérapeute)
 
-    - « Je suis sur un temps de création des activités pour les résidents. Francescu a réalisé toutes les activités qui pouvaient lui être proposées, je dois
-      donc lui en créer de nouvelles. Je vais me servir de QuizFlash regroupant l’ensemble des accueillis avec de nombreuses informations les concernant. Je me
-      lance dans la création d’un quiz sur le thème de la pêche, le site me propose différents types de questions (sonore, illustrée, etc.), j’ajoute un
-      ensemble de questions en alternant les types. Ainsi, une activité sera disponible au moment où il faudra en proposer à Francescu. »
-    - Ce scénario est de **haute priorité**. Comme expliqué précédemment, jouer à un quiz est l'essence même de notre site. Si on ne peut pas créer de quiz,
-      on ne peut pas jouer à un quiz, ce qui explique l'importance de tester ce scénario. Cependant, on considère qu'il est (légèrement) moins important de
-      tester la création de quiz que jouer à un quiz en termes de priorité, car ça n'impacte alors pas directement le joueur (l'accueilli dans notre cas).
+- « Je suis sur un temps de création des activités pour les résidents. Francescu a réalisé toutes les activités qui pouvaient lui être proposées, je dois
+  donc lui en créer de nouvelles. Je vais me servir de QuizFlash regroupant l’ensemble des accueillis avec de nombreuses informations les concernant. Je me
+  lance dans la création d’un quiz sur le thème de la pêche, le site me propose différents types de questions (sonore, illustrée, etc.), j’ajoute un
+  ensemble de questions en alternant les types. Ainsi, une activité sera disponible au moment où il faudra en proposer à Francescu. »
+- Ce scénario est de **haute priorité**. Comme expliqué précédemment, jouer à un quiz est l'essence même de notre site. Si on ne peut pas créer de quiz,
+  on ne peut pas jouer à un quiz, ce qui explique l'importance de tester ce scénario. Cependant, on considère qu'il est (légèrement) moins important de
+  tester la création de quiz que jouer à un quiz en termes de priorité, car ça n'impacte alors pas directement le joueur (l'accueilli dans notre cas).
 
 ### Scénario 3 : Ajout d’un accueilli (point de vue ergothérapeute)
 
-    - « J'accueille Bernard, un nouvel arrivant, pour cela, je réalise un premier rendez-vous. Bernard est dans mon bureau avec sa famille pour cet entretien et
-      ils me communiquent toutes les informations nécessaires à la création de son dossier. Je réalise un bilan psychomoteur, les raccompagne lui et sa famille,
-      et retourne ensuite dans mon bureau terminer le dossier. Je l’ajoute dans la base de données de QuizFlash. Pour cela, je rentre son nom, son prénom,
-      certaines de ses pathologies, le stade de sa maladie et ses différents centres d’intérêts pour obtenir des tests adaptés. »
-    - Ce scénario est de **haute priorité**. Si aucun utilisateur n'est défini sur notre site, alors il n'est pas possible de jouer à un quiz, d'où l'importance
-      de tester ce scénario. De même que précédemment, il est moins prioritaire par rapport au premier scénario, car cela n'impacte pas directement le joueur (
-      l'accueilli dans notre cas).
+- « J'accueille Bernard, un nouvel arrivant, pour cela, je réalise un premier rendez-vous. Bernard est dans mon bureau avec sa famille pour cet entretien et
+  ils me communiquent toutes les informations nécessaires à la création de son dossier. Je réalise un bilan psychomoteur, les raccompagne lui et sa famille,
+  et retourne ensuite dans mon bureau terminer le dossier. Je l’ajoute dans la base de données de QuizFlash. Pour cela, je rentre son nom, son prénom,
+  certaines de ses pathologies, le stade de sa maladie et ses différents centres d’intérêts pour obtenir des tests adaptés. »
+- Ce scénario est de **haute priorité**. Si aucun utilisateur n'est défini sur notre site, alors il n'est pas possible de jouer à un quiz, d'où l'importance
+  de tester ce scénario. De même que précédemment, il est moins prioritaire par rapport au premier scénario, car cela n'impacte pas directement le joueur (
+  l'accueilli dans notre cas).
 
 ### Scénario 4 : Visualisation de l’évolution (point de vue ergothérapeute)
 
-    - « Martine a réalisé plusieurs activités sur QuizFlash, je vais donc observer son évolution avec les résultats qui sont enregistrés dans le site. Durant
-      chaque activité, les données de la session sont collectées afin que je puisse y accéder pour les analyser ultérieurement. Je peux alors visualiser
-      l’évolution de Martine et ainsi adapter au mieux l’activité pour cette accueillie. Si j’observe qu’elle n’est plus en capacité de répondre à certaines
-      questions, je les retire. »
-    - Ce scénario est de **faible priorité**. On considère qu'il est moins grave que les statistiques d'un utilisateur ne soient plus fonctionnelles que le fait
-      de pouvoir jouer à un quiz par exemple. De plus, ce scénario n'impacte pas le joueur. Ce scénario est donc moins testé que les autres.
+- « Martine a réalisé plusieurs activités sur QuizFlash, je vais donc observer son évolution avec les résultats qui sont enregistrés dans le site. Durant
+  chaque activité, les données de la session sont collectées afin que je puisse y accéder pour les analyser ultérieurement. Je peux alors visualiser
+  l’évolution de Martine et ainsi adapter au mieux l’activité pour cette accueillie. Si j’observe qu’elle n’est plus en capacité de répondre à certaines
+  questions, je les retire. »
+- Ce scénario est de **faible priorité**. On considère qu'il est moins grave que les statistiques d'un utilisateur ne soient plus fonctionnelles que le fait
+  de pouvoir jouer à un quiz par exemple. De plus, ce scénario n'impacte pas le joueur. Ce scénario est donc moins testé que les autres.
 
 ----
 
@@ -161,26 +161,27 @@ On le sélectionne et on supprime une question. On vérifie qu'elle se supprime 
 
 ### Ordre de priorisation des scénarios de tests :
 
-- Cet ordre est basé sur les critères de priorisations décris plus haut :
-    1. Les scénarios de test [n°1](#scénario-de-test-n1--quiz-play-test-scenariospects), [n°2](#scénario-de-test-n2--create-quiz-test-scenariospects)
-       et [n°3](#scénario-de-test-n3--create-user-test-scenariospects) sont placés au même niveau, car la création des quizz et des utilisateurs permettent aux
-       patients de jouer tout comme le moteur de jeu lui-même.
-       Ainsi, ces 3 éléments impactent de manière importante les patients dans la mesure où cela leur permet de jouer les quizz.
-       Les éléments testés sont directement ou indirectement les plus vus par les patients et également par le professionnel.
-    2. Les scénarios de test complémentaire [n°3](#scénario-de-test-complémentaire-n3--quiz-play-fiftyfifty-not-removed-test-scenariospects)
-       et [n°4](#scénario-de-test-complémentaire-n4-quiz-play-replay-end-test-scenariospects), ces deux scénarios sont placés au même niveau,
-       car ils sont liés au fait de jouer les quiz.
-       Concernant les critères, les éléments testés par ces scénarios peuvent impacter les patients si les paramètres associés sont activés pour le patient,
-       de même pour la fréquence de visionnage par le patient. Pour ce qui est de la fréquence de visualisation par le professionnel,
-       les éléments ne sont jamais vu par les professionnels, car ils sont liés au moteur de jeu.
-    3. Le scénario de test complémentaire [n°5](#scénario-de-test-complémentaire-n5--delete-question-test-scenariospects) : ce scénario est là pour tester la suppression de
-       questions dans un quiz.
-       Ainsi, il peut impacter un patient dans la mesure où un quiz rejoué plusieurs fois peut être modifié en retirant des questions entre les différentes fois où il est joué.
-       De plus cela est géré par les professionnels donc sont souvent vu par ces deniers. Cependant, ce n'est pas vu directement par les patients.
-    4. Les scénarios de test complémentaire [n°1](#scénario-de-test-complémentaire-n1--create-user-error-testspects)
-       et [n°2](#scénario-de-test-complémentaire-n2--create-quiz-error-testspects), ces deux scénarios sont placés au même niveau, car ils sont liés au fait de créer/modifier les
-       patients ou les quiz. Ces scénarios sont là pour tester des cas extrêmes concernant la création/modification des patients et des quiz.
-       Ainsi, ils sont vu par le professionnel, mais n'impacte pas les patients et ne sont jamais vu par ces derniers.
+Cet ordre est basé sur les critères de priorisations décris plus haut :
+
+1. Les scénarios de test [n°1](#scénario-de-test-n1--quiz-play-test-scenariospects), [n°2](#scénario-de-test-n2--create-quiz-test-scenariospects)
+   et [n°3](#scénario-de-test-n3--create-user-test-scenariospects) sont placés au même niveau, car la création des quizz et des utilisateurs permettent aux
+   patients de jouer tout comme le moteur de jeu lui-même.
+   Ainsi, ces 3 éléments impactent de manière importante les patients dans la mesure où cela leur permet de jouer les quizz.
+   Les éléments testés sont directement ou indirectement les plus vus par les patients et également par le professionnel.
+2. Les scénarios de test complémentaire [n°3](#scénario-de-test-complémentaire-n3--quiz-play-fiftyfifty-not-removed-test-scenariospects)
+   et [n°4](#scénario-de-test-complémentaire-n4-quiz-play-replay-end-test-scenariospects), ces deux scénarios sont placés au même niveau,
+   car ils sont liés au fait de jouer les quiz.
+   Concernant les critères, les éléments testés par ces scénarios peuvent impacter les patients si les paramètres associés sont activés pour le patient,
+   de même pour la fréquence de visionnage par le patient. Pour ce qui est de la fréquence de visualisation par le professionnel,
+   les éléments ne sont jamais vu par les professionnels, car ils sont liés au moteur de jeu.
+3. Le scénario de test complémentaire [n°5](#scénario-de-test-complémentaire-n5--delete-question-test-scenariospects) : ce scénario est là pour tester la suppression de
+   questions dans un quiz.
+   Ainsi, il peut impacter un patient dans la mesure où un quiz rejoué plusieurs fois peut être modifié en retirant des questions entre les différentes fois où il est joué.
+   De plus cela est géré par les professionnels donc sont souvent vu par ces deniers. Cependant, ce n'est pas vu directement par les patients.
+4. Les scénarios de test complémentaire [n°1](#scénario-de-test-complémentaire-n1--create-user-error-testspects)
+   et [n°2](#scénario-de-test-complémentaire-n2--create-quiz-error-testspects), ces deux scénarios sont placés au même niveau, car ils sont liés au fait de créer/modifier les
+   patients ou les quiz. Ces scénarios sont là pour tester des cas extrêmes concernant la création/modification des patients et des quiz.
+   Ainsi, ils sont vu par le professionnel, mais n'impacte pas les patients et ne sont jamais vu par ces derniers.
 
 ----
 
@@ -188,18 +189,18 @@ On le sélectionne et on supprime une question. On vérifie qu'elle se supprime 
 
 ### Lancement facile avec Docker
 
-1. Pour lancer les tests end-to-end, il suffit d'exécuter le script `run-e2e.sh`.
-   Ce script démarre le compose `docker-compose-e2e.yml` et déclare que celui-ci doit s'arrêter lorsque les tests sont terminés.
-2. Pour lancer le site en vue d'un usage en production, il suffit de lancer le script `run.sh`. Ce script démarre simplement le compose `docker-compose.yml`.
+* Pour lancer les tests end-to-end, il suffit d'exécuter le script `run-e2e.sh`.
+  Ce script démarre le compose `docker-compose-e2e.yml` et déclare que celui-ci doit s'arrêter lorsque les tests sont terminés.
+* Pour lancer le site en vue d'un usage en production, il suffit de lancer le script `run.sh`. Ce script démarre simplement le compose `docker-compose.yml`.
 
 ### Images
 
 Notre site est découpé en 3 images :
 
-* Le backend, qui utilise l'image [distroless](https://github.com/GoogleContainerTools/distroless) de Node.JS fournie par Google
+* Le backend, qui utilise l'image [distroless](https://github.com/GoogleContainerTools/distroless) de Node.js fournie par Google
   afin de minimiser l'empreinte sur le disque (184.4 MB).  
   Pour ce faire, on installe dans un premier temps les dépendances du backend dans une image node classique.
-  Puis, on les copie dans l'image distroless puisque celle-ci ne contient rien d'autre que Node.JS.
+  Puis, on les copie dans l'image distroless puisque celle-ci ne contient rien d'autre que Node.js.
   Comme cette image ne contient pas curl, rm et mv, on réplique leur fonctionnement par des scripts js qu'on exécutera avec node
   (on aurait pu ajouter ces programmes, mais celà aurait augmenté la taille de l'image).
   Le seul programme ajouté est sh afin de pouvoir utiliser les && dans le point d'entrée.
@@ -225,9 +226,9 @@ Pour le backend :
 
 Pour le frontend :
 
-| Variable  |                                   Description                                   |
-|:---------:|:-------------------------------------------------------------------------------:|
-| BACK_URL  | URL du backend, sera utilisée par le proxy pour rediriger les requêtes sur /api |
+| Variable |                                   Description                                   |
+|:--------:|:-------------------------------------------------------------------------------:|
+| BACK_URL | URL du backend, sera utilisée par le proxy pour rediriger les requêtes sur /api |
 
 Pour Playwright :
 
@@ -235,15 +236,14 @@ Pour Playwright :
 |:---------:|:------------------------------------------:|
 | FRONT_URL | URL du frontend utilisée pendant les tests |
 
-
 ### Fonctionnement
 
-1. Pour les tests end-to-end, nous avons un docker compose qui gère trois services :
+* Pour les tests end-to-end, nous avons un docker compose qui gère trois services :
     - Le backend est initialisé avec une base de donnée réinitialisée à chaque lancement. Un jeu de donnée prédéfini est utilisé pour faciliter les tests.
-    - Le front-end géré par nginx qui à la fois héberge le site Angular et assure le reverse proxy vers le backend 
+    - Le front-end géré par nginx qui à la fois héberge le site Angular et assure le reverse proxy vers le backend
     - Playwright qui lance les tests end-to-end.
       Les résultats des tests (rapport JSON, vidéos, captures d'écran) sont placés sur l'hôte dans un dossier playwright à côté du docker compose.
-2. Pour une utilisation de l'application depuis un navigateur :
+* Pour une utilisation de l'application depuis un navigateur :
     - Le backend, qui est initilisé une seule fois avec quelques données de départ et dont la base de donnée est enregistrée dans un volume pour en assurer la persistance.
     - Le frontend dont le fonctionnement est similaire à celui des tests, on peut accéder au site depuis un navigateur sur le port par défaut (80).
 
