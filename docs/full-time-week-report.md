@@ -121,7 +121,7 @@ Une fois créé, on a accès à ses paramètres. On va donc ajuster ceux-ci conf
 Ce premier scénario complémentaire vise à tester plus en profondeur la création d'un utilisateur sur notre site en vérifiant également les cas d'erreurs.
 Ici, on va tenter de créer des utilisateurs avec des prénoms erronés, des noms erronés et des dates de naissance erronées.
 On va aussi tester l'ajout de la photo de profil ainsi que la sélection genre de l'utilisateur.
-Pour les noms et prénoms, on va passer des mauvais caractères dans les champs et on s'attend à ce que le champ ne soit pas valide.
+Pour les noms et prénoms, on va passer des mauvais caractères dans les champs et on s'attend à ce que les champs ne soient pas valides.
 Pour la date de naissance, on passe une mauvaise année. Pour la photo de profil, on vérifie qu'elle existe bien quand on la passe.
 On vérifie finalement que sélectionner le genre est bien nécessaire.
 
@@ -148,8 +148,9 @@ Le quiz est joué jusqu'à la fin, nous sommes félicités, puis nous sommes red
 
 Ce quatrième scénario complémentaire est lié en partie au [premier scénario d'utilisation](#scénario-1--jouer-à-un-quiz-point-de-vue-accueilli).
 Ce scénario de test a pour but de tester le paramètre "Rejouer les questions".
-Dans ce test, une mauvaise réponse est sélectionnée. Ainsi, cette réponse devra être reposée à la fin du quiz. Toutes les questions restantes ont une réponse juste.
-Lors de la dernière réponse, une vérification est effectuée afin de s'assurer que la dernière question est bien la question qui devait être reposée.
+Dans ce test, une mauvaise réponse est sélectionnée lors de la première questions. Ainsi, la question devra être reposée à la fin du quiz.
+Pour le reste des questions, la réponse juste est sélectionnée à chaque fois.
+Lors de la dernière question, une vérification est effectuée afin de s'assurer que celle-ci est bien la question qui devait être reposée.
 Le quiz est joué jusqu'à la fin, nous sommes félicités, ensuite, nous sommes redirigés vers la page des quizz pour Martine.
 
 #### Scénario de test complémentaire n°5 : `delete-question-test-scenario.spec.ts`
@@ -209,7 +210,7 @@ Notre site est découpé en 3 images :
   Dans un premier temps, on installe les dépendances dans une image node, et on exécute `ng build` pour obtenir des fichiers statiques du front.
   Ces fichiers sont copiés dans l'image nginx afin de les héberger.
   Le healthcheck est un simple appel CURL à la racine.
-* Les tests Playwright qui utilise l'image node à laquelle on ajoute Chromium et ffmpeg.
+* Les tests Playwright qui utilisent l'image node à laquelle on ajoute Chromium et ffmpeg.
   Cette image est de loin la plus volumineuse (910.6 MB) à cause de la taille très importante des différentes dépendances de Playwright.
   Des efforts ont été fait de notre côté en incluant un minimum de dépendance, mais node représentant 120mo et chromium pesant plus de 600mo,
   il est difficile de réduire beaucoup plus.
