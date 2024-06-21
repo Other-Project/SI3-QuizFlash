@@ -13,7 +13,7 @@ export const USER_MARTINE: Patient = {
   gender: Genders.FEMALE,
   birthDate: "1953-09-30",
   dementiaLevel: Dementia.Intermediate,
-  fontSize: 2,
+  fontSize: 1.5,
   hobbies: ["culture", "famille", "théâtre"],
 
   removeAnswers: false,
