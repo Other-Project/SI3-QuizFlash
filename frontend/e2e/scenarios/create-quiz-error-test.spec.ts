@@ -168,18 +168,18 @@ test.describe("Create Quiz with errors test display", () => {
       const questionPicture = questionFixture.getQuestionPicture();
       expect(await questionFixture.isSaveButtonDisabled()).toEqual(true);
 
-      await questionPicture.setInputFiles("./e2e/assets/bar.png");
-      await questionTitle.fill("C'est quoi ça ?");
-      await questionFirstProposition.fill("Le bar");
+      await questionPicture.setInputFiles("./e2e/assets/fishing.jpg");
+      await questionTitle.fill("Que fait-il ?");
+      await questionFirstProposition.fill("Il pêche");
       expect(await questionFixture.isSaveButtonDisabled()).toEqual(true);
-      await questionSecondProposition.fill("Le bar");
+      await questionSecondProposition.fill("Il a la pêche");
       expect(await questionFixture.isSaveButtonDisabled()).toEqual(false);
 
       const questionSaveButton = questionFixture.getSaveQuestionButton();
       await expect(questionSaveButton).toBeVisible();
       await questionSaveButton.click();
       // To wait the image saving in the back-end
-      await expect(questionFixture.getSaveButtonIcon()).toBeVisible({timeout: 50000});
+      await expect(questionFixture.getSaveButtonIcon()).toBeVisible({timeout: 10000});
     });
 
     await test.step("Create a third question (sound) with empty audio and check if it is saved", async () => {
