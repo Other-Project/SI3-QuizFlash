@@ -6,5 +6,5 @@ module.exports = new BaseModel("Attempts", {
     chosenAnswersId: Joi.string().required().uuid(),
     timeSpent: Joi.number().positive().required(),
     answerHint: Joi.boolean().required(),
-    hiddenAnswers: Joi.array().items(Joi.number()).required()
+    hiddenAnswers: Joi.array().items(Joi.string().uuid()).required()
 });

@@ -114,7 +114,6 @@ router.get("/:questionId/halveAnswers", checkAuthentication(access.user), (req, 
         #swagger.responses[404] = {
             description: 'No question found with this id'
         } */
-
     Quiz.getById(req.params.quizId);
     res.status(200).json(removedAnswers(req.params.questionId));
 }));
