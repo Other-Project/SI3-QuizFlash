@@ -71,20 +71,20 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
 
 ## Tests Réalisés :
 
-La plupart de nos tests ayant besoins de données de départ pour être réalisés, nous avons créé une petite base de donnée de départ dans notre back-end. Avant de
-lancer les tests, il est donc nécessaire de redémarrer le back-end avec la commande suivante : ``run start:e2e``
+La plupart de nos tests ayant besoins de données de départ pour être réalisés, nous avons créé une petite base de donnée dans notre back-end, qui sera utilisé pour l'initialiser.
+Avant de lancer les tests, il est donc nécessaire de (re)démarrer le back-end avec la commande suivante : `run start:e2e`
 
 Pour lancer nos tests, nous utilisons la configuration suivante :
 
-- Génération d'un ``.json`` quand les tests sont lancés avec Docker au lieu d'un ``.html``
-- ``video`` et ``screenshot`` mis sur ``on`` pour que les vidéos et screenshots de nos tests s'enregistrent et soient disponibles à la fin de ceux-ci
-- ``slowMo`` définit sur 500 et ``timeout`` sur 60000 (problèmes de performances du back-end sur certains pc du groupe)
+- Génération d'un `.json` quand les tests sont lancés avec Docker au lieu d'un `.html`
+- `video` et `screenshot` mis sur `on` pour que les vidéos et screenshots de nos tests s'enregistrent et soient disponibles à la fin de ceux-ci
+- `slowMo` définit sur 500 et `timeout` sur 60000 (problèmes de performances du back-end sur certains pc du groupe)
 
-Pour lancer tous les tests : ``run test:e2e``
+Pour lancer tous les tests : `run test:e2e`
 
 ### Critères de priorisation des scénarios de tests :
 
-Pour savoir quels scénarios prioriser en termes de tests, nous allons prendre en compte les éléments suivants :
+Pour savoir quels scénarios prioriser en termes de tests, nous avons pris en compte les éléments suivants :
 
 - Impact de l'élément pour le patient
 - Fréquence de visionnage par le patient
