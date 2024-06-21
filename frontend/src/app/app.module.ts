@@ -11,7 +11,8 @@ import {AdminButtonComponent} from "./profiles/admin-button/admin-button.compone
 import {ProfileListComponent} from "./profiles/profile-list/profile-list.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {QuizGameSelectionModule} from "./quiz/quiz-game-selection/quiz-game-selection.module";
-import {provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
+import {provideHttpClient, withInterceptors} from "@angular/common/http";
+import {errorInterceptor} from "../interceptor/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,11 @@ import {provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
     ProfilesComponent,
     AdminButtonComponent
   ],
-  bootstrap: [AppComponent], imports: [BrowserModule,
+  bootstrap: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
     AdminModule,
@@ -27,7 +32,11 @@ import {provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
     LayoutModule,
     ProfileListComponent,
     FontAwesomeModule,
-    QuizGameSelectionModule], providers: [provideHttpClient(withInterceptorsFromDi())]
+    QuizGameSelectionModule
+  ],
+  providers: [
+    provideHttpClient(withInterceptors([errorInterceptor]))
+  ]
 })
 export class AppModule {
 }
