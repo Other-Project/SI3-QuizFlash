@@ -8,7 +8,7 @@ const config: PlaywrightTestConfig = {
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     video: "on",
-    screenshot: "only-on-failure",
+    screenshot: "on",
     launchOptions: {
       executablePath: process.env["CHROME_BIN"],
       slowMo: 100
