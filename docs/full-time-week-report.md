@@ -91,7 +91,7 @@ Pour savoir quels scénarios prioriser en termes de tests, nous avons pris en co
 - Fréquence de visionnage par le patient
 - Fréquence de visionnage par le professionnel
 
-### Scénarios de tests par rapport à nos scénarios d'utilisation :
+### Scénarios de test par rapport à nos scénarios d'utilisation :
 
 #### Scénario de test n°1 : `quiz-play-test-scenario.spec.ts`
 
@@ -114,7 +114,7 @@ Pour commencer, on se connecte en tant qu'administrateur, puis on sélectionne "
 De là, on rentre son nom, son prénom, son sexe et sa date de naissance. On lui ajoute également une photo de profil. On valide et il est créé.
 Une fois créé, on a accès à ses paramètres. On va donc ajuster ceux-ci conformément au [scénario n°3](#scénario-3--ajout-dun-accueilli-point-de-vue-ergothérapeute).
 
-### Tests complémentaires :
+### Scénarios de test complémentaires :
 
 #### Scénario de test complémentaire n°1 : `create-user-error-test.spec.ts`
 
@@ -183,6 +183,30 @@ Cet ordre est basé sur les critères de priorisations décris plus haut :
    et [n°2](#scénario-de-test-complémentaire-n2--create-quiz-error-testspects), ces deux scénarios sont placés au même niveau, car ils sont liés au fait de créer/modifier les
    patients ou les quiz. Ces scénarios sont là pour tester des cas extrêmes concernant la création/modification des patients et des quiz.
    Ainsi, ils sont vu par le professionnel, mais n'impacte pas les patients et ne sont jamais vu par ces derniers.
+
+### Scénarios de test non implémentés:
+
+Liste des scénarios de test non implémentés durant la semaine en raison d'une contrainte de temps et à un choix de priorisations sur
+des [critères](#critères-de-priorisation-des-scénarios-de-tests-) précis.
+
+#### Scénario n°1 :
+
+Ce premier scénario non implémenté se base sur le scénario [n°4](#scénario-4--visualisation-de-lévolution-point-de-vue-ergothérapeute) qui consistait à tester
+la partie statistique du profil des patients.
+Le but était, dans un premier temps, de tester la présence de tous les boutons, avec le bon nombres de paramètres pour les sélecteurs.
+Et dans un second temps de s'assurer qu'au choix d'un sélecteur une action visant à changer le graphique des statistiques s'effectuait.
+Ce scénario contient des éléments seulement visibles par le professionnel et n'impactant absolument pas les patients.
+Ainsi, il a été jugé comme étant un des moins prioritaires, ce qui explique qu'il n'a pas pu être implémenté.
+
+#### Scénario n°2 :
+
+Ce second scénario non implémenté se base également sur le scénario [n°4](#scénario-4--visualisation-de-lévolution-point-de-vue-ergothérapeute) mais consistait
+à tester la partie historique du profil des patients.
+Le but était, dans un premier temps, de tester la présence de tous les boutons.
+Puis dans un second temps de s'assurer qu'à la sélection d'une tentative une action visant à changer l'historique affiché s'exécutait.
+Et que l'historique affiché était bien celui selectionné avec toute les informations qu'il contenait.
+Ce scénario contient des éléments seulement visibles par le professionnel et n'impactant absolument pas les patients.
+Ainsi, il a été jugé comme étant un des moins prioritaires, ce qui explique qu'il n'a pas pu être implémenté.
 
 ----
 
