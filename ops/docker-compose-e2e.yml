@@ -27,6 +27,3 @@ services:
         condition: service_healthy
     volumes:
       - ./playwright:/app/reports
-
-volumes:
-  reports_e2e:
