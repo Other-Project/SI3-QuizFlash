@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {UtilsService} from "../../../service/utils.service";
 
 @Component({
@@ -7,23 +7,20 @@ import {UtilsService} from "../../../service/utils.service";
   styleUrls: ["hobbies.component.scss"]
 })
 
-export class HobbiesComponent implements OnInit {
+export class HobbiesComponent {
   @Input() tags: string[] = [];
   @Input() placeHolder: string = "";
   @Output() updateTags: EventEmitter<string[]> = new EventEmitter<string[]>();
 
-  data: string[] = [];
+  availableTags: string[] = [];
   loading: boolean = true;
 
   constructor(private utilsService: UtilsService) {
     this.utilsService.getTags().then(values => {
-      this.data = values;
+      this.availableTags = values;
     }).catch(() => {
       alert("Il y a eu une erreur lors de la récupération des différents centres d'intérêt.\nVeuillez recharger la page");
     }).finally(() => this.loading = false);
-  }
-
-  ngOnInit() {
   }
 
   newTag(hobby: any) {
@@ -31,7 +28,7 @@ export class HobbiesComponent implements OnInit {
   }
 
   onAdd(hobby: any) {
-    this.data = [...this.data, hobby]; //https://github.com/ng-select/ng-select/tree/master
+    this.availableTags = [...this.availableTags, hobby]; //https://github.com/ng-select/ng-select/tree/master
     this.tags.push(hobby);
     this.updateTags.emit(this.tags);
   }
