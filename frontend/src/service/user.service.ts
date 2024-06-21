@@ -17,6 +17,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.retrieveUsers().then();
+    http.get<User>(`${apiUrl}/auth/me`).subscribe(user => this.user$.next(this.user = user));
   }
 
   async retrieveUsers() {
