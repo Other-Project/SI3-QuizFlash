@@ -6,6 +6,7 @@ const crypto = require("crypto");
 const AuthenticationError = require("passport/lib/errors/authenticationerror");
 const {catchErrors, manageAllErrors} = require("../utils/errors/routes");
 const {admin} = require("../models/access-restriction.model");
+const AuthorisationError = require("../utils/errors/authorisation-error");
 
 
 passport.use(new LocalStrategy({}, (username, password, cb) => {
@@ -65,6 +66,11 @@ router.post("/login/password",
     (err, req, res, next) => {
         manageAllErrors(res, new AuthenticationError(err));
     });
+
+router.get("/me", (req, res) => {
+    if (!req.isAuthenticated || !req.isAuthenticated() || !req.user) manageAllErrors(res, new AuthorisationError(false));
+    else res.status(200).json(req.user);
+});
 
 router.post("/logout", (req, res) => catchErrors(req, res, () => {
     /*  #swagger.tags = ['Authentication']
