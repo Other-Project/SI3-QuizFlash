@@ -3,7 +3,6 @@ npm-debug.log
 *Dockerfile*
 .dockerignore
 .angular
-playwright-report
-test-results
+reports
 playwright.config.ts
 package-lock.json

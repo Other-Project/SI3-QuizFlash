@@ -1,5 +1,5 @@
 import {expect, test} from "@playwright/test";
-import {testUrl} from "e2e/e2e.config";
+import {testUrl} from "../e2e.config";
 import {ProfilesFixture} from "../../src/app/profiles/profiles.fixture";
 import {AdminFixture} from "../../src/app/admin/admin.fixture";
 
