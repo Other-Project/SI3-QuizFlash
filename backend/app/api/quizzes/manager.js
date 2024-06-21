@@ -8,8 +8,8 @@ const thumbnail = (quizId) => `quizzes/${quizId}/thumbnail`;
 
 /**
  * This function aggregates the questions and answers from the database to build a quiz with all the data needed by the clients
- * @param {string|number} quizId
- * @param {string|number|undefined} userId
+ * @param {string} quizId
+ * @param {string|undefined} userId
  */
 function buildQuiz(quizId, userId = undefined) {
     const quiz = Quiz.getById(quizId);
@@ -42,7 +42,7 @@ function createQuiz(quiz) {
 
 /**
  * Replace quiz entry
- * @param {string|number} quizId
+ * @param {string} quizId
  * @param {Quiz&{questions: (Question&{answers: Answer[]})[]}} quiz
  */
 function replaceQuiz(quizId, quiz) {
@@ -64,7 +64,7 @@ function replaceQuiz(quizId, quiz) {
 
 /**
  * Update quiz fields
- * @param {string|number} quizId
+ * @param {string} quizId
  * @param {Quiz&{questions: (Question&{answers: Answer[]})[]}} quiz
  */
 function updateQuiz(quizId, quiz) {
@@ -86,7 +86,7 @@ function updateQuiz(quizId, quiz) {
 
 /**
  * Delete quiz entry
- * @param {string|number} quizId
+ * @param {string} quizId
  */
 function deleteQuiz(quizId) {
     const quiz = Quiz.getById(quizId);
@@ -98,11 +98,11 @@ function deleteQuiz(quizId) {
 /**
  * Create a new quizStat object
  * @param {string} quizId
- * @param {number} userId
+ * @param {string} userId
  */
 function createStatQuiz(quizId, userId) {
     const date = new Date();
-    return QuizStats.create({ quizId: parseInt(quizId), userId: userId, date: date.toISOString() }).id;
+    return QuizStats.create({ quizId: quizId, userId: userId, date: date.toISOString() }).id;
 }
 
 /**
@@ -111,7 +111,7 @@ function createStatQuiz(quizId, userId) {
  * @param {string} questionId
  */
 function createStatQuestion(quizStatId, questionId) {
-    return QuestionStats.create({ quizStatId: parseInt(quizStatId), questionId: parseInt(questionId), success: false }).id;
+    return QuestionStats.create({ quizStatId: quizStatId, questionId: questionId, success: false }).id;
 }
 
 /**
@@ -122,15 +122,15 @@ function createStatQuestion(quizStatId, questionId) {
  * @param {string} userId
  */
 function checkAnswer(quizStatId, questionStatId, questionAttempt, userId) {
-    let attempt = Attempts.create({ questionStatId: parseInt(questionStatId), ...questionAttempt });
+    let attempt = Attempts.create({ questionStatId: questionStatId, ...questionAttempt });
     let questionStats = QuestionStats.getById(questionStatId);
-    if (parseInt(quizStatId) !== questionStats.quizStatId) throw new NotFoundError(`The quizStatId ${quizStatId} does not contain the questionStat with id ${questionStatId}`);
+    if (quizStatId !== questionStats.quizStatId) throw new NotFoundError(`The quizStatId ${quizStatId} does not contain the questionStat with id ${questionStatId}`);
     let result = Answer.get().find(answer => answer.questionId === questionStats.questionId && answer.trueAnswer);
     if (!result) throw new NotFoundError(`No true answer found in the question ${Question.getById(questionStats.questionId).text}`);
     if (result.id === attempt.chosenAnswersId) {
         QuestionStats.update(questionStatId, { success: true });
         questionStats.success = true;
-    } else if (User.getById(parseInt(userId)).removeAnswers) return { isTrue: false };
+    } else if (User.getById(userId).removeAnswers) return { isTrue: false };
     return { isTrue: questionStats.success, expected: { id: result.id, text: result.answerText } };
 }
 

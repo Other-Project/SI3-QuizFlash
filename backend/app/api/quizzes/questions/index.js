@@ -50,8 +50,7 @@ router.post("/", checkAuthentication(access.admin), (req, res) => catchErrors(re
          } */
 
     Quiz.getById(req.params.quizId);
-    const quizId = parseInt(req.params.quizId, 10);
-    res.status(201).json(createQuestion(quizId, req.body));
+    res.status(201).json(createQuestion(req.params.quizId, req.body));
 }));
 
 router.put("/:questionId", checkAuthentication(access.admin), (req, res) => catchErrors(req, res, () => {
