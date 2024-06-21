@@ -24,7 +24,7 @@ test.describe("Delete a question display", () => {
       await expect(page).toHaveURL(`${testUrl}/admin/quizzes`);
 
 
-      const quizToTarget = adminQuizzesFixture.getAQuiz("Chansons Françaises");
+      const quizToTarget = adminQuizzesFixture.getAQuiz("Quiz delete question");
       await quizToTarget.click();
     });
 

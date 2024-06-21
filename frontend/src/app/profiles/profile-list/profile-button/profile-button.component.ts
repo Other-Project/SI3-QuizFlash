@@ -2,6 +2,7 @@ import {Component, Input} from "@angular/core";
 import {User} from "../../../../models/user.models";
 import {LayoutModule} from "../../../layout/layout.module";
 import {Padding} from "../../../layout/button/button.component";
+import {getDefaultProfilePicture} from "../../../../utils/profile-picture.utils";
 
 
 @Component({
@@ -19,4 +20,5 @@ export class ProfileButtonComponent {
   }
 
   protected readonly Padding = Padding;
+  protected readonly getDefaultProfilePicture = getDefaultProfilePicture;
 }
