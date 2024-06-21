@@ -28,7 +28,6 @@ import {UserService} from "../../../../../service/user.service";
   standalone: true
 })
 export class AdminQuizComponent implements OnDestroy {
-  availableTags: string[] = [];
   public loadingQuizData: boolean = false;
   public loading: boolean = false;
   public quiz: Quiz = {id: "", thumbnailUrl: "", title: "", tags: [], questions: []};
@@ -66,9 +65,6 @@ export class AdminQuizComponent implements OnDestroy {
       if (quizId) this.loadingQuizData = true;
       this.quizService.selectQuiz(quizId);
     });
-    userService.hobbies$.subscribe(availableTags => {
-      this.availableTags = availableTags;
-    });
   }
 
   ngOnDestroy() {
@@ -94,6 +90,10 @@ export class AdminQuizComponent implements OnDestroy {
 
   addQuestion() {
     this.quiz.questions.push({} as Question);
+  }
+
+  updateTags(tags: string[]) {
+    this.quiz.tags = tags;
   }
 
   protected readonly faAdd = faAdd;

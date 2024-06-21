@@ -1,4 +1,4 @@
-import {E2EComponentFixture} from "e2e/e2e-component.fixture";
+import {E2EComponentFixture} from "../../../../../e2e/e2e-component.fixture";
 import {PatientInfoFormFixture} from "./info-form/info-form.fixture";
 import {OptionsFixture} from "./options/options.fixture";
 

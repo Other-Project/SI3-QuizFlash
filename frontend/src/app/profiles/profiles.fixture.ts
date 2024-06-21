@@ -5,4 +5,8 @@ export class ProfilesFixture extends E2EComponentFixture {
   getAdminButtonFixture() {
     return new AdminButtonFixture(this.page);
   }
+
+  getFirstProfile() {
+    return this.page.locator("app-profiles-button").first();
+  }
 }
