@@ -29,28 +29,28 @@ test.describe("Create user with errors test display", () => {
 
     const patientFixture = new PatientFixture(page);
 
-    const patientHeaderFixture = patientFixture.getPatientInfoFormFixture();
-    const profilePictureInput = patientHeaderFixture.getProfilePictureInput();
-    const lastNameInput = patientHeaderFixture.getLastNameInput();
-    const firstNameInput = patientHeaderFixture.getFirstNameInput();
-    const birthDateInput = patientHeaderFixture.getBirthDateInput();
-    const validateButton = patientHeaderFixture.getValidateButton();
-    const genderInput = patientHeaderFixture.getGenderSelect();
+    const patientInfoFormFixture = patientFixture.getPatientInfoFormFixture();
+    const profilePictureInput = patientInfoFormFixture.getProfilePictureInput();
+    const lastNameInput = patientInfoFormFixture.getLastNameInput();
+    const firstNameInput = patientInfoFormFixture.getFirstNameInput();
+    const birthDateInput = patientInfoFormFixture.getBirthDateInput();
+    const genderSelect = patientInfoFormFixture.getGenderSelect();
+    const validateButton = patientInfoFormFixture.getValidateButton();
 
     await test.step("User form presence verification", async () => {
       await expect(lastNameInput).toBeVisible();
       await expect(firstNameInput).toBeVisible();
+      await expect(genderSelect).toBeVisible();
       await expect(birthDateInput).toBeVisible();
       await expect(validateButton).toBeVisible();
-      await expect(genderInput).toBeVisible();
     });
 
     await test.step("Create User with errors in name and firstname 1", async () => {
       await profilePictureInput.setInputFiles("./e2e/assets/bernard.jpg");
       await lastNameInput.fill("12345");
       await firstNameInput.fill("12345");
+      await genderSelect.selectOption("Homme");
       await birthDateInput.fill("1950-05-04");
-      await genderInput.selectOption("Homme");
       await validateButton.click();
       // We shouldn't be able to create such a user
       await expect(page).toHaveURL(`${testUrl}/admin/patient`);
@@ -83,17 +83,19 @@ test.describe("Create user with errors test display", () => {
       await validateButton.click();
       // We shouldn't be able to create such a user
       await expect(page).toHaveURL(`${testUrl}/admin/patient`);
+      await genderSelect.selectOption("");
     });
 
     await test.step("Create User without errors", async () => {
       await lastNameInput.fill("Dupont");
       await firstNameInput.fill("Jean-Marie");
       await birthDateInput.fill("1950-05-05");
+      await genderSelect.selectOption("Homme");
       await validateButton.click();
       await expect(page).toHaveURL(new RegExp(`${testUrl}\/admin\/patient\/\\d+`));
       // We should be able to create such a user
 
-      const createdUserProfilePicture = await patientHeaderFixture.getCreatedUserProfilePicture();
+      const createdUserProfilePicture = await patientInfoFormFixture.getCreatedUserProfilePicture();
       expect(createdUserProfilePicture).not.toEqual(null);
       const patientSettingsFixture = patientFixture.getPatientSettings();
       const dementiaInput = patientSettingsFixture.getDementiaLevel();
