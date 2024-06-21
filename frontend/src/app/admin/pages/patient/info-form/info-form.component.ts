@@ -6,6 +6,7 @@ import {Patient} from "../../../../../models/patient.models";
 import {Dementia} from "../../../../../models/dementia.models";
 import {Genders} from "../../../../../models/genders.model";
 import {getDefaultProfilePicture} from "../../../../../utils/profile-picture.utils";
+import {faAdd, faEdit, faSave} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "info-form",
@@ -16,6 +17,7 @@ import {getDefaultProfilePicture} from "../../../../../utils/profile-picture.uti
 export class InfoFormComponent {
   protected readonly Date = Date;
   protected badNameInputText = "Seuls les lettres, les espaces et les traits d'union sont autorisés.";
+  loading: boolean = false;
   @Output() patientInfoChange: EventEmitter<any> = new EventEmitter;
 
   genders = {
@@ -72,9 +74,13 @@ export class InfoFormComponent {
     if (!this.patientForm.valid) return;
     if (this.currentPatient) {
       this.patientInfoChange.emit();
+      this.loading = true;
       return this.userService.updateUser(this.currentPatient.id, this.patientForm.value);
     }
-    this.userService.addUser(this.patientForm.value).then(user => this.router.navigate([user.id], {relativeTo: this.route}).then());
+    this.loading = true;
+    this.userService.addUser(this.patientForm.value).then(user => this.router.navigate([user.id], {relativeTo: this.route}).then())
+      .catch(() => alert("Erreur lors de la création du patient\nEssayez de recharger la page"))
+      .finally(() => this.loading = false);
   }
 
   private dateValidator(): ValidatorFn {
@@ -100,4 +106,7 @@ export class InfoFormComponent {
   }
 
   protected readonly getDefaultProfilePicture = getDefaultProfilePicture;
+  protected readonly faEdit = faEdit;
+  protected readonly faAdd = faAdd;
+  protected readonly faSave = faSave;
 }

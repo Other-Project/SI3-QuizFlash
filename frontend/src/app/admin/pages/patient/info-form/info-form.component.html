@@ -31,7 +31,11 @@
         </div>
       </label>
     </div>
-    <app-button (click)="save()" [color]="'blue'">Valider</app-button>
+    <app-button (click)="save()" [disabled]="loading" [color]="'blue'">
+      <fa-icon [icon]="faSave" *ngIf="!loading"/>
+      <spinner *ngIf="loading"/>
+      Valider
+    </app-button>
   </div>
 </form>
 
