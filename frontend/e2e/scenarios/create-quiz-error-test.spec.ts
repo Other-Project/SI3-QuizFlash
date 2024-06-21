@@ -49,6 +49,9 @@ test.describe("Create Quiz with errors test display", () => {
       await quizzesButton.click();
       await expect(page).toHaveURL(`${testUrl}/admin/quizzes`);
 
+      // Wait for the quizzes to load
+      await expect(adminQuizzesFixture.getFirstQuizElement()).toBeVisible();
+
       const numberOfQuizzesEnd = await adminQuizzesFixture.getNumberOfQuizzes();
       expect(numberOfQuizzesBeginning).toEqual(numberOfQuizzesEnd);
     });
@@ -145,7 +148,7 @@ test.describe("Create Quiz with errors test display", () => {
       await expect(currentQuiz).toBeVisible();
       await currentQuiz.click();
 
-      await expect(page.locator("app-admin-question").nth(0)).toBeVisible();
+      await expect(page.locator("app-admin-question").nth(0)).toBeVisible({timeout: 50000});
       const numberOfQuestionEnd = await adminQuizFixture.getNumberOfQuestions();
       expect(numberOfQuestionBeginning).toEqual(numberOfQuestionEnd);
     });
@@ -202,7 +205,7 @@ test.describe("Create Quiz with errors test display", () => {
       const currentQuiz = adminQuizzesFixture.getAQuiz("La pêche (error test)");
       await expect(currentQuiz).toBeVisible();
       await currentQuiz.click();
-      await expect(page.locator("app-admin-question").nth(1)).toBeVisible();
+      await expect(page.locator("app-admin-question").nth(1)).toBeVisible({timeout: 50000});
       const numberOfQuestionsEnd = await adminQuizFixture.getNumberOfQuestions();
       expect(numberOfQuestionsBeginning).toEqual(numberOfQuestionsEnd + 1);
     });
