@@ -1,4 +1,4 @@
-import {E2EComponentFixture} from "e2e/e2e-component.fixture";
+import {E2EComponentFixture} from "../../../../../../../e2e/e2e-component.fixture";
 
 export class AdminQuestionFixture extends E2EComponentFixture {
   getQuestionTitlePlaceHolder() {
@@ -31,5 +31,17 @@ export class AdminQuestionFixture extends E2EComponentFixture {
 
   getSaveQuestionButton() {
     return this.page.locator("app-button.save");
+  }
+
+  getSaveButtonIcon() {
+    return this.getSaveQuestionButton().locator("fa-icon");
+  }
+
+  async isSaveButtonDisabled() {
+    return await this.getSaveQuestionButton().getAttribute("ng-reflect-disabled");
+  }
+
+  getDeleteQuestionButton() {
+    return this.page.locator("app-button.delete");
   }
 }

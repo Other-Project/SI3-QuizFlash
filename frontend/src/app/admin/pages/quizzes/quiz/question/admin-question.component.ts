@@ -4,7 +4,7 @@ import {LayoutModule} from "../../../../../layout/layout.module";
 import {Question} from "../../../../../../models/question.models";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faQuestion, faReply, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {DecimalPipe, KeyValuePipe, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
+import {DecimalPipe, KeyValuePipe, NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 import {QuestionType} from "../../../../../../models/question-type.models";
 import {PlayButtonComponent} from "../../../../../layout/play-button/play-button.component";
 import {Answer} from "../../../../../../models/answer.models";
@@ -27,7 +27,8 @@ import {Scale} from "../../../../../layout/button/button.component";
     NgSwitchDefault,
     DecimalPipe,
     FormsModule,
-    PlayButtonComponent
+    PlayButtonComponent,
+    NgClass
   ],
   standalone: true
 })

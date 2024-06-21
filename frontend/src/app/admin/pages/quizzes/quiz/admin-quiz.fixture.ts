@@ -1,4 +1,4 @@
-import {E2EComponentFixture} from "e2e/e2e-component.fixture";
+import {E2EComponentFixture} from "../../../../../../e2e/e2e-component.fixture";
 import {AdminQuestionFixture} from "./question/admin-question.fixture";
 
 export class AdminQuizFixture extends E2EComponentFixture {
@@ -30,5 +30,8 @@ export class AdminQuizFixture extends E2EComponentFixture {
     return this.page.getByRole("button", {name: "Ajouter une question", exact: true});
   }
 
-
+  async getNumberOfQuestions() {
+    const locators = await this.page.locator("app-admin-question").all();
+    return locators.length;
+  }
 }

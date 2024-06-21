@@ -1,7 +1,7 @@
 const { Quiz, Question, Answer } = require("../../../models");
 const NotFoundError = require("../../../utils/errors/not-found-error.js");
 const { getQuestionAnswers } = require("./answers/manager");
-const { storeFile, readFile, deleteFile } = require("../../../utils/file");
+const { storeFile, readFile, deleteFile, validateAndNormaliseFile } = require("../../../utils/file");
 
 const image = (quizId, questionId) => `quizzes/${quizId}/${questionId}/image`;
 const sound = (quizId, questionId) => `quizzes/${quizId}/${questionId}/sound`;
@@ -51,10 +51,12 @@ function createQuestion(quizId, question) {
     pureQuestion.imageUrl = imageUrl ? "ok" : undefined;
     pureQuestion.soundUrl = soundUrl ? "ok" : undefined;
 
+    const img = validateAndNormaliseFile(imageUrl, /image\/.*/);
+    const snd = validateAndNormaliseFile(soundUrl, /audio\/.*/);
     let result = Question.create({ ...pureQuestion, quizId });
     Question.update(result.id, {
-        imageUrl: storeFile(image(result.quizId, result.id), imageUrl),
-        soundUrl: storeFile(sound(result.quizId, result.id), soundUrl)
+        imageUrl: storeFile(image(result.quizId, result.id), ...img),
+        soundUrl: storeFile(sound(result.quizId, result.id), ...snd)
     });
     if (answers !== undefined) return { ...result, imageUrl, soundUrl, answers: answers.map(answer => Answer.create({ ...answer, questionId: result.id })) };
     return { ...result, imageUrl, soundUrl };
@@ -129,8 +131,8 @@ function checkQuestionAndUpdateFiles(quizId, questionId, pureQuestion, imageUrl,
     if (questionInDb.quizId !== quizId)
         throw new NotFoundError(`${questionInDb.name} id=${questionId} was not found for ${Quiz.getById(quizId).name} id=${quizId}`);
 
-    pureQuestion.imageUrl = storeFile(image(quizId, questionId), imageUrl);
-    pureQuestion.soundUrl = storeFile(sound(quizId, questionId), soundUrl);
+    pureQuestion.imageUrl = storeFile(image(quizId, questionId), ...validateAndNormaliseFile(imageUrl, /image\/.*/));
+    pureQuestion.soundUrl = storeFile(sound(quizId, questionId), ...validateAndNormaliseFile(soundUrl, /audio\/.*/));
     if (pureQuestion.imageUrl && questionInDb.imageUrl !== pureQuestion.imageUrl) deleteFile(questionInDb.imageUrl);
     if (pureQuestion.soundUrl && questionInDb.soundUrl !== pureQuestion.soundUrl) deleteFile(questionInDb.soundUrl);
     return pureQuestion;

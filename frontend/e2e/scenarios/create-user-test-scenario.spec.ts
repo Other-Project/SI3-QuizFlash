@@ -1,5 +1,5 @@
 import {expect, test} from "@playwright/test";
-import {testUrl} from "e2e/e2e.config";
+import {testUrl} from "../e2e.config";
 import {ProfilesFixture} from "../../src/app/profiles/profiles.fixture";
 import {AdminPatientsFixture} from "../../src/app/admin/pages/patients/admin-patients.fixture";
 import {PatientFixture} from "../../src/app/admin/pages/patient/patient.fixture";
@@ -52,7 +52,7 @@ test.describe("Create user test display", () => {
     });
 
     await test.step("Create User", async () => {
-      await profilePictureInput.setInputFiles(["./src/assets/users/bernard.jpg"]);
+      await profilePictureInput.setInputFiles("./e2e/assets/bernard.jpg");
       await lastNameInput.fill("Dupont");
       await firstNameInput.fill("Bernard");
       await birthDateInput.fill("1950-05-11");

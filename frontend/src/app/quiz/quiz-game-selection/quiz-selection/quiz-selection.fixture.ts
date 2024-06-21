@@ -1,5 +1,5 @@
-import {E2EComponentFixture} from "e2e/e2e-component.fixture";
-import {getButtonByText} from "e2e/e2e.utils";
+import {E2EComponentFixture} from "../../../../../e2e/e2e-component.fixture";
+import {getButtonByText} from "../../../../../e2e/e2e.utils";
 
 export class QuizSelectionFixture extends E2EComponentFixture {
 
