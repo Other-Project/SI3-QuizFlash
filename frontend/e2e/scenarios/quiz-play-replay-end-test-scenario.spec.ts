@@ -10,15 +10,13 @@ async function playReplayEndTest(quiz: Quiz, correctAnswer: boolean, quizGameFix
   const questionTitle = await quizGameFixture.getQuestionFixture().getQuestionTitle();
 
   // Getting correct answer corresponding to the question
-  const answer = quiz.questions.find(question => question.text == questionTitle)!
-    .answers.find(answer => answer.trueAnswer == correctAnswer)!.answerText;
+  const answer = quiz.questions.find(question => question.text == questionTitle)!.answers.find(answer => answer.trueAnswer == correctAnswer)!.answerText;
 
   // Obtain the button corresponding to the answer
   await checkVisibleAndClick(quizGameFixture.getAnswersFixture().getAnswerButton(answer));
 
   // Screen check
-  await ((correctAnswer) ? questionResultFixture.checkIsCorrectScreen()
-    : questionResultFixture.checkIsIncorrectScreen());
+  await (correctAnswer ? questionResultFixture.checkIsCorrectScreen() : questionResultFixture.checkIsIncorrectScreen());
 
   return questionTitle;
 }
@@ -36,8 +34,7 @@ async function finishQuizReplayQuestion(quiz: Quiz, correctAnswer: boolean, quiz
   await checkVisibleAndClick(quizGameFixture.getAnswersFixture().getAnswerButton(answer));
 
   // Screen check
-  await ((correctAnswer) ? questionResultFixture.checkIsCorrectScreen()
-    : questionResultFixture.checkIsIncorrectScreen());
+  await (correctAnswer ? questionResultFixture.checkIsCorrectScreen() : questionResultFixture.checkIsIncorrectScreen());
 
   const finishButton = quizGameFixture.getQuestionResultFixture().getFinishButton();
   await checkVisibleAndClick(finishButton);

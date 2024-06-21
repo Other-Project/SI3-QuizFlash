@@ -17,14 +17,13 @@ async function playFiftyFiftyQuestionTest(quiz: Quiz, correctAnswer: boolean, qu
   fiftyFiftyButton = quizGameFixture.getAnswersFixture().getAnswerButton("50/50");
   await expect(fiftyFiftyButton).not.toBeVisible();
 
-  const answers = quiz.questions.find(question => question.text == questionTitle)!
-    .answers;
+  const answers = quiz.questions.find(question => question.text == questionTitle)!.answers;
 
   // Check if the 50/50 button is hidden
   let buttons = quizGameFixture.getAnswersFixture().getAnswerButtons();
 
   // Check if the good number of elements is hide by the 50/50
-  await expect(buttons).toHaveCount(Math.floor(answers.length / 2), {timeout: 5000});
+  await expect(buttons).toHaveCount(Math.floor(answers.length / 2));
 
   // Getting correct answer corresponding to the question
   const answer = getAnswers(quiz, questionTitle, correctAnswer);
@@ -35,8 +34,7 @@ async function playFiftyFiftyQuestionTest(quiz: Quiz, correctAnswer: boolean, qu
   await answerButton.click();
 
   // Screen check
-  await ((correctAnswer) ? questionResultFixture.checkIsCorrectScreen()
-    : questionResultFixture.checkIsIncorrectScreen());
+  await ((correctAnswer) ? questionResultFixture.checkIsCorrectScreen() : questionResultFixture.checkIsIncorrectScreen());
 }
 
 async function playQuestionTestRemoveAnswers(quiz: Quiz, correctAnswer: boolean, quizGameFixture: QuizGameFixture) {
@@ -52,8 +50,7 @@ async function playQuestionTestRemoveAnswers(quiz: Quiz, correctAnswer: boolean,
       let fiftyFiftyButton = quizGameFixture.getAnswersFixture().getAnswerButton("50/50");
       await expect(fiftyFiftyButton).not.toBeVisible();
     }
-    const answer = quiz.questions.find(question => question.text == questionTitle)!
-      .answers.find(answer => answer.trueAnswer != correctAnswer && !hidden.find(hide => hide == answer.answerText))!.answerText;
+    const answer = quiz.questions.find(question => question.text == questionTitle)!.answers.find(answer => answer.trueAnswer != correctAnswer && !hidden.find(hide => hide == answer.answerText))!.answerText;
     hidden.push(answer);
 
     // Obtain the button corresponding to the answer
@@ -65,8 +62,7 @@ async function playQuestionTestRemoveAnswers(quiz: Quiz, correctAnswer: boolean,
   await playQuestionTest(quiz, true, quizGameFixture);
 
   // Screen check
-  await ((correctAnswer) ? questionResultFixture.checkIsCorrectScreen()
-    : questionResultFixture.checkIsIncorrectScreen());
+  await ((correctAnswer) ? questionResultFixture.checkIsCorrectScreen() : questionResultFixture.checkIsIncorrectScreen());
 }
 
 async function checkVisibleAndClick(button: Locator) {
