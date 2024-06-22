@@ -43,6 +43,7 @@ export class AdminQuizzesComponent {
   }
 
   searchQuiz(text: string) {
+    this.search = text;
     this.updateQuizzes();
   }
 
