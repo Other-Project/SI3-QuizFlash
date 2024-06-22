@@ -8,7 +8,7 @@
 ## Reports
 
 * [Cooperative evaluation report](docs/report.md)
-* [Full-time week report](docs/full-time-week-report.md)
+* [Full-time week report](ops/livrable_temps_plein.md)
 
 ## Screenshots
 
