@@ -1,0 +1,28 @@
+[
+  {
+    "title": "Voyages autour du monde",
+    "tags": [
+      "voyages",
+      "culture"
+    ],
+    "id": "31e0e2bd-a0d5-45ef-8203-739c3827fdd3",
+    "thumbnailUrl": "quizzes/31e0e2bd-a0d5-45ef-8203-739c3827fdd3/thumbnail.webp"
+  },
+  {
+    "title": "Les peintures et les peintres du monde",
+    "tags": [
+      "culture",
+      "peinture"
+    ],
+    "id": "22dc2cc4-e57d-4810-8923-fb9880685f89",
+    "thumbnailUrl": "quizzes/22dc2cc4-e57d-4810-8923-fb9880685f89/thumbnail.webp"
+  },
+  {
+    "title": "Le monde de la pêche",
+    "tags": [
+      "pêche"
+    ],
+    "id": "ffd8bcdb-6867-4c77-8432-382843d6ef81",
+    "thumbnailUrl": "quizzes/ffd8bcdb-6867-4c77-8432-382843d6ef81/thumbnail.webp"
+  }
+]

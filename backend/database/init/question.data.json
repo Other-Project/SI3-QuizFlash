@@ -1,0 +1,88 @@
+[
+  {
+    "text": "Où peut-on visiter la tour Eiffel ?",
+    "type": "TextOnly",
+    "quizId": "31e0e2bd-a0d5-45ef-8203-739c3827fdd3",
+    "id": "8fd2a377-64fb-480f-b872-f6c64f265d99"
+  },
+  {
+    "text": "Dans quel pays peut-on visiter cette tour ?",
+    "type": "Image",
+    "imageUrl": "quizzes/31e0e2bd-a0d5-45ef-8203-739c3827fdd3/618de4a4-5186-424e-9491-79a85898c3a4/image.webp",
+    "quizId": "31e0e2bd-a0d5-45ef-8203-739c3827fdd3",
+    "id": "618de4a4-5186-424e-9491-79a85898c3a4"
+  },
+  {
+    "text": "Dans quel pays peut-on visiter ce monument ?",
+    "type": "Image",
+    "imageUrl": "quizzes/31e0e2bd-a0d5-45ef-8203-739c3827fdd3/4d59dff2-e381-45b6-b3e9-189ef17e6c80/image.webp",
+    "quizId": "31e0e2bd-a0d5-45ef-8203-739c3827fdd3",
+    "id": "4d59dff2-e381-45b6-b3e9-189ef17e6c80"
+  },
+  {
+    "text": "De quel pays provient le style flamenco ?",
+    "type": "Sound",
+    "soundUrl": "quizzes/31e0e2bd-a0d5-45ef-8203-739c3827fdd3/34a459ff-7d57-4c5e-b47b-9f4f88841ff0/sound.mpga",
+    "quizId": "31e0e2bd-a0d5-45ef-8203-739c3827fdd3",
+    "id": "34a459ff-7d57-4c5e-b47b-9f4f88841ff0"
+  },
+  {
+    "text": "Que doit-on traverser pour aller aux États-Unis depuis la France ?",
+    "type": "TextOnly",
+    "quizId": "31e0e2bd-a0d5-45ef-8203-739c3827fdd3",
+    "id": "3a8e438f-f264-4085-9e88-9562b1000f58"
+  },
+  {
+    "text": "Qui a peint cette toile ?",
+    "type": "Image",
+    "imageUrl": "quizzes/22dc2cc4-e57d-4810-8923-fb9880685f89/5b62efbe-5350-437d-b689-00d62a438ea7/image.webp",
+    "quizId": "22dc2cc4-e57d-4810-8923-fb9880685f89",
+    "id": "5b62efbe-5350-437d-b689-00d62a438ea7"
+  },
+  {
+    "text": "Qui a peint cette toile ?",
+    "type": "Image",
+    "imageUrl": "quizzes/22dc2cc4-e57d-4810-8923-fb9880685f89/a8cf7ac6-c4e6-4f0a-ac72-7d84c0271ab2/image.webp",
+    "quizId": "22dc2cc4-e57d-4810-8923-fb9880685f89",
+    "id": "a8cf7ac6-c4e6-4f0a-ac72-7d84c0271ab2"
+  },
+  {
+    "text": "Quelle est la technique de peinture consistant à appliquer de petites touches de couleur ?",
+    "type": "TextOnly",
+    "quizId": "22dc2cc4-e57d-4810-8923-fb9880685f89",
+    "id": "c7cf93fb-1165-40bb-aeb9-cf05214b9cbc"
+  },
+  {
+    "text": "Qui a peint \"La naissance de Vénus\" ?",
+    "type": "TextOnly",
+    "quizId": "22dc2cc4-e57d-4810-8923-fb9880685f89",
+    "id": "39c352d3-0f0e-49bd-9c93-eed1c8252bf5"
+  },
+  {
+    "text": "Comment s'appelle cet objet ?",
+    "type": "Image",
+    "imageUrl": "quizzes/ffd8bcdb-6867-4c77-8432-382843d6ef81/65273f7b-e38f-4d6b-9dc9-0c61a950814e/image.webp",
+    "quizId": "ffd8bcdb-6867-4c77-8432-382843d6ef81",
+    "id": "65273f7b-e38f-4d6b-9dc9-0c61a950814e"
+  },
+  {
+    "text": "Comment s'appelle cet objet utiliser pour récupérer les poissons dans l'eau ?",
+    "type": "Image",
+    "imageUrl": "quizzes/ffd8bcdb-6867-4c77-8432-382843d6ef81/8b2c6162-7201-40eb-abd1-2b64b27b73cc/image.webp",
+    "quizId": "ffd8bcdb-6867-4c77-8432-382843d6ef81",
+    "id": "8b2c6162-7201-40eb-abd1-2b64b27b73cc"
+  },
+  {
+    "text": "Quel élément utiliser pour pêcher fait ce bruit ?",
+    "type": "Sound",
+    "soundUrl": "quizzes/ffd8bcdb-6867-4c77-8432-382843d6ef81/90b16fa7-437a-4bff-8247-e0fe9505a5cb/sound.mpga",
+    "quizId": "ffd8bcdb-6867-4c77-8432-382843d6ef81",
+    "id": "90b16fa7-437a-4bff-8247-e0fe9505a5cb"
+  },
+  {
+    "text": "Que lance-t-on à l'eau avant de pêcher pour attirer les poissons ?",
+    "type": "TextOnly",
+    "quizId": "ffd8bcdb-6867-4c77-8432-382843d6ef81",
+    "id": "3d8710d5-4636-4172-853c-b101813b265e"
+  }
+]
