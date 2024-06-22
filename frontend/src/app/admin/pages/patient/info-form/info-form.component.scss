@@ -14,7 +14,7 @@ form {
   align-items: center;
   gap: 1em;
 
-  input:not([hidden]), select {
+  app-input:not([hidden]), input:not([hidden]), select {
     width: 15em;
     padding: 12px 20px;
     margin: 8px 0;
@@ -22,6 +22,11 @@ form {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 0.75em;
+
+    &#start {
+      font-size: 1em;
+    }
 
     &.ng-invalid:not(option) {
       border-color: $darkRed;
@@ -37,10 +42,8 @@ form {
       font-size: 1em;
     }
   }
-}
 
-#gender-selection {
-  select {
+  #gender-selection select, #start {
     width: fit-content;
   }
 }

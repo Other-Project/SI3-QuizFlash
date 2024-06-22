@@ -22,6 +22,8 @@ export class InputComponent extends ImageComponent implements ControlValueAccess
   @Input() placeholder?: string;
   @Input() type = "text";
   @Input() disabled: boolean = false;
+  @Input() min?: string;
+  @Input() max?: string;
 
   constructor() {
     super();
