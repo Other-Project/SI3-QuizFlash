@@ -2,7 +2,7 @@
 
 <p align=center>
   <span>Project realized by <a href="https://github.com/06Games">Evan Galli</a>, <a href="https://github.com/theoLassauniere">Théo Lassauniere</a>,
-<a href="https://github.com/LubratJilian">Lubrat Jilian</a>, <a href="https://github.com/mantoniu">Michelozzi Antoine-Marie</a> as part of the <b>PS6</b> course.</span>
+<a href="https://github.com/LubratJilian">Jilian Lubrat</a>, <a href="https://github.com/mantoniu">Antoine-Marie Michelozzi</a> as part of the <b>PS6</b> course.</span>
 </p>
 
 ## Reports
