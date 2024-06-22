@@ -8,5 +8,73 @@
     "salt": "thePasswordIsAdmin",
     "pictureUrl": "",
     "id": "b84cba22-6388-4d5c-8b05-dd9d8637b5b6"
+  },
+  {
+    "firstname": "Martine",
+    "lastname": "Dupont",
+    "gender": "F",
+    "birthDate": "1954-05-30",
+    "hobbies": [
+      "culture",
+      "théâtre",
+      "famille"
+    ],
+    "dementiaLevel": "1",
+    "fontSize": "1.5",
+    "removeAnswers": false,
+    "automatedSkip": true,
+    "answerHint": true,
+    "numberOfQuestion": 5,
+    "replayAtEnd": true,
+    "soundQuestion": true,
+    "autoStartAudio": true,
+    "access": 1,
+    "id": "6e13f8f1-5dd9-41f6-885e-3b5b8a83c41e",
+    "pictureUrl": "users/6e13f8f1-5dd9-41f6-885e-3b5b8a83c41e/picture.webp"
+  },
+  {
+    "firstname": "Francescu",
+    "lastname": "Luciani",
+    "gender": "M",
+    "birthDate": "1928-12-07",
+    "hobbies": [
+      "pêche",
+      "télé"
+    ],
+    "dementiaLevel": 0,
+    "fontSize": 1,
+    "removeAnswers": false,
+    "automatedSkip": true,
+    "answerHint": true,
+    "numberOfQuestion": 5,
+    "replayAtEnd": true,
+    "soundQuestion": false,
+    "autoStartAudio": false,
+    "access": 1,
+    "id": "71496ce4-d3a0-48c7-aaf9-881e95fa2ab8",
+    "pictureUrl": "users/71496ce4-d3a0-48c7-aaf9-881e95fa2ab8/picture.webp"
+  },
+  {
+    "firstname": "Bernard",
+    "lastname": "Martin",
+    "gender": "M",
+    "birthDate": "1938-08-21",
+    "hobbies": [
+      "culture",
+      "peinture",
+      "lecture"
+    ],
+    "dementiaLevel": "2",
+    "fontSize": "1.2",
+    "removeAnswers": true,
+    "automatedSkip": true,
+    "answerHint": false,
+    "numberOfQuestion": 3,
+    "replayAtEnd": false,
+    "soundQuestion": false,
+    "autoStartAudio": false,
+    "access": 1,
+    "id": "8a8dfdc6-304e-47f2-85a6-79008565a514",
+    "pictureUrl": "users/8a8dfdc6-304e-47f2-85a6-79008565a514/picture.webp"
   }
 ]

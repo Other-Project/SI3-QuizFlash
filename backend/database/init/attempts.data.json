@@ -1,0 +1,247 @@
+[
+  {
+    "questionStatId": "d6469405-3958-4d91-9de4-5489714b2820",
+    "chosenAnswersId": "1fbf1703-6c49-4e14-a35c-0109547bc46a",
+    "answerHint": false,
+    "timeSpent": 0.3487166666666667,
+    "hiddenAnswers": [],
+    "id": "6a69fba9-ac13-4ed2-9863-8857e899c95f"
+  },
+  {
+    "questionStatId": "d6469405-3958-4d91-9de4-5489714b2820",
+    "chosenAnswersId": "7ad96368-8dab-4faa-be81-6caca72d7b7f",
+    "answerHint": false,
+    "timeSpent": 0.10795,
+    "hiddenAnswers": [
+      "1fbf1703-6c49-4e14-a35c-0109547bc46a"
+    ],
+    "id": "fbd3fc4e-136a-4b57-8e6d-a33ad447e31f"
+  },
+  {
+    "questionStatId": "d69291c2-8a08-41a4-a278-08783e9a0eb0",
+    "chosenAnswersId": "ccaacd5d-5796-4917-9c94-ca69b0f8c3de",
+    "answerHint": false,
+    "timeSpent": 0.5913166666666667,
+    "hiddenAnswers": [],
+    "id": "16fdfc33-915a-4650-b8cc-46698e0cd8ce"
+  },
+  {
+    "questionStatId": "7766824d-19a7-49f7-88ab-77a3bd6acd59",
+    "chosenAnswersId": "3a01aec9-d312-4fe2-8019-0d42fc479f00",
+    "answerHint": false,
+    "timeSpent": 0.39085,
+    "hiddenAnswers": [],
+    "id": "001cccb0-01c1-4a9f-9b74-1790d44cf255"
+  },
+  {
+    "questionStatId": "7766824d-19a7-49f7-88ab-77a3bd6acd59",
+    "chosenAnswersId": "50998876-60bb-4053-ba9f-7737798eeeca",
+    "answerHint": false,
+    "timeSpent": 0.4505166666666667,
+    "hiddenAnswers": [
+      "3a01aec9-d312-4fe2-8019-0d42fc479f00"
+    ],
+    "id": "c61d32bb-9fdb-4e20-9c8a-edaec5903fe8"
+  },
+  {
+    "questionStatId": "7766824d-19a7-49f7-88ab-77a3bd6acd59",
+    "chosenAnswersId": "aefbef1e-84c7-4dee-9c59-91c5a160db3c",
+    "answerHint": false,
+    "timeSpent": 0.23728333333333335,
+    "hiddenAnswers": [
+      "3a01aec9-d312-4fe2-8019-0d42fc479f00",
+      "50998876-60bb-4053-ba9f-7737798eeeca"
+    ],
+    "id": "e9558cd7-a285-4549-b039-9edcde8ce0c0"
+  },
+  {
+    "questionStatId": "d4a2e194-02c3-4d6f-9e24-4daf10ac04c9",
+    "chosenAnswersId": "0e27be69-76cd-4b59-bf29-50cb224fb08e",
+    "answerHint": false,
+    "timeSpent": 0.13756666666666667,
+    "hiddenAnswers": [],
+    "id": "011da6a9-b9ef-441c-b95b-0438bf10821f"
+  },
+  {
+    "questionStatId": "5dddf416-36a5-4d8a-a892-b8a22d11acb5",
+    "chosenAnswersId": "9108c125-9f74-44ac-9252-de5cdd303a52",
+    "answerHint": false,
+    "timeSpent": 0.34536666666666666,
+    "hiddenAnswers": [],
+    "id": "402b1b3c-bc2c-4756-b141-1685d7825aee"
+  },
+  {
+    "questionStatId": "82921df1-bdc7-46cb-88c9-2116bce5b122",
+    "chosenAnswersId": "7d0f117d-e417-4ac1-ae89-9ba4b03680fe",
+    "answerHint": false,
+    "timeSpent": 0.23403333333333334,
+    "hiddenAnswers": [],
+    "id": "d1211822-1c77-4f9d-9fe4-fdd00d0c31a2"
+  },
+  {
+    "questionStatId": "630de727-b08f-44bc-8a70-e83b68425459",
+    "chosenAnswersId": "b615d770-c864-4837-93cc-64ad0b7b4e5a",
+    "answerHint": false,
+    "timeSpent": 0.8289333333333333,
+    "hiddenAnswers": [],
+    "id": "4c45331f-24ac-4c9f-ae08-0ebe521d3a04"
+  },
+  {
+    "questionStatId": "de75a32b-9a94-4b26-9428-5bed2834d3cf",
+    "chosenAnswersId": "8f9bab74-ae5d-4fcb-98ad-473e87a6cf90",
+    "answerHint": true,
+    "timeSpent": 0.6529,
+    "hiddenAnswers": [
+      "37f65305-3516-49ed-955d-3b2512a1896f"
+    ],
+    "id": "0038a323-aaa6-4631-a9cb-458879182341"
+  },
+  {
+    "questionStatId": "037fc5e8-6160-4a6e-9eff-9a98f962eeca",
+    "chosenAnswersId": "edcc6fa9-039b-4084-948f-45e1a1d2c48f",
+    "answerHint": true,
+    "timeSpent": 0.6308833333333334,
+    "hiddenAnswers": [
+      "4bc20a2d-dd48-40cb-b436-229401f76082",
+      "cd5b6d2d-8fba-4496-837e-bfb4213025e2"
+    ],
+    "id": "1fd7f698-55bd-451d-953c-e082249f7471"
+  },
+  {
+    "questionStatId": "6b8a816d-50d3-4138-9376-36e49ba780bb",
+    "chosenAnswersId": "1fbf1703-6c49-4e14-a35c-0109547bc46a",
+    "answerHint": false,
+    "timeSpent": 0.5677,
+    "hiddenAnswers": [],
+    "id": "d1b0fb07-599e-428d-b5d1-7c18a4bc690a"
+  },
+  {
+    "questionStatId": "54310b97-8c73-4f7a-8864-db56dc2aadb7",
+    "chosenAnswersId": "ccaacd5d-5796-4917-9c94-ca69b0f8c3de",
+    "answerHint": true,
+    "timeSpent": 0.8378166666666667,
+    "hiddenAnswers": [
+      "4b3db626-9e93-496f-9732-ffd599e50837",
+      "3c383367-1bdf-4720-8363-7d9f27ab2eed"
+    ],
+    "id": "6ab4431a-ac96-443d-b84b-86bd6963949e"
+  },
+  {
+    "questionStatId": "7048ed00-3521-498a-9218-7e4c12a49e50",
+    "chosenAnswersId": "3a01aec9-d312-4fe2-8019-0d42fc479f00",
+    "answerHint": true,
+    "timeSpent": 0.8401833333333333,
+    "hiddenAnswers": [
+      "d72bec90-914a-4360-9a1d-95e0a10188ed",
+      "50998876-60bb-4053-ba9f-7737798eeeca"
+    ],
+    "id": "87df0c61-5dd8-46c3-994b-7bc5a36b6038"
+  },
+  {
+    "questionStatId": "56a43f4e-8393-4af6-bd6a-da59d772a373",
+    "chosenAnswersId": "b6fb0891-6cf4-4991-9a93-86247a716b76",
+    "answerHint": false,
+    "timeSpent": 0.71335,
+    "hiddenAnswers": [],
+    "id": "b04d1bbb-3b57-42ac-a2a6-08464110a980"
+  },
+  {
+    "questionStatId": "cf04df9a-ab00-4777-bbc3-51524686674d",
+    "chosenAnswersId": "7ad96368-8dab-4faa-be81-6caca72d7b7f",
+    "answerHint": false,
+    "timeSpent": 0.4477833333333333,
+    "hiddenAnswers": [],
+    "id": "ddf97bfa-8b53-4278-9bdd-eccc45b283e0"
+  },
+  {
+    "questionStatId": "6b5f6e16-bbef-4e05-bf50-713e9c689d73",
+    "chosenAnswersId": "aefbef1e-84c7-4dee-9c59-91c5a160db3c",
+    "answerHint": false,
+    "timeSpent": 0.7188,
+    "hiddenAnswers": [],
+    "id": "09628e02-5b79-4196-9b63-ceea3c8fcd37"
+  },
+  {
+    "questionStatId": "73152ed3-c441-4fb9-a1b4-8dcfdcf4eddb",
+    "chosenAnswersId": "7d0f117d-e417-4ac1-ae89-9ba4b03680fe",
+    "answerHint": false,
+    "timeSpent": 0.5456,
+    "hiddenAnswers": [],
+    "id": "b89dae53-281c-480f-a147-039f87fba042"
+  },
+  {
+    "questionStatId": "0586980c-3cf9-4c29-9b12-12c42ca5438f",
+    "chosenAnswersId": "0e27be69-76cd-4b59-bf29-50cb224fb08e",
+    "answerHint": false,
+    "timeSpent": 0.25955,
+    "hiddenAnswers": [],
+    "id": "930ccb16-0388-417d-9b08-5e426d55f64f"
+  },
+  {
+    "questionStatId": "70ef28c3-0bd3-4770-a161-b4ea09a8cbfa",
+    "chosenAnswersId": "a0660f11-4ceb-49ff-80a2-950fbc638b42",
+    "answerHint": false,
+    "timeSpent": 0.4064333333333333,
+    "hiddenAnswers": [],
+    "id": "83233206-6b3f-4707-b21d-c8399c62fd8c"
+  },
+  {
+    "questionStatId": "b9997bff-7f3f-40ee-a472-392a3d85b6e6",
+    "chosenAnswersId": "ff1cc8d7-fc39-4487-8fcf-486a5bde7051",
+    "answerHint": true,
+    "timeSpent": 0.8496666666666667,
+    "hiddenAnswers": [
+      "28dc39ca-3ed6-4416-bc16-e05fcfa79752",
+      "6c93d980-3d19-4125-8ccd-2ccd84741704"
+    ],
+    "id": "f040a601-ec2f-4de7-81ed-163c8a4ae7de"
+  },
+  {
+    "questionStatId": "1be7d3c0-ffd5-4973-9e0c-c2e90bd63139",
+    "chosenAnswersId": "9108c125-9f74-44ac-9252-de5cdd303a52",
+    "answerHint": false,
+    "timeSpent": 0.105,
+    "hiddenAnswers": [],
+    "id": "c334ed16-d03c-446b-b68a-e359982e5433"
+  },
+  {
+    "questionStatId": "dcdd97c4-1c24-4384-b3cb-e6411f6dac33",
+    "chosenAnswersId": "737dce51-9083-4672-b4cc-ebfd1be96b11",
+    "answerHint": false,
+    "timeSpent": 0.5449833333333334,
+    "hiddenAnswers": [],
+    "id": "bda27cc7-3ef9-4bf4-a44d-4aceb42c83df"
+  },
+  {
+    "questionStatId": "28c272fa-2605-4797-bd26-ba6e9ed3b801",
+    "chosenAnswersId": "0e27be69-76cd-4b59-bf29-50cb224fb08e",
+    "answerHint": false,
+    "timeSpent": 0.12093333333333334,
+    "hiddenAnswers": [],
+    "id": "fbde29d4-eb79-49d3-8219-7253f200e69c"
+  },
+  {
+    "questionStatId": "4ea5a499-608c-4f5b-99b5-a7c4b3f9ae01",
+    "chosenAnswersId": "737dce51-9083-4672-b4cc-ebfd1be96b11",
+    "answerHint": false,
+    "timeSpent": 0.29851666666666665,
+    "hiddenAnswers": [],
+    "id": "8171ae6e-0cbe-4352-a325-1cb8f6b1115c"
+  },
+  {
+    "questionStatId": "b9b7faa7-b736-4458-aed0-0a09abe538b0",
+    "chosenAnswersId": "9108c125-9f74-44ac-9252-de5cdd303a52",
+    "answerHint": false,
+    "timeSpent": 0.2954333333333333,
+    "hiddenAnswers": [],
+    "id": "977db6ea-9ef8-4599-b1de-ee744f71be27"
+  },
+  {
+    "questionStatId": "3f631cf9-8c96-4d1f-95c4-8cd318aa5d6e",
+    "chosenAnswersId": "7d0f117d-e417-4ac1-ae89-9ba4b03680fe",
+    "answerHint": false,
+    "timeSpent": 0.07498333333333333,
+    "hiddenAnswers": [],
+    "id": "95fc16d7-24c4-4f7e-a3af-09b7c008f8f5"
+  }
+]
