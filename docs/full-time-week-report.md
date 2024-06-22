@@ -36,8 +36,6 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
   françaises. Je commence ce quiz, il y a plein de questions différentes, certaines avec du son et d’autres avec du texte ou des images. Mais dans tous les
   cas, elles sont toutes adaptées à ma vision. Je termine cette activité, le site me félicite, car j’ai réussi à répondre à toutes les questions et je me
   sens apaisée. »
-- Ce scénario est de priorité **critique**. En effet, il constitue la base de notre site (à savoir jouer à un quiz). Si cette partie n'est pas
-  fonctionnelle, alors notre site ne sert à rien du tout.
 
 ### Scénario 2 : Création d'un quiz (point de vue ergothérapeute)
 
@@ -45,9 +43,6 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
   donc lui en créer de nouvelles. Je vais me servir de QuizFlash regroupant l’ensemble des accueillis avec de nombreuses informations les concernant. Je me
   lance dans la création d’un quiz sur le thème de la pêche, le site me propose différents types de questions (sonore, illustrée, etc.), j’ajoute un
   ensemble de questions en alternant les types. Ainsi, une activité sera disponible au moment où il faudra en proposer à Francescu. »
-- Ce scénario est de **haute priorité**. Comme expliqué précédemment, jouer à un quiz est l'essence même de notre site. Si on ne peut pas créer de quiz,
-  on ne peut pas jouer à un quiz, ce qui explique l'importance de tester ce scénario. Cependant, on considère qu'il est (légèrement) moins important de
-  tester la création de quiz que jouer à un quiz en termes de priorité, car ça n'impacte alors pas directement le joueur (l'accueilli dans notre cas).
 
 ### Scénario 3 : Ajout d’un accueilli (point de vue ergothérapeute)
 
@@ -55,9 +50,6 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
   ils me communiquent toutes les informations nécessaires à la création de son dossier. Je réalise un bilan psychomoteur, les raccompagne lui et sa famille,
   et retourne ensuite dans mon bureau terminer le dossier. Je l’ajoute dans la base de données de QuizFlash. Pour cela, je rentre son nom, son prénom,
   certaines de ses pathologies, le stade de sa maladie et ses différents centres d’intérêts pour obtenir des tests adaptés. »
-- Ce scénario est de **haute priorité**. Si aucun utilisateur n'est défini sur notre site, alors il n'est pas possible de jouer à un quiz, d'où l'importance
-  de tester ce scénario. De même que précédemment, il est moins prioritaire par rapport au premier scénario, car cela n'impacte pas directement le joueur (
-  l'accueilli dans notre cas).
 
 ### Scénario 4 : Visualisation de l’évolution (point de vue ergothérapeute)
 
@@ -65,8 +57,6 @@ Un [Docker Compose](https://docs.docker.com/compose/) est utilisé pour régir l
   chaque activité, les données de la session sont collectées afin que je puisse y accéder pour les analyser ultérieurement. Je peux alors visualiser
   l’évolution de Martine et ainsi adapter au mieux l’activité pour cette accueillie. Si j’observe qu’elle n’est plus en capacité de répondre à certaines
   questions, je les retire. »
-- Ce scénario est de **faible priorité**. On considère qu'il est moins grave que les statistiques d'un utilisateur ne soient plus fonctionnelles que le fait
-  de pouvoir jouer à un quiz par exemple. De plus, ce scénario n'impacte pas le joueur. Ce scénario est donc moins testé que les autres.
 
 ----
 
@@ -189,7 +179,7 @@ Cet ordre est basé sur les critères de priorisations décris plus haut :
 Liste des scénarios de test non implémentés durant la semaine en raison d'une contrainte de temps et à un choix de priorisations sur
 des [critères](#critères-de-priorisation-des-scénarios-de-tests-) précis.
 
-#### Scénario n°1 :
+#### Scénario de test n°1 :
 
 Ce premier scénario non implémenté se base sur le scénario [n°4](#scénario-4--visualisation-de-lévolution-point-de-vue-ergothérapeute) qui consistait à tester
 la partie statistique du profil des patients.
@@ -198,7 +188,7 @@ Et dans un second temps de s'assurer qu'au choix d'un sélecteur une action visa
 Ce scénario contient des éléments seulement visibles par le professionnel et n'impactant absolument pas les patients.
 Ainsi, il a été jugé comme étant un des moins prioritaires, ce qui explique qu'il n'a pas pu être implémenté.
 
-#### Scénario n°2 :
+#### Scénario de test n°2 :
 
 Ce second scénario non implémenté se base également sur le scénario [n°4](#scénario-4--visualisation-de-lévolution-point-de-vue-ergothérapeute) mais consistait
 à tester la partie historique du profil des patients.
