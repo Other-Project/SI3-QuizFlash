@@ -148,7 +148,7 @@ Le quiz est joué jusqu'à la fin, nous sommes félicités, puis nous sommes red
 
 Ce quatrième scénario complémentaire est lié en partie au [premier scénario d'utilisation](#scénario-1--jouer-à-un-quiz-point-de-vue-accueilli).
 Ce scénario de test a pour but de tester le paramètre "Rejouer les questions".
-Dans ce test, une mauvaise réponse est sélectionnée lors de la première questions. Ainsi, la question devra être reposée à la fin du quiz.
+Dans ce test, une mauvaise réponse est sélectionnée lors de la première question. Ainsi, la question devra être reposée à la fin du quiz.
 Pour le reste des questions, la réponse juste est sélectionnée à chaque fois.
 Lors de la dernière question, une vérification est effectuée afin de s'assurer que celle-ci est bien la question qui devait être reposée.
 Le quiz est joué jusqu'à la fin, nous sommes félicités, ensuite, nous sommes redirigés vers la page des quizz pour Martine.
@@ -184,7 +184,7 @@ Cet ordre est basé sur les critères de priorisations décris plus haut :
    patients ou les quiz. Ces scénarios sont là pour tester des cas extrêmes concernant la création/modification des patients et des quiz.
    Ainsi, ils sont vu par le professionnel, mais n'impacte pas les patients et ne sont jamais vu par ces derniers.
 
-### Scénarios de test non implémentés:
+### Scénarios de test non implémentés :
 
 Liste des scénarios de tests non implémentés durant la semaine en raison d'une contrainte de temps et à un choix de priorisation sur
 des [critères](#critères-de-priorisation-des-scénarios-de-tests-) précis.
