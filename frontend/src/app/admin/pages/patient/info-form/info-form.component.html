@@ -5,13 +5,13 @@
   <div class="form-inputs">
     <div class="fields">
       <label> Nom :
-        <input placeholder="Dupont" type="text" formControlName="lastname">
+        <app-input [placeholder]="'Dupont'" formControlName="lastname" />
         <div class="error-container">
           <small *ngIf="patientForm.get('lastname')?.errors?.['pattern']">{{ this.badNameInputText }}</small>
         </div>
       </label>
       <label> Prénom :
-        <input placeholder="Jean" type="text" formControlName="firstname">
+        <app-input [placeholder]="'Jean'" formControlName="firstname"/>
         <div class="error-container">
           <small *ngIf="patientForm.get('firstname')?.errors?.['pattern']">{{ this.badNameInputText }}</small>
         </div>
@@ -23,7 +23,7 @@
         <div class="error-container"></div>
       </label>
       <label> Date de naissance :
-        <input type="date" id="start" formControlName="birthDate" [min]="getMinBirthDate()" [max]="getMaxBirthDate()"/>
+        <app-input [type]="'date'" id="start" formControlName="birthDate" [min]="getMinBirthDate()" [max]="getMaxBirthDate()"/>
         <div class="error-container">
           <small *ngIf="patientForm.get('birthDate')?.value && patientForm.get('birthDate')?.errors?.['dateInvalid']">L'âge doit être compris entre 1
             et
