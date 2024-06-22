@@ -263,4 +263,4 @@ Pour Playwright :
     - Le frontend dont le fonctionnement est similaire à celui des tests, on peut accéder au site depuis un navigateur sur le port par défaut (80).
 
 Dans tous les cas, seul le frontend expose un port et celui-ci redirige si besoin vers le backend.
-Toutes les communications inter-services se font grâce réseau mis en place par docker au moment de la création des conteneurs.
+Toutes les communications inter-services se font grâce au réseau mis en place par docker au moment de la création des conteneurs.
