@@ -161,7 +161,7 @@ Cet ordre est basé sur les critères de priorisations décris plus haut :
    Les éléments testés sont directement ou indirectement les plus vus par les patients et également par le professionnel.
 2. Les scénarios de test complémentaire [n°3](#scénario-de-test-complémentaire-n3--quiz-play-fiftyfifty-not-removed-test-scenariospects)
    et [n°4](#scénario-de-test-complémentaire-n4-quiz-play-replay-end-test-scenariospects), ces deux scénarios sont placés au même niveau,
-   car ils sont liés au fait de jouer les quiz.
+   car ils sont liés au fait de jouer les quizz.
    Concernant les critères, les éléments testés par ces scénarios peuvent impacter les patients si les paramètres associés sont activés pour le patient,
    de même pour la fréquence de visionnage par le patient. Pour ce qui est de la fréquence de visualisation par le professionnel,
    les éléments ne sont jamais vu par les professionnels, car ils sont liés au moteur de jeu.
@@ -217,7 +217,7 @@ Notre site est découpé en 3 images :
   Pour ce faire, on installe dans un premier temps les dépendances du backend dans une image node classique.
   Puis, on les copie dans l'image distroless puisque celle-ci ne contient rien d'autre que Node.js.
   Comme cette image ne contient pas curl, rm et mv, on réplique leur fonctionnement par des scripts js qu'on exécutera avec node
-  (on aurait pu ajouter ces programmes, mais celà aurait augmenté la taille de l'image).
+  (on aurait pu ajouter ces programmes, mais cela aurait augmenté la taille de l'image).
   Le seul programme ajouté est sh afin de pouvoir utiliser les && dans le point d'entrée.
   Le healthcheck est un simple appel CURL à l'endpoint `/api/status`.
 * Le frontend, qui utilise l'image nginx slim hébergeant les fichiers générés par Angular. Cette image est très légère (24.45 MB).
@@ -259,7 +259,8 @@ Pour Playwright :
     - Playwright qui lance les tests end-to-end.
       Les résultats des tests (rapport JSON, vidéos, captures d'écran) sont placés sur l'hôte dans un dossier playwright à côté du docker compose.
 * Pour une utilisation de l'application depuis un navigateur :
-    - Le backend, qui est initilisé une seule fois avec quelques données de départ et dont la base de donnée est enregistrée dans un volume pour en assurer la persistance.
+    - Le backend, qui est initialisé une seule fois avec quelques données de départ et dont la base de donnée est enregistrée dans un volume pour en assurer la
+      persistance.
     - Le frontend dont le fonctionnement est similaire à celui des tests, on peut accéder au site depuis un navigateur sur le port par défaut (80).
 
 Dans tous les cas, seul le frontend expose un port et celui-ci redirige si besoin vers le backend.
